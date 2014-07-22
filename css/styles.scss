@@ -313,9 +313,12 @@ html, body {
     @include transparent($black-color, 0.3);
 }
 
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton{
+    border:none !important;
+}
 
 .esriSimpleSliderIncrementButton {
-    border-bottom: solid 1px #ffffff !important;
+   /*border-bottom: 1px solid rgba(255,255,255,0.5) !important;*/
 }
 
 .simpleGeocoder .esriGeocoder {
@@ -544,17 +547,16 @@ img{
     right:10px;
     margin-left: -310px;
     width: $page-width;
-    top: 90px;
     display:block;
     overflow:hidden;
     max-height:305px;
+    top:100px;
     @include transparent($default-theme, 1);
     @include respond-to(600){
-        top:100px;
         max-height:none;
     }
-    @include respond-to(860){
-        top:10px;
+    @include respond-to(1074){
+       top:10px;
         max-height:none;
     }
 }
@@ -661,7 +663,11 @@ img{
     padding:10px;
 }
 #pageBody_legend{
-    padding:20px;
+    padding-left:20px;
+    padding-top:20px;
+    padding-bottom:20px;
+    margin-right:30px;
+    max-width: $page-width - 20;
 }
 
 #pageBody_share{
@@ -673,7 +679,7 @@ img{
 }
 #pageBody_details{
     padding:5px;
-    max-width: $page-width - 10;
+    max-width: $page-width - 12;
 }
 
 #panelTop {
@@ -687,14 +693,23 @@ img{
     overflow: visible;
     height: auto;
     @include border-radius (0);
-    @include respond-to(720){
-        max-width:500px;
+    @include respond-to(760){
+        max-width:650px;
         left: 44px;
         top: 10px;
         @include border-radius(5px);
     }
 }
-
+.largerTitle{
+     @include respond-to(720){
+        max-width:720px !important;
+    }   
+}
+.smallerTitle{
+     @include respond-to(720){
+        max-width:520px !important;
+    }   
+}
 #panelTitle {
     height: 50px;
     width:100%;
@@ -733,6 +748,7 @@ img{
     font-size:.9em;
     @include respond-to(720){
         display:block;
+        max-width:400px;
     }
 }
 
