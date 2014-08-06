@@ -409,7 +409,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
                     var legendDiv = toolbar.createTool(tool, panelClass);
                     var legend = new Legend({
-                        map: this.map
+                        map: this.map,
+                        layerInfos: layers
                     }, domConstruct.create("div", {}, legendDiv));
                     domClass.add(legend.domNode, "legend");
                     legend.startup();
