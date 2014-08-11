@@ -181,13 +181,17 @@ Evented, declare, lang, has, esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on
                 var gExtent = map.geographicExtent;
                 // set extent string
                 urlObject.query.extent = number.format(gExtent.xmin, {
-                    places: 4
+                    places: 4,
+                    locale:"en_us"
                 }) + "," + number.format(gExtent.ymin, {
-                    places: 4
+                    places: 4,
+                    locale:"en_us"
                 }) + "," + number.format(gExtent.xmax, {
-                    places: 4
+                    places: 4,
+                    locale:"en_us"
                 }) + "," + number.format(gExtent.ymax, {
-                    places: 4
+                    places: 4,
+                    locale:"en_us"
                 });
 
             } else {
