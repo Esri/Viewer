@@ -4,7 +4,7 @@ basic-viewer-template
 
 ![Screen Shot](https://dl.dropboxusercontent.com/u/24627279/screenshots/Viewer_screenshot.png)
 
-[View it live] (http://www.arcgis.com/apps/OnePane/Viewer/index.html?webmap=f5b13dbed07c46cdb783cf361833aa6b)
+[View it live] (http://www.arcgis.com/apps/Viewer/index.html?webmap=f5b13dbed07c46cdb783cf361833aa6b)
 
 #Features
 The template can be configured using the following options:
