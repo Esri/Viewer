@@ -6,7 +6,7 @@
                 "heading": "このマップを共有",
                 "url": "マップ リンク",
                 "embed": "マップの埋め込み",
-                "extent": "現在のマップ範囲の共有",
+                "extent": "現在のマップ表示範囲の共有",
                 "size": "サイズ (幅/高さ):",
                 "facebookTooltip": "Facebook",
                 "twitterTooltip": "Twitter",

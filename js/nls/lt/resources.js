@@ -20,12 +20,19 @@ define(
             "error": "Žemėlapio sukurti nepavyko"
         },
         "tools":{
+            "search":{
+                "error": "Vietos surasti nepavyko",
+                "notWhatYouWanted": "Ne tai ko norėjote?",
+                "selectAnother": "Pasirinkite kitą vietą",
+                "currentLocation": "dabartinė vieta",
+                "title": "Vieta"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Gulsčiai (PDF)',
-			      "label2": 'Stačiai (PDF)',
-			      "label3": 'Gulsčiai (Paveikslėlis)',
-			      "label4": 'Stačiai (Paveikslėlis)'
+			      "label1": 'Gulsčias',
+			      "label2": 'Stačias',
+			      "label3": 'Gulsčias',
+			      "label4": 'Stačias'
 			    },
 			    "legend": "Į išvestį pridėti legendą"
 			},

@@ -20,19 +20,26 @@ define(
             "error": "Nie można utworzyć mapy"
         },
         "tools":{
+            "search":{
+                "error": "Nie można odnaleźć lokalizacji",
+                "notWhatYouWanted": "Oczekiwano innej lokalizacji?",
+                "selectAnother": "Wybierz inną lokalizację",
+                "currentLocation": "Bieżąca lokalizacja",
+                "title": "Lokalizacja"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Poziomo (PDF)',
-			      "label2": 'Pionowo (PDF)',
-			      "label3": 'Poziomo (obraz)',
-			      "label4": 'Pionowo (obraz)'
+			      "label1": 'Poziomo',
+			      "label2": 'Pionowo',
+			      "label3": 'Poziomo',
+			      "label4": 'Pionowo'
 			    },
 			    "legend": "Dodaj legendę do danych wynikowych"
 			},
 			"share": {
 				"extent": "Użyj bieżącego zasięgu mapy,",
 				"label": "Udostępnij tę mapę",
-				"link": "Łącze do mapy",
+				"link": "Łącze mapy",
 				"facebook": "Facebook",
 				"twitter": "Twitter"
 			}

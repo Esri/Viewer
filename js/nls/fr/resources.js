@@ -20,12 +20,19 @@ define(
             "error": "Impossible de créer la carte"
         },
         "tools":{
+            "search":{
+                "error": "Emplacement introuvable",
+                "notWhatYouWanted": "Ce n\'est pas ce que vous vouliez ?",
+                "selectAnother": "Sélectionnez un autre emplacement",
+                "currentLocation": "Emplacement actuel",
+                "title": "Emplacement"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Paysage (PDF)',
-			      "label2": 'Portrait (PDF)',
-			      "label3": 'Paysage (Image)',
-			      "label4": 'Portrait (Image)'
+			      "label1": 'Paysage',
+			      "label2": 'Portrait',
+			      "label3": 'Paysage',
+			      "label4": 'Portrait'
 			    },
 			    "legend": "Ajouter la légende à la sortie"
 			},
@@ -44,7 +51,7 @@ define(
         	"bookmarks": "Géosignets",
         	"layers": "Couches",
         	"basemap": "Galerie de fonds de carte",
-        	"overview": "Carte générale",
+        	"overview": "Vue générale",
         	"measure": "Mesurer",
         	"edit": "Modifier",
         	"time": "Heure",

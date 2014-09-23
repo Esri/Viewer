@@ -20,12 +20,19 @@ define(
             "error": "Harita oluşturulamıyor"
         },
         "tools":{
+            "search":{
+                "error": "Konum bulunamadı",
+                "notWhatYouWanted": "İstediğiniz bu değil mi?",
+                "selectAnother": "Başka bir konum seç",
+                "currentLocation": "Mevcut Konum",
+                "title": "Konum"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Yatay (PDF)',
-			      "label2": 'Dikey (PDF)',
-			      "label3": 'Yatay (Görüntü)',
-			      "label4": 'Dikey (Görüntü)'
+			      "label1": 'Yatay',
+			      "label2": 'Dikey',
+			      "label3": 'Yatay',
+			      "label4": 'Dikey'
 			    },
 			    "legend": "Çıktıya gösterim ekle"
 			},

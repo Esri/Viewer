@@ -20,12 +20,19 @@ define(
             "error": "ไม่สามารถสร้างแผนที่ได้"
         },
         "tools":{
+            "search":{
+                "error": "ไม่พบตำแหน่งนี้",
+                "notWhatYouWanted": "ไม่ใช่สิ่งที่คุณต้องการ",
+                "selectAnother": "เลือกตำแหน่งอื่น",
+                "currentLocation": "ตำแหน่งปัจจุบัน",
+                "title": "ตำแหน่ง"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'แนวนอน (PDF)',
-			      "label2": 'แนวตั้ง (PDF)',
-			      "label3": 'แนวนอน (Image)',
-			      "label4": 'แนวตั้ง (Image)'
+			      "label1": 'แนวนอน',
+			      "label2": 'แนวตั้ง',
+			      "label3": 'แนวนอน',
+			      "label4": 'แนวตั้ง'
 			    },
 			    "legend": "เพิ่มคำอธิบายแผนที่ไปยังส่วนผลลัพธ์"
 			},

@@ -20,12 +20,19 @@ define(
             "error": "Kan ikke oprette kort"
         },
         "tools":{
+            "search":{
+                "error": "Placeringen blev ikke fundet",
+                "notWhatYouWanted": "Var det ikke det, du ville?",
+                "selectAnother": "Vælg et andet sted",
+                "currentLocation": "Nuværende placering",
+                "title": "Placering"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'På langs (PDF)',
-			      "label2": 'På højkant (PDF)',
-			      "label3": 'På langs (billede)',
-			      "label4": 'På højkant (billede)'
+			      "label1": 'På langs',
+			      "label2": 'På højkant',
+			      "label3": 'På langs',
+			      "label4": 'På højkant'
 			    },
 			    "legend": "Føj signaturforklaring til output"
 			},

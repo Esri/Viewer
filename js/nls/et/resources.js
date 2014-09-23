@@ -20,12 +20,19 @@ define(
             "error": "Kaardi loomine ebaõnnestus"
         },
         "tools":{
+            "search":{
+                "error": "Asukohta ei leitud",
+                "notWhatYouWanted": "Ei ole see, mida soovisid?",
+                "selectAnother": "Vali muu asukoht",
+                "currentLocation": "Praegune asukoht",
+                "title": "Asukoht"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Horisontaalpaigutus (PDF)',
-			      "label2": 'Vertikaalpaigutus (PDF)',
-			      "label3": 'Horisontaalpaigutus (Pilt)',
-			      "label4": 'Vertikaalpaigutus (Pilt)'
+			      "label1": 'Horisontaalpaigutus',
+			      "label2": 'Vertikaalpaigutus',
+			      "label3": 'Horisontaalpaigutus',
+			      "label4": 'Vertikaalpaigutus'
 			    },
 			    "legend": "Lisa väljundile legend"
 			},

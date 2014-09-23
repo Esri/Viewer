@@ -20,12 +20,19 @@ define(
             "error": "Impossibile creare la mappa"
         },
         "tools":{
+            "search":{
+                "error": "Posizione non trovata",
+                "notWhatYouWanted": "Non è quanto desiderato?",
+                "selectAnother": "Selezionare un\'altra posizione",
+                "currentLocation": "Posizione corrente",
+                "title": "Posizione"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Orizzontale (PDF)',
-			      "label2": 'Verticale (PDF)',
-			      "label3": 'Orizzontale (immagine)',
-			      "label4": 'Verticale (immagine)'
+			      "label1": 'Orizzontale',
+			      "label2": 'Verticale',
+			      "label3": 'Orizzontale',
+			      "label4": 'Verticale'
 			    },
 			    "legend": "Aggiungi legenda all\'output"
 			},

@@ -20,12 +20,19 @@ define(
             "error": "Karte kann nicht erstellt werden"
         },
         "tools":{
+            "search":{
+                "error": "Position wurde nicht gefunden",
+                "notWhatYouWanted": "Nicht das gewünschte Ergebnis?",
+                "selectAnother": "Andere Position auswählen",
+                "currentLocation": "Aktuelle Position",
+                "title": "Position"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Querformat (PDF)',
-			      "label2": 'Hochformat (PDF)',
-			      "label3": 'Querformat (Bild)',
-			      "label4": 'Hochformat (Bild)'
+			      "label1": 'Querformat',
+			      "label2": 'Hochformat',
+			      "label3": 'Querformat',
+			      "label4": 'Hochformat'
 			    },
 			    "legend": "Legende zu Ausgabe hinzufügen"
 			},

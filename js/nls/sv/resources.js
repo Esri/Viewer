@@ -20,12 +20,19 @@ define(
             "error": "Det gick inte att skapa kartan"
         },
         "tools":{
+            "search":{
+                "error": "Det gick inte att hitta platsen",
+                "notWhatYouWanted": "Är det inte vad du vill ha?",
+                "selectAnother": "Välj en annan plats",
+                "currentLocation": "Aktuell plats",
+                "title": "Plats"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Liggande (PDF)',
-			      "label2": 'Stående (PDF)',
-			      "label3": 'Liggande (bild)',
-			      "label4": 'Stående (bild)'
+			      "label1": 'Liggande',
+			      "label2": 'Stående',
+			      "label3": 'Liggande',
+			      "label4": 'Stående'
 			    },
 			    "legend": "Lägg till teckenförklaring i utdata"
 			},

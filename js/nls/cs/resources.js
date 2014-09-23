@@ -20,12 +20,19 @@ define(
             "error": "Nelze vytvořit mapu"
         },
         "tools":{
+            "search":{
+                "error": "Umístění nebylo nalezeno.",
+                "notWhatYouWanted": "Nenašli jste, co jste hledali?",
+                "selectAnother": "Vybrat jiné umístění",
+                "currentLocation": "Současné umístění",
+                "title": "Umístění"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Na šířku (PDF)',
-			      "label2": 'Na výšku (PDF)',
-			      "label3": 'Na šířku (obrázek)',
-			      "label4": 'Na výšku (obrázek)'
+			      "label1": 'Na šířku',
+			      "label2": 'Na výšku',
+			      "label3": 'Na šířku',
+			      "label4": 'Na výšku'
 			    },
 			    "legend": "Přidat legendu do výstupu"
 			},

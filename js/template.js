@@ -358,7 +358,7 @@ Evented, declare, kernel, array, lang, domClass, Deferred, all, arcgisUtils, url
 
                 result = regex.exec(queryString);
 
-                fields[fieldName] = queryString.substring(fieldIndex, result ? result.index : queryString.length).replace(/^\s+|\s+$/g, "").replace(/\"/g, ""); //remove extra quotes in title 
+                fields[fieldName] = queryString.substring(fieldIndex, result ? result.index : queryString.length).replace(/^\s+|\s+$/g, "").replace(/\"/g, ""); //remove extra quotes in title
             }
             return fields;
         }

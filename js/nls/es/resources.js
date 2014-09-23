@@ -20,12 +20,19 @@ define(
             "error": "No se puede crear el mapa"
         },
         "tools":{
+            "search":{
+                "error": "La ubicación no se puede encontrar",
+                "notWhatYouWanted": "¿No es lo que querías?",
+                "selectAnother": "Selecciona otra ubicación",
+                "currentLocation": "Ubicación actual",
+                "title": "Ubicación"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Horizontal (PDF)',
-			      "label2": 'Vertical (PDF)',
-			      "label3": 'Horizontal (Imagen)',
-			      "label4": 'Vertical (Imagen)'
+			      "label1": 'Horizontal',
+			      "label2": 'Vertical',
+			      "label3": 'Horizontal',
+			      "label4": 'Vertical'
 			    },
 			    "legend": "Agregar leyenda a la salida"
 			},

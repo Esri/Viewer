@@ -20,12 +20,19 @@ define(
             "error": "לא ניתן ליצור מפה"
         },
         "tools":{
+            "search":{
+                "error": "לא ניתן למצוא מיקום",
+                "notWhatYouWanted": "לא מה שחיפשת?",
+                "selectAnother": "בחר מיקום אחר",
+                "currentLocation": "מיקום נוכחי",
+                "title": "מיקום"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'לרוחב (PDF)',
-			      "label2": 'לאורך (PDF)',
-			      "label3": 'לרוחב (Image)',
-			      "label4": 'לאורך (Image)'
+			      "label1": 'לרוחב',
+			      "label2": 'לאורך',
+			      "label3": 'לרוחב',
+			      "label4": 'לאורך'
 			    },
 			    "legend": "הוסף מקרא לתוצאה"
 			},
@@ -44,7 +51,7 @@ define(
         	"bookmarks": "סימניות",
         	"layers": "שכבות",
         	"basemap": "גלרית מפות בסיס",
-        	"overview": "מפת תצוגה מקדימה",
+        	"overview": "מפת התמצאות",
         	"measure": "מדידה",
         	"edit": "עריכה",
         	"time": "זמן",

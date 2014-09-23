@@ -20,12 +20,19 @@ define(
             "error": "Imposibil de creat harta"
         },
         "tools":{
+            "search":{
+                "error": "Locaţia nu a putut fi găsită",
+                "notWhatYouWanted": "Nu este ce doreaţi?",
+                "selectAnother": "Selectaţi altă locaţie",
+                "currentLocation": "Locaţie curentă",
+                "title": "Locaţie"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Peisaj (PDF)',
-			      "label2": 'Portret (PDF)',
-			      "label3": 'Peisaj (Imagine)',
-			      "label4": 'Portret (Imagine)'
+			      "label1": 'Peisaj',
+			      "label2": 'Portret',
+			      "label3": 'Peisaj',
+			      "label4": 'Portret'
 			    },
 			    "legend": "Adăugare legendă în rezultate"
 			},

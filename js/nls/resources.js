@@ -20,12 +20,19 @@ define({
             "error": "Unable to create map"
         },
         "tools":{
+            "search":{
+                "error": "Location could not be found",
+                "notWhatYouWanted": "Not what you wanted?",
+                "selectAnother": "Select another location",
+                "currentLocation": "Current Location",
+                "title": "Location"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Landscape (PDF)',
-			      "label2": 'Portrait (PDF)',
-			      "label3": 'Landscape (Image)',
-			      "label4": 'Portrait (Image)'
+			      "label1": 'Landscape',
+			      "label2": 'Portrait',
+			      "label3": 'Landscape',
+			      "label4": 'Portrait'
 			    },
 			    "legend": "Add legend to output"
 			},

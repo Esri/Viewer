@@ -20,12 +20,19 @@ define(
             "error": "Kan kaart niet maken"
         },
         "tools":{
+            "search":{
+                "error": "Locatie is niet gevonden",
+                "notWhatYouWanted": "Niet wat u wilde?",
+                "selectAnother": "Een andere locatie selecteren",
+                "currentLocation": "Huidige locatie",
+                "title": "Locatie"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Liggend (PDF)',
-			      "label2": 'Staand (PDF)',
-			      "label3": 'Liggend (afbeelding)',
-			      "label4": 'Staand (afbeelding)'
+			      "label1": 'Liggend',
+			      "label2": 'Staand',
+			      "label3": 'Liggend',
+			      "label4": 'Staand'
 			    },
 			    "legend": "Legenda toevoegen aan uitvoer"
 			},

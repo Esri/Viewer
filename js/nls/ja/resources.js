@@ -20,12 +20,19 @@ define(
             "error": "マップを作成できません"
         },
         "tools":{
+            "search":{
+                "error": "場所が見つかりませんでした",
+                "notWhatYouWanted": "他の住所の候補を表示しますか？",
+                "selectAnother": "他の候補を選択",
+                "currentLocation": "現在の位置",
+                "title": "位置"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": '横 (PDF)',
-			      "label2": '縦 (PDF)',
-			      "label3": '横 (画像)',
-			      "label4": '縦 (画像)'
+			      "label1": '横',
+			      "label2": '縦',
+			      "label3": '横',
+			      "label4": '縦'
 			    },
 			    "legend": "凡例を出力に追加"
 			},

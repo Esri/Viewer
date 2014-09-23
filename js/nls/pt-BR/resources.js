@@ -20,12 +20,19 @@ define(
             "error": "Não foi possível criar o mapa"
         },
         "tools":{
+            "search":{
+                "error": "Não foi possível encontrar o local",
+                "notWhatYouWanted": "Não é o que você desejava?",
+                "selectAnother": "Selecionar outro local",
+                "currentLocation": "Local atual",
+                "title": "Local"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Paisagem (PDF)',
-			      "label2": 'Retrato (PDF)',
-			      "label3": 'Paisagem (imagem)',
-			      "label4": 'Retrato (imagem)'
+			      "label1": 'Paisagem',
+			      "label2": 'Retrato',
+			      "label3": 'Paisagem',
+			      "label4": 'Retrato'
 			    },
 			    "legend": "Adicionar legenda na saída"
 			},

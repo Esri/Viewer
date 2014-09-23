@@ -20,12 +20,19 @@ define(
             "error": "无法创建地图"
         },
         "tools":{
+            "search":{
+                "error": "无法找到位置",
+                "notWhatYouWanted": "不是您想要的位置?",
+                "selectAnother": "选择其他位置",
+                "currentLocation": "当前位置",
+                "title": "位置"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": '横向(PDF)',
-			      "label2": '纵向(PDF)',
-			      "label3": '横向(图像)',
-			      "label4": '纵向(图像)'
+			      "label1": '横向',
+			      "label2": '纵向',
+			      "label3": '横向',
+			      "label4": '纵向'
 			    },
 			    "legend": "向输出添加图例"
 			},

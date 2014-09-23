@@ -20,12 +20,19 @@ define(
             "error": "Karttaa ei voi luoda"
         },
         "tools":{
+            "search":{
+                "error": "Sijaintia ei löytynyt",
+                "notWhatYouWanted": "Etkö löytänyt etsimääsi?",
+                "selectAnother": "Valitse toinen sijainti",
+                "currentLocation": "Nykyinen sijainti",
+                "title": "Sijainti"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Maisema (PDF)',
-			      "label2": 'Muotokuva (PDF)',
-			      "label3": 'Maisema (kuva)',
-			      "label4": 'Muotokuva (kuva)'
+			      "label1": 'Vaaka',
+			      "label2": 'Pysty',
+			      "label3": 'Vaaka',
+			      "label4": 'Pysty'
 			    },
 			    "legend": "Lisää selite tulokseen"
 			},

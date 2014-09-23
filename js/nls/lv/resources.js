@@ -20,12 +20,19 @@ define(
             "error": "Nevar izveidot karti"
         },
         "tools":{
+            "search":{
+                "error": "Izvietojumu nevarēja atrast",
+                "notWhatYouWanted": "Vai tas nav vajadzīgais?",
+                "selectAnother": "Izvēlieties citu izvietojumu",
+                "currentLocation": "Pašreizējais izvietojums",
+                "title": "Izvietojums"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Ainava (PDF)',
-			      "label2": 'Portrets (PDF)',
-			      "label3": 'Ainava (Attēls)',
-			      "label4": 'Portrets (Attēls)'
+			      "label1": 'Ainava',
+			      "label2": 'Portrets',
+			      "label3": 'Ainava',
+			      "label4": 'Portrets'
 			    },
 			    "legend": "Pievienot apzīmējumus izvadei"
 			},

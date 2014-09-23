@@ -20,12 +20,19 @@ define(
             "error": "Kan ikke opprette kart"
         },
         "tools":{
+            "search":{
+                "error": "Finner ikke lokasjonen",
+                "notWhatYouWanted": "Ikke den du ville ha?",
+                "selectAnother": "Velg en annen lokasjon",
+                "currentLocation": "Gjeldende lokasjon",
+                "title": "Lokasjon"
+            },
 	    	"print": {
 			    "layouts":{
-			      "label1": 'Liggende (PDF)',
-			      "label2": 'Stående (PDF)',
-			      "label3": 'Liggende (bilde)',
-			      "label4": 'Stående (bilde)'
+			      "label1": 'Liggende',
+			      "label2": 'Stående',
+			      "label3": 'Liggende',
+			      "label4": 'Stående'
 			    },
 			    "legend": "Legg til kartforklaring i resultatet"
 			},

@@ -1,5 +1,5 @@
-define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/fx", "dojo/_base/html", "dojo/_base/lang", "dojo/has", "dojo/dom", "dojo/dom-class", "dojo/dom-attr", "dojo/dom-construct", "dojo/dom-geometry", "dojo/on", "dojo/query", "dojo/Deferred"], function (
-Evented, declare, fx, html, lang, has, dom, domClass, domAttr, domConstruct, domGeometry, on, query, Deferred) {
+define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window", "dojo/_base/fx", "dojo/_base/html", "dojo/_base/lang", "dojo/has", "dojo/dom", "dojo/dom-class", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-construct", "dojo/dom-geometry", "dojo/on", "dojo/mouse", "dojo/query", "dojo/Deferred"], function (
+Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferred) {
     return declare([Evented], {
 
         map: null,
@@ -34,16 +34,36 @@ Evented, declare, fx, html, lang, has, dom, domClass, domAttr, domConstruct, dom
             var deferred;
 
             deferred = new Deferred();
-
             on(window, "scroll", lang.hitch(this, this._windowScrolled));
             on(window, "resize", lang.hitch(this, this._windowScrolled));
-
-
-
             this.pTools = dom.byId("panelTools");
             this.pMenu = dom.byId("panelMenu");
             on(this.pMenu, "click", lang.hitch(this, this._menuClick));
             this.pPages = dom.byId("panelPages");
+            //Prevent body scroll when scrolling to the end of the panel content
+
+            on(this.pPages, mouse.enter, lang.hitch(this, function () {
+
+                if (this._hasScrollbar()) {
+                    var p = dom.byId("panelContent");
+                    if (p) {
+                        domClass.add(p, "modal-scrollbar");
+                    }
+                }
+                domStyle.set(win.body(), "overflow", "hidden");
+
+            }));
+            on(this.pPages, mouse.leave, lang.hitch(this, function () {
+                if (this._hasScrollbar === false) {
+                    var p = dom.byId("panelContent");
+                    if (p) {
+                        domClass.remove(p, "modal-scrollbar");
+                    }
+                    domStyle.set(win.body(), "overflow-y", "auto");
+                }
+
+
+            }));
             domConstruct.empty(this.pPages);
             // add blank page
             domConstruct.create("div", {
@@ -55,7 +75,33 @@ Evented, declare, fx, html, lang, has, dom, domClass, domAttr, domConstruct, dom
 
             return deferred.promise;
         },
+        _hasScrollbar: function () {
+            // The Modern solution
+            if (typeof window.innerWidth === 'number') return window.innerWidth > document.documentElement.clientWidth;
 
+            // rootElem for quirksmode
+            var rootElem = document.documentElement || document.body;
+
+            // Check overflow style property on body for fauxscrollbars
+            var overflowStyle;
+
+            if (typeof rootElem.currentStyle !== 'undefined') overflowStyle = rootElem.currentStyle.overflow;
+
+            overflowStyle = overflowStyle || window.getComputedStyle(rootElem, '').overflow;
+
+            // Also need to check the Y axis overflow
+            var overflowYStyle;
+
+            if (typeof rootElem.currentStyle !== 'undefined') overflowYStyle = rootElem.currentStyle.overflowY;
+
+            overflowYStyle = overflowYStyle || window.getComputedStyle(rootElem, '').overflowY;
+
+            var contentOverflows = rootElem.scrollHeight > rootElem.clientHeight;
+            var overflowShown = /^(visible|auto)$/.test(overflowStyle) || /^(visible|auto)$/.test(overflowYStyle);
+            var alwaysShowScroll = overflowStyle === 'scroll' || overflowYStyle === 'scroll';
+
+            return (contentOverflows && overflowShown) || (alwaysShowScroll);
+        },
         //Create a tool and return the div where you can place content
         createTool: function (tool, panelClass) {
             var name = tool.name;
@@ -70,6 +116,7 @@ Evented, declare, fx, html, lang, has, dom, domClass, domAttr, domConstruct, dom
                 //add a tooltip 
                 var tip = this.config.i18n.tooltips[name] || name;
                 domAttr.set(pTool, "data-title", tip);
+                domAttr.set(pTool, "title", tip);
             }
 
             domConstruct.create("img", {
@@ -223,6 +270,8 @@ Evented, declare, fx, html, lang, has, dom, domClass, domAttr, domConstruct, dom
             this._updateTool(num);
 
         },
+
+        // window scrolled
         _windowScrolled: function (evt) {
 
             if (this.scrollTimer) {
@@ -230,10 +279,8 @@ Evented, declare, fx, html, lang, has, dom, domClass, domAttr, domConstruct, dom
             }
             if (this.snap === true) {
                 this.scrollTimer = setTimeout(lang.hitch(this, this._snapScroll), 300);
-                this._updateMap();
             }
         },
-
         _snapScroll: function () {
 
             var startPos = domGeometry.docScroll().y;
@@ -260,7 +307,7 @@ Evented, declare, fx, html, lang, has, dom, domClass, domAttr, domConstruct, dom
 
             this.curTool = num;
             this._updateTool(num);
-            //this.snap = false;
+
             if (num != numActual) {
                 this._animateScroll(startPos, endPos);
             }

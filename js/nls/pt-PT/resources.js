@@ -20,6 +20,13 @@ define(
             "error": "Não foi possível criar o mapa"
         },
         "tools":{
+            "search":{
+                "error": "A localização não pode ser encontrada",
+                "notWhatYouWanted": "Não é o que pretendia?",
+                "selectAnother": "Selecionar outra localização",
+                "currentLocation": "Localização atual",
+                "title": "Localização"
+            },
 	    	"print": {
 			    "layouts":{
 			      "label1": 'Paisagem (PDF)',
