@@ -221,7 +221,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     map: this.map,
                     showArcGISBasemaps: true,
                     portalUrl: this.config.sharinghost,
-                    basemapGroup: this._getBasemapGroup()
+                    basemapsGroup: this._getBasemapGroup()
                 }, domConstruct.create("div", {}, basemapDiv));
                 basemap.startup();
                 deferred.resolve(true);
