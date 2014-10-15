@@ -2,7 +2,7 @@ define(
 [],
 function() {
   var config = {
-    bingMapsKey:"Arrzu_Koi7htDRMIwm6kTe0Nqh8FvVdN17blcaJVTEhn87z-tIYJh2LgBNbJS4fv",   
+    bingMapsKey:"Ap4k7zGl21nUvZ0XtajPxoz9evZhRDrd7CGbWZrwAs6PSgQWoNySbUyYZozFMq6y",   
     units: null,
     helperServices: {
        geometry:{
