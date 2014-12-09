@@ -52,7 +52,7 @@ define(
         	"layers": "Camadas",
         	"basemap": "Galeria de mapa base",
         	"overview": "Mapa de visão geral",
-        	"measure": "Medida",
+        	"measure": "Medir",
         	"edit": "Editar",
         	"time": "Tempo",
         	"print": "Imprimir",
@@ -60,5 +60,4 @@ define(
         	"share": "Compartilhar"
         }
     })
-
 );

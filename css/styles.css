@@ -207,18 +207,27 @@ html, body {
   background: #d3d3d3; }
 
 /* Esri Javascript API*/
+.esriEditor{
+  height:400px;
+}
+.templatePicker {
+  height:100%;
+  padding-top:30px;
+  padding-bottom:120px;
+  border: none; 
+}
 .esriEditor .esriDrawingToolbar {
   position: absolute;
   right: 0;
   left: 0;
-  bottom: 35%;
-  border-bottom: none;
+  top: 10px;
+  border-top:none;
   border-right: none;
   border-left: none; }
 
 @media only screen and (min-width: 720px) {
   .esriEditor .esriDrawingToolbar {
-    bottom: 25%;
+    top:10px;
     right: 0;
     left: 0; } }
 
@@ -236,8 +245,7 @@ html, body {
   top: 40px;
   left: 15px; }
 
-.templatePicker {
-  border: none; }
+
 
 .esriMeasurement .esriMeasurementButtonPane {
   padding-left: 6px; }
@@ -784,6 +792,10 @@ img {
   line-height: 50px;
   display: none;
   font-size: 0.9em; }
+
+#panelText.nosearch{
+  display: block;
+}
 
 @media only screen and (min-width: 720px) {
   #panelText {

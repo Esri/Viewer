@@ -23,9 +23,9 @@ define(
             "search":{
                 "error": "تعذر العثور على الموقع",
                 "notWhatYouWanted": "أليس هذا ما تريده؟",
-                "selectAnother": "حدد موقع أخر",
+                "selectAnother": "تحديد موقع آخر",
                 "currentLocation": "الموقع الحالي",
-                "title": "موقع"
+                "title": "الموقع"
             },
 	    	"print": {
 			    "layouts":{
@@ -60,5 +60,4 @@ define(
         	"share": "مشاركة"
         }
     })
-
 );

@@ -50,20 +50,26 @@ declare, Deferred, Geocoder, PopupTemplate, FeatureLayer, Extent, Point, esriLan
         showGeocodingResult: function (result, pos) {
             this.map.infoWindow.hide();
 
-            var bestView, anchorPoint;
+
             var geocodeResult = result.result || result;
-            anchorPoint = geocodeResult.feature.geometry;
+
+            var bestView;
+            var anchorPoint = geocodeResult.feature.geometry;
             if (anchorPoint.type === "polygon") {
                 anchorPoint = anchorPoint.getCentroid();
                 bestView = geocodeResult.feature.geometry.getExtent().expand(1.1);
             } else if (anchorPoint.type === "polyline") {
                 anchorPoint = anchorPoint.getPoint(0, 0);
                 bestView = geocodeResult.feature.geometry.getExtent().expand(1.1);
+            } else if (anchorPoint.type === "multipoint") {
+                anchorPoint = anchorPoint.getPoint(0);
+                bestView = geocodeResult.feature.geometry.getExtent().expand(1.1);
             } else {
                 bestView = this.map.extent.centerAt(anchorPoint).expand(0.0625);
             }
-
-
+            if (geocodeResult.extent && !isNaN(geocodeResult.extent.xmin) && !isNaN(geocodeResult.extent.ymin) && !isNaN(geocodeResult.extent.xmax) && !isNaN(geocodeResult.extent.ymax)) {
+                bestView = geocodeResult.extent;
+            }
             //Add feature search support 
             var featureSearch = false;
             if (result.target && result.target.activeGeocoder) {
@@ -124,7 +130,7 @@ declare, Deferred, Geocoder, PopupTemplate, FeatureLayer, Extent, Point, esriLan
                 pos = 0;
             }
             //Locator based geocode results handled here 
-            this.setupInfoWindowAndZoom(geocodeResult.name, geocodeResult.feature.geometry, bestView, geocodeResult, pos);
+            this.setupInfoWindowAndZoom(geocodeResult.name, anchorPoint, bestView, geocodeResult, pos);
 
         },
         _getPopupFeatureLayer: function (mapLayer, subLayerId, popupInfo) {
@@ -287,9 +293,9 @@ declare, Deferred, Geocoder, PopupTemplate, FeatureLayer, Extent, Point, esriLan
                 }
 
             }));
-            //only use geocoders with a singleLineFieldName that allow placefinding
+            //only use geocoders with a singleLineFieldName 
             geocoders = array.filter(geocoders, function (geocoder) {
-                return (esriLang.isDefined(geocoder.singleLineFieldName) && esriLang.isDefined(geocoder.placefinding) && geocoder.placefinding);
+                return (esriLang.isDefined(geocoder.singleLineFieldName));
             });
             var esriIdx;
             if (hasEsri) {

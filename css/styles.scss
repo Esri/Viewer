@@ -114,7 +114,9 @@ html, body {
     width: 100%;
     font-family: Arial, Helvetica, sans-serif;
 }
-
+.modal-scrollbar {
+    margin-right: 17px;
+}
 /* Fonts */
 @include fontFace("HelveticaNeue","../fonts/helveticaneue");
 @include fontFace("HelveticaNeueUltraLight","../fonts/helveticaneueultralight");
@@ -175,12 +177,12 @@ html, body {
 #pageBody_print .checkbox {
     display: inline-block;
     cursor: pointer;
-    margin-left:10px; 
+    margin-left:10px;
     line-height:18px;
     padding:4px;
 }
 #pageBody_print input[type=checkbox].checkbox {
-    display:none; 
+    display:none;
 }
 
 #pageBody_print .checkbox:before {
@@ -199,6 +201,7 @@ html, body {
     text-shadow: 1px 1px 1px rgba(0, 0, 0, .2);
     font-size: 15px;
 }
+
 /*Layer list dialog*/
 .layer-menu{
     width:100%;
@@ -211,23 +214,28 @@ html, body {
     background:#d3d3d3;
 }
 /* Esri Javascript API*/
-
+.templatePicker{
+  height:100%;
+  padding-top:30px;
+  padding-bottom:120px;
+  border: none; 
+}
 .esriEditor .esriDrawingToolbar{
     position: absolute;
     right:0;
     left:0;
-    bottom:35%;
-    border-bottom: none;
+    top:10px;
+    border-top: none;
     border-right: none;
     border-left: none;
     @include respond-to(720){
-        bottom:25%;
+        top:10px;
         right:0;
         left:0;
     }
 }
 .esriAttributeInspector .atiDeleteButton{
-    
+
 }
 .esriPopup .pointer.bottom , .esriPopup .pointer.bottomLeft, .esriPopup .pointer.bottomRight{
     background: #f7f7f7 !important;
@@ -243,8 +251,11 @@ html, body {
     top:40px;
     left:15px;
 }
-.templatePicker{
-    border:none;
+.esriMeasurement .esriMeasurementButtonPane{
+    padding-left:6px;
+}
+.esriMeasurement .esriMeasurementResultLabel{
+    padding-left:4px;
 }
 .esriMeasurement .areaIcon{
     background-image: url(../images/area_measure.png);
@@ -395,7 +406,7 @@ html, body {
     background: #f8f8f8;
     color:#555;
     border-bottom:1px solid #e0e0e0;
-    @include user-select(none);    
+    @include user-select(none);
     padding:6px;
 }
 .esriBookmarkLabel {
@@ -412,7 +423,10 @@ html, body {
 .legend{
     padding-bottom:100px;
 }
-
+.scalebar_bottom-left {
+    left: 25px;
+    bottom: 40px;
+}
 .HomeButton .home {
     padding:0 !important;
     width:24px;
@@ -431,7 +445,10 @@ html, body {
 .no-touch .HomeButton .home:hover, .LocateButton .zoomLocateButton:hover{
     background-color:none !important;
 }
-
+.scalebar_bottom-left {
+    left: 25px;
+    bottom: 40px;
+}
 .HomeButton .home:before{
     width:24px;
     height:24px;
@@ -509,12 +526,11 @@ img{
 #panelContent {
     font-family: Helvetica, Arial, sans-serif;
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 0;
     height: 100%;
     width: 0px;
     display: block;
-    overflow:visible;
     @include transparent($black-color, 0.5);
 
 }
@@ -522,11 +538,10 @@ img{
 #panelPages {
     width: 100%;
     height: 100%;
-    overflow: visible;
     @include transparent(rgb(255,0,0), 0.5);
 }
 
-.page { 
+.page {
     overflow:visible;
     position:relative;
     width: 100%;
@@ -555,7 +570,7 @@ img{
     @include respond-to(600){
         max-height:none;
     }
-    @include respond-to(1074){
+    @include respond-to(1012){
        top:10px;
         max-height:none;
     }
@@ -616,7 +631,7 @@ img{
     cursor: pointer;
     position: absolute;
     right: 5px;
-    top: 9px; 
+    top: 9px;
     background: url(../images/close.png) no-repeat;
     background-size:24px;
     width: 24px;
@@ -626,7 +641,7 @@ img{
 
 .pageUp {
     position: absolute;
-    top: 35px; 
+    top: 35px;
     right: 5px;
     background: url(../images/up.png) no-repeat;
     background-size:24px;
@@ -638,7 +653,7 @@ img{
 
 .pageDown {
     position: absolute;
-    top: 60px; 
+    top: 60px;
     right: 5px;
     background: url(../images/down.png) no-repeat;
     background-size:24px;
@@ -656,7 +671,7 @@ img{
     width: 100%;
     color: #000000;
     overflow-x: hidden;
-    overflow-y: auto; 
+    overflow-y: auto;
 }
 
 #pageBody_print{
@@ -665,11 +680,16 @@ img{
 #pageBody_legend{
     padding-left:20px;
     padding-top:20px;
-    padding-bottom:20px;
     margin-right:30px;
+    max-height:80%;
     max-width: $page-width - 20;
 }
-
+#pageBody_basemap{
+    max-height:80%;
+}
+#pageBody_layers{
+    max-height:80%;
+}
 #pageBody_share{
     padding:5px 20px;
     overflow-y:auto;
@@ -677,10 +697,22 @@ img{
         max-height:none;
     }
 }
+#pageBody_bookmarks{
+    position:absolute;
+    top:90px;
+    max-height:70%;
+    @include respond-to(720){
+        max-height:80%;
+    }
+}
+#pageContent_details{
+    padding-bottom:100px;
+}
 #pageBody_details{
     padding:5px;
     max-width: $page-width - 12;
 }
+
 
 #panelTop {
     position: fixed;
@@ -703,12 +735,12 @@ img{
 .largerTitle{
      @include respond-to(720){
         max-width:720px !important;
-    }   
+    }
 }
 .smallerTitle{
      @include respond-to(720){
         max-width:520px !important;
-    }   
+    }
 }
 #panelTitle {
     height: 50px;
@@ -717,8 +749,8 @@ img{
     color: #ffffff;
     display: block;
     border-bottom: 1px solid rgba(255,255,255,0.5);
-    font-family: "HelveticaNeue-UltraLight", "HelveticaNeueUltraLight", "HelveticaNeue-Ultra-Light", "Helvetica Neue Ultra Light", "Helvetica Neue", "Arial", sans-serif; 
-    font-weight:normal; 
+    font-family: "Helvetica Neue", "Arial", sans-serif;
+    font-weight:normal;
     font-size: 25px;
 }
 
@@ -751,7 +783,9 @@ img{
         max-width:400px;
     }
 }
-
+#panelText.nosearch{
+  display: block;
+}
 #panelSearch {
     float: left;
     margin: 10px 0 10px 4px;
@@ -1016,7 +1050,7 @@ img{
     padding:8px;
 }
  input[type=checkbox].share-dialog-checkbox {
-    display:none; 
+    display:none;
 }
 
 .share-dialog-checkbox:before {
@@ -1058,38 +1092,38 @@ img{
     src: url('../fonts/tool-icons.svg?23344103#tool-icons') format('svg');  }
 }
 */
- 
+
  [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "tool-icons";
   font-style: normal;
   font-weight: normal;
   speak: none;
- 
+
   display: inline-block;
   text-decoration: inherit;
   width: 1em;
   margin-right: .2em;
   text-align: center;
   /* opacity: .8; */
- 
+
   /* For safety - reset parent styles, that can break glyph codes*/
   font-variant: normal;
   text-transform: none;
-     
+
   /* fix buttons height, for twitter bootstrap */
   line-height: 1em;
- 
+
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
   margin-left: .2em;
- 
+
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
- 
+
   /* Uncomment for 3D effect */
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
- 
+
 
 
 
@@ -1104,6 +1138,4 @@ img{
 .icon-buffer:before { content: '\e80b'; } /* '' */
 .icon-target:before { content: '\e80c'; } /* '' */
 .icon-angle-down:before { content: '\e809'; } /* '' */
-.icon-check-1:before {content: '\2713';} 
-
-
+.icon-check-1:before {content: '\2713';}

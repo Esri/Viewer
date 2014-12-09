@@ -1,17 +1,17 @@
 define({
-    "root": ({
-        "widgets": {
-            "ShareDialog": {
-                "title": "Share",
-                "heading": "Share this map",
-                "url": "Map Link",
-                "embed": "Embed Map",
-                "extent": "Share current map extent",
-                "size": "Size (width/height):",
-                "facebookTooltip": "Facebook",
-                "twitterTooltip": "Twitter",
-                "gplusTooltip": "Google Plus",
-                "emailTooltip": "Email"
+    root: ({
+        widgets: {
+            ShareDialog: {
+                title: "Share",
+                heading: "Share this map",
+                url: "Map Link",
+                embed: "Embed Map",
+                extent: "Share current map extent",
+                size: "Size (width/height):",
+                facebookTooltip: "Facebook",
+                twitterTooltip: "Twitter",
+                gplusTooltip: "Google Plus",
+                emailTooltip: "Email"
             }
         }
     }),
@@ -37,7 +37,8 @@ define({
     "ro": 1,
     "ru": 1,
     "sv": 1,
-    "th": 1,
     "tr": 1,
+    "th": 1,
+    "vi": 1,
     "zh-cn": 1
 });

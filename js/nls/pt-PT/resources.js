@@ -60,5 +60,4 @@ define(
         	"share": "Partilhar"
         }
     })
-
 );
