@@ -921,7 +921,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             }).then(lang.hitch(this, function (response) {
 
                 this.map = response.map;
-              //  domClass.add(this.map.infoWindow.domNode, "light");
+                domClass.add(this.map.infoWindow.domNode, "light");
                 this._updateTheme();
 
                 //Add a logo if provided
