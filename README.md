@@ -2,16 +2,16 @@
 
 This fork allows the implementer to define a webmap locally, rather than have the template retrieve the webmap definition from ArcGIS.com.
 
-##To define locally
+* To define locally
 Create an "itemInfo" property in the defaults.js file as shown in [this commit](https://github.com/jsomerville/Viewer/commit/476da3aaade082109c87496233f324d5acbef72f).
 
-###See the help page section
+  * See the help page section
 [Create a map using json](https://developers.arcgis.com/javascript/jshelp/intro_webmap.html) for more information on how to construct a webmap JSON object.
 
-###Another option
+  * Another option
 for creating the webmap JSON object's "itemData" property (which defines the map's layers, popups, etc.) is to create a web map in the ArcGIS.com viewer, and then retrieve and copy the JSON object into the "itemData" sub-property of the default.js file.
 
-Steps:
+    * Steps:
 
 1. Construct and Save a webmap in ArcGIS.com viewer. Also, share as Public (at least temporarily) if you do not want to worry about a token for the steps below.
 1. Get the webmap's unique id from the URL in the browser: http://`<your org>`.maps.arcgis.com/home/webmap/viewer.html?webmap=`<webmap id>`.
