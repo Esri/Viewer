@@ -11,16 +11,16 @@ Create an "itemInfo" property in the defaults.js file as shown in [this commit](
   * Another option
 for creating the webmap JSON object's "itemData" property (which defines the map's layers, popups, etc.) is to create a web map in the ArcGIS.com viewer, and then retrieve and copy the JSON object into the "itemData" sub-property of the default.js file.
 
-    * Steps:
+      * Steps:
+    
+      1. Construct and Save a webmap in ArcGIS.com viewer. Also, share as Public (at least temporarily) if you do not want to worry about a token for the steps below.
+      1. Get the webmap's unique id from the URL in the browser: http://`<your org>`.maps.arcgis.com/home/webmap/viewer.html?webmap=`<webmap id>`.
+      1. Obtain the JSON object by entering the following in a browser: "http://`<your org>`.maps.arcgis.com/sharing/rest/content/items/`<webmap id>`/data?f=pjson
+        1. Note: you can also retrieve the JSON object or URL by opening the dev tools for your browser and finding the Network request that retrieved the webmap's itemData object.
+        1. Also, if you did not share the webmap as Public, then this step will reject your request if you do not have a token parameter in the URL's query string.
 
-1. Construct and Save a webmap in ArcGIS.com viewer. Also, share as Public (at least temporarily) if you do not want to worry about a token for the steps below.
-1. Get the webmap's unique id from the URL in the browser: http://`<your org>`.maps.arcgis.com/home/webmap/viewer.html?webmap=`<webmap id>`.
-1. Obtain the JSON object by entering the following in a browser: "http://`<your org>`.maps.arcgis.com/sharing/rest/content/items/`<webmap id>`/data?f=pjson
-  1. Note: you can also retrieve the JSON object or URL by opening the dev tools for your browser and finding the Network request that retrieved the webmap's itemData object.
-  1. Also, if you did not share the webmap as Public, then this step will reject your request if you do not have a token parameter in the URL's query string.
-
-1. Enter this JSON object in the default.js file's `itemInfo.itemData` property- as shown in the commit linked above.
-1. The object can be edited as needed in the default.js file, and the webmap can be deleted on ArcGIS Online.
+      1. Enter this JSON object in the default.js file's `itemInfo.itemData` property- as shown in the commit linked above.
+      1. The object can be edited as needed in the default.js file, and the webmap can be deleted on ArcGIS Online.
 
 
 
