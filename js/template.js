@@ -73,8 +73,8 @@ Evented, declare, kernel, array, lang, domClass, Deferred, all, arcgisUtils, url
             }).then(lang.hitch(this, function () {
                 // then execute these async
                 all({
-                    // get item data
-                    item: this._queryDisplayItem(),
+                    // get item data from local config or from ArcGIS.com
+                    item: this.config.itemInfo || this._queryDisplayItem(),
                     // get org data
                     org: this._queryOrganizationInformation()
                 }).then(lang.hitch(this, function () {
