@@ -2,6 +2,8 @@
 
 This fork allows the implementer to define a webmap locally, rather than have the template retrieve the webmap definition from ArcGIS.com.
 
+With this fork, if an "itemInfo" property is present in the default.js (as discussed below), then that web map will be loaded. If the itemInfo property is not present, then the standard functionality of the template will apply (i.e. the webmap id included in default.js or in the URL query string will be retrieved from ArcGIS.com).
+
 * To define locally
 Create an "itemInfo" property in the defaults.js file as shown in [this commit](https://github.com/jsomerville/Viewer/commit/476da3aaade082109c87496233f324d5acbef72f).
 
