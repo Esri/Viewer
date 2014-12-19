@@ -19,6 +19,36 @@ define({
     //Default configuration settings for the application. This is where you'll define things like a bing maps key,
     //default web map, default app color theme and more. These values can be overwritten by template configuration settings and url parameters.
     "appid": "",
+	"itemInfo": {
+		"item": {
+				"title":"Soil Survey Map of USA",
+				"snippet": "Detailed description of data",
+				"extent": [[-139.4916, 10.7191],[-52.392, 59.5199]]
+			},
+		"itemData":	{
+				"operationalLayers": [{
+				  "url": "http://server.arcgisonline.com/ArcGIS/rest/services/Specialty/Soil_Survey_Map/MapServer",
+				  "visibility": true,
+				  "opacity": 0.75,
+				  "title": "Soil Survey Map",
+				  "itemId": "204d94c9b1374de9a21574c9efa31164"
+				}],
+				"baseMap": {
+				  "baseMapLayers": [{
+					"opacity": 1,
+					"visibility": true,
+					"url": "http://services.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer"
+					},{
+					"isReference": true,
+					"opacity": 1,
+					"visibility": true,
+					"url": "http://services.arcgisonline.com/ArcGIS/rest/services/Reference/World_Reference_Overlay/MapServer"
+					}],
+				  "title": "World_Terrain_Base"
+				},
+				"version": "1.1"
+			}
+	},
     "webmap": "f5b13dbed07c46cdb783cf361833aa6b",
     "oauthappid": null, //"AFTKRmv16wj14N3z",
     //Group templates must support a group url parameter. This will contain the id of the group.
