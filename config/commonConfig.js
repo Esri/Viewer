@@ -2,7 +2,7 @@ define(
 [],
 function() {
   var config = {
-    bingMapsKey:"",   
+    bingMapsKey:"",
     units: null,
     helperServices: {
        geometry:{
@@ -15,12 +15,14 @@ function() {
          url: location.protocol + "//elevation.arcgis.com/arcgis/rest/services/Tools/ElevationSync/GPServer"
        },
        geocode: [{
-        url: location.protocol + "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
+        url: location.protocol + "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer",
+        // when using custom geocoders, it is necessary to identify the actual Single Line input parameter recognized by the service itself.
+        // singleLineFieldName: "SingleLine"
        }]
     },
     queryForOrg: true
 };
-  
+
   // could use a has() test to optionally populate some global
   // property so that the stuff defined is in some global identifier
   //
@@ -31,5 +33,5 @@ function() {
   // instead of using a global, this should probably be added to some namespace...
   // do the templates have a common namespace that they use?
 
-  return config;  
+  return config;
 });
