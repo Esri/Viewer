@@ -17,7 +17,7 @@
 define(
      ({
         "map": {
-            "error": "Imposibil de creat harta"
+            "error": "Nu se poate crea harta"
         },
         "tools":{
             "search":{
@@ -38,7 +38,7 @@ define(
 			},
 			"share": {
 				"extent": "Utilizare extindere curentă a hărţii",
-				"label": "Partajare această hartă",
+				"label": "Se partajează această hartă",
 				"link": "Link către hartă",
 				"facebook": "Facebook",
 				"twitter": "Twitter"

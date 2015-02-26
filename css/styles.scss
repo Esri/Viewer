@@ -220,6 +220,9 @@ html, body {
   padding-bottom:120px;
   border: none; 
 }
+.esriEditor{
+    height:100%;
+}
 .esriEditor .esriDrawingToolbar{
     position: absolute;
     right:0;
@@ -243,6 +246,19 @@ html, body {
 .esriPopupMaximized{
    top:100px !important;
 }
+.esriPopup.light .actionsPane .action.zoomTo {
+  background-position: 0 -224px; }
+
+.esriPopup .actionsPane .action {
+  margin-right: 10px; }
+
+.esriPopup.light .actionsPane .action {
+  position: absolute;
+  cursor: pointer;
+  background-image: url("http://js.arcgis.com/3.12/esri/css/calcite/images/popup-sprite.png");
+  width: 12px;
+  height: 12px;
+  text-indent: -9999px; }
 .esriPrintout a{
     color:#5daddd;
 }
@@ -293,7 +309,7 @@ html, body {
     @include box-shadow (3px, 3px, 10px, rgba(0,0,0,0.3));
     cursor: pointer;
     display:none;
-    @include respond-to(720){
+    @include respond-to(760){
         display:block;
     }
 }
@@ -306,6 +322,31 @@ html, body {
     font-weight: bold;
     line-height: 40px;
     -webkit-user-select: none;
+}
+.arcgisSearch .searchGroup .searchInput {
+  width:200px;
+  padding: 6px 17px 6px 18px;
+  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.3);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
+  zoom: 1;
+  color:#fff;
+      @include respond-to(800){
+        max-width:190px;
+        display:block;
+    }
+}
+.arcgisSearch .searchClear{
+  background:none;
+  background-color: inherit;
+  color:#a8a8a8;
+ }
+
+.arcgisSearch .searchBtn {
+  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.3);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
+  color:#a8a8a8;
 }
 
 .notools div{
@@ -418,10 +459,10 @@ html, body {
 
 }
 .esriBasemapGallery{
-    padding:20px 20px 80px 20px;
+    padding:20px 20px 120px 20px;
 }
 .legend{
-    padding-bottom:100px;
+   margin-bottom:100px;
 }
 .scalebar_bottom-left {
     left: 25px;
@@ -570,7 +611,7 @@ img{
     @include respond-to(600){
         max-height:none;
     }
-    @include respond-to(1012){
+    @include respond-to(1070){
        top:10px;
         max-height:none;
     }
@@ -669,11 +710,14 @@ img{
     top:0;
     display:block;
     width: 100%;
+
     color: #000000;
     overflow-x: hidden;
     overflow-y: auto;
 }
-
+#pageBody_overview{
+    padding-bottom:90px;
+}
 #pageBody_print{
     padding:10px;
 }
@@ -681,14 +725,13 @@ img{
     padding-left:20px;
     padding-top:20px;
     margin-right:30px;
-    max-height:80%;
     max-width: $page-width - 20;
 }
 #pageBody_basemap{
-    max-height:80%;
+
 }
 #pageBody_layers{
-    max-height:80%;
+
 }
 #pageBody_share{
     padding:5px 20px;
@@ -697,6 +740,7 @@ img{
         max-height:none;
     }
 }
+
 #pageBody_bookmarks{
     position:absolute;
     top:90px;
@@ -705,12 +749,15 @@ img{
         max-height:80%;
     }
 }
-#pageContent_details{
-    padding-bottom:100px;
+
+.desc{
+    margin-bottom:100px; 
+    padding:5px;  
 }
 #pageBody_details{
     padding:5px;
     max-width: $page-width - 12;
+
 }
 
 
@@ -726,22 +773,13 @@ img{
     height: auto;
     @include border-radius (0);
     @include respond-to(760){
-        max-width:650px;
+        width:auto;
         left: 44px;
         top: 10px;
         @include border-radius(5px);
     }
 }
-.largerTitle{
-     @include respond-to(720){
-        max-width:720px !important;
-    }
-}
-.smallerTitle{
-     @include respond-to(720){
-        max-width:520px !important;
-    }
-}
+
 #panelTitle {
     height: 50px;
     width:100%;
@@ -753,7 +791,9 @@ img{
     font-weight:normal;
     font-size: 25px;
 }
-
+.no-search #panelText{
+    display:block;
+}
 #panelLogo {
     width: 50px;
     height: 50px;
@@ -780,7 +820,10 @@ img{
     font-size:.9em;
     @include respond-to(720){
         display:block;
-        max-width:400px;
+        max-width:300px
+    }
+    @include respond-to(800){
+    max-width:400px;
     }
 }
 #panelText.nosearch{
@@ -788,11 +831,10 @@ img{
 }
 #panelSearch {
     float: left;
-    margin: 10px 0 10px 4px;
-    width: 227px;
+    margin: 10px 0 10px 20px;
     height: 30px;
     @include respond-to(720){
-     margin: 10px 4px 10px 10px;
+     margin: 10px 4px 10px 20px;
      float:right;
     }
 }
@@ -957,6 +999,59 @@ img{
 .calcite .dijitPopup{
     border: solid 1px #d3d3d3;
 }
+
+.esriPopup .titlePane{
+  font-size: 12px;
+  line-height: 16px;
+  height: 16px;
+  padding: 10px;
+  border: 0;
+  border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+}
+.esriPopup .titlePane .title {
+  line-height: 16px;
+}
+.esriPopup .titleButton {
+  top: 10px;
+  background: none;
+}
+.esriPopup .titleButton.prev {
+  right: 73px;
+}
+.dj_rtl .esriPopup .titleButton.prev{
+  left: 73px;
+  right: auto;
+}
+.esriPopup .titleButton.next {
+  right: 55px;
+}
+.dj_rtl .esriPopup .titleButton.next {
+  left: 55px;
+  right: auto;
+}
+.esriPopup .titleButton.maximize {
+  right: 31px;
+}
+.dj_rtl .esriPopup .titleButton.maximize {
+  left: 31px;
+  right: auto;
+}
+.esriPopup .titleButton.restore{
+  right: 29px;
+}
+.dj_rtl .esriPopup .titleButton.restore{
+  left: 29px;
+  right: auto;
+}
+.esriPopup .titleButton.close{
+  right: 10px;
+}
+.dj_rtl .esriPopup .titleButton.close{
+  left: 10px;
+  right: auto;
+}
+
 
 /*Share Dialog updates*/
 

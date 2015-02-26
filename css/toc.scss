@@ -2,10 +2,10 @@
 $page-width: 300px;
 
 .TableOfContents {
+    padding-bottom:100px;
     position:relative;
     width: $page-width - 3;
-    padding-bottom:100px;
-    overflow:scroll;
+    overflow:auto;
 }
 .TableOfContents .toc-title {
     border-bottom: 1px solid #e0e0e0;

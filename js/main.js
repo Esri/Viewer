@@ -13,8 +13,8 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", "application/has-config", "esri/arcgis/utils", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/Legend", "esri/dijit/BasemapGallery", "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog"], function (
-ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, domConstruct, domStyle, on, Deferred, all, query, registry, Menu, CheckedMenuItem, Toolbar, has, arcgisUtils, HomeButton, LocateButton, Legend, BasemapGallery, Measurement, OverviewMap, Extent, FeatureLayer, TableOfContents, ShareDialog) {
+define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", "application/has-config", "esri/arcgis/utils", "esri/lang", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/Legend", "esri/dijit/BasemapGallery", "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog"], function (
+ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, domConstruct, domStyle, on, Deferred, all, query, registry, Menu, CheckedMenuItem, Toolbar, has, arcgisUtils, esriLang, HomeButton, LocateButton, Legend, BasemapGallery, Measurement, OverviewMap, Extent, FeatureLayer, TableOfContents, ShareDialog) {
 
 
     return declare(null, {
@@ -181,11 +181,9 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     //Now that all the tools have been added to the toolbar we can add page naviagation
                     //to the toolbar panel, update the color theme and set the active tool.
                     this._updateTheme();
-
-
+                    toolbar.updatePageNavigation();
                     if (this.config.activeTool !== "") {
                         toolbar.activateTool(this.config.activeTool);
-                        toolbar.updatePageNavigation();
                     } else {
                         toolbar._closePage();
                     }
@@ -204,22 +202,22 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                             this._destroyEditor();
                             this.map.setInfoWindowOnClick(true);
                         }
-                      
-                      
-                        if(has("measure") && name !== "measure"){
-                            query(".esriMeasurement").forEach(lang.hitch(this, function(node){
+
+
+                        if (has("measure") && name !== "measure") {
+                            query(".esriMeasurement").forEach(lang.hitch(this, function (node) {
                                 var m = registry.byId(node.id);
-                                if(m){
+                                if (m) {
                                     m.clearResult();
                                     m.setTool("location", false);
                                     m.setTool("area", false);
                                     m.setTool("distance", false);
                                 }
                             }));
-                        }         
-                      
-                      
-                      
+                        }
+
+
+
                     }));
 
                     domStyle.set("panelPages", "visibility", "visible");
@@ -291,7 +289,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     }
 
                     var detailDiv = toolbar.createTool(tool, panelClass);
-                    detailDiv.innerHTML = description;
+                    detailDiv.innerHTML = "<div class='desc'>" + description + "</div>";
                 }
                 deferred.resolve(true);
             } else {
@@ -839,20 +837,147 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             }
 
             //Add the location search widget
-            require(["application/has-config!search?application/CreateGeocoder"], lang.hitch(this, function (CreateGeocoder) {
-                if (!CreateGeocoder) {
-                    //add class to make title area max-width smaller. Since geocoder isn't there we don't need extra space.
-                    domClass.add("panelTop", "smallerTitle");
+            require(["application/has-config!search?esri/dijit/Search", "application/has-config!search?esri/tasks/locator"], lang.hitch(this, function (Search, Locator) {
+                if (!Search && !Locator) {
+                    //add class so we know we don't have to hide title since search isn't visible
+                    domClass.add("panelTop", "no-search");
                     return;
                 }
 
-                var geocoder = new CreateGeocoder({
+                var options = {
                     map: this.map,
-                    config: this.config
-                });
-                if (geocoder.geocoder && geocoder.geocoder.domNode) {
-                    domConstruct.place(geocoder.geocoder.domNode, "panelGeocoder");
+                    addLayersFromMap: false
+                };
+                var searchLayers = false;
+                var search = new Search(options, domConstruct.create("div", {
+                    id: "search"
+                }, "mapDiv"));
+                var defaultSources = [];
+
+                //setup geocoders defined in common config 
+                if (this.config.helperServices.geocode && this.config.locationSearch) {
+                    var geocoders = lang.clone(this.config.helperServices.geocode);
+                    array.forEach(geocoders, lang.hitch(this, function (geocoder) {
+                        if (geocoder.url.indexOf(".arcgis.com/arcgis/rest/services/World/GeocodeServer") > -1) {
+
+                            geocoder.hasEsri = true;
+                            geocoder.locator = new Locator(geocoder.url);
+
+                            geocoder.singleLineFieldName = "SingleLine";
+
+                            geocoder.name = geocoder.name || "Esri World Geocoder";
+
+                            if (this.config.searchExtent) {
+                                geocoder.searchExtent = this.map.extent;
+                                geocoder.localSearchOptions = {
+                                    minScale: 300000,
+                                    distance: 50000
+                                };
+                            }
+                            defaultSources.push(geocoder);
+                        } else if (esriLang.isDefined(geocoder.singleLineFieldName)) {
+
+                            //Add geocoders with a singleLineFieldName defined 
+                            geocoder.locator = new Locator(geocoder.url);
+
+                            defaultSources.push(geocoder);
+                        }
+                    }));
                 }
+                //add configured search layers to the search widget 
+                var configuredSearchLayers = (this.config.searchLayers instanceof Array) ? this.config.searchLayers : JSON.parse(this.config.searchLayers);
+
+                array.forEach(configuredSearchLayers, lang.hitch(this, function (layer) {
+
+                    var mapLayer = this.map.getLayer(layer.id);
+                    if (mapLayer) {
+                        var source = {};
+                        source.featureLayer = mapLayer;
+
+                        if (layer.fields && layer.fields.length && layer.fields.length > 0) {
+                            source.searchFields = layer.fields;
+                            source.displayField = layer.fields[0];
+                            source.outFields = ["*"];
+                            searchLayers = true;
+                            defaultSources.push(source);
+                            if (mapLayer.infoTemplate) {
+                                source.infoTemplate = mapLayer.infoTemplate;
+                            }
+                        }
+                    }
+                }));
+                //Add search layers defined on the web map item 
+                if (this.config.response.itemInfo.itemData && this.config.response.itemInfo.itemData.applicationProperties && this.config.response.itemInfo.itemData.applicationProperties.viewing && this.config.response.itemInfo.itemData.applicationProperties.viewing.search) {
+                    var searchOptions = this.config.response.itemInfo.itemData.applicationProperties.viewing.search;
+                
+                    array.forEach(searchOptions.layers, lang.hitch(this, function (searchLayer) {
+                        //we do this so we can get the title specified in the item
+                        var operationalLayers = this.config.itemInfo.itemData.operationalLayers;
+                        var layer = null;
+                        array.some(operationalLayers, function (opLayer) {
+                            if (opLayer.id === searchLayer.id) {
+                                layer = opLayer;
+                                return true;
+                            }
+                        });
+
+                        if (layer && layer.hasOwnProperty("url")) {
+                            var source = {};
+                            var url = layer.url;
+                            var name = layer.title || layer.name;
+
+                            if (esriLang.isDefined(searchLayer.subLayer)) {
+                                url = url + "/" + searchLayer.subLayer;
+                                array.some(layer.layerObject.layerInfos, function (info) {
+                                    if (info.id == searchLayer.subLayer) {
+                                        name += " - " + layer.layerObject.layerInfos[searchLayer.subLayer].name;
+                                        return true;
+                                    }
+                                });
+                            }
+
+                            source.featureLayer = new FeatureLayer(url);
+
+
+                            source.name = name;
+
+
+                            source.exactMatch = searchLayer.field.exactMatch;
+                            source.displayField = searchLayer.field.name;
+                            source.searchFields = [searchLayer.field.name];
+                            source.placeholder = searchOptions.hintText;
+                            defaultSources.push(source);
+                            searchLayers = true;
+                        }
+
+                    }));
+                }
+
+                search.set("sources", defaultSources);
+
+                search.startup();
+                
+                //set the first non esri layer as active if search layers are defined. 
+                var activeIndex = 0;
+                if (searchLayers) {
+                    array.some(defaultSources, function (s, index) {
+                        if (!s.hasEsri) {
+                            activeIndex = index;
+                            return true;
+                        }
+                    });
+
+
+                    if (activeIndex > 0) {
+                        search.set("activeSourceIndex", activeIndex);
+                    }
+                }
+
+
+                if (search && search.domNode) {
+                    domConstruct.place(search.domNode, "panelGeocoder");
+                }
+
             }));
 
             //create the tools
@@ -911,9 +1036,24 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
         _createWebMap: function (itemInfo) {
 
             window.config = this.config;
+
+            var options = {};
+            //specify center and zoom if provided as url params 
+            if (this.config.level) {
+                options.zoom = this.config.level;
+            }
+            if (this.config.center) {
+                var points = this.config.center.split(",");
+                if (points && points.length === 2) {
+                    options.center = [parseFloat(points[0]), parseFloat(points[1])];
+                }
+
+            }
+
+
             // create a map based on the input web map id
             arcgisUtils.createMap(itemInfo, "mapDiv", {
-                mapOptions: {},
+                mapOptions: options,
                 editable: has("edit"),
                 //is the app editable
                 usePopupManager: true,

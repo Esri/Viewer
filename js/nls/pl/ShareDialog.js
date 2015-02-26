@@ -11,7 +11,7 @@
                 facebookTooltip: "Facebook",
                 twitterTooltip: "Twitter",
                 gplusTooltip: "Google Plus",
-                emailTooltip: "E-mail"
+                emailTooltip: "Email"
             }
         }
     })

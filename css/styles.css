@@ -1,8 +1,8 @@
 .TableOfContents {
+  padding-bottom: 100px;
   position: relative;
   width: 297px;
-  padding-bottom: 100px;
-  overflow: scroll; }
+  overflow: auto; }
 
 .TableOfContents .toc-title {
   border-bottom: 1px solid #e0e0e0;
@@ -207,27 +207,27 @@ html, body {
   background: #d3d3d3; }
 
 /* Esri Javascript API*/
-.esriEditor{
-  height:400px;
-}
 .templatePicker {
-  height:100%;
-  padding-top:30px;
-  padding-bottom:120px;
-  border: none; 
-}
+  height: 100%;
+  padding-top: 30px;
+  padding-bottom: 120px;
+  border: none; }
+
+.esriEditor {
+  height: 100%; }
+
 .esriEditor .esriDrawingToolbar {
   position: absolute;
   right: 0;
   left: 0;
   top: 10px;
-  border-top:none;
+  border-top: none;
   border-right: none;
   border-left: none; }
 
 @media only screen and (min-width: 720px) {
   .esriEditor .esriDrawingToolbar {
-    top:10px;
+    top: 10px;
     right: 0;
     left: 0; } }
 
@@ -237,6 +237,20 @@ html, body {
 .esriPopupMaximized {
   top: 100px !important; }
 
+.esriPopup.light .actionsPane .action.zoomTo {
+  background-position: 0 -224px; }
+
+.esriPopup .actionsPane .action {
+  margin-right: 10px; }
+
+.esriPopup.light .actionsPane .action {
+  position: absolute;
+  cursor: pointer;
+  background-image: url("http://js.arcgis.com/3.12/esri/css/calcite/images/popup-sprite.png");
+  width: 12px;
+  height: 12px;
+  text-indent: -9999px; }
+
 .esriPrintout a {
   color: #5daddd; }
 
@@ -244,8 +258,6 @@ html, body {
   position: absolute;
   top: 40px;
   left: 15px; }
-
-
 
 .esriMeasurement .esriMeasurementButtonPane {
   padding-left: 6px; }
@@ -294,7 +306,7 @@ html, body {
   cursor: pointer;
   display: none; }
 
-@media only screen and (min-width: 720px) {
+@media only screen and (min-width: 760px) {
   .esriSimpleSlider {
     display: block; } }
 
@@ -306,6 +318,31 @@ html, body {
   font-weight: bold;
   line-height: 40px;
   -webkit-user-select: none; }
+
+.arcgisSearch .searchGroup .searchInput {
+  width: 200px;
+  padding: 6px 17px 6px 18px;
+  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.3);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
+  zoom: 1;
+  color: #fff; }
+
+@media only screen and (min-width: 800px) {
+  .arcgisSearch .searchGroup .searchInput {
+    max-width: 190px;
+    display: block; } }
+
+.arcgisSearch .searchClear {
+  background: none;
+  background-color: inherit;
+  color: #a8a8a8; }
+
+.arcgisSearch .searchBtn {
+  background-color: transparent;
+  background-color: rgba(0, 0, 0, 0.3);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
+  color: #a8a8a8; }
 
 .notools div {
   width: 30px;
@@ -420,10 +457,10 @@ html, body {
   zoom: 1; }
 
 .esriBasemapGallery {
-  padding: 20px 20px 80px 20px; }
+  padding: 20px 20px 120px 20px; }
 
 .legend {
-  padding-bottom: 100px; }
+  margin-bottom: 100px; }
 
 .scalebar_bottom-left {
   left: 25px;
@@ -588,7 +625,7 @@ img {
   .pageContent {
     max-height: none; } }
 
-@media only screen and (min-width: 1012px) {
+@media only screen and (min-width: 1070px) {
   .pageContent {
     top: 10px;
     max-height: none; } }
@@ -685,6 +722,9 @@ img {
   overflow-x: hidden;
   overflow-y: auto; }
 
+#pageBody_overview {
+  padding-bottom: 90px; }
+
 #pageBody_print {
   padding: 10px; }
 
@@ -692,14 +732,7 @@ img {
   padding-left: 20px;
   padding-top: 20px;
   margin-right: 30px;
-  max-height: 80%;
   max-width: 280px; }
-
-#pageBody_basemap {
-  max-height: 80%; }
-
-#pageBody_layers {
-  max-height: 80%; }
 
 #pageBody_share {
   padding: 5px 20px;
@@ -718,8 +751,9 @@ img {
   #pageBody_bookmarks {
     max-height: 80%; } }
 
-#pageContent_details {
-  padding-bottom: 100px; }
+.desc {
+  margin-bottom: 100px;
+  padding: 5px; }
 
 #pageBody_details {
   padding: 5px;
@@ -742,21 +776,13 @@ img {
 
 @media only screen and (min-width: 760px) {
   #panelTop {
-    max-width: 650px;
+    width: auto;
     left: 44px;
     top: 10px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     border-radius: 5px; } }
-
-@media only screen and (min-width: 720px) {
-  .largerTitle {
-    max-width: 720px !important; } }
-
-@media only screen and (min-width: 720px) {
-  .smallerTitle {
-    max-width: 520px !important; } }
 
 #panelTitle {
   height: 50px;
@@ -768,6 +794,9 @@ img {
   font-family: "Helvetica Neue", "Arial", sans-serif;
   font-weight: normal;
   font-size: 25px; }
+
+.no-search #panelText {
+  display: block; }
 
 #panelLogo {
   width: 50px;
@@ -793,24 +822,26 @@ img {
   display: none;
   font-size: 0.9em; }
 
-#panelText.nosearch{
-  display: block;
-}
-
 @media only screen and (min-width: 720px) {
   #panelText {
     display: block;
+    max-width: 300px; } }
+
+@media only screen and (min-width: 800px) {
+  #panelText {
     max-width: 400px; } }
+
+#panelText.nosearch {
+  display: block; }
 
 #panelSearch {
   float: left;
-  margin: 10px 0 10px 4px;
-  width: 227px;
+  margin: 10px 0 10px 20px;
   height: 30px; }
 
 @media only screen and (min-width: 720px) {
   #panelSearch {
-    margin: 10px 4px 10px 10px;
+    margin: 10px 4px 10px 20px;
     float: right; } }
 
 #panelTools {
@@ -1001,6 +1032,57 @@ img {
 
 .calcite .dijitPopup {
   border: solid 1px #d3d3d3; }
+
+.esriPopup .titlePane {
+  font-size: 12px;
+  line-height: 16px;
+  height: 16px;
+  padding: 10px;
+  border: 0;
+  border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0; }
+
+.esriPopup .titlePane .title {
+  line-height: 16px; }
+
+.esriPopup .titleButton {
+  top: 10px;
+  background: none; }
+
+.esriPopup .titleButton.prev {
+  right: 73px; }
+
+.dj_rtl .esriPopup .titleButton.prev {
+  left: 73px;
+  right: auto; }
+
+.esriPopup .titleButton.next {
+  right: 55px; }
+
+.dj_rtl .esriPopup .titleButton.next {
+  left: 55px;
+  right: auto; }
+
+.esriPopup .titleButton.maximize {
+  right: 31px; }
+
+.dj_rtl .esriPopup .titleButton.maximize {
+  left: 31px;
+  right: auto; }
+
+.esriPopup .titleButton.restore {
+  right: 29px; }
+
+.dj_rtl .esriPopup .titleButton.restore {
+  left: 29px;
+  right: auto; }
+
+.esriPopup .titleButton.close {
+  right: 10px; }
+
+.dj_rtl .esriPopup .titleButton.close {
+  left: 10px;
+  right: auto; }
 
 /*Share Dialog updates*/
 .calcite .icon-container {

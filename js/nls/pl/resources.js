@@ -37,7 +37,7 @@ define(
 			    "legend": "Dodaj legendę do danych wynikowych"
 			},
 			"share": {
-				"extent": "Użyj bieżącego zasięgu mapy,",
+				"extent": "Użyj bieżącego zasięgu mapy",
 				"label": "Udostępnij tę mapę",
 				"link": "Łącze mapy",
 				"facebook": "Facebook",
@@ -45,13 +45,13 @@ define(
 			}
         },
         "tooltips":{
-        	"home": "Domyślny zakres",
+        	"home": "Domyślny zasięg",
         	"locate": "Znajdź moją lokalizację",
         	"legend": "Legenda",
         	"bookmarks": "Zakładki",
         	"layers": "Warstwy",
         	"basemap": "Galeria map bazowych",
-        	"overview": "Przegląd mapy",
+        	"overview": "Mapa przeglądowa",
         	"measure": "Zmierz",
         	"edit": "Edytuj",
         	"time": "Czas",

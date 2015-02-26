@@ -53,7 +53,7 @@ define({
         {"name": "overview", "enabled": true},
         {"name": "measure", "enabled": true},
         {"name": "edit", "enabled": true, "toolbar": false}, 
-        {"name": "print", "enabled": true, "legend": true, "layouts":false, "format":"pdf"},
+        {"name": "print", "enabled": true, "legend": false, "layouts":false, "format":"pdf"},
         {"name": "details", "enabled": true},
         {"name": "share", "enabled": true}
     ],
@@ -62,8 +62,13 @@ define({
     "activeTool": "legend",
     //Add the geocoding tool next to the title bar.
     "search": true,
+    "locationSearch": true,
     //When searchExtent is true the locator will prioritize results within the current map extent.
     "searchExtent": false,
+    "searchLayers":[{
+        "id": "",
+        "fields": []
+    }],
     //Add the home extent button to the toolbar
     "home": true,
     //Add the geolocation button on the toolbar. Only displayed if browser supports geolocation
@@ -71,14 +76,10 @@ define({
     //When true display a scalebar on the map
     "scalebar": false,
     //Specify a title for the application. If not provided the web map title is used.
-    "title": null,
-    //This option demonstrates how to handle additional custom url parameters. For example
-    //if you want users to be able to specify lat/lon coordinates that define the map's center or
-    //specify an alternate basemap via a url parameter.
-    "urlItems": [
-        "extent,color"
-    ],
+    "title": "",
+    "level": null,
+    "center": null,
     //Replace these with your own bitly key
-    "bitlyLogin": "esrimarketing",
-    "bitlyKey": "R_52f84981da0e75b23aea2b3b20cbafbc"
+    "bitlyLogin": "",
+    "bitlyKey": ""
 });
