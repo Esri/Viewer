@@ -37,7 +37,7 @@
 		</div>
 
 		<!-- Panel Top -->
-		<div id="panelTop" class="bg rounded shadow">
+		<div id="panelTop" class="bg rounded shadow" style="color:transparent !important;">
 			<!-- Panel Title -->
 			<div id="panelTitle">
 				<div class="fc" id="panelText">
@@ -73,13 +73,15 @@
             }]
          };
 		</script>
-		<script type="text/javascript" src="//js.arcgis.com/3.13/"></script>
+		<script type="text/javascript" src="//js.arcgis.com/3.13/">
+		</script>
         <script type="text/javascript">
         require([
             "dojo/parser",
             "config/templateConfig",
             "application/template",
             "application/main",
+            "esri/IdentityManager",
             "dijit/layout/BorderContainer",
             "dijit/layout/ContentPane",
             "dijit/layout/StackContainer"
@@ -87,19 +89,34 @@
             parser,
             templateConfig,
             Template,
-            Main
+            Main,
+            esriId
         ){
+          	var username = "htudosietsg";
+		  	var password = "Felicia!1";
+			esriId.on("dialog-create", function(evt) {
+				evt.target.dialog.txtUser_.focusNode.value = username;
+				setTimeout(function() {
+					evt.target.dialog.txtPwd_.focusNode.value = password;
+					setTimeout(function() {
+						evt.target.dialog.btnSubmit_.focusNode.click();
+					}, 100);
+				}, 100);
+			});
+
             parser.parse();
           // create the template. This will take care of all the logic required for template applications
           var myTemplate = new Template(templateConfig);
           // create my main application. Start placing your logic in the main.js file.
           var myApp = new Main();
+
+
           // start template
           myTemplate.startup().then(function (config) {
             // The config object contains the following properties: helper services, (optionally)
             // i18n, appid, webmap and any custom values defined by the application.
             // In this example we have one called theme.
-            myApp.startup(config);
+			myApp.startup(config);
           }, function (error) {
             // something went wrong. Let's report it.
             myApp.reportError(error);

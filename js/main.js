@@ -784,14 +784,34 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
         _createMapUI: function () {
             // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
             if (has("home")) {
-                domConstruct.create("div", {
+                panelHome = domConstruct.create("div", {
                     id: "panelHome",
                     className: "icon-color tool",
-                    innerHTML: "<div id='btnHome'></div>"
+                    innerHTML: "<div id='btnHome'></div>",
+                    tabindex: 0
                 }, dom.byId("panelTools"), 0);
                 var home = new HomeButton({
                     map: this.map
                 }, dom.byId("btnHome"));
+
+                home.startup();
+
+                homeNode = dojo.query(".home")[0];
+                dojo.empty(homeNode);
+                dojo.setAttr(homeNode, 'style','display:table-cell; vertical-align:middle; text-align:center;');
+                
+                domConstruct.create("img", {
+                  'src': 'images/icons_white/home.png',
+                  alt: dojo.attr(homeNode, 'title'),
+                  height:14,
+                  width:14
+                }, homeNode);
+                dojo.setAttr(homeNode, 'title','');
+
+                on(panelHome, 'keydown', lang.hitch(this, function(event){
+                   if(event.keyCode=='13')
+                   homeNode.click();
+                }));
 
                 if (!has("touch")) {
                     //add a tooltip
@@ -801,8 +821,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     domClass.remove(document.body, "no-touch");
 
                 }
-
-                home.startup();
             }
 
             require(["application/has-config!scalebar?esri/dijit/Scalebar"], lang.hitch(this, function (Scalebar) {
@@ -818,21 +836,40 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
 
             if (has("locate")) {
-                domConstruct.create("div", {
+                panelLocate = domConstruct.create("div", {
                     id: "panelLocate",
                     className: "icon-color tool",
-                    innerHTML: "<div id='btnLocate'></div>"
+                    innerHTML: "<div id='btnLocate'></div>",
+                    tabindex: 0
                 }, dom.byId("panelTools"), 1);
                 var geoLocate = new LocateButton({
                     map: this.map
                 }, dom.byId("btnLocate"));
+
+                geoLocate.startup();
+
+                zoomLocateButton = dojo.query(".zoomLocateButton")[0];
+                dojo.empty(zoomLocateButton);
+                dojo.setAttr(zoomLocateButton, 'style','display:table-cell; vertical-align:middle; text-align:center;');
+
+                domConstruct.create("img", {
+                  'src': 'images/icons_white/locate.png',
+                  alt: dojo.attr(zoomLocateButton, 'title'),
+                  height:14,
+                  width:14
+                }, zoomLocateButton);
+                dojo.setAttr(zoomLocateButton, 'title','');
+
+                on(panelLocate, 'keydown', lang.hitch(this, function(event){
+                   if(event.keyCode=='13')
+                   zoomLocateButton.click();
+                }));
+
                 if (!has("touch")) {
                     //add a tooltip
                     domAttr.set("btnLocate", "data-title", this.config.i18n.tooltips.locate);
                 }
 
-
-                geoLocate.startup();
 
             }
 
