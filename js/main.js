@@ -105,6 +105,38 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             domClass.remove(document.body, "app-loading");
             on(window, "orientationchange", lang.hitch(this, this._adjustPopupSize));
             this._adjustPopupSize();
+
+            esriSimpleSliderIncrementNode = dojo.query(".esriSimpleSliderIncrementButton")[0];
+            dojo.empty(esriSimpleSliderIncrementNode);
+            dojo.setAttr(esriSimpleSliderIncrementNode, 'tabindex', 0);
+            plusImg = domConstruct.create("img", {
+              'src': 'images/icons_white/plus.png',
+              alt: 'Zoom In',
+              height:14,
+              width:14
+            }, esriSimpleSliderIncrementNode);
+
+            dojo.setAttr(esriSimpleSliderIncrementNode, 'title', plusImg.alt);
+            on(esriSimpleSliderIncrementNode, 'keydown', lang.hitch(this, function(event){
+                if(event.keyCode=='13')
+                esriSimpleSliderIncrementNode.click();
+            }));
+
+            esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
+            dojo.empty(esriSimpleSliderDecrementNode);
+            dojo.setAttr(esriSimpleSliderDecrementNode, 'tabindex', 0);
+            minusImg = domConstruct.create("img", {
+              'src': 'images/icons_white/minus.png',
+              alt: 'Zoom Out',
+              height:14,
+              width:14
+            }, esriSimpleSliderDecrementNode);
+
+            dojo.setAttr(esriSimpleSliderDecrementNode, 'title', minusImg.alt);
+            on(esriSimpleSliderDecrementNode, 'keydown', lang.hitch(this, function(event){
+                if(event.keyCode=='13')
+                esriSimpleSliderDecrementNode.click();
+            }));
         },
 
         // Create UI
