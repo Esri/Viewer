@@ -116,7 +116,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
               width:14
             }, esriSimpleSliderIncrementNode);
 
-            dojo.setAttr(esriSimpleSliderIncrementNode, 'title', plusImg.alt);
+            dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', plusImg.alt);
             on(esriSimpleSliderIncrementNode, 'keydown', lang.hitch(this, function(event){
                 if(event.keyCode=='13')
                 esriSimpleSliderIncrementNode.click();
@@ -132,7 +132,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
               width:14
             }, esriSimpleSliderDecrementNode);
 
-            dojo.setAttr(esriSimpleSliderDecrementNode, 'title', minusImg.alt);
+            dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', minusImg.alt);
             on(esriSimpleSliderDecrementNode, 'keydown', lang.hitch(this, function(event){
                 if(event.keyCode=='13')
                 esriSimpleSliderDecrementNode.click();
@@ -796,7 +796,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             return layerInfos;
         },
 
-
         _getBasemapGroup: function () {
             //Get the id or owner and title for an organizations custom basemap group.
             var basemapGroup = null;
@@ -827,7 +826,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
                 home.startup();
 
-                homeButton = dojo.query(".HomeButton")[0];
+                homeButton = dojo.query(".homeContainer")[0];
                 dojo.setAttr(homeButton, 'tabindex', 0);
 
                 homeNode = dojo.query(".home")[0];
@@ -881,7 +880,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
                 geoLocate.startup();
 
-                locateButton = dojo.query(".LocateButton")[0];
+                locateButton = dojo.query(".locateContainer")[0];
                 dojo.setAttr(locateButton, 'tabindex', 0);
                 
                 zoomLocateButton = dojo.query(".zoomLocateButton")[0];
@@ -905,8 +904,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     //add a tooltip
                     domAttr.set("btnLocate", "data-title", this.config.i18n.tooltips.locate);
                 }
-
-
             }
 
             //Add the location search widget

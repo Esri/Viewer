@@ -468,8 +468,8 @@ html, body {
 
 .HomeButton .home {
   padding: 0 !important;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   line-height: 24px;
   font-size: 20px;
   background-color: transparent;
@@ -491,31 +491,13 @@ html, body {
   left: 25px;
   bottom: 40px; }
 
-.HomeButton .home:before {
-  width: 24px;
-  height: 24px;
-  content: "\e800";
-  position: absolute;
-  font-family: "tool-icons";
-  text-align: center;
-  speak: none; }
-
-.LocateButton .zoomLocateButton:before {
-  content: "\e80c";
-  font-size: 20px;
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  font-family: "tool-icons";
-  text-align: center;
-  speak: none; }
 
 .LocateButton .zoomLocateButton {
   padding: 0;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   font-size: 20px;
-  line-height: 24px;
+  line-height: 26px;
   background-color: transparent;
   background-image: none;
   -webkit-user-select: none;
@@ -901,19 +883,19 @@ img {
   height: 24px;
   cursor: pointer; }
 
-#panelHome {
+#panelHome, #panelLocate {
   float: left;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   margin-left: 1px;
-  margin-top: 3px; }
+  margin-top: 2px; 
+  line-height: 26px;
+  text-align: center;
+}
 
 #panelLocate {
-  float: left;
-  width: 24px;
-  height: 24px;
   margin-left: 0px;
-  margin-top: 3px; }
+}
 
 /*Calcite updates keep list and submit issues*/
 .calcite .esriPopup .title {
@@ -1273,12 +1255,50 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .icon-check-1:before {
   content: '\2713'; }
 
-.esriSimpleSliderDecrementButton:focus, 
-.esriSimpleSliderIncrementButton:focus,
-.HomeButton:focus, .LocateButton:focus
-{
-    background-color: #01DFD7;
-    outline-width: 0px !important;
-    outline-style: none; !important;
+.homeContainer, .locateContainer{
+  margin-bottom: 7px;
 }
 
+.esriSimpleSliderDecrementButton:focus, 
+.esriSimpleSliderIncrementButton:focus,
+.homeContainer:focus, .locateContainer:focus,
+.share-dialog-icon:focus,
+.share-map-url:focus, .share-dialog-textarea:focus, 
+.embed-map-size-dropdown:focus, select:focus,
+.searchInput:focus,
+.searchBtn:focus, .searchClear:focus
+{
+    background-color: #01DFD7 !important;
+    outline-width: 0px !important;
+    outline-style: none !important;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;  
+}
+
+.HomeButton:focus, .LocateButton:focus,
+.share-dialog-icon
+{
+  border-radius: 5px;
+  -webkit-border-radius: 5px;  
+}
+
+.esriSimpleSliderDisabledButton
+{
+  background-color: #CEF6CE;
+}
+
+.HomeButton .home:before{
+    width:26px;
+    height:26px;
+    margin-top: 2px;
+    content:"";
+    text-align:center;
+}
+.LocateButton .zoomLocateButton:before{
+    content:"";
+    font-size:20px;
+    width:26px;
+    height:26px !important;
+    margin-top: 2px;
+    text-align:center;
+}
