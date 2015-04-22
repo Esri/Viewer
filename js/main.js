@@ -188,8 +188,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 }
 
                 all(toolList).then(lang.hitch(this, function (results) {
-
-
                     //If all the results are false and locate and home are also false we can hide the toolbar
                     var tools = array.some(results, function (r) {
                         return r;
@@ -197,7 +195,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
                     var home = has("home");
                     var locate = has("locate");
-
 
                     //No tools are specified in the configuration so hide the panel and update the title area styles
                     if (!tools && !home && !locate) {
@@ -279,7 +276,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
         },
 
         _addBookmarks: function (tool, toolbar, panelClass) {
-            //Add the bookmarks tool to the toolbar. Only activated if the webmap contains bookmarks.
+            //Add the bookmarks tool to the toolbar. 
+            //Only activated if the webmap contains bookmarks.
             var deferred = new Deferred();
             if (this.config.response.itemInfo.itemData.bookmarks) {
                 //Conditionally load this module since most apps won't have bookmarks
@@ -304,6 +302,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
             return deferred.promise;
         },
+
         _addDetails: function (tool, toolbar, panelClass) {
             //Add the default map description panel
             var deferred = new Deferred();
@@ -329,8 +328,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             }
 
             return deferred.promise;
-
         },
+
         _addEditor: function (tool, toolbar, panelClass) {
 
             //Add the editor widget to the toolbar if the web map contains editable layers
@@ -350,6 +349,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
             return deferred.promise;
         },
+
         _createEditor: function () {
             var deferred = new Deferred();
             //Dynamically load since many apps won't have editable layers
@@ -400,15 +400,15 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
             }));
             return deferred.promise;
-
         },
+
         _destroyEditor: function () {
             if (this.editor) {
                 this.editor.destroy();
                 this.editor = null;
             }
-
         },
+
         _addLayers: function (tool, toolbar, panelClass) {
             //Toggle layer visibility if web map has operational layers
             var deferred = new Deferred();
@@ -445,6 +445,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             }
             return deferred.promise;
         },
+
         _addLegend: function (tool, toolbar, panelClass) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
@@ -516,6 +517,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
             return deferred.promise;
         },
+
         _addOverviewMap: function (tool, toolbar, panelClass) {
             //Add the overview map to the toolbar
             var deferred = new Deferred();
@@ -566,6 +568,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
             return deferred.promise;
         },
+
         _addPrint: function (tool, toolbar, panelClass) {
             //Add the print widget to the toolbar. TODO: test custom layouts.
             var deferred = new Deferred(),
@@ -751,6 +754,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
             return deferred.promise;
         },
+
         _addShare: function (tool, toolbar, panelClass) {
             //Add share links for facebook, twitter and direct linking.
             //Add the measure widget to the toolbar.
@@ -778,8 +782,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
 
             return deferred.promise;
-
         },
+
         _getEditableLayers: function (layers) {
             var layerInfos = [];
             array.forEach(layers, lang.hitch(this, function (layer) {

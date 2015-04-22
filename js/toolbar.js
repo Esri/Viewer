@@ -351,10 +351,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 domClass.add("panelTool_" + name, "panelToolActive");
             }
             this.emit("updateTool", name);
-
-
-
         },
+
         _updateMap: function () {
             if (this.map) {
                 this.map.resize();
