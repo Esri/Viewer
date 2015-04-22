@@ -874,7 +874,7 @@ img {
 .panelToolActive {
   background-color: transparent;
   background-color: rgba(0, 0, 0, 0.3);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000) !important;
   zoom: 1; }
 
 .tool {
@@ -1266,9 +1266,10 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .share-map-url:focus, .share-dialog-textarea:focus, 
 .embed-map-size-dropdown:focus, select:focus,
 .searchInput:focus,
-.searchBtn:focus, .searchClear:focus
+.searchBtn:focus, .searchClear:focus,
+.panelTool:focus
 {
-    background-color: #01DFD7 !important;
+    background-color: #01DFD7;
     outline-width: 0px !important;
     outline-style: none !important;
     border-radius: 3px;
@@ -1280,6 +1281,11 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 {
   border-radius: 5px;
   -webkit-border-radius: 5px;  
+}
+
+.panelToolActive:focus {
+  border-radius: 15px;
+  -webkit-border-radius: 15px;  
 }
 
 .esriSimpleSliderDisabledButton

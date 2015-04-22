@@ -841,7 +841,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 }, homeNode);
                 dojo.setAttr(homeNode, 'title','');
 
-                on(homeButton, 'keydown', lang.hitch(this, function(event){
+                on(homeButton, 'keyup', lang.hitch(this, function(event){
                    if(event.keyCode=='13')
                    homeNode.click();
                 }));
@@ -852,7 +852,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 } else {
                     //remove no-touch class from body
                     domClass.remove(document.body, "no-touch");
-
                 }
             }
 
@@ -864,7 +863,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     map: this.map,
                     scalebarUnit: this.config.units
                 });
-
             }));
 
 
@@ -895,9 +893,11 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 }, zoomLocateButton);
                 dojo.setAttr(zoomLocateButton, 'title','');
 
-                on(locateButton, 'keydown', lang.hitch(this, function(event){
-                   if(event.keyCode=='13')
-                   zoomLocateButton.click();
+                on(locateButton, 'keyup', lang.hitch(this, function(event){
+                  if(event.keyCode=='13')
+                    {
+                        zoomLocateButton.click();
+                    }
                 }));
 
                 if (!has("touch")) {
