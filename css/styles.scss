@@ -361,16 +361,12 @@ html, body {
     border: none;
 }
 
-.esriSimpleSliderDecrementButton:hover, .esriSimpleSliderIncrementButton:hover {
-    @include transparent($black-color, 0.3);
-}
-
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton{
     border:none !important;
 }
 
-.esriSimpleSliderIncrementButton {
-   /*border-bottom: 1px solid rgba(255,255,255,0.5) !important;*/
+.esriSimpleSliderDecrementButton:hover, .esriSimpleSliderIncrementButton:hover {
+    @include transparent($black-color, 0.3);
 }
 
 .simpleGeocoder .esriGeocoder {
@@ -483,9 +479,11 @@ html, body {
     background-size: 14px 14px;
     background-image:none;
 }
+
 .no-touch .HomeButton .home:hover, .LocateButton .zoomLocateButton:hover{
     background-color:none !important;
 }
+
 .scalebar_bottom-left {
     left: 25px;
     bottom: 40px;
@@ -1234,3 +1232,6 @@ img{
 .icon-target:before { content: '\e80c'; } /* '' */
 .icon-angle-down:before { content: '\e809'; } /* '' */
 .icon-check-1:before {content: '\2713';}
+
+
+

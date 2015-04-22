@@ -1272,3 +1272,13 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 /* '	' */
 .icon-check-1:before {
   content: '\2713'; }
+
+.esriSimpleSliderDecrementButton:focus, 
+.esriSimpleSliderIncrementButton:focus,
+.HomeButton:focus, .LocateButton:focus
+{
+    background-color: #01DFD7;
+    outline-width: 0px !important;
+    outline-style: none; !important;
+}
+

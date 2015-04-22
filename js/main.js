@@ -819,14 +819,16 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 panelHome = domConstruct.create("div", {
                     id: "panelHome",
                     className: "icon-color tool",
-                    innerHTML: "<div id='btnHome'></div>",
-                    tabindex: 0
+                    innerHTML: "<div id='btnHome'></div>"
                 }, dom.byId("panelTools"), 0);
                 var home = new HomeButton({
                     map: this.map
                 }, dom.byId("btnHome"));
 
                 home.startup();
+
+                homeButton = dojo.query(".HomeButton")[0];
+                dojo.setAttr(homeButton, 'tabindex', 0);
 
                 homeNode = dojo.query(".home")[0];
                 dojo.empty(homeNode);
@@ -840,7 +842,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 }, homeNode);
                 dojo.setAttr(homeNode, 'title','');
 
-                on(panelHome, 'keydown', lang.hitch(this, function(event){
+                on(homeButton, 'keydown', lang.hitch(this, function(event){
                    if(event.keyCode=='13')
                    homeNode.click();
                 }));
@@ -871,8 +873,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 panelLocate = domConstruct.create("div", {
                     id: "panelLocate",
                     className: "icon-color tool",
-                    innerHTML: "<div id='btnLocate'></div>",
-                    tabindex: 0
+                    innerHTML: "<div id='btnLocate'></div>"
                 }, dom.byId("panelTools"), 1);
                 var geoLocate = new LocateButton({
                     map: this.map
@@ -880,6 +881,9 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
                 geoLocate.startup();
 
+                locateButton = dojo.query(".LocateButton")[0];
+                dojo.setAttr(locateButton, 'tabindex', 0);
+                
                 zoomLocateButton = dojo.query(".zoomLocateButton")[0];
                 dojo.empty(zoomLocateButton);
                 dojo.setAttr(zoomLocateButton, 'style','display:table-cell; vertical-align:middle; text-align:center;');
@@ -892,7 +896,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 }, zoomLocateButton);
                 dojo.setAttr(zoomLocateButton, 'title','');
 
-                on(panelLocate, 'keydown', lang.hitch(this, function(event){
+                on(locateButton, 'keydown', lang.hitch(this, function(event){
                    if(event.keyCode=='13')
                    zoomLocateButton.click();
                 }));
