@@ -13,8 +13,9 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
+
 define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", "application/has-config", "esri/arcgis/utils", "esri/lang", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/Legend", "esri/dijit/BasemapGallery", "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog"], function (
-ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, domConstruct, domStyle, on, Deferred, all, query, registry, Menu, CheckedMenuItem, Toolbar, has, arcgisUtils, esriLang, HomeButton, LocateButton, Legend, BasemapGallery, Measurement, OverviewMap, Extent, FeatureLayer, TableOfContents, ShareDialog) {
+    ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, domConstruct, domStyle, on, Deferred, all, query, registry, Menu, CheckedMenuItem, Toolbar, has, arcgisUtils, esriLang, HomeButton, LocateButton, Legend, BasemapGallery, Measurement, OverviewMap, Extent, FeatureLayer, TableOfContents, ShareDialog) {
 
 
     return declare(null, {
@@ -45,8 +46,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
                         if (extArray.length === 4) {
                             itemInfo.item.extent = [
-                                [parseFloat(extArray[0]), parseFloat(extArray[1])],
-                                [parseFloat(extArray[2]), parseFloat(extArray[3])]
+                            [parseFloat(extArray[0]), parseFloat(extArray[1])],
+                            [parseFloat(extArray[2]), parseFloat(extArray[3])]
                             ];
                         } else if (extArray.length === 5) {
                             this.initExt = new Extent(JSON.parse(this.config.extent));
@@ -93,9 +94,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 outputColor = Color.fromArray(rgb);
 
             }
-
             return outputColor;
-
         },
 
         // Map is ready
@@ -114,12 +113,12 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
               alt: 'Zoom In',
               height:14,
               width:14
-            }, esriSimpleSliderIncrementNode);
+          }, esriSimpleSliderIncrementNode);
 
             dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', plusImg.alt);
             on(esriSimpleSliderIncrementNode, 'keydown', lang.hitch(this, function(event){
                 if(event.keyCode=='13')
-                esriSimpleSliderIncrementNode.click();
+                    esriSimpleSliderIncrementNode.click();
             }));
 
             esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
@@ -130,12 +129,12 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
               alt: 'Zoom Out',
               height:14,
               width:14
-            }, esriSimpleSliderDecrementNode);
+          }, esriSimpleSliderDecrementNode);
 
             dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', minusImg.alt);
             on(esriSimpleSliderDecrementNode, 'keydown', lang.hitch(this, function(event){
                 if(event.keyCode=='13')
-                esriSimpleSliderDecrementNode.click();
+                    esriSimpleSliderDecrementNode.click();
             }));
         },
 
@@ -152,38 +151,38 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 var toolList = [];
                 for (var i = 0; i < this.config.tools.length; i++) {
                     switch (this.config.tools[i].name) {
-                    case "legend":
-                        toolList.push(this._addLegend(this.config.tools[i], toolbar, "medium"));
-                        break;
-                    case "bookmarks":
-                        toolList.push(this._addBookmarks(this.config.tools[i], toolbar, "medium"));
-                        break;
-                    case "layers":
-                        toolList.push(this._addLayers(this.config.tools[i], toolbar, "medium"));
-                        break;
-                    case "basemap":
-                        toolList.push(this._addBasemapGallery(this.config.tools[i], toolbar, "large"));
-                        break;
-                    case "overview":
-                        toolList.push(this._addOverviewMap(this.config.tools[i], toolbar, "medium"));
-                        break;
-                    case "measure":
-                        toolList.push(this._addMeasure(this.config.tools[i], toolbar, "small"));
-                        break;
-                    case "edit":
-                        toolList.push(this._addEditor(this.config.tools[i], toolbar, "medium"));
-                        break;
-                    case "print":
-                        toolList.push(this._addPrint(this.config.tools[i], toolbar, "small"));
-                        break;
-                    case "details":
-                        toolList.push(this._addDetails(this.config.tools[i], toolbar, "medium"));
-                        break;
-                    case "share":
-                        toolList.push(this._addShare(this.config.tools[i], toolbar, "medium"));
-                        break;
-                    default:
-                        break;
+                        case "legend":
+                            toolList.push(this._addLegend(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        case "bookmarks":
+                            toolList.push(this._addBookmarks(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        case "layers":
+                            toolList.push(this._addLayers(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        case "basemap":
+                            toolList.push(this._addBasemapGallery(this.config.tools[i], toolbar, "large"));
+                            break;
+                        case "overview":
+                            toolList.push(this._addOverviewMap(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        case "measure":
+                            toolList.push(this._addMeasure(this.config.tools[i], toolbar, "small"));
+                            break;
+                        case "edit":
+                            toolList.push(this._addEditor(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        case "print":
+                            toolList.push(this._addPrint(this.config.tools[i], toolbar, "small"));
+                            break;
+                        case "details":
+                            toolList.push(this._addDetails(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        case "share":
+                            toolList.push(this._addShare(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        default:
+                            break;
                     }
                 }
 
@@ -244,16 +243,13 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                                 }
                             }));
                         }
-
-
-
                     }));
 
                     domStyle.set("panelPages", "visibility", "visible");
-
                 }));
             }));
         },
+
         _addBasemapGallery: function (tool, toolbar, panelClass) {
             //Add the basemap gallery to the toolbar.
             var deferred = new Deferred();
@@ -293,9 +289,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     }, domConstruct.create("div", {}, bookmarkDiv));
 
                     deferred.resolve(true);
-
                 }));
-
             } else {
                 deferred.resolve(false);
             }
@@ -385,28 +379,28 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                         layer.fieldInfos = fieldInfos;
                     }
                 }));
-                var settings = {
-                    map: this.map,
-                    layerInfos: this.editableLayers,
-                    toolbarVisible: has("edit-toolbar")
-                };
-                this.editor = new Editor({
-                    settings: settings
-                }, domConstruct.create("div", {}, this.editorDiv));
+var settings = {
+    map: this.map,
+    layerInfos: this.editableLayers,
+    toolbarVisible: has("edit-toolbar")
+};
+this.editor = new Editor({
+    settings: settings
+}, domConstruct.create("div", {}, this.editorDiv));
 
 
-                this.editor.startup();
-                deferred.resolve(true);
+this.editor.startup();
+deferred.resolve(true);
 
-            }));
-            return deferred.promise;
+}));
+return deferred.promise;
         },
 
         _destroyEditor: function () {
-            if (this.editor) {
-                this.editor.destroy();
-                this.editor = null;
-            }
+    if (this.editor) {
+        this.editor.destroy();
+        this.editor = null;
+    }
         },
 
         _addLayers: function (tool, toolbar, panelClass) {
@@ -572,8 +566,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
         _addPrint: function (tool, toolbar, panelClass) {
             //Add the print widget to the toolbar. TODO: test custom layouts.
             var deferred = new Deferred(),
-                legendNode = null,
-                print = null;
+            legendNode = null,
+            print = null;
 
 
             require(["application/has-config!print?esri/dijit/Print"], lang.hitch(this, function (Print) {
@@ -651,10 +645,10 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
 
                     }));
-                }
+}
 
-                require(["application/has-config!print-layouts?esri/request", "application/has-config!print-layouts?esri/tasks/PrintTemplate"], lang.hitch(this, function (esriRequest, PrintTemplate) {
-                    if (!esriRequest && !PrintTemplate) {
+require(["application/has-config!print-layouts?esri/request", "application/has-config!print-layouts?esri/tasks/PrintTemplate"], lang.hitch(this, function (esriRequest, PrintTemplate) {
+    if (!esriRequest && !PrintTemplate) {
                         //Use the default print templates
                         var templates = [{
                             layout: "Letter ANSI A Landscape",
@@ -747,12 +741,12 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                         deferred.resolve(true);
 
                     }));
-                }));
+}));
 
-            }));
+}));
 
 
-            return deferred.promise;
+return deferred.promise;
         },
 
         _addShare: function (tool, toolbar, panelClass) {
@@ -838,17 +832,18 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 dojo.setAttr(homeNode, 'style','display:table-cell; vertical-align:middle; text-align:center;');
                 
                 domConstruct.create("img", {
-                  'src': 'images/icons_white/home.png',
-                  alt: dojo.attr(homeNode, 'title'),
-                  height:14,
-                  width:14
+                    'src': 'images/icons_white/home.png',
+                    alt: dojo.attr(homeNode, 'title'),
+                    height:14,
+                    width:14
                 }, homeNode);
                 dojo.setAttr(homeNode, 'title','');
 
-                on(homeButton, 'keyup', lang.hitch(this, function(event){
-                   if(event.keyCode=='13')
-                   homeNode.click();
-                }));
+                //on(homeButton, 'keyup', lang.hitch(this, function(event){
+                //    if(event.keyCode=='13')
+                //        homeNode.click();
+                //}));
+                this._atachEnterKey(homeButton, homeNode);
 
                 if (!has("touch")) {
                     //add a tooltip
@@ -875,10 +870,10 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     id: "panelLocate",
                     className: "icon-color tool",
                     innerHTML: "<div id='btnLocate'></div>"
-                }, dom.byId("panelTools"), 1);
-                var geoLocate = new LocateButton({
-                    map: this.map
-                }, dom.byId("btnLocate"));
+                    }, dom.byId("panelTools"), 1);
+                    var geoLocate = new LocateButton({
+                        map: this.map
+                    }, dom.byId("btnLocate"));
 
                 geoLocate.startup();
 
@@ -897,11 +892,10 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 }, zoomLocateButton);
                 dojo.setAttr(zoomLocateButton, 'title','');
 
-                on(locateButton, 'keyup', lang.hitch(this, function(event){
-                  if(event.keyCode=='13')
-                    {
-                        zoomLocateButton.click();
-                    }
+                this._atachEnterKey(locateButton, zoomLocateButton);
+
+                on(zoomLocateButton, 'click', lang.hitch(this, function(event){
+                    setTimeout(function(){ dojo.setAttr(zoomLocateButton, 'title',''); }, 200);
                 }));
 
                 if (!has("touch")) {
@@ -958,6 +952,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                         }
                     }));
                 }
+
                 //add configured search layers to the search widget 
                 var configuredSearchLayers = (this.config.searchLayers instanceof Array) ? this.config.searchLayers : JSON.parse(this.config.searchLayers);
 
@@ -983,7 +978,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 //Add search layers defined on the web map item 
                 if (this.config.response.itemInfo.itemData && this.config.response.itemInfo.itemData.applicationProperties && this.config.response.itemInfo.itemData.applicationProperties.viewing && this.config.response.itemInfo.itemData.applicationProperties.viewing.search) {
                     var searchOptions = this.config.response.itemInfo.itemData.applicationProperties.viewing.search;
-                
+
                     array.forEach(searchOptions.layers, lang.hitch(this, function (searchLayer) {
                         //we do this so we can get the title specified in the item
                         var operationalLayers = this.config.itemInfo.itemData.operationalLayers;
@@ -1030,7 +1025,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 search.set("sources", defaultSources);
 
                 search.startup();
-                
+
                 //set the first non esri layer as active if search layers are defined. 
                 var activeIndex = 0;
                 if (searchLayers) {
@@ -1056,8 +1051,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
             //create the tools
             this._createUI();
-
         },
+ 
         _updateTheme: function () {
 
             //Set the background color using the configured theme value
@@ -1079,8 +1074,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 query(".esriSimpleSlider").style("color", "#000");
                 query(".icon-color").style("color", "#000");
             }
-
         },
+
         _checkExtent: function () {
             var pt = this.map.extent.getCenter();
             if (!this.initExt.contains(pt)) {
@@ -1089,6 +1084,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 this.mapExt = this.map.extent;
             }
         },
+ 
         _adjustPopupSize: function () {
             if (!this.map) {
                 return;
@@ -1096,9 +1092,9 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             var box = domGeometry.getContentBox(this.map.container);
 
             var width = 270,
-                height = 300,
-                newWidth = Math.round(box.w * 0.50),
-                newHeight = Math.round(box.h * 0.35);
+            height = 300,
+            newWidth = Math.round(box.w * 0.50),
+            newHeight = Math.round(box.h * 0.35);
             if (newWidth < width) {
                 width = newWidth;
             }
@@ -1107,6 +1103,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             }
             this.map.infoWindow.resize(width, height);
         },
+ 
         _createWebMap: function (itemInfo) {
 
             window.config = this.config;
@@ -1190,6 +1187,13 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     }));
                 }
             }), this.reportError);
+        },
+
+        _atachEnterKey: function(onButton, clickButton) {
+            on(onButton, 'keyup', lang.hitch(clickButton, function(event){
+            if(event.keyCode=='13')
+                this.click();
+            }));
         }
     });
 });

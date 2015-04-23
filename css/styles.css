@@ -666,8 +666,8 @@ img {
   position: absolute;
   right: 5px;
   top: 9px;
-  background: url(../images/close.png) no-repeat;
-  background-size: 24px;
+  --background: url(../images/close.png) no-repeat;
+  --background-size: 24px;
   width: 24px;
   height: 24px;
   display: block; }
@@ -676,8 +676,8 @@ img {
   position: absolute;
   top: 35px;
   right: 5px;
-  background: url(../images/up.png) no-repeat;
-  background-size: 24px;
+  --background: url(../images/up.png) no-repeat;
+  --background-size: 24px;
   cursor: pointer;
   width: 24px;
   height: 24px;
@@ -687,8 +687,8 @@ img {
   position: absolute;
   top: 60px;
   right: 5px;
-  background: url(../images/down.png) no-repeat;
-  background-size: 24px;
+  --background: url(../images/down.png) no-repeat;
+  --background-size: 24px;
   cursor: pointer;
   width: 24px;
   height: 24px;
@@ -1267,7 +1267,8 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .embed-map-size-dropdown:focus, select:focus,
 .searchInput:focus,
 .searchBtn:focus, .searchClear:focus,
-.panelTool:focus
+.panelTool:focus,
+.pageClose:focus, .pageUp:focus, .pageDown:focus
 {
     background-color: #01DFD7;
     outline-width: 0px !important;

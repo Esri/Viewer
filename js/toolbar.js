@@ -168,7 +168,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             domConstruct.create("div", {
                 className: "pageHeaderImg",
-                innerHTML: "<img class='pageIcon' src ='images/icons_" + this.config.icons + "/" + name + ".png'/>"
+                innerHTML: "<img class='pageIcon' src ='images/icons_" + this.config.icons + "/" + name + ".png' alt=''/>"
             }, pageHeader);
 
 
@@ -185,26 +185,36 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             for (var i = 0; i < this.tools.length; i++) {
                 var name = this.tools[i];
                 var pageClose = domConstruct.create("div", {
-                    className: "pageClose"
+                    className: "pageClose",
+                    tabIndex:0,
+                    //'data-title':'Close',
+                    innerHTML:"<img src='images/close.png' alt='Close' width=24 height=24/>"
                 }, "pageHeader_" + name);
                 on(pageClose, "click", lang.hitch(this, this._closePage));
+                this._atachEnterKey(pageClose, pageClose);
 
                 var pageUp = domConstruct.create("div", {
-                    className: "pageUp"
+                    className: "pageUp",
+                    tabIndex:0,
+                    //'data-title':'Previous',
+                    innerHTML:"<img src='images/up.png' alt='Previous Page' width=24 height=24/>"
                 }, "pageHeader_" + name);
                 on(pageUp, "click", lang.hitch(this, this._showPreviousPage, name));
+                this._atachEnterKey(pageUp, pageUp);
 
                 if (name != this.tools[this.tools.length - 1]) {
                     var pageDown = domConstruct.create("div", {
-                        className: "pageDown"
+                        className: "pageDown",
+                        tabIndex:0,
+                        //'data-title':'Next',
+                        innerHTML:"<img src='images/down.png' alt='Next Page' width=24 height=24/>"
                     }, "pageHeader_" + name);
                     on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
+                    this._atachEnterKey(pageDown, pageDown);
                 }
-
             }
-
-
         },
+
         setContent: function (name, content) {
             domConstruct.place(content, "pageBody_" + name, "last");
         },
@@ -228,6 +238,13 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
         _toolClick: function (name) {
             this._showPage(name);
+        },
+
+        _atachEnterKey: function(onButton, clickButton) {
+            on(onButton, 'keyup', lang.hitch(clickButton, function(event){
+            if(event.keyCode=='13')
+                this.click();
+            }));
         },
 
         _getPageNum: function (name) {
