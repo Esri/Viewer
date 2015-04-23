@@ -1268,7 +1268,8 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .searchInput:focus,
 .searchBtn:focus, .searchClear:focus,
 .panelTool:focus,
-.pageClose:focus, .pageUp:focus, .pageDown:focus
+.pageClose:focus, .pageUp:focus, .pageDown:focus,
+.toc-title-container:focus
 {
     background-color: #01DFD7;
     outline-width: 0px !important;

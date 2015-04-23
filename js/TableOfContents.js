@@ -128,7 +128,8 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                     domConstruct.place(titleDiv, layerDiv, "last");
                     // title container
                     var titleContainerDiv = domConstruct.create("div", {
-                        className: this.css.titleContainer
+                        className: this.css.titleContainer,
+                        tabindex: 0
                     });
                     domConstruct.place(titleContainerDiv, titleDiv, "last");
                     // Title checkbox
@@ -142,6 +143,8 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                         title: layer.title,
                         innerHTML: layer.title
                     });
+                    this._atachSpaceKey(titleContainerDiv,titleCheckbox);
+
                     domConstruct.place(titleText, titleContainerDiv, "last");
                     // Account text
                     var accountText;
@@ -189,6 +192,14 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 this._setLayerEvents();
             }
         },
+
+        _atachSpaceKey: function(onButton, clickButton) {
+            on(onButton, 'keyup', lang.hitch(clickButton, function(event){
+            if(event.keyCode=='32')
+                this.click();
+            }));
+        },
+
         _refreshLayers: function () {
             this.refresh();
         },
