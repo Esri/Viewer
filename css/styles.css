@@ -1269,7 +1269,8 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .searchBtn:focus, .searchClear:focus,
 .panelTool:focus,
 .pageClose:focus, .pageUp:focus, .pageDown:focus,
-.toc-title-container:focus
+.toc-title-container:focus,
+.esriBookmarkItem:focus
 {
     background-color: #01DFD7;
     outline-width: 0px !important;
@@ -1309,4 +1310,8 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
     height:26px !important;
     margin-top: 2px;
     text-align:center;
+}
+
+.esriBookmarkItem {
+  width: 286px;
 }

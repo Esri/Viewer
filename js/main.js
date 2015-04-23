@@ -116,10 +116,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
           }, esriSimpleSliderIncrementNode);
 
             dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', plusImg.alt);
-            on(esriSimpleSliderIncrementNode, 'keydown', lang.hitch(this, function(event){
-                if(event.keyCode=='13')
-                    esriSimpleSliderIncrementNode.click();
-            }));
+            this._atachEnterKey(esriSimpleSliderIncrementNode,esriSimpleSliderIncrementNode);
 
             esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
             dojo.empty(esriSimpleSliderDecrementNode);
@@ -132,10 +129,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
           }, esriSimpleSliderDecrementNode);
 
             dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', minusImg.alt);
-            on(esriSimpleSliderDecrementNode, 'keydown', lang.hitch(this, function(event){
-                if(event.keyCode=='13')
-                    esriSimpleSliderDecrementNode.click();
-            }));
+            this._atachEnterKey(esriSimpleSliderDecrementNode, esriSimpleSliderDecrementNode);
         },
 
         // Create UI
@@ -263,6 +257,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     basemapsGroup: this._getBasemapGroup()
                 }, domConstruct.create("div", {}, basemapDiv));
                 basemap.startup();
+
                 deferred.resolve(true);
             } else {
                 deferred.resolve(false);
@@ -287,7 +282,12 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         map: this.map,
                         bookmarks: this.config.response.itemInfo.itemData.bookmarks
                     }, domConstruct.create("div", {}, bookmarkDiv));
-
+                    items = bookmarks.bookmarkDomNode.querySelectorAll('.esriBookmarkItem');
+                    for(i=0; i<items.length; i++) {
+                        var item = items[i];
+                        domAttr.set(item, 'tabindex', 0);
+                        this._atachEnterKey(item,item.querySelector('.esriBookmarkLabel'));
+                    }
                     deferred.resolve(true);
                 }));
             } else {
@@ -839,10 +839,6 @@ return deferred.promise;
                 }, homeNode);
                 dojo.setAttr(homeNode, 'title','');
 
-                //on(homeButton, 'keyup', lang.hitch(this, function(event){
-                //    if(event.keyCode=='13')
-                //        homeNode.click();
-                //}));
                 this._atachEnterKey(homeButton, homeNode);
 
                 if (!has("touch")) {
