@@ -92,6 +92,18 @@
             Main,
             esriId
         ){
+          	var username = "";
+		  	var password = "";
+			esriId.on("dialog-create", function(evt) {
+				evt.target.dialog.txtUser_.focusNode.value = username;
+				setTimeout(function() {
+					evt.target.dialog.txtPwd_.focusNode.value = password;
+					setTimeout(function() {
+						evt.target.dialog.btnSubmit_.focusNode.click();
+					}, 100);
+				}, 100);
+			});
+
           parser.parse();
           // create the template. This will take care of all the logic required for template applications
           var myTemplate = new Template(templateConfig);
