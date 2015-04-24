@@ -256,8 +256,17 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     portalUrl: this.config.sharinghost,
                     basemapsGroup: this._getBasemapGroup()
                 }, domConstruct.create("div", {}, basemapDiv));
-                basemap.startup();
 
+                basemap.startup();
+                on(basemap, "load", lang.hitch(basemap, function () {
+                    var imgs = this.domNode.querySelectorAll("img");
+                    array.forEach(imgs, function(img) { 
+                        img.alt='';
+                        img.title='';
+                    });
+
+
+                }));
                 deferred.resolve(true);
             } else {
                 deferred.resolve(false);

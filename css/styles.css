@@ -10,7 +10,8 @@
   line-height: 16px;
   -webkit-user-select: none;
   -moz-user-select: none;
-  user-select: none; }
+  margin: 1px 2px;
+}
 
 .TableOfContents .toc-first-layer .toc-title {
   border-top: 1px solid #e0e0e0; }
@@ -19,14 +20,14 @@
   background: none;
   color: #555;
   position: relative;
-  zoom: 1; }
+}
 
 .TableOfContents .toc-text {
   float: left;
   padding: 2px 4px;
   margin: 0;
   text-overflow: ellipsis;
-  width: 250px;
+  width: 246px;
   white-space: nowrap;
   overflow-x: hidden;
   line-height: 16px;
@@ -460,8 +461,10 @@ input[type=checkbox]:checked.checkbox + .checkbox:before {
 .esriBookmarkHighlight {
   background-color: transparent;
   background-color: rgba(0, 153,0, 0.6);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000,endColorstr=#33000000);
-  zoom: 1; }
+}
 
 .esriBasemapGallery {
   padding: 20px 20px 120px 20px; }
@@ -1294,11 +1297,13 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .dijitButtonNode:focus 
 {
     background-color: #009999 !important;
-    outline-width: 0px !important;
-    outline-style: none !important;
+    outline-width: 2px !important;
+    outline-style: solid !important;
+    outline-color: #333300 !important;
     border-radius: 3px;
     -webkit-border-radius: 3px;  
     color: white !important;
+    border-bottom: 0;
 }
 
 .HomeButton:focus, .LocateButton:focus,
