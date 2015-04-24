@@ -113,7 +113,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
               alt: 'Zoom In',
               height:14,
               width:14
-          }, esriSimpleSliderIncrementNode);
+            }, esriSimpleSliderIncrementNode);
 
             dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', plusImg.alt);
             this._atachEnterKey(esriSimpleSliderIncrementNode,esriSimpleSliderIncrementNode);
@@ -1043,6 +1043,23 @@ return deferred.promise;
 
                 if (search && search.domNode) {
                     domConstruct.place(search.domNode, "panelGeocoder");
+            
+                    esriIconDownArrowNode = dojo.query(".esriIconDownArrow")[0];
+                    domClass.remove(esriIconDownArrowNode, "esriIconDownArrow");
+
+                    esriIconDownArrowNode.innerHTML = 
+                        '<img src="images\\downArrow.png" alt="Search in" width="20" height="20">';
+
+                    esriIconZoomNode = dojo.query(".esriIconZoom")[0];
+                    domClass.remove(esriIconZoomNode, "esriIconZoom");
+                    esriIconZoomNode.innerHTML = 
+                        '<img src="images\\searchZoom.png" alt="Search" width="20" height="20">';
+
+                    esriIconCloseNode = dojo.query(".esriIconClose")[0]; 
+                    domClass.remove(esriIconCloseNode, "esriIconClose");
+                    esriIconCloseNode.innerHTML = 
+                        '<img src="images\\searchClear.png" alt="Clear search" width="16" height="16">';
+
                 }
 
             }));

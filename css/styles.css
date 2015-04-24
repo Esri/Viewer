@@ -360,8 +360,6 @@ input[type=checkbox]:checked.checkbox + .checkbox:before {
   border: none; }
 
 .esriSimpleSliderDecrementButton:hover, .esriSimpleSliderIncrementButton:hover {
-  background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.3);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
   zoom: 1; }
 
@@ -461,7 +459,7 @@ input[type=checkbox]:checked.checkbox + .checkbox:before {
 
 .esriBookmarkHighlight {
   background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(0, 153,0, 0.6);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000,endColorstr=#33000000);
   zoom: 1; }
 
@@ -876,13 +874,13 @@ img {
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/
 .no-touch .panelTool:hover {
   background-color: transparent;
-  background-color: rgba(102, 102, 102, 0.9);
+  background-color: rgba(0, 153,0, 0.6);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#E6666666,endColorstr=#E6666666);
   zoom: 1; }
 
 .panelToolActive {
   background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 102, 153, 0.8);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000) !important;
   zoom: 1; }
 
@@ -1291,14 +1289,15 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .panelTool:focus,
 .pageClose:focus, .pageUp:focus, .pageDown:focus,
 .toc-title-container:focus,
-.esriBookmarkItem:focus
+.esriBookmarkItem:focus,
+.searchMenu ul li:focus, .sourcesMenu ul li:focus
 {
-    background-color: #01DFD7;
+    background-color: #009999 !important;
     outline-width: 0px !important;
     outline-style: none !important;
     border-radius: 3px;
     -webkit-border-radius: 3px;  
-    color: white;
+    color: white !important;
 }
 
 .HomeButton:focus, .LocateButton:focus,
@@ -1336,4 +1335,23 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 
 .esriBookmarkItem {
   width: 286px;
+}
+
+.LocateButton .zoomLocateButton:hover,
+.HomeButton .home:hover,
+.esriSimpleSliderIncrementButton:hover, .esriSimpleSliderDecrementButton:hover,
+.arcgisSearch .searchMenu li:hover, .arcgisSearch .searchMenu li:focus,
+.toc-title-container:hover,
+.searchBtn:hover
+{
+  background-color: rgba(0, 153,0, 0.6) !important;
+}
+
+.searchBtn .searchIcon, .searchClear .searchIcon {
+  opacity: 0.5;
+}
+
+.searchBtn:focus .searchIcon, .searchBtn:hover .searchIcon,
+.searchClear:focus .searchIcon, .searchClear:hover .searchIcon {
+  opacity: 1;
 }
