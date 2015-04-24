@@ -1,7 +1,7 @@
 .TableOfContents {
   padding-bottom: 100px;
   position: relative;
-  width: 297px;
+  --width: 297px;
   overflow: auto; }
 
 .TableOfContents .toc-title {
@@ -23,10 +23,10 @@
 
 .TableOfContents .toc-text {
   float: left;
-  padding: 12px 0;
+  padding: 2px 4px;
   margin: 0;
   text-overflow: ellipsis;
-  width: 200px;
+  width: 250px;
   white-space: nowrap;
   overflow-x: hidden;
   line-height: 16px;
@@ -42,7 +42,7 @@
   height: 16px;
   width: 16px;
   border: 1px solid #bababa;
-  margin: 12px 8px;
+  --margin: 12px 8px;
   vertical-align: middle;
   font-size: 12px;
   line-height: 16px;
@@ -170,28 +170,32 @@ html, body {
   text-align: center; }
 
 /*Styles for the print dialog checkbox*/
-#pageBody_print .checkbox {
+#pageBody_print 
+.checkbox {
   display: inline-block;
   cursor: pointer;
   margin-left: 10px;
   line-height: 18px;
   padding: 4px; }
 
-#pageBody_print input[type=checkbox].checkbox {
-  display: none; }
+#pageBody_print 
+input[type=checkbox].checkbox {
+  display: none; 
+}
 
-#pageBody_print .checkbox:before {
+.checkbox:before {
   content: "";
   display: inline-block;
   width: 18px;
   height: 18px;
-  vertical-align: middle;
+  vertical-align: bottom;
   background-color: #d3d3d3;
   color: #f3f3f3;
   text-align: center;
   border-radius: 3px; }
 
-#pageBody_print input[type=checkbox]:checked.checkbox + .checkbox:before {
+#pageBody_print 
+input[type=checkbox]:checked.checkbox + .checkbox:before {
   content: "\2713";
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   font-size: 15px; }
@@ -430,10 +434,12 @@ html, body {
 .esriAttribution {
   position: absolute;
   left: 65px;
-  bottom: 5px; }
+  bottom: 5px; 
+}
 
 .esriBookmarks {
-  border: none; }
+  border: none; 
+}
 
 .esriBookmarkItem {
   width: 300px;
@@ -448,7 +454,10 @@ html, body {
   padding: 6px; }
 
 .esriBookmarkLabel {
-  font-size: 16px; }
+  font-size: 16px; 
+  text-overflow: ellipsis;
+  color: inherit;
+}
 
 .esriBookmarkHighlight {
   background-color: transparent;
@@ -1259,6 +1268,18 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   margin-bottom: 7px;
 }
 
+.esriBasemapGallery{
+  padding:10px 10px 110px 10px;
+}
+
+#pageBody_print {
+  padding: 0; 
+}
+
+.toc-title-container {
+  padding: 8px;
+}
+
 .esriSimpleSliderDecrementButton:focus, 
 .esriSimpleSliderIncrementButton:focus,
 .homeContainer:focus, .locateContainer:focus,
@@ -1277,6 +1298,7 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
     outline-style: none !important;
     border-radius: 3px;
     -webkit-border-radius: 3px;  
+    color: white;
 }
 
 .HomeButton:focus, .LocateButton:focus,

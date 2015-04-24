@@ -286,7 +286,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     for(i=0; i<items.length; i++) {
                         var item = items[i];
                         domAttr.set(item, 'tabindex', 0);
-                        this._atachEnterKey(item,item.querySelector('.esriBookmarkLabel'));
+                        label = item.querySelector('.esriBookmarkLabel');
+                        this._atachEnterKey(item, label);
+                        domStyle.set(label, 'width', '280px');
                     }
                     deferred.resolve(true);
                 }));

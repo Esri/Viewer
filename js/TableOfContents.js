@@ -132,20 +132,42 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                         tabindex: 0
                     });
                     domConstruct.place(titleContainerDiv, titleDiv, "last");
+                    
                     // Title checkbox
-                    var titleCheckbox = domConstruct.create("div", {
-                        className: titleCheckBoxClass
-                    });
-                    domConstruct.place(titleCheckbox, titleContainerDiv, "last");
-                    // Title text
-                    var titleText = domConstruct.create("div", {
-                        className: this.css.titleText,
-                        title: layer.title,
-                        innerHTML: layer.title
-                    });
-                    this._atachSpaceKey(titleContainerDiv,titleCheckbox);
+                    //var titleCheckbox = domConstruct.create("div", {
+                    //    className: titleCheckBoxClass
+                    //});
 
-                    domConstruct.place(titleText, titleContainerDiv, "last");
+                    titleCheckbox = domConstruct.create("input", {
+                        id: "layer_ck_"+i,
+                        className: titleCheckBoxClass, //this.css.titleCheckbox,
+                        type: "checkbox",
+                        tabindex: -1,
+                        checked: false //layer.visibility
+                    }, domConstruct.create("div", {
+                        "class": "checkbox"
+                    }));
+
+                    var titleText = domConstruct.create("label", {
+                        "for": "layer_ck_"+i,
+                        "className": this.css.titleText,
+                        "innerHTML": layer.title
+                    }, domConstruct.create("div"));
+                    domConstruct.place(titleCheckbox, titleContainerDiv);
+                    domConstruct.place(titleText, titleContainerDiv);
+                    
+
+                    //domConstruct.place(titleCheckbox, titleContainerDiv, "last");
+
+                    // Title text
+                    //var titleText = domConstruct.create("div", {
+                    //    className: this.css.titleText,
+                    //    title: layer.title,
+                    //    innerHTML: layer.title
+                    //});
+                    this._atachSpaceKey(titleContainerDiv, titleCheckbox);
+
+                    //domConstruct.place(titleText, titleContainerDiv, "last");
                     // Account text
                     var accountText;
                     if (layer.account) {
