@@ -504,13 +504,29 @@ return deferred.promise;
                 }, domConstruct.create("div", {}, measureDiv));
 
                 measure.startup();
+
+                dijitButtonNodes = measureDiv.querySelectorAll('.dijitButtonNode');
+                array.forEach(dijitButtonNodes, function (node) {
+                    domAttr.set(node, 'tabindex', 0);
+                    domAttr.set(node.querySelector('.dijitButtonContents'), 'tabindex', '');
+                });
+
+                areaIconNode = measureDiv.querySelector('.areaIcon');
+                domClass.remove(areaIconNode, 'areaIcon');
+                areaIconNode.innerHTML = '<img src="images\\area_measure.png" alt="Area"/>';
+
+                distanceIconNode = measureDiv.querySelector('.distanceIcon');
+                domClass.remove(distanceIconNode, 'distanceIcon');
+                distanceIconNode.innerHTML = '<img src="images\\dist_measure.png" alt="Distance"/>';
+
+                locationIconNode = measureDiv.querySelector('.locationIcon');
+                domClass.remove(locationIconNode, 'locationIcon');
+                locationIconNode.innerHTML = '<img src="images\\dist_point.png" alt="Distance"/>';
+
                 deferred.resolve(true);
             } else {
                 deferred.resolve(false);
             }
-
-
-
             return deferred.promise;
         },
 
@@ -520,8 +536,6 @@ return deferred.promise;
 
             if (has("overview")) {
                 var ovMapDiv = toolbar.createTool(tool, panelClass);
-
-
                 domStyle.set(ovMapDiv, {
                     "height": "100%",
                     "width": "100%"

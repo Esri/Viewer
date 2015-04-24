@@ -651,7 +651,7 @@ img {
   position: absolute;
   left: 5px;
   margin-left: 0px;
-  top: 5px;
+  top: 11px;
   width: 60px;
   height: 60px;
   line-height: 60px;
@@ -863,7 +863,7 @@ img {
   float: left;
   width: 26px;
   height: 26px;
-  margin-top: 2px;
+  margin-top: 3px;
   text-align: center;
   line-height: 26px;
   -webkit-border-radius: 13px;
@@ -876,13 +876,13 @@ img {
   background-color: transparent;
   background-color: rgba(0, 153,0, 0.6);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#E6666666,endColorstr=#E6666666);
-  zoom: 1; }
+}
 
 .panelToolActive {
   background-color: transparent;
   background-color: rgba(0, 102, 153, 0.8);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000) !important;
-  zoom: 1; }
+}
 
 .tool {
   margin: 1px;
@@ -1290,7 +1290,8 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .pageClose:focus, .pageUp:focus, .pageDown:focus,
 .toc-title-container:focus,
 .esriBookmarkItem:focus,
-.searchMenu ul li:focus, .sourcesMenu ul li:focus
+.searchMenu ul li:focus, .sourcesMenu ul li:focus,
+.dijitButtonNode:focus 
 {
     background-color: #009999 !important;
     outline-width: 0px !important;
@@ -1342,9 +1343,13 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .esriSimpleSliderIncrementButton:hover, .esriSimpleSliderDecrementButton:hover,
 .arcgisSearch .searchMenu li:hover, .arcgisSearch .searchMenu li:focus,
 .toc-title-container:hover,
-.searchBtn:hover
+.searchBtn:hover,
+.no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
+.share-dialog-icon:hover
 {
   background-color: rgba(0, 153,0, 0.6) !important;
+  border-radius: 5px;
+  -webkit-border-radius: 5px;  
 }
 
 .searchBtn .searchIcon, .searchClear .searchIcon {
@@ -1355,3 +1360,17 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .searchClear:focus .searchIcon, .searchClear:hover .searchIcon {
   opacity: 1;
 }
+
+.esriMeasurement {
+  width: 93%;
+  height: auto;
+  position: relative;
+  padding: 10px;
+}
+
+.esriMeasurement .esriButtonChecked .dijitButtonNode{
+    background: rgba(0, 102, 153, 0.8);
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+}
+
