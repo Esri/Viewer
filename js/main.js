@@ -259,13 +259,26 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
                 basemap.startup();
                 on(basemap, "load", lang.hitch(basemap, function () {
-                    var imgs = this.domNode.querySelectorAll("img");
-                    array.forEach(imgs, function(img) { 
+                    
+                    var nodes = this.domNode.querySelectorAll(".esriBasemapGalleryNode");
+                    array.forEach(nodes, function(node){
+                        img = node.querySelector("img");
                         img.alt='';
-                        img.title='';
+                        domAttr.set(img, "tabindex", -1);
+                        domAttr.remove(img, "title");
+
+                        aNode = node.querySelector("a");
+                        labelNode = node.querySelector(".esriBasemapGalleryLabelContainer");
+                        domAttr.remove(labelNode.firstChild, "alt");
+                        domAttr.remove(labelNode.firstChild, "title");
+                        dojo.place(labelNode, aNode, "last");
+                        domStyle.set(labelNode, "width", img.width);
+                        domAttr.set(aNode, "tabindex", -1);
+                        domAttr.set(node, "tabindex", 0);
+                        domStyle.set(node, "padding", "5px 8px 0px 5px");
+                        on(aNode, "focus", function() { node.focus();});
+                        on(img, "click", function() { node.focus();});
                     });
-
-
                 }));
                 deferred.resolve(true);
             } else {

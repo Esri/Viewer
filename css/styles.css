@@ -573,7 +573,7 @@ img {
   background-color: transparent;
   background-color: rgba(0, 0, 0, 0.5);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000,endColorstr=#80000000);
-  zoom: 1; }
+}
 
 #panelPages {
   width: 100%;
@@ -1281,6 +1281,12 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   padding: 8px;
 }
 
+
+.esriBasemapGalleryNode
+{
+  margin: 1px 8px !important;
+}
+
 .esriSimpleSliderDecrementButton:focus, 
 .esriSimpleSliderIncrementButton:focus,
 .homeContainer:focus, .locateContainer:focus,
@@ -1294,16 +1300,21 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .toc-title-container:focus,
 .esriBookmarkItem:focus,
 .searchMenu ul li:focus, .sourcesMenu ul li:focus,
-.dijitButtonNode:focus 
+.dijitButtonNode:focus,
+.esriBasemapGalleryNode:focus
 {
-    background-color: #009999 !important;
+    --background-color: #009999 !important;
+    --border-radius: 3px;
+    ---webkit-border-radius: 3px;  
     outline-width: 2px !important;
     outline-style: solid !important;
     outline-color: #333300 !important;
-    border-radius: 3px;
-    -webkit-border-radius: 3px;  
-    color: white !important;
+    color: black;
     border-bottom: 0;
+}
+
+.searchBtn:focus, .searchClear:focus {
+  background-color: #009999 !important;
 }
 
 .HomeButton:focus, .LocateButton:focus,
@@ -1350,7 +1361,7 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .toc-title-container:hover,
 .searchBtn:hover,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
-.share-dialog-icon:hover
+.share-dialog-icon:hover, .esriBasemapGalleryNode:hover
 {
   background-color: rgba(0, 153,0, 0.6) !important;
   border-radius: 5px;
@@ -1373,7 +1384,9 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   padding: 10px;
 }
 
-.esriMeasurement .esriButtonChecked .dijitButtonNode{
+.esriMeasurement .esriButtonChecked .dijitButtonNode,
+.esriBasemapGallerySelectedNode 
+{
     background: rgba(0, 102, 153, 0.8);
     border-radius: 5px;
     -webkit-border-radius: 5px;
