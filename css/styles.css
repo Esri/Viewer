@@ -52,19 +52,23 @@
   cursor: pointer; }
 
 .esriRTL .TableOfContents .toc-checkbox {
-  float: right; }
+  float: right; 
+}
 
 .TableOfContents .toc-checkbox:hover {
-  color: #555; }
+  color: #555; 
+}
 
 .TableOfContents .toc-checkbox:active {
-  color: #999; }
+  color: #999; 
+}
 
 .TableOfContents .toc-checkbox .icon-check-1 {
-  content: "\2713";
-  color: #333;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-  font-size: 15px; }
+  --content: "\2713";
+  --color: #333;
+  --text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  --font-size: 15px; 
+}
 
 .toc-settings {
   cursor: pointer;
@@ -470,7 +474,8 @@ input[type=checkbox]:checked.checkbox + .checkbox:before {
   padding: 20px 20px 120px 20px; }
 
 .legend {
-  margin-bottom: 100px; }
+--  margin-bottom: 100px; 
+}
 
 .scalebar_bottom-left {
   left: 25px;
@@ -624,13 +629,16 @@ img {
 
 /*Panel sizes*/
 .small {
-  height: 295px; }
+  height: 295px; 
+}
 
 .medium {
-  height: 440px; }
+  height: 440px; 
+}
 
 .large {
-  height: 540px; }
+  height: 540px; 
+}
 
 .pageHeader {
   position: relative;
@@ -712,7 +720,8 @@ img {
   width: 100%;
   color: #000000;
   overflow-x: hidden;
-  overflow-y: auto; }
+  overflow-y: auto; 
+}
 
 #pageBody_overview {
   padding-bottom: 90px; }
@@ -1263,7 +1272,8 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 
 /* '	' */
 .icon-check-1:before {
-  content: '\2713'; }
+  --content: '\2713'; 
+}
 
 .homeContainer, .locateContainer{
   margin-bottom: 7px;
@@ -1351,7 +1361,8 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 }
 
 .esriBookmarkItem {
-  width: 286px;
+  width: 284px;
+  margin-left: 1px;
 }
 
 .LocateButton .zoomLocateButton:hover,

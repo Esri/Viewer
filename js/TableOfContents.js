@@ -1,7 +1,7 @@
 define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "esri/kernel", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
 // load template    
-"dojo/text!application/dijit/templates/TableOfContents.html", "dojo/dom-class", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", "dojo/_base/array"], function (
-Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemplate, domClass, domStyle, domConstruct, event, array) {
+"dojo/text!application/dijit/templates/TableOfContents.html", "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", "dojo/_base/array"], function (
+Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemplate, domClass, domAttr, domStyle, domConstruct, event, array) {
     var Widget = declare("esri.dijit.TableOfContents", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: dijitTemplate,
         // defaults
@@ -11,6 +11,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             layers: null,
             visible: true
         },
+
         // lifecycle: 1
         constructor: function (options, srcRefNode) {
             // mix in settings and defaults
@@ -47,6 +48,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 clear: "clear"
             };
         },
+
         // start widget. called by user
         startup: function () {
             // map not defined
@@ -63,6 +65,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 }));
             }
         },
+
         // connections/subscriptions will be cleaned up during the destroy() lifecycle phase
         destroy: function () {
             this._removeEvents();
@@ -75,21 +78,27 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
         // toggle
         // expand
         // collapse
+
         /* ---------------- */
         /* Public Functions */
         /* ---------------- */
+
         show: function () {
             this.set("visible", true);
         },
+
         hide: function () {
             this.set("visible", false);
         },
+
         refresh: function () {
             this._createList();
         },
-        /* ---------------- */
+
+        /* ----------------- */
         /* Private Functions */
-        /* ---------------- */
+        /* ----------------- */
+
         _createList: function () {
             var layers = this.get("layers");
             this._nodes = [];
@@ -143,7 +152,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                         className: titleCheckBoxClass, //this.css.titleCheckbox,
                         type: "checkbox",
                         tabindex: -1,
-                        checked: false //layer.visibility
+                        checked: layer.visibility
                     }, domConstruct.create("div", {
                         "class": "checkbox"
                     }));
@@ -225,6 +234,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
         _refreshLayers: function () {
             this.refresh();
         },
+
         _removeEvents: function () {
             var i;
             // checkbox click events
@@ -242,15 +252,25 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             this._checkEvents = [];
             this._layerEvents = [];
         },
+
         _toggleVisible: function (index, visible) {
             // update checkbox and layer visibility classes
             domClass.toggle(this._nodes[index].layer, this.css.visible, visible);
             domClass.toggle(this._nodes[index].checkbox, this.css.checkboxCheck, visible);
+            
             this.emit("toggle", {
                 index: index,
                 visible: visible
             });
+
+            if(visible) {
+                domAttr.set(this._nodes[index].checkbox, "checked", "checked");
+            }
+            else {
+                domAttr.set(this._nodes[index].checkbox, "checked", "");
+            };
         },
+
         _layerEvent: function (layer, index) {
             // layer visibility changes
             var visChange = on(layer, "visibility-change", lang.hitch(this, function (evt) {
@@ -259,6 +279,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             }));
             this._layerEvents.push(visChange);
         },
+
         _featureCollectionVisible: function (layer, index, visible) {
             // all layers either visible or not
             var equal;
@@ -286,6 +307,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 this._toggleVisible(index, visible);
             }
         },
+
         _createFeatureLayerEvent: function (layer, index, i) {
             var layers = layer.featureCollection.layers;
             // layer visibility changes
@@ -295,6 +317,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             }));
             this._layerEvents.push(visChange);
         },
+
         _featureLayerEvent: function (layer, index) {
             // feature collection layers
             var layers = layer.featureCollection.layers;
@@ -305,6 +328,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 }
             }
         },
+
         _setLayerEvents: function () {
             // this function sets up all the events for layers
             var layers = this.get("layers");
@@ -324,6 +348,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 }
             }
         },
+
         _toggleLayer: function (layerIndex) {
             // all layers
             if (this.layers && this.layers.length) {
@@ -364,34 +389,32 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 }
             }
         },
+
         _checkboxEvent: function (index) {
             // when checkbox is clicked
-            var checkEvent = on(this._nodes[index].checkbox, "click", lang.hitch(this, function (evt) {
+            var checkEvent = on(this._nodes[index].checkbox, "click", lang.hitch(this, 
+                function (evt) {
                 // toggle layer visibility
                 this._toggleLayer(index);
-                event.stop(evt);
+                //event.stop(evt);
             }));
             this._checkEvents.push(checkEvent);
-            // when title is clicked
-            var titleEvent = on(this._nodes[index].titleText, "click", lang.hitch(this, function (evt) {
-                // toggle layer visibility
-                this._toggleLayer(index);
-                event.stop(evt);
-            }));
-            this._checkEvents.push(titleEvent);
         },
+
         _init: function () {
             this._visible();
             this._createList();
             this.set("loaded", true);
             this.emit("load", {});
         },
+
         _updateThemeWatch: function () {
             var oldVal = arguments[1];
             var newVal = arguments[2];
             domClass.remove(this.domNode, oldVal);
             domClass.add(this.domNode, newVal);
         },
+
         _visible: function () {
             if (this.get("visible")) {
                 domStyle.set(this.domNode, "display", "block");

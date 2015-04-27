@@ -74,6 +74,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             return deferred.promise;
         },
+
         _hasScrollbar: function () {
             // The Modern solution
             if (typeof window.innerWidth === 'number') return window.innerWidth > document.documentElement.clientWidth;
@@ -101,6 +102,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             return (contentOverflows && overflowShown) || (alwaysShowScroll);
         },
+
         //Create a tool and return the div where you can place content
         createTool: function (tool, panelClass) {
             var name = tool.name;
@@ -140,8 +142,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             on(pTool, "click", lang.hitch(this, this._toolClick, name));
             this.tools.push(name);
 
-
-
             // add page
             var page = domConstruct.create("div", {
                 className: "page",
@@ -152,14 +152,12 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 className: "pageContent rounded shadow",
                 id: "pageContent_" + name
             }, page);
-
             domClass.add(pageContent, panelClass);
 
             var pageHeader = domConstruct.create("div", {
                 id: "pageHeader_" + name,
                 className: "pageHeader bg roundedTop"
             }, pageContent);
-
 
             domConstruct.create("div", {
                 className: "pageTitle fc",
@@ -177,7 +175,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 id: "pageBody_" + name
             }, pageContent);
             return pageBody;
-
         },
 
         updatePageNavigation: function () {
@@ -231,7 +228,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             this._updateMap();
 
-
             this.curTool = num;
             this._updateTool(num);
         },
@@ -264,6 +260,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 this._scrollToPage(0);
             }
         },
+
         _showPreviousPage: function (name) {
             var num = this._getPageNum(name);
             this._scrollToPage(num);
@@ -295,12 +292,10 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             }
             this.curTool = num;
             this._updateTool(num);
-
         },
 
         // window scrolled
         _windowScrolled: function (evt) {
-
             if (this.scrollTimer) {
                 clearTimeout(this.scrollTimer);
             }
@@ -338,7 +333,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             if (num != numActual) {
                 this._animateScroll(startPos, endPos);
             }
-
         },
 
         _animateScroll: function (start, end) {
@@ -379,7 +373,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
         _resetSnap: function () {
             this.snap = true;
-
         },
 
         // menu click
@@ -387,7 +380,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             if (query("#panelTools").style("display") == "block") {
                 query("#panelTools").style("display", "none");
                 this._closePage();
-
             } else {
                 query("#panelTools").style("display", "block");
             }
