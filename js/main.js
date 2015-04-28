@@ -648,8 +648,8 @@ return deferred.promise;
 
                     var labelNode = domConstruct.create("label", {
                         "for": "legend_ck",
-                        "className": "checkbox",
-                        "innerHTML": "  " + this.config.i18n.tools.print.legend
+                        "className": "cb_label",
+                        "innerHTML": this.config.i18n.tools.print.legend
                     }, domConstruct.create("div"));
                     domConstruct.place(legendNode, printDiv);
                     domConstruct.place(labelNode, printDiv);
