@@ -715,6 +715,11 @@ img {
   max-width: 258px; 
 }
 
+#pageBody_share {
+  max-width: 280px; 
+  padding-right: 0px;
+}
+
 #pageBody_print {
   padding-bottom: 20px;
 }
@@ -1101,14 +1106,19 @@ img {
   color: rgba(0, 0, 0, 0.8); }
 
 .calcite .share-map-url {
-  width: 50%;
-  min-width: 80%;
-  max-width: 90%;
-  height: 25px;
+  width: 90%;
+  height: 24px;
   font-size: 14px;
   color: #777;
   border: 1px solid #dcdcdc;
-  margin: 0 0 10px; }
+  margin: 0 0 10px; 
+  padding-left:1px;
+  padding-right:1px;
+}
+
+.calcite .share-dialog-subheader {
+  margin-bottom: 0;
+}
 
 .calcite .map-size-container {
   margin: 0;
@@ -1133,13 +1143,15 @@ img {
 
 .calcite .share-dialog-textarea {
   width: auto;
+  width: 100%;
   max-width: 90%;
-  width: 80%;
+  margin:0;
   height: 50px;
   font-size: 14px;
   color: #777;
   border: 1px solid #dcdcdc;
-  margin: 0 0 10px; }
+  margin: 0 0 10px; 
+}
 
 .share-dialog-checkbox {
   display: inline-block;

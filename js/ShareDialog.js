@@ -107,18 +107,31 @@ Evented, declare, lang, has, esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on
                 iconClear: "icon-clear"
             };
         },
+
         // bind listener for button to action
         postCreate: function () {
             this.inherited(arguments);
             this._setExtentChecked();
             this._shareLink();
             this.own(on(this._extentInput, a11yclick, lang.hitch(this, this._useExtentUpdate)));
+            
+            domAttr.remove(dojo.query(".share-dialog-textarea")[0], "style");
+
+            var cb = dojo.query("#pageBody_share_extent_checkbox")[0];
+            domClass.remove(cb);
+            domClass.add(cb, "checkbox");
+            
+            var lb = dojo.query("label[for=pageBody_share_extent_checkbox]")[0]
+            domClass.remove(lb);
+            domClass.add(lb, "cb_label");
+            //lb.innerHTML = lb.innerHTML.trim();
         },
+
         // start widget. called by user
         startup: function () {
             this._init();
-
         },
+
         // connections/subscriptions will be cleaned up during the destroy() lifecycle phase
         destroy: function () {
             this.inherited(arguments);
