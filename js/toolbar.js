@@ -152,12 +152,28 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 className: "pageContent rounded shadow",
                 id: "pageContent_" + name
             }, page);
-            domClass.add(pageContent, panelClass);
+            //domClass.add(pageContent, panelClass);
 
+            /*
+            var pageTable = domConstruct.create("table", {
+                className: "pageTable",
+                id: "pageTable_" + name,
+                width: "100%",
+                style: "border-collapse: collapse; border-spacing:0;"
+            }, pageContent);
+
+            var row1 = domConstruct.create("tr", { id:"headerRow" }, pageTable);
+            var cell1 = domConstruct.create("td", { id:"headerCell" }, row1);
+
+            var row2 = domConstruct.create("tr", { id:"contentRow" }, pageTable);
+            var cell2 = domConstruct.create("td", { id:"contentCell" }, row2);
+*/
             var pageHeader = domConstruct.create("div", {
                 id: "pageHeader_" + name,
                 className: "pageHeader bg roundedTop"
-            }, pageContent);
+            }, 
+            //cell1);
+            pageContent);
 
             domConstruct.create("div", {
                 className: "pageTitle fc",
@@ -173,7 +189,11 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             var pageBody = domConstruct.create("div", {
                 className: "pageBody",
                 id: "pageBody_" + name
-            }, pageContent);
+            }, 
+            //cell2);
+            pageContent);
+            domClass.add(pageBody, panelClass);
+
             return pageBody;
         },
 
@@ -209,6 +229,26 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                     on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
                     this._atachEnterKey(pageDown, pageDown);
                 }
+/*
+                pageContent = dom.byId("pageContent_" + name);
+                domAttr.set(pageContent, 'tabIndex', 0);
+                domAttr.set(pageContent, 'data-name', name);
+                on(pageContent, 'keyup', lang.hitch(this, function(event) {
+                    switch (event.keyCode) {
+                        case 33: // PgUp
+                            this._showPreviousPage(domAttr.get(event.currentTarget, 'data-name'));
+                            break;
+                        case 34: // PgDn
+                            if(pageDown)
+                                this._showNextPage(domAttr.get(event.currentTarget, 'data-name'));
+                            break;
+                        //case 35: // End
+                        //    break;
+                        //case 36: // Home
+                        //    break;
+                    }
+                }));
+*/
             }
         },
 
@@ -274,8 +314,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         _closePage: function () {
             this._scrollToPage(0);
         },
-        _scrollToPage: function (num) {
 
+        _scrollToPage: function (num) {
             var box = html.getContentBox(dom.byId("panelContent"));
 
             var startPos = this.curTool * box.h;
@@ -303,8 +343,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 this.scrollTimer = setTimeout(lang.hitch(this, this._snapScroll), 300);
             }
         },
-        _snapScroll: function () {
 
+        _snapScroll: function () {
             var startPos = domGeometry.docScroll().y;
             var box = html.getContentBox(dom.byId("panelContent"));
             var numActual = startPos / box.h;
