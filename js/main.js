@@ -51,12 +51,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                             ];
                         } else if (extArray.length === 5) {
                             this.initExt = new Extent(JSON.parse(this.config.extent));
-
                         }
                     }
                     this._createWebMap(itemInfo);
-
-
                 }));
             } else {
                 var error = new Error("Main:: Config is not defined");
@@ -92,7 +89,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 //rgba supported so add
                 rgb.push(0.9);
                 outputColor = Color.fromArray(rgb);
-
             }
             return outputColor;
         },
@@ -648,7 +644,7 @@ return deferred.promise;
 
                     var labelNode = domConstruct.create("label", {
                         "for": "legend_ck",
-                        "className": "cb_label",
+                        "className": "checkbox",
                         "innerHTML": this.config.i18n.tools.print.legend
                     }, domConstruct.create("div"));
                     domConstruct.place(legendNode, printDiv);
