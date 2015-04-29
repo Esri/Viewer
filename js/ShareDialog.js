@@ -101,7 +101,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on
                 shareDialogSubHeader: "share-dialog-subheader",
                 shareDialogTextarea: "share-dialog-textarea",
                 shareDialogExtent: "share-dialog-extent",
-                shareDialogExtentChk: "share-dialog-checkbox",
+                shareDialogExtentChk: "checkbox",
                 mapSizeContainer: "map-size-container",
                 embedMapSizeClear: "embed-map-size-clear",
                 iconClear: "icon-clear"
@@ -116,15 +116,6 @@ Evented, declare, lang, has, esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on
             this.own(on(this._extentInput, a11yclick, lang.hitch(this, this._useExtentUpdate)));
             
             domAttr.remove(dojo.query(".share-dialog-textarea")[0], "style");
-
-            var cb = dojo.query("#pageBody_share_extent_checkbox")[0];
-            domClass.remove(cb);
-            domClass.add(cb, "checkbox");
-            
-            var lb = dojo.query("label[for=pageBody_share_extent_checkbox]")[0]
-            domClass.remove(lb);
-            domClass.add(lb, "cb_label");
-            //lb.innerHTML = lb.innerHTML.trim();
         },
 
         // start widget. called by user

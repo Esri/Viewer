@@ -23,12 +23,11 @@
   position: relative;
 }
 
-.TableOfContents .toc-text, .cb_label {
+label.checkbox{
   float: left;
   padding: 2px 4px;
-  margin: 0;
+  margin: 0 !important;
   text-overflow: ellipsis;
-  width: 240px;
   white-space: nowrap;
   overflow-x: hidden;
   line-height: 20px;
@@ -37,15 +36,10 @@
   vertical-align: middle; 
 }
 
-.cb_label {
-  width: 200px;
-  margin-bottom: 0 !important;
-}
-
-.esriRTL .TableOfContents .toc-text, .esriRTL .cb_label {
+.esriRTL label.checkbox {
   float: right; }
 
-.TableOfContents .toc-checkbox, .checkbox {
+input[type=checkbox].checkbox {
   float: left;
   height: 20px;
   width: 20px;
@@ -58,23 +52,8 @@
   cursor: pointer; 
 }
 
-.esriRTL .TableOfContents .toc-checkbox, .esriRTL .checkbox {
+.esriRTL .checkbox {
   float: right; 
-}
-
-.TableOfContents .toc-checkbox:hover {
-  color: #555; 
-}
-
-.TableOfContents .toc-checkbox:active {
-  color: #999; 
-}
-
-.TableOfContents .toc-checkbox .icon-check-1 {
-  --content: "\2713";
-  --color: #333;
-  --text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-  --font-size: 15px; 
 }
 
 .toc-settings {
@@ -107,8 +86,9 @@
 @media screen and (max-width: 300px) {
   .TableOfContents {
     width: auto; }
-  .TableOfContents .toc-text {
-    width: 60%; } }
+  label.checkbox {
+    width: 60%; } 
+  }
 
 .clear {
   clear: both; }
@@ -183,7 +163,7 @@ html, body {
 
 /*Styles for the print dialog checkbox*/
 #pageBody_print 
-.checkbox {
+input[type=checkbox].checkbox {
   width: 20px;
   height: 20px;
   padding: 4px;
@@ -1161,10 +1141,12 @@ img {
 .share-dialog-checkbox {
   display: inline-block;
   cursor: pointer;
-  padding: 8px; }
+  padding: 8px; 
+}
 
 input[type=checkbox].share-dialog-checkbox {
-  display: none; }
+  display: none; 
+}
 
 .share-dialog-checkbox:before {
   content: "";
@@ -1285,7 +1267,6 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .toc-title-container {
   padding: 8px;
 }
-
 
 .esriBasemapGalleryNode
 {
