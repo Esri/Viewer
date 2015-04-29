@@ -111,7 +111,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
               width:14
             }, esriSimpleSliderIncrementNode);
 
-            //dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', plusImg.alt);
+            dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', plusImg.alt);
             this._atachEnterKey(esriSimpleSliderIncrementNode,esriSimpleSliderIncrementNode);
 
             esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
