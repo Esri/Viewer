@@ -1084,16 +1084,21 @@ img {
   margin: 0 0 0 5px; }
 
 .calcite .share-dialog-icon {
-  /*font-size: 32px;
-    line-height: 32px;*/
-  font-size: 30px;
-  line-height: 30px;
+  --font-size: 30px;
+  --line-height: 30px;
   float: left;
-  color: rgba(0, 0, 0, 0.3);
+  --color: rgba(0, 0, 0, 0.3);
   cursor: pointer;
   margin: 0 10px 0 0;
   text-decoration: none;
-  display: block; }
+  display: block; 
+  height: 32px;
+  opacity: 0.5;
+}
+
+.calcite .share-dialog-icon:hover, .calcite .share-dialog-icon:focus {
+  opacity: 1;
+}
 
 .calcite .share-dialog-icon:visited {
   color: rgba(0, 0, 0, 0.5); }
@@ -1193,26 +1198,26 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
     font-family: 'tool-icons';
     src: url('../fonts/tool-icons.svg?23344103#tool-icons') format('svg');  }
 }
-*/
+*/ 
 [class^="icon-"]:before, [class*=" icon-"]:before {
-  font-family: "tool-icons";
-  font-style: normal;
-  font-weight: normal;
-  speak: none;
-  display: inline-block;
-  text-decoration: inherit;
-  width: 1em;
-  margin-right: 0.2em;
-  text-align: center;
+  --font-family: "tool-icons";
+  --font-style: normal;
+  --font-weight: normal;
+  --speak: none;
+  --display: inline-block;
+  --text-decoration: inherit;
+  --width: 1em;
+  --margin-right: 0.2em;
+  --text-align: center;
   /* opacity: .8; */
   /* For safety - reset parent styles, that can break glyph codes*/
-  font-variant: normal;
-  text-transform: none;
+  --font-variant: normal;
+  --text-transform: none;
   /* fix buttons height, for twitter bootstrap */
-  line-height: 1em;
+  --line-height: 1em;
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
-  margin-left: 0.2em;
+  --margin-left: 0.2em;
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
   /* Uncomment for 3D effect */
@@ -1227,35 +1232,42 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 
 /* '' */
 .icon-twitter:before {
-  content: '\e802'; }
+  --content: '\e802'; }
 
 /* '' */
 .icon-facebook-squared:before {
-  content: '\e803'; }
+  --content: '\e803'; 
+}
 
 /* '' */
 .icon-gplus:before {
-  content: '\e804'; }
+  --content: '\e804'; 
+}
 
 /* '' */
 .icon-mail-alt:before {
-  content: '\e805'; }
+  --content: '\e805'; 
+}
 
 /* '' */
 .icon-link:before {
-  content: '\e806'; }
+  --content: '\e806'; 
+}
 
 /* '' */
 .icon-buffer:before {
-  content: '\e80b'; }
+  content: '\e80b'; 
+}
 
 /* '' */
 .icon-target:before {
-  content: '\e80c'; }
+  content: '\e80c'; 
+}
 
 /* '' */
 .icon-angle-down:before {
-  content: '\e809'; }
+  content: '\e809'; 
+}
 
 /* '	' */
 .icon-check-1:before {

@@ -4,11 +4,21 @@
     <div class="${css.shareDialogContent}">
         <div class="${css.shareDialogSubHeader}">${_i18n.widgets.ShareDialog.heading}</div>
         <div class="${css.iconContainer}">
-            <div tabindex="0" class="${css.facebookIcon}" data-dojo-attach-point="_facebookButton" title="${_i18n.widgets.ShareDialog.facebookTooltip}"></div>
-            <div tabindex="0" class="${css.twitterIcon}" data-dojo-attach-point="_twitterButton" title="${_i18n.widgets.ShareDialog.twitterTooltip}"></div>
-            <div tabindex="0" class="${css.gplusIcon}" data-dojo-attach-point="_gpulsButton" title="${_i18n.widgets.ShareDialog.gplusTooltip}"></div>
-            <div tabindex="0" class="${css.emailIcon}" data-dojo-attach-point="_emailButton" title="${_i18n.widgets.ShareDialog.emailTooltip}"></div>
-            <a tabindex="0" class="${css.linkIcon}" data-dojo-attach-point="_linkButton" title="${_i18n.widgets.ShareDialog.url}" target="_blank"></a>
+            <div tabindex="0" class="${css.facebookIcon}" data-dojo-attach-point="_facebookButton" title="${_i18n.widgets.ShareDialog.facebookTooltip}">
+                <img src="images\\share-facebook.png" alt="${_i18n.widgets.ShareDialog.facebookTooltip}" height="32" width="32"/>
+            </div>
+            <div tabindex="0" class="${css.twitterIcon}" data-dojo-attach-point="_twitterButton" title="${_i18n.widgets.ShareDialog.twitterTooltip}">
+                <img src="images\\share-twitter.png" alt="${_i18n.widgets.ShareDialog.twitterTooltip}" height="32" width="32"/>
+            </div>
+            <div tabindex="0" class="${css.gplusIcon}" data-dojo-attach-point="_gpulsButton" title="${_i18n.widgets.ShareDialog.gplusTooltip}">
+                <img src="images\\share-gplus.png" alt="${_i18n.widgets.ShareDialog.gplusTooltip}" height="32" width="32"/>
+            </div>
+            <div tabindex="0" class="${css.emailIcon}" data-dojo-attach-point="_emailButton" title="${_i18n.widgets.ShareDialog.emailTooltip}">
+                <img src="images\\share-email.png" alt="${_i18n.widgets.ShareDialog.emailTooltip}" height="32" width="32"/>
+            </div>
+            <div>
+                <a tabindex="0" class="${css.linkIcon}" data-dojo-attach-point="_linkButton" title="${_i18n.widgets.ShareDialog.url}" target="_blank" width="32"><img src="images\\share-link.png" alt="Link" height="32" width="32"/></a>
+            </div>
             <div tabindex="0" class="${css.iconClear}"></div>
         </div>
         <div class="${css.shareDialogExtent}" style="height: 40px;">
