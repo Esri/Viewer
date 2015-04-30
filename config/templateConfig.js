@@ -43,8 +43,8 @@ define({
   //if you want users to be able to specify lat/lon coordinates that define the map's center or
   //specify an alternate basemap via a url parameter.
   "urlItems": [
-    "color","extent", "center", "level" // example param. ?theme=<my theme>
+    "color","extent", "center", "level", "feature", "find" // example param. ?theme=<my theme>
   ],
   // For esri hosted environments only. Will automatically create a sharingurl and proxyurl for the application.
-  esriEnvironment: false
+  esriEnvironment: true
 });

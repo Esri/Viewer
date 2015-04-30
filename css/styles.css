@@ -1,8 +1,8 @@
 .TableOfContents {
-  padding-bottom: 100px;
   position: relative;
   width: 297px;
-  overflow: auto; }
+  overflow: auto; 
+}
 
 .TableOfContents .toc-title {
   border-bottom: 1px solid #e0e0e0;
@@ -26,7 +26,7 @@
   padding: 12px 0;
   margin: 0;
   text-overflow: ellipsis;
-  width: 200px;
+  width: 87%;
   white-space: nowrap;
   overflow-x: hidden;
   line-height: 16px;
@@ -121,7 +121,7 @@ html, body {
   font-weight: normal; }
 
 @font-face {
-  font-family: "HelveticaNeueUltraLight";
+  font-family: "HelveticaNeueUltraLight ";
   src: url('../fonts/helveticaneueultralight.eot');
   src: url('../fonts/helveticaneueultralight.eot?#iefix') format('embedded-opentype'), url('../fonts/helveticaneueultralight.woff') format('woff'), url('../fonts/helveticaneueultralight.ttf') format('truetype'), url('../fonts/helveticaneueultralight.svg#HelveticaNeueUltraLight') format('svg');
   font-style: normal;
@@ -167,15 +167,26 @@ html, body {
   z-index: 2;
   top: 40%;
   left: 0;
-  text-align: center; }
+  text-align: center; 
+}
+.esriOverviewMap{
 
+}
+.esriOverviewMap .ovwContainer{
+  width:300px !important;
+}
+#pageBody_overview{
+  height:350px !important;
+}
+@media only screen and (min-width: 720px) {
+  #pageBody_overview {
+    max-height: 80%; } }
 /*Styles for the print dialog checkbox*/
 #pageBody_print .checkbox {
   display: inline-block;
   cursor: pointer;
-  margin-left: 10px;
   line-height: 18px;
-  padding: 4px; }
+}
 
 #pageBody_print input[type=checkbox].checkbox {
   display: none; }
@@ -210,7 +221,6 @@ html, body {
 .templatePicker {
   height: 100%;
   padding-top: 30px;
-  padding-bottom: 120px;
   border: none; }
 
 .esriEditor {
@@ -249,16 +259,30 @@ html, body {
   background-image: url("http://js.arcgis.com/3.12/esri/css/calcite/images/popup-sprite.png");
   width: 12px;
   height: 12px;
-  text-indent: -9999px; }
-
+  text-indent: -9999px; 
+}
+.printTitle{
+  width: 265px;
+  font-size: 14px;
+  border-width: 2px;
+  border-color: #CCC;
+  border-style: solid;
+  padding: 5px;
+  margin-bottom: 12px;
+}
 .esriPrintout a {
-  color: #5daddd; }
+  color: #5daddd; 
+}
 
 .esriPrint {
   position: absolute;
-  top: 40px;
-  left: 15px; }
-
+  bottom:5px;
+  right: 20px;
+  padding:5px;
+}
+.esriMeasurement .esriMeasurementResultTable{
+  padding:6px;
+}
 .esriMeasurement .esriMeasurementButtonPane {
   padding-left: 6px; }
 
@@ -457,10 +481,7 @@ html, body {
   zoom: 1; }
 
 .esriBasemapGallery {
-  padding: 20px 20px 120px 20px; }
-
-.legend {
-  margin-bottom: 100px; }
+  padding: 20px; }
 
 .scalebar_bottom-left {
   left: 25px;
@@ -614,7 +635,11 @@ img {
   width: 300px;
   display: block;
   overflow: hidden;
-  max-height: 305px;
+
+  /*overflow-y:auto;*/
+
+  /*overflow: hidden;
+  max-height: 305px;*/
   top: 100px;
   background-color: transparent;
   background-color: white;
@@ -623,22 +648,14 @@ img {
 
 @media only screen and (min-width: 600px) {
   .pageContent {
-    max-height: none; } }
+    max-height: 80%;
+     } }
 
 @media only screen and (min-width: 1070px) {
   .pageContent {
     top: 10px;
-    max-height: none; } }
+   } }
 
-/*Panel sizes*/
-.small {
-  height: 295px; }
-
-.medium {
-  height: 440px; }
-
-.large {
-  height: 540px; }
 
 .pageHeader {
   position: relative;
@@ -656,7 +673,8 @@ img {
   font-size: 14px;
   color: #ffffff;
   line-height: 20px;
-  overflow: hidden; }
+  overflow: hidden; 
+}
 
 .pageHeaderImg {
   position: absolute;
@@ -714,50 +732,42 @@ img {
 
 .pageBody {
   position: relative;
-  height: 100%;
   top: 0;
-  display: block;
-  width: 100%;
+  /*display: -moz-box;
+  display: -webkit-box;
+  display: box;*/
+  display:block;
+  max-height: 400px;
+  width:100%;
+  overflow-x:hidden;
+  overflow-y:auto;
   color: #000000;
-  overflow-x: hidden;
-  overflow-y: auto; }
-
-#pageBody_overview {
-  padding-bottom: 90px; }
+}
 
 #pageBody_print {
-  padding: 10px; }
+  padding: 10px; 
+  height:120px;
+}
 
 #pageBody_legend {
-  padding-left: 20px;
   padding-top: 20px;
-  margin-right: 30px;
-  max-width: 280px; }
-
+}
+.legend{
+  margin:auto;
+  max-width: 90%;
+}
 #pageBody_share {
   padding: 5px 20px;
-  overflow-y: auto; }
-
-@media only screen and (min-width: 720px) {
-  #pageBody_share {
-    max-height: none; } }
-
-#pageBody_bookmarks {
-  position: absolute;
-  top: 90px;
-  max-height: 70%; }
-
-@media only screen and (min-width: 720px) {
-  #pageBody_bookmarks {
-    max-height: 80%; } }
+  overflow-y: auto; 
+}
 
 .desc {
-  margin-bottom: 100px;
-  padding: 5px; }
+  padding: 10px; }
 
 #pageBody_details {
   padding: 5px;
-  max-width: 288px; }
+  max-width: 288px; 
+}
 
 #panelTop {
   position: fixed;
@@ -772,7 +782,8 @@ img {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
-  border-radius: 0; }
+  border-radius: 0; 
+}
 
 @media only screen and (min-width: 760px) {
   #panelTop {
@@ -782,8 +793,27 @@ img {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
-    border-radius: 5px; } }
+    border-radius: 5px; 
+  }
 
+    #panelLogo {
+      margin-left: 5px; 
+      display:block !important;
+      overflow: hidden;
+      float: left;
+      line-height: 50px;
+      width:50px;
+      height: 50px;
+    }
+
+    #panelLogo img {
+      vertical-align: middle;
+      line-height: inherit;
+      max-width: 45px;
+      max-height: 45px; 
+    }
+
+  }
 #panelTitle {
   height: 50px;
   width: 100%;
@@ -793,51 +823,81 @@ img {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   font-family: "Helvetica Neue", "Arial", sans-serif;
   font-weight: normal;
-  font-size: 25px; }
+}
 
 .no-search #panelText {
-  display: block; }
-
-#panelLogo {
+  display: block; 
+}
+.no-search #panelLogo {
+  display: block !important;
   width: 50px;
   height: 50px;
   overflow: hidden;
   float: left;
   line-height: 50px;
-  margin-left: 5px; }
-
-#panelLogo img {
-  max-width: 50px;
-  max-height: 50px; }
-
+  margin-left: 5px;
+}
+.no-search #panelLogo img{
+  max-width:50px !important;
+  max-height:50px !important;
+}
+#panelLogo{
+  display:none;
+}
 #panelText {
+  z-index: 40;
+  display: none;
   float: left;
   max-width: 196px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-left: 5px;
+  height:50px;
+  line-height: 50px;
+}
+#title{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  height: 30px;
+  line-height: 30px;
+  font-size: 1.3em;   
+}
+#subtitle{
+  overflow: hidden;
+  text-overflow:ellipsis;
+  height: 30px;
+  line-height: 20px;
+  font-size: 0.9em;  
+}
+#title.nosubtitle{
+  overflow: hidden;
+  text-overflow:ellipsis;
   height: 50px;
   line-height: 50px;
-  display: none;
-  font-size: 0.9em; }
+}
 
 @media only screen and (min-width: 720px) {
   #panelText {
     display: block;
-    max-width: 300px; } }
+    max-width: 300px; 
+  } 
+}
 
 @media only screen and (min-width: 800px) {
   #panelText {
-    max-width: 400px; } }
+    max-width: 400px; 
+  } 
+}
 
 #panelText.nosearch {
-  display: block; }
-
+  display: block; 
+}
 #panelSearch {
   float: left;
   margin: 10px 0 10px 20px;
-  height: 30px; }
+  height: 30px; 
+}
 
 @media only screen and (min-width: 720px) {
   #panelSearch {

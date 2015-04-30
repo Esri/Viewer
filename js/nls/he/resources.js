@@ -34,8 +34,10 @@ define(
 			      "label3": 'לרוחב',
 			      "label4": 'לאורך'
 			    },
-			    "legend": "הוסף מקרא למפה"
-			},
+			    "legend": "הוסף מקרא למפה",
+                "title": "כן_Title___ש",
+                "titlePrompt": "כן_Add custom title______ש"
+            },
 			"share": {
 				"extent": "השתמש בתיחום המפה הנוכחי",
 				"label": "שתף מפה זו",

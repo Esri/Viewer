@@ -34,8 +34,10 @@ define(
 			      "label3": 'Liggend',
 			      "label4": 'Staand'
 			    },
-			    "legend": "Legenda toevoegen aan uitvoer"
-			},
+			    "legend": "Legenda toevoegen aan uitvoer",
+                "title": "Ĳ_Title___ä",
+                "titlePrompt": "Ĳ_Add custom title______ä"
+            },
 			"share": {
 				"extent": "Huidige extent van de kaart gebruiken",
 				"label": "Deze kaart delen",

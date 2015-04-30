@@ -34,8 +34,10 @@ define({
 			      "label3": 'Landscape',
 			      "label4": 'Portrait'
 			    },
-			    "legend": "Add legend to output"
-			},
+			    "legend": "Add legend to output",
+                "title": "Title",
+                "titlePrompt": "Add custom title"
+            },
 			"share": {
 				"extent": "Use current map extent",
 				"label": "Share this map",
@@ -86,5 +88,7 @@ define({
 "tr": 1,
 "th": 1,
 "vi": 1,
-"zh-cn": 1
+"zh-cn": 1,
+"zh-hk": 1,
+"zh-tw": 1
 });

@@ -34,8 +34,10 @@ define(
 			      "label3": 'På langs',
 			      "label4": 'På højkant'
 			    },
-			    "legend": "Føj signaturforklaring til output"
-			},
+			    "legend": "Føj signaturforklaring til output",
+                "title": "ø_Title___å",
+                "titlePrompt": "ø_Add custom title______å"
+            },
 			"share": {
 				"extent": "Gem aktuelt kortområde",
 				"label": "Del dette kort",

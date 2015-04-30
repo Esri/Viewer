@@ -19,8 +19,8 @@ Evented, declare, lang, has, esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on
             twitterURL: "https://twitter.com/intent/tweet?url={url}&text={title}&hashtags={hashtags}",
             googlePlusURL: "https://plus.google.com/share?url={url}",
             bitlyAPI: location.protocol === "https:" ? "https://api-ssl.bitly.com/v3/shorten" : "http://api.bit.ly/v3/shorten",
-            bitlyLogin: "",
-            bitlyKey: "",
+            bitlyLogin: "arcgis",
+            bitlyKey: "R_b8a169f3a8b978b9697f64613bf1db6d",
             embedSizes: [{
                 "width": "100%",
                 "height": "640px"

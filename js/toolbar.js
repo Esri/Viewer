@@ -250,7 +250,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         },
 
         _closePage: function () {
-            this._scrollToPage(0);
+            this._scrollToPage(-1);
         },
         _scrollToPage: function (num) {
 

@@ -17,49 +17,49 @@
 define(
      ({
         "map": {
-            "error": "无法创建地图"
+            "error": "無法建立地圖"
         },
         "tools":{
             "search":{
-                "error": "无法找到位置",
+                "error": "無法找到位置",
                 "notWhatYouWanted": "不是您想要的位置?",
-                "selectAnother": "选择其他位置",
-                "currentLocation": "当前位置",
+                "selectAnother": "選擇其他位置",
+                "currentLocation": "目前位置",
                 "title": "位置"
             },
 	    	"print": {
 			    "layouts":{
-			      "label1": '横向',
-			      "label2": '纵向',
-			      "label3": '横向',
-			      "label4": '纵向'
+			      "label1": '橫向',
+			      "label2": '縱向',
+			      "label3": '橫向',
+			      "label4": '縱向'
 			    },
-			    "legend": "向输出添加图例",
-                "title": "试_Title___验",
-                "titlePrompt": "试_Add custom title______验"
+			    "legend": "在輸出新增圖例",
+                "title": "試_Title___驗",
+                "titlePrompt": "試_Add custom title______驗"
             },
 			"share": {
-				"extent": "使用当前地图范围",
-				"label": "共享此地图",
-				"link": "地图链接",
+				"extent": "使用目前地圖範圍",
+				"label": "共用此地圖",
+				"link": "地圖連結",
 				"facebook": "Facebook",
 				"twitter": "Twitter"
 			}
         },
         "tooltips":{
-        	"home": "默认范围",
-        	"locate": "查找我的位置",
-        	"legend": "图例",
-        	"bookmarks": "书签",
-        	"layers": "图层",
-        	"basemap": "底图库",
-        	"overview": "鹰眼图",
-        	"measure": "测量",
-        	"edit": "编辑",
-        	"time": "时间",
-        	"print": "打印",
-        	"details": "详细信息",
-        	"share": "共享"
+        	"home": "預設範圍",
+        	"locate": "查詢我的位置",
+        	"legend": "圖例",
+        	"bookmarks": "書簽",
+        	"layers": "圖層",
+        	"basemap": "底圖庫",
+        	"overview": "鷹眼圖",
+        	"measure": "測量",
+        	"edit": "編輯",
+        	"time": "時間",
+        	"print": "列印",
+        	"details": "詳細資訊",
+        	"share": "共用"
         }
     })
 );

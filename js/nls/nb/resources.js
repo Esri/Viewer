@@ -34,8 +34,10 @@ define(
 			      "label3": 'Liggende',
 			      "label4": 'Stående'
 			    },
-			    "legend": "Legg til kartforklaring i resultatet"
-			},
+			    "legend": "Legg til kartforklaring i resultatet",
+                "title": "å_Title___ø",
+                "titlePrompt": "å_Add custom title______ø"
+            },
 			"share": {
 				"extent": "Bruk gjeldende kartutstrekning",
 				"label": "Del dette kartet",

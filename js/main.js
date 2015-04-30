@@ -50,7 +50,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                             ];
                         } else if (extArray.length === 5) {
                             this.initExt = new Extent(JSON.parse(this.config.extent));
-
                         }
                     }
                     this._createWebMap(itemInfo);
@@ -447,6 +446,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     legend.startup();
                     if (this.config.activeTool !== "") {
                         toolbar.activateTool(this.config.activeTool || "legend");
+                    }else{
+                        toolbar._closePage();
                     }
                     deferred.resolve(true);
 
@@ -542,6 +543,9 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
 
             require(["application/has-config!print?esri/dijit/Print"], lang.hitch(this, function (Print) {
+                //TODO Update this to have custom title text if specified by user. 
+                //Add a new item to the print dialog that allows people to set this. 
+                //By default it should show the web map text.
                 var layoutOptions = {
                     "titleText": this.config.title,
                     "scalebarUnit": this.config.units,
@@ -567,8 +571,17 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 if (this.config.hasOwnProperty("tool_print_format")) {
                     this.format = this.config.tool_print_format.toLowerCase();
                 }
+                //add text box for title to print dialog
+                var titleNode = domConstruct.create("input",{
+                    id:"print_title",
+                    className: "printTitle",
+                    placeholder: this.config.i18n.tools.print.titlePrompt
+                },domConstruct.create("div"));
+
+                domConstruct.place(titleNode, printDiv);
 
 
+    
                 if (has("print-legend")) {
                     legendNode = domConstruct.create("input", {
                         id: "legend_ck",
@@ -616,6 +629,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
 
                     }));
+                }else{
+                    domStyle.set("pageBody_print","height","90px");
                 }
 
                 require(["application/has-config!print-layouts?esri/request", "application/has-config!print-layouts?esri/tasks/PrintTemplate"], lang.hitch(this, function (esriRequest, PrintTemplate) {
@@ -655,6 +670,15 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                             url: this.config.helperServices.printTask.url
                         }, domConstruct.create("div"));
                         domConstruct.place(print.printDomNode, printDiv, "first");
+
+                        print.on("print-start", lang.hitch(this,function(){
+                         var printBox = dom.byId("print_title");
+                         if(printBox.value){
+                            array.forEach(print.templates, lang.hitch(this, function(template){
+                                template.layoutOptions.titleText = printBox.value;
+                            }));
+                         }
+                        }));
 
                         print.startup();
 
@@ -706,6 +730,14 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                             templates: templates,
                             url: this.config.helperServices.printTask.url
                         }, domConstruct.create("div"));
+                        print.on("print-start", lang.hitch(this,function(){
+                         var printBox = dom.byId("print_title");
+                         if(printBox.value){
+                            array.forEach(print.templates, lang.hitch(this, function(template){
+                                template.layoutOptions.titleText = printBox.value;
+                            }));
+                         }
+                        }));
                         domConstruct.place(print.printDomNode, printDiv, "first");
 
                         print.startup();
@@ -864,7 +896,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                             geocoder.locator = new Locator(geocoder.url);
 
                             geocoder.singleLineFieldName = "SingleLine";
-
+                            geocoder.placeholder = "Select a location";
                             geocoder.name = geocoder.name || "Esri World Geocoder";
 
                             if (this.config.searchExtent) {
@@ -967,18 +999,71 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                         }
                     });
 
-
                     if (activeIndex > 0) {
                         search.set("activeSourceIndex", activeIndex);
                     }
                 }
-
 
                 if (search && search.domNode) {
                     domConstruct.place(search.domNode, "panelGeocoder");
                 }
 
             }));
+
+
+            //Feature Search or find (if no search widget)
+            if((this.config.find || this.config.feature)){
+                require(["esri/dijit/Search"], lang.hitch(this, function(Search){
+                    //get the search value
+                    var feature = null, find = null, source = null, value = null;
+                    if(this.config.feature){
+                       feature = decodeURIComponent(this.config.feature);
+                        if(feature){
+                          var splitFeature = feature.split(";");
+                          if(splitFeature.length && splitFeature.length !== 3){
+                            splitFeature = feature.split(",");
+                          }
+                          feature = splitFeature;
+                          if(feature && feature.length && feature.length === 3){
+                             var layerId = feature[0],attribute = feature[1], featureId = feature[2],searchLayer = null;
+                             searchLayer = this.map.getLayer(layerId);
+                             if(searchLayer){
+                                source = {
+                                    exactMatch: true,
+                                    outFields: ["*"],
+                                    featureLayer: searchLayer,
+                                    displayField: attribute,
+                                    searchFields: [attribute] 
+                                };
+                                value = featureId;
+                             }
+    
+                          }
+                        }         
+                    }
+                    if(this.config.find){
+                        value = decodeURIComponent(this.config.find);
+                    }
+                    var urlSearch = new Search({
+                        map: this.map
+                    });
+                    urlSearch.sources;
+       
+                    if(source){
+                        urlSearch.set("sources", [source]);
+                    }
+                    urlSearch.on("load", lang.hitch(this, function(){
+                        urlSearch.search(value).then(lang.hitch(this, function(){
+                            on.once(this.map.infoWindow, "hide", lang.hitch(this, function(){
+                                urlSearch.clear();
+                                urlSearch.destroy();
+                            }));
+                        }));
+                    }));
+                    urlSearch.startup();
+        
+                }));
+            }
 
             //create the tools
             this._createUI();
@@ -1076,33 +1161,33 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 //Set the application title
                 this.map = response.map;
                 //Set the title - use the config value if provided.
-                //var title = (this.config.title === null) ? response.itemInfo.item.title : this.config.title;
                 var title;
                 if (this.config.title === null || this.config.title === "") {
                     title = response.itemInfo.item.title;
                 } else {
                     title = this.config.title;
                 }
-
-                //if title is short make title area smaller
-                if (title && title.length && title.length === 0) {
-                    domClass.add("panelTop", "smallerTitle");
-                } else if (title && title.length && title.length <= 20 && !this.config.logo) {
-                    domClass.add("panelTop", "smallerTitle");
-                }
-
-
+                
                 this.config.title = title;
                 document.title = title;
-                dom.byId("panelText").innerHTML = title;
+                dom.byId("title").innerHTML = title;
+
+                //Set subtitle if provided 
+                if(this.config.subtitle){
+                    dom.byId("subtitle").innerHTML = this.config.subtitle;
+                }else{
+                    domClass.add("title","nosubtitle" )
+                }
                 this.config.response = response;
                 window.config = this.config;
 
                 if (this.initExt !== null) {
                     this.map.setExtent(this.initExt);
+                }else{
+                   this.initExt = this.map.extent;
+                  // on.once(this.map, "extent-change", lang.hitch(this, this._checkExtent));
                 }
-                this.initExt = this.map.extent;
-                on.once(this.map, "extent-change", lang.hitch(this, this._checkExtent));
+
 
                 this._createMapUI();
                 // make sure map is loaded

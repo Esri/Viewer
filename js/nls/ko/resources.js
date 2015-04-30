@@ -34,8 +34,10 @@ define(
 			      "label3": '가로',
 			      "label4": '세로'
 			    },
-			    "legend": "출력에 범례 추가"
-			},
+			    "legend": "출력에 범례 추가",
+                "title": "한_Title___빠",
+                "titlePrompt": "한_Add custom title______빠"
+            },
 			"share": {
 				"extent": "현재 맵 범위 사용",
 				"label": "이 맵 공유",

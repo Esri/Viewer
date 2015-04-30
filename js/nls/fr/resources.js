@@ -34,8 +34,10 @@ define(
 			      "label3": 'Paysage',
 			      "label4": 'Portrait'
 			    },
-			    "legend": "Ajouter la légende à la sortie"
-			},
+			    "legend": "Ajouter la légende à la sortie",
+                "title": "æ_Title___Â",
+                "titlePrompt": "æ_Add custom title______Â"
+            },
 			"share": {
 				"extent": "Utiliser l’étendue courante de la carte",
 				"label": "Partager cette carte",

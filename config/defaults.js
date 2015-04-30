@@ -18,7 +18,7 @@
 define({
     //Default configuration settings for the application. This is where you'll define things like a bing maps key,
     //default web map, default app color theme and more. These values can be overwritten by template configuration settings and url parameters.
-    "appid": "",
+    "appid": "",//"73909e939be34d2b931f0765ba3bf4a6",
     "webmap": "f5b13dbed07c46cdb783cf361833aa6b",
     "oauthappid": null, //"AFTKRmv16wj14N3z",
     //Group templates must support a group url parameter. This will contain the id of the group.
@@ -33,6 +33,8 @@ define({
     //from the javascript/nls/resource files.
     //Note that we've included a placeholder nls folder and a resource file with one error string
     //to show how to setup the strings file.
+    "find": null,
+    "feature": null,
     "localize": true,
     "units": null,
     //Theme defines the background color of the title area and tool dialog
@@ -77,9 +79,11 @@ define({
     "scalebar": false,
     //Specify a title for the application. If not provided the web map title is used.
     "title": "",
+    //Optionally specify some sub title text. 
+    "subtitle":null,
     "level": null,
     "center": null,
     //Replace these with your own bitly key
-    "bitlyLogin": "",
-    "bitlyKey": ""
+    "bitlyLogin": "esrimarketing",
+    "bitlyKey": "R_52f84981da0e75b23aea2b3b20cbafbc"
 });

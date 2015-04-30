@@ -14,6 +14,13 @@
                "tooltip":"Defaults to web map title"
             },
             {  
+               "placeHolder":"Optional subtitle text",
+               "label":"SubTitle:",
+               "fieldName":"subtitle",
+               "type":"string",
+               "tooltip":"Optional subtitle text"
+            },
+            {  
                "label":"Title logo:",
                "fieldName":"logo",
                "type":"string",
