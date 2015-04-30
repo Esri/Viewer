@@ -1286,7 +1286,6 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .searchInput:focus,
 .searchBtn:focus, .searchClear:focus,
 .panelTool:focus,
-.pageClose:focus, .pageUp:focus, .pageDown:focus,
 .toc-title-container:focus,
 .esriBookmarkItem:focus,
 .searchMenu ul li:focus, .sourcesMenu ul li:focus,
@@ -1378,8 +1377,17 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .esriMeasurement .esriButtonChecked .dijitButtonNode,
 .esriBasemapGallerySelectedNode 
 {
-    background: rgba(0, 102, 153, 0.8);
-    border-radius: 5px;
-    -webkit-border-radius: 5px;
+  background: rgba(0, 102, 153, 0.8);
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
 }
 
+.pageClose, .pageUp, .pageDown {
+  opacity: 0.2;
+}
+
+.pageClose:hover, .pageUp:hover, .pageDown:hover,
+.pageClose:focus, .pageUp:focus, .pageDown:focus {
+  opacity: 1;
+  outline-style: none;
+}
