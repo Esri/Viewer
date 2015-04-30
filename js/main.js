@@ -465,27 +465,11 @@ return deferred.promise;
             var deferred = new Deferred();
             var layers = arcgisUtils.getLegendLayers(this.config.response);
 
-
             if (layers.length === 0) {
                 deferred.resolve(false);
             } else {
                 if (has("legend")) {
-                    var legendLength = 0;
-                    array.forEach(layers, lang.hitch(this, function (layer) {
-                        if (layer.infos && layer.infos.length) {
-                            legendLength += layer.infos.length;
-                        }
-                    }));
-
-                    if (legendLength.length < 5) {
-                        panelClass = "small";
-                    } else if (legendLength.length < 15) {
-                        panelClass = "medium";
-                    } else {
-                        panelClass = "large";
-                    }
-
-                    var legendDiv = toolbar.createTool(tool, panelClass);
+                    var legendDiv = toolbar.createTool(tool, "large");
                     var legend = new Legend({
                         map: this.map,
                         layerInfos: layers

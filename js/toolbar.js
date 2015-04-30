@@ -205,7 +205,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                     className: "pageClose",
                     tabIndex:0,
                     //'data-title':'Close',
-                    innerHTML:"<img src='images/close.png' alt='Close' width=24 height=24/>"
+                    innerHTML:"<img src='images/close.png' alt='Close'/>"
                 }, "pageHeader_" + name);
                 on(pageClose, "click", lang.hitch(this, this._closePage));
                 this._atachEnterKey(pageClose, pageClose);
@@ -214,7 +214,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                     className: "pageUp",
                     tabIndex:0,
                     //'data-title':'Previous',
-                    innerHTML:"<img src='images/up.png' alt='Previous Page' width=24 height=24/>"
+                    innerHTML:"<img src='images/up.png' alt='Previous Page'/>"
                 }, "pageHeader_" + name);
                 on(pageUp, "click", lang.hitch(this, this._showPreviousPage, name));
                 this._atachEnterKey(pageUp, pageUp);
@@ -224,7 +224,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                         className: "pageDown",
                         tabIndex:0,
                         //'data-title':'Next',
-                        innerHTML:"<img src='images/down.png' alt='Next Page' width=24 height=24/>"
+                        innerHTML:"<img src='images/down.png' alt='Next Page'/>"
                     }, "pageHeader_" + name);
                     on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
                     this._atachEnterKey(pageDown, pageDown);
