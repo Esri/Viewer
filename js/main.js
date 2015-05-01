@@ -126,6 +126,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
             dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', minusImg.alt);
             this._atachEnterKey(esriSimpleSliderDecrementNode, esriSimpleSliderDecrementNode);
+
+            buttons = query(".titleButton");
         },
 
         // Create UI
@@ -479,6 +481,13 @@ return deferred.promise;
                     if (this.config.activeTool !== "") {
                         toolbar.activateTool(this.config.activeTool || "legend");
                     }
+
+                    var LegendServiceLabel = legend.domNode.querySelector(".esriLegendServiceLabel");
+                    var h3 = domConstruct.create("h3",{
+                        className : LegendServiceLabel.className,
+                        innerHTML : LegendServiceLabel.innerHTML
+                    });
+                    LegendServiceLabel.parentNode.replaceChild(h3, LegendServiceLabel);
                     deferred.resolve(true);
 
                 } else {

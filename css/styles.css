@@ -610,13 +610,20 @@ img {
 .pageTitle {
   position: absolute;
   left: 80px;
-  top: 30px;
+  top: 25px;
   width: auto;
   height: 20px;
   font-size: 14px;
   color: #ffffff;
-  line-height: 20px;
+  --line-height: 20px;
   overflow: hidden; }
+
+.esriLegendServiceLabel {
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
 
 .pageHeaderImg {
   position: absolute;
@@ -783,7 +790,7 @@ img {
   white-space: nowrap;
   margin-left: 5px;
   height: 50px;
-  line-height: 50px;
+  --line-height: 50px;
   display: none;
   font-size: 0.9em; }
 

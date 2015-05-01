@@ -175,7 +175,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             //cell1);
             pageContent);
 
-            domConstruct.create("div", {
+            domConstruct.create("h2", {
                 className: "pageTitle fc",
                 innerHTML: this.config.i18n.tooltips[name] || name
             }, pageHeader);
