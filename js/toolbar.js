@@ -204,10 +204,11 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 var pageClose = domConstruct.create("div", {
                     className: "pageClose",
                     tabIndex:0,
+                    //accesskey: 'x',
                     //'data-title':'Close',
                     innerHTML:"<img src='images/close.png' alt='Close'/>"
                 }, "pageHeader_" + name);
-                on(pageClose, "click", lang.hitch(this, this._closePage));
+                on(pageClose, "click", lang.hitch(this, this._closePage, name));
                 this._atachEnterKey(pageClose, pageClose);
 
                 var pageUp = domConstruct.create("div", {
@@ -229,26 +230,35 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                     on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
                     this._atachEnterKey(pageDown, pageDown);
                 }
-/*
-                pageContent = dom.byId("pageContent_" + name);
-                domAttr.set(pageContent, 'tabIndex', 0);
+
+                var pageContent = dom.byId("pageContent_" + name);
                 domAttr.set(pageContent, 'data-name', name);
                 on(pageContent, 'keyup', lang.hitch(this, function(event) {
+                    var name = domAttr.get(event.currentTarget, 'data-name');
+                    var pageHeader = dom.byId("pageHeader_" + name);
                     switch (event.keyCode) {
+                        case 27:
+                            var pageClose = pageHeader.querySelector(".pageClose");
+                            if(pageClose)
+                                pageClose.click();
+                        break;
                         case 33: // PgUp
-                            this._showPreviousPage(domAttr.get(event.currentTarget, 'data-name'));
+                            var pageUp = pageHeader.querySelector(".pageUp");
+                            if(pageUp)
+                                pageUp.click();
                             break;
                         case 34: // PgDn
+                            var pageDown = pageHeader.querySelector(".pageDown");
                             if(pageDown)
-                                this._showNextPage(domAttr.get(event.currentTarget, 'data-name'));
+                                pageDown.click();
                             break;
                         //case 35: // End
                         //    break;
                         //case 36: // Home
                         //    break;
-                    }
+                    };
                 }));
-*/
+/**/
             }
         },
 
@@ -291,6 +301,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             }
             return 0;
         },
+
         _showPage: function (name) {
             var num = this._getPageNum(name) + 1;
 
@@ -311,8 +322,11 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             this._scrollToPage(num);
         },
 
-        _closePage: function () {
+        _closePage: function (name) {
             this._scrollToPage(0);
+            var tool = dom.byId("panelTool_" + name);
+            if(tool)
+                tool.focus();
         },
 
         _scrollToPage: function (num) {
@@ -332,6 +346,22 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             }
             this.curTool = num;
             this._updateTool(num);
+
+            var name = this.tools[num - 1];
+            var pageBody = dom.byId("pageBody_" + name);
+            if(pageBody) 
+            {
+                var focusable = pageBody.querySelector("[tabindex]");
+                if(focusable)
+                {
+                    focusable.focus();
+                } else {
+                    var pageHeader = dom.byId("pageHeader_" + name);
+                    var pageClose = pageHeader.querySelector(".pageClose");
+                    if(pageClose)
+                        pageClose.focus();
+                }
+            }
         },
 
         // window scrolled

@@ -850,7 +850,7 @@ return deferred.promise;
                 home.startup();
 
                 homeButton = dojo.query(".homeContainer")[0];
-                dojo.setAttr(homeButton, 'tabindex', 0);
+                dojo.setAttr(homeButton, 'tabindex', 0); 
 
                 homeNode = dojo.query(".home")[0];
                 dojo.empty(homeNode);
