@@ -106,7 +106,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             dojo.empty(esriSimpleSliderIncrementNode);
             dojo.setAttr(esriSimpleSliderIncrementNode, 'tabindex', 0);
             plusImg = domConstruct.create("img", {
-              'src': 'images/icons_white/plus.png',
+              'src': 'images/icons_' + this.config.icons + '/plus.png',
               alt: 'Zoom In',
               height:14,
               width:14
@@ -119,7 +119,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             dojo.empty(esriSimpleSliderDecrementNode);
             dojo.setAttr(esriSimpleSliderDecrementNode, 'tabindex', 0);
             minusImg = domConstruct.create("img", {
-              'src': 'images/icons_white/minus.png',
+              'src': 'images/icons_' + this.config.icons + '/minus.png',
               alt: 'Zoom Out',
               height:14,
               width:14
@@ -857,7 +857,7 @@ return deferred.promise;
                 dojo.setAttr(homeNode, 'style','display:table-cell; vertical-align:middle; text-align:center;');
                 
                 domConstruct.create("img", {
-                    'src': 'images/icons_white/home.png',
+                    'src': 'images/icons_' + this.config.icons + '/home.png',
                     alt: dojo.attr(homeNode, 'title'),
                     height:14,
                     width:14
@@ -906,7 +906,7 @@ return deferred.promise;
                 dojo.setAttr(zoomLocateButton, 'style','display:table-cell; vertical-align:middle; text-align:center;');
 
                 domConstruct.create("img", {
-                  'src': 'images/icons_white/locate.png',
+                  'src': 'images/icons_' + this.config.icons + '/locate.png',
                   alt: dojo.attr(zoomLocateButton, 'title'),
                   height:14,
                   width:14
