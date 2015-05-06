@@ -253,6 +253,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/kernel", "dojo/_base/a
       });
       return deferred.promise;
     },
+
     _getLocalization: function () {
       var deferred, dirNode, classes, rtlClasses;
       deferred = new Deferred();

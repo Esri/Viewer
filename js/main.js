@@ -71,6 +71,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             // strings here and comment out the call in index.html to get the localization strings.
             // set message
             var node = dom.byId("loading_message");
+
             if (node) {
                 if (this.config && this.config.i18n) {
                     node.innerHTML = this.config.i18n.map.error + ": " + error.message;
@@ -126,8 +127,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
             dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', minusImg.alt);
             this._atachEnterKey(esriSimpleSliderDecrementNode, esriSimpleSliderDecrementNode);
-
-            buttons = query(".titleButton");
         },
 
         // Create UI
@@ -634,7 +633,6 @@ return deferred.promise;
                     }, domConstruct.create("div", {
                         "class": "checkbox"
                     }));
-
                     var labelNode = domConstruct.create("label", {
                         "for": "legend_ck",
                         "className": "checkbox",
@@ -1190,9 +1188,9 @@ return deferred.promise;
                 //var title = (this.config.title === null) ? response.itemInfo.item.title : this.config.title;
                 var title;
                 if (this.config.title === null || this.config.title === "") {
-                    title = response.itemInfo.item.title;
+                    title = response.itemInfo.item.title + " - WCAG Viewer";
                 } else {
-                    title = this.config.title;
+                    title = this.config.title+': '+response.itemInfo.item.title + " - WCAG Viewer";
                 }
 
                 //if title is short make title area smaller
@@ -1203,9 +1201,14 @@ return deferred.promise;
                 }
 
 
-                this.config.title = title;
                 document.title = title;
-                dom.byId("panelText").innerHTML = title;
+                if (this.config.title === null || this.config.title === "") {
+                    dom.byId("panelText").innerHTML = response.itemInfo.item.title; //title;
+                }
+                else {
+                    dom.byId("panelText").innerHTML = this.config.title;
+                }
+                this.config.title = title;
                 this.config.response = response;
                 window.config = this.config;
 
