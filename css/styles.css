@@ -857,13 +857,13 @@ img {
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/
 .no-touch .panelTool:hover {
   background-color: transparent;
-  background-color: rgba(0, 153,0, 0.6);
+  background-color: rgba(0, 0, 0, 0.3);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#E6666666,endColorstr=#E6666666);
 }
 
 .panelToolActive {
   background-color: transparent;
-  background-color: rgba(0, 102, 153, 0.8);
+  background-color: rgba(0, 0, 0, 0.7);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000) !important;
 }
 
@@ -1310,7 +1310,7 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 }
 
 .searchBtn:focus, .searchClear:focus {
-  background-color: #009999 !important;
+  background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
 .HomeButton:focus, .LocateButton:focus,
@@ -1360,7 +1360,7 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
 .share-dialog-icon:hover, .esriBasemapGalleryNode:hover
 {
-  background-color: rgba(0, 153,0, 0.6) !important;
+  background-color: rgba(0, 0, 0, 0.3) !important;
   border-radius: 5px;
   -webkit-border-radius: 5px;  
 }
@@ -1384,7 +1384,7 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .esriMeasurement .esriButtonChecked .dijitButtonNode,
 .esriBasemapGallerySelectedNode 
 {
-  background: rgba(0, 102, 153, 0.8);
+  background: rgba(0, 0, 0, 0.5);
   border-radius: 5px;
   -webkit-border-radius: 5px;
 }
