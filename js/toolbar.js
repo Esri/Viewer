@@ -204,12 +204,12 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 var pageClose = domConstruct.create("div", {
                     className: "pageClose",
                     tabIndex:0,
-                    //accesskey: 'x',
-                    //'data-title':'Close',
+                    style: 'overflow: visible;',
+                    'data-title':'Close',
                     innerHTML:"<img src='images/close.png' alt='Close'/>"
                 }, "pageHeader_" + name);
                 on(pageClose, "click", lang.hitch(this, this._closePage, name));
-                this._atachEnterKey(pageClose, pageClose);
+                //this._atachEnterKey(pageClose, pageClose);
 
                 var pageUp = domConstruct.create("div", {
                     className: "pageUp",
