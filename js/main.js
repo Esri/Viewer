@@ -14,8 +14,42 @@
  | limitations under the License.
  */
 
-define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", "application/has-config", "esri/arcgis/utils", "esri/lang", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/Legend", "esri/dijit/BasemapGallery", "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog"], function (
-    ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, domConstruct, domStyle, on, Deferred, all, query, registry, Menu, CheckedMenuItem, Toolbar, has, arcgisUtils, esriLang, HomeButton, LocateButton, Legend, BasemapGallery, Measurement, OverviewMap, Extent, FeatureLayer, TableOfContents, ShareDialog) {
+define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", "application/has-config", "esri/arcgis/utils", "esri/lang", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/Legend", "esri/dijit/BasemapGallery", "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog",
+    "esri/dijit/InfoWindow"], function (
+    ready, 
+    JSON, 
+    array, 
+    Color, 
+    declare, 
+    lang, 
+    dom, 
+    domGeometry, 
+    domAttr, 
+    domClass, 
+    domConstruct, 
+    domStyle, 
+    on, 
+    Deferred, 
+    all, 
+    query, 
+    registry, 
+    Menu, 
+    CheckedMenuItem, 
+    Toolbar, 
+    has, 
+    arcgisUtils, 
+    esriLang, 
+    HomeButton, 
+    LocateButton, 
+    Legend, 
+    BasemapGallery, 
+    Measurement, 
+    OverviewMap, 
+    Extent, 
+    FeatureLayer, 
+    TableOfContents, 
+    ShareDialog,
+    InfoWindow) {
 
 
     return declare(null, {
@@ -127,6 +161,24 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
             dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', minusImg.alt);
             this._atachEnterKey(esriSimpleSliderDecrementNode, esriSimpleSliderDecrementNode);
+
+            on(this.map.infoWindow, "show", lang.hitch(this, function() {
+                this._clearAltOnImgs(this.map.infoWindow.domNode);
+            }));
+
+            on(this.map.infoWindow, "selection-change", lang.hitch(this, function() {
+                this._clearAltOnImgs(this.map.infoWindow.domNode);
+            }));
+        },
+
+        _clearAltOnImgs : function (node) {
+            images = node.querySelectorAll('img');
+            for (var i = 0; i<images.length; i++) {
+                if(!dojo.getAttr(images[i], 'alt'))
+                {
+                    dojo.setAttr(images[i], 'alt', '');
+                } 
+            };
         },
 
         // Create UI
