@@ -124,12 +124,12 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                     domAttr.set(pTool, "title","");
                 });
                 on(pTool, mouse.leave, function(){
-                  domAttr.set(pTool, "title", tip);
+                    domAttr.set(pTool, "title", tip);
                 });            
                 
                 on(pTool, 'keydown', lang.hitch(pTool, function(event){
-                  if(event.keyCode=='13')
-                    this.click();
+                    if(event.keyCode=='13')
+                        this.click();
                 }));
             }
 
@@ -152,27 +152,11 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 className: "pageContent rounded shadow",
                 id: "pageContent_" + name
             }, page);
-            //domClass.add(pageContent, panelClass);
 
-            /*
-            var pageTable = domConstruct.create("table", {
-                className: "pageTable",
-                id: "pageTable_" + name,
-                width: "100%",
-                style: "border-collapse: collapse; border-spacing:0;"
-            }, pageContent);
-
-            var row1 = domConstruct.create("tr", { id:"headerRow" }, pageTable);
-            var cell1 = domConstruct.create("td", { id:"headerCell" }, row1);
-
-            var row2 = domConstruct.create("tr", { id:"contentRow" }, pageTable);
-            var cell2 = domConstruct.create("td", { id:"contentCell" }, row2);
-*/
             var pageHeader = domConstruct.create("div", {
                 id: "pageHeader_" + name,
                 className: "pageHeader bg roundedTop"
             }, 
-            //cell1);
             pageContent);
 
             domConstruct.create("h2", {
@@ -190,7 +174,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 className: "pageBody",
                 id: "pageBody_" + name
             }, 
-            //cell2);
             pageContent);
             domClass.add(pageBody, panelClass);
 
@@ -204,12 +187,11 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 var pageClose = domConstruct.create("div", {
                     className: "pageClose",
                     tabIndex:0,
-                    style: 'overflow: visible;',
-                    'data-title':'Close',
+                    //'data-title':'Close',
                     innerHTML:"<img src='images/close.png' alt='Close'/>"
                 }, "pageHeader_" + name);
                 on(pageClose, "click", lang.hitch(this, this._closePage, name));
-                //this._atachEnterKey(pageClose, pageClose);
+                this._atachEnterKey(pageClose, pageClose);
 
                 var pageUp = domConstruct.create("div", {
                     className: "pageUp",
@@ -233,7 +215,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
                 var pageContent = dom.byId("pageContent_" + name);
                 domAttr.set(pageContent, 'data-name', name);
-                on(pageContent, 'keyup', lang.hitch(this, function(event) {
+                on(pageContent, 'keydown', lang.hitch(this, function(event) {
                     var name = domAttr.get(event.currentTarget, 'data-name');
                     var pageHeader = dom.byId("pageHeader_" + name);
                     switch (event.keyCode) {
@@ -245,20 +227,19 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                         case 33: // PgUp
                             var pageUp = pageHeader.querySelector(".pageUp");
                             if(pageUp)
+                                event.stopPropagation();
                                 pageUp.click();
                             break;
                         case 34: // PgDn
                             var pageDown = pageHeader.querySelector(".pageDown");
                             if(pageDown)
+                                event.stopPropagation();
                                 pageDown.click();
                             break;
-                        //case 35: // End
-                        //    break;
                         //case 36: // Home
-                        //    break;
+                        //case 35: // End
                     };
                 }));
-/**/
             }
         },
 
@@ -287,7 +268,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         },
 
         _atachEnterKey: function(onButton, clickButton) {
-            on(onButton, 'keyup', lang.hitch(clickButton, function(event){
+            on(onButton, 'keydown', lang.hitch(clickButton, function(event){
             if(event.keyCode=='13')
                 this.click();
             }));
