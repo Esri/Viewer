@@ -771,16 +771,19 @@ img {
   display: block; }
 
 #panelLogo {
-  width: 50px;
+  --width: 50px;
   height: 50px;
   overflow: hidden;
   float: left;
   line-height: 50px;
-  margin-left: 5px; }
+  margin-left: 5px; 
+  padding-top: 7px;
+}
 
 #panelLogo img {
-  max-width: 50px;
-  max-height: 50px; }
+  max-width: 32px;
+  max-height: 32px; 
+}
 
 #panelText {
   float: left;

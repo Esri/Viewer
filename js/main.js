@@ -1229,7 +1229,7 @@ return deferred.promise;
                 if (this.config.logo) {
                     domConstruct.create("div", {
                         id: "panelLogo",
-                        innerHTML: "<img id='logo' src=" + this.config.logo + "></>"
+                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt=''></>"
                     }, dom.byId("panelTitle"), "first");
                     domClass.add("panelTop", "largerTitle");
                 }
