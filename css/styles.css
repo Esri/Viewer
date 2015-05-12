@@ -422,8 +422,7 @@ input[type=checkbox].checkbox {
 }
 
 .esriBookmarkHighlight {
-  background-color: transparent;
-  background-color: rgba(0, 153,0, 0.6);
+  background-color: rgba(0, 0, 0, 0.3) !important;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000,endColorstr=#33000000);
@@ -455,13 +454,10 @@ input[type=checkbox].checkbox {
   background-size: 14px 14px;
   background-image: none; }
 
-.no-touch .HomeButton .home:hover, .LocateButton .zoomLocateButton:hover {
-  background-color: none !important; }
-
 .scalebar_bottom-left {
   left: 25px;
-  bottom: 40px; }
-
+  bottom: 40px; 
+}
 
 .LocateButton .zoomLocateButton {
   padding: 0;
@@ -910,7 +906,7 @@ img {
 
 .no-touch .dijitMenuItem:hover {
   background-color: transparent;
-  background-color: rgba(93, 173, 221, 0.4);
+  background-color: rgba(0, 0, 0, 0.8);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#665DADDD,endColorstr=#665DADDD);
   zoom: 1; }
 
