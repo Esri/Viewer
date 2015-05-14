@@ -70,7 +70,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 this.config = config;
                 this.color = this.setColor(this.config.color, 0.9);
                 this.hoverColor = typeof(this.config.hoverColor)=='undefined' ? this.setColor('#000000', 0.4) : this.setColor(this.config.hoverColor, 0.9);
-                this.focusColor = this.setColor(typeof(this.config.focusColor)=='undefined' ? '#000000' : this.config.focusColor, 0.9);
+                this.focusColor = typeof(this.config.focusColor)=='undefined' ? this.setColor('#1f1f1f', 0.4) : this.setColor(this.config.focusColor, 0.9);
                 this.activeColor = this.setColor(typeof(this.config.activeColor)=='undefined' ? '#0f0f0f' : this.config.activeColor, 0.9);
                 this.theme = this.setColor(this.config.theme);
                 // document ready
@@ -1186,7 +1186,10 @@ return deferred.promise;
                         if(rule.selectorText.indexOf(':hover') > 0) {
                             rule.style['backgroundColor'] = this.hoverColor;
                         }
-
+                        //focus
+                        if(rule.selectorText.indexOf(':focus') > 0) {
+                            rule.style['outlineColor'] = this.focusColor;
+                        }
                     }
                 }
             }

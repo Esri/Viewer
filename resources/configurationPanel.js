@@ -46,6 +46,12 @@
                "label":"Hover Color:"
             },
             {  
+               "type":"color",
+               "fieldName":"focusColor",
+               "tooltip":"Focus border color",
+               "label":"Focus Color:"
+            },
+            {  
                "type":"string",
                "fieldName":"icons",
                "tooltip":"Icon color",

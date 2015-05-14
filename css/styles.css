@@ -1415,3 +1415,12 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
   color: #a8a8a8; 
 }
+
+.arcgisSearch .searchBtn:focus, .arcgisSearch .searchClear:focus,
+input[type='checkbox']:focus {
+  outline-style: none;
+}
+
+#dijit_form_ComboButton_0 {
+  margin: 0;
+}
