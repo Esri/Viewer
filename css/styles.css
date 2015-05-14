@@ -852,12 +852,6 @@ img {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#E6666666,endColorstr=#E6666666);
 }
 
-.panelToolActive {
-  background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.7);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000) !important;
-}
-
 .tool {
   margin: 1px;
   width: 24px;
@@ -1387,7 +1381,7 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
 .esriMeasurement .esriButtonChecked .dijitButtonNode,
 .esriBasemapGallerySelectedNode 
 {
-  background: rgba(0, 0, 0, 0.5);
+  background: transparent;
   border-radius: 5px;
   -webkit-border-radius: 5px;
 }
@@ -1423,4 +1417,8 @@ input[type='checkbox']:focus {
 
 #dijit_form_ComboButton_0 {
   margin: 0;
+}
+
+.esriBasemapGallerySelectedNode a {
+  color:white;
 }

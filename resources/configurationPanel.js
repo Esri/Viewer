@@ -52,6 +52,12 @@
                "label":"Focus Color:"
             },
             {  
+               "type":"color",
+               "fieldName":"activeColor",
+               "tooltip":"Selection color",
+               "label":"Active Color:"
+            },
+            {  
                "type":"string",
                "fieldName":"icons",
                "tooltip":"Icon color",

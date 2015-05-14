@@ -71,7 +71,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 this.color = this.setColor(this.config.color, 0.9);
                 this.hoverColor = typeof(this.config.hoverColor)=='undefined' ? this.setColor('#000000', 0.4) : this.setColor(this.config.hoverColor, 0.9);
                 this.focusColor = typeof(this.config.focusColor)=='undefined' ? this.setColor('#1f1f1f', 0.4) : this.setColor(this.config.focusColor, 0.9);
-                this.activeColor = this.setColor(typeof(this.config.activeColor)=='undefined' ? '#0f0f0f' : this.config.activeColor, 0.9);
+                this.activeColor = typeof(this.config.activeColor)=='undefined' ? this.focusColor : this.setColor(this.config.activeColor, 0.9);
                 this.theme = this.setColor(this.config.theme);
                 // document ready
                 ready(lang.hitch(this, function () {
@@ -1183,12 +1183,16 @@ return deferred.promise;
                     rule = styleCss.cssRules[i];
                     if(typeof(rule.selectorText)!='undefined' && rule.selectorText!=null) {
                         //hover
-                        if(rule.selectorText.indexOf(':hover') > 0) {
+                        if(rule.selectorText.indexOf(':hover') >= 0) {
                             rule.style['backgroundColor'] = this.hoverColor;
                         }
                         //focus
-                        if(rule.selectorText.indexOf(':focus') > 0) {
+                        if(rule.selectorText.indexOf(':focus') >= 0) {
                             rule.style['outlineColor'] = this.focusColor;
+                        }
+                        //active
+                        if(rule.selectorText.indexOf('.activeMarker') >= 0) {
+                            rule.style['backgroundColor'] = this.activeColor;
                         }
                     }
                 }

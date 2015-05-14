@@ -1,6 +1,6 @@
 li[role='menuitem']:hover, 
 div[role='button']:not(.searchBtn):not(.searchClear):hover,
-div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchBtn):not(.searchClear):hover,
+div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchClear):hover,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
 #dijit_form_ComboButton_0_arrow:hover,
 .panelToolActive:hover
@@ -15,18 +15,16 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):no
 
 li[role='menuitem']:focus, 
 div[role='button']:not(.searchBtn):not(.searchClear):focus,
-div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchBtn):not(.searchClear):focus,
+div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchClear):focus,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:focus,
 input[type='text']:focus,
 textarea:focus,
 select[tabindex='0']:not(#embedMapSizeDropDown):focus,
-#dijit_form_ComboButton_0_arrow:focus,
-.panelToolActive:hover
+#dijit_form_ComboButton_0_arrow:focus
 {
     outline-width: 2px;
     outline-style: solid;
     outline-color: rgba(0, 0, 0, 0.9);
-    color: white;
     border-bottom: 0;
 }
 
@@ -38,5 +36,12 @@ select[tabindex='0']:not(#embedMapSizeDropDown):focus,
 
 .arcgisSearch .searchMenu li:hover, .arcgisSearch .searchMenu li:focus {
   background-color: rgba(0, 0, 0, 0.3);
+}
+
+.activeMarker,
+.panelToolActive, 
+.esriBasemapGallerySelectedNode {
+  background-color: rgba(0, 0, 0, 0.7);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000) !important;
 }
 
