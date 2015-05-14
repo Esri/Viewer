@@ -40,6 +40,7 @@ define({
     //both these values must be specified as hex colors.
     "theme": "#80ab00",
     "color": "#fff",
+    "hoverColor": "#C3D787",
     //Specify the tool icon color for the tools on the toolbar and the menu icon.
     // Valid values are white and black.
     "icons": "white",

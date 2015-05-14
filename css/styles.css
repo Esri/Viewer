@@ -290,7 +290,6 @@ input[type=checkbox].checkbox {
 .arcgisSearch .searchGroup .searchInput {
   width: 200px;
   padding: 6px 17px 6px 18px;
-  background-color: transparent;
   background-color: rgba(0, 0, 0, 0.3);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
   zoom: 1;
@@ -306,12 +305,6 @@ input[type=checkbox].checkbox {
   background-color: inherit;
   color: #a8a8a8; }
 
-.arcgisSearch .searchBtn {
-  background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.3);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
-  color: #a8a8a8; }
-
 .notools div {
   width: 30px;
   height: 30px;
@@ -325,7 +318,8 @@ input[type=checkbox].checkbox {
 
 .esriSimpleSliderDecrementButton:hover, .esriSimpleSliderIncrementButton:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
-  zoom: 1; }
+  zoom: 1; 
+}
 
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton {
   border: none !important; }
@@ -358,8 +352,7 @@ input[type=checkbox].checkbox {
   color: #FFF !important; }
 
 .simpleGeocoder .esriGeocoderResult:hover, .simpleGeocoder .esriGeocoderResultEven:focus, .simpleGeocoder .esriGeocoderResultOdd:focus {
-  background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.3);
+  --background-color: rgba(0, 0, 0, 0.3);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
   zoom: 1; }
 
@@ -422,7 +415,7 @@ input[type=checkbox].checkbox {
 }
 
 .esriBookmarkHighlight {
-  background-color: rgba(0, 0, 0, 0.3) !important;
+  background-color: none !important;
   border-radius: 5px;
   -webkit-border-radius: 5px;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#33000000,endColorstr=#33000000);
@@ -845,7 +838,7 @@ img {
   float: left;
   width: 26px;
   height: 26px;
-  margin-top: 3px;
+  margin-top: 2px;
   text-align: center;
   line-height: 26px;
   -webkit-border-radius: 13px;
@@ -855,8 +848,7 @@ img {
 
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/
 .no-touch .panelTool:hover {
-  background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.3);
+  --background-color: rgba(0, 0, 0, 0.3);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#E6666666,endColorstr=#E6666666);
 }
 
@@ -905,8 +897,7 @@ img {
   visibility: visible; }
 
 .no-touch .dijitMenuItem:hover {
-  background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.8);
+  --background-color: rgba(0, 0, 0, 0.8);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#665DADDD,endColorstr=#665DADDD);
   zoom: 1; }
 
@@ -994,8 +985,9 @@ img {
   /*#5daddd; calcite blue */ }
 
 .esriPrintButton:hover {
-  background: #a9a9a9;
-  /*#4997d2; calcite hover */ }
+  --background: #a9a9a9;
+  /*#4997d2; calcite hover */ 
+}
 
 .calcite .dijitArrowButtonInner {
   width: 16px;
@@ -1098,7 +1090,8 @@ img {
   margin: 0 0 0 10px; }
 
 .calcite .share-dialog-icon:hover {
-  color: rgba(0, 0, 0, 0.8); }
+  color: rgba(0, 0, 0, 0.8); 
+}
 
 .calcite .share-map-url {
   width: 90%;
@@ -1283,6 +1276,7 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   margin: 1px 8px !important;
 }
 
+/*
 .esriSimpleSliderDecrementButton:focus, 
 .esriSimpleSliderIncrementButton:focus,
 .homeContainer:focus, .locateContainer:focus,
@@ -1307,6 +1301,19 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
     color: black;
     border-bottom: 0;
 }
+*/
+li[role='menuitem']:hover, 
+div[role='button']:hover,
+div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
+{
+  border-radius: 5px;
+  -webkit-border-radius: 5px;  
+}
+
+.panelToolActive:focus, .panelToolActive:hover {
+  border-radius: 15px !important;
+  -webkit-border-radius: 15px !important;  
+}
 
 .searchBtn:focus, .searchClear:focus {
   background-color: rgba(0, 0, 0, 0.7) !important;
@@ -1317,11 +1324,6 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 {
   border-radius: 5px;
   -webkit-border-radius: 5px;  
-}
-
-.panelToolActive:focus {
-  border-radius: 15px;
-  -webkit-border-radius: 15px;  
 }
 
 .esriSimpleSliderDisabledButton
@@ -1350,8 +1352,9 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   margin-left: 1px;
 }
 
-.LocateButton .zoomLocateButton:hover,
+/*
 .HomeButton .home:hover,
+.LocateButton .zoomLocateButton:hover,
 .esriSimpleSliderIncrementButton:hover, .esriSimpleSliderDecrementButton:hover,
 .arcgisSearch .searchMenu li:hover, .arcgisSearch .searchMenu li:focus,
 .toc-title-container:hover,
@@ -1359,10 +1362,11 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
 .share-dialog-icon:hover, .esriBasemapGalleryNode:hover
 {
-  background-color: rgba(0, 0, 0, 0.3) !important;
+  --background-color: rgba(0, 0, 0, 0.3);
   border-radius: 5px;
   -webkit-border-radius: 5px;  
 }
+*/
 
 .searchBtn .searchIcon, .searchClear .searchIcon {
   opacity: 0.5;
@@ -1396,4 +1400,18 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .pageClose:focus, .pageUp:focus, .pageDown:focus {
   opacity: 1;
   outline-style: none;
+}
+
+.homeContainer, .locateContainer {
+  background-color: transparent;
+}
+
+.arcgisSearch .searchBtn:hover, .arcgisSearch .searchBtn:focus {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.arcgisSearch .searchBtn {
+  background-color: rgba(0, 0, 0, 0.3);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
+  color: #a8a8a8; 
 }

@@ -1,0 +1,29 @@
+li[role='menuitem']:hover, 
+div[role='button']:not(.searchBtn):not(.searchClear):hover,
+div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchBtn):not(.searchClear):hover,
+.no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
+.panelToolActive:hover
+{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.HomeButton .home:hover,
+.LocateButton .zoomLocateButton:hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+li[role='menuitem']:focus, 
+div[role='button']:focus,
+[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):focus
+{
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: #333300;
+    color: black;
+    border-bottom: 0;
+}
+
+.arcgisSearch .searchMenu li:hover, .arcgisSearch .searchMenu li:focus {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+

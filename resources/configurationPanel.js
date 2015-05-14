@@ -40,6 +40,12 @@
                "label":"Title Color:"
             },
             {  
+               "type":"color",
+               "fieldName":"hoverColor",
+               "tooltip":"Hover over color",
+               "label":"Hover Color:"
+            },
+            {  
                "type":"string",
                "fieldName":"icons",
                "tooltip":"Icon color",

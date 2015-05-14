@@ -68,7 +68,10 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             // and application id and any url parameters and any application specific configuration information.
             if (config) {
                 this.config = config;
-                this.color = this.setColor(this.config.color);
+                this.color = this.setColor(this.config.color, 0.9);
+                this.hoverColor = typeof(this.config.hoverColor)=='undefined' ? this.setColor('#000000', 0.4) : this.setColor(this.config.hoverColor, 0.9);
+                this.focusColor = this.setColor(typeof(this.config.focusColor)=='undefined' ? '#000000' : this.config.focusColor, 0.9);
+                this.activeColor = this.setColor(typeof(this.config.activeColor)=='undefined' ? '#0f0f0f' : this.config.activeColor, 0.9);
                 this.theme = this.setColor(this.config.theme);
                 // document ready
                 ready(lang.hitch(this, function () {
@@ -115,14 +118,14 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             }
         },
 
-        setColor: function (color) {
+        setColor: function (color, tr) {
             var rgb = Color.fromHex(color).toRgb();
             var outputColor = null;
             if (has("ie") < 9) {
                 outputColor = color;
             } else {
                 //rgba supported so add
-                rgb.push(0.9);
+                rgb.push(tr);
                 outputColor = Color.fromArray(rgb);
             }
             return outputColor;
@@ -902,11 +905,11 @@ return deferred.promise;
                 home.startup();
 
                 homeButton = dojo.query(".homeContainer")[0];
-                dojo.setAttr(homeButton, 'tabindex', 0); 
 
                 homeNode = dojo.query(".home")[0];
                 dojo.empty(homeNode);
-                dojo.setAttr(homeNode, 'style','display:table-cell; vertical-align:middle; text-align:center;');
+                dojo.setAttr(homeNode, 'style','display:table-cell; vertical-align:middle;');
+                dojo.setAttr(homeNode, 'tabindex', 0); 
                 
                 domConstruct.create("img", {
                     'src': 'images/icons_' + this.config.icons + '/home.png',
@@ -951,11 +954,11 @@ return deferred.promise;
                 geoLocate.startup();
 
                 locateButton = dojo.query(".locateContainer")[0];
-                dojo.setAttr(locateButton, 'tabindex', 0);
                 
                 zoomLocateButton = dojo.query(".zoomLocateButton")[0];
                 dojo.empty(zoomLocateButton);
                 dojo.setAttr(zoomLocateButton, 'style','display:table-cell; vertical-align:middle; text-align:center;');
+                dojo.setAttr(zoomLocateButton, 'tabindex', 0);
 
                 domConstruct.create("img", {
                   'src': 'images/icons_' + this.config.icons + '/locate.png',
@@ -1164,6 +1167,30 @@ return deferred.promise;
                 query(".esriSimpleSlider").style("color", "#000");
                 query(".icon-color").style("color", "#000");
             }
+
+            var styleSheetList = document.styleSheets;
+            var styleCss = null;
+            for(i=0; i<styleSheetList.length; i++) {
+                css = styleSheetList[i];
+                if(css.href.indexOf('styles1.css')>0) {
+                    styleCss = css;
+                    break;
+                }
+            };
+
+            if(styleCss) {
+                for(i=0; i<styleCss.cssRules.length; i++) {
+                    rule = styleCss.cssRules[i];
+                    if(typeof(rule.selectorText)!='undefined' && rule.selectorText!=null) {
+                        //hover
+                        if(rule.selectorText.indexOf(':hover') > 0) {
+                            rule.style['backgroundColor'] = this.hoverColor;
+                        }
+
+                    }
+                }
+            }
+            //debugger;
         },
 
         _checkExtent: function () {
