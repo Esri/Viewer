@@ -1419,6 +1419,12 @@ input[type='checkbox']:focus {
   margin: 0;
 }
 
+.esriBookmarkList {
+  margin-top: 1px;
+  margin-bottom: 2px;
+}
+
 .esriBasemapGallerySelectedNode a {
   color:white;
 }
+

@@ -42,6 +42,7 @@ define({
     "color": "#fff",
     "hoverColor": "#C3D787",
     "focusColor": "#073f0f",
+    "activeColor": "#1E5025",
     //Specify the tool icon color for the tools on the toolbar and the menu icon.
     // Valid values are white and black.
     "icons": "white",
