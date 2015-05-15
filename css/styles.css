@@ -58,13 +58,25 @@ input[type=checkbox].checkbox {
 
 .toc-settings {
   cursor: pointer;
-  padding: 12px 0;
   float: right;
-  margin-right: 15px;
-  color: #999; }
+  margin-top: 5px;
+  opacity: 0.15;
+  position: absolute;
+  margin-left: 264px;
+}
+
+.toc-settings img{
+  width:16px;
+  height:16px;
+}
+
+.toc-title label.checkbox{
+  max-width:240px;
+}
 
 .toc-settings:hover {
-  color: #333; }
+  opacity: 1;
+}
 
 .toc-settings:active {
   color: #97cbec; }

@@ -429,7 +429,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     return;
                 }
 
-
                 //add field infos if necessary. Field infos will contain hints if defined in the popup and hide fields where visible is set
                 //to false. The popup logic takes care of this for the info window but not the edit window.
                 array.forEach(this.editableLayers, lang.hitch(this, function (layer) {
@@ -455,28 +454,28 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         layer.fieldInfos = fieldInfos;
                     }
                 }));
-var settings = {
-    map: this.map,
-    layerInfos: this.editableLayers,
-    toolbarVisible: has("edit-toolbar")
-};
-this.editor = new Editor({
-    settings: settings
-}, domConstruct.create("div", {}, this.editorDiv));
 
+                var settings = {
+                    map: this.map,
+                    layerInfos: this.editableLayers,
+                    toolbarVisible: has("edit-toolbar")
+                };
+                this.editor = new Editor({
+                    settings: settings
+                }, domConstruct.create("div", {}, this.editorDiv));
 
-this.editor.startup();
-deferred.resolve(true);
+                this.editor.startup();
+                deferred.resolve(true);
+            }));
 
-}));
-return deferred.promise;
+            return deferred.promise;
         },
 
         _destroyEditor: function () {
-    if (this.editor) {
-        this.editor.destroy();
-        this.editor = null;
-    }
+            if (this.editor) {
+                this.editor.destroy();
+                this.editor = null;
+            }
         },
 
         _addLayers: function (tool, toolbar, panelClass) {
@@ -489,16 +488,8 @@ return deferred.promise;
                 deferred.resolve(false);
             } else {
                 if (has("layers")) {
+                    panelClass = "large";
 
-
-                    //Use small panel class if layer layer is less than 5
-                    if (layers.length < 5) {
-                        panelClass = "small";
-                    } else if (layers.length < 15) {
-                        panelClass = "medium";
-                    } else {
-                        panelClass = "large";
-                    }
                     var layersDiv = toolbar.createTool(tool, panelClass);
 
                     var toc = new TableOfContents({
@@ -506,7 +497,6 @@ return deferred.promise;
                         layers: layers
                     }, domConstruct.create("div", {}, layersDiv));
                     toc.startup();
-
 
                     deferred.resolve(true);
                 } else {
@@ -537,11 +527,14 @@ return deferred.promise;
                     }
 
                     var LegendServiceLabel = legend.domNode.querySelector(".esriLegendServiceLabel");
-                    var h3 = domConstruct.create("h3",{
-                        className : LegendServiceLabel.className,
-                        innerHTML : LegendServiceLabel.innerHTML
-                    });
-                    LegendServiceLabel.parentNode.replaceChild(h3, LegendServiceLabel);
+                    if(LegendServiceLabel)
+                    {
+                        var h3 = domConstruct.create("h3",{
+                            className : LegendServiceLabel.className,
+                            innerHTML : LegendServiceLabel.innerHTML
+                        });
+                        LegendServiceLabel.parentNode.replaceChild(h3, LegendServiceLabel);
+                    }
                     deferred.resolve(true);
 
                 } else {

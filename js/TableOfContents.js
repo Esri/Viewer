@@ -1,7 +1,7 @@
 define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "esri/kernel", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
 // load template    
 "dojo/text!application/dijit/templates/TableOfContents.html", "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", "dojo/_base/array"], function (
-Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemplate, domClass, domAttr, domStyle, domConstruct, event, array) {
+    Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemplate, domClass, domAttr, domStyle, domConstruct, event, array) {
     var Widget = declare("esri.dijit.TableOfContents", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: dijitTemplate,
         // defaults
@@ -125,86 +125,77 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                         titleCheckBoxClass += " ";
                         titleCheckBoxClass += this.css.checkboxCheck;
                     }
+
                     // layer node
                     var layerDiv = domConstruct.create("div", {
                         className: layerClass
                     });
                     domConstruct.place(layerDiv, this._layersNode, "first");
+
                     // title of layer
                     var titleDiv = domConstruct.create("div", {
                         className: this.css.title
-                    });
-                    domConstruct.place(titleDiv, layerDiv, "last");
+                    }, layerDiv);
+                    
                     // title container
                     var titleContainerDiv = domConstruct.create("div", {
                         className: this.css.titleContainer,
                         tabindex: 0
-                    });
-                    domConstruct.place(titleContainerDiv, titleDiv, "last");
+                    }, titleDiv);
                     
-                    // Title checkbox
-                    //var titleCheckbox = domConstruct.create("div", {
-                    //    className: titleCheckBoxClass
-                    //});
-
-                    titleCheckbox = domConstruct.create("input", {
+                    titleCheckbox = domConstruct.create("input", 
+                    {
                         id: "layer_ck_"+i,
                         className: titleCheckBoxClass, //this.css.titleCheckbox,
                         type: "checkbox",
                         tabindex: -1,
                         checked: layer.visibility
-                    }, domConstruct.create("div", {
-                        "class": "checkbox"
-                    }));
+                    },  titleContainerDiv);
 
                     var titleText = domConstruct.create("label", {
                         "for": "layer_ck_"+i,
                         "className": this.css.titleText,
-                        "innerHTML": layer.title
-                    }, domConstruct.create("div"));
-                    domConstruct.place(titleCheckbox, titleContainerDiv);
-                    domConstruct.place(titleText, titleContainerDiv);
-                    
+                        "innerHTML": layer.title,
+                        "title" : layer.title
+                    }, titleContainerDiv);
 
-                    //domConstruct.place(titleCheckbox, titleContainerDiv, "last");
-
-                    // Title text
-                    //var titleText = domConstruct.create("div", {
-                    //    className: this.css.titleText,
-                    //    title: layer.title,
-                    //    innerHTML: layer.title
-                    //});
                     this._atachSpaceKey(titleContainerDiv, titleCheckbox);
 
-                    //domConstruct.place(titleText, titleContainerDiv, "last");
-                    // Account text
-                    var accountText;
+                    var accountText = '';
                     if (layer.account) {
                         accountText = domConstruct.create("a", {
                             className: this.css.accountText,
                             id: layer.account
-                        });
-                        domConstruct.place(accountText, titleText, "last");
+                        }, titleText);
                     }
+
                     // settings
                     var settingsDiv, settingsIcon;
-                    if (layer.settings) {
+                    if (layer.layerObject &&
+                        layer.//settings) 
+                        layerObject.isEditable()) 
+                    { 
+                        
                         settingsDiv = domConstruct.create("div", {
                             className: this.css.settings,
                             id: layer.settings
-                        });
-                        domConstruct.place(settingsDiv, titleContainerDiv, "last");
+                        }, titleContainerDiv);
+
                         // settings icon
-                        settingsIcon = domConstruct.create("div", {
-                            className: this.css.settingsIcon
-                        });
-                        domConstruct.place(settingsIcon, settingsDiv, "last");
+                        //settingsIcon = domConstruct.create("div", {
+                        //    className: this.css.settingsIcon
+                        //}, settingsDiv);
+                        settingsIcon = domConstruct.create("img", {
+                            'src' : 'images/icon-cog.png',
+                            alt:'Configuration'
+                        }, settingsDiv);
                     }
+
                     // clear css
                     var clearCSS = domConstruct.create("div", {
                         className: this.css.clear
-                    });
-                    domConstruct.place(clearCSS, titleContainerDiv, "last");
+                    }, titleContainerDiv);
+                    
                     // lets save all the nodes for events
                     var nodesObj = {
                         checkbox: titleCheckbox,
@@ -226,8 +217,8 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
 
         _atachSpaceKey: function(onButton, clickButton) {
             on(onButton, 'keyup', lang.hitch(clickButton, function(event){
-            if(event.keyCode=='32')
-                this.click();
+                if(event.keyCode=='32')
+                    this.click();
             }));
         },
 
@@ -423,8 +414,8 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             }
         }
     });
-    if (has("extend-esri")) {
-        lang.setObject("dijit.TableOfContents", Widget, esriNS);
-    }
-    return Widget;
+if (has("extend-esri")) {
+    lang.setObject("dijit.TableOfContents", Widget, esriNS);
+}
+return Widget;
 });
