@@ -3,7 +3,8 @@ div[role='button']:not(.searchBtn):not(.searchClear):hover,
 div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchClear):hover,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
 #dijit_form_ComboButton_0_arrow:hover,
-.panelToolActive:hover
+.panelToolActive:hover,
+.esriMeasurement .esriToggleButton .dijitButtonNode:hover
 {
   background-color: rgba(0, 0, 0, 0.3);
 }

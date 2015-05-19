@@ -1440,3 +1440,7 @@ input[type='checkbox']:focus {
   color:white;
 }
 
+.esriMeasurement .esriToggleButton .dijitButtonNode{
+  height: 32px;
+  width: auto;
+}
