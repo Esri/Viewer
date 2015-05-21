@@ -418,12 +418,15 @@ input[type=checkbox].checkbox {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  padding: 6px; }
+  padding: 5px 3px 5px 12px;
+}
 
 .esriBookmarkLabel {
   font-size: 16px; 
   text-overflow: ellipsis;
   color: inherit;
+  margin-left:0;
+  padding-left:0;
 }
 
 .esriBookmarkHighlight {
@@ -1282,32 +1285,6 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   margin: 1px 8px !important;
 }
 
-/*
-.esriSimpleSliderDecrementButton:focus, 
-.esriSimpleSliderIncrementButton:focus,
-.homeContainer:focus, .locateContainer:focus,
-.share-dialog-icon:focus,
-.share-map-url:focus, .share-dialog-textarea:focus, 
-.embed-map-size-dropdown:focus, select:focus,
-.searchInput:focus,
-.searchBtn:focus, .searchClear:focus,
-.panelTool:focus,
-.toc-title-container:focus,
-.esriBookmarkItem:focus,
-.searchMenu ul li:focus, .sourcesMenu ul li:focus,
-.dijitButtonNode:focus,
-.esriBasemapGalleryNode:focus
-{
-    --background-color: #009999 !important;
-    --border-radius: 3px;
-    ---webkit-border-radius: 3px;  
-    outline-width: 2px !important;
-    outline-style: solid !important;
-    outline-color: #333300 !important;
-    color: black;
-    border-bottom: 0;
-}
-*/
 li[role='menuitem']:hover, 
 div[role='button']:hover,
 div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
@@ -1354,25 +1331,9 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
 }
 
 .esriBookmarkItem {
-  width: 284px;
+  width: 281px;
   margin-left: 1px;
 }
-
-/*
-.HomeButton .home:hover,
-.LocateButton .zoomLocateButton:hover,
-.esriSimpleSliderIncrementButton:hover, .esriSimpleSliderDecrementButton:hover,
-.arcgisSearch .searchMenu li:hover, .arcgisSearch .searchMenu li:focus,
-.toc-title-container:hover,
-.searchBtn:hover,
-.no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
-.share-dialog-icon:hover, .esriBasemapGalleryNode:hover
-{
-  --background-color: rgba(0, 0, 0, 0.3);
-  border-radius: 5px;
-  -webkit-border-radius: 5px;  
-}
-*/
 
 .searchBtn .searchIcon, .searchClear .searchIcon {
   opacity: 0.5;

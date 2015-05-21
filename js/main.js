@@ -356,7 +356,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         map: this.map,
                         bookmarks: this.config.response.itemInfo.itemData.bookmarks
                     }, domConstruct.create("div", {}, bookmarkDiv));
+
                     items = bookmarks.bookmarkDomNode.querySelectorAll('.esriBookmarkItem');
+
                     for(i=0; i<items.length; i++) {
                         var item = items[i];
                         domAttr.set(item, 'tabindex', 0);
