@@ -108,36 +108,38 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             var name = tool.name;
 
             // add tool
+            var tip = this.config.i18n.tooltips[name] || name;
             var pTool = domConstruct.create("div", {
                 className: "panelTool",
-                id: "panelTool_" + name
+                id: "panelTool_" + name,
+                "aria-label": tip,
+                tabindex: 0,
+                role: "button",
             }, this.pTools);
+            //domAttr.set(pTool, "style", "background: url('images/icons_" + this.config.icons + "/" + name + ".png') no-repeat top left; background-size: 24px;");
+            on(pTool, 'keydown', lang.hitch(pTool, function(event){
+                if(event.keyCode=='13')
+                    this.click();
+            }));
 
-            if (!has("touch")) {
+            if (!has("touch")) 
+            {
                 //add a tooltip 
-                var tip = this.config.i18n.tooltips[name] || name;
                 domAttr.set(pTool, "data-title", tip);
-                domAttr.set(pTool, "title", tip);
-                domAttr.set(pTool, "tabindex", 0);
                 
-                on(pTool, mouse.enter, function(){
-                    domAttr.set(pTool, "title","");
-                });
-                on(pTool, mouse.leave, function(){
-                    domAttr.set(pTool, "title", tip);
-                });            
-                
-                on(pTool, 'keydown', lang.hitch(pTool, function(event){
-                    if(event.keyCode=='13')
-                        this.click();
-                }));
+                //on(pTool, mouse.enter, function(){
+                //    domAttr.set(pTool, "title","");
+                //});
+                //on(pTool, mouse.leave, function(){
+                //    domAttr.set(pTool, "title", tip);
+                //});            
             }
 
             domConstruct.create("img", {
                 className: "tool",
                 src: "images/icons_" + this.config.icons + "/" + name + ".png",
-                alt: tip,
-                role: "button"
+                alt: ""//tip,
+                //role: "button"
             }, pTool);
             on(pTool, "click", lang.hitch(this, this._toolClick, name));
             this.tools.push(name);
@@ -332,12 +334,11 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             var pageBody = dom.byId("pageBody_" + name);
             if(pageBody) 
             {
-                var focusable = pageBody.querySelector("[tabindex]");
-                if(focusable)
-                {
-                    focusable.focus();
-                } else {
-                    var pageHeader = dom.byId("pageHeader_" + name);
+                var pageHeader = dom.byId("pageHeader_" + name);
+                var pageDown = pageHeader.querySelector(".pageDown");
+                if(pageDown)
+                    pageDown.focus();
+                else {
                     var pageClose = pageHeader.querySelector(".pageClose");
                     if(pageClose)
                         pageClose.focus();

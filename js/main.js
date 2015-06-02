@@ -14,41 +14,25 @@
  | limitations under the License.
  */
 
-define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", "application/has-config", "esri/arcgis/utils", "esri/lang", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/Legend", "esri/dijit/BasemapGallery", "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog",
+define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", 
+    "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", 
+    "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", 
+    "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", 
+    "application/has-config", "esri/arcgis/utils", "esri/lang", 
+    "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
+    "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
+    "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
+    "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog",
     "esri/dijit/InfoWindow"], function (
-    ready, 
-    JSON, 
-    array, 
-    Color, 
-    declare, 
-    lang, 
-    dom, 
-    domGeometry, 
-    domAttr, 
-    domClass, 
-    domConstruct, 
-    domStyle, 
-    on, 
-    Deferred, 
-    all, 
-    query, 
-    registry, 
-    Menu, 
-    CheckedMenuItem, 
-    Toolbar, 
-    has, 
-    arcgisUtils, 
-    esriLang, 
-    HomeButton, 
-    LocateButton, 
-    Legend, 
-    BasemapGallery, 
-    Measurement, 
-    OverviewMap, 
-    Extent, 
-    FeatureLayer, 
-    TableOfContents, 
-    ShareDialog,
+    ready, JSON, array, Color, declare, 
+    lang, dom, domGeometry, domAttr, domClass, 
+    domConstruct, domStyle, on, Deferred, all, 
+    query, registry, Menu, CheckedMenuItem, Toolbar, 
+    has, arcgisUtils, esriLang, 
+    HomeButton, LocateButton, 
+    Legend, BasemapGallery, 
+    Measurement, OverviewMap, Extent, 
+    FeatureLayer, TableOfContents, ShareDialog,
     InfoWindow) {
 
 
@@ -905,10 +889,11 @@ return deferred.promise;
                 dojo.empty(homeNode);
                 dojo.setAttr(homeNode, 'style','display:table-cell; vertical-align:middle;');
                 dojo.setAttr(homeNode, 'tabindex', 0); 
+                dojo.setAttr(homeNode, 'aria-label', dojo.attr(homeNode, 'title')); 
                 
                 domConstruct.create("img", {
                     'src': 'images/icons_' + this.config.icons + '/home.png',
-                    alt: dojo.attr(homeNode, 'title'),
+                    alt: "",//dojo.attr(homeNode, 'title'),
                     height:14,
                     width:14
                 }, homeNode);
@@ -954,10 +939,11 @@ return deferred.promise;
                 dojo.empty(zoomLocateButton);
                 dojo.setAttr(zoomLocateButton, 'style','display:table-cell; vertical-align:middle; text-align:center;');
                 dojo.setAttr(zoomLocateButton, 'tabindex', 0);
+                dojo.setAttr(zoomLocateButton, 'aria-label', dojo.attr(zoomLocateButton, 'title')); 
 
                 domConstruct.create("img", {
                   'src': 'images/icons_' + this.config.icons + '/locate.png',
-                  alt: dojo.attr(zoomLocateButton, 'title'),
+                  alt: "",//dojo.attr(zoomLocateButton, 'title'),
                   height:14,
                   width:14
                 }, zoomLocateButton);

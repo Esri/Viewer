@@ -1405,3 +1405,15 @@ input[type='checkbox']:focus {
   height: 32px;
   width: auto;
 }
+
+@media only screen and (min-width: 720px) {
+  .esriEditor .esriDrawingToolbar {
+  top:0px;
+}
+
+#esri_dijit_editing_TemplatePicker_1, 
+.templatePicker 
+{
+--  padding-top: 45px;
+  padding-bottom: 4px;  
+}

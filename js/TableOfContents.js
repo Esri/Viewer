@@ -1,7 +1,17 @@
-define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "esri/kernel", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
-// load template    
-"dojo/text!application/dijit/templates/TableOfContents.html", "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", "dojo/_base/array"], function (
-    Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemplate, domClass, domAttr, domStyle, domConstruct, event, array) {
+define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "esri/kernel", 
+    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
+    "dojo/text!application/dijit/templates/TableOfContents.html", 
+    "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
+    "dojo/_base/array",
+    "esri/symbols/TextSymbol", "esri/renderers/SimpleRenderer", "esri/layers/LabelLayer"
+    ], function (
+        Evented, declare, lang, has, esriNS,
+        _WidgetBase, _TemplatedMixin, on, 
+        dijitTemplate, 
+        domClass, domAttr, domStyle, domConstruct, event, 
+        array,
+        TextSymbol, SimpleRenderer, LabelLayer
+    ) {
     var Widget = declare("esri.dijit.TableOfContents", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: dijitTemplate,
         // defaults
@@ -108,8 +118,10 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             this._layersNode.innerHTML = "";
             // if we got layers
             if (layers && layers.length) {
+
                 for (var i = 0; i < layers.length; i++) {
                     var layer = layers[i];
+
                     // ceckbox class
                     var titleCheckBoxClass = this.css.titleCheckbox;
                     // layer class
