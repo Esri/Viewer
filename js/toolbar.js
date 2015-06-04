@@ -147,12 +147,14 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             // add page
             var page = domConstruct.create("div", {
                 className: "page",
-                id: "page_" + name
+                id: "page_" + name,
+                role: "dialog",
+                "aria-labelledby": "pagetitle_" + name
             }, this.pPages);
 
             var pageContent = domConstruct.create("div", {
                 className: "pageContent rounded shadow",
-                id: "pageContent_" + name
+                id: "pageContent_" + name,
             }, page);
 
             var pageHeader = domConstruct.create("div", {
@@ -163,7 +165,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             domConstruct.create("h2", {
                 className: "pageTitle fc",
-                innerHTML: this.config.i18n.tooltips[name] || name
+                innerHTML: this.config.i18n.tooltips[name] || name,
+                id: "pagetitle_" + name
             }, pageHeader);
 
             domConstruct.create("div", {

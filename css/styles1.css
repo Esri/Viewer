@@ -3,6 +3,7 @@ div[role='button']:not(.searchBtn):not(.searchClear):hover,
 div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchClear):hover,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
 #dijit_form_ComboButton_0_arrow:hover,
+button:hover,
 .panelToolActive:hover,
 .esriMeasurement .esriToggleButton .dijitButtonNode:hover
 {
@@ -19,6 +20,7 @@ div[role='button']:not(.searchBtn):not(.searchClear):focus,
 div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchClear):focus,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:focus,
 input[type='text']:focus,
+button:focus,
 textarea:focus,
 select[tabindex='0']:not(#embedMapSizeDropDown):focus,
 #dijit_form_ComboButton_0_arrow:focus

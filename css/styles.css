@@ -202,7 +202,7 @@ input[type=checkbox].checkbox {
   height: 100%; }
 
 .esriEditor .esriDrawingToolbar {
-  position: absolute;
+  --position: absolute;
   right: 0;
   left: 0;
   top: 10px;
@@ -856,10 +856,19 @@ img {
   margin-top: 2px;
   text-align: center;
   line-height: 26px;
-  -webkit-border-radius: 13px;
+  -- -webkit-border-radius: 13px;
   -moz-border-radius: 13px;
   -ms-border-radius: 13px;
-  border-radius: 13px; }
+  --border-radius: 13px; 
+
+  background-color: transparent;
+  padding: 0;
+  border-left-color: transparent;
+  border-top-color: transparent;
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+  margin-right: 2px;
+}
 
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/
 .no-touch .panelTool:hover {
@@ -1414,6 +1423,5 @@ input[type='checkbox']:focus {
 #esri_dijit_editing_TemplatePicker_1, 
 .templatePicker 
 {
---  padding-top: 45px;
-  padding-bottom: 4px;  
+  padding: 2px;
 }
