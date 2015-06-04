@@ -159,7 +159,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             var pageHeader = domConstruct.create("div", {
                 id: "pageHeader_" + name,
-                className: "pageHeader bg roundedTop"
+                className: "pageHeader bg roundedTop",
+                tabindex: 0,
             }, 
             pageContent);
 

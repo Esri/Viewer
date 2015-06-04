@@ -150,15 +150,16 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             this._atachEnterKey(esriSimpleSliderDecrementNode, esriSimpleSliderDecrementNode);
 
             on(this.map.infoWindow, "show", lang.hitch(this, function() {
-                this._clearAltOnImgs(this.map.infoWindow.domNode);
+                this._initPopup(this.map.infoWindow.domNode);
+
             }));
 
             on(this.map.infoWindow, "selection-change", lang.hitch(this, function() {
-                this._clearAltOnImgs(this.map.infoWindow.domNode);
+                this._initPopup(this.map.infoWindow.domNode);
             }));
         },
 
-        _clearAltOnImgs : function (node) {
+        _initPopup : function (node) {
             images = node.querySelectorAll('img');
             for (var i = 0; i<images.length; i++) {
                 if(!dojo.getAttr(images[i], 'alt'))
@@ -166,6 +167,43 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     dojo.setAttr(images[i], 'alt', '');
                 } 
             };
+
+            //dojo.setAttr(node, "role", "dialog");
+            header = node.querySelector('.header');
+            if(header) {
+                dojo.setAttr(node, "tabindex", 0);
+                node.blur();
+                label = header.innerHTML;
+                title = node.querySelector('.title');
+                if(title && title.innerHTML!="&nbsp;") {
+                    label=label + ". " + title.innerHTML;
+                }
+                dojo.setAttr(node, "aria-label", label);
+                node.focus();
+            }
+
+            attrNames = node.querySelectorAll('.attrName');
+            if(attrNames) {
+                for(i=0; i<attrNames.length; i++) {
+                    attrName = attrNames[i];
+
+                    dojo.create("th", {
+                        id: "h_"+i,
+                        scope: "row",
+                        className: 'attrName',
+                        innerHTML: attrName.innerHTML,
+                    }, attrName.parentNode, "first")
+
+                    attrValues = attrName.parentNode.querySelectorAll('.attrValue');
+                    if(attrValues) {
+                        for(j=0; j<attrValues.length; j++) {
+                            var attrValue = attrValues[j];
+                            dojo.setAttr(attrValue, "headers", "h_"+i);
+                        }
+                    }
+                    dojo.destroy(attrName);
+                }
+            }
         },
 
         // Create UI

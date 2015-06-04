@@ -1425,3 +1425,10 @@ input[type='checkbox']:focus {
 {
   padding: 2px;
 }
+
+.attrName {
+  text-align: left;
+  font-weight: normal;
+  padding: 2px;
+  white-space: normal;
+}
