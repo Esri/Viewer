@@ -204,6 +204,16 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     dojo.destroy(attrName);
                 }
             }
+
+            zoom = node.querySelector('.zoomTo');
+            if(zoom) {
+                hint = "Zoom to";
+                dojo.setAttr(zoom, "aria-label", hint);
+                dojo.setAttr(zoom, "title", hint);
+                //dojo.setAttr(zoom.parentNode, "data-title", hint);
+                dojo.removeAttr(zoom, "to");
+                dojo.setAttr(zoom, "role", "button");
+            }
         },
 
         // Create UI
