@@ -176,7 +176,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 label = header.innerHTML;
                 title = node.querySelector('.title');
                 if(title && title.innerHTML!="&nbsp;") {
-                    label=label + ". " + title.innerHTML;
+                    label=title.innerHTML + ": " + label;
                 }
                 dojo.setAttr(node, "aria-label", label);
                 node.focus();
