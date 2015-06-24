@@ -343,9 +343,12 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
                 basemap.startup();
                 on(basemap, "load", lang.hitch(basemap, function () {
-                    
+                    var list = this.domNode.querySelector("div");
+                    domAttr.set(list, "role", "list");
+
                     var nodes = this.domNode.querySelectorAll(".esriBasemapGalleryNode");
                     array.forEach(nodes, function(node){
+                        domAttr.set(node, "role", "listitem");
                         img = node.querySelector("img");
                         img.alt='';
                         domAttr.set(img, "tabindex", -1);

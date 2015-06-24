@@ -160,7 +160,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             var pageHeader = domConstruct.create("div", {
                 id: "pageHeader_" + name,
                 className: "pageHeader bg roundedTop",
-                tabindex: 0,
+                //tabindex: 0,
             }, 
             pageContent);
 
@@ -193,6 +193,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 var pageClose = domConstruct.create("div", {
                     className: "pageClose",
                     tabIndex:0,
+                    role: "button",
+                    "aria-label": "Close dialog.",
                     //'data-title':'Close',
                     innerHTML:"<img src='images/close.png' alt='Close'/>"
                 }, "pageHeader_" + name);
@@ -202,6 +204,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 var pageUp = domConstruct.create("div", {
                     className: "pageUp",
                     tabIndex:0,
+                    role: "button",
+                    "aria-label": "Previous page.",
                     //'data-title':'Previous',
                     innerHTML:"<img src='images/up.png' alt='Previous Page'/>"
                 }, "pageHeader_" + name);
@@ -212,6 +216,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                     var pageDown = domConstruct.create("div", {
                         className: "pageDown",
                         tabIndex:0,
+                        role: "button",
+                        "aria-label": "Next page.",
                         //'data-title':'Next',
                         innerHTML:"<img src='images/down.png' alt='Next Page'/>"
                     }, "pageHeader_" + name);
