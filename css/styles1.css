@@ -7,28 +7,36 @@ button:hover,
 .panelToolActive:hover,
 .esriMeasurement .esriToggleButton .dijitButtonNode:hover
 {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 .HomeButton .home:hover,
 .LocateButton .zoomLocateButton:hover {
-  background-color: rgba(0, 0, 0, 0.3);
+  background-color: rgba(255, 255, 255, 0.3) !important;
 }
 
 li[role='menuitem']:focus, 
-div[role='button']:not(.searchBtn):not(.searchClear):focus,
+div[role='button']:not(.searchBtn):not(.searchClear):not(.pageClose):not(.pageUp):not(.pageDown):focus,
 div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchClear):focus,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:focus,
 input[type='text']:focus,
 button:focus,
 textarea:focus,
 select[tabindex='0']:not(#embedMapSizeDropDown):focus,
-#dijit_form_ComboButton_0_arrow:focus
+#dijit_form_ComboButton_0_arrow:focus,
+input[type='checkbox']:focus,
+tr[tabindex='0']:focus
 {
     outline-width: 2px;
+    outline-offset: -2px;
     outline-style: solid;
-    outline-color: rgba(0, 0, 0, 0.9);
+    outline-color: rgba(0, 0, 0, 0.9) !important;
     border-bottom: 0;
+}
+
+tr[tabindex='0']:focus
+{
+    outline-offset: 0px;
 }
 
 #embedMapSizeDropDown:focus {

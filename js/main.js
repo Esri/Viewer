@@ -393,6 +393,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     }, domConstruct.create("div", {}, bookmarkDiv));
 
                     items = bookmarks.bookmarkDomNode.querySelectorAll('.esriBookmarkItem');
+                    domAttr.set(items[0].parentNode.parentNode.parentNode,"role","list");
 
                     for(i=0; i<items.length; i++) {
                         var item = items[i];
@@ -400,6 +401,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         label = item.querySelector('.esriBookmarkLabel');
                         this._atachEnterKey(item, label);
                         domStyle.set(label, 'width', '280px');
+
+                        domAttr.set(item.parentNode.parentNode,"role","listitem");
                     }
                     deferred.resolve(true);
                 }));
@@ -568,10 +571,26 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     {
                         var h3 = domConstruct.create("h3",{
                             className : LegendServiceLabel.className,
-                            innerHTML : LegendServiceLabel.innerHTML
+                            innerHTML : LegendServiceLabel.innerHTML,
                         });
                         LegendServiceLabel.parentNode.replaceChild(h3, LegendServiceLabel);
                     }
+
+                    var LegendLayers = legend.domNode.querySelectorAll(".esriLegendLayer");
+                    for(j=0; j<LegendLayers.length; j++) {
+                        //var LegendServiceLists = legend.domNode.querySelectorAll(".esriLegendLayer tbody");
+                        var LegendServiceList = LegendLayers[j].querySelector("tbody");;
+
+                        domAttr.set(LegendServiceList, "role", "list");
+                        domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
+
+                        for(i=0; i<LegendServiceList.childNodes.length; i++) {
+                            var item = LegendServiceList.childNodes[i];
+                            domAttr.set(item, "role", "listitem");
+                            domAttr.set(item, "tabindex", "0");
+                        };
+                    };
+
                     deferred.resolve(true);
 
                 } else {

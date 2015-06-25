@@ -107,7 +107,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on
                 iconClear: "icon-clear"
             };
         },
-
+        
         // bind listener for button to action
         postCreate: function () {
             this.inherited(arguments);

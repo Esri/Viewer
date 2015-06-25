@@ -148,13 +148,13 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             var page = domConstruct.create("div", {
                 className: "page",
                 id: "page_" + name,
-                role: "dialog",
-                "aria-labelledby": "pagetitle_" + name
             }, this.pPages);
 
             var pageContent = domConstruct.create("div", {
                 className: "pageContent rounded shadow",
                 id: "pageContent_" + name,
+                role: "dialog",
+                "aria-labelledby": "pagetitle_" + name,
             }, page);
 
             var pageHeader = domConstruct.create("div", {

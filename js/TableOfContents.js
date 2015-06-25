@@ -116,6 +116,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             this._removeEvents();
             // clear node
             this._layersNode.innerHTML = "";
+            domAttr.set(this._layersNode, "role", "list");
             // if we got layers
             if (layers && layers.length) {
 
@@ -140,19 +141,20 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
 
                     // layer node
                     var layerDiv = domConstruct.create("div", {
-                        className: layerClass
+                        className: layerClass,
+                        role: "listitem",
                     });
                     domConstruct.place(layerDiv, this._layersNode, "first");
 
                     // title of layer
                     var titleDiv = domConstruct.create("div", {
-                        className: this.css.title
+                        className: this.css.title,
                     }, layerDiv);
                     
                     // title container
                     var titleContainerDiv = domConstruct.create("div", {
                         className: this.css.titleContainer,
-                        tabindex: 0
+                        tabindex: -1,
                     }, titleDiv);
                     
                     titleCheckbox = domConstruct.create("input", 
@@ -160,15 +162,16 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         id: "layer_ck_"+i,
                         className: titleCheckBoxClass, //this.css.titleCheckbox,
                         type: "checkbox",
-                        tabindex: -1,
-                        checked: layer.visibility
-                    },  titleContainerDiv);
+                        tabindex: 0,
+                        checked: layer.visibility,
+                    }, titleContainerDiv);
 
                     var titleText = domConstruct.create("label", {
                         "for": "layer_ck_"+i,
                         "className": this.css.titleText,
                         "innerHTML": layer.title,
-                        "title" : layer.title
+                        role: "presentation",
+                        //"title" : layer.title
                     }, titleContainerDiv);
 
                     this._atachSpaceKey(titleContainerDiv, titleCheckbox);
@@ -184,22 +187,19 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     // settings
                     var settingsDiv, settingsIcon;
                     if (layer.layerObject &&
-                        layer.//settings) 
-                        layerObject.isEditable()) 
+                        dojo.exists("settings", layer) &&
+                        layer.layerObject.isEditable()) 
                     { 
-                        
                         settingsDiv = domConstruct.create("div", {
                             className: this.css.settings,
                             id: layer.settings
                         }, titleContainerDiv);
 
-                        // settings icon
-                        //settingsIcon = domConstruct.create("div", {
-                        //    className: this.css.settingsIcon
-                        //}, settingsDiv);
                         settingsIcon = domConstruct.create("img", {
                             'src' : 'images/icon-cog.png',
-                            alt:'Configuration'
+                            alt:'Configuration',
+                            role: "button,",
+                            tabindex:0,
                         }, settingsDiv);
                     }
 
