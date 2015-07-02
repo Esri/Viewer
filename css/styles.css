@@ -1472,6 +1472,7 @@ h3 {
   position: relative;
 }
 
-#panelTool_instructions {
+#panelTool_instructions,
+#panelTool_details {
   float: right;
 }
