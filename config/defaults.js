@@ -18,8 +18,12 @@
 define({
     //Default configuration settings for the application. This is where you'll define things like a bing maps key,
     //default web map, default app color theme and more. These values can be overwritten by template configuration settings and url parameters.
-    "appid": "",
-    "webmap": "f5b13dbed07c46cdb783cf361833aa6b",
+    "appid": //"0d877e183a5e4754adac1a88cd15749f",
+             //"c8077b61b6f94fd29371a7cbac6923ba",
+             //"5147e7fbc6394546a3b6f58f0c944cb9",
+             "f2d19e3559444846ac5839c5d83ded60",
+    "webmap": "",
+              //"326320c9eab3489d8d17bc389ce1e023",
     "oauthappid": null, //"AFTKRmv16wj14N3z",
     //Group templates must support a group url parameter. This will contain the id of the group.
     //group: "",
@@ -38,7 +42,7 @@ define({
     //Theme defines the background color of the title area and tool dialog
     //Color defines the text color for the title and details. Note that
     //both these values must be specified as hex colors.
-    "theme": "#0084A8",
+    "theme": "#037EAF",
     "color": "#fff",
     "hoverColor": "#BEE8FF",
     "focusColor": "#00C5FF",
@@ -67,10 +71,10 @@ define({
     "search": true,
     "locationSearch": true,
     //When searchExtent is true the locator will prioritize results within the current map extent.
-    "searchExtent": false,
+    "searchExtent": true,
     "searchLayers":[{
-        "id": "",
-        "fields": []
+        "id": "Incidents",
+        "fields": ["Incident Type", "Province", "Company", "Status", "Substance"]
     }],
     //Add the home extent button to the toolbar
     "home": true,

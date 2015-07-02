@@ -25,7 +25,9 @@ textarea:focus,
 select[tabindex='0']:not(#embedMapSizeDropDown):focus,
 #dijit_form_ComboButton_0_arrow:focus,
 input[type='checkbox']:focus,
-tr[tabindex='0']:focus
+tr[tabindex='0']:focus,
+h1:focus, h1:focus, h3:focus,
+.esriOverviewMap:focus, .ovwHighlight:focus
 {
     outline-width: 2px;
     outline-offset: -2px;
@@ -56,3 +58,7 @@ tr[tabindex='0']:focus
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000) !important;
 }
 
+.esriBasemapGallerySelectedNode:hover span {
+  color: black;
+  text-align: center;
+}

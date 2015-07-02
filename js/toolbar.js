@@ -114,7 +114,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 id: "panelTool_" + name,
                 "aria-label": tip,
                 tabindex: 0,
-                role: "button",
+                role: "listitem",
             }, this.pTools);
             //domAttr.set(pTool, "style", "background: url('images/icons_" + this.config.icons + "/" + name + ".png') no-repeat top left; background-size: 24px;");
             on(pTool, 'keydown', lang.hitch(pTool, function(event){
@@ -138,8 +138,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             domConstruct.create("img", {
                 className: "tool",
                 src: "images/icons_" + this.config.icons + "/" + name + ".png",
-                alt: ""//tip,
-                //role: "button"
+                alt: "",
+                role: "button"
             }, pTool);
             on(pTool, "click", lang.hitch(this, this._toolClick, name));
             this.tools.push(name);
@@ -178,6 +178,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             var pageBody = domConstruct.create("div", {
                 className: "pageBody",
+                //tabindex: 0,
                 id: "pageBody_" + name
             }, 
             pageContent);

@@ -334,7 +334,14 @@ input[type=checkbox].checkbox {
 }
 
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton {
-  border: none !important; }
+  border: none !important; 
+  background: url('../images/icons_white/plus.png') no-repeat center;
+}
+
+.esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
+  border: none !important; 
+  background: url('../images/icons_white/minus.png') no-repeat center;
+}
 
 .simpleGeocoder .esriGeocoder {
   display: block;
@@ -796,10 +803,17 @@ img {
   text-overflow: ellipsis;
   white-space: nowrap;
   margin-left: 5px;
-  height: 50px;
-  --line-height: 50px;
+  margin-top: 10px;
   display: none;
-  font-size: 0.9em; }
+  font-size: 28px; }
+
+#panelTitle h1 {
+  -webkit-margin-before: 10px;
+  -webkit-margin-after: 0;
+  -webkit-margin-start: 5px;
+  -webkit-margin-end: 0;
+  margin: 10px 0px 0px 5px;
+}
 
 @media only screen and (min-width: 720px) {
   #panelText {
@@ -1449,4 +1463,13 @@ input[type='checkbox']:focus {
     -moz-border-radius: 0 0 5px 5px;
     -webkit-border-radius: 0 0 5px 5px;
     border-radius: 0 0 5px 5px;
+}
+
+h3 {
+  padding:3px;
+}
+
+.esriOverviewMap .ovwContainer {
+  display: block;
+  position: relative;
 }

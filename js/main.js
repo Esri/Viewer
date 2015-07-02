@@ -123,30 +123,42 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             on(window, "orientationchange", lang.hitch(this, this._adjustPopupSize));
             this._adjustPopupSize();
 
+            zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
+            dojo.setAttr(zoomSlider, 'role', 'list');
+            dojo.setAttr(zoomSlider, 'aria-label', 'Zoom Slider');
+
             esriSimpleSliderIncrementNode = dojo.query(".esriSimpleSliderIncrementButton")[0];
             dojo.empty(esriSimpleSliderIncrementNode);
             dojo.setAttr(esriSimpleSliderIncrementNode, 'tabindex', 0);
-            plusImg = domConstruct.create("img", {
-              'src': 'images/icons_' + this.config.icons + '/plus.png',
-              alt: 'Zoom In',
-              height:14,
-              width:14
-            }, esriSimpleSliderIncrementNode);
+            dojo.setAttr(esriSimpleSliderIncrementNode, 'role', 'listitem');
+            dojo.setAttr(esriSimpleSliderIncrementNode, 'aria-label', 'Zoom In, button.');
+            //plusImg = domConstruct.create("img", {
+            //  'src': 'images/icons_' + this.config.icons + '/plus.png',
+            //  alt: 'Zoom In',
+            //  role: 'button',
+            //  'aria-hidden': true,
+            //  height:14,
+            //  width:14
+            //}, esriSimpleSliderIncrementNode);
 
-            dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', plusImg.alt);
+            //dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', plusImg.alt);
             this._atachEnterKey(esriSimpleSliderIncrementNode,esriSimpleSliderIncrementNode);
 
             esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
             dojo.empty(esriSimpleSliderDecrementNode);
             dojo.setAttr(esriSimpleSliderDecrementNode, 'tabindex', 0);
-            minusImg = domConstruct.create("img", {
-              'src': 'images/icons_' + this.config.icons + '/minus.png',
-              alt: 'Zoom Out',
-              height:14,
-              width:14
-          }, esriSimpleSliderDecrementNode);
+            dojo.setAttr(esriSimpleSliderDecrementNode, 'role', 'listitem');
+            dojo.setAttr(esriSimpleSliderDecrementNode, 'aria-label', 'Zoom Out, button.');
+            //minusImg = domConstruct.create("img", {
+            //  'src': 'images/icons_' + this.config.icons + '/minus.png',
+            //  alt: 'Zoom Out',
+            //  role: 'button',
+            //  'aria-hidden': true,
+            //  height:14,
+            //  width:14
+            //}, esriSimpleSliderDecrementNode);
 
-            dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', minusImg.alt);
+            //dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', minusImg.alt);
             this._atachEnterKey(esriSimpleSliderDecrementNode, esriSimpleSliderDecrementNode);
 
             on(this.map.infoWindow, "show", lang.hitch(this, function() {
@@ -359,7 +371,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         domAttr.remove(labelNode.firstChild, "alt");
                         domAttr.remove(labelNode.firstChild, "title");
                         dojo.place(labelNode, aNode, "last");
-                        domStyle.set(labelNode, "width", img.width);
+                        //domStyle.set(labelNode, "width", img.width);
                         domAttr.set(aNode, "tabindex", -1);
                         domAttr.set(node, "tabindex", 0);
                         domStyle.set(node, "padding", "5px 8px 0px 5px");
@@ -430,7 +442,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     }
 
                     var detailDiv = toolbar.createTool(tool, panelClass);
-                    detailDiv.innerHTML = "<div class='desc'>" + description + "</div>";
+                    detailDiv.innerHTML = "<div class='desc' tabindex='0'>" + description + "</div>";
                 }
                 deferred.resolve(true);
             } else {
@@ -556,6 +568,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             } else {
                 if (has("legend")) {
                     var legendDiv = toolbar.createTool(tool, "large");
+                    dojo.setAttr(legendDiv, 'tabindex', 0);
                     var legend = new Legend({
                         map: this.map,
                         layerInfos: layers
@@ -570,8 +583,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     if(LegendServiceLabel)
                     {
                         var h3 = domConstruct.create("h3",{
-                            className : LegendServiceLabel.className,
-                            innerHTML : LegendServiceLabel.innerHTML,
+                            className: LegendServiceLabel.className,
+                            innerHTML: LegendServiceLabel.innerHTML,
+                            tabindex: 0
                         });
                         LegendServiceLabel.parentNode.replaceChild(h3, LegendServiceLabel);
                     }
@@ -582,7 +596,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         var LegendServiceList = LegendLayers[j].querySelector("tbody");;
 
                         domAttr.set(LegendServiceList, "role", "list");
-                        domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
+                        //domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
 
                         for(i=0; i<LegendServiceList.childNodes.length; i++) {
                             var item = LegendServiceList.childNodes[i];
@@ -652,7 +666,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 var ovMapDiv = toolbar.createTool(tool, panelClass);
                 domStyle.set(ovMapDiv, {
                     "height": "100%",
-                    "width": "100%"
+                    "width": "100%",
                 });
 
                 var panelHeight = this.map.height;
@@ -662,26 +676,13 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     panelHeight = 350;
                 }
 
-                var ovMap = new OverviewMap({
-                    id: "overviewMap",
-                    map: this.map,
-                    height: panelHeight
-                }, domConstruct.create("div", {}, ovMapDiv));
-
-                ovMap.startup();
-
+                this.createOverviewMap(ovMapDiv, panelHeight);
+                
                 on(this.map, "layer-add", lang.hitch(this, function (args) {
                     //delete and re-create the overview map if the basemap gallery changes
                     if (args.layer.hasOwnProperty("_basemapGalleryLayerType") && args.layer._basemapGalleryLayerType === "basemap") {
                         registry.byId("overviewMap").destroy();
-                        var ovMap = new OverviewMap({
-                            id: "overviewMap",
-                            map: this.map,
-                            height: panelHeight,
-                            visible: false
-                        }, domConstruct.create("div", {}, ovMapDiv));
-
-                        ovMap.startup();
+                        this.createOverviewMap(ovMapDiv, panelHeight);
                     }
                 }));
                 deferred.resolve(true);
@@ -689,8 +690,30 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 deferred.resolve(false);
             }
 
-
             return deferred.promise;
+        },
+
+        createOverviewMap: function(div, height) {
+            var ovMap = new OverviewMap({
+                id: "overviewMap",
+                map: this.map,
+                height: height,
+                visible: false
+            }, domConstruct.create("div", {}, div));
+
+            ovMap.startup();
+
+            ovwHighlight = div.querySelector('.ovwHighlight');
+            dojo.setAttr(ovwHighlight, 'tabindex', 0);
+            /*
+            images = div.children[0].querySelectorAll('img');
+            for (var i = 0; i<images.length; i++) {
+                if(!dojo.getAttr(images[i], 'alt'))
+                {
+                    dojo.setAttr(images[i], 'alt', '');
+                } 
+            };
+            */
         },
 
         _addPrint: function (tool, toolbar, panelClass) {
@@ -747,7 +770,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
                     on(legendNode, "change", lang.hitch(this, function (arg) {
 
-
                         if (legendNode.checked) {
                             var layers = arcgisUtils.getLegendLayers(this.config.response);
                             var legendLayers = array.map(layers, function (layer) {
@@ -762,7 +784,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                                 template.layoutOptions = layoutOptions;
                             });
 
-
                         } else {
                             array.forEach(print.templates, function (template) {
                                 if (template.layoutOptions && template.layoutOptions.legendLayers) {
@@ -771,13 +792,11 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
                             });
                         }
-
-
                     }));
-}
+                }
 
-require(["application/has-config!print-layouts?esri/request", "application/has-config!print-layouts?esri/tasks/PrintTemplate"], lang.hitch(this, function (esriRequest, PrintTemplate) {
-    if (!esriRequest && !PrintTemplate) {
+                require(["application/has-config!print-layouts?esri/request", "application/has-config!print-layouts?esri/tasks/PrintTemplate"], lang.hitch(this, function (esriRequest, PrintTemplate) {
+                    if (!esriRequest && !PrintTemplate) {
                         //Use the default print templates
                         var templates = [{
                             layout: "Letter ANSI A Landscape",
@@ -803,8 +822,6 @@ require(["application/has-config!print-layouts?esri/request", "application/has-c
                             label: this.config.i18n.tools.print.layouts.label4 + " ( image )",
                             format: "PNG32"
                         }];
-
-
 
                         print = new Print({
                             map: this.map,
@@ -870,12 +887,10 @@ require(["application/has-config!print-layouts?esri/request", "application/has-c
                         deferred.resolve(true);
 
                     }));
-}));
+                }));
+            }));
 
-}));
-
-
-return deferred.promise;
+            return deferred.promise;
         },
 
         _addShare: function (tool, toolbar, panelClass) {
@@ -945,6 +960,7 @@ return deferred.promise;
                 panelHome = domConstruct.create("div", {
                     id: "panelHome",
                     className: "icon-color tool",
+                    role: "listitem",
                     innerHTML: "<div id='btnHome'></div>"
                 }, dom.byId("panelTools"), 0);
                 var home = new HomeButton({
@@ -995,6 +1011,7 @@ return deferred.promise;
                 panelLocate = domConstruct.create("div", {
                     id: "panelLocate",
                     className: "icon-color tool",
+                    role: "listitem",
                     innerHTML: "<div id='btnLocate'></div>"
                     }, dom.byId("panelTools"), 1);
                     var geoLocate = new LocateButton({
@@ -1102,6 +1119,7 @@ return deferred.promise;
                         }
                     }
                 }));
+
                 //Add search layers defined on the web map item 
                 if (this.config.response.itemInfo.itemData && this.config.response.itemInfo.itemData.applicationProperties && this.config.response.itemInfo.itemData.applicationProperties.viewing && this.config.response.itemInfo.itemData.applicationProperties.viewing.search) {
                     var searchOptions = this.config.response.itemInfo.itemData.applicationProperties.viewing.search;
@@ -1153,6 +1171,9 @@ return deferred.promise;
 
                 search.startup();
 
+                //noResultsBody = search.domNode.querySelector('.noResultsBody');
+                //debugger;
+
                 //set the first non esri layer as active if search layers are defined. 
                 var activeIndex = 0;
                 if (searchLayers) {
@@ -1178,6 +1199,9 @@ return deferred.promise;
 
                     esriIconDownArrowNode.innerHTML = 
                         '<img src="images\\downArrow.png" alt="Search in" width="20" height="20">';
+
+                    searchInput = dojo.query(".searchInput")[0];
+                    dojo.setAttr(searchInput, 'role', 'search');
 
                     esriIconZoomNode = dojo.query(".esriIconZoom")[0];
                     domClass.remove(esriIconZoomNode, "esriIconZoom");
