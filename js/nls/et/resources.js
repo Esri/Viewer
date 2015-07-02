@@ -47,7 +47,8 @@ define(
         "tooltips":{
         	"home": "Vaikimisi kuvaulatus",
         	"locate": "Leia minu asukoht",
-        	"legend": "Legend",
+            "instructions": "Instructions",
+            "legend": "Legend",
         	"bookmarks": "Järjehoidjad",
         	"layers": "Kihid",
         	"basemap": "Aluskaartide galerii",

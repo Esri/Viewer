@@ -53,6 +53,7 @@ define({
     "logo": "images/logo.png",
     //Set of tools that will be added to the toolbar
     "tools": [
+        {"name": "instructions", "enabled": true},
         {"name": "legend", "enabled": true},
         {"name": "bookmarks", "enabled": true},
         {"name": "layers", "enabled": true},
@@ -66,7 +67,7 @@ define({
     ],
     //Set the active tool on the toolbar. Note home and locate can't be the active tool.
     //Set to "" to display no tools at startup
-    "activeTool": "legend",
+    "activeTool": "instructions",
     //Add the geocoding tool next to the title bar.
     "search": true,
     "locationSearch": true,

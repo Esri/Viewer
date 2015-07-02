@@ -109,6 +109,10 @@
                      "value":"layers"
                   },
                   {  
+                     "label":"Instructions",
+                     "value":"instructions"
+                  },
+                  {  
                      "label":"Legend",
                      "value":"legend"
                   },
@@ -164,6 +168,11 @@
                "type":"boolean",
                "fieldName":"tool_legend",
                "label":"Legend"
+            },
+            {  
+               "type":"boolean",
+               "fieldName":"tool_instructions",
+               "label":"Instructions"
             },
             {  
                "type":"boolean",
@@ -293,7 +302,7 @@
       "logo":"images/logo.png",
       "color":"#fff",
       "theme":"80ab00",
-      "activeTool":"legend",
+      "activeTool":"instructions",
       "scalebar":false,
       "tool_print":true,
       "tool_print_layouts":false,
@@ -303,6 +312,7 @@
       "tool_measure":true,
       "tool_details":true,
       "tool_legend":true,
+      "tool_instructions":true,
       "tool_layers":true,
       "tool_home":true,
       "tool_locate":true,

@@ -26,8 +26,9 @@ select[tabindex='0']:not(#embedMapSizeDropDown):focus,
 #dijit_form_ComboButton_0_arrow:focus,
 input[type='checkbox']:focus,
 tr[tabindex='0']:focus,
-h1:focus, h1:focus, h3:focus,
-.esriOverviewMap:focus, .ovwHighlight:focus
+h1:focus, h2:focus, h3:focus,
+.esriOverviewMap:focus, 
+.ovwHighlight:focus
 {
     outline-width: 2px;
     outline-offset: -2px;

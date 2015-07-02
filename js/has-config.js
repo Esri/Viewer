@@ -88,6 +88,7 @@ define(["dojo/has"], function (has) {
         }
         return home;
     });
+    
     has.add("layers", function (g) {
         var layers = getTool("layers", g.config);
         //overwrite the default with app settings
@@ -96,6 +97,16 @@ define(["dojo/has"], function (has) {
         }
         return layers;
     });
+
+    has.add("instructions", function (g) {
+        var instructions = getTool("instructions", g.config);
+        //overwrite the default with app settings
+        if (g.config.hasOwnProperty("tool_instructions")) {
+            instructions = g.config.tool_instructions;
+        }
+        return instructions;
+    });
+
     has.add("legend", function (g) {
         var legend = getTool("legend", g.config);
         //overwrite the default with app settings

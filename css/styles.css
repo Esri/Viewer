@@ -735,12 +735,10 @@ img {
     max-height: 80%; } }
 
 .desc {
-  margin-bottom: 100px;
-  padding: 5px; }
-
-#pageBody_details {
-  padding: 5px;
-  max-width: 288px; }
+  padding: 30px 10px 20px 20px;
+  max-width: 288px; 
+  color: rgb(93, 93, 124);
+}
 
 #panelTop {
   position: fixed;
@@ -1472,4 +1470,8 @@ h3 {
 .esriOverviewMap .ovwContainer {
   display: block;
   position: relative;
+}
+
+#panelTool_instructions {
+  float: right;
 }

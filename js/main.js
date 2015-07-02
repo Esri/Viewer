@@ -241,6 +241,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 var toolList = [];
                 for (var i = 0; i < this.config.tools.length; i++) {
                     switch (this.config.tools[i].name) {
+                        case "instructions":
+                            toolList.push(this._addInstructions(this.config.tools[i], toolbar, "large"));
+                            break;
                         case "legend":
                             toolList.push(this._addLegend(this.config.tools[i], toolbar, "medium"));
                             break;
@@ -558,6 +561,55 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             return deferred.promise;
         },
 
+        _addInstructions: function (tool, toolbar, panelClass) {
+            var deferred = new Deferred();
+            if (!has("instructions")) {
+               deferred.resolve(false);
+            } else 
+            {
+                var instructionsDiv = toolbar.createTool(tool, "large");
+
+                instructionsText = domConstruct.create("div", {
+                    tabindex: '0',
+                    class: 'desc',
+                }, instructionsDiv);
+
+                domConstruct.create("div", {
+                    innerHTML: '<b>In addition to the mouse, you may:</b></br>',
+                }, instructionsText);
+
+                list = domConstruct.create("ul", {
+                }, instructionsText);
+
+                domConstruct.create("li", {
+                    innerHTML : "Use <b><abbr aria-label='tab key'>TAB</abbr></b> to navigate from item to item."
+                }, list);
+
+                domConstruct.create("li", {
+                    innerHTML : "Use <b><abbr title='Shift and Tab keys together' aria-label='shift and tab keys'>SHIFT TAB</abbr></b> to navigate backwards."
+                }, list);
+
+                domConstruct.create("li", {
+                    innerHTML : "Press <b><abbr title='Enter (or Return)' aria-label='enter or return key'>ENTER</abbr></b> to activate the focused item."
+                }, list);
+
+                domConstruct.create("li", {
+                    innerHTML : "Use <b><abbr title='Page Up' aria-label='page up'>PgUp</abbr></b> or <b><abbr title='Page Down' aria-label='page down keys'>PgDn</abbr></b> to move from a tool page to the next or previous one."
+                }, list);
+
+                domConstruct.create("li", {
+                    innerHTML : "Use <b><abbr title='Escape' aria-label='escape key'>ESC</abbr></b> to close a tool page and return to the tool bar."
+                }, list);
+
+                domConstruct.create("li", {
+                    innerHTML : "Hit <b><abbr aria-label='space bar'>SPACE</abbr></b> to toggle a selected check box."
+                }, list);
+
+                deferred.resolve(true);
+            }
+            return deferred.promise;
+        },
+
         _addLegend: function (tool, toolbar, panelClass) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
@@ -610,8 +662,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 } else {
                     deferred.resolve(false);
                 }
-
-
             }
             return deferred.promise;
         },
