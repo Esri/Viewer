@@ -762,27 +762,31 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
         },
 
         _atachArrowKeys: function(onButton, map) {
-            on(onButton, 'keydown', lang.hitch(onButton, function(event) {
+            on(onButton, 'keydown', lang.hitch({ div: onButton, map: map}, function(event) {
                 switch (event.keyCode) {
                     case 38 : // up
-                        var top = dojo.style(this, 'top');
-                        if(top>0) {
-                            dojo.style(this, 'top', --top + 'px');
+                        var top = dojo.style(this.div, 'top');
+                        if(top > -this.div.clientHeight/2) {
+                            dojo.style(this.div, 'top', --top + 'px');
                         }
                         break;
                     case 40 : // down
-                        var top = dojo.style(this, 'top');
-                        dojo.style(this, 'top', ++top + 'px');
+                        var top = dojo.style(this.div, 'top');
+                        if(top < this.map.height - this.div.clientHeight/2) {
+                            dojo.style(this.div, 'top', ++top + 'px');
+                        }
                         break;
                     case 37 : // left
-                        var left = dojo.style(this, 'left');
-                        if(left>0) {
-                            dojo.style(this, 'left', --left + 'px');
+                        var left = dojo.style(this.div, 'left');
+                        if(left > -this.div.clientWidth/2) {
+                            dojo.style(this.div, 'left', --left + 'px');
                         }
                         break;
                     case 39 : // right
-                        var left = dojo.style(this, 'left');
-                        dojo.style(this, 'left', ++left + 'px');
+                        var left = dojo.style(this.div, 'left');
+                        if(left < this.map.width - this.div.clientWidth/2) {
+                            dojo.style(this.div, 'left', ++left + 'px');
+                        }
                         break;
                 }
                 switch (event.keyCode) {
