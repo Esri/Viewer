@@ -244,6 +244,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         case "instructions":
                             toolList.push(this._addInstructions(this.config.tools[i], toolbar, "large"));
                             break;
+                        case "details":
+                            toolList.push(this._addDetails(this.config.tools[i], toolbar, "medium"));
+                            break;
                         case "legend":
                             toolList.push(this._addLegend(this.config.tools[i], toolbar, "medium"));
                             break;
@@ -267,9 +270,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                             break;
                         case "print":
                             toolList.push(this._addPrint(this.config.tools[i], toolbar, "small"));
-                            break;
-                        case "details":
-                            toolList.push(this._addDetails(this.config.tools[i], toolbar, "medium"));
                             break;
                         case "share":
                             toolList.push(this._addShare(this.config.tools[i], toolbar, "medium"));
@@ -748,13 +748,16 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 id: "overviewMap",
                 map: this.map,
                 height: height,
-                visible: false
+                visible: false,
+                opacity: 1,
+                color: '#0000000f'
             }, domConstruct.create("div", {}, div));
 
             ovMap.startup();
 
             ovwHighlight = div.querySelector('.ovwHighlight');
             dojo.setAttr(ovwHighlight, 'tabindex', 0);
+            this._atachArrowKeys(ovwHighlight, ovMap);
             /*
             images = div.children[0].querySelectorAll('img');
             for (var i = 0; i<images.length; i++) {
@@ -764,6 +767,67 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 } 
             };
             */
+        },
+
+        _atachArrowKeys: function(onButton, map) {
+            on(onButton, 'keydown', lang.hitch(onButton, function(event) {
+                switch (event.keyCode) {
+                    case 38 : // up
+                        var top = dojo.style(this, 'top');
+                        if(top>0) {
+                            dojo.style(this, 'top', --top + 'px');
+                        }
+                        break;
+                    case 40 : // down
+                        var top = dojo.style(this, 'top');
+                        dojo.style(this, 'top', ++top + 'px');
+                        break;
+                    case 37 : // left
+                        var left = dojo.style(this, 'left');
+                        if(left>0) {
+                            dojo.style(this, 'left', --left + 'px');
+                        }
+                        break;
+                    case 39 : // right
+                        var left = dojo.style(this, 'left');
+                        dojo.style(this, 'left', ++left + 'px');
+                        break;
+                }
+                switch (event.keyCode) {
+                    case  9: // tab
+                    case 33: // PgUp
+                    case 34: // PgDn
+                    case 27: // Esc
+                        break;
+                    default:
+                        event.stopPropagation();
+                        event.preventDefault();
+                        break;
+                }
+            }));
+
+            on(onButton, 'keyup', lang.hitch(map, function(event) {
+                switch (event.keyCode) {
+                    case 38 : // up
+                    case 40 : // down
+                    case 37 : // left
+                    case 39 : // right
+                        var a;
+                        this._moveStopHandler(a);
+                        break;
+                }
+                switch (event.keyCode) {
+                    case  9: // tab
+                    case 33: // PgUp
+                    case 34: // PgDn
+                    case 27: // Esc
+                        break;
+                    default:
+                        event.stopPropagation();
+                        event.preventDefault();
+                        break;
+                }
+            }));
         },
 
         _addPrint: function (tool, toolbar, panelClass) {

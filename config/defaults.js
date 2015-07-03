@@ -54,6 +54,7 @@ define({
     //Set of tools that will be added to the toolbar
     "tools": [
         {"name": "instructions", "enabled": true},
+        {"name": "details", "enabled": true},
         {"name": "legend", "enabled": true},
         {"name": "bookmarks", "enabled": true},
         {"name": "layers", "enabled": true},
@@ -62,7 +63,6 @@ define({
         {"name": "measure", "enabled": true},
         {"name": "edit", "enabled": true, "toolbar": true}, 
         {"name": "print", "enabled": true, "legend": false, "layouts":false, "format":"pdf"},
-        {"name": "details", "enabled": true},
         {"name": "share", "enabled": true}
     ],
     //Set the active tool on the toolbar. Note home and locate can't be the active tool.

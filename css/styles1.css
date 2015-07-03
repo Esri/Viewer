@@ -26,20 +26,24 @@ select[tabindex='0']:not(#embedMapSizeDropDown):focus,
 #dijit_form_ComboButton_0_arrow:focus,
 input[type='checkbox']:focus,
 tr[tabindex='0']:focus,
-h1:focus, h2:focus, h3:focus,
-.esriOverviewMap:focus, 
-.ovwHighlight:focus
+h1:focus, h2:focus, h3:focus
+.esriOverviewMap:focus 
 {
     outline-width: 2px;
     outline-offset: -2px;
     outline-style: solid;
-    outline-color: rgba(0, 0, 0, 0.9) !important;
+    outline-color: rgba(0, 0, 0, 0.9);-- !important;
     border-bottom: 0;
 }
 
-tr[tabindex='0']:focus
+tr[tabindex='0']:focus 
 {
     outline-offset: 0px;
+}
+
+.ovwHighlight:focus{
+  outline-offset: 2px !important;
+  --outline-style: dotted !important;
 }
 
 #embedMapSizeDropDown:focus {

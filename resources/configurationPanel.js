@@ -195,7 +195,8 @@
                "label":"Share Tools"
             }
          ]
-      },{
+      },
+      {
          "category": "Search Settings",
          "fields": [
             {
