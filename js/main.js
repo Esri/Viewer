@@ -757,16 +757,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
             ovwHighlight = div.querySelector('.ovwHighlight');
             dojo.setAttr(ovwHighlight, 'tabindex', 0);
+            dojo.setAttr(ovwHighlight, 'aria-label', 'Use the Arrow keys to change the map extent.');
             this._atachArrowKeys(ovwHighlight, ovMap);
-            /*
-            images = div.children[0].querySelectorAll('img');
-            for (var i = 0; i<images.length; i++) {
-                if(!dojo.getAttr(images[i], 'alt'))
-                {
-                    dojo.setAttr(images[i], 'alt', '');
-                } 
-            };
-            */
         },
 
         _atachArrowKeys: function(onButton, map) {
