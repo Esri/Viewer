@@ -141,7 +141,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             //  width:14
             //}, esriSimpleSliderIncrementNode);
 
-            //dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', plusImg.alt);
+            dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', 'Zoom In');
             this._atachEnterKey(esriSimpleSliderIncrementNode,esriSimpleSliderIncrementNode);
 
             esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
@@ -158,7 +158,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             //  width:14
             //}, esriSimpleSliderDecrementNode);
 
-            //dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', minusImg.alt);
+            dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', 'Zoom Out');
             this._atachEnterKey(esriSimpleSliderDecrementNode, esriSimpleSliderDecrementNode);
 
             on(this.map.infoWindow, "show", lang.hitch(this, function() {

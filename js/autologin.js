@@ -1,6 +1,6 @@
 require(["esri/IdentityManager"], function (esriId) {
-	var username = "";
-	var password = "";
+	var username = "htudosietsg";
+	var password = "Margot!1";
 	esriId.on("dialog-create", function(evt) {
 		evt.target.dialog.txtUser_.focusNode.value = username;
 		setTimeout(function() {

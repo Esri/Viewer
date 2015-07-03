@@ -512,6 +512,10 @@ img {
 }
 
 .esriSimpleSliderIncrementButton[data-title]:hover:after {
+    line-height: 17;
+}
+
+.esriSimpleSliderDecrementButton[data-title]:hover:after {
     line-height: 10;
 }
 
