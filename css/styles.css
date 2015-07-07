@@ -872,18 +872,14 @@ img {
   margin-top: 2px;
   text-align: center;
   line-height: 26px;
-  -- -webkit-border-radius: 13px;
-  -moz-border-radius: 13px;
-  -ms-border-radius: 13px;
-  --border-radius: 13px; 
-
   background-color: transparent;
   padding: 0;
   border-left-color: transparent;
   border-top-color: transparent;
   border-right-color: transparent;
   border-bottom-color: transparent;
-  margin-right: 2px;
+  margin-left: 1px;
+  margin-right: 1px;
 }
 
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/

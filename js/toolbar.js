@@ -179,6 +179,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                     "aria-label": "Close tool page.",
                     src: 'images/close.png',
                     alt: 'Close',
+                    title: 'Close',
                 }, "pageHeader_" + name);
                 on(pageClose, "click", lang.hitch(this, this._closePage, name));
 
@@ -188,6 +189,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                     "aria-label": "Previous tool page.",
                     src: 'images/up.png',
                     alt: 'Previous Page',
+                    title: 'Previous Page',
                 }, "pageHeader_" + name);
                 on(pageUp, "click", lang.hitch(this, this._showPreviousPage, name));
 
@@ -198,6 +200,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                         "aria-label": "Next tool page.",
                         src: 'images/down.png',
                         alt: 'Next Page',
+                        title: 'Next Page',
                     }, "pageHeader_" + name);
                     on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
                 }

@@ -130,28 +130,30 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             esriSimpleSliderIncrementNode = dojo.query(".esriSimpleSliderIncrementButton")[0];
             var zoomIn_click = esriSimpleSliderIncrementNode.OnClick;
             dojo.empty(esriSimpleSliderIncrementNode);
-            dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', 'Zoom In');
+            //dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', 'Zoom In');
 
             plusbtn = domConstruct.create("input", {
                 className: "esriSimpleSliderIncrementButton",
                 type: "image",
-                "aria-label": "Zoom In.",
+                "aria-label": "Zoom In",
                 src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom In',
+                title: 'Zoom In',
             }, esriSimpleSliderIncrementNode);
             on(plusbtn, "click", zoomIn_click);
 
             esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
             var zoomOut_click = esriSimpleSliderDecrementNode.OnClick;
             dojo.empty(esriSimpleSliderDecrementNode);
-            dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', 'Zoom Out');
+            //dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', 'Zoom Out');
 
             minusbtn = domConstruct.create("input", {
                 className: "esriSimpleSliderDecrementButton",
                 type: "image",
-                "aria-label": "Zoom Out.",
+                "aria-label": "Zoom Out",
                 src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom Out',
+                title: 'Zoom Out',
             }, esriSimpleSliderDecrementNode);
             on(minusbtn, "click", zoomOut_click);
 
