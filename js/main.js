@@ -1060,45 +1060,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
         },
 
         _createMapUI: function () {
-            // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
-            if (has("home")) {
-                panelHome = domConstruct.create("div", {
-                    id: "panelHome",
-                    className: "icon-color tool",
-                    role: "listitem",
-                    innerHTML: "<div id='btnHome'></div>"
-                }, dom.byId("panelTools"), 0);
-                var home = new HomeButton({
-                    map: this.map
-                }, dom.byId("btnHome"));
-
-                home.startup();
-
-                homeButton = dojo.query(".homeContainer")[0];
-
-                homeNode = dojo.query(".home")[0];
-                dojo.empty(homeNode);
-                dojo.setAttr(homeNode, 'style','display:table-cell; vertical-align:middle;');
-                dojo.setAttr(homeNode, 'tabindex', 0); 
-                dojo.setAttr(homeNode, 'aria-label', dojo.attr(homeNode, 'title')); 
-                
-                domConstruct.create("img", {
-                    'src': 'images/icons_' + this.config.icons + '/home.png',
-                    alt: "",//dojo.attr(homeNode, 'title'),
-                    height:14,
-                    width:14
-                }, homeNode);
-                dojo.setAttr(homeNode, 'title','');
-
-                this._atachEnterKey(homeButton, homeNode);
-
-                if (!has("touch")) {
-                    //add a tooltip
-                    domAttr.set("btnHome", "data-title", this.config.i18n.tooltips.home);
-                } else {
-                    //remove no-touch class from body
-                    domClass.remove(document.body, "no-touch");
-                }
+            if (!has("touch")) {
+                //remove no-touch class from body
+                domClass.remove(document.body, "no-touch");
             }
 
             require(["application/has-config!scalebar?esri/dijit/Scalebar"], lang.hitch(this, function (Scalebar) {
@@ -1110,6 +1074,34 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     scalebarUnit: this.config.units
                 });
             }));
+
+            // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
+            if (has("home")) {
+                panelHome = domConstruct.create("div", {
+                    id: "panelHome",
+                    className: "icon-color tool",
+                    //role: "listitem",
+                    innerHTML: "<div id='btnHome'></div>"
+                }, dom.byId("panelTools"), 0);
+                var home = new HomeButton({
+                    map: this.map
+                }, dom.byId("btnHome"));
+
+                home.startup();
+
+                homeButton = dojo.query(".homeContainer")[0];
+                homeNode = dojo.query(".home")[0];
+                dojo.empty(homeNode);
+
+                homeHint = this.config.i18n.tooltips.home;
+                btnHome = domConstruct.create("input", {
+                    type: 'image',
+                    src: 'images/icons_' + this.config.icons + '/home.png',
+                    alt: homeHint,
+                    //title: homeHint,
+                    'aria-label': homeHint,
+                }, homeNode);
+            }
 
 
             if (has("locate")) {

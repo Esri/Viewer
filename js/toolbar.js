@@ -116,7 +116,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 "aria-label": tip,
                 alt: tip,
                 src: "images/icons_" + this.config.icons + "/" + name + ".png",
-                //"data-title": tip,
             }, this.pTools);
 
             if (!has("touch")) 
@@ -124,13 +123,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 domAttr.set(pTool, "title", tip);
             }
 
-            //domConstruct.create("div", {
-            //    className: "tool",
-            //    src: "images/icons_" + this.config.icons + "/" + name + ".png",
-            //    alt: "",
-            //    role: "button"
-            //
-            //}, pTool);
             on(pTool, "click", lang.hitch(this, this._toolClick, name));
             this.tools.push(name);
 
