@@ -136,7 +136,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 className: "esriSimpleSliderIncrementButton",
                 type: "image",
                 "aria-label": "Zoom In.",
-                src: 'images/icons_' + this.config.icons + '/plus.png',
+                src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom In',
             }, esriSimpleSliderIncrementNode);
             on(plusbtn, "click", zoomIn_click);
@@ -150,7 +150,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 className: "esriSimpleSliderDecrementButton",
                 type: "image",
                 "aria-label": "Zoom Out.",
-                src: 'images/icons_' + this.config.icons + '/minus.png',
+                src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom Out',
             }, esriSimpleSliderDecrementNode);
             on(minusbtn, "click", zoomOut_click);

@@ -72,6 +72,11 @@
                      "value":"black"
                   }
                ]
+            },
+            {  
+               "type":"boolean",
+               "fieldName":"new_icons",
+               "label":"New Icons"
             }
          ]
       },
@@ -300,6 +305,7 @@
    ],
    "values":{  
       "icons":"white",
+      "new_icons":false,
       "logo":"images/logo.png",
       "color":"#fff",
       "theme":"80ab00",
