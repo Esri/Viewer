@@ -46,5 +46,5 @@ define({
     "color","extent", "center", "level", "feature", "find" // example param. ?theme=<my theme>
   ],
   // For esri hosted environments only. Will automatically create a sharingurl and proxyurl for the application.
-  esriEnvironment: true
+  esriEnvironment: false
 });

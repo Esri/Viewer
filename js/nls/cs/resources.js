@@ -35,8 +35,8 @@ define(
 			      "label4": 'Na výšku'
 			    },
 			    "legend": "Přidat legendu do výstupu",
-                "title": "Ř_Title___ů",
-                "titlePrompt": "Ř_Add custom title______ů"
+                "title": "Nadpis",
+                "titlePrompt": "Přidat vlastní název"
             },
 			"share": {
 				"extent": "Použít aktuální rozsah mapy",

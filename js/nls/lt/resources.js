@@ -35,8 +35,8 @@ define(
 			      "label4": 'Stačias'
 			    },
 			    "legend": "Į išvestį pridėti legendą",
-                "title": "Į_Title___š",
-                "titlePrompt": "Į_Add custom title______š"
+                "title": "Pavadinimas",
+                "titlePrompt": "Pridėti adaptuotą pavadinimą"
             },
 			"share": {
 				"extent": "Naudoti esamą žemėlapio aprėptį",

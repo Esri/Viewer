@@ -35,8 +35,8 @@ define(
 			      "label4": 'Portrets'
 			    },
 			    "legend": "Pievienot apzīmējumus izvadei",
-                "title": "ķ_Title___ū",
-                "titlePrompt": "ķ_Add custom title______ū"
+                "title": "Nosaukums",
+                "titlePrompt": "Pievienot pielāgotu virsrakstu"
             },
 			"share": {
 				"extent": "Lieto pašreizējo kartes pārklājumu",

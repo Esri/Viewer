@@ -35,8 +35,8 @@ define(
 			      "label4": 'Pionowo'
 			    },
 			    "legend": "Dodaj legendę do danych wynikowych",
-                "title": "ł_Title___ą",
-                "titlePrompt": "ł_Add custom title______ą"
+                "title": "Tytuł",
+                "titlePrompt": "Dodaj niestandardowy tytuł"
             },
 			"share": {
 				"extent": "Użyj bieżącego zasięgu mapy",

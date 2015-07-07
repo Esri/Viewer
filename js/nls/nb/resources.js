@@ -35,8 +35,8 @@ define(
 			      "label4": 'Stående'
 			    },
 			    "legend": "Legg til kartforklaring i resultatet",
-                "title": "å_Title___ø",
-                "titlePrompt": "å_Add custom title______ø"
+                "title": "Tittel",
+                "titlePrompt": "Legg til egendefinert tittel"
             },
 			"share": {
 				"extent": "Bruk gjeldende kartutstrekning",

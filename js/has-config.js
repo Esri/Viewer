@@ -4,7 +4,6 @@ https://dojotoolkit.org/documentation/tutorials/1.8/device_optimized_builds/
 http://dante.dojotoolkit.org/hasjs/tests/runTests.html*/
 
 define(["dojo/has"], function (has) {
-
     var getTool = function (name, config) {
         var tool = false;
         for (var i = 0; i < config.tools.length; i++) {
@@ -179,8 +178,6 @@ define(["dojo/has"], function (has) {
         }
         return printLayouts;
     });
-
-
 
     has.add("share", function (g) {
         var share = getTool("share", g.config);

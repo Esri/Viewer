@@ -13,16 +13,13 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", "application/has-config", "esri/arcgis/utils", "esri/lang", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/Legend", "esri/dijit/BasemapGallery", "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog"], function (
-ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, domConstruct, domStyle, on, Deferred, all, query, registry, Menu, CheckedMenuItem, Toolbar, has, arcgisUtils, esriLang, HomeButton, LocateButton, Legend, BasemapGallery, Measurement, OverviewMap, Extent, FeatureLayer, TableOfContents, ShareDialog) {
-
-
+define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", "application/has-config", "esri/arcgis/utils", "esri/lang", "esri/urlUtils", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/Legend", "esri/dijit/BasemapGallery", "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/dijit/LayerList", "application/ShareDialog", "application/SearchSources"], function (
+ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, domConstruct, domStyle, on, Deferred, all, query, registry, Menu, CheckedMenuItem, Toolbar, has, arcgisUtils, esriLang, urlUtils, HomeButton, LocateButton, Legend, BasemapGallery, Measurement, OverviewMap, Extent, FeatureLayer, LayerList, ShareDialog, SearchSources) {
     return declare(null, {
         config: {},
         color: null,
         theme: null,
         map: null,
-        initExt: null,
         mapExt: null,
         editorDiv: null,
         editor: null,
@@ -33,28 +30,14 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             // and application id and any url parameters and any application specific configuration information.
             if (config) {
                 this.config = config;
-                this.color = this.setColor(this.config.color);
-                this.theme = this.setColor(this.config.theme);
+                this.color = this._setColor(this.config.color);
+                this.theme = this._setColor(this.config.theme);
                 // document ready
                 ready(lang.hitch(this, function () {
                     //supply either the webmap id or, if available, the item info
                     var itemInfo = this.config.itemInfo || this.config.webmap;
-                    //If a custom extent is set as a url parameter handle that before creating the map
-                    if (this.config.extent) {
-                        var extArray = decodeURIComponent(this.config.extent).split(",");
 
-                        if (extArray.length === 4) {
-                            itemInfo.item.extent = [
-                                [parseFloat(extArray[0]), parseFloat(extArray[1])],
-                                [parseFloat(extArray[2]), parseFloat(extArray[3])]
-                            ];
-                        } else if (extArray.length === 5) {
-                            this.initExt = new Extent(JSON.parse(this.config.extent));
-                        }
-                    }
                     this._createWebMap(itemInfo);
-
-
                 }));
             } else {
                 var error = new Error("Main:: Config is not defined");
@@ -80,23 +63,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 }
             }
         },
-
-        setColor: function (color) {
-            var rgb = Color.fromHex(color).toRgb();
-            var outputColor = null;
-            if (has("ie") < 9) {
-                outputColor = color;
-            } else {
-                //rgba supported so add
-                rgb.push(0.9);
-                outputColor = Color.fromArray(rgb);
-
-            }
-
-            return outputColor;
-
-        },
-
         // Map is ready
         _mapLoaded: function () {
             query(".esriSimpleSlider").style("backgroundColor", this.theme.toString());
@@ -326,7 +292,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     return;
                 }
 
-
                 //add field infos if necessary. Field infos will contain hints if defined in the popup and hide fields where visible is set
                 //to false. The popup logic takes care of this for the info window but not the edit window.
                 array.forEach(this.editableLayers, lang.hitch(this, function (layer) {
@@ -342,11 +307,10 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                                     time: true
                                 };
                             }
-
-                            if (field.visible) {
-                                fieldInfos.push(field);
-                            }
-
+                            //Add all editable fields even if not visible. 
+                            //if (field.visible) {
+                            fieldInfos.push(field);
+                            //}
                         }));
 
                         layer.fieldInfos = fieldInfos;
@@ -398,9 +362,9 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     }
                     var layersDiv = toolbar.createTool(tool, panelClass);
 
-                    var toc = new TableOfContents({
+                    var toc = new LayerList({
                         map: this.map,
-                        layers: layers
+                        layers: arcgisUtils.getLayerList(this.config.response)
                     }, domConstruct.create("div", {}, layersDiv));
                     toc.startup();
 
@@ -446,7 +410,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     legend.startup();
                     if (this.config.activeTool !== "") {
                         toolbar.activateTool(this.config.activeTool || "legend");
-                    }else{
+                    } else {
                         toolbar._closePage();
                     }
                     deferred.resolve(true);
@@ -536,219 +500,112 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             return deferred.promise;
         },
         _addPrint: function (tool, toolbar, panelClass) {
-            //Add the print widget to the toolbar. TODO: test custom layouts.
+            //Add the print widget to the toolbar 
             var deferred = new Deferred(),
-                legendNode = null,
                 print = null;
-
-
-            require(["application/has-config!print?esri/dijit/Print"], lang.hitch(this, function (Print) {
-                //TODO Update this to have custom title text if specified by user. 
-                //Add a new item to the print dialog that allows people to set this. 
-                //By default it should show the web map text.
+            require(["application/has-config!print?application/PrintConfig", "application/has-config!print?esri/dijit/Print"], lang.hitch(this, function (PrintConfig, Print) {
+                if (!PrintConfig || !Print) {
+                    deferred.resolve(false);
+                    return;
+                }
+                var printDiv = toolbar.createTool(tool, panelClass);
+                var format = null;
+                array.forEach(this.config.tools, function (tool) {
+                    if (tool.name === "print") {
+                        format = tool.format;
+                    }
+                });
+                if (this.config.hasOwnProperty("tool_print_format")) {
+                    format = this.config.tool_print_format;
+                }
                 var layoutOptions = {
                     "titleText": this.config.title,
                     "scalebarUnit": this.config.units,
                     "legendLayers": []
                 };
-                if (!Print) {
-                    deferred.resolve(false);
-                    return;
-                }
 
-                var printDiv = toolbar.createTool(tool, panelClass);
+                var printConfig = new PrintConfig({
+                    legendLayers: this.config.response,
+                    layouts: has("print-layouts"),
+                    format: format.toLowerCase() || null,
+                    printTaskUrl: this.config.helperServices.printTask.url,
+                    printi18n: this.config.i18n.tools.print,
+                    layoutOptions: layoutOptions
+                });
+                printConfig.createPrintOptions().then(lang.hitch(this, function (results) {
+                    var templates = results.templates;
+                    var legendLayers = results.legendLayers;
 
-                //get format
-                this.format = "PDF"; //default if nothing is specified
-                for (var i = 0; i < this.config.tools.length; i++) {
-                    if (this.config.tools[i].name === "print") {
-                        var f = this.config.tools[i].format;
-                        this.format = f.toLowerCase();
-                        break;
-                    }
-                }
-
-                if (this.config.hasOwnProperty("tool_print_format")) {
-                    this.format = this.config.tool_print_format.toLowerCase();
-                }
-                //add text box for title to print dialog
-                var titleNode = domConstruct.create("input",{
-                    id:"print_title",
-                    className: "printTitle",
-                    placeholder: this.config.i18n.tools.print.titlePrompt
-                },domConstruct.create("div"));
-
-                domConstruct.place(titleNode, printDiv);
-
-
-    
-                if (has("print-legend")) {
-                    legendNode = domConstruct.create("input", {
-                        id: "legend_ck",
-                        className: "checkbox",
-                        type: "checkbox",
-                        checked: false
-                    }, domConstruct.create("div", {
-                        "class": "checkbox"
-                    }));
-
-                    var labelNode = domConstruct.create("label", {
-                        "for": "legend_ck",
-                        "className": "checkbox",
-                        "innerHTML": "  " + this.config.i18n.tools.print.legend
+                    //add a text box so users can enter a custom title
+                    var titleNode = domConstruct.create("input", {
+                        id: "print_title",
+                        className: "printTitle",
+                        tabindex: "0",
+                        placeholder: this.config.i18n.tools.print.titlePrompt
                     }, domConstruct.create("div"));
-                    domConstruct.place(legendNode, printDiv);
-                    domConstruct.place(labelNode, printDiv);
 
-                    on(legendNode, "change", lang.hitch(this, function (arg) {
+                    domConstruct.place(titleNode, printDiv);
 
+                    if (has("print-legend")) {
+                        var legendNode = domConstruct.create("input", {
+                            id: "legend_ck",
+                            className: "checkbox",
+                            type: "checkbox",
+                            checked: false
+                        }, domConstruct.create("div", {
+                            "class": "checkbox"
+                        }));
 
-                        if (legendNode.checked) {
-                            var layers = arcgisUtils.getLegendLayers(this.config.response);
-                            var legendLayers = array.map(layers, function (layer) {
-                                return {
-                                    "layerId": layer.layer.id
-                                };
-                            });
-                            if (legendLayers.length > 0) {
+                        var labelNode = domConstruct.create("label", {
+                            "for": "legend_ck",
+                            "className": "checkbox",
+                            "innerHTML": "  " + this.config.i18n.tools.print.legend
+                        }, domConstruct.create("div"));
+                        domConstruct.place(legendNode, printDiv);
+                        domConstruct.place(labelNode, printDiv);
+
+                        on(legendNode, "change", lang.hitch(this, function (arg) {
+                            if (legendNode.checked && legendLayers.length > 0) {
                                 layoutOptions.legendLayers = legendLayers;
+                            } else {
+                                layoutOptions.legendLayers = [];
                             }
-                            array.forEach(print.templates, function (template) {
+                            array.forEach(this.print.templates, lang.hitch(this, function (template) {
                                 template.layoutOptions = layoutOptions;
-                            });
-
-
-                        } else {
-                            array.forEach(print.templates, function (template) {
-                                if (template.layoutOptions && template.layoutOptions.legendLayers) {
-                                    template.layoutOptions.legendLayers = [];
-                                }
-
-                            });
-                        }
-
-
-                    }));
-                }else{
-                    domStyle.set("pageBody_print","height","90px");
-                }
-
-                require(["application/has-config!print-layouts?esri/request", "application/has-config!print-layouts?esri/tasks/PrintTemplate"], lang.hitch(this, function (esriRequest, PrintTemplate) {
-                    if (!esriRequest && !PrintTemplate) {
-                        //Use the default print templates
-                        var templates = [{
-                            layout: "Letter ANSI A Landscape",
-                            layoutOptions: layoutOptions,
-                            label: this.config.i18n.tools.print.layouts.label1 + " ( " + this.format + " )",
-                            format: this.format
-                        },
-                        {
-                            layout: "Letter ANSI A Portrait",
-                            layoutOptions: layoutOptions,
-                            label: this.config.i18n.tools.print.layouts.label2 + " ( " + this.format + " )",
-                            format: this.format
-                        },
-                        {
-                            layout: "Letter ANSI A Landscape",
-                            layoutOptions: layoutOptions,
-                            label: this.config.i18n.tools.print.layouts.label3 + " ( image )",
-                            format: "PNG32"
-                        },
-                        {
-                            layout: "Letter ANSI A Portrait",
-                            layoutOptions: layoutOptions,
-                            label: this.config.i18n.tools.print.layouts.label4 + " ( image )",
-                            format: "PNG32"
-                        }];
-
-
-
-                        print = new Print({
-                            map: this.map,
-                            id: "printButton",
-                            templates: templates,
-                            url: this.config.helperServices.printTask.url
-                        }, domConstruct.create("div"));
-                        domConstruct.place(print.printDomNode, printDiv, "first");
-
-                        print.on("print-start", lang.hitch(this,function(){
-                         var printBox = dom.byId("print_title");
-                         if(printBox.value){
-                            array.forEach(print.templates, lang.hitch(this, function(template){
-                                template.layoutOptions.titleText = printBox.value;
                             }));
-                         }
                         }));
 
-                        print.startup();
-
-
-
-                        deferred.resolve(true);
-                        return;
+                    } else {
+                        domStyle.set("pageBody_print", "height", "90px");
                     }
+                    this.print = new Print({
+                        map: this.map,
+                        id: "printButton",
+                        templates: templates,
+                        url: this.config.helperServices.printTask.url
+                    }, domConstruct.create("div"));
+                    domConstruct.place(this.print.printDomNode, printDiv, "first");
 
-                    esriRequest({
-                        url: this.config.helperServices.printTask.url,
-                        content: {
-                            "f": "json"
-                        },
-                        "callbackParamName": "callback"
-                    }).then(lang.hitch(this, function (response) {
-                        var layoutTemplate, templateNames, mapOnlyIndex, templates;
-
-                        layoutTemplate = array.filter(response.parameters, function (param, idx) {
-                            return param.name === "Layout_Template";
-                        });
-
-                        if (layoutTemplate.length === 0) {
-                            console.log("print service parameters name for templates must be \"Layout_Template\"");
-                            return;
-                        }
-                        templateNames = layoutTemplate[0].choiceList;
-
-
-                        // remove the MAP_ONLY template then add it to the end of the list of templates
-                        mapOnlyIndex = array.indexOf(templateNames, "MAP_ONLY");
-                        if (mapOnlyIndex > -1) {
-                            var mapOnly = templateNames.splice(mapOnlyIndex, mapOnlyIndex + 1)[0];
-                            templateNames.push(mapOnly);
-                        }
-
-                        // create a print template for each choice
-                        templates = array.map(templateNames, lang.hitch(this, function (name) {
-                            var plate = new PrintTemplate();
-                            plate.layout = plate.label = name;
-                            plate.format = this.format;
-                            plate.layoutOptions = layoutOptions;
-                            return plate;
-                        }));
-
-
-                        print = new Print({
-                            map: this.map,
-                            templates: templates,
-                            url: this.config.helperServices.printTask.url
-                        }, domConstruct.create("div"));
-                        print.on("print-start", lang.hitch(this,function(){
-                         var printBox = dom.byId("print_title");
-                         if(printBox.value){
-                            array.forEach(print.templates, lang.hitch(this, function(template){
+                    this.print.on("print-start", lang.hitch(this, function () {
+                        var printBox = dom.byId("print_title");
+                        if (printBox.value) {
+                            array.forEach(this.print.templates, lang.hitch(this, function (template) {
                                 template.layoutOptions.titleText = printBox.value;
                             }));
-                         }
-                        }));
-                        domConstruct.place(print.printDomNode, printDiv, "first");
-
-                        print.startup();
-                        deferred.resolve(true);
-
+                        }
                     }));
+
+                    this.print.startup();
+
+
                 }));
+                deferred.resolve(true);
+                return;
+
+
+
 
             }));
-
-
             return deferred.promise;
         },
         _addShare: function (tool, toolbar, panelClass) {
@@ -863,7 +720,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     domAttr.set("btnLocate", "data-title", this.config.i18n.tooltips.locate);
                 }
 
-
                 geoLocate.startup();
 
             }
@@ -876,133 +732,43 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     return;
                 }
 
-                var options = {
+                var searchOptions = {
                     map: this.map,
-                    addLayersFromMap: false
+                    useMapExtent: this.config.searchExtent,
+                    itemData: this.config.response.itemInfo.itemData
                 };
-                var searchLayers = false;
-                var search = new Search(options, domConstruct.create("div", {
+
+                if (this.config.searchConfig) {
+                    searchOptions.applicationConfiguredSources = this.config.searchConfig.sources || [];
+                } else {
+                    var configuredSearchLayers = (this.config.searchLayers instanceof Array) ? this.config.searchLayers : JSON.parse(this.config.searchLayers);
+                    searchOptions.configuredSearchLayers = configuredSearchLayers;
+                    searchOptions.geocoders = this.config.locationSearch ? this.config.helperServices.geocode : [];
+                }
+                var searchSources = new SearchSources(searchOptions);
+                var createdOptions = searchSources.createOptions();
+
+                if (this.config.searchConfig && this.config.searchConfig.activeSourceIndex) {
+                    createdOptions.activeSourceIndex = this.config.searchConfig.activeSourceIndex;
+                }
+
+                var search = new Search(createdOptions, domConstruct.create("div", {
                     id: "search"
                 }, "mapDiv"));
-                var defaultSources = [];
 
-                //setup geocoders defined in common config 
-                if (this.config.helperServices.geocode && this.config.locationSearch) {
-                    var geocoders = lang.clone(this.config.helperServices.geocode);
-                    array.forEach(geocoders, lang.hitch(this, function (geocoder) {
-                        if (geocoder.url.indexOf(".arcgis.com/arcgis/rest/services/World/GeocodeServer") > -1) {
-
-                            geocoder.hasEsri = true;
-                            geocoder.locator = new Locator(geocoder.url);
-
-                            geocoder.singleLineFieldName = "SingleLine";
-                            geocoder.placeholder = "Select a location";
-                            geocoder.name = geocoder.name || "Esri World Geocoder";
-
-                            if (this.config.searchExtent) {
-                                geocoder.searchExtent = this.map.extent;
-                                geocoder.localSearchOptions = {
-                                    minScale: 300000,
-                                    distance: 50000
-                                };
-                            }
-                            defaultSources.push(geocoder);
-                        } else if (esriLang.isDefined(geocoder.singleLineFieldName)) {
-
-                            //Add geocoders with a singleLineFieldName defined 
-                            geocoder.locator = new Locator(geocoder.url);
-
-                            defaultSources.push(geocoder);
+                search.on("select-result", lang.hitch(this, function () {
+                    //if edit tool is enabled we'll have to delete/create 
+                    //so info window behaves correctly. 
+                    on.once(this.map.infoWindow, "hide", lang.hitch(this, function () {
+                        search.clear();
+                        if (this.editor) {
+                            this._destroyEditor();
+                            this._createEditor();
                         }
                     }));
-                }
-                //add configured search layers to the search widget 
-                var configuredSearchLayers = (this.config.searchLayers instanceof Array) ? this.config.searchLayers : JSON.parse(this.config.searchLayers);
 
-                array.forEach(configuredSearchLayers, lang.hitch(this, function (layer) {
-
-                    var mapLayer = this.map.getLayer(layer.id);
-                    if (mapLayer) {
-                        var source = {};
-                        source.featureLayer = mapLayer;
-
-                        if (layer.fields && layer.fields.length && layer.fields.length > 0) {
-                            source.searchFields = layer.fields;
-                            source.displayField = layer.fields[0];
-                            source.outFields = ["*"];
-                            searchLayers = true;
-                            defaultSources.push(source);
-                            if (mapLayer.infoTemplate) {
-                                source.infoTemplate = mapLayer.infoTemplate;
-                            }
-                        }
-                    }
                 }));
-                //Add search layers defined on the web map item 
-                if (this.config.response.itemInfo.itemData && this.config.response.itemInfo.itemData.applicationProperties && this.config.response.itemInfo.itemData.applicationProperties.viewing && this.config.response.itemInfo.itemData.applicationProperties.viewing.search) {
-                    var searchOptions = this.config.response.itemInfo.itemData.applicationProperties.viewing.search;
-                
-                    array.forEach(searchOptions.layers, lang.hitch(this, function (searchLayer) {
-                        //we do this so we can get the title specified in the item
-                        var operationalLayers = this.config.itemInfo.itemData.operationalLayers;
-                        var layer = null;
-                        array.some(operationalLayers, function (opLayer) {
-                            if (opLayer.id === searchLayer.id) {
-                                layer = opLayer;
-                                return true;
-                            }
-                        });
-
-                        if (layer && layer.hasOwnProperty("url")) {
-                            var source = {};
-                            var url = layer.url;
-                            var name = layer.title || layer.name;
-
-                            if (esriLang.isDefined(searchLayer.subLayer)) {
-                                url = url + "/" + searchLayer.subLayer;
-                                array.some(layer.layerObject.layerInfos, function (info) {
-                                    if (info.id == searchLayer.subLayer) {
-                                        name += " - " + layer.layerObject.layerInfos[searchLayer.subLayer].name;
-                                        return true;
-                                    }
-                                });
-                            }
-
-                            source.featureLayer = new FeatureLayer(url);
-
-
-                            source.name = name;
-
-
-                            source.exactMatch = searchLayer.field.exactMatch;
-                            source.displayField = searchLayer.field.name;
-                            source.searchFields = [searchLayer.field.name];
-                            source.placeholder = searchOptions.hintText;
-                            defaultSources.push(source);
-                            searchLayers = true;
-                        }
-
-                    }));
-                }
-
-                search.set("sources", defaultSources);
-
                 search.startup();
-                
-                //set the first non esri layer as active if search layers are defined. 
-                var activeIndex = 0;
-                if (searchLayers) {
-                    array.some(defaultSources, function (s, index) {
-                        if (!s.hasEsri) {
-                            activeIndex = index;
-                            return true;
-                        }
-                    });
-
-                    if (activeIndex > 0) {
-                        search.set("activeSourceIndex", activeIndex);
-                    }
-                }
 
                 if (search && search.domNode) {
                     domConstruct.place(search.domNode, "panelGeocoder");
@@ -1012,56 +778,55 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
 
             //Feature Search or find (if no search widget)
-            if((this.config.find || this.config.feature)){
-                require(["esri/dijit/Search"], lang.hitch(this, function(Search){
-                    //get the search value
-                    var feature = null, find = null, source = null, value = null;
-                    if(this.config.feature){
-                       feature = decodeURIComponent(this.config.feature);
-                        if(feature){
-                          var splitFeature = feature.split(";");
-                          if(splitFeature.length && splitFeature.length !== 3){
-                            splitFeature = feature.split(",");
-                          }
-                          feature = splitFeature;
-                          if(feature && feature.length && feature.length === 3){
-                             var layerId = feature[0],attribute = feature[1], featureId = feature[2],searchLayer = null;
-                             searchLayer = this.map.getLayer(layerId);
-                             if(searchLayer){
-                                source = {
-                                    exactMatch: true,
-                                    outFields: ["*"],
-                                    featureLayer: searchLayer,
-                                    displayField: attribute,
-                                    searchFields: [attribute] 
-                                };
-                                value = featureId;
-                             }
-    
-                          }
-                        }         
-                    }
-                    if(this.config.find){
+            if ((this.config.find || (this.config.customUrlLayer.id !== null && this.config.customUrlLayer.fields.length > 0 && this.config.customUrlParam !== null))) {
+                require(["esri/dijit/Search"], lang.hitch(this, function (Search) {
+                    var source = null,
+                        value = null,
+                        searchLayer = null;
+
+                    var urlObject = urlUtils.urlToObject(document.location.href);
+                    urlObject.query = urlObject.query || {};
+                    urlObject.query = esriLang.stripTags(urlObject.query);
+                    //Support find or custom url param 
+                    if (this.config.find) {
                         value = decodeURIComponent(this.config.find);
+                    } else if (urlObject.query[this.config.customUrlParam.toLowerCase()]) {
+                        value = urlObject.query[this.config.customUrlParam.toLowerCase()];
+
+                        searchLayer = this.map.getLayer(this.config.customUrlLayer.id);
+                        if (searchLayer) {
+
+                            var searchFields = this.config.customUrlLayer.fields[0].fields;
+                            source = {
+                                exactMatch: true,
+                                outFields: ["*"],
+                                featureLayer: searchLayer,
+                                displayField: searchFields[0],
+                                searchFields: searchFields
+                            };
+                        }
                     }
                     var urlSearch = new Search({
                         map: this.map
                     });
-                    urlSearch.sources;
-       
-                    if(source){
+
+                    if (source) {
                         urlSearch.set("sources", [source]);
                     }
-                    urlSearch.on("load", lang.hitch(this, function(){
-                        urlSearch.search(value).then(lang.hitch(this, function(){
-                            on.once(this.map.infoWindow, "hide", lang.hitch(this, function(){
+                    urlSearch.on("load", lang.hitch(this, function () {
+                        urlSearch.search(value).then(lang.hitch(this, function () {
+                            on.once(this.map.infoWindow, "hide", lang.hitch(this, function () {
                                 urlSearch.clear();
                                 urlSearch.destroy();
+                                if (this.editor) {
+                                    this._destroyEditor();
+                                    this._createEditor();
+                                }
                             }));
                         }));
                     }));
                     urlSearch.startup();
-        
+
                 }));
             }
 
@@ -1069,8 +834,22 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             this._createUI();
 
         },
-        _updateTheme: function () {
+        _setColor: function (color) {
+            //Convert the string color from the config file to rgba if supported. 
+            var rgb = Color.fromHex(color).toRgb();
+            var outputColor = null;
+            if (has("ie") < 9) {
+                outputColor = color;
+            } else {
+                //rgba supported so add
+                rgb.push(0.9);
+                outputColor = Color.fromArray(rgb);
 
+            }
+            return outputColor;
+        },
+        _updateTheme: function () {
+            //Update the app to use the configured color scheme. 
             //Set the background color using the configured theme value
             query(".bg").style("backgroundColor", this.theme.toString());
             query(".esriPopup .pointer").style("backgroundColor", this.theme.toString());
@@ -1092,15 +871,9 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             }
 
         },
-        _checkExtent: function () {
-            var pt = this.map.extent.getCenter();
-            if (!this.initExt.contains(pt)) {
-                this.map.setExtent(this.mapExt);
-            } else {
-                this.mapExt = this.map.extent;
-            }
-        },
+
         _adjustPopupSize: function () {
+            //Set the popup size to be half the widget and .35% of the map height
             if (!this.map) {
                 return;
             }
@@ -1117,34 +890,31 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 height = newHeight;
             }
             this.map.infoWindow.resize(width, height);
+            on(this.map.infoWindow, "show", lang.hitch(this, function () {
+                domClass.add(document.body, "noscroll");
+            }));
+            on(this.map.infoWindow, "hide", lang.hitch(this, function () {
+                domClass.remove(document.body, "noscroll");
+            }));
         },
         _createWebMap: function (itemInfo) {
 
             window.config = this.config;
+            itemInfo = this._setExtent(itemInfo);
 
-            var options = {};
-            //specify center and zoom if provided as url params 
-            if (this.config.level) {
-                options.zoom = this.config.level;
-            }
-            if (this.config.center) {
-                var points = this.config.center.split(",");
-                if (points && points.length === 2) {
-                    options.center = [parseFloat(points[0]), parseFloat(points[1])];
-                }
-
-            }
-
+            var mapOptions = {};
+            mapOptions = this._setLevel(mapOptions);
+            mapOptions = this._setCenter(mapOptions);
 
             // create a map based on the input web map id
             arcgisUtils.createMap(itemInfo, "mapDiv", {
-                mapOptions: options,
+                mapOptions: mapOptions,
                 editable: has("edit"),
                 //is the app editable
                 usePopupManager: true,
+                layerMixins: this.config.layerMixins,
                 bingMapsKey: this.config.bingKey
             }).then(lang.hitch(this, function (response) {
-
                 this.map = response.map;
                 domClass.add(this.map.infoWindow.domNode, "light");
                 this._updateTheme();
@@ -1167,27 +937,18 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 } else {
                     title = this.config.title;
                 }
-                
+
                 this.config.title = title;
                 document.title = title;
                 dom.byId("title").innerHTML = title;
 
                 //Set subtitle if provided 
-                if(this.config.subtitle){
+                if (this.config.subtitle) {
                     dom.byId("subtitle").innerHTML = this.config.subtitle;
-                }else{
-                    domClass.add("title","nosubtitle" )
+                } else {
+                    domClass.add("title", "nosubtitle");
                 }
                 this.config.response = response;
-                window.config = this.config;
-
-                if (this.initExt !== null) {
-                    this.map.setExtent(this.initExt);
-                }else{
-                   this.initExt = this.map.extent;
-                  // on.once(this.map, "extent-change", lang.hitch(this, this._checkExtent));
-                }
-
 
                 this._createMapUI();
                 // make sure map is loaded
@@ -1201,6 +962,41 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     }));
                 }
             }), this.reportError);
+        },
+        _setLevel: function (options) {
+            var level = this.config.level;
+            //specify center and zoom if provided as url params 
+            if (level) {
+                options.zoom = level;
+            }
+            return options;
+        },
+
+        _setCenter: function (options) {
+            var center = this.config.center;
+            if (center) {
+                var points = center.split(",");
+                if (points && points.length === 2) {
+                    options.center = [parseFloat(points[0]), parseFloat(points[1])];
+                }
+            }
+            return options;
+        },
+
+        _setExtent: function (info) {
+            var e = this.config.extent;
+            //If a custom extent is set as a url parameter handle that before creating the map
+            if (e) {
+                var extArray = e.split(",");
+                var extLength = extArray.length;
+                if (extLength === 4) {
+                    info.item.extent = [
+                        [parseFloat(extArray[0]), parseFloat(extArray[1])],
+                        [parseFloat(extArray[2]), parseFloat(extArray[3])]
+                    ];
+                }
+            }
+            return info;
         }
     });
 });

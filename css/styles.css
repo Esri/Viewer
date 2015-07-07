@@ -1,106 +1,3 @@
-.TableOfContents {
-  position: relative;
-  width: 297px;
-  overflow: auto; 
-}
-
-.TableOfContents .toc-title {
-  border-bottom: 1px solid #e0e0e0;
-  font-size: 16px;
-  line-height: 16px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none; }
-
-.TableOfContents .toc-first-layer .toc-title {
-  border-top: 1px solid #e0e0e0; }
-
-.TableOfContents .toc-title-container {
-  background: none;
-  color: #555;
-  position: relative;
-  zoom: 1; }
-
-.TableOfContents .toc-text {
-  float: left;
-  padding: 12px 0;
-  margin: 0;
-  text-overflow: ellipsis;
-  width: 87%;
-  white-space: nowrap;
-  overflow-x: hidden;
-  line-height: 16px;
-  height: 16px;
-  border: 1px solid transparent;
-  vertical-align: middle; }
-
-.esriRTL .TableOfContents .toc-text {
-  float: right; }
-
-.TableOfContents .toc-checkbox {
-  float: left;
-  height: 16px;
-  width: 16px;
-  border: 1px solid #bababa;
-  margin: 12px 8px;
-  vertical-align: middle;
-  font-size: 12px;
-  line-height: 16px;
-  background-color: #fff;
-  color: #000;
-  cursor: pointer; }
-
-.esriRTL .TableOfContents .toc-checkbox {
-  float: right; }
-
-.TableOfContents .toc-checkbox:hover {
-  color: #555; }
-
-.TableOfContents .toc-checkbox:active {
-  color: #999; }
-
-.TableOfContents .toc-checkbox .icon-check-1 {
-  content: "\2713";
-  color: #333;
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-  font-size: 15px; }
-
-.toc-settings {
-  cursor: pointer;
-  padding: 12px 0;
-  float: right;
-  margin-right: 15px;
-  color: #999; }
-
-.toc-settings:hover {
-  color: #333; }
-
-.toc-settings:active {
-  color: #97cbec; }
-
-.esriRTL .toc-settings {
-  margin-right: 0;
-  float: left;
-  margin-left: 15px; }
-
-.toc-account {
-  margin-left: 4px;
-  cursor: pointer;
-  text-decoration: none; }
-
-.esriRTL .toc-account {
-  margin-left: 0;
-  margin-right: 4px; }
-
-@media screen and (max-width: 300px) {
-  .TableOfContents {
-    width: auto; }
-  .TableOfContents .toc-text {
-    width: 60%; } }
-
-.clear {
-  clear: both; }
-
 /*Phones (520px) Small Tablets (720px)*/
 html, body {
   padding: 0;
@@ -108,6 +5,10 @@ html, body {
   height: 100%;
   width: 100%;
   font-family: Arial, Helvetica, sans-serif; }
+
+.noscroll{
+  overflow: hidden;
+}
 
 .modal-scrollbar {
   margin-right: 17px; }
@@ -169,9 +70,25 @@ html, body {
   left: 0;
   text-align: center; 
 }
-.esriOverviewMap{
 
+.esriLayer{
+  background-color: #fff;
 }
+.esriLayerList .esriTitle {
+  background-color: #fff;
+  border-bottom:none;
+}
+.esriLayerList .esriList ul{
+  background-color: #fff;
+}
+.esriLayerList .esriList{
+    border-top:none;
+}
+
+#pageBody_layers{
+  background-color: #fff;
+}
+
 .esriOverviewMap .ovwContainer{
   width:300px !important;
 }
@@ -181,31 +98,14 @@ html, body {
 @media only screen and (min-width: 720px) {
   #pageBody_overview {
     max-height: 80%; } }
+    
 /*Styles for the print dialog checkbox*/
 #pageBody_print .checkbox {
   display: inline-block;
   cursor: pointer;
   line-height: 18px;
-}
-
-#pageBody_print input[type=checkbox].checkbox {
-  display: none; }
-
-#pageBody_print .checkbox:before {
-  content: "";
-  display: inline-block;
-  width: 18px;
   height: 18px;
-  vertical-align: middle;
-  background-color: #d3d3d3;
-  color: #f3f3f3;
-  text-align: center;
-  border-radius: 3px; }
-
-#pageBody_print input[type=checkbox]:checked.checkbox + .checkbox:before {
-  content: "\2713";
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-  font-size: 15px; }
+}
 
 /*Layer list dialog*/
 .layer-menu {
@@ -269,6 +169,7 @@ html, body {
   border-style: solid;
   padding: 5px;
   margin-bottom: 12px;
+  display:block;
 }
 .esriPrintout a {
   color: #5daddd; 
@@ -351,10 +252,13 @@ html, body {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
   zoom: 1;
   color: #fff; }
-
+@media only screen and (max-width: 400px){
+  .arcgisSearch .searchGroup .searchInput{
+    width:130px;
+  }
+}
 @media only screen and (min-width: 800px) {
   .arcgisSearch .searchGroup .searchInput {
-    max-width: 190px;
     display: block; } }
 
 .arcgisSearch .searchClear {
@@ -635,11 +539,6 @@ img {
   width: 300px;
   display: block;
   overflow: hidden;
-
-  /*overflow-y:auto;*/
-
-  /*overflow: hidden;
-  max-height: 305px;*/
   top: 100px;
   background-color: transparent;
   background-color: white;
@@ -752,10 +651,20 @@ img {
 #pageBody_legend {
   padding-top: 20px;
 }
+@media only screen and (max-width: 480px) {
+  #pageBody_legend {
+    max-height:250px;
+  }
+  .pageBody{
+    max-height: 250px;
+  } 
+}
 .legend{
   margin:auto;
   max-width: 90%;
 }
+
+
 #pageBody_share {
   padding: 5px 20px;
   overflow-y: auto; 
@@ -838,8 +747,8 @@ img {
   margin-left: 5px;
 }
 .no-search #panelLogo img{
-  max-width:50px !important;
-  max-height:50px !important;
+  max-width:45px !important;
+  max-height:45px !important;
 }
 #panelLogo{
   display:none;
@@ -1163,8 +1072,6 @@ img {
   margin: 0 0 0 5px; }
 
 .calcite .share-dialog-icon {
-  /*font-size: 32px;
-    line-height: 32px;*/
   font-size: 30px;
   line-height: 30px;
   float: left;
@@ -1225,29 +1132,13 @@ img {
   border: 1px solid #dcdcdc;
   margin: 0 0 10px; }
 
-.share-dialog-checkbox {
-  display: inline-block;
-  cursor: pointer;
-  padding: 8px; }
-
-input[type=checkbox].share-dialog-checkbox {
-  display: none; }
-
-.share-dialog-checkbox:before {
-  content: "";
-  display: inline-block;
-  width: 18px;
-  height: 18px;
-  vertical-align: middle;
-  background-color: #d3d3d3;
-  color: #f3f3f3;
-  text-align: center;
-  border-radius: 3px; }
-
-input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:before {
-  content: "\2713";
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-  font-size: 15px; }
+.share-dialog-extent{
+  height:30px;
+  line-height: 30px;
+}
+input[type=checkbox]{
+  font-size:2em;
+}
 
 /*Icon Fonts*/
 @font-face {
@@ -1329,6 +1220,6 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .icon-angle-down:before {
   content: '\e809'; }
 
-/* '	' */
+/* '  ' */
 .icon-check-1:before {
   content: '\2713'; }

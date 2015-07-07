@@ -76,7 +76,9 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         },
         _hasScrollbar: function () {
             // The Modern solution
-            if (typeof window.innerWidth === 'number') return window.innerWidth > document.documentElement.clientWidth;
+            if (typeof window.innerWidth === "number") {
+                return window.innerWidth > document.documentElement.clientWidth;
+            }
 
             // rootElem for quirksmode
             var rootElem = document.documentElement || document.body;
@@ -84,20 +86,24 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             // Check overflow style property on body for fauxscrollbars
             var overflowStyle;
 
-            if (typeof rootElem.currentStyle !== 'undefined') overflowStyle = rootElem.currentStyle.overflow;
+            if (typeof rootElem.currentStyle !== "undefined") {
+                overflowStyle = rootElem.currentStyle.overflow;
+            }
 
-            overflowStyle = overflowStyle || window.getComputedStyle(rootElem, '').overflow;
+            overflowStyle = overflowStyle || window.getComputedStyle(rootElem, "").overflow;
 
             // Also need to check the Y axis overflow
             var overflowYStyle;
 
-            if (typeof rootElem.currentStyle !== 'undefined') overflowYStyle = rootElem.currentStyle.overflowY;
+            if (typeof rootElem.currentStyle !== "undefined") {
+                overflowYStyle = rootElem.currentStyle.overflowY;
+            }
 
-            overflowYStyle = overflowYStyle || window.getComputedStyle(rootElem, '').overflowY;
+            overflowYStyle = overflowYStyle || window.getComputedStyle(rootElem, "").overflowY;
 
             var contentOverflows = rootElem.scrollHeight > rootElem.clientHeight;
             var overflowShown = /^(visible|auto)$/.test(overflowStyle) || /^(visible|auto)$/.test(overflowYStyle);
-            var alwaysShowScroll = overflowStyle === 'scroll' || overflowYStyle === 'scroll';
+            var alwaysShowScroll = overflowStyle === "scroll" || overflowYStyle === "scroll";
 
             return (contentOverflows && overflowShown) || (alwaysShowScroll);
         },
@@ -116,13 +122,13 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 var tip = this.config.i18n.tooltips[name] || name;
                 domAttr.set(pTool, "data-title", tip);
                 domAttr.set(pTool, "title", tip);
-                on(pTool, mouse.enter, function(){
-                    domAttr.set(pTool, "title","");
+                on(pTool, mouse.enter, function () {
+                    domAttr.set(pTool, "title", "");
                 });
-                on(pTool, mouse.leave, function(){
+                on(pTool, mouse.leave, function () {
                     domAttr.set(pTool, "title", tip);
-                });            
-                
+                });
+
             }
 
             domConstruct.create("img", {

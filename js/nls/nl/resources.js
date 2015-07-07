@@ -35,8 +35,8 @@ define(
 			      "label4": 'Staand'
 			    },
 			    "legend": "Legenda toevoegen aan uitvoer",
-                "title": "Ĳ_Title___ä",
-                "titlePrompt": "Ĳ_Add custom title______ä"
+                "title": "Titel",
+                "titlePrompt": "Aangepaste titel toevoegen"
             },
 			"share": {
 				"extent": "Huidige extent van de kaart gebruiken",
