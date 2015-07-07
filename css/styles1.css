@@ -17,7 +17,7 @@ button:hover,
 
 li[role='menuitem']:focus, 
 div[role='button']:not(.searchBtn):not(.searchClear):not(.pageClose):not(.pageUp):not(.pageDown):focus,
-div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchClear):focus,
+div[tabindex]:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):not(.searchClear):focus,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:focus,
 input[type='text']:focus,
 button:focus,
@@ -25,6 +25,7 @@ textarea:focus,
 select[tabindex='0']:not(#embedMapSizeDropDown):focus,
 #dijit_form_ComboButton_0_arrow:focus,
 input[type='checkbox']:focus,
+input[type='image']:focus, .icon-link:focus,
 tr[tabindex='0']:focus,
 h1:focus, h2:focus, h3:focus
 .esriOverviewMap:focus,
@@ -37,7 +38,11 @@ h1:focus, h2:focus, h3:focus
     border-bottom: 0;
 }
 
-.esriSimpleSliderIncrementButton:focus, .esriSimpleSliderDecrementButton:focus{
+.esriSimpleSliderIncrementButton:focus, 
+.esriSimpleSliderDecrementButton:focus,
+.icon-link:focus,
+input[type='image']:focus
+{
     outline-offset: 1px;
 }
 
@@ -48,7 +53,6 @@ tr[tabindex='0']:focus
 
 .ovwHighlight:focus{
   outline-offset: 2px !important;
-  --outline-style: dotted !important;
 }
 
 #embedMapSizeDropDown:focus {
