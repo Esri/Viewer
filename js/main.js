@@ -132,14 +132,14 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             dojo.setAttr(esriSimpleSliderIncrementNode, 'tabindex', 0);
             dojo.setAttr(esriSimpleSliderIncrementNode, 'role', 'listitem');
             dojo.setAttr(esriSimpleSliderIncrementNode, 'aria-label', 'Zoom In, button.');
-            //plusImg = domConstruct.create("img", {
-            //  'src': 'images/icons_' + this.config.icons + '/plus.png',
-            //  alt: 'Zoom In',
-            //  role: 'button',
-            //  'aria-hidden': true,
-            //  height:14,
-            //  width:14
-            //}, esriSimpleSliderIncrementNode);
+            plusImg = domConstruct.create("img", {
+              'src': 'images/icons_' + this.config.icons + '/plus.png',
+              alt: 'Zoom In',
+              role: 'button',
+              'aria-hidden': true,
+              height:20,
+              width:20
+            }, esriSimpleSliderIncrementNode);
 
             dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', 'Zoom In');
             this._atachEnterKey(esriSimpleSliderIncrementNode,esriSimpleSliderIncrementNode);
@@ -149,14 +149,14 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             dojo.setAttr(esriSimpleSliderDecrementNode, 'tabindex', 0);
             dojo.setAttr(esriSimpleSliderDecrementNode, 'role', 'listitem');
             dojo.setAttr(esriSimpleSliderDecrementNode, 'aria-label', 'Zoom Out, button.');
-            //minusImg = domConstruct.create("img", {
-            //  'src': 'images/icons_' + this.config.icons + '/minus.png',
-            //  alt: 'Zoom Out',
-            //  role: 'button',
-            //  'aria-hidden': true,
-            //  height:14,
-            //  width:14
-            //}, esriSimpleSliderDecrementNode);
+            minusImg = domConstruct.create("img", {
+              'src': 'images/icons_' + this.config.icons + '/minus.png',
+              alt: 'Zoom Out',
+              role: 'button',
+              'aria-hidden': true,
+              height:20,
+              width:20
+            }, esriSimpleSliderDecrementNode);
 
             dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', 'Zoom Out');
             this._atachEnterKey(esriSimpleSliderDecrementNode, esriSimpleSliderDecrementNode);

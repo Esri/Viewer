@@ -333,16 +333,6 @@ input[type=checkbox].checkbox {
   zoom: 1; 
 }
 
-.esriSimpleSliderVertical .esriSimpleSliderIncrementButton {
-  border: none !important; 
-  background: url('../images/icons_white/plus.png') no-repeat center;
-}
-
-.esriSimpleSliderVertical .esriSimpleSliderDecrementButton {
-  border: none !important; 
-  background: url('../images/icons_white/minus.png') no-repeat center;
-}
-
 .simpleGeocoder .esriGeocoder {
   display: block;
   width: 100%;
