@@ -5,7 +5,8 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):not(.searchBtn):no
 #dijit_form_ComboButton_0_arrow:hover,
 button:hover,
 .panelToolActive:hover,
-.esriMeasurement .esriToggleButton .dijitButtonNode:hover
+.esriMeasurement .esriToggleButton .dijitButtonNode:hover,
+.panelTool:hover
 {
   background-color: rgba(255, 255, 255, 0.3) !important;
 }

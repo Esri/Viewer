@@ -494,7 +494,8 @@ img {
   border: 0; }
 
 /*custom tooltips for toolbar tools. Test on early IE*/
-[data-title]:hover:after {
+[data-title]:hover:after
+{
   content: attr(data-title);
   padding: 4px 8px;
   color: #fff;

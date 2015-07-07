@@ -109,38 +109,28 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             // add tool
             var tip = this.config.i18n.tooltips[name] || name;
-            var pTool = domConstruct.create("div", {
+            var pTool = domConstruct.create("input", {
+                type:"image",
                 className: "panelTool",
                 id: "panelTool_" + name,
                 "aria-label": tip,
-                tabindex: 0,
-                role: "listitem",
+                alt: tip,
+                src: "images/icons_" + this.config.icons + "/" + name + ".png",
+                //"data-title": tip,
             }, this.pTools);
-            //domAttr.set(pTool, "style", "background: url('images/icons_" + this.config.icons + "/" + name + ".png') no-repeat top left; background-size: 24px;");
-            on(pTool, 'keydown', lang.hitch(pTool, function(event){
-                if(event.keyCode=='13')
-                    this.click();
-            }));
 
             if (!has("touch")) 
             {
-                //add a tooltip 
-                domAttr.set(pTool, "data-title", tip);
-                
-                //on(pTool, mouse.enter, function(){
-                //    domAttr.set(pTool, "title","");
-                //});
-                //on(pTool, mouse.leave, function(){
-                //    domAttr.set(pTool, "title", tip);
-                //});            
+                domAttr.set(pTool, "title", tip);
             }
 
-            domConstruct.create("img", {
-                className: "tool",
-                src: "images/icons_" + this.config.icons + "/" + name + ".png",
-                alt: "",
-                role: "button"
-            }, pTool);
+            //domConstruct.create("div", {
+            //    className: "tool",
+            //    src: "images/icons_" + this.config.icons + "/" + name + ".png",
+            //    alt: "",
+            //    role: "button"
+            //
+            //}, pTool);
             on(pTool, "click", lang.hitch(this, this._toolClick, name));
             this.tools.push(name);
 
