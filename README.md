@@ -5,7 +5,11 @@ basic-viewer-template
 ![Screen Shot](https://dl.dropboxusercontent.com/u/24627279/screenshots/Viewer_screenshot.png)
 
 [View it live] (http://www.arcgis.com/apps/Viewer/index.html?webmap=f5b13dbed07c46cdb783cf361833aa6b)
-
+#July 2015 Release Updates
+- **Optional Subtitle:** Added support for specifying a subtitle. To specify subtitle text update config/defaults.js and specify the subtitle text using the subtitle property. 
+-  **Custom URL Parameters:** The template now supports the ability to define a custom url parameter along with the search layer and field. This can be used to build applications that display a particular feature at application startup. For example if your app displays parcel features you could define a custom url parameter called parcel and then users can navigate there directly by appending ?parcel=1245243242343 and the map will zoom to that feature on startup. Define these values using by setting the customUrlParam and customUrlLayer properties in config/defaults.js. 
+-  **Support for toggling sub layers:** The layers feature now allows you to toggle the visilibity of sub layers. 
+-  **Define custom print layout title:** The print feature now provides an option for users to define a custom title for the print layout. 
 #Features
 The template can be configured using the following options:
 
