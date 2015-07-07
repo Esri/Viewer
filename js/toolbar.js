@@ -191,39 +191,33 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             //Adds the up/down and close tools to the page header. 
             for (var i = 0; i < this.tools.length; i++) {
                 var name = this.tools[i];
-                var pageClose = domConstruct.create("div", {
+                var pageClose = domConstruct.create("input", {
                     className: "pageClose",
-                    tabIndex:0,
-                    role: "button",
-                    "aria-label": "Close dialog.",
-                    //'data-title':'Close',
-                    innerHTML:"<img src='images/close.png' alt='Close'/>"
+                    type: "image",
+                    "aria-label": "Close tool page.",
+                    src: 'images/close.png',
+                    alt: 'Close',
                 }, "pageHeader_" + name);
                 on(pageClose, "click", lang.hitch(this, this._closePage, name));
-                this._atachEnterKey(pageClose, pageClose);
 
-                var pageUp = domConstruct.create("div", {
+                var pageUp = domConstruct.create("input", {
                     className: "pageUp",
-                    tabIndex:0,
-                    role: "button",
-                    "aria-label": "Previous page.",
-                    //'data-title':'Previous',
-                    innerHTML:"<img src='images/up.png' alt='Previous Page'/>"
+                    type: "image",
+                    "aria-label": "Previous tool page.",
+                    src: 'images/up.png',
+                    alt: 'Previous Page',
                 }, "pageHeader_" + name);
                 on(pageUp, "click", lang.hitch(this, this._showPreviousPage, name));
-                this._atachEnterKey(pageUp, pageUp);
 
                 if (name != this.tools[this.tools.length - 1]) {
-                    var pageDown = domConstruct.create("div", {
+                    var pageDown = domConstruct.create("input", {
                         className: "pageDown",
-                        tabIndex:0,
-                        role: "button",
-                        "aria-label": "Next page.",
-                        //'data-title':'Next',
-                        innerHTML:"<img src='images/down.png' alt='Next Page'/>"
+                        type: "image",
+                        "aria-label": "Next tool page.",
+                        src: 'images/down.png',
+                        alt: 'Next Page',
                     }, "pageHeader_" + name);
                     on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
-                    this._atachEnterKey(pageDown, pageDown);
                 }
 
                 var pageContent = dom.byId("pageContent_" + name);
