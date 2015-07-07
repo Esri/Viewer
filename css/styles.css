@@ -1288,17 +1288,12 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   content: '\e809'; 
 }
 
-/* '	' */
-.icon-check-1:before {
-  --content: '\2713'; 
-}
-
 .homeContainer, .locateContainer
 {
   margin-bottom: 7px;
 }
 
-.homeContainer input 
+.homeContainer input, .locateContainer input
 {
   margin-top: 3px; 
   height:19px; 

@@ -40,11 +40,19 @@ h1:focus, h2:focus, h3:focus
 }
 
 .esriSimpleSliderIncrementButton:focus, 
-.esriSimpleSliderDecrementButton:focus,
+.esriSimpleSliderDecrementButton:focus{
+    outline-offset: 2px;
+}
+
 .icon-link:focus,
 input[type='image']:focus
 {
-    outline-offset: 1px;
+    outline-offset: 0px;
+}
+
+.homeContainer input:focus, .locateContainer input:focus 
+{
+    outline-offset: 2px;
 }
 
 tr[tabindex='0']:focus 

@@ -1080,7 +1080,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 panelHome = domConstruct.create("div", {
                     id: "panelHome",
                     className: "icon-color tool",
-                    //role: "listitem",
                     innerHTML: "<div id='btnHome'></div>"
                 }, dom.byId("panelTools"), 0);
                 var home = new HomeButton({
@@ -1092,8 +1091,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 homeButton = dojo.query(".homeContainer")[0];
                 homeNode = dojo.query(".home")[0];
                 dojo.empty(homeNode);
+                homeHint = dojo.attr(homeButton, 'title');
 
-                homeHint = this.config.i18n.tooltips.home;
                 btnHome = domConstruct.create("input", {
                     type: 'image',
                     src: 'images/icons_' + this.config.icons + '/home.png',
@@ -1108,41 +1107,25 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 panelLocate = domConstruct.create("div", {
                     id: "panelLocate",
                     className: "icon-color tool",
-                    role: "listitem",
                     innerHTML: "<div id='btnLocate'></div>"
                     }, dom.byId("panelTools"), 1);
-                    var geoLocate = new LocateButton({
-                        map: this.map
-                    }, dom.byId("btnLocate"));
+                var geoLocate = new LocateButton({
+                    map: this.map
+                }, dom.byId("btnLocate"));
 
                 geoLocate.startup();
 
                 locateButton = dojo.query(".locateContainer")[0];
-                
                 zoomLocateButton = dojo.query(".zoomLocateButton")[0];
                 dojo.empty(zoomLocateButton);
-                dojo.setAttr(zoomLocateButton, 'style','display:table-cell; vertical-align:middle; text-align:center;');
-                dojo.setAttr(zoomLocateButton, 'tabindex', 0);
-                dojo.setAttr(zoomLocateButton, 'aria-label', dojo.attr(zoomLocateButton, 'title')); 
+                locateHint = dojo.attr(zoomLocateButton, 'title');
 
-                domConstruct.create("img", {
-                  'src': 'images/icons_' + this.config.icons + '/locate.png',
-                  alt: "",//dojo.attr(zoomLocateButton, 'title'),
-                  height:14,
-                  width:14
+                domConstruct.create("input", {
+                    type: 'image',
+                    src: 'images/icons_' + this.config.icons + '/locate.png',
+                    alt: locateHint,
+                    'aria-label': locateHint,
                 }, zoomLocateButton);
-                dojo.setAttr(zoomLocateButton, 'title','');
-
-                this._atachEnterKey(locateButton, zoomLocateButton);
-
-                on(zoomLocateButton, 'click', lang.hitch(this, function(event){
-                    setTimeout(function(){ dojo.setAttr(zoomLocateButton, 'title',''); }, 200);
-                }));
-
-                if (!has("touch")) {
-                    //add a tooltip
-                    domAttr.set("btnLocate", "data-title", this.config.i18n.tooltips.locate);
-                }
             }
 
             //Add the location search widget
