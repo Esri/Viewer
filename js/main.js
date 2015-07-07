@@ -124,47 +124,42 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             this._adjustPopupSize();
 
             zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
-            dojo.setAttr(zoomSlider, 'role', 'list');
-            dojo.setAttr(zoomSlider, 'aria-label', 'Zoom Slider');
+            //dojo.setAttr(zoomSlider, 'role', 'list');
+            //dojo.setAttr(zoomSlider, 'aria-label', 'Zoom Slider');
 
             esriSimpleSliderIncrementNode = dojo.query(".esriSimpleSliderIncrementButton")[0];
+            var zoomIn_click = esriSimpleSliderIncrementNode.OnClick;
             dojo.empty(esriSimpleSliderIncrementNode);
-            dojo.setAttr(esriSimpleSliderIncrementNode, 'tabindex', 0);
-            dojo.setAttr(esriSimpleSliderIncrementNode, 'role', 'listitem');
-            dojo.setAttr(esriSimpleSliderIncrementNode, 'aria-label', 'Zoom In, button.');
-            plusImg = domConstruct.create("img", {
-              'src': 'images/icons_' + this.config.icons + '/plus.png',
-              alt: 'Zoom In',
-              role: 'button',
-              'aria-hidden': true,
-              height:20,
-              width:20
-            }, esriSimpleSliderIncrementNode);
-
             dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', 'Zoom In');
-            this._atachEnterKey(esriSimpleSliderIncrementNode,esriSimpleSliderIncrementNode);
+
+            plusbtn = domConstruct.create("input", {
+                className: "esriSimpleSliderIncrementButton",
+                type: "image",
+                "aria-label": "Zoom In.",
+                src: 'images/icons_' + this.config.icons + '/plus.png',
+                alt: 'Zoom In',
+            }, esriSimpleSliderIncrementNode);
+            on(plusbtn, "click", zoomIn_click);
 
             esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
+            var zoomOut_click = esriSimpleSliderDecrementNode.OnClick;
             dojo.empty(esriSimpleSliderDecrementNode);
-            dojo.setAttr(esriSimpleSliderDecrementNode, 'tabindex', 0);
-            dojo.setAttr(esriSimpleSliderDecrementNode, 'role', 'listitem');
-            dojo.setAttr(esriSimpleSliderDecrementNode, 'aria-label', 'Zoom Out, button.');
-            minusImg = domConstruct.create("img", {
-              'src': 'images/icons_' + this.config.icons + '/minus.png',
-              alt: 'Zoom Out',
-              role: 'button',
-              'aria-hidden': true,
-              height:20,
-              width:20
-            }, esriSimpleSliderDecrementNode);
-
             dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', 'Zoom Out');
-            this._atachEnterKey(esriSimpleSliderDecrementNode, esriSimpleSliderDecrementNode);
+
+            minusbtn = domConstruct.create("input", {
+                className: "esriSimpleSliderDecrementButton",
+                type: "image",
+                "aria-label": "Zoom Out.",
+                src: 'images/icons_' + this.config.icons + '/minus.png',
+                alt: 'Zoom Out',
+            }, esriSimpleSliderDecrementNode);
+            on(minusbtn, "click", zoomOut_click);
+
 
             on(this.map.infoWindow, "show", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);
-
             }));
+
 
             on(this.map.infoWindow, "selection-change", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);

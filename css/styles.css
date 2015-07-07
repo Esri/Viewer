@@ -333,6 +333,15 @@ input[type=checkbox].checkbox {
   zoom: 1; 
 }
 
+
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton input[type='image']{
+  border-bottom: 0;
+}
+
 .simpleGeocoder .esriGeocoder {
   display: block;
   width: 100%;
@@ -502,11 +511,11 @@ img {
 }
 
 .esriSimpleSliderIncrementButton[data-title]:hover:after {
-    line-height: 17;
+    line-height: 11;
 }
 
 .esriSimpleSliderDecrementButton[data-title]:hover:after {
-    line-height: 10;
+    line-height: 0;
 }
 
 /* Template */

@@ -27,13 +27,18 @@ select[tabindex='0']:not(#embedMapSizeDropDown):focus,
 input[type='checkbox']:focus,
 tr[tabindex='0']:focus,
 h1:focus, h2:focus, h3:focus
-.esriOverviewMap:focus 
+.esriOverviewMap:focus,
+.esriSimpleSliderIncrementButton:focus, .esriSimpleSliderDecrementButton:focus
 {
     outline-width: 2px;
     outline-offset: -2px;
     outline-style: solid;
-    outline-color: rgba(0, 0, 0, 0.9);-- !important;
+    outline-color: rgba(0, 0, 0, 0.9);
     border-bottom: 0;
+}
+
+.esriSimpleSliderIncrementButton:focus, .esriSimpleSliderDecrementButton:focus{
+    outline-offset: 1px;
 }
 
 tr[tabindex='0']:focus 
