@@ -6,7 +6,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         tools: [],
         toollist: [],
         snap: true,
-        curTool: 0,
+        curTool: -1,
         scrollTimer: null,
         config: {},
         pTools: null,
@@ -174,9 +174,9 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             for (var i = 0; i < this.tools.length; i++) {
                 var name = this.tools[i];
                 var pageClose = domConstruct.create("input", {
-                    className: "pageClose",
                     type: "image",
-                    "aria-label": "Close tool page.",
+                    className: "pageClose",
+                    "aria-label": "Close Page",
                     src: 'images/close.png',
                     alt: 'Close',
                     title: 'Close',
@@ -184,9 +184,9 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 on(pageClose, "click", lang.hitch(this, this._closePage, name));
 
                 var pageUp = domConstruct.create("input", {
-                    className: "pageUp",
                     type: "image",
-                    "aria-label": "Previous tool page.",
+                    className: "pageUp",
+                    "aria-label": "Previous Page",
                     src: 'images/up.png',
                     alt: 'Previous Page',
                     title: 'Previous Page',
@@ -195,9 +195,9 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
                 if (name != this.tools[this.tools.length - 1]) {
                     var pageDown = domConstruct.create("input", {
-                        className: "pageDown",
                         type: "image",
-                        "aria-label": "Next tool page.",
+                        className: "pageDown",
+                        "aria-label": "Next Page",
                         src: 'images/down.png',
                         alt: 'Next Page',
                         title: 'Next Page',
@@ -229,12 +229,52 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                                 pageDown.click();
                             break;
                         //case 36: // Home
-                        //case 35: // End
+                        case 35: 
+                            event.stopPropagation();
+                            this.showInstructions();
+                            break;
                     };
                 }));
             }
         },
 
+        showInstructions: function() {
+            this._showPage("instructions");
+            var Instructions = dom.byId("pageBody_instructions");
+            if(Instructions)        
+            {
+                //var pageHeader = dom.byId("pageHeader_" + name);
+                var pagedown = Instructions.querySelector(".pageDown");
+                if(pagedown)
+                    pagedown.focus();
+                var desc = Instructions.querySelector(".desc");
+                if(desc)
+                {
+                    desc.focus();
+                    //if(has("ie")) 
+                    //    this.selectText(desc);
+                }
+            }
+        },
+
+
+       selectText: function(text) {
+            var doc = document,
+                //text = doc.getElementById(element),
+                range, selection;    
+            if (doc.body.createTextRange) {
+                range = document.body.createTextRange();
+                range.moveToElementText(text);
+                range.select();
+            } else if (window.getSelection) {
+                selection = window.getSelection();        
+                range = document.createRange();
+                range.selectNodeContents(text);
+                selection.removeAllRanges();
+                selection.addRange(range);
+            }
+        },
+    
         setContent: function (name, content) {
             domConstruct.place(content, "pageBody_" + name, "last");
         },
@@ -299,7 +339,9 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             this._scrollToPage(0);
             var tool = dom.byId("panelTool_" + name);
             if(tool)
+            {
                 tool.focus();
+            }
         },
 
         _scrollToPage: function (num) {
@@ -322,7 +364,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             var name = this.tools[num - 1];
             var pageBody = dom.byId("pageBody_" + name);
-            if(pageBody) 
+            if(pageBody)        
             {
                 var pageHeader = dom.byId("pageHeader_" + name);
                 var pageDown = pageHeader.querySelector(".pageDown");

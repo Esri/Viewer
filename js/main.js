@@ -35,7 +35,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     FeatureLayer, TableOfContents, ShareDialog,
     InfoWindow) {
 
-
     return declare(null, {
         config: {},
         color: null,
@@ -47,6 +46,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
         editor: null,
         editableLayers: null,
         timeFormats: ["shortDateShortTime", "shortDateLEShortTime", "shortDateShortTime24", "shortDateLEShortTime24", "shortDateLongTime", "shortDateLELongTime", "shortDateLongTime24", "shortDateLELongTime24"],
+        
         startup: function (config) {
             // config will contain application and user defined info for the template such as i18n strings, the web map id
             // and application id and any url parameters and any application specific configuration information.
@@ -300,7 +300,12 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     //to the toolbar panel, update the color theme and set the active tool.
                     this._updateTheme();
                     toolbar.updatePageNavigation();
-                    if (this.config.activeTool !== "") {
+
+                    if(has("instructions")) {
+                        //toolbar.activateTool("instructions");
+                        setTimeout(lang.hitch(toolbar, toolbar.showInstructions), 300);
+                    }
+                    else if (this.config.activeTool !== "") {
                         toolbar.activateTool(this.config.activeTool);
                     } else {
                         toolbar._closePage();
@@ -572,10 +577,11 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }, instructionsDiv);
 
                 domConstruct.create("div", {
-                    innerHTML: '<b>In addition to the mouse, you may:</b></br>',
+                    innerHTML: '<b>In addition to the mouse you may:</b></br>',
                 }, instructionsText);
 
                 list = domConstruct.create("ul", {
+                    id:'instructionsList',
                 }, instructionsText);
 
                 domConstruct.create("li", {
@@ -591,7 +597,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Use <b><abbr title='Page Up' aria-label='page up'>PgUp</abbr></b> or <b><abbr title='Page Down' aria-label='page down keys'>PgDn</abbr></b> to move from a tool page to the next or previous one."
+                    innerHTML : "Use <b><abbr title='Page Up' aria-label='page up'>PgUp</abbr></b> or <b><abbr title='Page Down' aria-label='page down keys'>PgDown</abbr></b> to move from a tool page to the next or previous one."
                 }, list);
 
                 domConstruct.create("li", {
@@ -621,7 +627,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     var legend = new Legend({
                         map: this.map,
                         layerInfos: layers
-                    }, domConstruct.create("div", {}, legendDiv));
+                    }, domConstruct.create("div", {role:'application'}, legendDiv));
                     domClass.add(legend.domNode, "legend");
                     legend.startup();
                     if (this.config.activeTool !== "") {

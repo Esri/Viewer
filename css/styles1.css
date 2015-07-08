@@ -31,7 +31,8 @@ input[type='image']:focus, .icon-link:focus,
 tr[tabindex='0']:focus,
 h1:focus, h2:focus, h3:focus
 .esriOverviewMap:focus,
-.esriSimpleSliderIncrementButton:focus, .esriSimpleSliderDecrementButton:focus
+.esriSimpleSliderIncrementButton:focus, .esriSimpleSliderDecrementButton:focus,
+h3[tabindex='0']:focus
 {
     outline-width: 2px;
     outline-offset: -2px;
