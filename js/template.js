@@ -400,7 +400,6 @@ define([
             // If we want to get the webmap
             if (this.templateConfig.queryForWebmap) {
                 // Use local webmap instead of portal webmap
-                debugger;
                 if (this.templateConfig.useLocalWebmap) {
                     // get webmap js file
                     require([this.templateConfig.localWebmapFile], lang.hitch(this, function(webmap) {
