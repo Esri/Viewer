@@ -1,4 +1,4 @@
-﻿/*global define,location */
+/*global define,location */
 /*jslint sloppy:true */
 /*
  | Copyright 2014 Esri
@@ -43,7 +43,7 @@ define({
     //Color defines the text color for the title and details. Note that
     //both these values must be specified as hex colors.
     "theme": "#037EAF",
-    "color": "#fff",
+    "color": "#ffffff",
     "hoverColor": "#BEE8FF",
     "focusColor": "#00C5FF",
     "activeColor": "#002673",

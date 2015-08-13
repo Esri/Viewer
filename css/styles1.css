@@ -34,11 +34,12 @@ h1:focus, h2:focus, h3:focus
 .esriSimpleSliderIncrementButton:focus, .esriSimpleSliderDecrementButton:focus,
 h3[tabindex='0']:focus
 {
-    outline-width: 2px;
+    /*outline-width: 2px;
     outline-offset: -2px;
     outline-style: solid;
     outline-color: rgba(0, 0, 0, 0.9);
-    border-bottom: 0;
+    border-bottom: 0;*/
+    box-shadow: 0 0 12px #38c;
 }
 
 .esriSimpleSliderIncrementButton:focus, 
@@ -49,12 +50,14 @@ h3[tabindex='0']:focus
 .icon-link:focus,
 input[type='image']:focus
 {
-    outline-offset: 0px;
+    --outline-offset: 0px;
+    box-shadow: 0 0 12px #38c;
 }
 
 .homeContainer input:focus, .locateContainer input:focus 
 {
-    outline-offset: 2px;
+    --outline-offset: 2px;
+    box-shadow: 0 0 12px #38c;
 }
 
 tr[tabindex='0']:focus 

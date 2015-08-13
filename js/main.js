@@ -23,7 +23,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
     "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog",
-    "esri/dijit/InfoWindow"], function (
+    "esri/dijit/InfoWindow"], 
+    function (
     ready, JSON, array, Color, declare, 
     lang, dom, domGeometry, domAttr, domClass, 
     domConstruct, domStyle, on, Deferred, all, 
@@ -52,7 +53,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             // and application id and any url parameters and any application specific configuration information.
             if (config) {
                 this.config = config;
-                this.color = this.setColor(this.config.color, 0.9);
+                this.color = this.setColor(this.config.color);
                 this.hoverColor = typeof(this.config.hoverColor)=='undefined' ? this.setColor('#000000', 0.4) : this.setColor(this.config.hoverColor, 0.9);
                 this.focusColor = typeof(this.config.focusColor)=='undefined' ? this.setColor('#1f1f1f', 0.4) : this.setColor(this.config.focusColor, 0.9);
                 this.activeColor = typeof(this.config.activeColor)=='undefined' ? this.focusColor : this.setColor(this.config.activeColor, 0.9);
@@ -177,7 +178,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 } 
             };
 
-            //dojo.setAttr(node, "role", "dialog");
+            dojo.setAttr(node, "role", "dialog");
             header = node.querySelector('.header');
             if(header) {
                 dojo.setAttr(node, "tabindex", 0);
@@ -577,7 +578,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }, instructionsDiv);
 
                 domConstruct.create("div", {
-                    innerHTML: '<b>In addition to the mouse you may:</b></br>',
+                    innerHTML: '<h4 style="margin:0;">In addition to the mouse you may:</h4>',
                 }, instructionsText);
 
                 list = domConstruct.create("ul", {
@@ -585,27 +586,27 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }, instructionsText);
 
                 domConstruct.create("li", {
-                    innerHTML : "Use <b><abbr aria-label='tab key'>TAB</abbr></b> to navigate from item to item."
+                    innerHTML : "Use <b>Tab key</b> to navigate from item to item."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Use <b><abbr title='Shift and Tab keys together' aria-label='shift and tab keys'>SHIFT TAB</abbr></b> to navigate backwards."
+                    innerHTML : "Use <b>SHIFT Tab</b> to navigate backwards."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Press <b><abbr title='Enter (or Return)' aria-label='enter or return key'>ENTER</abbr></b> to activate the focused item."
+                    innerHTML : "Press <b>ENTER</b> to activate the focused item."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Use <b><abbr title='Page Up' aria-label='page up'>PgUp</abbr></b> or <b><abbr title='Page Down' aria-label='page down keys'>PgDown</abbr></b> to move from a tool page to the next or previous one."
+                    innerHTML : "Use <b>Page&nbsp;Up</b> or <b>Page&nbsp;Down</b> to move from a tool page to the next or to the previous page."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Use <b><abbr title='Escape' aria-label='escape key'>ESC</abbr></b> to close a tool page and return to the tool bar."
+                    innerHTML : "Use <b>ESCAPE</b> to close a tool page and return to the tool bar."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Hit <b><abbr aria-label='space bar'>SPACE</abbr></b> to toggle a selected check box."
+                    innerHTML : "Hit <b>SPACE&nbsp;bar</b> to toggle a focused check box."
                 }, list);
 
                 deferred.resolve(true);
@@ -760,7 +761,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
             ovwHighlight = div.querySelector('.ovwHighlight');
             dojo.setAttr(ovwHighlight, 'tabindex', 0);
-            dojo.setAttr(ovwHighlight, 'aria-label', 'Use the Arrow keys to change the map extent.');
+            dojo.setAttr(ovwHighlight, 'title', 'Drag To Change The Map Extent,\nor focus and use the Arrow keys.');
             this._atachArrowKeys(ovwHighlight, ovMap);
         },
 
