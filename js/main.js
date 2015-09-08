@@ -578,7 +578,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }, instructionsDiv);
 
                 domConstruct.create("div", {
-                    innerHTML: '<h4 style="margin:0;">In addition to the mouse you may:</h4>',
+                    innerHTML: '<h3>In addition to the mouse you may:</h3>',
                 }, instructionsText);
 
                 list = domConstruct.create("ul", {
