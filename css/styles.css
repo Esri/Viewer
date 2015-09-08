@@ -1508,5 +1508,9 @@ h3 {
 }
 
 .esriViewPopup .editSummary {
-    color: #883988 !important;
+  color: #883988 !important;
+}
+
+.share-dialog-textarea, .share-map-url {
+  color: #a12177 !important;
 }
