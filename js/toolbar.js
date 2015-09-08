@@ -146,7 +146,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             }, 
             pageContent);
 
-            domConstruct.create("h2", {
+            domConstruct.create("h1", {
                 className: "pageTitle fc",
                 innerHTML: this.config.i18n.tooltips[name] || name,
                 id: "pagetitle_" + name

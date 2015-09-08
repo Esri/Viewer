@@ -578,7 +578,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }, instructionsDiv);
 
                 domConstruct.create("div", {
-                    innerHTML: '<h3>In addition to the mouse you may:</h3>',
+                    innerHTML: '<h2>In addition to the mouse you may:</h2>',
                 }, instructionsText);
 
                 list = domConstruct.create("ul", {
@@ -638,7 +638,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     var LegendServiceLabel = legend.domNode.querySelector(".esriLegendServiceLabel");
                     if(LegendServiceLabel)
                     {
-                        var h3 = domConstruct.create("h3",{
+                        var h3 = domConstruct.create("h2",{
                             className: LegendServiceLabel.className,
                             innerHTML: LegendServiceLabel.innerHTML,
                             tabindex: 0

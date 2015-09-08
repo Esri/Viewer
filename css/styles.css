@@ -1484,7 +1484,7 @@ h3 {
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.pageBody h3, .groupLabel {
+.pageBody h2, .groupLabel {
   padding:3px;
   font-size:16px;
   margin:0;
@@ -1505,4 +1505,8 @@ h3 {
 
 .esriDrawingToolbar {
   background-color: rgb(3, 126, 175) !important;
+}
+
+.esriViewPopup .editSummary {
+    color: #883988 !important;
 }
