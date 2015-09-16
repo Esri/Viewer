@@ -1514,3 +1514,7 @@ h3 {
 .share-dialog-textarea, .share-map-url {
   color: #a12177 !important;
 }
+
+.esriLegendMsg {
+  margin-bottom: 18px;
+}
