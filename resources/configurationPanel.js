@@ -64,9 +64,40 @@
                      "value":"black"
                   }
                ]
+            },{
+               "type":"paragraph",
+               "value": "Use the Custom css option to paste css that overwrites rules in the app."
+            },{
+               "type":"string",
+               "fieldName": "customstyle",
+               "tooltip":"Custom css",
+               "label": "Custom css"
+            },{
+               "type": "boolean",
+               "fieldName": "popupPanel",
+               "label": "Display popup content in floating panel"
             }
          ]
-      },
+         },{
+         "category":"Splash Screen",
+         "fields":[{
+           "type": "boolean",
+           "fieldName": "splashModal",
+           "tooltip": "Enable Splash Screen",
+           "label": "Splash Screen"
+         },{
+           "type": "string",
+           "fieldName": "splashTitle",
+           "label": "Splash screen title",
+           "tooltip": "Define splash screen title"
+         },{
+          "type":"string",
+          "fieldName":"splashContent",
+          "label":"Splash screen content text",
+          "tooltip":"Define splash screen content",
+          "stringFieldOption":"richtext"
+         } ]
+       },
       {  
          "category":"Tools",
          "fields":[  
@@ -136,6 +167,10 @@
                "type":"boolean",
                "fieldName":"tool_locate",
                "label":"Find Location"
+            },{
+               "type": "boolean",
+               "fieldName": "locate_track",
+               "label": "Enable tracking"
             },
             {  
                "type":"boolean",
@@ -151,6 +186,18 @@
                "type":"boolean",
                "fieldName":"tool_layers",
                "label":"Layer List"
+            },{
+               "type":"boolean",
+               "fieldName": "tool_sublayers",
+               "label": "Include sublayers in Layer List"
+            },{
+               "type": "boolean",
+               "fieldName": "tool_layerlegend",
+               "label": "Include legend in Layer List"
+            },{
+               "type": "boolean",
+               "fieldName": "tool_opacity",
+               "label": "Include opacity slider in Layer List"
             },
             {  
                "type":"boolean",
@@ -296,6 +343,7 @@
       "theme":"80ab00",
       "activeTool":"legend",
       "scalebar":false,
+      "splashModal": false,
       "tool_print":true,
       "tool_print_layouts":false,
       "tool_print_legend":false,
@@ -305,13 +353,18 @@
       "tool_details":true,
       "tool_legend":true,
       "tool_layers":true,
+      "tool_sublayers": true,
+      "tool_opacity": true,
+      "tool_layerlegend": true,
       "tool_home":true,
       "tool_locate":true,
+      "locate_track": false,
       "tool_edit":true,
       "tool_edit_toolbar":false,
       "tool_bookmarks":true,
       "tool_basemap":true,
       "tool_search":true,
-      "locationSearch": true
+      "locationSearch": true,
+      "popupPanel": false
    }
 }

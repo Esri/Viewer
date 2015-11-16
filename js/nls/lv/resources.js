@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "Nevar izveidot karti"
         },
+        "nav":{
+            "next": "Tālāk",
+            "previous": "Iepriekšējais",
+            "close": "Aizvērt"
+        },
         "tools":{
             "search":{
                 "error": "Izvietojumu nevarēja atrast",

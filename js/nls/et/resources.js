@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "Kaardi loomine ebaõnnestus"
         },
+        "nav":{
+            "next": "Järgmine",
+            "previous": "Eelmine",
+            "close": "Sulge"
+        },
         "tools":{
             "search":{
                 "error": "Asukohta ei leitud",

@@ -1,62 +1,90 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title></title>	<!-- Define the versions of IE that will be used to render the page. See Microsoft documentation for details. Optional. -->	
+  <head>
+    <title></title> <!-- Define the versions of IE that will be used to render the page. See Microsoft documentation for details. Optional. --> 
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta charset="utf-8">
-		<!-- Responsive -->
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<meta name="mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-capable" content="yes">
-		<meta name="apple-mobile-web-app-status-bar-style" content="default">
-		<!-- End Responsive -->
-		<!-- Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol -->
-		<link rel="stylesheet" href="//js.arcgis.com/3.14/esri/css/calcite/calcite.css">
-	
-    <link rel="stylesheet"  href="//js.arcgis.com/3.14/esri/css/esri.css">
-		<!-- Load any application specific styles -->
-		<link rel="stylesheet" href="css/styles.css">
-		<!--[if IE 8]>
-			<link rel="stylesheet" href="css/ie.css">
-		<![endif]-->
-	</head>
-	<body class="calcite app-loading no-touch">
-		<!-- Loading Indicator -->
-		<div class="loading-indicator">
-			<div class="loading-message" id="loading_message"></div>
-		</div>
+    <meta charset="utf-8">
+    <meta name="fragment" content="!">
+    <!-- Responsive -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <!-- End Responsive -->
+    <!-- Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol -->
+    <link rel="stylesheet" href="//js.arcgis.com/3.15/esri/css/calcite/calcite.css">
+  
+    <link rel="stylesheet"  href="//js.arcgis.com/3.15/esri/css/esri.css">
+    <!-- Load any application specific styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <!--[if IE 8]>
+      <link rel="stylesheet" href="css/ie.css">
+    <![endif]-->
+  </head>
+  <body class="calcite app-loading no-touch">
+   <div>
+    <!--Modal Splash Screen-->
+    <div id="modal" class="hide-modal">
+      <div class="modal-content">
+        <div class="modal-header bg fc">
+          <h2 id="modalTitle"></h2>
+          <button id="closeOverlay" class="tool-btn icon-close fc" type="button"></button>
+        </div>
+        <div id="modalContent" class="copy"></div>
+      </div>
+      <div class="overlay"></div>
+    </div>
+    <!-- Loading Indicator -->
+    <div class="loading-indicator">
+      <div class="loading-message" id="loading_message"></div>
+    </div>
+    <!-- Map -->
+    <!-- The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
+    <div id="mapDiv" dir="ltr"></div>
 
-		<!-- Map -->
-		<!-- The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
-		<div id="mapDiv" dir="ltr"></div>
+    <!-- Panel Content -->
 
-		<!-- Panel Content -->
-		<div id="panelContent">
-			<div id="panelPages"></div>
-		</div>
+    <div id="panelContent">
+      <div id="panelPages"></div>
+      <div class="pageContent rounded shadow medium panelPopup" id="pageContent_popup">
+        <div id="pageHeader_popup" class="popupHeader bg roundedTop">
+          <div class="popupTitle fc">
+            <div id="popupTitle"></div>
+            <div id="popupButtonPrev" class="popupButton prev"></div>
+            <div id="popupButtonNext" class="popupButton next"></div>
+            <div id="popupButtonClose" class="popupButton close"></div>  
+          </div>
+        </div>
+        <div class="pageBody" id="pageBody_popup">
+          <div id="popupContainer" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'" class="popupContent"></div>
+          <div id="popupFooter"></div>
+        </div>
+      </div>
+      </div>
+    <!-- Panel Top -->
+    <div id="panelTop" class="bg rounded shadow">
+      <!-- Panel Title -->
+       <div id="panelTitle">
+        <div class="fc" id="panelText">
+            <h1 id="title"></h1>
+            <h2 id="subtitle"></h2>            
+        </div>
+        <div id="panelSearch">
+          <div id="panelGeocoder"></div>
+        </div>
+        <div id="panelMenu" class="icon-menu icon-color"></div>
+      </div>
 
-		<!-- Panel Top -->
-		<div id="panelTop" class="bg rounded shadow">
-			<!-- Panel Title -->
-			 <div id="panelTitle">
-				<div class="fc" id="panelText">
-                    <div id="title"></div>
-                    <div id="subtitle"></div>            
-                </div>
-				<div id="panelSearch">
-					<div id="panelGeocoder"></div>
-				</div>
-				<div id="panelMenu" class="icon-menu icon-color"></div>
-			</div>
+      <!-- Panel Tools -->
+      <div id="panelTools">
+        <!--Tools are created programatically-->
+      </div>
 
-			<!-- Panel Tools -->
-			<div id="panelTools">
-				<!--Tools are created programatically-->
-			</div>
+    </div>
+    </div>
 
-		</div>
 
-		<script type="text/javascript">
+    <script type="text/javascript">
          var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
          var dojoConfig = {
             // The locationPath logic below may look confusing but all its doing is
@@ -72,8 +100,21 @@
                 location: package_path + '/..'
             }]
          };
-		</script>
-		<script type="text/javascript" src="//js.arcgis.com/3.14/"></script>
+      // Have to handle a locale parameter before dojo is loaded
+        var locale = getQueryVariable("locale");
+        if(locale){ dojoConfig.locale = locale; }
+        function getQueryVariable(param){
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for(var i=0;i<vars.length;i++){
+                var pair = vars[i].split("=");
+                if(pair[0] == param){return pair[1];}
+            }
+            return (false);
+        }
+
+    </script>
+    <script type="text/javascript" src="//js.arcgis.com/3.15/"></script>
         <script type="text/javascript">
         require([
             "dojo/parser",
@@ -82,7 +123,6 @@
             "application/main",
             "dijit/layout/BorderContainer",
             "dijit/layout/ContentPane",
-            "dijit/layout/StackContainer"
         ], function(
             parser,
             templateConfig,
@@ -106,5 +146,5 @@
           });
         });
     </script>
-	</body>
+  </body>
 </html>

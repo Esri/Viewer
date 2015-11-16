@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "לא ניתן ליצור מפה"
         },
+        "nav":{
+            "next": "הבא",
+            "previous": "הקודם",
+            "close": "סגור"
+        },
         "tools":{
             "search":{
                 "error": "לא ניתן למצוא מיקום",

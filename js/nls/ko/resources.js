@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "맵을 생성할 수 없음"
         },
+        "nav":{
+            "next": "다음",
+            "previous": "이전",
+            "close": "닫기"
+        },
         "tools":{
             "search":{
                 "error": "위치를 찾을 수 없습니다.",

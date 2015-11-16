@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "無法建立地圖"
         },
+        "nav":{
+            "next": "下一頁",
+            "previous": "上一頁",
+            "close": "關閉"
+        },
         "tools":{
             "search":{
                 "error": "無法找到位置",

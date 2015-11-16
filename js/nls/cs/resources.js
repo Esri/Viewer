@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "Nelze vytvořit mapu"
         },
+        "nav":{
+            "next": "Další",
+            "previous": "Předchozí",
+            "close": "Zavřít"
+        },
         "tools":{
             "search":{
                 "error": "Umístění nebylo nalezeno.",

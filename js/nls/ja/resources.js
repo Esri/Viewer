@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "マップを作成できません"
         },
+        "nav":{
+            "next": "次へ",
+            "previous": "前へ",
+            "close": "閉じる"
+        },
         "tools":{
             "search":{
                 "error": "場所が見つかりませんでした",

@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "Karttaa ei voi luoda"
         },
+        "nav":{
+            "next": "Seuraava",
+            "previous": "Edellinen",
+            "close": "Sulje"
+        },
         "tools":{
             "search":{
                 "error": "Sijaintia ei löytynyt",

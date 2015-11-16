@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "Kan ikke opprette kart"
         },
+        "nav":{
+            "next": "Neste",
+            "previous": "Forrige",
+            "close": "Lukk"
+        },
         "tools":{
             "search":{
                 "error": "Finner ikke lokasjonen",

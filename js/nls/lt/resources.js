@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "Žemėlapio sukurti nepavyko"
         },
+        "nav":{
+            "next": "Kitas",
+            "previous": "Ankstesnis",
+            "close": "Užverti"
+        },
         "tools":{
             "search":{
                 "error": "Vietos surasti nepavyko",
@@ -53,7 +58,7 @@ define(
         	"bookmarks": "Žymės",
         	"layers": "Sluoksniai",
         	"basemap": "Pagrindo žemėlapių galerija",
-        	"overview": "Apžvalgos žemėlapis",
+        	"overview": "Apžvalga",
         	"measure": "Matuoti",
         	"edit": "Redaguoti",
         	"time": "Laikas",

@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "Kan ikke oprette kort"
         },
+        "nav":{
+            "next": "Næste",
+            "previous": "Forrige",
+            "close": "Luk"
+        },
         "tools":{
             "search":{
                 "error": "Placeringen blev ikke fundet",

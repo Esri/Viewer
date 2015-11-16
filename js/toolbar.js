@@ -114,6 +114,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             // add tool
             var pTool = domConstruct.create("div", {
                 className: "panelTool",
+                role: "button",
+                tabindex: "0",
                 id: "panelTool_" + name
             }, this.pTools);
 
@@ -183,20 +185,35 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             for (var i = 0; i < this.tools.length; i++) {
                 var name = this.tools[i];
                 var pageClose = domConstruct.create("div", {
-                    className: "pageClose"
+                    className: "pageNav pageClose",
+                    tabindex: "0",
+                    title: this.config.i18n.nav.close
                 }, "pageHeader_" + name);
-                on(pageClose, "click", lang.hitch(this, this._closePage));
+                if(this.config.icons === "black"){
+                    domClass.add(pageClose, "icons-dark");
+                }
+                on(pageClose, "click, keypress", lang.hitch(this, this.closePage));
 
                 var pageUp = domConstruct.create("div", {
-                    className: "pageUp"
+                    className: "pageNav pageUp",
+                    tabindex: "0",
+                    title: this.config.i18n.nav.previous
                 }, "pageHeader_" + name);
-                on(pageUp, "click", lang.hitch(this, this._showPreviousPage, name));
+                if(this.config.icons === "black"){
+                    domClass.add(pageUp, "icons-dark");
+                }                
+                on(pageUp, "click, keypress", lang.hitch(this, this._showPreviousPage, name));
 
                 if (name != this.tools[this.tools.length - 1]) {
                     var pageDown = domConstruct.create("div", {
-                        className: "pageDown"
+                        className: "pageNav pageDown",
+                        tabindex: "0",
+                        title: this.config.i18n.nav.next
                     }, "pageHeader_" + name);
-                    on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
+                    if(this.config.icons === "black"){
+                        domClass.add(pageDown, "icons-dark");
+                    }
+                    on(pageDown, "click, keypress", lang.hitch(this, this._showNextPage, name));
                 }
 
             }
@@ -248,6 +265,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         _showPreviousPage: function (name) {
             var num = this._getPageNum(name);
             this._scrollToPage(num);
+
         },
 
         _showNextPage: function (name) {
@@ -255,7 +273,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             this._scrollToPage(num);
         },
 
-        _closePage: function () {
+        closePage: function (e) {
             this._scrollToPage(-1);
         },
         _scrollToPage: function (num) {
@@ -349,9 +367,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 domClass.add("panelTool_" + name, "panelToolActive");
             }
             this.emit("updateTool", name);
-
-
-
         },
         _updateMap: function () {
             if (this.map) {
@@ -369,7 +384,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         _menuClick: function () {
             if (query("#panelTools").style("display") == "block") {
                 query("#panelTools").style("display", "none");
-                this._closePage();
+                this.closePage();
 
             } else {
                 query("#panelTools").style("display", "block");

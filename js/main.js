@@ -13,8 +13,78 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", "application/has-config", "esri/arcgis/utils", "esri/lang", "esri/urlUtils", "esri/dijit/HomeButton", "esri/dijit/LocateButton", "esri/dijit/Legend", "esri/dijit/BasemapGallery", "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", "esri/layers/FeatureLayer", "esri/dijit/LayerList", "application/ShareDialog", "application/SearchSources"], function (
-ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, domConstruct, domStyle, on, Deferred, all, query, registry, Menu, CheckedMenuItem, Toolbar, has, arcgisUtils, esriLang, urlUtils, HomeButton, LocateButton, Legend, BasemapGallery, Measurement, OverviewMap, Extent, FeatureLayer, LayerList, ShareDialog, SearchSources) {
+define([
+    "dojo/ready", 
+    "dojo/json", 
+
+    "dojo/i18n!esri/nls/jsapi",
+
+    "dojo/_base/array", 
+    "dojo/_base/Color", 
+    "dojo/_base/declare", 
+    "dojo/_base/lang", 
+
+    "dojo/dom", 
+    "dojo/dom-geometry", 
+    "dojo/dom-attr", 
+    "dojo/dom-class", 
+    "dojo/dom-construct", 
+    "dojo/dom-style", 
+
+    "dojo/on", 
+    "dojo/Deferred", 
+    "dojo/promise/all", 
+    "dojo/query", 
+
+    "dijit/registry", 
+    "dijit/Menu", 
+    "dijit/CheckedMenuItem", 
+
+    "application/toolbar", 
+    "application/has-config",
+    "application/ShareDialog", 
+    "application/SearchSources",
+
+    "esri/arcgis/utils", 
+    "esri/lang", 
+    "esri/urlUtils", 
+
+    "esri/dijit/HomeButton", 
+    "esri/dijit/LocateButton", 
+    "esri/dijit/Legend", 
+    "esri/dijit/BasemapGallery", 
+    "esri/dijit/Measurement", 
+    "esri/dijit/OverviewMap", 
+    "esri/dijit/LayerList", 
+
+    "esri/geometry/Extent", 
+    "esri/layers/FeatureLayer"
+    ], function (
+        ready,JSON,
+
+        esriBundle,
+
+        array, Color, declare, lang, 
+
+        dom, domGeometry, domAttr, domClass, 
+        domConstruct, domStyle, 
+
+        on, Deferred, all, query, 
+
+        registry, Menu, CheckedMenuItem, 
+
+        Toolbar, has,
+        ShareDialog, SearchSources,
+
+        arcgisUtils, esriLang, urlUtils, 
+
+        HomeButton, LocateButton, Legend, 
+        BasemapGallery, Measurement, 
+        OverviewMap, LayerList, 
+
+        Extent, FeatureLayer
+
+        ) {
     return declare(null, {
         config: {},
         color: null,
@@ -32,12 +102,38 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 this.config = config;
                 this.color = this._setColor(this.config.color);
                 this.theme = this._setColor(this.config.theme);
+
+                // Create and add custom style sheet
+                if(this.config.customstyle){
+                    var style = document.createElement("style");
+                    style.appendChild(document.createTextNode(this.config.customstyle));
+                    document.head.appendChild(style);    
+                }
+
+         
                 // document ready
                 ready(lang.hitch(this, function () {
                     //supply either the webmap id or, if available, the item info
                     var itemInfo = this.config.itemInfo || this.config.webmap;
 
-                    this._createWebMap(itemInfo);
+                    // Setup the modal overlay if enabled
+                    if(this.config.splashModal){
+                      domClass.remove("modal", "hide-modal");
+                      var title = this.config.splashTitle || "";
+                      var content = this.config.splashContent || "";
+                      dom.byId("modalTitle").innerHTML = title;
+                      dom.byId("modalContent").innerHTML = content;
+                      // Close button handler for the overlay  
+                      on(dom.byId("closeOverlay"), "click", lang.hitch(this, function(){
+                        this._createWebMap(itemInfo);
+                        domClass.add("modal", "hide-modal");
+                      }));
+                    }else{
+                        this._createWebMap(itemInfo);
+                    }
+
+
+
                 }));
             } else {
                 var error = new Error("Main:: Config is not defined");
@@ -68,10 +164,13 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             query(".esriSimpleSlider").style("backgroundColor", this.theme.toString());
             // remove loading class from body
             domClass.remove(document.body, "app-loading");
-            on(window, "orientationchange", lang.hitch(this, this._adjustPopupSize));
-            this._adjustPopupSize();
-        },
+            if(!this.config.popupPanel){
+                //on(this.map.infoWindow, "selection-change", lang.hitch(this, this._movePopup));
+                on(window, "orientationchange", lang.hitch(this, this._adjustPopupSize));
+                this._adjustPopupSize();
+            }
 
+        },
         // Create UI
         _createUI: function () {
             domStyle.set("panelPages", "visibility", "hidden");
@@ -81,6 +180,18 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
                 // set map so that it can be repositioned when page is scrolled
                 toolbar.map = this.map;
+
+                if(this.config.popupPanel){
+                    require(["application/PopupPanel"], lang.hitch(this, function(PopupPanel){
+                        this.map.infoWindow.set("popupWindow", false);
+                        var popupPane = new PopupPanel({
+                            popup: this.map.infoWindow,
+                            srcNode: "popupContainer",
+                            toolbar: toolbar
+                        });
+                        popupPane.initPopup();
+                    }));
+                }
 
                 var toolList = [];
                 for (var i = 0; i < this.config.tools.length; i++) {
@@ -137,7 +248,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                         domConstruct.destroy("panelTools");
                         domStyle.set("panelContent", "display", "none");
                         domStyle.set("panelTitle", "border-bottom", "none");
-                        domStyle.set("panelTop", "height", "52px");
+                        domStyle.set("panelTop", "height", "60px");
                         query(".esriSimpleSlider").addClass("notools");
                         this._updateTheme();
                         return;
@@ -150,9 +261,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     if (this.config.activeTool !== "") {
                         toolbar.activateTool(this.config.activeTool);
                     } else {
-                        toolbar._closePage();
+                        toolbar.closePage();
                     }
-
 
                     on(toolbar, "updateTool", lang.hitch(this, function (name) {
                         if (name === "measure") {
@@ -351,7 +461,6 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             } else {
                 if (has("layers")) {
 
-
                     //Use small panel class if layer layer is less than 5
                     if (layers.length < 5) {
                         panelClass = "small";
@@ -364,6 +473,10 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
 
                     var toc = new LayerList({
                         map: this.map,
+                        showSubLayers: has("layers-sublayers"),
+                        subLayers: has("layers-sublayers"),
+                        showLegend: has("layers-legend"),
+                        showOpacitySlider: has("layers-opacity"),
                         layers: arcgisUtils.getLayerList(this.config.response)
                     }, domConstruct.create("div", {}, layersDiv));
                     toc.startup();
@@ -411,7 +524,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     if (this.config.activeTool !== "") {
                         toolbar.activateTool(this.config.activeTool || "legend");
                     } else {
-                        toolbar._closePage();
+                        toolbar.closePage();
                     }
                     deferred.resolve(true);
 
@@ -523,15 +636,18 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     "scalebarUnit": this.config.units,
                     "legendLayers": []
                 };
-
-                var printConfig = new PrintConfig({
+                var printOptions = {
                     legendLayers: this.config.response,
                     layouts: has("print-layouts"),
                     format: format.toLowerCase() || null,
                     printTaskUrl: this.config.helperServices.printTask.url,
                     printi18n: this.config.i18n.tools.print,
                     layoutOptions: layoutOptions
-                });
+                };
+                if(this.config.helperServices.printTask && this.config.helperServices.printTask.templates){
+                    printOptions.templates = this.config.helperServices.printTask.templates;
+                }
+                var printConfig = new PrintConfig(printOptions);
                 printConfig.createPrintOptions().then(lang.hitch(this, function (results) {
                     var templates = results.templates;
                     var legendLayers = results.legendLayers;
@@ -578,12 +694,18 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     } else {
                         domStyle.set("pageBody_print", "height", "90px");
                     }
-                    this.print = new Print({
+                    var printOptions = {
                         map: this.map,
                         id: "printButton",
-                        templates: templates,
                         url: this.config.helperServices.printTask.url
-                    }, domConstruct.create("div"));
+                    };
+                    if(templates){
+                        printOptions.templates = templates;
+                    }
+                    // Add a loading indicator to the Printing label
+                    esriBundle.widgets.print.NLS_printing =  esriBundle.widgets.print.NLS_printing + "<img class='loadPrint' src='./images/loading-small.png'/> ";
+                    this.print = new Print(printOptions, domConstruct.create("div"));
+
                     domConstruct.place(this.print.printDomNode, printDiv, "first");
 
                     this.print.on("print-start", lang.hitch(this, function () {
@@ -713,7 +835,8 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     innerHTML: "<div id='btnLocate'></div>"
                 }, dom.byId("panelTools"), 1);
                 var geoLocate = new LocateButton({
-                    map: this.map
+                    map: this.map,
+                    useTracking: this.config.locate_track
                 }, dom.byId("btnLocate"));
                 if (!has("touch")) {
                     //add a tooltip
@@ -760,7 +883,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     //if edit tool is enabled we'll have to delete/create 
                     //so info window behaves correctly. 
                     on.once(this.map.infoWindow, "hide", lang.hitch(this, function () {
-                        search.clear();
+                        search.clearGraphics();
                         if (this.editor) {
                             this._destroyEditor();
                             this._createEditor();
@@ -773,6 +896,12 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 if (search && search.domNode) {
                     domConstruct.place(search.domNode, "panelGeocoder");
                 }
+             // update the search placeholder text color and dropdown
+             // to match the icon text 
+             if(this.config.icons === "black"){
+                query(".arcgisSearch .searchIcon").style("color", "#000");
+                domClass.add(dom.byId("search_input"),"dark");
+             }
 
             }));
 
@@ -787,12 +916,21 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     var urlObject = urlUtils.urlToObject(document.location.href);
                     urlObject.query = urlObject.query || {};
                     urlObject.query = esriLang.stripTags(urlObject.query);
+                    var customUrl = null;
+                    for(var prop in urlObject.query){
+                        if(urlObject.query.hasOwnProperty(prop)){
+                            if(prop.toUpperCase() === this.config.customUrlParam.toUpperCase()){
+                                customUrl = prop;
+                            }
+                        }
+                    }
+
                     //Support find or custom url param 
                     if (this.config.find) {
                         value = decodeURIComponent(this.config.find);
-                    } else if (urlObject.query[this.config.customUrlParam.toLowerCase()]) {
-                        value = urlObject.query[this.config.customUrlParam.toLowerCase()];
-
+                    } else if (customUrl){
+                 
+                        value = urlObject.query[customUrl];
                         searchLayer = this.map.getLayer(this.config.customUrlLayer.id);
                         if (searchLayer) {
 
@@ -816,7 +954,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                     urlSearch.on("load", lang.hitch(this, function () {
                         urlSearch.search(value).then(lang.hitch(this, function () {
                             on.once(this.map.infoWindow, "hide", lang.hitch(this, function () {
-                                urlSearch.clear();
+                                //urlSearch.clear();
                                 urlSearch.destroy();
                                 if (this.editor) {
                                     this._destroyEditor();
@@ -871,12 +1009,13 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             }
 
         },
-
         _adjustPopupSize: function () {
+
             //Set the popup size to be half the widget and .35% of the map height
             if (!this.map) {
                 return;
             }
+
             var box = domGeometry.getContentBox(this.map.container);
 
             var width = 270,
@@ -896,6 +1035,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
             on(this.map.infoWindow, "hide", lang.hitch(this, function () {
                 domClass.remove(document.body, "noscroll");
             }));
+
         },
         _createWebMap: function (itemInfo) {
 
@@ -915,8 +1055,11 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 layerMixins: this.config.layerMixins,
                 bingMapsKey: this.config.bingKey
             }).then(lang.hitch(this, function (response) {
+
                 this.map = response.map;
+            
                 domClass.add(this.map.infoWindow.domNode, "light");
+
                 this._updateTheme();
 
                 //Add a logo if provided
@@ -939,7 +1082,7 @@ ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, domClass, d
                 }
 
                 this.config.title = title;
-                document.title = title;
+                document.title = esriLang.stripTags(title);
                 dom.byId("title").innerHTML = title;
 
                 //Set subtitle if provided 

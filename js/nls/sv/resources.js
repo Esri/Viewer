@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "Det gick inte att skapa kartan"
         },
+        "nav":{
+            "next": "Nästa",
+            "previous": "Föregående",
+            "close": "Stäng"
+        },
         "tools":{
             "search":{
                 "error": "Det gick inte att hitta platsen",

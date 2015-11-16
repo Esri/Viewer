@@ -95,6 +95,51 @@ define(["dojo/has"], function (has) {
         }
         return layers;
     });
+
+    has.add("layers-sublayers", function (g) {
+        var subLayers = false;
+        for (var i = 0; i < g.config.tools.length; i++) {
+            if (g.config.tools[i].name === "layers") {
+                subLayers = g.config.tools[i].sublayers;
+                break;
+            }
+        }
+        //overwrite the default with app settings
+        if (g.config.hasOwnProperty("tool_sublayers")) {
+            subLayers = g.config.tool_sublayers;
+        }
+        return subLayers;
+    });
+    has.add("layers-legend", function (g) {
+        var layerLegend = false;
+        for (var i = 0; i < g.config.tools.length; i++) {
+            if (g.config.tools[i].name === "layers") {
+                layerLegend = g.config.tools[i].legend;
+                break;
+            }
+        }
+        //overwrite the default with app settings
+        if (g.config.hasOwnProperty("tool_layerlegend")) {
+            layerLegend = g.config.tool_layerlegend;
+        }
+        return layerLegend;
+    });
+
+    has.add("layers-opacity", function (g) {
+        var opacity = false;
+        for (var i = 0; i < g.config.tools.length; i++) {
+            if (g.config.tools[i].name === "layers") {
+                opacity = g.config.tools[i].opacityslider;
+                break;
+            }
+        }
+        //overwrite the default with app settings
+        if (g.config.hasOwnProperty("tool_opacity")) {
+            opacity = g.config.tool_opacity;
+        }
+        return opacity;
+    });
+
     has.add("legend", function (g) {
         var legend = getTool("legend", g.config);
         //overwrite the default with app settings

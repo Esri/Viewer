@@ -9,6 +9,7 @@ declare, Deferred, all, lang, array, arcgisUtils, esriLang, PrintTemplate, esriR
         //************
         //defaultFormat: "pdf",
         printConfig: {
+            templates: null,
             layouts: false,
             legendLayers: [],
             printi18n: null,
@@ -51,7 +52,20 @@ declare, Deferred, all, lang, array, arcgisUtils, esriLang, PrintTemplate, esriR
         },
         _buildPrintLayouts: function () {
             var deferred = new Deferred();
-            if (this.printConfig.layouts) {
+            if(this.printConfig.templates){
+                this.templates = this.printConfig.templates;
+                array.forEach(this.templates, lang.hitch(this, function(template){
+                    if(template.layout === "MAP_ONLY"){
+                        template.exportOptions = {
+                            width:670,
+                            height:500,
+                            dpi:96
+                        };
+                    }
+                    template.layoutOptions = this.printConfig.layoutOptions;
+                }));
+                deferred.resolve(true);
+            }else if (this.printConfig.layouts) {
                 esriRequest({
                     url: this.printConfig.printTaskUrl,
                     content: {
@@ -109,14 +123,14 @@ declare, Deferred, all, lang, array, arcgisUtils, esriLang, PrintTemplate, esriR
                 var landscapeImage = new PrintTemplate();
                 landscapeImage.layout = "Letter ANSI A Landscape";
                 landscapeImage.layoutOptions = this.printConfig.layoutOptions;
-                landscapeImage.format = this.printConfig.format;
+                landscapeImage.format = "png32";
                 landscapeImage.label = this.printConfig.printi18n.layouts.label3 + " ( image )";
 
 
                 var portraitImage = new PrintTemplate();
                 portraitImage.layout = "Letter ANSI A Portrait";
                 portraitImage.layoutOptions = this.printConfig.layoutOptions;
-                portraitImage.format = this.printConfig.format;
+                portraitImage.format = "png32";
                 portraitImage.label = this.printConfig.printi18n.layouts.label4 + " ( image )";
 
 
