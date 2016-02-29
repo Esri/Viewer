@@ -1,7 +1,7 @@
 {  
    "configurationSettings":[  
       {  
-         "category":"<b>Configure template</b>",
+         "category":"<strong>Configure template</strong>",
          "fields":[  
             {  
                "type":"webmap"

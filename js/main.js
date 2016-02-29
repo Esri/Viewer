@@ -586,27 +586,27 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }, instructionsText);
 
                 domConstruct.create("li", {
-                    innerHTML : "Use <b>Tab key</b> to navigate from item to item."
+                    innerHTML : "Use <strong>Tab key</strong> to navigate from item to item."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Use <b>SHIFT Tab</b> to navigate backwards."
+                    innerHTML : "Use <strong>SHIFT Tab</strong> to navigate backwards."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Press <b>ENTER</b> to activate the focused item."
+                    innerHTML : "Press <strong>ENTER</strong> to activate the focused item."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Use <b>Page&nbsp;Up</b> or <b>Page&nbsp;Down</b> to move from a tool page to the next or to the previous page."
+                    innerHTML : "Use <strong>Page&nbsp;Up</strong> or <strong>Page&nbsp;Down</strong> to move from a tool page to the next or to the previous page."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Use <b>ESCAPE</b> to close a tool page and return to the tool bar."
+                    innerHTML : "Use <strong>ESCAPE</strong> to close a tool page and return to the tool bar."
                 }, list);
 
                 domConstruct.create("li", {
-                    innerHTML : "Hit <b>SPACE&nbsp;bar</b> to toggle a focused check box."
+                    innerHTML : "Hit <strong>SPACE&nbsp;bar</strong> to toggle a focused check box."
                 }, list);
 
                 deferred.resolve(true);
@@ -649,7 +649,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     var LegendLayers = legend.domNode.querySelectorAll(".esriLegendLayer");
                     for(j=0; j<LegendLayers.length; j++) {
                         //var LegendServiceLists = legend.domNode.querySelectorAll(".esriLegendLayer tbody");
-                        var LegendServiceList = LegendLayers[j].querySelector("tbody");;
+                        var LegendServiceList = LegendLayers[j].querySelector("tbody");
 
                         domAttr.set(LegendServiceList, "role", "list");
                         //domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
@@ -658,8 +658,13 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                             var item = LegendServiceList.childNodes[i];
                             domAttr.set(item, "role", "listitem");
                             domAttr.set(item, "tabindex", "0");
-                        };
-                    };
+                        }
+                    }
+
+                    var LegendLayerImages = legend.domNode.querySelectorAll(".esriLegendLayer image");
+                    for(i = 0; i<LegendLayerImages.length; i++) {
+                        domAttr.set(LegendLayerImages[i],'alt','');
+                    }
 
                     deferred.resolve(true);
 
@@ -763,6 +768,13 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             dojo.setAttr(ovwHighlight, 'tabindex', 0);
             dojo.setAttr(ovwHighlight, 'title', 'Drag To Change The Map Extent,\nor focus and use the Arrow keys.');
             this._atachArrowKeys(ovwHighlight, ovMap);
+
+            on(ovMap.overviewMap, "extent-change", lang.hitch(ovMap.overviewMap.container, function() {
+                var images = this.querySelectorAll("img");
+                for(i=0; i<images.length; i++)
+                    domAttr.set(images[i],'alt','');
+            }));
+
         },
 
         _atachArrowKeys: function(onButton, map) {
@@ -1467,6 +1479,11 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }
                 this.initExt = this.map.extent;
                 on.once(this.map, "extent-change", lang.hitch(this, this._checkExtent));
+                on(this.map, "extent-change", function() {
+                    var images = this.container.querySelectorAll("img");
+                    for(i=0; i<images.length; i++)
+                        domAttr.set(images[i],'alt','');
+                });
 
                 this._createMapUI();
                 // make sure map is loaded
