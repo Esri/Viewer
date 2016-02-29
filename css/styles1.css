@@ -90,3 +90,18 @@ tr[tabindex='0']:focus
   color: black;
   text-align: center;
 }
+
+
+
+.arcgisSearch .searchInput::-moz-placeholder {
+    color: #c6c6c1; !important
+    opacity: 1;
+}
+
+.arcgisSearch .searchInput:-ms-input-placeholder {
+    color: #c6c6c1; !important
+}
+
+.arcgisSearch .searchInput::-webkit-input-placeholder {
+    color: #c6c6c1; !important
+}
