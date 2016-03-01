@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title></title> <!-- Define the versions of IE that will be used to render the page. See Microsoft documentation for details. Optional. --> 
+    <title></title> <!-- Define the versions of IE that will be used to render the page. See Microsoft documentation for details. Optional. -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta charset="utf-8">
     <meta name="fragment" content="!">
@@ -12,9 +12,9 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <!-- End Responsive -->
     <!-- Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol -->
-    <link rel="stylesheet" href="//js.arcgis.com/3.15/esri/css/calcite/calcite.css">
-  
-    <link rel="stylesheet"  href="//js.arcgis.com/3.15/esri/css/esri.css">
+    <link rel="stylesheet" href="//js.arcgis.com/3.16/esri/css/calcite/calcite.css">
+
+    <link rel="stylesheet"  href="//js.arcgis.com/3.16/esri/css/esri.css">
     <!-- Load any application specific styles -->
     <link rel="stylesheet" href="css/styles.css">
     <!--[if IE 8]>
@@ -24,15 +24,17 @@
   <body class="calcite app-loading no-touch">
    <div>
     <!--Modal Splash Screen-->
-    <div id="modal" class="hide-modal">
+    <div id="modal" class="hide">
       <div class="modal-content">
         <div class="modal-header bg fc">
           <h2 id="modalTitle"></h2>
-          <button id="closeOverlay" class="tool-btn icon-close fc" type="button"></button>
         </div>
-        <div id="modalContent" class="copy"></div>
+        <div class="copy">
+          <div id="modalContent"></div>
+          <input  id="closeOverlay" class="bg fc" type="button"/>
+        </div>
       </div>
-      <div class="overlay"></div>
+    <!--  <div class="overlay"></div>-->
     </div>
     <!-- Loading Indicator -->
     <div class="loading-indicator">
@@ -52,7 +54,7 @@
             <div id="popupTitle"></div>
             <div id="popupButtonPrev" class="popupButton prev"></div>
             <div id="popupButtonNext" class="popupButton next"></div>
-            <div id="popupButtonClose" class="popupButton close"></div>  
+            <div id="popupButtonClose" class="popupButton close"></div>
           </div>
         </div>
         <div class="pageBody" id="pageBody_popup">
@@ -67,7 +69,7 @@
        <div id="panelTitle">
         <div class="fc" id="panelText">
             <h1 id="title"></h1>
-            <h2 id="subtitle"></h2>            
+            <h2 id="subtitle"></h2>
         </div>
         <div id="panelSearch">
           <div id="panelGeocoder"></div>
@@ -114,7 +116,7 @@
         }
 
     </script>
-    <script type="text/javascript" src="//js.arcgis.com/3.15/"></script>
+    <script type="text/javascript" src="//js.arcgis.com/3.16/"></script>
         <script type="text/javascript">
         require([
             "dojo/parser",

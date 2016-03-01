@@ -68,7 +68,7 @@ html, body {
   z-index: 2;
   top: 40%;
   left: 0;
-  text-align: center; 
+  text-align: center;
 }
 
 .esriLayer{
@@ -106,7 +106,7 @@ html, body {
 @media only screen and (min-width: 720px) {
   #pageBody_overview {
     max-height: 80%; } }
-    
+
 /*Styles for the print dialog checkbox*/
 #pageBody_print .checkbox {
   display: inline-block;
@@ -171,7 +171,7 @@ html, body {
   background-image: url("../images/popup-sprite.png");
   width: 12px;
   height: 12px;
-  text-indent: -9999px; 
+  text-indent: -9999px;
 }
 .printTitle{
   width: 265px;
@@ -187,7 +187,7 @@ html, body {
   font-size:20px;
 }
 .esriPrintout a {
-  color: #5daddd; 
+  color: #5daddd;
 }
 .esriPrint {
   position: absolute;
@@ -202,16 +202,16 @@ html, body {
     text-align: center;
     vertical-align: middle;
     line-height:32px;
-    -webkit-animation-name: rotate; 
-    -webkit-animation-duration: 1s; 
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 1s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
-    -moz-animation-name: rotate; 
-    -moz-animation-duration: 1s; 
+    -moz-animation-name: rotate;
+    -moz-animation-duration: 1s;
     -moz-animation-iteration-count: infinite;
     -moz-animation-timing-function: linear;
-    animation-name: rotate; 
-    animation-duration: 1s; 
+    animation-name: rotate;
+    animation-duration: 1s;
     animation-iteration-count: infinite;
     animation-timing-function: linear;
 }
@@ -444,7 +444,8 @@ html, body {
   border-bottom: none;
 }
 .esriBookmarkLabel {
-  font-size: 16px; }
+  font-size: 16px;
+  width:250px; }
 
 .esriBookmarkHighlight {
   background-color: transparent;
@@ -520,7 +521,7 @@ html, body {
   border-radius: 13px; }
 
 img {
-  border: 0; 
+  border: 0;
 }
 .LocateButton .tracking {
     background-image: none !important;
@@ -737,7 +738,7 @@ img {
   font-size: 14px;
   color: #ffffff;
   line-height: 20px;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .pageHeaderImg {
@@ -814,7 +815,7 @@ img {
 }
 
 #pageBody_print {
-  padding: 10px; 
+  padding: 10px;
   height:120px;
 }
 
@@ -827,7 +828,7 @@ img {
   }
   .pageBody{
     max-height: 250px;
-  } 
+  }
 }
 .legend{
   margin:auto;
@@ -837,7 +838,7 @@ img {
 
 #pageBody_share {
   padding: 5px 20px;
-  overflow-y: auto; 
+  overflow-y: auto;
 }
 
 .desc {
@@ -845,7 +846,7 @@ img {
 
 #pageBody_details {
   padding: 5px;
-  max-width: 288px; 
+  max-width: 288px;
 }
 
 #panelTop {
@@ -861,7 +862,7 @@ img {
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
-  border-radius: 0; 
+  border-radius: 0;
 }
 
 @media only screen and (min-width: 760px) {
@@ -872,11 +873,11 @@ img {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
-    border-radius: 5px; 
+    border-radius: 5px;
   }
 
     #panelLogo {
-      margin-left: 5px; 
+      margin-left: 5px;
       display:block !important;
       overflow: hidden;
       float: left;
@@ -889,7 +890,7 @@ img {
       vertical-align: middle;
       line-height: inherit;
       max-width: 45px;
-      max-height: 45px; 
+      max-height: 45px;
     }
 
   }
@@ -905,7 +906,7 @@ img {
 }
 
 .no-search #panelText {
-  display: block; 
+  display: block;
 }
 .no-search #panelLogo {
   display: block !important;
@@ -944,14 +945,14 @@ h1, h2{
   text-overflow:ellipsis;
   height: 30px;
   line-height: 30px;
-  font-size: 1.3em;   
+  font-size: 1.3em;
 }
 #subtitle{
   overflow: hidden;
   text-overflow:ellipsis;
   height: 30px;
   line-height: 20px;
-  font-size: 0.9em;  
+  font-size: 0.9em;
 }
 #title.nosubtitle{
   overflow: hidden;
@@ -963,23 +964,23 @@ h1, h2{
 @media only screen and (min-width: 720px) {
   #panelText {
     display: block;
-    max-width: 300px; 
-  } 
+    max-width: 300px;
+  }
 }
 
 @media only screen and (min-width: 800px) {
   #panelText {
-    max-width: 400px; 
-  } 
+    max-width: 400px;
+  }
 }
 
 #panelText.nosearch {
-  display: block; 
+  display: block;
 }
 #panelSearch {
   float: left;
   margin: 10px 0 10px 20px;
-  height: 30px; 
+  height: 30px;
 }
 
 @media only screen and (min-width: 720px) {
@@ -1400,32 +1401,41 @@ input[type=checkbox]{
 /*Styles for the modal dialog (splash screen)*/
 
 #modal {
-  z-index:1000;
-  position: absolute;
-  top: 50%; 
+  z-index:2000;
+  position: fixed;
   left: 50%;
-  margin: -100px 0 0 -20%;
-  opacity: 1;
-  visibility: visible;
-  width: 40%;
-  box-shadow: 0 3px 7px rgba(0,0,0,.25);
-  box-sizing: border-box;
-  transition: all .4s ease-in-out;
-  -moz-transition: all .4s ease-in-out;
-  -webkit-transition: all .4s ease-in-out;
-  overflow:visible;
+  top: 50%;
+  -moz-transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+
 }
-#modal.hide-modal{
+#modalContent{
+  overflow-y:auto;
+  max-height: 300px;
+}
+#modalContent img {
+  max-width: 100%;
+  max-height: 40%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+#modal.hide{
   top: -50%;
   visibility: hidden;
   opacity: 0;
 }
 #modal .modal-header{
   border-bottom: 1px solid #ccc;
-  border-radius: 5px 5px 0 0
+  border-radius: 0;
 }
 #modal h2 {
   margin: 0;
+  padding-right:8px;
+  padding-bottom:5px;
+  margin-right:5px;
 }
 #modal .copy{
   color: #333;
@@ -1438,24 +1448,19 @@ input[type=checkbox]{
   position: relative;
   z-index: 20;
 }
-#modal .overlay {
-  position: fixed;
-  left: 0;
-  top: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 10
-}
 
 #closeOverlay{
-  display: inline-block;
-  position: absolute;
-  right:2px;
-  top:2px;
-  height:36px;
-  width:36px;
-  font-size:24px;
-  line-height: 24px;
+  line-height: normal;
+  padding: .5em 1em;
+  outline: none;
+  font-size: 1em;
+  font-weight: 600;
+  border:none;
+  cursor:pointer;
+  height:auto;
+  width: auto;
+  position: relative;
+  margin:.5em auto;
 }
 .tool-btn{
   text-align: center;

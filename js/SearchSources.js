@@ -146,7 +146,11 @@ declare, lang, array, dojoJson, domConstruct, esriLang, Locator, FeatureLayer, S
                     source.locator = new Locator(source.url);
                 } else { //feature layer
                     var featureLayer = null;
-                    if (source.flayerId) {
+                    if (source.flayerId && source.url) {
+                        featureLayer = new FeatureLayer(source.url,{
+                            outFields: ["*"]
+                        });
+                    }else if(source.flayerId){
                         featureLayer = this.map.getLayer(source.flayerId);
                     }
                     if (!featureLayer && source.url) {

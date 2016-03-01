@@ -14,73 +14,75 @@
  | limitations under the License.
  */
 define([
-    "dojo/ready", 
-    "dojo/json", 
+    "dojo/ready",
+    "dojo/json",
 
     "dojo/i18n!esri/nls/jsapi",
 
-    "dojo/_base/array", 
-    "dojo/_base/Color", 
-    "dojo/_base/declare", 
-    "dojo/_base/lang", 
+    "dojo/_base/array",
+    "dojo/_base/Color",
+    "dojo/_base/declare",
+    "dojo/_base/lang",
 
-    "dojo/dom", 
-    "dojo/dom-geometry", 
-    "dojo/dom-attr", 
-    "dojo/dom-class", 
-    "dojo/dom-construct", 
-    "dojo/dom-style", 
+    "dojo/dom",
+    "dojo/dom-geometry",
+    "dojo/dom-attr",
+    "dojo/dom-class",
+    "dojo/dom-construct",
+    "dojo/dom-style",
 
-    "dojo/on", 
-    "dojo/Deferred", 
-    "dojo/promise/all", 
-    "dojo/query", 
+    "dojo/on",
+    "dojo/Deferred",
+    "dojo/promise/all",
+    "dojo/query",
 
-    "dijit/registry", 
-    "dijit/Menu", 
-    "dijit/CheckedMenuItem", 
+    "dijit/registry",
+    "dijit/Menu",
+    "dijit/CheckedMenuItem",
 
-    "application/toolbar", 
+    "application/toolbar",
     "application/has-config",
-    "application/ShareDialog", 
+    "application/ShareDialog",
     "application/SearchSources",
+    "application/MapUrlParams",
 
-    "esri/arcgis/utils", 
-    "esri/lang", 
-    "esri/urlUtils", 
+    "esri/arcgis/utils",
+    "esri/lang",
+    "esri/urlUtils",
 
-    "esri/dijit/HomeButton", 
-    "esri/dijit/LocateButton", 
-    "esri/dijit/Legend", 
-    "esri/dijit/BasemapGallery", 
-    "esri/dijit/Measurement", 
-    "esri/dijit/OverviewMap", 
-    "esri/dijit/LayerList", 
+    "esri/dijit/HomeButton",
+    "esri/dijit/LocateButton",
+    "esri/dijit/Legend",
+    "esri/dijit/BasemapGallery",
+    "esri/dijit/Measurement",
+    "esri/dijit/OverviewMap",
+    "esri/dijit/LayerList",
 
-    "esri/geometry/Extent", 
+    "esri/geometry/Extent",
     "esri/layers/FeatureLayer"
     ], function (
         ready,JSON,
 
         esriBundle,
 
-        array, Color, declare, lang, 
+        array, Color, declare, lang,
 
-        dom, domGeometry, domAttr, domClass, 
-        domConstruct, domStyle, 
+        dom, domGeometry, domAttr, domClass,
+        domConstruct, domStyle,
 
-        on, Deferred, all, query, 
+        on, Deferred, all, query,
 
-        registry, Menu, CheckedMenuItem, 
+        registry, Menu, CheckedMenuItem,
 
         Toolbar, has,
         ShareDialog, SearchSources,
+        MapUrlParams,
 
-        arcgisUtils, esriLang, urlUtils, 
+        arcgisUtils, esriLang, urlUtils,
 
-        HomeButton, LocateButton, Legend, 
-        BasemapGallery, Measurement, 
-        OverviewMap, LayerList, 
+        HomeButton, LocateButton, Legend,
+        BasemapGallery, Measurement,
+        OverviewMap, LayerList,
 
         Extent, FeatureLayer
 
@@ -107,31 +109,49 @@ define([
                 if(this.config.customstyle){
                     var style = document.createElement("style");
                     style.appendChild(document.createTextNode(this.config.customstyle));
-                    document.head.appendChild(style);    
+                    document.head.appendChild(style);
                 }
 
-         
+
                 // document ready
                 ready(lang.hitch(this, function () {
                     //supply either the webmap id or, if available, the item info
                     var itemInfo = this.config.itemInfo || this.config.webmap;
 
+                    var mapParams = new MapUrlParams({
+                           center: this.config.center || null,
+                           extent: this.config.extent || null,
+                           level: this.config.level || null,
+                           marker: this.config.marker || null,
+                           mapSpatialReference: itemInfo.itemData.spatialReference,
+                           defaultMarkerSymbol: this.config.markerSymbol,
+                           defaultMarkerSymbolWidth: this.config.markerSymbolWidth,
+                           defaultMarkerSymbolHeight: this.config.markerSymbolHeight,
+                           geometryService: this.config.helperServices.geometry.url
+                    });
+
                     // Setup the modal overlay if enabled
                     if(this.config.splashModal){
-                      domClass.remove("modal", "hide-modal");
+                      domClass.add(document.body, "noscroll");
+                      domClass.remove("modal", "hide");
                       var title = this.config.splashTitle || "";
                       var content = this.config.splashContent || "";
                       dom.byId("modalTitle").innerHTML = title;
                       dom.byId("modalContent").innerHTML = content;
-                      // Close button handler for the overlay  
-                      on(dom.byId("closeOverlay"), "click", lang.hitch(this, function(){
-                        this._createWebMap(itemInfo);
-                        domClass.add("modal", "hide-modal");
-                      }));
-                    }else{
-                        this._createWebMap(itemInfo);
-                    }
+                      dom.byId("closeOverlay").value = this.config.splashButtonText || this.config.i18n.nav.close;
 
+                      // Close button handler for the overlay
+                      on(dom.byId("closeOverlay"), "click", lang.hitch(this, function(){
+                        domClass.remove(document.body, "noscroll");
+                        domClass.add("modal", "hide");
+                      }));
+                      this._updateTheme();
+                    }
+                    mapParams.processUrlParams().then(lang.hitch(this, function(urlParams){
+                      promise = this._createWebMap(itemInfo, urlParams);
+                    }), lang.hitch(this, function(error){
+                      this.reportError(error);
+                    }));
 
 
                 }));
@@ -417,7 +437,7 @@ define([
                                     time: true
                                 };
                             }
-                            //Add all editable fields even if not visible. 
+                            //Add all editable fields even if not visible.
                             //if (field.visible) {
                             fieldInfos.push(field);
                             //}
@@ -460,7 +480,6 @@ define([
                 deferred.resolve(false);
             } else {
                 if (has("layers")) {
-
                     //Use small panel class if layer layer is less than 5
                     if (layers.length < 5) {
                         panelClass = "small";
@@ -479,9 +498,15 @@ define([
                         showOpacitySlider: has("layers-opacity"),
                         layers: arcgisUtils.getLayerList(this.config.response)
                     }, domConstruct.create("div", {}, layersDiv));
+
                     toc.startup();
 
-
+                    toc.on("toggle", lang.hitch(this, function(){
+                        var legend = registry.byId("mapLegend");
+                        if(legend){
+                          legend.refresh();
+                        }
+                    }));
                     deferred.resolve(true);
                 } else {
                     deferred.resolve(false);
@@ -493,30 +518,14 @@ define([
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
             var layers = arcgisUtils.getLegendLayers(this.config.response);
-
-
             if (layers.length === 0) {
                 deferred.resolve(false);
             } else {
                 if (has("legend")) {
-                    var legendLength = 0;
-                    array.forEach(layers, lang.hitch(this, function (layer) {
-                        if (layer.infos && layer.infos.length) {
-                            legendLength += layer.infos.length;
-                        }
-                    }));
-
-                    if (legendLength.length < 5) {
-                        panelClass = "small";
-                    } else if (legendLength.length < 15) {
-                        panelClass = "medium";
-                    } else {
-                        panelClass = "large";
-                    }
-
                     var legendDiv = toolbar.createTool(tool, panelClass);
                     var legend = new Legend({
                         map: this.map,
+                        id: "mapLegend",
                         layerInfos: layers
                     }, domConstruct.create("div", {}, legendDiv));
                     domClass.add(legend.domNode, "legend");
@@ -613,7 +622,7 @@ define([
             return deferred.promise;
         },
         _addPrint: function (tool, toolbar, panelClass) {
-            //Add the print widget to the toolbar 
+            //Add the print widget to the toolbar
             var deferred = new Deferred(),
                 print = null;
             require(["application/has-config!print?application/PrintConfig", "application/has-config!print?esri/dijit/Print"], lang.hitch(this, function (PrintConfig, Print) {
@@ -657,6 +666,7 @@ define([
                         id: "print_title",
                         className: "printTitle",
                         tabindex: "0",
+                        "aria-label": this.config.i18n.tools.print.titlePrompt,
                         placeholder: this.config.i18n.tools.print.titlePrompt
                     }, domConstruct.create("div"));
 
@@ -871,8 +881,10 @@ define([
                 var searchSources = new SearchSources(searchOptions);
                 var createdOptions = searchSources.createOptions();
 
-                if (this.config.searchConfig && this.config.searchConfig.activeSourceIndex) {
+                if (this.config.searchConfig !== null && this.config.searchConfig !== undefined){
+                  if (this.config.searchConfig.activeSourceIndex !== null && this.config.searchConfig.activeSourceIndex !== undefined) {
                     createdOptions.activeSourceIndex = this.config.searchConfig.activeSourceIndex;
+                  }
                 }
 
                 var search = new Search(createdOptions, domConstruct.create("div", {
@@ -880,8 +892,8 @@ define([
                 }, "mapDiv"));
 
                 search.on("select-result", lang.hitch(this, function () {
-                    //if edit tool is enabled we'll have to delete/create 
-                    //so info window behaves correctly. 
+                    //if edit tool is enabled we'll have to delete/create
+                    //so info window behaves correctly.
                     on.once(this.map.infoWindow, "hide", lang.hitch(this, function () {
                         search.clearGraphics();
                         if (this.editor) {
@@ -897,7 +909,7 @@ define([
                     domConstruct.place(search.domNode, "panelGeocoder");
                 }
              // update the search placeholder text color and dropdown
-             // to match the icon text 
+             // to match the icon text
              if(this.config.icons === "black"){
                 query(".arcgisSearch .searchIcon").style("color", "#000");
                 domClass.add(dom.byId("search_input"),"dark");
@@ -925,11 +937,11 @@ define([
                         }
                     }
 
-                    //Support find or custom url param 
+                    //Support find or custom url param
                     if (this.config.find) {
                         value = decodeURIComponent(this.config.find);
                     } else if (customUrl){
-                 
+
                         value = urlObject.query[customUrl];
                         searchLayer = this.map.getLayer(this.config.customUrlLayer.id);
                         if (searchLayer) {
@@ -973,7 +985,7 @@ define([
 
         },
         _setColor: function (color) {
-            //Convert the string color from the config file to rgba if supported. 
+            //Convert the string color from the config file to rgba if supported.
             var rgb = Color.fromHex(color).toRgb();
             var outputColor = null;
             if (has("ie") < 9) {
@@ -987,7 +999,7 @@ define([
             return outputColor;
         },
         _updateTheme: function () {
-            //Update the app to use the configured color scheme. 
+            //Update the app to use the configured color scheme.
             //Set the background color using the configured theme value
             query(".bg").style("backgroundColor", this.theme.toString());
             query(".esriPopup .pointer").style("backgroundColor", this.theme.toString());
@@ -1037,18 +1049,13 @@ define([
             }));
 
         },
-        _createWebMap: function (itemInfo) {
+        _createWebMap: function (itemInfo, params) {
 
             window.config = this.config;
-            itemInfo = this._setExtent(itemInfo);
-
-            var mapOptions = {};
-            mapOptions = this._setLevel(mapOptions);
-            mapOptions = this._setCenter(mapOptions);
 
             // create a map based on the input web map id
             arcgisUtils.createMap(itemInfo, "mapDiv", {
-                mapOptions: mapOptions,
+                mapOptions: params.mapOptions || {},
                 editable: has("edit"),
                 //is the app editable
                 usePopupManager: true,
@@ -1057,8 +1064,25 @@ define([
             }).then(lang.hitch(this, function (response) {
 
                 this.map = response.map;
-            
+
                 domClass.add(this.map.infoWindow.domNode, "light");
+
+             if(params.markerGraphic){
+                    // Add a marker graphic with an optional info window if
+                    // one was specified via the marker url parameter
+                    require(["esri/layers/GraphicsLayer"], lang.hitch(this, function(GraphicsLayer){
+                      var markerLayer = new GraphicsLayer();
+
+                      this.map.addLayer(markerLayer);
+                      markerLayer.add(params.markerGraphic);
+
+                      if(params.markerGraphic.infoTemplate){
+                        this.map.infoWindow.setFeatures([params.markerGraphic]);
+                        this.map.infoWindow.show(params.markerGraphic.geometry);
+                      }
+                    }));
+
+                }
 
                 this._updateTheme();
 
@@ -1085,7 +1109,7 @@ define([
                 document.title = esriLang.stripTags(title);
                 dom.byId("title").innerHTML = title;
 
-                //Set subtitle if provided 
+                //Set subtitle if provided
                 if (this.config.subtitle) {
                     dom.byId("subtitle").innerHTML = this.config.subtitle;
                 } else {
@@ -1105,41 +1129,7 @@ define([
                     }));
                 }
             }), this.reportError);
-        },
-        _setLevel: function (options) {
-            var level = this.config.level;
-            //specify center and zoom if provided as url params 
-            if (level) {
-                options.zoom = level;
-            }
-            return options;
-        },
-
-        _setCenter: function (options) {
-            var center = this.config.center;
-            if (center) {
-                var points = center.split(",");
-                if (points && points.length === 2) {
-                    options.center = [parseFloat(points[0]), parseFloat(points[1])];
-                }
-            }
-            return options;
-        },
-
-        _setExtent: function (info) {
-            var e = this.config.extent;
-            //If a custom extent is set as a url parameter handle that before creating the map
-            if (e) {
-                var extArray = e.split(",");
-                var extLength = extArray.length;
-                if (extLength === 4) {
-                    info.item.extent = [
-                        [parseFloat(extArray[0]), parseFloat(extArray[1])],
-                        [parseFloat(extArray[2]), parseFloat(extArray[3])]
-                    ];
-                }
-            }
-            return info;
         }
+
     });
 });

@@ -60,8 +60,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                     }
                     domStyle.set(win.body(), "overflow-y", "auto");
                 }
-
-
             }));
             domConstruct.empty(this.pPages);
             // add blank page
@@ -120,7 +118,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             }, this.pTools);
 
             if (!has("touch")) {
-                //add a tooltip 
+                //add a tooltip
                 var tip = this.config.i18n.tooltips[name] || name;
                 domAttr.set(pTool, "data-title", tip);
                 domAttr.set(pTool, "title", tip);
@@ -135,7 +133,8 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             domConstruct.create("img", {
                 className: "tool",
-                src: "images/icons_" + this.config.icons + "/" + name + ".png"
+                src: "images/icons_" + this.config.icons + "/" + name + ".png",
+                alt: name
             }, pTool);
             on(pTool, "click", lang.hitch(this, this._toolClick, name));
             this.tools.push(name);
@@ -168,7 +167,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             domConstruct.create("div", {
                 className: "pageHeaderImg",
-                innerHTML: "<img class='pageIcon' src ='images/icons_" + this.config.icons + "/" + name + ".png'/>"
+                innerHTML: "<img class='pageIcon' src ='images/icons_" + this.config.icons + "/" + name + ".png' alt="+ name +"/>"
             }, pageHeader);
 
 
@@ -181,7 +180,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         },
 
         updatePageNavigation: function () {
-            //Adds the up/down and close tools to the page header. 
+            //Adds the up/down and close tools to the page header.
             for (var i = 0; i < this.tools.length; i++) {
                 var name = this.tools[i];
                 var pageClose = domConstruct.create("div", {
@@ -201,7 +200,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 }, "pageHeader_" + name);
                 if(this.config.icons === "black"){
                     domClass.add(pageUp, "icons-dark");
-                }                
+                }
                 on(pageUp, "click, keypress", lang.hitch(this, this._showPreviousPage, name));
 
                 if (name != this.tools[this.tools.length - 1]) {
@@ -225,7 +224,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         },
 
         activateTool: function (name) {
-            //Instead of scrolling to the tool just go there. 
+            //Instead of scrolling to the tool just go there.
             var num = this._getPageNum(name) + 1;
             var box = html.getContentBox(dom.byId("panelContent"));
 
