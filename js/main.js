@@ -248,9 +248,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         case "legend":
                             toolList.push(this._addLegend(this.config.tools[i], toolbar, "medium"));
                             break;
-                        case "bookmarks":
-                            toolList.push(this._addBookmarks(this.config.tools[i], toolbar, "medium"));
-                            break;
                         case "layers":
                             toolList.push(this._addLayers(this.config.tools[i], toolbar, "medium"));
                             break;
@@ -266,11 +263,14 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         case "edit":
                             toolList.push(this._addEditor(this.config.tools[i], toolbar, "medium"));
                             break;
-                        case "print":
-                            toolList.push(this._addPrint(this.config.tools[i], toolbar, "small"));
-                            break;
                         case "share":
                             toolList.push(this._addShare(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        case "bookmarks":
+                            toolList.push(this._addBookmarks(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        case "print":
+                            toolList.push(this._addPrint(this.config.tools[i], toolbar, "small"));
                             break;
                         default:
                             break;
@@ -411,16 +411,23 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     }, domConstruct.create("div", {}, bookmarkDiv));
 
                     items = bookmarks.bookmarkDomNode.querySelectorAll('.esriBookmarkItem');
-                    domAttr.set(items[0].parentNode.parentNode.parentNode,"role","list");
+                    if(items && items.length>0)
+                    {
+                        itemsTable = items[0].parentNode.parentNode.parentNode.parentNode;
+                        var header = document.createElement("tr");
+                        header.innerHTML = "<th style='display:none;'>Bookmarks</th>";
+                        itemsTable.insertBefore(header, items[0].parentNode.parentNode.parentNode);
+                        domAttr.set(itemsTable,"role","list");
 
-                    for(i=0; i<items.length; i++) {
-                        var item = items[i];
-                        domAttr.set(item, 'tabindex', 0);
-                        label = item.querySelector('.esriBookmarkLabel');
-                        this._atachEnterKey(item, label);
-                        domStyle.set(label, 'width', '280px');
+                        for(i=0; i<items.length; i++) {
+                            var item = items[i];
+                            domAttr.set(item, 'tabindex', 0);
+                            label = item.querySelector('.esriBookmarkLabel');
+                            this._atachEnterKey(item, label);
+                            domStyle.set(label, 'width', '280px');
 
-                        domAttr.set(item.parentNode.parentNode,"role","listitem");
+                            domAttr.set(item.parentNode.parentNode,"role","listitem");
+                        }
                     }
                     deferred.resolve(true);
                 }));
