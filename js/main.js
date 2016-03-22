@@ -727,6 +727,12 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     esriMeasurementTableHeader.parentNode.replaceChild(newHeader, esriMeasurementTableHeader);
                 }
 
+                var AccessAuditMarkers = esriMeasurementResultTable.querySelectorAll('img');
+                for(i = 0; i< AccessAuditMarkers.length; i++)
+                {
+                     AccessAuditMarkers[i].setAttribute('Alt','');  
+                }
+
                 areaIconNode = measureDiv.querySelector('.areaIcon');
                 domClass.remove(areaIconNode, 'areaIcon');
                 areaIconNode.innerHTML = '<img src="images\\area_measure.png" alt="Area"/>';
