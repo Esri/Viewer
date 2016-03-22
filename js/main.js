@@ -662,7 +662,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         var header = document.createElement("tr");
                         header.innerHTML = "<th style='display:none;'></th>";
                         LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
-                        
+
 
                         domAttr.set(LegendServiceList, "role", "list");
                         //domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
@@ -710,6 +710,22 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     domAttr.set(node, 'tabindex', 0);
                     domAttr.set(node.querySelector('.dijitButtonContents'), 'tabindex', '');
                 });
+
+                var esriMeasurementResultTable = measureDiv.querySelector('.esriMeasurementResultTable');
+                var esriMeasurementTableHeaders = esriMeasurementResultTable.querySelectorAll('.esriMeasurementTableHeader');
+                for(i = 0; i< esriMeasurementTableHeaders.length; i++)
+                {
+                    esriMeasurementTableHeader = esriMeasurementTableHeaders[i];
+                    //alert(esriMeasurementTableHeader.innerHTML); 
+                    var newHeader = document.createElement('th');
+                    newHeader.innerHTML = esriMeasurementTableHeader.innerHTML;
+                    colspan = esriMeasurementTableHeader.getAttribute('colspan');
+                    if(colspan) {
+                        newHeader.setAttribute('colspan', colspan);
+                    }
+                    newHeader.className = esriMeasurementTableHeader.className;
+                    esriMeasurementTableHeader.parentNode.replaceChild(newHeader, esriMeasurementTableHeader);
+                }
 
                 areaIconNode = measureDiv.querySelector('.areaIcon');
                 domClass.remove(areaIconNode, 'areaIcon');
