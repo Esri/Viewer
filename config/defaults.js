@@ -57,14 +57,14 @@ define({
         {"name": "instructions", "enabled": true},
         {"name": "details", "enabled": true},
         {"name": "legend", "enabled": true},
-        {"name": "bookmarks", "enabled": true},
         {"name": "layers", "enabled": true},
         {"name": "basemap", "enabled": true},
         {"name": "overview", "enabled": true},
         {"name": "measure", "enabled": true},
         {"name": "edit", "enabled": true, "toolbar": true}, 
-        {"name": "print", "enabled": true, "legend": false, "layouts":false, "format":"pdf"},
-        {"name": "share", "enabled": true}
+        {"name": "share", "enabled": true},
+        {"name": "bookmarks", "enabled": true},
+        {"name": "print", "enabled": true, "legend": false, "layouts":false, "format":"pdf"}
     ],
     //Set the active tool on the toolbar. Note home and locate can't be the active tool.
     //Set to "" to display no tools at startup

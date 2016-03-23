@@ -258,7 +258,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         },
 
 
-       selectText: function(text) {
+        selectText: function(text) {
             var doc = document,
                 //text = doc.getElementById(element),
                 range, selection;    

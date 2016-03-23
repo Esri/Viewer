@@ -19,6 +19,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", 
     "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", 
     "application/has-config", "esri/arcgis/utils", "esri/lang", 
+    "esri/tasks/query", "esri/tasks/QueryTask",
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
@@ -30,6 +31,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     domConstruct, domStyle, on, Deferred, all, 
     query, registry, Menu, CheckedMenuItem, Toolbar, 
     has, arcgisUtils, esriLang, 
+    Query, QueryTask,
     HomeButton, LocateButton, 
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
@@ -304,7 +306,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
                     if(has("instructions")) {
                         //toolbar.activateTool("instructions");
-                        setTimeout(lang.hitch(toolbar, toolbar.showInstructions), 300);
+                        setTimeout(lang.hitch(toolbar, toolbar.showInstructions), 400);
                     }
                     else if (this.config.activeTool !== "") {
                         toolbar.activateTool(this.config.activeTool);
@@ -660,7 +662,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
 
                         var header = document.createElement("tr");
-                        header.innerHTML = "<th style='display:none;'></th>";
+                        header.innerHTML = "<th style='display:none;'>Layer</th>";
                         LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
 
 
@@ -1480,7 +1482,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }
 
                 //Set the application title
-                this.map = response.map;
+                //this.map = response.map;
                 //Set the title - use the config value if provided.
                 //var title = (this.config.title === null) ? response.itemInfo.item.title : this.config.title;
                 var title;
@@ -1515,9 +1517,34 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 this.initExt = this.map.extent;
                 on.once(this.map, "extent-change", lang.hitch(this, this._checkExtent));
                 on(this.map, "extent-change", function() {
-                    var images = this.container.querySelectorAll("img");
-                    for(i=0; i<images.length; i++)
-                        domAttr.set(images[i],'alt','');
+                    var imgs = this.container.querySelectorAll("img");
+                    for(i=0; i<imgs.length; i++)
+                        domAttr.set(imgs[i],'alt','');
+
+                    // // mapDiv_layers
+                    // var images = this.container.querySelectorAll("image");
+                    // for(i=0; i<images.length; i++)
+                    //     domAttr.set(images[i],'tabindex','0');
+                });
+
+                fields = ["Incident_Number", "Incident_Types"];
+                
+                url = "http://services.arcgis.com/zmLUiqh7X11gGV2d/arcgis/rest/services/Incidents/FeatureServer/0";
+                
+                var _queryTask = new QueryTask(url);
+                _queryTask.on("complete", function(evt) {
+                    console.log(evt.featureSet.features);
+                });
+                
+                _query = new Query();
+                _query.outFields = ["*"];
+                _query.returnGeometry = true;
+                _query.spatialRelationship = "esriSpatialRelIntersects";
+                //_query.where = "1=1";
+                
+                on(this.map, "extent-change", function(evt) {
+                    _query.geometry = evt.extent;
+                    _queryTask.execute(_query);
                 });
 
                 this._createMapUI();
