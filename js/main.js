@@ -169,6 +169,33 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             on(this.map.infoWindow, "selection-change", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);
             }));
+
+            var tasks = [];
+            this.map.graphicsLayerIds.forEach(lang.hitch(this, function(id) {
+                var layer = this.map._layers[id];
+                if(layer.url && !layer._isSnapshot)
+                {
+                    var _query = new Query();
+                    _query.outFields = ["*"];
+                    _query.returnGeometry = true;
+                    _query.spatialRelationship = "esriSpatialRelIntersects";
+                    tasks.push({
+                        task : new QueryTask(this.map._layers[layer.id].url),
+                        query : _query
+                    });
+                }   
+            }));
+            
+            on(this.map, "extent-change", function(ext) {
+                tasks.forEach(lang.hitch(this, function(t) {
+                    t.query.geometry = ext.extent;
+                    t.result = t.task.execute(t.query);
+                }));
+                promises = all(tasks.map(function(t) {return t.result;}));
+                promises.then(function(results) {
+                    console.log(results[0]);
+                });
+            });
         },
 
         _initPopup : function (node) {
@@ -178,7 +205,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 {
                     dojo.setAttr(images[i], 'alt', '');
                 } 
-            };
+            }
 
             dojo.setAttr(node, "role", "dialog");
             header = node.querySelector('.header');
@@ -1527,25 +1554,32 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     //     domAttr.set(images[i],'tabindex','0');
                 });
 
-                fields = ["Incident_Number", "Incident_Types"];
+//                 var tasks = []
+//                 this.map.graphicsLayerIds.forEach(lang.hitch(this, function(id) {
+//                     var layer = this.map._layers[id]
+//                     if(layer.url && !layer._isSnapshot)
+//                     {
+//                         var _query = new Query();
+//                         _query.outFields = ["*"];
+//                         _query.returnGeometry = true;
+//                         _query.spatialRelationship = "esriSpatialRelIntersects";
+//                         tasks.push({
+//                             task : new QueryTask(this.map._layers[layer.id].url),
+//                             query : _query
+//                         })
+//                     }   
+//                 }));
                 
-                url = "http://services.arcgis.com/zmLUiqh7X11gGV2d/arcgis/rest/services/Incidents/FeatureServer/0";
-                
-                var _queryTask = new QueryTask(url);
-                _queryTask.on("complete", function(evt) {
-                    console.log(evt.featureSet.features);
-                });
-                
-                _query = new Query();
-                _query.outFields = ["*"];
-                _query.returnGeometry = true;
-                _query.spatialRelationship = "esriSpatialRelIntersects";
-                //_query.where = "1=1";
-                
-                on(this.map, "extent-change", function(evt) {
-                    _query.geometry = evt.extent;
-                    _queryTask.execute(_query);
-                });
+//                 on(this.map, "extent-change", function(evt) {
+//                     tasks.forEach(lang.hitch(this, function(t) {
+//                         t.query.geometry = evt.extent;
+//                         t.result = t.task.execute(t.query);
+//                     }))
+//                     promises = all(tasks.map(function(t) {return t.result}));
+//                     promises.then(function(results) {
+//                         console.log(results);
+//                     })
+//                 });
 
                 this._createMapUI();
                 // make sure map is loaded
