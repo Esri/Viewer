@@ -23,7 +23,10 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
-    "esri/layers/FeatureLayer", "application/TableOfContents", "application/ShareDialog",
+    "esri/layers/FeatureLayer",
+    "dojo/string", 
+    "dojo/text!./FeatureListTemplate.html",
+    "application/TableOfContents", "application/ShareDialog",
     "esri/dijit/InfoWindow"], 
     function (
     ready, JSON, array, Color, declare, 
@@ -35,7 +38,10 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     HomeButton, LocateButton, 
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
-    FeatureLayer, TableOfContents, ShareDialog,
+    FeatureLayer, 
+    string,
+    listTemplate,
+    TableOfContents, ShareDialog,
     InfoWindow) {
 
     return declare(null, {
@@ -78,6 +84,28 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         }
                     }
                     this._createWebMap(itemInfo);
+                    window._prevSelected = null;
+                    window.featureExpand = lang.hitch(this, function(fid, layerId) {
+                        //var checked = dojo.query('#featureButton_'+fid)[0].checked;
+                        //console.log(fid, checked, dojo.query('.featureItem_'+fid));
+                        if(_prevSelected) {
+                            dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                                dojo.style(e, 'display','none');
+                            });
+                        }
+                        _prevSelected = fid;
+                        dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                            dojo.style(e, 'display','');
+                        });
+
+                        var layer = this.map.getLayer(layerId);
+                        q = new Query();
+                        q.where = "[FID]='"+fid+"'";
+                        layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
+                                f[0].symbol.size = 40;
+                        });
+                    });
+
                 }));
             } else {
                 var error = new Error("Main:: Config is not defined");
@@ -180,22 +208,66 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     _query.returnGeometry = true;
                     _query.spatialRelationship = "esriSpatialRelIntersects";
                     tasks.push({
+                        layer : layer,
                         task : new QueryTask(this.map._layers[layer.id].url),
                         query : _query
                     });
                 }   
             }));
             
+            _featureListItem = function(f, template, objectIdFieldName, layerId) {
+                    try {
+                        template = template.replace('FID', objectIdFieldName);
+                        template = template.replace('LAYERID', layerId);
+                        return string.substitute(template, f.attributes);
+                    } catch (e) {
+                            console.log(e);
+                            return "Error on feature "+f.attributes[objectIdFieldName];
+                    }
+            };
+
             on(this.map, "extent-change", function(ext) {
                 tasks.forEach(lang.hitch(this, function(t) {
                     t.query.geometry = ext.extent;
                     t.result = t.task.execute(t.query);
                 }));
                 promises = all(tasks.map(function(t) {return t.result;}));
+                var list = query("#featuresList")[0];
                 promises.then(function(results) {
-                    console.log(results[0]);
+                    list.innerHTML = "";
+                    if(results) for(var i = 0; i<results.length; i++)
+                    {
+                    //results.forEach(function(r) {
+                        r = results[i];
+//                         console.log(r);
+                        tasks[i].layer.clearSelection();
+                        var objectIdFieldName = r.objectIdFieldName;
+                        var content = '';
+                        r.fields.forEach(function(f) {
+                            content+='<tr class="featureItem_${'+objectIdFieldName+'}" style="display:none;" tabindex="0">\n';
+			                content+='    <td/>\n';
+			                content+='    <td valign="top" align="right">'+f.alias+'</td>\n';
+                            content+='    <td valign="top">:</td>\n';
+                            content+='    <td valign="top">${'+f.name+'}</td>\n';
+		                    content+='</tr>\n';
+                        });
+                        r.features.forEach(function(f) {
+//                             console.log(f);
+                            if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
+                                template = listTemplate.replace('$$$', content);
+                                domConstruct.create("li", {
+                                    tabindex:0,
+                                    innerHTML : _featureListItem(f, template, objectIdFieldName, tasks[i].layer.id)
+                                }, list);
+                            }
+                        });
+                    };
                 });
-            });
+            }, this);
+        },
+
+        _featureListItem : function(f) {
+            return f.attributes.Incident_Types;
         },
 
         _initPopup : function (node) {
@@ -231,7 +303,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         scope: "row",
                         className: 'attrName',
                         innerHTML: attrName.innerHTML,
-                    }, attrName.parentNode, "first")
+                    }, attrName.parentNode, "first");
 
                     attrValues = attrName.parentNode.querySelectorAll('.attrValue');
                     if(attrValues) {
@@ -273,6 +345,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                             break;
                         case "details":
                             toolList.push(this._addDetails(this.config.tools[i], toolbar, "medium"));
+                            break;
+                        case "features":
+                            toolList.push(this._addFeatures(this.config.tools[i], toolbar, "large"));
                             break;
                         case "legend":
                             toolList.push(this._addLegend(this.config.tools[i], toolbar, "medium"));
@@ -617,7 +692,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     innerHTML: '<h2>In addition to the mouse you may:</h2>',
                 }, instructionsText);
 
-                list = domConstruct.create("ul", {
+                var list = domConstruct.create("ul", {
                     id:'instructionsList',
                 }, instructionsText);
 
@@ -650,6 +725,30 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             return deferred.promise;
         },
 
+        _addFeatures: function (tool, toolbar, panelClass) {
+            //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
+            var deferred = new Deferred();
+//             if (has("features")) {
+                var featuresDiv = toolbar.createTool(tool, "large");
+                dojo.setAttr(featuresDiv, 'tabindex', 0);
+
+                featuresList = domConstruct.create("div", {
+                    tabindex: '0',
+                    class: 'desc',
+                }, featuresDiv);
+
+                var list = domConstruct.create("ul", {
+                    id:'featuresList'
+                }, featuresList);
+
+                deferred.resolve(true);
+//             } else {
+//                 deferred.resolve(false);
+//             }
+        
+            return deferred.promise;
+        },
+        
         _addLegend: function (tool, toolbar, panelClass) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();

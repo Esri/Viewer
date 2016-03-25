@@ -56,6 +56,7 @@ define({
     "tools": [
         {"name": "instructions", "enabled": true},
         {"name": "details", "enabled": true},
+        {"name": "features", "enabled": true},
         {"name": "legend", "enabled": true},
         {"name": "layers", "enabled": true},
         {"name": "basemap", "enabled": true},
