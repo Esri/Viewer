@@ -307,7 +307,17 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     lang.mixin(attributes, f.attributes);
                     content = string.substitute(content, attributes);
                     listTemplate=string.substitute(listTemplate, attributes);
-                    return string.substitute(listTemplate, attributes);
+                    var result =  string.substitute(listTemplate, attributes);
+                    var re = /FORMAT_(DATE|NUM)\((\d+),\"(.+)\"\)/gm;
+                    do {
+                        var matches = re.exec(result);
+                        if(!matches) break;
+                        if(matches[1]==="DATE") {
+                            var date = new Date(Number(matches[2]));
+                            result = result.replace(re, date.toLocaleDateString());
+                        }
+                    } while (true);
+                    return result;
                 } catch (e) {
                     console.log("Error on feature ("+featureId+")\n\t "+layer.infoTemplate.title(f)+"\n\t",e);
                     return null;
@@ -812,15 +822,20 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                             for(var p in layer.infoTemplate._fieldsMap) {
                                 if(fieldsMap.hasOwnProperty(p) && fieldsMap[p].visible)
                                 {
+                                    var pField = fieldsMap[p];
+                                    var fieldName = '${'+pField.fieldName+'}';
                                     content+='<tr class="featureItem_${_featureId}" style="display:none;" tabindex="0">\n';
                                     content+='    <td/>\n';
-                                    content+='    <td valign="top" align="right">'+fieldsMap[p].label+'</td>\n';
+                                    content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
                                     content+='    <td valign="top">:</td>\n';
-                                    content+='    <td valign="top">${'+fieldsMap[p].fieldName;
-                                    // if(fieldsMap[p].format && fieldsMap[p].format.dateFormat) {
-                                    //     content+=':DateFormat(selector: "date", fullYear: true)';
-                                    // }
-                                    content+='}</td>\n';
+                                    content+='    <td valign="top">';
+                                    if(pField.format && pField.format.dateFormat) {
+                                        content+='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
+                                    }
+                                    else {
+                                        content+=fieldName;
+                                    }
+                                    content+='</td>\n';
                                     content+='</tr>\n';
                                 }
                             }
