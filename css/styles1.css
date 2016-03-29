@@ -119,3 +119,14 @@ tr[tabindex='0']:focus
     padding-left: 10px;
 }
 
+.showAttr {
+    display:;
+}
+
+.hideAttr {
+    display:none;
+}
+
+.borderLi {
+  border: solid 1px #037eaf;
+}

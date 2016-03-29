@@ -28,7 +28,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "dojo/text!./FeatureListTemplate.html",
     "application/TableOfContents", "application/ShareDialog",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
-    "esri/dijit/InfoWindow"], 
+    "esri/dijit/InfoWindow",
+    "dojo/NodeList-dom", "dojo/NodeList-traverse"], 
     function (
     ready, JSON, array, Color, declare, 
     lang, dom, domGeometry, domAttr, domClass, 
@@ -242,7 +243,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 //console.log(fid, checked, dojo.query('.featureItem_'+fid));
                 if(_prevSelected) {
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                        dojo.style(e, 'display','none');
+                        dojo.removeClass(e, 'showAttr');
+                        dojo.addClass(e, 'hideAttr');
+                        query(e).closest('li').removeClass('borderLi');
                     });
                     dojo.query('#featureButton_'+_prevSelected).forEach(function(e) {
                         e.checked=false;
@@ -258,7 +261,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 {
                     _prevSelected = fid;
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                        dojo.style(e, 'display','');
+                        dojo.addClass(e, 'showAttr');
+                        dojo.removeClass(e, 'hideAttr');
+                        query(e).closest('li').addClass('borderLi');
                     });
 
                     q = new Query();
@@ -276,7 +281,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     // });
                 } else {
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                        dojo.style(e, 'display','none');
+                        dojo.removeClass(e, 'showAttr');
+                        dojo.addClass(e, 'hideAttr');
                         window._prevSelected = null;
                     });                        
                 }
@@ -314,7 +320,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         if(!matches) break;
                         if(matches[1]==="DATE") {
                             var date = new Date(Number(matches[2]));
-                            result = result.replace(re, date.toLocaleDateString());
+                            result = result.replace(re, date.toLocaleDateString("en-US", {
+                                year: "numeric", month: "long", day: "numeric"
+                            }));
                         }
                     } while (true);
                     return result;
@@ -824,7 +832,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                                 {
                                     var pField = fieldsMap[p];
                                     var fieldName = '${'+pField.fieldName+'}';
-                                    content+='<tr class="featureItem_${_featureId}" style="display:none;" tabindex="0">\n';
+                                    content+='<tr class="featureItem_${_featureId} hideAttr" tabindex="0">\n';
                                     content+='    <td/>\n';
                                     content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
                                     content+='    <td valign="top">:</td>\n';
