@@ -212,14 +212,14 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             }));
 
             var markerSymbol = new SimpleMarkerSymbol({
-              "color": [255,0,0,100],
+              "color": [3,126,175,20],
               "size": 30,
               "xoffset": 0,
               "yoffset": 0,
               "type": "esriSMS",
               "style": "esriSMSCircle",
               "outline": {
-                "color": [255,0,0,255],
+                "color": [3,26,255,220],
                 "width": 2,
                 "type": "esriSLS",
                 "style": "esriSLSSolid"
@@ -228,12 +228,12 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             // var markerSymbol = new esri.symbol.PictureMarkerSymbol({
             //     "angle": 0,
             //     "xoffset": 0,
-            //     "yoffset": 12,
+            //     "yoffset": 0,
             //     "type": "esriPMS",
-            //     "url": "http://static.arcgis.com/images/Symbols/Basic/YellowStickpin.png",
+            //     "url": "../images/rot-cursor.gif",
             //     "contentType": "image/png",
-            //     "width": 24,
-            //     "height": 24
+            //     "width": 31,
+            //     "height": 31
             // });
 
             window._prevSelected = null;
