@@ -27,6 +27,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "dojo/string", 
     "dojo/text!./FeatureListTemplate.html",
     "application/TableOfContents", "application/ShareDialog",
+    "dijit/layout/AccordionContainer",
     "esri/dijit/InfoWindow"], 
     function (
     ready, JSON, array, Color, declare, 
@@ -42,6 +43,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     string,
     listTemplate,
     TableOfContents, ShareDialog,
+    AccordionContainer,
     InfoWindow) {
 
     return declare(null, {
@@ -85,7 +87,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     }
                     this._createWebMap(itemInfo);
                     window._prevSelected = null;
-                    window.featureExpand = lang.hitch(this, function(fid, layerId) {
+                    window.featureExpand = lang.hitch(this, function(checkBox) {//fid, layerId
                         //var checked = dojo.query('#featureButton_'+fid)[0].checked;
                         //console.log(fid, checked, dojo.query('.featureItem_'+fid));
                         if(_prevSelected) {
@@ -93,17 +95,27 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                                 dojo.style(e, 'display','none');
                             });
                         }
-                        _prevSelected = fid;
-                        dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                            dojo.style(e, 'display','');
-                        });
+                        if(checkBox.checked)
+                        {
+                            var values = checkBox.value.split(',');
+                            var layerId = values[0];
+                            var fid = values[1];
+                            _prevSelected = fid;
+                            dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                                dojo.style(e, 'display','');
+                            });
 
-                        var layer = this.map.getLayer(layerId);
-                        q = new Query();
-                        q.where = "[FID]='"+fid+"'";
-                        layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
+                            var layer = this.map.getLayer(layerId);
+                            q = new Query();
+                            q.where = "[FID]='"+fid+"'";
+                            layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
                                 f[0].symbol.size = 40;
-                        });
+                            });
+                        } else {
+                            dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                                dojo.style(e, 'display','none');
+                            });                        
+                        }
                     });
 
                 }));
@@ -215,14 +227,17 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }   
             }));
             
-            _featureListItem = function(f, template, objectIdFieldName, layerId) {
+            _getFeatureListItem = function(f, objectIdFieldName, layer, content, listTemplate) {
                     try {
-                        template = template.replace('FID', objectIdFieldName);
-                        template = template.replace('LAYERID', layerId);
-                        return string.substitute(template, f.attributes);
+                        var featureId = f.attributes[objectIdFieldName];
+                        var attributes = {_featureId:featureId, _layerId:layer.id, _title:layer.infoTemplate.title(f), _content:content};
+                        lang.mixin(attributes, f.attributes);
+                        content = string.substitute(content, attributes);
+                        listTemplate=string.substitute(listTemplate, attributes);
+                        return string.substitute(listTemplate, attributes);
                     } catch (e) {
-                            console.log(e);
-                            return "Error on feature "+f.attributes[objectIdFieldName];
+                        console.log("Error on feature ("+featureId+")\n\t "+layer.infoTemplate.title(f)+"\n\t",e);
+                        return null;
                     }
             };
 
@@ -237,28 +252,38 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     list.innerHTML = "";
                     if(results) for(var i = 0; i<results.length; i++)
                     {
-                    //results.forEach(function(r) {
                         r = results[i];
 //                         console.log(r);
-                        tasks[i].layer.clearSelection();
-                        var objectIdFieldName = r.objectIdFieldName;
+                        var layer = tasks[i].layer;
+                        layer.clearSelection();
                         var content = '';
-                        r.fields.forEach(function(f) {
-                            content+='<tr class="featureItem_${'+objectIdFieldName+'}" style="display:none;" tabindex="0">\n';
-			                content+='    <td/>\n';
-			                content+='    <td valign="top" align="right">'+f.alias+'</td>\n';
-                            content+='    <td valign="top">:</td>\n';
-                            content+='    <td valign="top">${'+f.name+'}</td>\n';
-		                    content+='</tr>\n';
-                        });
+                        var fieldsMap = layer.infoTemplate._fieldsMap;
+                        for(var p in layer.infoTemplate._fieldsMap) {
+                            if(fieldsMap.hasOwnProperty(p) && fieldsMap[p].visible)
+                            {
+                                content+='<tr class="featureItem_${_featureId}" style="display:none;" tabindex="0">\n';
+			                    content+='    <td/>\n';
+			                    content+='    <td valign="top" align="right">'+fieldsMap[p].label+'</td>\n';
+                                content+='    <td valign="top">:</td>\n';
+                                content+='    <td valign="top">${'+fieldsMap[p].fieldName;
+//                                 if(fieldsMap[p].format && fieldsMap[p].format.dateFormat) {
+//                                     content+=':DateFormat(selector: "date", fullYear: true)';
+//                                 }
+                                content+='}</td>\n';
+		                        content+='</tr>\n';
+                            }
+                        };
                         r.features.forEach(function(f) {
-//                             console.log(f);
+//                          console.log(f);
                             if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
-                                template = listTemplate.replace('$$$', content);
-                                domConstruct.create("li", {
-                                    tabindex:0,
-                                    innerHTML : _featureListItem(f, template, objectIdFieldName, tasks[i].layer.id)
-                                }, list);
+                                var featureListItem = _getFeatureListItem(f, r.objectIdFieldName, layer, content, listTemplate);
+                                if(featureListItem)
+                                {
+                                    domConstruct.create("li", {
+                                        tabindex : 0,
+                                        innerHTML : featureListItem
+                                    }, list);
+                                }
                             }
                         });
                     };
@@ -728,23 +753,23 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
         _addFeatures: function (tool, toolbar, panelClass) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
-//             if (has("features")) {
+            if (has("features")) {
                 var featuresDiv = toolbar.createTool(tool, "large");
                 dojo.setAttr(featuresDiv, 'tabindex', 0);
 
-                featuresList = domConstruct.create("div", {
+                features = domConstruct.create("div", {
                     tabindex: '0',
                     class: 'desc',
                 }, featuresDiv);
 
                 var list = domConstruct.create("ul", {
                     id:'featuresList'
-                }, featuresList);
+                }, features);
 
                 deferred.resolve(true);
-//             } else {
-//                 deferred.resolve(false);
-//             }
+            } else {
+                deferred.resolve(false);
+            }
         
             return deferred.promise;
         },

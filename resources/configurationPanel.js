@@ -118,6 +118,10 @@
                      "value":"instructions"
                   },
                   {  
+                     "label":"Features",
+                     "value":"features"
+                  },
+                  {  
                      "label":"Legend",
                      "value":"legend"
                   },
@@ -163,6 +167,11 @@
                "type":"boolean",
                "fieldName":"scalebar",
                "label":"Scalebar"
+            },
+            {  
+               "type":"boolean",
+               "fieldName":"tool_features",
+               "label":"Feature List"
             },
             {  
                "type":"boolean",
