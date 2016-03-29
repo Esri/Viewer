@@ -27,7 +27,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "dojo/string", 
     "dojo/text!./FeatureListTemplate.html",
     "application/TableOfContents", "application/ShareDialog",
-    "dijit/layout/AccordionContainer",
+    "esri/symbols/SimpleMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow"], 
     function (
     ready, JSON, array, Color, declare, 
@@ -43,7 +43,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     string,
     listTemplate,
     TableOfContents, ShareDialog,
-    AccordionContainer,
+    SimpleMarkerSymbol, Graphic,
     InfoWindow) {
 
     return declare(null, {
@@ -211,8 +211,14 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 this._initPopup(this.map.infoWindow.domNode);
             }));
 
+            var markerSymbol = new SimpleMarkerSymbol();
+            markerSymbol.setPath("M16,4.938c-7.732,0-14,4.701-14,10.5c0,1.981,0.741,3.833,2.016,5.414L2,25.272l5.613-1.44c2.339,1.316,5.237,2.106,8.387,2.106c7.732,0,14-4.701,14-10.5S23.732,4.938,16,4.938zM16.868,21.375h-1.969v-1.889h1.969V21.375zM16.772,18.094h-1.777l-0.176-8.083h2.113L16.772,18.094z");
+            markerSymbol.setColor(new Color("#00FFFF00"));
+            markerSymbol.size = 40;
+
+
             window._prevSelected = null;
-            window.featureExpand = lang.hitch(this, function(checkBox) {//fid, layerId
+            window.featureExpand = function(checkBox) {//fid, layerId
                 //var checked = dojo.query('#featureButton_'+fid)[0].checked;
                 //console.log(fid, checked, dojo.query('.featureItem_'+fid));
                 if(_prevSelected) {
@@ -223,29 +229,37 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         e.checked=false;
                     });
                 }
+                    var values = checkBox.value.split(',');
+                    var r = window.tasks[values[0]];
+                    var fid = values[1];
+                    var layer = r.layer;
+                        layer._map.graphics.clear();
                 if(checkBox.checked)
                 {
-                    var values = checkBox.value.split(',');
-                    var layerId = values[0];
-                    var fid = values[1];
                     _prevSelected = fid;
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
                         dojo.style(e, 'display','');
                     });
 
-                    var layer = this.map.getLayer(layerId);
                     q = new Query();
                     q.where = "[FID]='"+fid+"'";
+                    q.outFields = ["FID"];
+                    q.returnGeometry = true;
                     //layer.clearSelection();
-                    layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
-                        f[0].symbol.size = 40;
+                    r.task.execute(q).then(function(ev) {
+                        //console.log(ev);
+                        var graphic = new Graphic(ev.features[0].geometry, markerSymbol);
+                        layer._map.graphics.add(graphic);
                     });
+                    // layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
+                    //     f[0].symbol.size = 40;
+                    // });
                 } else {
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
                         dojo.style(e, 'display','none');
                     });                        
                 }
-            });
+            };
 
             window.tasks = [];
             this.map.graphicsLayerIds.forEach(lang.hitch(this, function(id) {
@@ -254,7 +268,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 {
                     var _query = new Query();
                     _query.outFields = ["*"];
-                    _query.returnGeometry = true;
+                    _query.returnGeometry = false;
                     _query.spatialRelationship = "esriSpatialRelIntersects";
                     window.tasks.push({
                         layer : layer,
@@ -264,10 +278,10 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }   
             }));
             
-            _getFeatureListItem = function(f, objectIdFieldName, layer, content, listTemplate) {
+            _getFeatureListItem = function(r, f, objectIdFieldName, layer, content, listTemplate) {
                 try {
                     var featureId = f.attributes[objectIdFieldName];
-                    var attributes = {_featureId:featureId, _layerId:layer.id, _title:layer.infoTemplate.title(f), _content:content};
+                    var attributes = {_featureId:featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
                     lang.mixin(attributes, f.attributes);
                     content = string.substitute(content, attributes);
                     listTemplate=string.substitute(listTemplate, attributes);
@@ -313,7 +327,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         r.features.forEach(function(f) {
 //                          console.log(f);
                             if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
-                                var featureListItem = _getFeatureListItem(f, r.objectIdFieldName, layer, content, listTemplate);
+                                var featureListItem = _getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
                                 if(featureListItem)
                                 {
                                     domConstruct.create("li", {
