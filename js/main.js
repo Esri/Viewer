@@ -27,7 +27,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "dojo/string", 
     "dojo/text!./FeatureListTemplate.html",
     "application/TableOfContents", "application/ShareDialog",
-    "esri/symbols/SimpleMarkerSymbol", "esri/graphic",
+    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow"], 
     function (
     ready, JSON, array, Color, declare, 
@@ -43,7 +43,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     string,
     listTemplate,
     TableOfContents, ShareDialog,
-    SimpleMarkerSymbol, Graphic,
+    SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
     InfoWindow) {
 
     return declare(null, {
@@ -225,6 +225,16 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 "style": "esriSLSSolid"
               }
             });
+            // var markerSymbol = new esri.symbol.PictureMarkerSymbol({
+            //     "angle": 0,
+            //     "xoffset": 0,
+            //     "yoffset": 12,
+            //     "type": "esriPMS",
+            //     "url": "http://static.arcgis.com/images/Symbols/Basic/YellowStickpin.png",
+            //     "contentType": "image/png",
+            //     "width": 24,
+            //     "height": 24
+            // });
 
             window._prevSelected = null;
             window.featureExpand = function(checkBox) {//fid, layerId
@@ -267,6 +277,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 } else {
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
                         dojo.style(e, 'display','none');
+                        window._prevSelected = null;
                     });                        
                 }
             };
@@ -781,6 +792,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }, features);
 
                 on(this.map, "extent-change", function(ext) {
+                    this.graphics.clear();
+                    window._prevSelected = null;
                     var list = query("#featuresList")[0];
                     window.tasks.forEach(lang.hitch(this, function(t) {
                         t.query.geometry = ext.extent;
@@ -810,9 +823,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                                     content+='}</td>\n';
                                     content+='</tr>\n';
                                 }
-                            };
-                            r.features.forEach(function(f) {
-                             // console.log(f);
+                            }
+                            for(var j = 0; j<r.features.length; j++) {
+                                var f = r.features[j];
                                 if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
                                     var featureListItem = _getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
                                     if(featureListItem)
@@ -823,8 +836,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                                         }, list);
                                     }
                                 }
-                            });
-                        };
+                            }
+                        }
                     });
                 }, this);
                 deferred.resolve(true);
