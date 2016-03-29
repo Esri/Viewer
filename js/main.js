@@ -211,11 +211,20 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 this._initPopup(this.map.infoWindow.domNode);
             }));
 
-            var markerSymbol = new SimpleMarkerSymbol();
-            markerSymbol.setPath("M16,4.938c-7.732,0-14,4.701-14,10.5c0,1.981,0.741,3.833,2.016,5.414L2,25.272l5.613-1.44c2.339,1.316,5.237,2.106,8.387,2.106c7.732,0,14-4.701,14-10.5S23.732,4.938,16,4.938zM16.868,21.375h-1.969v-1.889h1.969V21.375zM16.772,18.094h-1.777l-0.176-8.083h2.113L16.772,18.094z");
-            markerSymbol.setColor(new Color("#00FFFF00"));
-            markerSymbol.size = 40;
-
+            var markerSymbol = new SimpleMarkerSymbol({
+              "color": [255,0,0,100],
+              "size": 30,
+              "xoffset": 0,
+              "yoffset": 0,
+              "type": "esriSMS",
+              "style": "esriSMSCircle",
+              "outline": {
+                "color": [255,0,0,255],
+                "width": 2,
+                "type": "esriSLS",
+                "style": "esriSLSSolid"
+              }
+            });
 
             window._prevSelected = null;
             window.featureExpand = function(checkBox) {//fid, layerId
@@ -229,11 +238,12 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         e.checked=false;
                     });
                 }
-                    var values = checkBox.value.split(',');
-                    var r = window.tasks[values[0]];
-                    var fid = values[1];
-                    var layer = r.layer;
-                        layer._map.graphics.clear();
+                var values = checkBox.value.split(',');
+                var r = window.tasks[values[0]];
+                var fid = values[1];
+                var layer = r.layer;
+                layer._map.graphics.clear();
+                
                 if(checkBox.checked)
                 {
                     _prevSelected = fid;
@@ -262,6 +272,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             };
 
             window.tasks = [];
+                    
             this.map.graphicsLayerIds.forEach(lang.hitch(this, function(id) {
                 var layer = this.map._layers[id];
                 if(layer.url && !layer._isSnapshot)
@@ -292,54 +303,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }
             };
 
-            on(this.map, "extent-change", function(ext) {
-                window.tasks.forEach(lang.hitch(this, function(t) {
-                    t.query.geometry = ext.extent;
-                    t.result = t.task.execute(t.query);
-                }));
-                promises = all(window.tasks.map(function(t) {return t.result;}));
-                var list = query("#featuresList")[0];
-                promises.then(function(results) {
-                    list.innerHTML = "";
-                    if(results) for(var i = 0; i<results.length; i++)
-                    {
-                        r = results[i];
-//                         console.log(r);
-                        var layer = window.tasks[i].layer;
-                        layer.clearSelection();
-                        var content = '';
-                        var fieldsMap = layer.infoTemplate._fieldsMap;
-                        for(var p in layer.infoTemplate._fieldsMap) {
-                            if(fieldsMap.hasOwnProperty(p) && fieldsMap[p].visible)
-                            {
-                                content+='<tr class="featureItem_${_featureId}" style="display:none;" tabindex="0">\n';
-			                    content+='    <td/>\n';
-			                    content+='    <td valign="top" align="right">'+fieldsMap[p].label+'</td>\n';
-                                content+='    <td valign="top">:</td>\n';
-                                content+='    <td valign="top">${'+fieldsMap[p].fieldName;
-//                                 if(fieldsMap[p].format && fieldsMap[p].format.dateFormat) {
-//                                     content+=':DateFormat(selector: "date", fullYear: true)';
-//                                 }
-                                content+='}</td>\n';
-		                        content+='</tr>\n';
-                            }
-                        };
-                        r.features.forEach(function(f) {
-//                          console.log(f);
-                            if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
-                                var featureListItem = _getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
-                                if(featureListItem)
-                                {
-                                    domConstruct.create("li", {
-                                        tabindex : 0,
-                                        innerHTML : featureListItem
-                                    }, list);
-                                }
-                            }
-                        });
-                    };
-                });
-            }, this);
         },
 
         _featureListItem : function(f) {
@@ -817,6 +780,53 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     id:'featuresList'
                 }, features);
 
+                on(this.map, "extent-change", function(ext) {
+                    var list = query("#featuresList")[0];
+                    window.tasks.forEach(lang.hitch(this, function(t) {
+                        t.query.geometry = ext.extent;
+                        t.result = t.task.execute(t.query);
+                    }));
+                    promises = all(window.tasks.map(function(t) {return t.result;}));
+                    promises.then(function(results) {
+                        list.innerHTML = "";
+                        if(results) for(var i = 0; i<results.length; i++)
+                        {
+                            r = results[i];
+                            var layer = window.tasks[i].layer;
+                            layer.clearSelection();
+                            var content = '';
+                            var fieldsMap = layer.infoTemplate._fieldsMap;
+                            for(var p in layer.infoTemplate._fieldsMap) {
+                                if(fieldsMap.hasOwnProperty(p) && fieldsMap[p].visible)
+                                {
+                                    content+='<tr class="featureItem_${_featureId}" style="display:none;" tabindex="0">\n';
+                                    content+='    <td/>\n';
+                                    content+='    <td valign="top" align="right">'+fieldsMap[p].label+'</td>\n';
+                                    content+='    <td valign="top">:</td>\n';
+                                    content+='    <td valign="top">${'+fieldsMap[p].fieldName;
+                                    // if(fieldsMap[p].format && fieldsMap[p].format.dateFormat) {
+                                    //     content+=':DateFormat(selector: "date", fullYear: true)';
+                                    // }
+                                    content+='}</td>\n';
+                                    content+='</tr>\n';
+                                }
+                            };
+                            r.features.forEach(function(f) {
+                             // console.log(f);
+                                if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
+                                    var featureListItem = _getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
+                                    if(featureListItem)
+                                    {
+                                        domConstruct.create("li", {
+                                            tabindex : 0,
+                                            innerHTML : featureListItem
+                                        }, list);
+                                    }
+                                }
+                            });
+                        };
+                    });
+                }, this);
                 deferred.resolve(true);
             } else {
                 deferred.resolve(false);
@@ -1728,33 +1738,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     // for(i=0; i<images.length; i++)
                     //     domAttr.set(images[i],'tabindex','0');
                 });
-
-//                 var tasks = []
-//                 this.map.graphicsLayerIds.forEach(lang.hitch(this, function(id) {
-//                     var layer = this.map._layers[id]
-//                     if(layer.url && !layer._isSnapshot)
-//                     {
-//                         var _query = new Query();
-//                         _query.outFields = ["*"];
-//                         _query.returnGeometry = true;
-//                         _query.spatialRelationship = "esriSpatialRelIntersects";
-//                         tasks.push({
-//                             task : new QueryTask(this.map._layers[layer.id].url),
-//                             query : _query
-//                         })
-//                     }   
-//                 }));
-                
-//                 on(this.map, "extent-change", function(evt) {
-//                     tasks.forEach(lang.hitch(this, function(t) {
-//                         t.query.geometry = evt.extent;
-//                         t.result = t.task.execute(t.query);
-//                     }))
-//                     promises = all(tasks.map(function(t) {return t.result}));
-//                     promises.then(function(results) {
-//                         console.log(results);
-//                     })
-//                 });
 
                 this._createMapUI();
                 // make sure map is loaded
