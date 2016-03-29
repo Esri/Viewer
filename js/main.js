@@ -238,10 +238,10 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             });
 
             window._prevSelected = null;
-            window.featureExpand = function(checkBox) {//fid, layerId
+            window.featureExpand = function(checkBox, restore) {//fid, layerId
                 //var checked = dojo.query('#featureButton_'+fid)[0].checked;
                 //console.log(fid, checked, dojo.query('.featureItem_'+fid));
-                if(_prevSelected) {
+                if(_prevSelected && !restore) {
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
                         dojo.removeClass(e, 'showAttr');
                         dojo.addClass(e, 'hideAttr');
@@ -811,7 +811,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
                 on(this.map, "extent-change", function(ext) {
                     this.graphics.clear();
-                    window._prevSelected = null;
+                    // window._prevSelected = null;
                     var list = query("#featuresList")[0];
                     window.tasks.forEach(lang.hitch(this, function(t) {
                         t.query.geometry = ext.extent;
@@ -820,6 +820,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     promises = all(window.tasks.map(function(t) {return t.result;}));
                     promises.then(function(results) {
                         list.innerHTML = "";
+                        var preselected = null;
                         if(results) for(var i = 0; i<results.length; i++)
                         {
                             r = results[i];
@@ -849,6 +850,9 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                             }
                             for(var j = 0; j<r.features.length; j++) {
                                 var f = r.features[j];
+                                if(window._prevSelected == f.attributes[r.objectIdFieldName]) {
+                                    preselected = f;
+                                }
                                 if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
                                     var featureListItem = _getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
                                     if(featureListItem)
@@ -861,10 +865,18 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                                 }
                             }
                         }
+                        if(!preselected) {
+                            window._prevSelected = null;
+                        } else {
+                            var checkbox = query("#featureButton_"+preselected.attributes[r.objectIdFieldName])[0];
+                            checkbox.checked = true;
+                            window.featureExpand(checkbox, true);
+                        }
                     });
                 }, this);
                 deferred.resolve(true);
             } else {
+                window._prevSelected = null;
                 deferred.resolve(false);
             }
         
