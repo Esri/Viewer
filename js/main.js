@@ -212,7 +212,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 this._initPopup(this.map.infoWindow.domNode);
             }));
 
-            // var markerSymbol = new SimpleMarkerSymbol({
+            // markerSymbol = new SimpleMarkerSymbol({
             //   "color": [3,126,175,20],
             //   "size": 30,
             //   "xoffset": 0,
@@ -226,13 +226,13 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             //     "style": "esriSLSSolid"
             //   }
             // });
-            var markerSymbol = new esri.symbol.PictureMarkerSymbol({
+            markerSymbol = new esri.symbol.PictureMarkerSymbol({
                 "angle": 0,
                 "xoffset": 0,
                 "yoffset": 0,
                 "type": "esriPMS",
                 "url": "../images/animated-ripple-dot4.gif",
-                "contentType": "image/png",
+                "contentType": "image/gif",
                 "width": 31,
                 "height": 31
             });
