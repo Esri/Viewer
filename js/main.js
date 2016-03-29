@@ -86,37 +86,38 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                         }
                     }
                     this._createWebMap(itemInfo);
-                    window._prevSelected = null;
-                    window.featureExpand = lang.hitch(this, function(checkBox) {//fid, layerId
-                        //var checked = dojo.query('#featureButton_'+fid)[0].checked;
-                        //console.log(fid, checked, dojo.query('.featureItem_'+fid));
-                        if(_prevSelected) {
-                            dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                                dojo.style(e, 'display','none');
-                            });
-                        }
-                        if(checkBox.checked)
-                        {
-                            var values = checkBox.value.split(',');
-                            var layerId = values[0];
-                            var fid = values[1];
-                            _prevSelected = fid;
-                            dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                                dojo.style(e, 'display','');
-                            });
+                    
+                    // window._prevSelected = null;
+                    // window.featureExpand1 = lang.hitch(this, function(checkBox) {//fid, layerId
+                    //     //var checked = dojo.query('#featureButton_'+fid)[0].checked;
+                    //     //console.log(fid, checked, dojo.query('.featureItem_'+fid));
+                    //     if(_prevSelected) {
+                    //         dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                    //             dojo.style(e, 'display','none');
+                    //         });
+                    //     }
+                    //     if(checkBox.checked)
+                    //     {
+                    //         var values = checkBox.value.split(',');
+                    //         var layerId = values[0];
+                    //         var fid = values[1];
+                    //         _prevSelected = fid;
+                    //         dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                    //             dojo.style(e, 'display','');
+                    //         });
 
-                            var layer = this.map.getLayer(layerId);
-                            q = new Query();
-                            q.where = "[FID]='"+fid+"'";
-                            layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
-                                f[0].symbol.size = 40;
-                            });
-                        } else {
-                            dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                                dojo.style(e, 'display','none');
-                            });                        
-                        }
-                    });
+                    //         var layer = this.map.getLayer(layerId);
+                    //         q = new Query();
+                    //         q.where = "[FID]='"+fid+"'";
+                    //         layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
+                    //             f[0].symbol.size = 40;
+                    //         });
+                    //     } else {
+                    //         dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                    //             dojo.style(e, 'display','none');
+                    //         });                        
+                    //     }
+                    // });
 
                 }));
             } else {
@@ -210,7 +211,43 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 this._initPopup(this.map.infoWindow.domNode);
             }));
 
-            var tasks = [];
+            window._prevSelected = null;
+            window.featureExpand = lang.hitch(this, function(checkBox) {//fid, layerId
+                //var checked = dojo.query('#featureButton_'+fid)[0].checked;
+                //console.log(fid, checked, dojo.query('.featureItem_'+fid));
+                if(_prevSelected) {
+                    dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                        dojo.style(e, 'display','none');
+                    });
+                    dojo.query('#featureButton_'+_prevSelected).forEach(function(e) {
+                        e.checked=false;
+                    });
+                }
+                if(checkBox.checked)
+                {
+                    var values = checkBox.value.split(',');
+                    var layerId = values[0];
+                    var fid = values[1];
+                    _prevSelected = fid;
+                    dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                        dojo.style(e, 'display','');
+                    });
+
+                    var layer = this.map.getLayer(layerId);
+                    q = new Query();
+                    q.where = "[FID]='"+fid+"'";
+                    //layer.clearSelection();
+                    layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
+                        f[0].symbol.size = 40;
+                    });
+                } else {
+                    dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                        dojo.style(e, 'display','none');
+                    });                        
+                }
+            });
+
+            window.tasks = [];
             this.map.graphicsLayerIds.forEach(lang.hitch(this, function(id) {
                 var layer = this.map._layers[id];
                 if(layer.url && !layer._isSnapshot)
@@ -219,7 +256,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     _query.outFields = ["*"];
                     _query.returnGeometry = true;
                     _query.spatialRelationship = "esriSpatialRelIntersects";
-                    tasks.push({
+                    window.tasks.push({
                         layer : layer,
                         task : new QueryTask(this.map._layers[layer.id].url),
                         query : _query
@@ -228,25 +265,25 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             }));
             
             _getFeatureListItem = function(f, objectIdFieldName, layer, content, listTemplate) {
-                    try {
-                        var featureId = f.attributes[objectIdFieldName];
-                        var attributes = {_featureId:featureId, _layerId:layer.id, _title:layer.infoTemplate.title(f), _content:content};
-                        lang.mixin(attributes, f.attributes);
-                        content = string.substitute(content, attributes);
-                        listTemplate=string.substitute(listTemplate, attributes);
-                        return string.substitute(listTemplate, attributes);
-                    } catch (e) {
-                        console.log("Error on feature ("+featureId+")\n\t "+layer.infoTemplate.title(f)+"\n\t",e);
-                        return null;
-                    }
+                try {
+                    var featureId = f.attributes[objectIdFieldName];
+                    var attributes = {_featureId:featureId, _layerId:layer.id, _title:layer.infoTemplate.title(f), _content:content};
+                    lang.mixin(attributes, f.attributes);
+                    content = string.substitute(content, attributes);
+                    listTemplate=string.substitute(listTemplate, attributes);
+                    return string.substitute(listTemplate, attributes);
+                } catch (e) {
+                    console.log("Error on feature ("+featureId+")\n\t "+layer.infoTemplate.title(f)+"\n\t",e);
+                    return null;
+                }
             };
 
             on(this.map, "extent-change", function(ext) {
-                tasks.forEach(lang.hitch(this, function(t) {
+                window.tasks.forEach(lang.hitch(this, function(t) {
                     t.query.geometry = ext.extent;
                     t.result = t.task.execute(t.query);
                 }));
-                promises = all(tasks.map(function(t) {return t.result;}));
+                promises = all(window.tasks.map(function(t) {return t.result;}));
                 var list = query("#featuresList")[0];
                 promises.then(function(results) {
                     list.innerHTML = "";
@@ -254,7 +291,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     {
                         r = results[i];
 //                         console.log(r);
-                        var layer = tasks[i].layer;
+                        var layer = window.tasks[i].layer;
                         layer.clearSelection();
                         var content = '';
                         var fieldsMap = layer.infoTemplate._fieldsMap;
