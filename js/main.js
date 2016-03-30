@@ -212,130 +212,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 this._initPopup(this.map.infoWindow.domNode);
             }));
 
-            // markerSymbol = new SimpleMarkerSymbol({
-            //   "color": [3,126,175,20],
-            //   "size": 30,
-            //   "xoffset": 0,
-            //   "yoffset": 0,
-            //   "type": "esriSMS",
-            //   "style": "esriSMSCircle",
-            //   "outline": {
-            //     "color": [3,26,255,220],
-            //     "width": 2,
-            //     "type": "esriSLS",
-            //     "style": "esriSLSSolid"
-            //   }
-            // });
-            markerSymbol = new esri.symbol.PictureMarkerSymbol({
-                "angle": 0,
-                "xoffset": 0,
-                "yoffset": 0,
-                "type": "esriPMS",
-                "url": "../images/animated-ripple-dot4.gif",
-                "contentType": "image/gif",
-                "width": 31,
-                "height": 31
-            });
 
-            window._prevSelected = null;
-            window.featureExpand = function(checkBox, restore) {//fid, layerId
-                //var checked = dojo.query('#featureButton_'+fid)[0].checked;
-                //console.log(fid, checked, dojo.query('.featureItem_'+fid));
-                if(_prevSelected && !restore) {
-                    dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                        dojo.removeClass(e, 'showAttr');
-                        dojo.addClass(e, 'hideAttr');
-                        query(e).closest('li').removeClass('borderLi');
-                    });
-                    dojo.query('#featureButton_'+_prevSelected).forEach(function(e) {
-                        e.checked=false;
-                    });
-                }
-                var values = checkBox.value.split(',');
-                var r = window.tasks[values[0]];
-                var fid = values[1];
-                var layer = r.layer;
-                layer._map.graphics.clear();
-                
-                if(checkBox.checked)
-                {
-                    _prevSelected = fid;
-                    dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                        dojo.addClass(e, 'showAttr');
-                        dojo.removeClass(e, 'hideAttr');
-                        query(e).closest('li').addClass('borderLi');
-                    });
-
-                    q = new Query();
-                    q.where = "[FID]='"+fid+"'";
-                    q.outFields = ["FID"];
-                    q.returnGeometry = true;
-                    //layer.clearSelection();
-                    r.task.execute(q).then(function(ev) {
-                        //console.log(ev);
-                        var graphic = new Graphic(ev.features[0].geometry, markerSymbol);
-                        layer._map.graphics.add(graphic);
-                    });
-                    // layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
-                    //     f[0].symbol.size = 40;
-                    // });
-                } else {
-                    dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
-                        dojo.removeClass(e, 'showAttr');
-                        dojo.addClass(e, 'hideAttr');
-                        window._prevSelected = null;
-                    });                        
-                }
-            };
-
-            window.tasks = [];
-                    
-            this.map.graphicsLayerIds.forEach(lang.hitch(this, function(id) {
-                var layer = this.map._layers[id];
-                if(layer.url && !layer._isSnapshot)
-                {
-                    var _query = new Query();
-                    _query.outFields = ["*"];
-                    _query.returnGeometry = false;
-                    _query.spatialRelationship = "esriSpatialRelIntersects";
-                    window.tasks.push({
-                        layer : layer,
-                        task : new QueryTask(this.map._layers[layer.id].url),
-                        query : _query
-                    });
-                }   
-            }));
-            
-            _getFeatureListItem = function(r, f, objectIdFieldName, layer, content, listTemplate) {
-                try {
-                    var featureId = f.attributes[objectIdFieldName];
-                    var attributes = {_featureId:featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
-                    lang.mixin(attributes, f.attributes);
-                    content = string.substitute(content, attributes);
-                    listTemplate=string.substitute(listTemplate, attributes);
-                    var result =  string.substitute(listTemplate, attributes);
-                    var re = /FORMAT_(DATE|NUM)\((\d+),\"(.+)\"\)/gm;
-                    do {
-                        var matches = re.exec(result);
-                        if(!matches) break;
-                        if(matches[1]==="DATE") {
-                            var date = new Date(Number(matches[2]));
-                            result = result.replace(re, date.toLocaleDateString("en-US", {
-                                year: "numeric", month: "long", day: "numeric"
-                            }));
-                        }
-                    } while (true);
-                    return result;
-                } catch (e) {
-                    console.log("Error on feature ("+featureId+")\n\t "+layer.infoTemplate.title(f)+"\n\t",e);
-                    return null;
-                }
-            };
-
-        },
-
-        _featureListItem : function(f) {
-            return f.attributes.Incident_Types;
         },
 
         _initPopup : function (node) {
@@ -518,6 +395,217 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             }));
         },
 
+        _addFeatures: function (tool, toolbar, panelClass) {
+            //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
+            var deferred = new Deferred();
+            if (has("features")) {
+                // markerSymbol = new SimpleMarkerSymbol({
+                //   "color": [3,126,175,20],
+                //   "size": 30,
+                //   "xoffset": 0,
+                //   "yoffset": 0,
+                //   "type": "esriSMS",
+                //   "style": "esriSMSCircle",
+                //   "outline": {
+                //     "color": [3,26,255,220],
+                //     "width": 2,
+                //     "type": "esriSLS",
+                //     "style": "esriSLSSolid"
+                //   }
+                // });
+                markerSymbol = new esri.symbol.PictureMarkerSymbol({
+                    "angle": 0,
+                    "xoffset": 0,
+                    "yoffset": 0,
+                    "type": "esriPMS",
+                    "url": "http://apps.esri.ca/templates/WCAGViewer/images/ripple-dot1.gif",
+                    "contentType": "image/gif",
+                    "width": 51,
+                    "height": 51
+                });
+
+                window._prevSelected = null;
+                window.featureExpand = function(checkBox, restore) {//fid, layerId
+                    //var checked = dojo.query('#featureButton_'+fid)[0].checked;
+                    //console.log(fid, checked, dojo.query('.featureItem_'+fid));
+                    if(_prevSelected && !restore) {
+                        dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                            dojo.removeClass(e, 'showAttr');
+                            dojo.addClass(e, 'hideAttr');
+                            query(e).closest('li').removeClass('borderLi');
+                        });
+                        dojo.query('#featureButton_'+_prevSelected).forEach(function(e) {
+                            e.checked=false;
+                        });
+                    }
+                    var values = checkBox.value.split(',');
+                    var r = window.tasks[values[0]];
+                    var fid = values[1];
+                    var layer = r.layer;
+                    layer._map.graphics.clear();
+                    
+                    if(checkBox.checked)
+                    {
+                        _prevSelected = fid;
+                        dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                            dojo.addClass(e, 'showAttr');
+                            dojo.removeClass(e, 'hideAttr');
+                            query(e).closest('li').addClass('borderLi');
+                        });
+
+                        q = new Query();
+                        q.where = "[FID]='"+fid+"'";
+                        q.outFields = ["FID"];
+                        q.returnGeometry = true;
+                        //layer.clearSelection();
+                        r.task.execute(q).then(function(ev) {
+                            //console.log(ev);
+                            var graphic = new Graphic(ev.features[0].geometry, markerSymbol);
+                            layer._map.graphics.add(graphic);
+                        });
+                        // layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
+                        //     f[0].symbol.size = 40;
+                        // });
+                    } else {
+                        dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
+                            dojo.removeClass(e, 'showAttr');
+                            dojo.addClass(e, 'hideAttr');
+                            window._prevSelected = null;
+                        });                        
+                    }
+                };
+
+                window.tasks = [];
+                        
+                this.map.graphicsLayerIds.forEach(lang.hitch(this, function(id) {
+                    var layer = this.map._layers[id];
+                    if(layer.url && !layer._isSnapshot)
+                    {
+                        var _query = new Query();
+                        _query.outFields = ["*"];
+                        _query.returnGeometry = false;
+                        _query.spatialRelationship = "esriSpatialRelIntersects";
+                        window.tasks.push({
+                            layer : layer,
+                            task : new QueryTask(this.map._layers[layer.id].url),
+                            query : _query
+                        });
+                    }   
+                }));
+                
+                _getFeatureListItem = function(r, f, objectIdFieldName, layer, content, listTemplate) {
+                    try {
+                        var featureId = f.attributes[objectIdFieldName];
+                        var attributes = {_featureId:featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
+                        lang.mixin(attributes, f.attributes);
+                        content = string.substitute(content, attributes);
+                        listTemplate=string.substitute(listTemplate, attributes);
+                        var result =  string.substitute(listTemplate, attributes);
+                        var re = /FORMAT_(DATE|NUM)\((\d+),\"(.+)\"\)/gm;
+                        do {
+                            var matches = re.exec(result);
+                            if(!matches) break;
+                            if(matches[1]==="DATE") {
+                                var date = new Date(Number(matches[2]));
+                                result = result.replace(re, date.toLocaleDateString("en-US", {
+                                    year: "numeric", month: "long", day: "numeric"
+                                }));
+                            }
+                        } while (true);
+                        return result;
+                    } catch (e) {
+                        console.log("Error on feature ("+featureId+")\n\t "+layer.infoTemplate.title(f)+"\n\t",e);
+                        return null;
+                    }
+                };
+
+                var featuresDiv = toolbar.createTool(tool, "large");
+                dojo.setAttr(featuresDiv, 'tabindex', 0);
+
+                features = domConstruct.create("div", {
+                    tabindex: '0',
+                    class: 'desc',
+                }, featuresDiv);
+
+                var list = domConstruct.create("ul", {
+                    id:'featuresList'
+                }, features);
+
+                on(this.map, "extent-change", function(ext) {
+                    this.graphics.clear();
+                    // window._prevSelected = null;
+                    var list = query("#featuresList")[0];
+                    window.tasks.forEach(lang.hitch(this, function(t) {
+                        t.query.geometry = ext.extent;
+                        t.result = t.task.execute(t.query);
+                    }));
+                    promises = all(window.tasks.map(function(t) {return t.result;}));
+                    promises.then(function(results) {
+                        list.innerHTML = "";
+                        var preselected = null;
+                        if(results) for(var i = 0; i<results.length; i++)
+                        {
+                            r = results[i];
+                            var layer = window.tasks[i].layer;
+                            layer.clearSelection();
+                            var content = '';
+                            var fieldsMap = layer.infoTemplate._fieldsMap;
+                            for(var p in layer.infoTemplate._fieldsMap) {
+                                if(fieldsMap.hasOwnProperty(p) && fieldsMap[p].visible)
+                                {
+                                    var pField = fieldsMap[p];
+                                    var fieldName = '${'+pField.fieldName+'}';
+                                    content+='<tr class="featureItem_${_featureId} hideAttr" tabindex="0">\n';
+                                    content+='    <td/>\n';
+                                    content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
+                                    content+='    <td valign="top">:</td>\n';
+                                    content+='    <td valign="top">';
+                                    if(pField.format && pField.format.dateFormat) {
+                                        content+='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
+                                    }
+                                    else {
+                                        content+=fieldName;
+                                    }
+                                    content+='</td>\n';
+                                    content+='</tr>\n';
+                                }
+                            }
+                            for(var j = 0; j<r.features.length; j++) {
+                                var f = r.features[j];
+                                if(window._prevSelected == f.attributes[r.objectIdFieldName]) {
+                                    preselected = f;
+                                }
+                                if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
+                                    var featureListItem = _getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
+                                    if(featureListItem)
+                                    {
+                                        domConstruct.create("li", {
+                                            tabindex : 0,
+                                            innerHTML : featureListItem
+                                        }, list);
+                                    }
+                                }
+                            }
+                        }
+                        if(!preselected) {
+                            window._prevSelected = null;
+                        } else {
+                            var checkbox = query("#featureButton_"+preselected.attributes[r.objectIdFieldName])[0];
+                            checkbox.checked = true;
+                            window.featureExpand(checkbox, true);
+                        }
+                    });
+                }, this);
+                deferred.resolve(true);
+            } 
+            else {
+                window._prevSelected = null;
+                deferred.resolve(false);
+            }
+        
+            return deferred.promise;
+        },
+        
         _addBasemapGallery: function (tool, toolbar, panelClass) {
             //Add the basemap gallery to the toolbar.
             var deferred = new Deferred();
@@ -793,96 +881,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             return deferred.promise;
         },
 
-        _addFeatures: function (tool, toolbar, panelClass) {
-            //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
-            var deferred = new Deferred();
-            if (has("features")) {
-                var featuresDiv = toolbar.createTool(tool, "large");
-                dojo.setAttr(featuresDiv, 'tabindex', 0);
-
-                features = domConstruct.create("div", {
-                    tabindex: '0',
-                    class: 'desc',
-                }, featuresDiv);
-
-                var list = domConstruct.create("ul", {
-                    id:'featuresList'
-                }, features);
-
-                on(this.map, "extent-change", function(ext) {
-                    this.graphics.clear();
-                    // window._prevSelected = null;
-                    var list = query("#featuresList")[0];
-                    window.tasks.forEach(lang.hitch(this, function(t) {
-                        t.query.geometry = ext.extent;
-                        t.result = t.task.execute(t.query);
-                    }));
-                    promises = all(window.tasks.map(function(t) {return t.result;}));
-                    promises.then(function(results) {
-                        list.innerHTML = "";
-                        var preselected = null;
-                        if(results) for(var i = 0; i<results.length; i++)
-                        {
-                            r = results[i];
-                            var layer = window.tasks[i].layer;
-                            layer.clearSelection();
-                            var content = '';
-                            var fieldsMap = layer.infoTemplate._fieldsMap;
-                            for(var p in layer.infoTemplate._fieldsMap) {
-                                if(fieldsMap.hasOwnProperty(p) && fieldsMap[p].visible)
-                                {
-                                    var pField = fieldsMap[p];
-                                    var fieldName = '${'+pField.fieldName+'}';
-                                    content+='<tr class="featureItem_${_featureId} hideAttr" tabindex="0">\n';
-                                    content+='    <td/>\n';
-                                    content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
-                                    content+='    <td valign="top">:</td>\n';
-                                    content+='    <td valign="top">';
-                                    if(pField.format && pField.format.dateFormat) {
-                                        content+='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
-                                    }
-                                    else {
-                                        content+=fieldName;
-                                    }
-                                    content+='</td>\n';
-                                    content+='</tr>\n';
-                                }
-                            }
-                            for(var j = 0; j<r.features.length; j++) {
-                                var f = r.features[j];
-                                if(window._prevSelected == f.attributes[r.objectIdFieldName]) {
-                                    preselected = f;
-                                }
-                                if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
-                                    var featureListItem = _getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
-                                    if(featureListItem)
-                                    {
-                                        domConstruct.create("li", {
-                                            tabindex : 0,
-                                            innerHTML : featureListItem
-                                        }, list);
-                                    }
-                                }
-                            }
-                        }
-                        if(!preselected) {
-                            window._prevSelected = null;
-                        } else {
-                            var checkbox = query("#featureButton_"+preselected.attributes[r.objectIdFieldName])[0];
-                            checkbox.checked = true;
-                            window.featureExpand(checkbox, true);
-                        }
-                    });
-                }, this);
-                deferred.resolve(true);
-            } else {
-                window._prevSelected = null;
-                deferred.resolve(false);
-            }
-        
-            return deferred.promise;
-        },
-        
         _addLegend: function (tool, toolbar, panelClass) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
