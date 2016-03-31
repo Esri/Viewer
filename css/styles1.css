@@ -130,3 +130,7 @@ tr[tabindex='0']:focus
 .borderLi {
   border: solid 1px #037eaf;
 }
+
+.featureItem h2 {
+    font-size: 16px;
+}

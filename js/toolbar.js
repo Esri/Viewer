@@ -161,7 +161,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             var pageBody = domConstruct.create("div", {
                 className: "pageBody",
                 //tabindex: 0,
-                id: "pageBody_" + name
+                id: "pageBody_" + name,
             }, 
             pageContent);
             domClass.add(pageBody, panelClass);

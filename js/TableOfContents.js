@@ -426,8 +426,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             }
         }
     });
-if (has("extend-esri")) {
-    lang.setObject("dijit.TableOfContents", Widget, esriNS);
-}
-return Widget;
+    if (has("extend-esri")) {
+        lang.setObject("dijit.TableOfContents", Widget, esriNS);
+    }
+    return Widget;
 });
