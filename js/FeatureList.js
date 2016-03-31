@@ -6,7 +6,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dojo/text!application/dijit/templates/FeatureList.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
-    "dojo/text!./FeatureListTemplate.html",
+    "dojo/text!application/dijit/templates/FeatureListTemplate.html",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"

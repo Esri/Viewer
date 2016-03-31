@@ -19,33 +19,24 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", 
     "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", 
     "application/has-config", "esri/arcgis/utils", "esri/lang", 
-    "esri/tasks/query", "esri/tasks/QueryTask",
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
     "esri/layers/FeatureLayer",
-    "dojo/string", 
-    "dojo/text!./FeatureListTemplate.html",
-    "application/FeatureList", "application/TableOfContents", "application/ShareDialog",
-    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
-    "esri/dijit/InfoWindow",
-    "dojo/NodeList-dom", "dojo/NodeList-traverse"], 
+    "application/FeatureList", "application/TableOfContents", "application/ShareDialog"
+    ], 
     function (
     ready, JSON, array, Color, declare, 
     lang, dom, domGeometry, domAttr, domClass, 
     domConstruct, domStyle, on, Deferred, all, 
     query, registry, Menu, CheckedMenuItem, Toolbar, 
     has, arcgisUtils, esriLang, 
-    Query, QueryTask,
     HomeButton, LocateButton, 
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
     FeatureLayer, 
-    string,
-    listTemplate,
-    FeatureList, TableOfContents, ShareDialog,
-    SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
-    InfoWindow) {
+    FeatureList, TableOfContents, ShareDialog
+    ) {
 
     return declare(null, {
         config: {},
