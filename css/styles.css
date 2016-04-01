@@ -841,24 +841,29 @@ img {
 @media only screen and (min-width: 720px) {
   #panelText {
     display: block;
-    max-width: 300px; } }
+    max-width: 300px;
+    } }
 
 @media only screen and (min-width: 800px) {
   #panelText {
-    max-width: 400px; } }
+    max-width: 400px;
+    } }
 
 #panelText.nosearch {
   display: block; }
 
 #panelSearch {
-  float: left;
-  margin: 10px 0 10px 20px;
-  height: 30px; }
+  float: left !important;
+  margin: 2px !important;
+  /* height: 30px; */
+  /* display: -webkit-inline-box; */
+  }
 
 @media only screen and (min-width: 720px) {
   #panelSearch {
     margin: 10px 4px 10px 20px;
-    float: right; } }
+    float: right;
+    } }
 
 #panelTools {
   position: relative;
