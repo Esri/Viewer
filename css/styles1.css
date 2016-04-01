@@ -106,31 +106,3 @@ tr[tabindex='0']:focus
     color: #c6c6c1; !important
 }
 
-#featuresList {
-    list-style: none;
-    margin: 0;
-    /* -webkit-margin-before: -10px; */
-    -webkit-padding-start: 0;
-}
-#featuresList li {
-    margin-bottom: 4px;
-    margin-left: -10px;
-    padding: 2px;
-    padding-left: 10px;
-}
-
-.showAttr {
-    display:;
-}
-
-.hideAttr {
-    display:none;
-}
-
-.borderLi {
-  border: solid 1px #037eaf;
-}
-
-.featureItem h2 {
-    font-size: 16px;
-}

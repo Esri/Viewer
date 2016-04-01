@@ -19,24 +19,31 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", 
     "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", 
     "application/has-config", "esri/arcgis/utils", "esri/lang", 
+    "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+    "esri/tasks/query", "esri/tasks/QueryTask",
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
     "esri/layers/FeatureLayer",
-    "application/FeatureList", "application/TableOfContents", "application/ShareDialog"
-    ], 
+    "application/FeatureList", "application/TableOfContents", "application/ShareDialog",
+    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
+    "esri/dijit/InfoWindow",
+    "dojo/NodeList-dom", "dojo/NodeList-traverse"], 
     function (
     ready, JSON, array, Color, declare, 
     lang, dom, domGeometry, domAttr, domClass, 
     domConstruct, domStyle, on, Deferred, all, 
     query, registry, Menu, CheckedMenuItem, Toolbar, 
     has, arcgisUtils, esriLang, 
+    BorderContainer, ContentPane,
+    Query, QueryTask,
     HomeButton, LocateButton, 
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
     FeatureLayer, 
-    FeatureList, TableOfContents, ShareDialog
-    ) {
+    FeatureList, TableOfContents, ShareDialog,
+    SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
+    InfoWindow) {
 
     return declare(null, {
         config: {},
@@ -232,6 +239,43 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
         // Create UI
         _createUI: function () {
+
+            var borderContainer = new BorderContainer({
+                design:'sidebar',
+                gutters:'true', 
+                liveSplitters:'true',
+                id:"borderContainer"
+            });
+             
+
+
+
+
+            var contentPaneLeft = new ContentPane({
+                region: "leading",
+                splitter: 'true',
+                style: "width:500px; padding:0; height: 600px !important; overflow: none;",
+                content: dom.byId("leftPanel"),
+                class: "splitterContent"
+            });
+            // contentPaneLeft.content=domConstruct.create('div');
+            borderContainer.addChild(contentPaneLeft);
+              
+            // creating a ContentPane as the Right pane in the BorderContainer
+            var contentPaneRight = new ContentPane({
+                region: "center",
+                splitter:'true',
+                style: "padding:0",
+                content: dom.byId("mapDiv"),
+            });
+            borderContainer.addChild(contentPaneRight);
+
+            //place BorderContainer to the document Body
+             
+            borderContainer.placeAt(document.body);
+            borderContainer.startup();
+
+            
             domStyle.set("panelPages", "visibility", "hidden");
             //Add tools to the toolbar. The tools are listed in the defaults.js file
             var toolbar = new Toolbar(this.config);

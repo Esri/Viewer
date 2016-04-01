@@ -1,5 +1,9 @@
-define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window", "dojo/_base/fx", "dojo/_base/html", "dojo/_base/lang", "dojo/has", "dojo/dom", "dojo/dom-class", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-construct", "dojo/dom-geometry", "dojo/on", "dojo/mouse", "dojo/query", "dojo/Deferred"], function (
-Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferred) {
+define([
+    "dojo/Evented", "dojo/_base/declare", "dojo/_base/window", "dojo/_base/fx", 
+    "dojo/_base/html", "dojo/_base/lang", "dojo/has", "dojo/dom", 
+    "dojo/dom-class", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-construct", "dojo/dom-geometry", "dojo/on", "dojo/mouse", "dojo/query", "dojo/Deferred"], function (
+Evented, declare, win, fx, html, lang, has, dom, 
+domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferred) {
     return declare([Evented], {
 
         map: null,
@@ -19,12 +23,14 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
         startup: function () {
             var deferred = this._init();
-            deferred.then(lang.hitch(this, function (config) {
-                // optional ready event to listen to
-                this.emit("ready", config);
-            }), lang.hitch(this, function (error) {
-                // optional error event to listen to
-                this.emit("error", error);
+            deferred.then(
+                lang.hitch(this, function (config) {
+                    // optional ready event to listen to
+                    this.emit("ready", config);
+                }), 
+                lang.hitch(this, function (error) {
+                    // optional error event to listen to
+                    this.emit("error", error);
             }));
             return deferred;
         },
@@ -65,11 +71,6 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             }));
             domConstruct.empty(this.pPages);
             // add blank page
-            domConstruct.create("div", {
-                className: "pageblank",
-                id: "page_blank"
-            }, this.pPages);
-
             deferred.resolve();
 
             return deferred.promise;
@@ -112,7 +113,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             var pTool = domConstruct.create("input", {
                 type:"image",
                 className: "panelTool",
-                id: "panelTool_" + name,
+                id: "toolButton_" + name,
                 "aria-label": tip,
                 alt: tip,
                 src: "images/icons_" + this.config.icons + "/" + name + ".png",
@@ -128,7 +129,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
             // add page
             var page = domConstruct.create("div", {
-                className: "page",
+                className: "page hideAttr",
                 id: "page_" + name,
             }, this.pPages);
 
@@ -152,10 +153,10 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 id: "pagetitle_" + name
             }, pageHeader);
 
-            domConstruct.create("div", {
-                className: "pageHeaderImg",
-                innerHTML: "<img class='pageIcon' src ='images/icons_" + this.config.icons + "/" + name + ".png' alt=''/>"
-            }, pageHeader);
+            // domConstruct.create("div", {
+            //     className: "pageHeaderImg",
+            //     innerHTML: "<img class='pageIcon' src ='images/icons_" + this.config.icons + "/" + name + ".png' alt=''/>"
+            // }, pageHeader);
 
 
             var pageBody = domConstruct.create("div", {
@@ -183,27 +184,27 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
                 }, "pageHeader_" + name);
                 on(pageClose, "click", lang.hitch(this, this._closePage, name));
 
-                var pageUp = domConstruct.create("input", {
-                    type: "image",
-                    className: "pageUp",
-                    "aria-label": "Previous Page",
-                    src: 'images/up.png',
-                    alt: 'Previous Page',
-                    title: 'Previous Page',
-                }, "pageHeader_" + name);
-                on(pageUp, "click", lang.hitch(this, this._showPreviousPage, name));
+                // var pageUp = domConstruct.create("input", {
+                //     type: "image",
+                //     className: "pageUp",
+                //     "aria-label": "Previous Page",
+                //     src: 'images/up.png',
+                //     alt: 'Previous Page',
+                //     title: 'Previous Page',
+                // }, "pageHeader_" + name);
+                // on(pageUp, "click", lang.hitch(this, this._showPreviousPage, name));
 
-                if (name != this.tools[this.tools.length - 1]) {
-                    var pageDown = domConstruct.create("input", {
-                        type: "image",
-                        className: "pageDown",
-                        "aria-label": "Next Page",
-                        src: 'images/down.png',
-                        alt: 'Next Page',
-                        title: 'Next Page',
-                    }, "pageHeader_" + name);
-                    on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
-                }
+                // if (name != this.tools[this.tools.length - 1]) {
+                //     var pageDown = domConstruct.create("input", {
+                //         type: "image",
+                //         className: "pageDown",
+                //         "aria-label": "Next Page",
+                //         src: 'images/down.png',
+                //         alt: 'Next Page',
+                //         title: 'Next Page',
+                //     }, "pageHeader_" + name);
+                //     on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
+                // }
 
                 var pageContent = dom.byId("pageContent_" + name);
                 domAttr.set(pageContent, 'data-name', name);
@@ -296,7 +297,20 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
         },
 
         _toolClick: function (name) {
-            this._showPage(name);
+            var id ="page_"+name;
+            var page = dom.byId(id);
+
+            var hidden = page.classList.contains("hideAttr");
+            var pages = query(".page");
+            pages.forEach(function(p){
+                if(hidden && p === page) {
+                    domClass.remove(p,"hideAttr");
+                    domClass.add(p, "showAttr");
+                } else {
+                    domClass.add(p,"hideAttr");
+                    domClass.remove(p, "showAttr");
+                }
+            });
         },
 
         _atachEnterKey: function(onButton, clickButton) {
@@ -337,7 +351,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
 
         _closePage: function (name) {
             this._scrollToPage(0);
-            var tool = dom.byId("panelTool_" + name);
+            var tool = dom.byId("toolButton_" + name);
             if(tool)
             {
                 tool.focus();
@@ -443,7 +457,7 @@ Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle, domAttr, do
             query(".panelTool").removeClass("panelToolActive");
             var name = this.tools[num - 1];
             if (name) {
-                domClass.add("panelTool_" + name, "panelToolActive");
+                domClass.add("toolButton_" + name, "panelToolActive");
             }
             this.emit("updateTool", name);
         },
