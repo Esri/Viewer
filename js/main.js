@@ -247,10 +247,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 id:"borderContainer"
             });
              
-
-
-
-
             var contentPaneLeft = new ContentPane({
                 region: "leading",
                 splitter: 'true',
@@ -258,10 +254,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 content: dom.byId("leftPanel"),
                 class: "splitterContent"
             });
-            // contentPaneLeft.content=domConstruct.create('div');
             borderContainer.addChild(contentPaneLeft);
               
-            // creating a ContentPane as the Right pane in the BorderContainer
             var contentPaneRight = new ContentPane({
                 region: "center",
                 splitter:'true',
@@ -270,8 +264,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             });
             borderContainer.addChild(contentPaneRight);
 
-            //place BorderContainer to the document Body
-             
             borderContainer.placeAt(document.body);
             borderContainer.startup();
 

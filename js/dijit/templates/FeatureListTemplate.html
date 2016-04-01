@@ -8,6 +8,16 @@
 				<h2 style="display:inline; padding: 1px;" id="featureLabel_${_featureId}">${_title}</h2>
 			</th>
 		</tr>
-		${_content}</td>
+		<tr class="featureItem_${_featureId} hideAttr">
+			<td/>
+			<td align="right">
+				<input type="button" value="Pan To" onclick="featurePanZoom(this, true)" tag="${_layerId},${_featureId}"/>
+			</td>
+			<td/>
+			<td>
+				<input type="button" value="Zoom To" onclick="featurePanZoom(this, false)"tag="${_layerId},${_featureId}"/>
+			</td>
+		</tr>
+		${_content}
 	</table>
 </div>

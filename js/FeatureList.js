@@ -35,21 +35,12 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         },
 
         constructor: function (options, srcRefNode) {
-            // mix in settings and defaults
             var defaults = lang.mixin({}, this.options, options);
-            // widget node
 
             this.domNode = srcRefNode;
             // properties
             this.set("map", defaults.map);
             this.set("layers", defaults.layers);
-//             this.set("theme", defaults.theme);
-//             this.set("visible", defaults.visible);
-            // listeners
-//             this.watch("theme", this._updateThemeWatch);
-//             this.watch("visible", this._visible);
-//             this.watch("layers", this._refreshLayers);
-//             this.watch("map", this.refresh);
 
             // this.markerSymbol = new SimpleMarkerSymbol({
                 //   "color": [3,126,175,20],
@@ -76,32 +67,14 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                 "height": 35
             });
             this.css = {
-                container: "toc-container",
-//                 layer: "toc-layer",
-//                 firstLayer: "toc-first-layer",
-//                 title: "toc-title",
-//                 titleContainer: "toc-title-container",
-//                 content: "toc-content",
-//                 titleCheckbox: "checkbox",
-//                 checkboxCheck: "icon-check-1",
-//                 titleText: "checkbox",
-//                 accountText: "toc-account",
-//                 visible: "toc-visible",
-//                 settingsIcon: "icon-cog",
-//                 settings: "toc-settings",
-//                 actions: "toc-actions",
-//                 account: "toc-account",
-//                 clear: "clear"
             };
         },
 
         startup: function () {
-            // map not defined
             if (!this.map) {
                 this.destroy();
                 console.log("FeaturesList::map required");
             }
-            // when map is loaded
             if (this.map.loaded) {
                 this._init();
             } else {
@@ -112,7 +85,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         },
 
         _init: function () {
-//             this._visible();
             this._createList();
             this.set("loaded", true);
             this.emit("load", {});
@@ -135,6 +107,26 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     });
                 }   
             }
+
+            window.featurePanZoom = function(btn, panOnly) {
+                console.log(btn);
+                values = btn.attributes.tag.value.split(',');
+                var r = window.tasks[values[0]];
+                var fid = values[1];
+                var layer = r.layer;
+
+                    q = new Query();
+                    q.where = "[FID]='"+fid+"'";
+                    q.outFields = ["FID"];
+                    q.returnGeometry = true;
+                    r.task.execute(q).then(function(ev) {
+                        if(panOnly) {
+                            layer._map.centerAt(ev.features[0].geometry);
+                        } else {
+                            layer._map.centerAndZoom(ev.features[0].geometry, 10);
+                        }
+                    });
+            };
 
             window._prevSelected = null;                
             window.featureExpand = function(checkBox, restore) {
@@ -179,8 +171,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
                         dojo.removeClass(e, 'showAttr');
                         dojo.addClass(e, 'hideAttr');
-                        window._prevSelected = null;
                     });                        
+                    window._prevSelected = null;
                 }
             };
 
@@ -278,25 +270,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     return null;
                 }
             };
-            
         },
-
-
-
-//         _updateThemeWatch: function () {
-//             var oldVal = arguments[1];
-//             var newVal = arguments[2];
-//             domClass.remove(this.domNode, oldVal);
-//             domClass.add(this.domNode, newVal);
-//         },
-
-//         _visible: function () {
-//             if (this.get("visible")) {
-//                 domStyle.set(this.domNode, "display", "block");
-//             } else {
-//                 domStyle.set(this.domNode, "display", "none");
-//             }
-//         }
     });
     if (has("extend-esri")) {
         lang.setObject("dijit.FeaturesList", Widget, esriNS);
