@@ -242,7 +242,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
 
             var borderContainer = new BorderContainer({
                 design:'sidebar',
-                gutters:'true', 
+                gutters:'false', 
                 liveSplitters:'true',
                 id:"borderContainer"
             });

@@ -134,7 +134,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             }, this.pPages);
 
             var pageContent = domConstruct.create("div", {
-                className: "pageContent rounded shadow",
+                className: "pageContent",
                 id: "pageContent_" + name,
                 role: "dialog",
                 "aria-labelledby": "pagetitle_" + name,
@@ -174,15 +174,15 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             //Adds the up/down and close tools to the page header. 
             for (var i = 0; i < this.tools.length; i++) {
                 var name = this.tools[i];
-                var pageClose = domConstruct.create("input", {
-                    type: "image",
-                    className: "pageClose",
-                    "aria-label": "Close Page",
-                    src: 'images/close.png',
-                    alt: 'Close',
-                    title: 'Close',
-                }, "pageHeader_" + name);
-                on(pageClose, "click", lang.hitch(this, this._closePage, name));
+                // var pageClose = domConstruct.create("input", {
+                //     type: "image",
+                //     className: "pageClose",
+                //     "aria-label": "Close Page",
+                //     src: 'images/close.png',
+                //     alt: 'Close',
+                //     title: 'Close',
+                // }, "pageHeader_" + name);
+                // on(pageClose, "click", lang.hitch(this, this._closePage, name));
 
                 // var pageUp = domConstruct.create("input", {
                 //     type: "image",
