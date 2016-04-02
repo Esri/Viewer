@@ -108,7 +108,7 @@ input[type=checkbox].checkbox {
 /*Phones (520px) Small Tablets (720px)*/
 html, body {
   padding: 0;
-  margin: 0;
+  margin: 0px;
   height: 100%;
   width: 100%;
   font-family: Arial, Helvetica, sans-serif;
@@ -302,17 +302,19 @@ input[type=checkbox].checkbox {
   -webkit-user-select: none; }
 
 .arcgisSearch .searchGroup .searchInput {
-  width: 200px;
+  width: 298px;
   padding: 6px 17px 6px 18px;
   background-color: rgba(0, 0, 0, 0.3);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
   zoom: 1;
-  color: #fff; }
+  color: #fff;
+  }
 
 @media only screen and (min-width: 800px) {
   .arcgisSearch .searchGroup .searchInput {
-    max-width: 190px;
-    display: block; } }
+    /* max-width: 300px; */
+    display: block;
+    } }
 
 .arcgisSearch .searchClear {
   background: none;
@@ -544,16 +546,8 @@ img {
 
 #panelContent {
   font-family: Helvetica, Arial, sans-serif;
-  /* position: fixed; */
-  /* right: 15px; */
-  left: 0;
-  /* top: 0; */
-  /* height: 600px; */
-  /* width: 500px; */
-  display: block;
   /* background-color: transparent; */
-  /* background-color: rgba(0, 0, 0, 0.5); */
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000,endColorstr=#80000000);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 #panelPages {
@@ -566,10 +560,6 @@ img {
 
 .page {
   /* overflow: visible; */
-  /* position: fixed; */
-  /* width: 100%; */
-  /* height: 500px; */
-  display: block;
   background-color: transparent;
   background-color: rgba(0, 0, 0, 0.5);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000,endColorstr=#80000000);
@@ -581,31 +571,17 @@ img {
   }
 
 .pageContent {
-  /* position: relative; */
-  /* left: 10px; */
-  /* right: 10px; */
-  /* width: 300px; */
-  /* height: 100%; */
-  /*display: block;*/
-  /*overflow: hidden;*/
-  /*max-height: 305px;*/
-  /*top: 100px;*/
   background-color: white;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#FFFFFFFF,endColorstr=#FFFFFFFF);
 }
 
 @media only screen and (min-width: 600px) {
   .pageContent {
-    /* max-height: none; */
-    /* width: 500px; */
-    /* left: 0; */
     margin: 0;
     } }
 
 @media only screen and (min-width: 1070px) {
   .pageContent {
     /* top: 10px; */
-    /* max-height: none; */
     } }
 
 /*Panel sizes*/
@@ -624,25 +600,14 @@ img {
 
 .pageHeader {
   position: relative;
-  margin-top: 1px;
   width: 100%;
-  /* height: 40px; */
-  /* text-align: center; */
-  /* display: block; */
-  /* vertical-align: middle; */
   }
 
 .pageTitle {
-  /* position: absolute; */
-  /* left: 80px; */
-  /* top: 25px; */
-  /* width: auto; */
-  /* height: 20px; */
   font-size: 20px;
   color: #ffffff;
-  /* --line-height: 20px; */
   overflow: hidden;
-  padding: 8px 4px;
+  padding: 4px;
   margin: 0;
   }
 
@@ -709,16 +674,15 @@ img {
   display: block; }
 
 .pageBody {
-  /* position: relative; */
+  position: absolute;
   --
   height: 100%;
-  top: 0;
-  display: block;
   width: 100%;
+  height: 84%;
   color: #000000;
-  overflow-x: hidden;
+  overflow: hidden;
   overflow-y: auto;
-  margin: 0;
+  background-color: transparent;
 }
 
 #pageBody_overview {
@@ -755,11 +719,11 @@ img {
     max-height: 80%; } }
 
 .desc {
-  padding: 20px 10px 20px 20px;
-  /* max-width: 288px; */
+  padding: 20px 8px;
   color: rgb(60, 60, 90);
-  height: 580px;
-  /* overflow: auto; */
+  /* height: 590px; */
+  position: relative;
+  /* overflow-y: auto; */
 }
 
 #panelTop {
@@ -795,7 +759,6 @@ img {
   float: left;
   color: #ffffff;
   display: block;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   font-family: "Helvetica Neue", "Arial", sans-serif;
   font-weight: normal;
   font-size: 25px;
@@ -852,18 +815,22 @@ img {
 #panelText.nosearch {
   display: block; }
 
-#panelSearch {
-  float: left !important;
-  margin: 2px !important;
-  /* height: 30px; */
-  /* display: -webkit-inline-box; */
-  }
-
 @media only screen and (min-width: 720px) {
   #panelSearch {
     margin: 10px 4px 10px 20px;
     float: right;
     } }
+
+#panelSearch {
+  margin: 0;
+  width:100%;
+  display: table;
+  }
+
+#panelSearch .searchLabel {
+  padding: 8px 4px;
+  float: left;
+}
 
 #panelTools {
   position: relative;
@@ -1555,8 +1522,11 @@ html, body {
 }
 
 #borderContainer {
-    width: 100%;
+    /* width: 90%; */
     height: 100%;
+    width:  100%;
+    margin: 0;
+    position: static;
 }
 
 .dijitSplitterV, .dijitGutterV {
@@ -1601,8 +1571,9 @@ html, body {
 #featuresList {
     list-style: none;
     margin: 0;
-    /* -webkit-margin-before: -10px; */
     -webkit-padding-start: 0;
+    background-color: white;
+    overflow-y: auto;
 }
 #featuresList li {
     margin-bottom: 4px;
@@ -1641,10 +1612,14 @@ text-align: left;
 
 .splitterContent {
     overflow-y: hidden !important;
-    height: 100% !important;
+    /* height: 100% !important; */
     position: fixed !important;
 }
 
 td, th {
   /* display: -webkit-inline-box; */
+}
+
+.borderBottom {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
