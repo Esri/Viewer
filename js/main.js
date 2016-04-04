@@ -14,10 +14,12 @@
  | limitations under the License.
  */
 
-define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", 
+define(["dojo/ready", 
+    "dojo/aspect", "dijit/registry",
+    "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo/_base/declare", 
     "dojo/_base/lang", "dojo/dom", "dojo/dom-geometry", "dojo/dom-attr", "dojo/dom-class", 
     "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", 
-    "dojo/query", "dijit/registry", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", 
+    "dojo/query", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", 
     "application/has-config", "esri/arcgis/utils", "esri/lang", 
     "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
     "esri/tasks/query", "esri/tasks/QueryTask",
@@ -31,10 +33,12 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "dojo/text!application/dijit/templates/instructions.html",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"], 
     function (
-    ready, JSON, array, Color, declare, 
+    ready, 
+    aspect, registry,
+    JSON, array, Color, declare, 
     lang, dom, domGeometry, domAttr, domClass, 
     domConstruct, domStyle, on, Deferred, all, 
-    query, registry, Menu, CheckedMenuItem, Toolbar, 
+    query, Menu, CheckedMenuItem, Toolbar, 
     has, arcgisUtils, esriLang, 
     BorderContainer, ContentPane,
     Query, QueryTask,
@@ -252,7 +256,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             var contentPaneLeft = new ContentPane({
                 region: "leading",
                 splitter: 'true',
-                style: "width:500px; padding:0; height: 600px !important; overflow: none;",
+                style: "width:500px; padding:0; overflow: none;",
                 content: dom.byId("leftPanel"),
                 class: "splitterContent"
             });
@@ -265,6 +269,11 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 content: dom.byId("mapDiv"),
             });
             borderContainer.addChild(contentPaneRight);
+
+            aspect.after(contentPaneRight, "resize", lang.hitch(this, function() {
+                this.map.resize();
+                this.map.reposition();
+            }));
 
             borderContainer.placeAt(document.body);
             borderContainer.startup();
@@ -1162,6 +1171,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 }, dom.byId("panelTools"), 0);
                 var home = new HomeButton({
                     map: this.map
+                // }, dom.byId("mapDiv_zoom_slider"));
                 }, dom.byId("btnHome"));
 
                 home.startup();
