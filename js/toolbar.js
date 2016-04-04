@@ -281,37 +281,36 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
         },
 
         activateTool: function (name) {
-            //Instead of scrolling to the tool just go there. 
-            var num = this._getPageNum(name) + 1;
-            var box = html.getContentBox(dom.byId("panelPages"));
-
-            var endPos = num * box.h;
-
-            document.body.scrollTop = endPos;
-            document.documentElement.scrollTop = endPos;
-
-            this._updateMap();
-
-            this.curTool = num;
-            this._updateTool(num);
-        },
+       },
 
         _toolClick: function (name) {
-            var id ="page_"+name;
-            var page = dom.byId(id);
+            this._updateMap(); // ! out of place
 
+            var active = false;
+            var page = dom.byId("page_"+name);
             var hidden = page.classList.contains("hideAttr");
             var pages = query(".page");
             pages.forEach(function(p){
                 if(hidden && p === page) {
                     domClass.remove(p,"hideAttr");
                     domClass.add(p, "showAttr");
+                    active = true;
                 } else {
                     domClass.add(p,"hideAttr");
                     domClass.remove(p, "showAttr");
                 }
             });
-        },
+            
+            var tool = dom.byId("toolButton_"+name);
+            var tools = query(".panelTool");           
+            tools.forEach(function(t){
+                if(active && t === tool) {
+                    domClass.add(t, "panelToolActive");
+                } else {
+                    domClass.remove(t,"panelToolActive");
+                }
+            });
+         },
 
         _atachEnterKey: function(onButton, clickButton) {
             on(onButton, 'keydown', lang.hitch(clickButton, function(event){
@@ -402,55 +401,55 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
         //     }
         // },
 
-        _snapScroll: function () {
-            var startPos = domGeometry.docScroll().y;
-            var box = html.getContentBox(dom.byId("panelPages"));
-            var numActual = startPos / box.h;
-            var num = Math.round(numActual);
+        // _snapScroll: function () {
+        //     var startPos = domGeometry.docScroll().y;
+        //     var box = html.getContentBox(dom.byId("panelPages"));
+        //     var numActual = startPos / box.h;
+        //     var num = Math.round(numActual);
 
-            if (numActual > this.curTool) {
-                if (numActual - this.curTool > 0.2) {
-                    num = Math.ceil(startPos / box.h);
-                }
-                if (num > this.tools.length - 1) {
-                    num = this.tools.length - 1;
-                }
-            } else if (numActual < this.curPage) {
-                if (this.curTool - numActual > 0.2) {
-                    num = Math.floor(startPos / box.h);
-                }
-                if (num < 0) {
-                    num = 0;
-                }
-            }
-            var endPos = num * box.h;
+        //     if (numActual > this.curTool) {
+        //         if (numActual - this.curTool > 0.2) {
+        //             num = Math.ceil(startPos / box.h);
+        //         }
+        //         if (num > this.tools.length - 1) {
+        //             num = this.tools.length - 1;
+        //         }
+        //     } else if (numActual < this.curPage) {
+        //         if (this.curTool - numActual > 0.2) {
+        //             num = Math.floor(startPos / box.h);
+        //         }
+        //         if (num < 0) {
+        //             num = 0;
+        //         }
+        //     }
+        //     var endPos = num * box.h;
 
-            this.curTool = num;
-            this._updateTool(num);
+        //     this.curTool = num;
+        //     this._updateTool(num);
 
-            if (num != numActual) {
-                this._animateScroll(startPos, endPos);
-            }
-        },
+        //     if (num != numActual) {
+        //         this._animateScroll(startPos, endPos);
+        //     }
+        // },
 
-        _animateScroll: function (start, end) {
-            //var me = this;
-            var anim = new fx.Animation({
-                duration: 500,
-                curve: [start, end]
-            });
-            on(anim, "Animate", function (v) {
-                document.body.scrollTop = v;
-                document.documentElement.scrollTop = v;
-            });
+        // _animateScroll: function (start, end) {
+        //     //var me = this;
+        //     var anim = new fx.Animation({
+        //         duration: 500,
+        //         curve: [start, end]
+        //     });
+        //     on(anim, "Animate", function (v) {
+        //         document.body.scrollTop = v;
+        //         document.documentElement.scrollTop = v;
+        //     });
 
-            on(anim, "End", lang.hitch(this, function () {
-                setTimeout(lang.hitch(this, this._resetSnap), 500);
-                this._updateMap();
-            }));
+        //     on(anim, "End", lang.hitch(this, function () {
+        //         setTimeout(lang.hitch(this, this._resetSnap), 500);
+        //         this._updateMap();
+        //     }));
 
-            anim.play();
-        },
+        //     anim.play();
+        // },
 
         // highlight the active tool on the toolbar
         _updateTool: function (num) {

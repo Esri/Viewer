@@ -737,7 +737,8 @@ img {
 @media only screen and (min-width: 760px) {
   #panelTop {
     /* width: auto; */
-    position: relative;
+    /* position: absolute; */
+    top: 0;
     } }
 
 #panelTitle {
@@ -1609,8 +1610,8 @@ td, th {
 }
 
 #leftPanel{
-    min-width: 500px;
+    /* min-width: 500px; */
     height: 100%;
-    width:100%
+    width: 100%;
     position: absolute;
 }
