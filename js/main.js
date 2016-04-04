@@ -314,9 +314,9 @@ define(["dojo/ready",
                         case "measure":
                             toolList.push(this._addMeasure(this.config.tools[i], toolbar, ""));
                             break;
-                        case "edit":
-                            toolList.push(this._addEditor(this.config.tools[i], toolbar, ""));
-                            break;
+                        // case "edit":
+                        //     toolList.push(this._addEditor(this.config.tools[i], toolbar, ""));
+                        //     break;
                         case "share":
                             toolList.push(this._addShare(this.config.tools[i], toolbar, ""));
                             break;
@@ -340,16 +340,16 @@ define(["dojo/ready",
                     var home = has("home");
                     var locate = has("locate");
 
-                    //No tools are specified in the configuration so hide the panel and update the title area styles
-                    if (!tools && !home && !locate) {
-                        domConstruct.destroy("panelTools");
-                        domStyle.set("panelContent", "display", "none");
-                        domStyle.set("panelTitle", "border-bottom", "none");
-                        domStyle.set("panelTop", "height", "52px");
-                        query(".esriSimpleSlider").addClass("notools");
-                        this._updateTheme();
-                        return;
-                    }
+                    // //No tools are specified in the configuration so hide the panel and update the title area styles
+                    // if (!tools && !home && !locate) {
+                    //     domConstruct.destroy("panelTools");
+                    //     domStyle.set("panelContent", "display", "none");
+                    //     domStyle.set("panelTitle", "border-bottom", "none");
+                    //     domStyle.set("panelTop", "height", "52px");
+                    //     query(".esriSimpleSlider").addClass("notools");
+                    //     this._updateTheme();
+                    //     return;
+                    // }
 
                     //Now that all the tools have been added to the toolbar we can add page naviagation
                     //to the toolbar panel, update the color theme and set the active tool.
@@ -398,6 +398,64 @@ define(["dojo/ready",
                     domStyle.set("panelPages", "visibility", "visible");
                 }));
             }));
+
+            on(document.body, 'keydown', function(event) {
+                if(event.altKey) {
+                    query('.goThereHint').forEach(function(h) {
+                        domStyle.set(h, 'display','block');
+                    });
+                    switch(event.code) {
+                        case 'Digit1' :
+                            query('.panelTool')[0].focus();
+                            break;
+                        case 'Digit2' :
+                            dom.byId('search_input').focus();
+                            break;
+                        case 'Digit3' :
+                            query('.showAttr [tabindex=0]')[0].focus();
+                            break;
+                        case 'Digit4' :
+                            query('.esriSimpleSliderIncrementButton input')[0].focus();
+                            break;
+                    }
+                } 
+            });
+            on(document.body, 'keyup', function(event) {
+                if(!event.altKey) {
+                    query('.goThereHint').forEach(function(h) {
+                        domStyle.set(h, 'display','');
+                    });
+                }
+            });
+
+            domConstruct.create("div", {
+                id: 'goThereHint_toolPanel', 
+                class:'goThereHint',
+                innerHTML: 'Alt + 1',
+                style:'right:20px;'
+            }, dom.byId('panelTools'));
+
+            domConstruct.create("div", {
+                id: 'goThereHint_search', 
+                class:'goThereHint',
+                innerHTML: 'Alt + 2',
+                style:'left:160px;'
+            }, dom.byId('panelSearch'));
+
+            domConstruct.create("div", {
+                id: 'goThereHint_pages', 
+                class:'goThereHint',
+                innerHTML: 'Alt + 3',
+                style:'left:20px; top:200px;'
+            }, dom.byId('panelPages'));
+
+            domConstruct.create("div", {
+                id: 'goThereHint_zoom_slider', 
+                class:'goThereHint',
+                innerHTML: 'Alt + 4',
+                style:'left:20px; top:40px;'
+            }, dom.byId('mapDiv_zoom_slider'));
+
         },
 
         _addFeatures: function (tool, toolbar, panelClass) {
@@ -840,32 +898,29 @@ define(["dojo/ready",
                 for(i=0; i<images.length; i++)
                     domAttr.set(images[i],'alt','');
             }));
-
         },
 
         _atachArrowKeys: function(onButton, map) {
             on(onButton, 'keydown', lang.hitch({ div: onButton, map: map}, function(event) {
+                var top = dojo.style(this.div, 'top');
+                var left = dojo.style(this.div, 'left');
                 switch (event.keyCode) {
                     case 38 : // up
-                        var top = dojo.style(this.div, 'top');
                         if(top > -this.div.clientHeight/2) {
                             dojo.style(this.div, 'top', --top + 'px');
                         }
                         break;
                     case 40 : // down
-                        var top = dojo.style(this.div, 'top');
                         if(top < this.map.height - this.div.clientHeight/2) {
                             dojo.style(this.div, 'top', ++top + 'px');
                         }
                         break;
                     case 37 : // left
-                        var left = dojo.style(this.div, 'left');
                         if(left > -this.div.clientWidth/2) {
                             dojo.style(this.div, 'left', --left + 'px');
                         }
                         break;
                     case 39 : // right
-                        var left = dojo.style(this.div, 'left');
                         if(left < this.map.width - this.div.clientWidth/2) {
                             dojo.style(this.div, 'left', ++left + 'px');
                         }

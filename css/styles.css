@@ -286,11 +286,13 @@ input[type=checkbox].checkbox {
   -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
   cursor: pointer;
-  display: none; }
+  display: none;
+  }
 
 @media only screen and (min-width: 760px) {
   .esriSimpleSlider {
-    display: block; } }
+    display: block;
+    } }
 
 .esriSimpleSlider div {
   width: 30px;
@@ -299,7 +301,8 @@ input[type=checkbox].checkbox {
   font-family: verdana, helvetica;
   font-weight: bold;
   line-height: 40px;
-  -webkit-user-select: none; }
+  -webkit-user-select: none;
+  }
 
 .arcgisSearch .searchGroup .searchInput {
   width: 298px;
@@ -330,7 +333,8 @@ input[type=checkbox].checkbox {
 .esriSimpleSliderTL {
   top: 10px;
   left: 10px;
-  border: none; }
+  border: none;
+  }
 
 .esriSimpleSliderDecrementButton:hover, .esriSimpleSliderIncrementButton:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
@@ -677,13 +681,20 @@ img {
 .pageBody {
   
   --
-  height: 100%;
-  width: 100%;
-  height: 90%;
-  color: #000000;
-  overflow: hidden;
-  overflow-y: auto;
-  background-color: transparent;
+  
+height: 100%;
+  
+width: 100%;
+  
+height: 90%;
+  
+color: #000000;
+  
+overflow: hidden;
+  
+overflow-y: auto;
+  
+background-color: transparent;
 }
 
 #pageBody_overview {
@@ -723,6 +734,7 @@ img {
   color: rgb(60, 60, 90);
   /* position: relative; */
   overflow-y: auto;
+  margin-bottom: 20px;
 }
 
 #panelTop {
@@ -807,13 +819,14 @@ img {
 
 @media only screen and (min-width: 720px) {
   #panelSearch {
-    margin: 10px 4px 10px 20px;
+    /* margin: 10px 4px 10px 20px; */
     } }
 
 #panelSearch {
   margin: 0;
   width:100%;
-  display: block;
+  /* display: block; */
+  position: relative;
   }
 
 #panelSearch .searchLabel {
@@ -1628,10 +1641,31 @@ td, th {
 
 #instructionsDiv {
   position: absolute;
-  bottom: 16px;
+  bottom: 26px;
+  margin-bottom: 20px;
 }
 
 #detailDiv {
   position: absolute;
   top: 0;
+}
+
+.goThereHint {
+  position: absolute;
+  top: 6px;
+  padding: 4px 10px !important;
+  z-index: 100;
+  background-color: rgba(253, 253, 253, 0.83);
+  border-radius: 8px;
+  border: #FF4600;
+  border-style: solid;
+  color: #FF005E;
+  font-size: 16px !important;
+  font-family: verdana, helvetica;
+  font-weight: bold;
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+  width: 64px !important;
+  height: 18px !important;
+  line-height: 18px !important;
+  display: none;
 }
