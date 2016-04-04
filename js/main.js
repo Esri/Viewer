@@ -514,7 +514,10 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 var description = this.config.description || this.config.response.itemInfo.item.description || this.config.response.itemInfo.item.snippet;
                 if (description) {
 
-                    var detailDiv = toolbar.createTool(tool, panelClass);
+                    var detailDiv = //toolbar.createTool(tool, panelClass);
+                        domConstruct.create('div',{
+                        id:"detailDiv",
+                    }, dom.byId('fixContent'));
                     detailDiv.innerHTML = "<div class='desc' tabindex='0'>" + description + "</div>";
                 }
                 deferred.resolve(true);
@@ -637,7 +640,10 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                deferred.resolve(false);
             } else 
             {
-                var instructionsDiv = toolbar.createTool(tool, "");
+                var instructionsDiv = //toolbar.createTool(tool, "");
+                domConstruct.create('div',{
+                    id:"instructionsDiv",
+                }, dom.byId('fixContent'));
 
                 instructionsDiv.innerHTML = instructionsText;
                 deferred.resolve(true);
@@ -662,9 +668,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                     }, domConstruct.create("div", {role:'application'}, legendDiv));
                     domClass.add(legend.domNode, "legend");
                     legend.startup();
-                    if (this.config.activeTool !== "") {
-                        toolbar.activateTool(this.config.activeTool || "legend");
-                    }
 
                     var LegendServiceLabel = legend.domNode.querySelector(".esriLegendServiceLabel");
                     if(LegendServiceLabel)

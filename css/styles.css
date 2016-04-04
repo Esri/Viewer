@@ -557,8 +557,6 @@ img {
   height: 100%;
   background-color: #F9F9F9;
   overflow: auto;
-  position: relative;
-  /* top: 0; */
 }
 
 .page {
@@ -569,6 +567,7 @@ img {
   height: 100%;
   position: absolute;
   width: 100%;
+  top: 120px;
 }
 
 .pageblank {
@@ -1616,4 +1615,19 @@ td, th {
     height: 100%;
     width: 100%;
     position: absolute;
+}
+
+#fixContent {
+  width: 100%;
+  height: 100%;
+  position: inherit;
+}
+
+#instructionsDiv {
+  position: absolute;
+  bottom: 0;
+}
+
+#detailDiv {
+  position: absolute;
 }

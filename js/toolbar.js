@@ -68,7 +68,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
 
 
             }));
-            domConstruct.empty(this.pPages);
+//             domConstruct.empty(this.pPages);
             // add blank page
             deferred.resolve();
 
@@ -173,68 +173,37 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             //Adds the up/down and close tools to the page header. 
             for (var i = 0; i < this.tools.length; i++) {
                 var name = this.tools[i];
-                // var pageClose = domConstruct.create("input", {
-                //     type: "image",
-                //     className: "pageClose",
-                //     "aria-label": "Close Page",
-                //     src: 'images/close.png',
-                //     alt: 'Close',
-                //     title: 'Close',
-                // }, "pageHeader_" + name);
-                // on(pageClose, "click", lang.hitch(this, this._closePage, name));
-
-                // var pageUp = domConstruct.create("input", {
-                //     type: "image",
-                //     className: "pageUp",
-                //     "aria-label": "Previous Page",
-                //     src: 'images/up.png',
-                //     alt: 'Previous Page',
-                //     title: 'Previous Page',
-                // }, "pageHeader_" + name);
-                // on(pageUp, "click", lang.hitch(this, this._showPreviousPage, name));
-
-                // if (name != this.tools[this.tools.length - 1]) {
-                //     var pageDown = domConstruct.create("input", {
-                //         type: "image",
-                //         className: "pageDown",
-                //         "aria-label": "Next Page",
-                //         src: 'images/down.png',
-                //         alt: 'Next Page',
-                //         title: 'Next Page',
-                //     }, "pageHeader_" + name);
-                //     on(pageDown, "click", lang.hitch(this, this._showNextPage, name));
-                // }
 
                 var pageContent = dom.byId("pageContent_" + name);
                 domAttr.set(pageContent, 'data-name', name);
-                on(pageContent, 'keydown', lang.hitch(this, function(event) {
-                    var name = domAttr.get(event.currentTarget, 'data-name');
-                    var pageHeader = dom.byId("pageHeader_" + name);
-                    switch (event.keyCode) {
-                        case 27:
-                            var pageClose = pageHeader.querySelector(".pageClose");
-                            if(pageClose)
-                                pageClose.click();
-                        break;
-                        case 33: // PgUp
-                            var pageUp = pageHeader.querySelector(".pageUp");
-                            if(pageUp)
-                                event.stopPropagation();
-                                pageUp.click();
-                            break;
-                        case 34: // PgDn
-                            var pageDown = pageHeader.querySelector(".pageDown");
-                            if(pageDown)
-                                event.stopPropagation();
-                                pageDown.click();
-                            break;
-                        //case 36: // Home
-                        case 35: 
-                            event.stopPropagation();
-                            this.showInstructions();
-                            break;
-                    }
-                }));
+                // on(pageContent, 'keydown', lang.hitch(this, function(event) {
+                //     var name = domAttr.get(event.currentTarget, 'data-name');
+                //     var pageHeader = dom.byId("pageHeader_" + name);
+                //     switch (event.keyCode) {
+                //         case 27:
+                //             var pageClose = pageHeader.querySelector(".pageClose");
+                //             if(pageClose)
+                //                 pageClose.click();
+                //         break;
+                //         case 33: // PgUp
+                //             var pageUp = pageHeader.querySelector(".pageUp");
+                //             if(pageUp)
+                //                 event.stopPropagation();
+                //                 pageUp.click();
+                //             break;
+                //         case 34: // PgDn
+                //             var pageDown = pageHeader.querySelector(".pageDown");
+                //             if(pageDown)
+                //                 event.stopPropagation();
+                //                 pageDown.click();
+                //             break;
+                //         //case 36: // Home
+                //         case 35: 
+                //             event.stopPropagation();
+                //             this.showInstructions();
+                //             break;
+                //     }
+                // }));
             }
         },
 
@@ -274,10 +243,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             domConstruct.place(content, "pageBody_" + name, "last");
         },
 
-        activateTool: function (name) {
-       },
-
-        _toolClick: function (name) {
+       _toolClick: function (name) {
             this._updateMap(); // ! out of place
 
             var active = false;
@@ -304,6 +270,13 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
                     domClass.remove(t,"panelToolActive");
                 }
             });
+
+            var fixContent = dom.byId('fixContent');
+            if(active) {
+                domClass.remove(fixContent, "showAttr");
+            } else {
+                domClass.add(fixContent, "showAttr");
+            }
          },
 
         _atachEnterKey: function(onButton, clickButton) {
