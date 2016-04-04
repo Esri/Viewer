@@ -28,12 +28,12 @@ label.checkbox{
   padding: 2px 4px;
   margin: 0 !important;
   text-overflow: ellipsis;
-  white-space: nowrap;
+  /* white-space: nowrap; */
   overflow-x: hidden;
   line-height: 20px;
-  height: 20px;
+  /* height: 20px; */
   border: 2px solid transparent;
-  vertical-align: middle;
+  vertical-align: text-top;
 }
 
 .esriRTL label.checkbox {
@@ -44,12 +44,12 @@ input[type=checkbox].checkbox {
   height: 20px;
   width: 20px;
   border: 1px solid #bababa;
-  vertical-align: middle;
-  font-size: 12px;
-  line-height: 16px;
+  /* vertical-align: middle; */
+  /* font-size: 12px; */
+  /* line-height: 16px; */
   background-color: #fff;
   color: #000;
-  cursor: pointer; 
+  cursor: pointer;
 }
 
 .esriRTL .checkbox {
@@ -554,20 +554,20 @@ img {
 #panelPages {
   font-family: Helvetica, Arial, sans-serif;
   width: 100%;
-  height: 100%;
+  height: 90%;
   background-color: #F9F9F9;
   overflow: auto;
+  position: absolute;
 }
 
 .page {
   /* overflow: visible; */
   background-color: transparent;
   background-color: rgba(0, 0, 0, 0.5);
-  position: relative;
   height: 100%;
   position: absolute;
   width: 100%;
-  top: 120px;
+  top: 0;
 }
 
 .pageblank {
@@ -579,8 +579,10 @@ img {
   .pageContent {
     background-color: white;
     margin: 0;
-    height: 90%;
-    position: relative;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    /* top: 0; */
     } }
 
 /*Panel sizes*/
@@ -673,15 +675,15 @@ img {
   display: block; }
 
 .pageBody {
-  position: absolute;
+  
   --
-  height: 100%;
-  width: 100%;
-  height: 100%;
-  color: #000000;
-  overflow: hidden;
-  overflow-y: auto;
-  background-color: transparent;
+  height: 100%;
+  width: 100%;
+  height: 90%;
+  color: #000000;
+  overflow: hidden;
+  overflow-y: auto;
+  background-color: transparent;
 }
 
 #pageBody_overview {
@@ -697,7 +699,6 @@ img {
   padding-left: 20px;
   padding-top: 20px;
   padding-right: 22px;
-  max-width: 258px; 
 }
 
 #pageBody_share {
@@ -737,9 +738,9 @@ img {
 
 @media only screen and (min-width: 760px) {
   #panelTop {
-    /* width: auto; */
-    /* position: absolute; */
-    top: 0;
+    /* width: 100%; */
+    position: initial;
+    /* top: 0; */
     } }
 
 #panelTitle {
@@ -1620,14 +1621,17 @@ td, th {
 #fixContent {
   width: 100%;
   height: 100%;
-  position: inherit;
+  position: absolute;
+  overflow: auto;
+  top: 0;
 }
 
 #instructionsDiv {
   position: absolute;
-  bottom: 0;
+  bottom: 16px;
 }
 
 #detailDiv {
   position: absolute;
+  top: 0;
 }
