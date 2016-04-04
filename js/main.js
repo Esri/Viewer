@@ -280,40 +280,40 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 for (var i = 0; i < this.config.tools.length; i++) {
                     switch (this.config.tools[i].name) {
                         case "instructions":
-                            toolList.push(this._addInstructions(this.config.tools[i], toolbar, "large"));
+                            toolList.push(this._addInstructions(this.config.tools[i], toolbar, ""));
                             break;
                         case "details":
-                            toolList.push(this._addDetails(this.config.tools[i], toolbar, "medium"));
+                            toolList.push(this._addDetails(this.config.tools[i], toolbar, ""));
                             break;
                         case "features":
-                            toolList.push(this._addFeatures(this.config.tools[i], toolbar, "large"));
+                            toolList.push(this._addFeatures(this.config.tools[i], toolbar, ""));
                             break;
                         case "legend":
-                            toolList.push(this._addLegend(this.config.tools[i], toolbar, "medium"));
+                            toolList.push(this._addLegend(this.config.tools[i], toolbar, ""));
                             break;
                         case "layers":
-                            toolList.push(this._addLayers(this.config.tools[i], toolbar, "medium"));
+                            toolList.push(this._addLayers(this.config.tools[i], toolbar, ""));
                             break;
                         case "basemap":
-                            toolList.push(this._addBasemapGallery(this.config.tools[i], toolbar, "large"));
+                            toolList.push(this._addBasemapGallery(this.config.tools[i], toolbar, ""));
                             break;
                         case "overview":
-                            toolList.push(this._addOverviewMap(this.config.tools[i], toolbar, "medium"));
+                            toolList.push(this._addOverviewMap(this.config.tools[i], toolbar, ""));
                             break;
                         case "measure":
-                            toolList.push(this._addMeasure(this.config.tools[i], toolbar, "small"));
+                            toolList.push(this._addMeasure(this.config.tools[i], toolbar, ""));
                             break;
                         case "edit":
-                            toolList.push(this._addEditor(this.config.tools[i], toolbar, "medium"));
+                            toolList.push(this._addEditor(this.config.tools[i], toolbar, ""));
                             break;
                         case "share":
-                            toolList.push(this._addShare(this.config.tools[i], toolbar, "medium"));
+                            toolList.push(this._addShare(this.config.tools[i], toolbar, ""));
                             break;
                         case "bookmarks":
-                            toolList.push(this._addBookmarks(this.config.tools[i], toolbar, "medium"));
+                            toolList.push(this._addBookmarks(this.config.tools[i], toolbar, ""));
                             break;
                         case "print":
-                            toolList.push(this._addPrint(this.config.tools[i], toolbar, "small"));
+                            toolList.push(this._addPrint(this.config.tools[i], toolbar, ""));
                             break;
                         default:
                             break;
@@ -393,7 +393,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
             if (has("features")) {
-                var featuresDiv = toolbar.createTool(tool, "large");
+                var featuresDiv = toolbar.createTool(tool, "");
 
                 var layers = this.config.response.itemInfo.itemData.operationalLayers;
                 
@@ -511,15 +511,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             if (has("details")) {
                 var description = this.config.description || this.config.response.itemInfo.item.description || this.config.response.itemInfo.item.snippet;
                 if (description) {
-                    var descLength = description.length;
-                    //Change the panel class based on the string length
-                    if (descLength < 200) {
-                        panelClass = "small";
-                    } else if (descLength < 400) {
-                        panelClass = "medium";
-                    } else {
-                        panelClass = "large";
-                    }
 
                     var detailDiv = toolbar.createTool(tool, panelClass);
                     detailDiv.innerHTML = "<div class='desc' tabindex='0'>" + description + "</div>";
@@ -620,7 +611,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 deferred.resolve(false);
             } else {
                 if (has("layers")) {
-                    panelClass = "large";
+                    panelClass = "";
 
                     var layersDiv = toolbar.createTool(tool, panelClass);
 
@@ -644,7 +635,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                deferred.resolve(false);
             } else 
             {
-                var instructionsDiv = toolbar.createTool(tool, "large");
+                var instructionsDiv = toolbar.createTool(tool, "");
 
                 instructionsText = domConstruct.create("div", {
                     tabindex: '0',
@@ -697,7 +688,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 deferred.resolve(false);
             } else {
                 if (has("legend")) {
-                    var legendDiv = toolbar.createTool(tool, "large");
+                    var legendDiv = toolbar.createTool(tool, "");
                     dojo.setAttr(legendDiv, 'tabindex', 0);
                     var legend = new Legend({
                         map: this.map,
@@ -831,11 +822,6 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 });
 
                 var panelHeight = this.map.height;
-                if (panelClass === "small") {
-                    panelHeight = 250;
-                } else if (panelClass === "medium") {
-                    panelHeight = 350;
-                }
 
                 this.createOverviewMap(ovMapDiv, panelHeight);
                 

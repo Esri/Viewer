@@ -50,7 +50,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             on(this.pPages, mouse.enter, lang.hitch(this, function () {
 
                 if (this._hasScrollbar()) {
-                    var p = dom.byId("panelContent");
+                    var p = dom.byId("panelPages");
                     if (p) {
                         domClass.add(p, "modal-scrollbar");
                     }
@@ -60,7 +60,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             }));
             on(this.pPages, mouse.leave, lang.hitch(this, function () {
                 if (this._hasScrollbar === false) {
-                    var p = dom.byId("panelContent");
+                    var p = dom.byId("panelPages");
                     if (p) {
                         domClass.remove(p, "modal-scrollbar");
                     }
@@ -142,7 +142,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
 
             var pageHeader = domConstruct.create("div", {
                 id: "pageHeader_" + name,
-                className: "pageHeader bg roundedTop",
+                className: "pageHeader fr bg roundedTop",
                 //tabindex: 0,
             }, 
             pageContent);
@@ -234,7 +234,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
                             event.stopPropagation();
                             this.showInstructions();
                             break;
-                    };
+                    }
                 }));
             }
         },
@@ -283,7 +283,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
         activateTool: function (name) {
             //Instead of scrolling to the tool just go there. 
             var num = this._getPageNum(name) + 1;
-            var box = html.getContentBox(dom.byId("panelContent"));
+            var box = html.getContentBox(dom.byId("panelPages"));
 
             var endPos = num * box.h;
 
@@ -332,11 +332,11 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
         _showPage: function (name) {
             var num = this._getPageNum(name) + 1;
 
-            if (num != this.curTool) {
-                this._scrollToPage(num);
-            } else {
-                this._scrollToPage(0);
-            }
+//             if (num != this.curTool) {
+//                 this._scrollToPage(num);
+//             } else {
+//                 this._scrollToPage(0);
+//             }
         },
 
         _showPreviousPage: function (name) {
@@ -358,53 +358,53 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             }
         },
 
-        _scrollToPage: function (num) {
-            var box = html.getContentBox(dom.byId("panelContent"));
+        // _scrollToPage: function (num) {
+        //     var box = html.getContentBox(dom.byId("panelPages"));
 
-            var startPos = this.curTool * box.h;
-            var endPos = num * box.h;
-            var diff = Math.abs(num - this.curTool);
-            this.snap = false;
-            if (diff == 1) {
-                this._animateScroll(startPos, endPos);
-            } else {
-                document.body.scrollTop = endPos;
-                document.documentElement.scrollTop = endPos;
-                this._updateMap();
-                this.snap = true;
-            }
-            this.curTool = num;
-            this._updateTool(num);
+        //     var startPos = this.curTool * box.h;
+        //     var endPos = num * box.h;
+        //     var diff = Math.abs(num - this.curTool);
+        //     this.snap = false;
+        //     if (diff == 1) {
+        //         this._animateScroll(startPos, endPos);
+        //     } else {
+        //         document.body.scrollTop = endPos;
+        //         document.documentElement.scrollTop = endPos;
+        //         this._updateMap();
+        //         this.snap = true;
+        //     }
+        //     this.curTool = num;
+        //     this._updateTool(num);
 
-            var name = this.tools[num - 1];
-            var pageBody = dom.byId("pageBody_" + name);
-            if(pageBody)        
-            {
-                var pageHeader = dom.byId("pageHeader_" + name);
-                var pageDown = pageHeader.querySelector(".pageDown");
-                if(pageDown)
-                    pageDown.focus();
-                else {
-                    var pageClose = pageHeader.querySelector(".pageClose");
-                    if(pageClose)
-                        pageClose.focus();
-                }
-            }
-        },
+        //     var name = this.tools[num - 1];
+        //     var pageBody = dom.byId("pageBody_" + name);
+        //     if(pageBody)        
+        //     {
+        //         var pageHeader = dom.byId("pageHeader_" + name);
+        //         var pageDown = pageHeader.querySelector(".pageDown");
+        //         if(pageDown)
+        //             pageDown.focus();
+        //         else {
+        //             var pageClose = pageHeader.querySelector(".pageClose");
+        //             if(pageClose)
+        //                 pageClose.focus();
+        //         }
+        //     }
+        // },
 
-        // window scrolled
-        _windowScrolled: function (evt) {
-            if (this.scrollTimer) {
-                clearTimeout(this.scrollTimer);
-            }
-            if (this.snap === true) {
-                this.scrollTimer = setTimeout(lang.hitch(this, this._snapScroll), 300);
-            }
-        },
+        // // window scrolled
+        // _windowScrolled: function (evt) {
+        //     if (this.scrollTimer) {
+        //         clearTimeout(this.scrollTimer);
+        //     }
+        //     if (this.snap === true) {
+        //         this.scrollTimer = setTimeout(lang.hitch(this, this._snapScroll), 300);
+        //     }
+        // },
 
         _snapScroll: function () {
             var startPos = domGeometry.docScroll().y;
-            var box = html.getContentBox(dom.byId("panelContent"));
+            var box = html.getContentBox(dom.byId("panelPages"));
             var numActual = startPos / box.h;
             var num = Math.round(numActual);
 

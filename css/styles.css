@@ -33,7 +33,7 @@ label.checkbox{
   line-height: 20px;
   height: 20px;
   border: 2px solid transparent;
-  vertical-align: middle; 
+  vertical-align: middle;
 }
 
 .esriRTL label.checkbox {
@@ -525,7 +525,8 @@ img {
 
 /* Template */
 .bg {
-  display: block; }
+  /* display: block; */
+  }
 
 .rounded {
   -webkit-border-radius: 5px;
@@ -546,23 +547,26 @@ img {
 
 #panelContent {
   font-family: Helvetica, Arial, sans-serif;
-  /* background-color: transparent; */
-  background-color: rgba(0, 0, 0, 0.5);
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  /* position: relative; */
 }
 
 #panelPages {
-  /* width: 100%; */
+  font-family: Helvetica, Arial, sans-serif;
+  width: 100%;
   height: 100%;
-  /* background-color: transparent; */
   background-color: #F9F9F9;
   overflow: auto;
+  position: relative;
+  /* top: 0; */
 }
 
 .page {
   /* overflow: visible; */
   background-color: transparent;
   background-color: rgba(0, 0, 0, 0.5);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000,endColorstr=#80000000);
+  position: relative;
+  height: 100%;
 }
 
 .pageblank {
@@ -570,18 +574,12 @@ img {
   height: 100%;
   }
 
-.pageContent {
-  background-color: white;
-}
-
 @media only screen and (min-width: 600px) {
   .pageContent {
+    background-color: white;
     margin: 0;
-    } }
-
-@media only screen and (min-width: 1070px) {
-  .pageContent {
-    /* top: 10px; */
+    height: 90%;
+    position: relative;
     } }
 
 /*Panel sizes*/
@@ -678,7 +676,7 @@ img {
   --
   height: 100%;
   width: 100%;
-  height: 84%;
+  height: 100%;
   color: #000000;
   overflow: hidden;
   overflow-y: auto;
@@ -719,23 +717,17 @@ img {
     max-height: 80%; } }
 
 .desc {
-  padding: 20px 8px;
+  padding: 20px 14px;
   color: rgb(60, 60, 90);
-  /* height: 590px; */
-  position: relative;
-  /* overflow-y: auto; */
+  /* position: relative; */
+  overflow-y: auto;
 }
 
 #panelTop {
-  /* position: fixed; */
-  /* left: 0px; */
-  /* top: 0px; */
-  /* width: 100%; */
-  /* color: #ffffff; */
-  padding: 0px;
-  display: block;
-  overflow: visible;
-  height: auto;
+  /* padding: 0px; */
+  /* display: block; */
+  /* overflow: visible; */
+  /* height: auto; */
   -webkit-border-radius: 0;
   -moz-border-radius: 0;
   -ms-border-radius: 0;
@@ -744,13 +736,8 @@ img {
 
 @media only screen and (min-width: 760px) {
   #panelTop {
-    width: auto;
-    /* left: 44px; */
-    /* top: 10px; */
-    /* -webkit-border-radius: 5px; */
-    /*     -moz-border-radius: 5px; */
-    /*     -ms-border-radius: 5px; */
-    /* border-radius: 5px; */
+    /* width: auto; */
+    position: relative;
     } }
 
 #panelTitle {
@@ -818,13 +805,12 @@ img {
 @media only screen and (min-width: 720px) {
   #panelSearch {
     margin: 10px 4px 10px 20px;
-    float: right;
     } }
 
 #panelSearch {
   margin: 0;
   width:100%;
-  display: table;
+  display: block;
   }
 
 #panelSearch .searchLabel {
@@ -1308,8 +1294,8 @@ li[role='menuitem']:hover,
 div[role='button']:hover,
 div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
 {
-  border-radius: 5px;
-  -webkit-border-radius: 5px;  
+  /* border-radius: 5px; */
+  /* -webkit-border-radius: 5px; */
 }
 
 .panelToolActive:focus, .panelToolActive:hover {
@@ -1522,11 +1508,12 @@ html, body {
 }
 
 #borderContainer {
-    /* width: 90%; */
-    height: 100%;
-    width:  100%;
+    width: 99%;
     margin: 0;
-    position: static;
+    height: 99%;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .dijitSplitterV, .dijitGutterV {
@@ -1576,15 +1563,13 @@ html, body {
     overflow-y: auto;
 }
 #featuresList li {
-    margin-bottom: 4px;
-    margin-left: -10px;
+    /* margin-bottom: 4px; */
+    /* margin-left: -10px; */
     padding: 2px;
-    padding-left: 10px;
+    /* padding-left: 10px; */
 }
 
-.showAttr {
-    display: grid;
-}
+.showAttr {display: grid;}
 
 .hideAttr {
     display:none;
@@ -1617,9 +1602,15 @@ text-align: left;
 }
 
 td, th {
-  /* display: -webkit-inline-box; */
 }
 
 .borderBottom {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+#leftPanel{
+    min-width: 500px;
+    height: 100%;
+    width:100%
+    position: absolute;
 }

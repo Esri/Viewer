@@ -109,7 +109,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             }
 
             window.featurePanZoom = function(btn, panOnly) {
-                console.log(btn);
                 values = btn.attributes.tag.value.split(',');
                 var r = window.tasks[values[0]];
                 var fid = values[1];

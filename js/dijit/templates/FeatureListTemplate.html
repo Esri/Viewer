@@ -2,10 +2,10 @@
 	<table>
 		<tr>
 			<th valign="top">
-				<input id="featureButton_${_featureId}" aria-labelledby="featureLabel_${_featureId}" type="checkbox" name="featureItem" value="${_layerId},${_featureId}" onchange="featureExpand(this)" style="margin:0"/>
+				<input id="featureButton_${_featureId}" class="checkbox" type="checkbox" name="featureItem" value="${_layerId},${_featureId}" onchange="featureExpand(this)" style="margin:0"/>
 			</th>
 			<th colspan="3" style="padding:0;" valign="top">
-				<h2 style="display:inline; padding: 1px;" id="featureLabel_${_featureId}">${_title}</h2>
+				<label for="featureButton_${_featureId}" style="padding: 2px;" class="checkbox">${_title}</label>
 			</th>
 		</tr>
 		<tr class="featureItem_${_featureId} hideAttr">
