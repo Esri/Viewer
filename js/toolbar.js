@@ -9,7 +9,6 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
         map: null,
         tools: [],
         toollist: [],
-        snap: true,
         curTool: -1,
         scrollTimer: null,
         config: {},
@@ -240,14 +239,9 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
         },
 
         showInstructions: function() {
-            this._showPage("instructions");
             var Instructions = dom.byId("pageBody_instructions");
             if(Instructions)        
             {
-                //var pageHeader = dom.byId("pageHeader_" + name);
-                var pagedown = Instructions.querySelector(".pageDown");
-                if(pagedown)
-                    pagedown.focus();
                 var desc = Instructions.querySelector(".desc");
                 if(desc)
                 {
@@ -319,138 +313,6 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             }));
         },
 
-        _getPageNum: function (name) {
-            for (var i = 0; i < this.tools.length; i++) {
-                if (this.tools[i] == name) {
-                    return i;
-                }
-            }
-            return 0;
-        },
-
-        _showPage: function (name) {
-            var num = this._getPageNum(name) + 1;
-
-//             if (num != this.curTool) {
-//                 this._scrollToPage(num);
-//             } else {
-//                 this._scrollToPage(0);
-//             }
-        },
-
-        _showPreviousPage: function (name) {
-            var num = this._getPageNum(name);
-            this._scrollToPage(num);
-        },
-
-        _showNextPage: function (name) {
-            var num = this._getPageNum(name) + 2;
-            this._scrollToPage(num);
-        },
-
-        _closePage: function (name) {
-            this._scrollToPage(0);
-            var tool = dom.byId("toolButton_" + name);
-            if(tool)
-            {
-                tool.focus();
-            }
-        },
-
-        // _scrollToPage: function (num) {
-        //     var box = html.getContentBox(dom.byId("panelPages"));
-
-        //     var startPos = this.curTool * box.h;
-        //     var endPos = num * box.h;
-        //     var diff = Math.abs(num - this.curTool);
-        //     this.snap = false;
-        //     if (diff == 1) {
-        //         this._animateScroll(startPos, endPos);
-        //     } else {
-        //         document.body.scrollTop = endPos;
-        //         document.documentElement.scrollTop = endPos;
-        //         this._updateMap();
-        //         this.snap = true;
-        //     }
-        //     this.curTool = num;
-        //     this._updateTool(num);
-
-        //     var name = this.tools[num - 1];
-        //     var pageBody = dom.byId("pageBody_" + name);
-        //     if(pageBody)        
-        //     {
-        //         var pageHeader = dom.byId("pageHeader_" + name);
-        //         var pageDown = pageHeader.querySelector(".pageDown");
-        //         if(pageDown)
-        //             pageDown.focus();
-        //         else {
-        //             var pageClose = pageHeader.querySelector(".pageClose");
-        //             if(pageClose)
-        //                 pageClose.focus();
-        //         }
-        //     }
-        // },
-
-        // // window scrolled
-        // _windowScrolled: function (evt) {
-        //     if (this.scrollTimer) {
-        //         clearTimeout(this.scrollTimer);
-        //     }
-        //     if (this.snap === true) {
-        //         this.scrollTimer = setTimeout(lang.hitch(this, this._snapScroll), 300);
-        //     }
-        // },
-
-        // _snapScroll: function () {
-        //     var startPos = domGeometry.docScroll().y;
-        //     var box = html.getContentBox(dom.byId("panelPages"));
-        //     var numActual = startPos / box.h;
-        //     var num = Math.round(numActual);
-
-        //     if (numActual > this.curTool) {
-        //         if (numActual - this.curTool > 0.2) {
-        //             num = Math.ceil(startPos / box.h);
-        //         }
-        //         if (num > this.tools.length - 1) {
-        //             num = this.tools.length - 1;
-        //         }
-        //     } else if (numActual < this.curPage) {
-        //         if (this.curTool - numActual > 0.2) {
-        //             num = Math.floor(startPos / box.h);
-        //         }
-        //         if (num < 0) {
-        //             num = 0;
-        //         }
-        //     }
-        //     var endPos = num * box.h;
-
-        //     this.curTool = num;
-        //     this._updateTool(num);
-
-        //     if (num != numActual) {
-        //         this._animateScroll(startPos, endPos);
-        //     }
-        // },
-
-        // _animateScroll: function (start, end) {
-        //     //var me = this;
-        //     var anim = new fx.Animation({
-        //         duration: 500,
-        //         curve: [start, end]
-        //     });
-        //     on(anim, "Animate", function (v) {
-        //         document.body.scrollTop = v;
-        //         document.documentElement.scrollTop = v;
-        //     });
-
-        //     on(anim, "End", lang.hitch(this, function () {
-        //         setTimeout(lang.hitch(this, this._resetSnap), 500);
-        //         this._updateMap();
-        //     }));
-
-        //     anim.play();
-        // },
-
         // highlight the active tool on the toolbar
         _updateTool: function (num) {
             query(".panelTool").removeClass("panelToolActive");
@@ -466,10 +328,6 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
                 this.map.resize();
                 this.map.reposition();
             }
-        },
-
-        _resetSnap: function () {
-            this.snap = true;
         },
 
         // menu click

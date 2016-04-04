@@ -567,6 +567,8 @@ img {
   background-color: rgba(0, 0, 0, 0.5);
   position: relative;
   height: 100%;
+  position: absolute;
+  width: 100%;
 }
 
 .pageblank {

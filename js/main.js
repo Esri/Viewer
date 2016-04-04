@@ -28,6 +28,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     "application/FeatureList", "application/TableOfContents", "application/ShareDialog",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
+    "dojo/text!application/dijit/templates/instructions.html",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"], 
     function (
     ready, JSON, array, Color, declare, 
@@ -43,7 +44,8 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
     FeatureLayer, 
     FeatureList, TableOfContents, ShareDialog,
     SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
-    InfoWindow) {
+    InfoWindow,
+    instructionsText) {
 
     return declare(null, {
         config: {},
@@ -279,11 +281,11 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
                 var toolList = [];
                 for (var i = 0; i < this.config.tools.length; i++) {
                     switch (this.config.tools[i].name) {
-                        case "instructions":
-                            toolList.push(this._addInstructions(this.config.tools[i], toolbar, ""));
-                            break;
                         case "details":
                             toolList.push(this._addDetails(this.config.tools[i], toolbar, ""));
+                            break;
+                        case "instructions":
+                            toolList.push(this._addInstructions(this.config.tools[i], toolbar, ""));
                             break;
                         case "features":
                             toolList.push(this._addFeatures(this.config.tools[i], toolbar, ""));
@@ -637,43 +639,7 @@ define(["dojo/ready", "dojo/json", "dojo/_base/array", "dojo/_base/Color", "dojo
             {
                 var instructionsDiv = toolbar.createTool(tool, "");
 
-                instructionsText = domConstruct.create("div", {
-                    tabindex: '0',
-                    class: 'desc',
-                }, instructionsDiv);
-
-                domConstruct.create("div", {
-                    innerHTML: '<h2>In addition to the mouse you may:</h2>',
-                }, instructionsText);
-
-                var list = domConstruct.create("ul", {
-                    id:'instructionsList',
-                }, instructionsText);
-
-                domConstruct.create("li", {
-                    innerHTML : "Use <strong>Tab key</strong> to navigate from item to item."
-                }, list);
-
-                domConstruct.create("li", {
-                    innerHTML : "Use <strong>SHIFT Tab</strong> to navigate backwards."
-                }, list);
-
-                domConstruct.create("li", {
-                    innerHTML : "Press <strong>ENTER</strong> to activate the focused item."
-                }, list);
-
-                domConstruct.create("li", {
-                    innerHTML : "Use <strong>Page&nbsp;Up</strong> or <strong>Page&nbsp;Down</strong> to move from a tool page to the next or to the previous page."
-                }, list);
-
-                domConstruct.create("li", {
-                    innerHTML : "Use <strong>ESCAPE</strong> to close a tool page and return to the tool bar."
-                }, list);
-
-                domConstruct.create("li", {
-                    innerHTML : "Hit <strong>SPACE&nbsp;bar</strong> to toggle a focused check box."
-                }, list);
-
+                instructionsDiv.innerHTML = instructionsText;
                 deferred.resolve(true);
             }
             return deferred.promise;
