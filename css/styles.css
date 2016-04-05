@@ -1513,14 +1513,15 @@ html, body {
     margin: 0;
 }
 .dijitSplitterV .dijitSplitterThumb {
-    background: #b5bcc7 none;
-    height: 19px;
-    left: 2px;
-    width: 10px;
+    background: #90BBFF none;
+    height: 10%;
+    /* left: 2px; */
+    width: 100%;
     margin: 0;
     overflow: hidden;
     position: absolute;
-    top: 49%;
+    top: 45%;
+    border-radius: 2px;
 }
 
 .dj_a11y .dijitSplitterV {
@@ -1537,7 +1538,7 @@ html, body {
 
 .dijitSplitter {
     position: absolute;
-    overflow: hidden;
+    /* overflow: hidden; */
     z-index: 10;
     background-color: #fff;
     border-color: gray;
@@ -1636,7 +1637,7 @@ td, th {
 .goThereHint {
   position: absolute;
   top: 6px;
-  padding: 4px 10px !important;
+  padding: 2px 4px !important;
   z-index: 100;
   background-color: rgba(253, 253, 253, 0.83);
   border-radius: 8px;
@@ -1650,6 +1651,8 @@ td, th {
   width: 64px !important;
   height: 18px !important;
   line-height: 18px !important;
+  overflow: hidden;
+  z-index: 20000;
   display: none;
 }
 

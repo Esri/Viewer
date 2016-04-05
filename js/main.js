@@ -271,13 +271,13 @@ define(["dojo/ready",
             });
             borderContainer.addChild(contentPaneRight);
 
+            borderContainer.placeAt(document.body);
+            borderContainer.startup();
+
             aspect.after(contentPaneRight, "resize", lang.hitch(this, function() {
                 this.map.resize();
                 this.map.reposition();
             }));
-
-            borderContainer.placeAt(document.body);
-            borderContainer.startup();
 
             
             domStyle.set("panelPages", "visibility", "hidden");
@@ -309,9 +309,9 @@ define(["dojo/ready",
                         case "basemap":
                             toolList.push(this._addBasemapGallery(this.config.tools[i], toolbar, ""));
                             break;
-                        // case "overview":
-                        //     toolList.push(this._addOverviewMap(this.config.tools[i], toolbar, ""));
-                        //     break;
+                        case "overview":
+                            toolList.push(this._addOverviewMap(this.config.tools[i], toolbar, ""));
+                            break;
                         case "measure":
                             toolList.push(this._addMeasure(this.config.tools[i], toolbar, ""));
                             break;
@@ -418,6 +418,9 @@ define(["dojo/ready",
                         case 'Digit4' :
                             query('.esriSimpleSliderIncrementButton input')[0].focus();
                             break;
+                        case 'Digit5' :
+                            dom.byId('dijit_layout_ContentPane_0_splitter').focus();
+                            break;
                     }
                 }
                 else {
@@ -467,6 +470,16 @@ define(["dojo/ready",
                 innerHTML: 'Alt + 4',
                 style:'left:20px; top:40px;'
             }, dom.byId('mapDiv_zoom_slider'));
+
+            domConstruct.create("div", {
+                id: 'goThereHint_splitter', 
+                class:'goThereHint',
+                innerHTML: 'Alt + 5',
+                style:'left:-8px; top:52%;'
+            }, dom.byId('dijit_layout_ContentPane_0_splitter'));
+
+            // var spliter = dom.byId('dijit_layout_ContentPane_0_splitter');
+
 
         },
 
