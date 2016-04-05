@@ -141,7 +141,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
 
             var pageHeader = domConstruct.create("div", {
                 id: "pageHeader_" + name,
-                className: "pageHeader fr bg roundedTop",
+                className: "pageHeader fr bg",
                 //tabindex: 0,
             }, 
             pageContent);

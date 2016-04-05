@@ -28,10 +28,10 @@ label.checkbox{
   padding: 2px 4px;
   margin: 0 !important;
   text-overflow: ellipsis;
-  /* white-space: nowrap; */
+  white-space: nowrap;
   overflow-x: hidden;
   line-height: 20px;
-  /* height: 20px; */
+  height: 20px;
   border: 2px solid transparent;
   vertical-align: text-top;
 }
@@ -104,15 +104,6 @@ input[type=checkbox].checkbox {
 
 .clear {
   clear: both; }
-
-/*Phones (520px) Small Tablets (720px)*/
-html, body {
-  padding: 0;
-  margin: 0px;
-  height: 100%;
-  width: 100%;
-  font-family: Arial, Helvetica, sans-serif;
-  }
 
 .modal-scrollbar {
   margin-right: 17px; }
@@ -558,20 +549,20 @@ img {
 #panelPages {
   font-family: Helvetica, Arial, sans-serif;
   width: 100%;
-  height: 90%;
+  height: calc(100% - 150px);
   background-color: #F9F9F9;
   overflow: auto;
-  position: absolute;
 }
 
 .page {
   /* overflow: visible; */
-  background-color: transparent;
-  background-color: rgba(0, 0, 0, 0.5);
-  height: 100%;
-  position: absolute;
+  /* background-color: transparent; */
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  height: calc(100% - 10px);
+  position: relative;
   width: 100%;
   top: 0;
+  /* margin: 10px; */
 }
 
 .pageblank {
@@ -586,7 +577,7 @@ img {
     height: 100%;
     width: 100%;
     position: absolute;
-    /* top: 0; */
+    top: 0;
     } }
 
 /*Panel sizes*/
@@ -606,6 +597,7 @@ img {
 .pageHeader {
   position: relative;
   width: 100%;
+  top: 0;
   }
 
 .pageTitle {
@@ -686,7 +678,7 @@ height: 100%;
   
 width: 100%;
   
-height: 90%;
+height: 95%;
   
 color: #000000;
   
@@ -695,10 +687,14 @@ overflow: hidden;
 overflow-y: auto;
   
 background-color: transparent;
+  
+display: inline-block;
+  
+position: relative;
 }
 
 #pageBody_overview {
-  padding-bottom: 350px; 
+  /* padding-bottom: 350px; */
 }
 
 .esriPrint {
@@ -707,56 +703,36 @@ background-color: transparent;
 }
 
 #pageBody_legend, #pageBody_share, #pageBody_print {
-  padding-left: 20px;
-  padding-top: 20px;
-  padding-right: 22px;
+  /* padding-left: 20px; */
+  /* padding-top: 20px; */
+  /* padding-right: 22px; */
 }
 
 #pageBody_share {
-  max-width: 280px; 
-  padding-right: 0px;
+  /* max-width: 280px; */
+  /* padding-right: 0px; */
 }
 
 #pageBody_print {
-  padding-bottom: 20px;
+  /* padding-bottom: 20px; */
 }
 
 @media only screen and (min-width: 720px) {
   #pageBody_share {
-    max-height: none; } }
+    max-height: none;
+    } }
 
 @media only screen and (min-width: 720px) {
   #pageBody_bookmarks {
     max-height: 80%; } }
 
-.desc {
-  padding: 20px 14px;
-  color: rgb(60, 60, 90);
-  /* position: relative; */
-  overflow-y: auto;
-  margin-bottom: 20px;
-}
-
-#panelTop {
-  /* padding: 0px; */
-  /* display: block; */
-  /* overflow: visible; */
-  /* height: auto; */
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  -ms-border-radius: 0;
-  /* border-radius: 0; */
-  }
-
 @media only screen and (min-width: 760px) {
   #panelTop {
-    /* width: 100%; */
-    position: initial;
-    /* top: 0; */
+    width: 100%;
     } }
 
 #panelTitle {
-  height: 50px;
+  /* height: 50px; */
   width: 100%;
   float: left;
   color: #ffffff;
@@ -796,11 +772,8 @@ background-color: transparent;
   font-size: 28px; }
 
 #panelTitle h1 {
-  -webkit-margin-before: 10px;
-  -webkit-margin-after: 0;
-  -webkit-margin-start: 5px;
-  -webkit-margin-end: 0;
-  margin: 10px 0px 0px 5px;
+  padding: 12px;
+  margin: 0;
 }
 
 @media only screen and (min-width: 720px) {
@@ -1121,12 +1094,12 @@ background-color: transparent;
 }
 
 .calcite .share-map-url {
-  width: 90%;
+  width: 100%;
   height: 24px;
   font-size: 14px;
   color: #777;
   border: 1px solid #dcdcdc;
-  margin: 0 0 10px; 
+  margin: 0 0 10px;
   padding-left:1px;
   padding-right:1px;
 }
@@ -1159,13 +1132,14 @@ background-color: transparent;
 .calcite .share-dialog-textarea {
   width: auto;
   width: 100%;
-  max-width: 90%;
+  max-width: 100%;
+  min-width: 100%;
   margin:0;
-  height: 50px;
+  height: 100px;
   font-size: 14px;
   color: #777;
   border: 1px solid #dcdcdc;
-  margin: 0 0 10px; 
+  margin: 0 0 10px;
 }
 
 .share-dialog-checkbox {
@@ -1521,15 +1495,13 @@ html, body {
     height: 100%;
     margin: 0;
     overflow:hidden;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 #borderContainer {
-    width: 99%;
-    margin: 0;
-    height: 99%;
-    position: absolute;
-    top: 0;
-    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 .dijitSplitterV, .dijitGutterV {
@@ -1614,7 +1586,7 @@ text-align: left;
 .splitterContent {
     overflow-y: hidden !important;
     /* height: 100% !important; */
-    position: fixed !important;
+    /* position: fixed !important; */
 }
 
 td, th {
@@ -1625,29 +1597,37 @@ td, th {
 }
 
 #leftPanel{
-    /* min-width: 500px; */
+    min-width: 500px;
     height: 100%;
     width: 100%;
-    position: absolute;
+    background-color: aquamarine;
+}
+
+#panelBottom {
+    position:absolute;
+    bottom: 1px;
+    width: calc(100% - 20px);
+    padding: 4px 10px;
+    color: white;
 }
 
 #fixContent {
   width: 100%;
   height: 100%;
-  position: absolute;
+  /* position: relative; */
   overflow: auto;
-  top: 0;
 }
 
 #instructionsDiv {
   position: absolute;
-  bottom: 26px;
-  margin-bottom: 20px;
+  bottom: 0;
+  /* margin-bottom: 20px; */
 }
 
 #detailDiv {
   position: absolute;
   top: 0;
+  /* width: 100%; */
 }
 
 .goThereHint {
@@ -1668,4 +1648,10 @@ td, th {
   height: 18px !important;
   line-height: 18px !important;
   display: none;
+}
+
+.margin {
+  border: transparent;
+  border-width: 10px;
+  border-style: solid;
 }

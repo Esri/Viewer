@@ -248,8 +248,8 @@ define(["dojo/ready",
 
             var borderContainer = new BorderContainer({
                 design:'sidebar',
-                gutters:'false', 
-                liveSplitters:'true',
+                gutters:'true', 
+                liveSplitters:'false',
                 id:"borderContainer"
             });
              
@@ -308,9 +308,9 @@ define(["dojo/ready",
                         case "basemap":
                             toolList.push(this._addBasemapGallery(this.config.tools[i], toolbar, ""));
                             break;
-                        case "overview":
-                            toolList.push(this._addOverviewMap(this.config.tools[i], toolbar, ""));
-                            break;
+                        // case "overview":
+                        //     toolList.push(this._addOverviewMap(this.config.tools[i], toolbar, ""));
+                        //     break;
                         case "measure":
                             toolList.push(this._addMeasure(this.config.tools[i], toolbar, ""));
                             break;
@@ -584,8 +584,10 @@ define(["dojo/ready",
                     var detailDiv = //toolbar.createTool(tool, panelClass);
                         domConstruct.create('div',{
                         id:"detailDiv",
+                        class:"margin",
+                        tabindex:0
                     }, dom.byId('fixContent'));
-                    detailDiv.innerHTML = "<div class='desc' tabindex='0'>" + description + "</div>";
+                    detailDiv.innerHTML = description;
                 }
                 deferred.resolve(true);
             } else {
@@ -686,11 +688,12 @@ define(["dojo/ready",
                     panelClass = "";
 
                     var layersDiv = toolbar.createTool(tool, panelClass);
+                    var layersDivDesc = domConstruct.create("div", {class:'margin'}, layersDiv);
 
                     var toc = new TableOfContents({
                         map: this.map,
                         layers: layers
-                    }, domConstruct.create("div", {}, layersDiv));
+                    }, domConstruct.create("div", {}, layersDivDesc));
                     toc.startup();
 
                     deferred.resolve(true);
@@ -710,6 +713,7 @@ define(["dojo/ready",
                 var instructionsDiv = //toolbar.createTool(tool, "");
                 domConstruct.create('div',{
                     id:"instructionsDiv",
+                    // class:"margin"
                 }, dom.byId('fixContent'));
 
                 instructionsDiv.innerHTML = instructionsText;
@@ -728,11 +732,12 @@ define(["dojo/ready",
             } else {
                 if (has("legend")) {
                     var legendDiv = toolbar.createTool(tool, "");
-                    dojo.setAttr(legendDiv, 'tabindex', 0);
+                    var legentDivDesc = domConstruct.create("div", {class:'margin', 'tabindex':0}, legendDiv);
+                    // dojo.setAttr(legendDiv, 'tabindex', 0);
                     var legend = new Legend({
                         map: this.map,
                         layerInfos: layers
-                    }, domConstruct.create("div", {role:'application'}, legendDiv));
+                    }, domConstruct.create("div", {role:'application'}, legentDivDesc));
                     domClass.add(legend.domNode, "legend");
                     legend.startup();
 
@@ -852,10 +857,11 @@ define(["dojo/ready",
 
             if (has("overview")) {
                 var ovMapDiv = toolbar.createTool(tool, panelClass);
-                domStyle.set(ovMapDiv, {
-                    "height": "100%",
-                    "width": "100%",
-                });
+                // domClass.add(ovMapDiv, 'margin');
+                // domStyle.set(ovMapDiv, {
+                //     // "height": "100%",
+                //     "width": "100%",
+                // });
 
                 var panelHeight = this.map.height;
 
@@ -1148,7 +1154,7 @@ define(["dojo/ready",
             if (has("share")) {
 
                 var shareDiv = toolbar.createTool(tool, panelClass);
-
+                // var shareDivMargin = domConstruct.create('div',{class:'margin'}, shareDiv);
                 var shareDialog = new ShareDialog({
                     bitlyLogin: this.config.bitlyLogin,
                     bitlyKey: this.config.bitlyKey,
@@ -1157,9 +1163,10 @@ define(["dojo/ready",
                     title: this.config.title,
                     summary: this.config.response.itemInfo.item.snippet || ""
                 }, shareDiv);
-                domClass.add(shareDialog.domNode, "pageBody");
+                domClass.add(shareDialog.domNode, "margin");
                 shareDialog.startup();
 
+                //domClass.add(dom.byId('_dialogNode'),'margin')
                 deferred.resolve(true);
             } else {
                 deferred.resolve(false);
