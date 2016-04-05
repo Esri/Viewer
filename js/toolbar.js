@@ -176,68 +176,37 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
 
                 var pageContent = dom.byId("pageContent_" + name);
                 domAttr.set(pageContent, 'data-name', name);
-                // on(pageContent, 'keydown', lang.hitch(this, function(event) {
-                //     var name = domAttr.get(event.currentTarget, 'data-name');
-                //     var pageHeader = dom.byId("pageHeader_" + name);
-                //     switch (event.keyCode) {
-                //         case 27:
-                //             var pageClose = pageHeader.querySelector(".pageClose");
-                //             if(pageClose)
-                //                 pageClose.click();
-                //         break;
-                //         case 33: // PgUp
-                //             var pageUp = pageHeader.querySelector(".pageUp");
-                //             if(pageUp)
-                //                 event.stopPropagation();
-                //                 pageUp.click();
-                //             break;
-                //         case 34: // PgDn
-                //             var pageDown = pageHeader.querySelector(".pageDown");
-                //             if(pageDown)
-                //                 event.stopPropagation();
-                //                 pageDown.click();
-                //             break;
-                //         //case 36: // Home
-                //         case 35: 
-                //             event.stopPropagation();
-                //             this.showInstructions();
-                //             break;
-                //     }
-                // }));
             }
         },
 
-        showInstructions: function() {
-            var Instructions = dom.byId("pageBody_instructions");
-            if(Instructions)        
-            {
-                var desc = Instructions.querySelector(".desc");
-                if(desc)
-                {
-                    desc.focus();
-                    //if(has("ie")) 
-                    //    this.selectText(desc);
-                }
-            }
-        },
+        // showInstructions: function() {
+        //     var Instructions = dom.byId("pageBody_instructions");
+        //     if(Instructions)        
+        //     {
+        //         var desc = Instructions.querySelector(".desc");
+        //         if(desc)
+        //         {
+        //             desc.focus();
+        //         }
+        //     }
+        // },
 
 
-        selectText: function(text) {
-            var doc = document,
-                //text = doc.getElementById(element),
-                range, selection;    
-            if (doc.body.createTextRange) {
-                range = document.body.createTextRange();
-                range.moveToElementText(text);
-                range.select();
-            } else if (window.getSelection) {
-                selection = window.getSelection();        
-                range = document.createRange();
-                range.selectNodeContents(text);
-                selection.removeAllRanges();
-                selection.addRange(range);
-            }
-        },
+        // selectText: function(text) {
+        //     var doc = document,
+        //         range, selection;    
+        //     if (doc.body.createTextRange) {
+        //         range = document.body.createTextRange();
+        //         range.moveToElementText(text);
+        //         range.select();
+        //     } else if (window.getSelection) {
+        //         selection = window.getSelection();        
+        //         range = document.createRange();
+        //         range.selectNodeContents(text);
+        //         selection.removeAllRanges();
+        //         selection.addRange(range);
+        //     }
+        // },
     
         setContent: function (name, content) {
             domConstruct.place(content, "pageBody_" + name, "last");
@@ -252,17 +221,16 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             var pages = query(".page");
             pages.forEach(function(p){
                 if(hidden && p === page) {
-                    domClass.remove(p,"hideAttr");
-                    domClass.add(p, "showAttr");
+                    domClass.replace(p, "showAttr","hideAttr");
                     active = true;
                 } else {
-                    domClass.add(p,"hideAttr");
-                    domClass.remove(p, "showAttr");
+                    domClass.replace(p,"hideAttr","showAttr");
                 }
             });
             
             var tool = dom.byId("toolButton_"+name);
             var tools = query(".panelTool");           
+            this.emit("updateTool", name);
             tools.forEach(function(t){
                 if(active && t === tool) {
                     domClass.add(t, "panelToolActive");
@@ -273,9 +241,9 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
 
             var fixContent = dom.byId('fixContent');
             if(active) {
-                domClass.remove(fixContent, "showAttr");
+                domClass.replace(fixContent, "hideAttr", "showAttr");
             } else {
-                domClass.add(fixContent, "showAttr");
+                domClass.replace(fixContent, "showAttr", "hideAttr");
             }
          },
 

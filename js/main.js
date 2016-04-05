@@ -100,8 +100,7 @@ define(["dojo/ready",
 
         reportError: function (error) {
             // remove loading class from body
-            domClass.remove(document.body, "app-loading");
-            domClass.add(document.body, "app-error");
+            domClass.replace(document.body, "app-error","app-loading");
             // an error occurred - notify the user. In this example we pull the string from the
             // resource.js file located in the nls folder because we've set the application up
             // for localization. If you don't need to support multiple languages you can hardcode the
@@ -468,7 +467,8 @@ define(["dojo/ready",
                 
                 var fl = new FeatureList({
                     map: this.map,
-                    layers: layers
+                    layers: layers,
+                    toolbar: toolbar
                 }, featuresDiv);
                 fl.startup();
 
