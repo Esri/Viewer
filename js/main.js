@@ -21,7 +21,7 @@ define(["dojo/ready",
     "dojo/dom-construct", "dojo/dom-style", "dojo/on", "dojo/Deferred", "dojo/promise/all", 
     "dojo/query", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", 
     "application/has-config", "esri/arcgis/utils", "esri/lang", 
-    "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+    "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/focus",
     "esri/tasks/query", "esri/tasks/QueryTask",
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
@@ -40,7 +40,7 @@ define(["dojo/ready",
     domConstruct, domStyle, on, Deferred, all, 
     query, Menu, CheckedMenuItem, Toolbar, 
     has, arcgisUtils, esriLang, 
-    BorderContainer, ContentPane,
+    BorderContainer, ContentPane, focusUtil,
     Query, QueryTask,
     HomeButton, LocateButton, 
     Legend, BasemapGallery, 
@@ -257,7 +257,8 @@ define(["dojo/ready",
                 splitter: 'true',
                 style: "width:500px; padding:0; overflow: none;",
                 content: dom.byId("leftPanel"),
-                class: "splitterContent"
+                class: "splitterContent",
+                tabindex: 0
             });
             borderContainer.addChild(contentPaneLeft);
               
@@ -266,6 +267,7 @@ define(["dojo/ready",
                 splitter:'true',
                 style: "padding:0",
                 content: dom.byId("mapDiv"),
+                tabindex:0
             });
             borderContainer.addChild(contentPaneRight);
 
@@ -405,19 +407,30 @@ define(["dojo/ready",
                     });
                     switch(event.code) {
                         case 'Digit1' :
-                            query('.panelTool')[0].focus();
+                            dom.byId('panelTools').focus();
                             break;
                         case 'Digit2' :
                             dom.byId('search_input').focus();
                             break;
                         case 'Digit3' :
-                            query('.showAttr [tabindex=0]')[0].focus();
+                            dom.byId('panelPages').focus();
                             break;
                         case 'Digit4' :
                             query('.esriSimpleSliderIncrementButton input')[0].focus();
                             break;
                     }
-                } 
+                }
+                else {
+                    switch(event.code) {
+                        case 'Escape' :
+                            var activeElement = focusUtil.curNode;
+                            var upper = query(activeElement).parent().closest('[tabindex=0]');
+                            if(upper && upper.length>= 1) {
+                                upper[0].focus();
+                            }
+                            break;
+                    }
+                }
             });
             on(document.body, 'keyup', function(event) {
                 if(!event.altKey) {

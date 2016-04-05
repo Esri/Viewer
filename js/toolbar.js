@@ -130,6 +130,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             var page = domConstruct.create("div", {
                 className: "page hideAttr",
                 id: "page_" + name,
+                // tabindex: 0
             }, this.pPages);
 
             var pageContent = domConstruct.create("div", {
@@ -160,7 +161,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
 
             var pageBody = domConstruct.create("div", {
                 className: "pageBody",
-                //tabindex: 0,
+                tabindex: 0,
                 id: "pageBody_" + name,
             }, 
             pageContent);
