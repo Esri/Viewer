@@ -287,7 +287,6 @@ define(["dojo/ready",
 
                 // set map so that it can be repositioned when page is scrolled
                 toolbar.map = this.map;
-
                 var toolList = [];
                 for (var i = 0; i < this.config.tools.length; i++) {
                     switch (this.config.tools[i].name) {
@@ -421,6 +420,11 @@ define(["dojo/ready",
                         case 'Digit5' :
                             dom.byId('dijit_layout_ContentPane_0_splitter').focus();
                             break;
+                        case 'Digit6' :
+                            if(featureList) {
+                                featureList.FocusDetails();
+                            }
+                            break;
                     }
                 }
                 else {
@@ -447,14 +451,14 @@ define(["dojo/ready",
                 id: 'goThereHint_toolPanel', 
                 class:'goThereHint',
                 innerHTML: 'Alt + 1',
-                style:'right:20px;'
+                style:'right:20px; top:20%;'
             }, dom.byId('panelTools'));
 
             domConstruct.create("div", {
                 id: 'goThereHint_search', 
                 class:'goThereHint',
                 innerHTML: 'Alt + 2',
-                style:'left:160px;'
+                style:'left:160px; top:20%;'
             }, dom.byId('panelSearch'));
 
             domConstruct.create("div", {
@@ -477,11 +481,9 @@ define(["dojo/ready",
                 innerHTML: 'Alt + 5',
                 style:'left:-8px; top:52%;'
             }, dom.byId('dijit_layout_ContentPane_0_splitter'));
-
-            // var spliter = dom.byId('dijit_layout_ContentPane_0_splitter');
-
-
         },
+
+        featureList : null,
 
         _addFeatures: function (tool, toolbar, panelClass) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
@@ -491,12 +493,12 @@ define(["dojo/ready",
 
                 var layers = this.config.response.itemInfo.itemData.operationalLayers;
                 
-                var fl = new FeatureList({
+                featureList = new FeatureList({
                     map: this.map,
                     layers: layers,
                     toolbar: toolbar
                 }, featuresDiv);
-                fl.startup();
+                featureList.startup();
 
                 deferred.resolve(true);
             } 

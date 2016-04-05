@@ -97,6 +97,16 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             }));
         },
 
+        FocusDetails: function() {
+            if(!this._isVisible()) return;
+            
+            var details = this.domNode.querySelector('.showAttr');
+            if(details) {
+                var page = query(details).closest('.borderLi')[0];
+                page.focus();
+            }
+        },
+
         _isVisible : function() {
             var page = query(this.domNode).closest('.page')[0];
             return dojo.hasClass(page, "showAttr");

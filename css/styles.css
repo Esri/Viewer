@@ -1636,14 +1636,13 @@ td, th {
 
 .goThereHint {
   position: absolute;
-  top: 6px;
   padding: 2px 4px !important;
   z-index: 100;
-  background-color: rgba(253, 253, 253, 0.83);
+  background-color: rgba(255, 0, 0, 0.75);
   border-radius: 8px;
-  border: #FF4600;
+  border: rgba(255, 70, 0, 0);
   border-style: solid;
-  color: #FF005E;
+  color: #FFFFFF;
   font-size: 16px !important;
   font-family: verdana, helvetica;
   font-weight: bold;
@@ -1652,7 +1651,6 @@ td, th {
   height: 18px !important;
   line-height: 18px !important;
   overflow: hidden;
-  z-index: 20000;
   display: none;
 }
 

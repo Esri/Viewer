@@ -10,10 +10,15 @@
 		</tr>
 		<tr class="featureItem_${_featureId} hideAttr">
 			<td/>
-			<td  colspan="3" >
+			<td colspan="3" >
 				<input type="button" value="Pan To" onclick="featurePanZoom(this, true)" tag="${_layerId},${_featureId}"/>
 			
 				<input type="button" value="Zoom To" onclick="featurePanZoom(this, false)"tag="${_layerId},${_featureId}"/>
+			</td>
+		</tr>
+		<tr class="featureItem_${_featureId} hideAttr">
+			<td colspan="4" >
+				<div class='goThereHint' style='right:50%;'>Alt + 6</div>
 			</td>
 		</tr>
 		${_content}
