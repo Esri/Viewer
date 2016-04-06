@@ -407,6 +407,14 @@ define(["dojo/ready",
                         domStyle.set(h, 'display','block');
                     });
                     switch(event.code) {
+                        case 'Digit0' :
+                            var activeTool = query('.panelToolActive');
+                            if(activeTool && activeTool.length>0) {
+                                activeTool = activeTool[0];
+                                activeTool.click();
+                            }
+                            dom.byId('instructionsDiv').focus();
+                            break;
                         case 'Digit1' :
                             dom.byId('panelTools').focus();
                             break;
@@ -448,6 +456,13 @@ define(["dojo/ready",
                     });
                 }
             });
+
+            domConstruct.create("div", {
+                id: 'goThereHint_toolPanel', 
+                class:'goThereHint',
+                innerHTML: 'Alt + 0',
+                style:'left:60%; top:-50%;'
+            }, dom.byId('panelBottom'));
 
             domConstruct.create("div", {
                 id: 'goThereHint_toolPanel', 
@@ -1613,6 +1628,7 @@ define(["dojo/ready",
                 } else {
                     title = this.config.title+': '+response.itemInfo.item.title + " - WCAG Viewer";
                 }
+                // dom.byId("loadingTitle").innerHTML = title;
 
                 //if title is short make title area smaller
                 if (title && title.length && title.length === 0) {
@@ -1624,7 +1640,7 @@ define(["dojo/ready",
 
                 document.title = title;
                 if (this.config.title === null || this.config.title === "") {
-                    dom.byId("panelText").innerHTML = response.itemInfo.item.title; //title;
+                    dom.byId("panelText").innerHTML = response.itemInfo.item.title;
                 }
                 else {
                     dom.byId("panelText").innerHTML = this.config.title;

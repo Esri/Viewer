@@ -25,8 +25,8 @@
 
 label.checkbox{
   /* float: left; */
-  padding: 2px 4px;
-  margin: 0 !important;
+  padding: 3px 0px;
+  /* margin: 0 !important; */
   /* text-overflow: ellipsis; */
   /* white-space: nowrap; */
   overflow-x: hidden;
@@ -1663,7 +1663,7 @@ td, th {
 .app-loading .loading-indicator {
   /* Loading image */
     background-position: center center;
-    background-image: url(../images/reload2.gif);
+    background-image: url(../images/reload3.gif);
     background-repeat: no-repeat;
 }
 
@@ -1677,4 +1677,13 @@ td, th {
     width: 22px;
     height: 22px;
     z-index: 2000;
+}
+
+#loadingTitle {
+  width: 100%;
+  position: absolute;
+  z-index: 2;
+  top: 45%;
+  left: 0;
+  text-align: center; 
 }
