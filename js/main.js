@@ -247,13 +247,6 @@ define(["dojo/ready",
 
         // Create UI
         _createUI: function () {
-            document.getElementById('skip-tools').addEventListener('click', function (e) { skipToTools(); });
-            document.getElementById('skip-search').addEventListener('click', function (e) { skipToSearch(); });
-            document.getElementById('skip-content').addEventListener('click', function (e) { skipToContent(); });
-            document.getElementById('skip-map').addEventListener('click', function (e) { skipToMap(); });
-            document.getElementById('skip-instructions').addEventListener('click', function (e) { skipToInstructions(); });
-            document.getElementById('skip-splitter').addEventListener('click', function (e) { skipToSplitter(); });
-
             skipToInstructions = function() {
                 var activeTool = query('.panelToolActive');
                 if(activeTool && activeTool.length>0) {
@@ -316,7 +309,6 @@ define(["dojo/ready",
                 this.map.resize();
                 this.map.reposition();
             }));
-
             
             domStyle.set("panelPages", "visibility", "hidden");
             //Add tools to the toolbar. The tools are listed in the defaults.js file
@@ -530,6 +522,13 @@ define(["dojo/ready",
                 innerHTML: 'Alt + 5',
                 style:'left:-8px; top:52%;'
             }, dom.byId('dijit_layout_ContentPane_0_splitter'));
+            query('#header #skip-tools')[0].addEventListener('click', function (e) { skipToTools(); });
+            query('#header #skip-search')[0].addEventListener('click', function (e) { skipToSearch(); });
+            query('#header #skip-content')[0].addEventListener('click', function (e) { skipToContent(); });
+            query('#header #skip-map')[0].addEventListener('click', function (e) { skipToMap(); });
+            query('#header #skip-instructions')[0].addEventListener('click', function (e) { skipToInstructions(); });
+            query('#header #skip-splitter')[0].addEventListener('click', function (e) { skipToSplitter(); });
+
         },
 
         featureList : null,

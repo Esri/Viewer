@@ -1638,7 +1638,7 @@ td, th {
   position: absolute;
   padding: 2px 4px !important;
   z-index: 100;
-  background-color: rgba(255, 0, 0, 0.75);
+  background-color: rgba(110, 0, 255, 0.85);
   border-radius: 8px;
   border: rgba(255, 70, 0, 0);
   border-style: solid;
@@ -1646,7 +1646,7 @@ td, th {
   font-size: 16px !important;
   font-family: verdana, helvetica;
   font-weight: bold;
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.5);
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.75);
   width: 64px !important;
   height: 18px !important;
   line-height: 18px !important;
@@ -1690,14 +1690,14 @@ td, th {
 
 .skip {
     color: white;
-    position: fixed;
-    top: 0;
-    left: 0;
+    position: absolute;
+    /* top: 0; */
+    /* left: 0; */
     border-right: 2px solid #FFF;
     border-bottom: 2px solid #FFF;
     background-color: #002C61;
-    width: 1px;
-    height: 1px;
+    /* width: 1px; */
+    /* height: 1px; */
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -1709,4 +1709,24 @@ td, th {
     height: auto;
     padding: .5rem 1rem;
     clip: auto;
+}
+
+#header {
+    position: relative;
+    width: 30%;
+    right: 1px;
+    top: 6px;
+    height: 20px;
+    /* float: right; */
+    white-space: nowrap;
+    display: inline;
+    font-size: 22px;
+}
+
+.pageBtn {
+  background-color: rgb(3, 126, 175);
+  color: white;
+  background-blend-mode: darken;
+  padding: 3px 10px 0px 10px;
+  border-radius: 5px;
 }
