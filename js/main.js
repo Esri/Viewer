@@ -247,6 +247,41 @@ define(["dojo/ready",
 
         // Create UI
         _createUI: function () {
+            document.getElementById('skip-tools').addEventListener('click', function (e) { skipToTools(); });
+            document.getElementById('skip-search').addEventListener('click', function (e) { skipToSearch(); });
+            document.getElementById('skip-content').addEventListener('click', function (e) { skipToContent(); });
+            document.getElementById('skip-map').addEventListener('click', function (e) { skipToMap(); });
+            document.getElementById('skip-instructions').addEventListener('click', function (e) { skipToInstructions(); });
+            document.getElementById('skip-splitter').addEventListener('click', function (e) { skipToSplitter(); });
+
+            skipToInstructions = function() {
+                var activeTool = query('.panelToolActive');
+                if(activeTool && activeTool.length>0) {
+                    activeTool = activeTool[0];
+                    activeTool.click();
+                }
+                dom.byId('instructionsDiv').focus();            
+            };
+
+            skipToTools = function() {
+                dom.byId('panelTools').focus();
+            };
+
+            skipToSearch = function() {
+                dom.byId('search_input').focus();
+            };
+
+            skipToContent = function() {
+                dom.byId('panelPages').focus();
+            };
+
+            skipToMap = function() {
+                query('.esriSimpleSliderIncrementButton input')[0].focus();
+            };
+
+            skipToSplitter = function() {
+                dom.byId('dijit_layout_ContentPane_0_splitter').focus();
+            };
 
             var borderContainer = new BorderContainer({
                 design:'sidebar',
@@ -405,30 +440,27 @@ define(["dojo/ready",
                 if(event.altKey) {
                     query('.goThereHint').forEach(function(h) {
                         domStyle.set(h, 'display','block');
+                        event.stopPropagation();
+                        event.preventDefault();
                     });
                     switch(event.code) {
                         case 'Digit0' :
-                            var activeTool = query('.panelToolActive');
-                            if(activeTool && activeTool.length>0) {
-                                activeTool = activeTool[0];
-                                activeTool.click();
-                            }
-                            dom.byId('instructionsDiv').focus();
+                            skipToInstructions();    
                             break;
                         case 'Digit1' :
-                            dom.byId('panelTools').focus();
+                            skipToTools();
                             break;
                         case 'Digit2' :
-                            dom.byId('search_input').focus();
+                            skipToSearch();
                             break;
                         case 'Digit3' :
-                            dom.byId('panelPages').focus();
+                            skipToContent();
                             break;
                         case 'Digit4' :
-                            query('.esriSimpleSliderIncrementButton input')[0].focus();
+                            skipToMap();
                             break;
                         case 'Digit5' :
-                            dom.byId('dijit_layout_ContentPane_0_splitter').focus();
+                            skipToSplitter();
                             break;
                         case 'Digit6' :
                             if(featureList) {

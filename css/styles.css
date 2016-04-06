@@ -1687,3 +1687,26 @@ td, th {
   left: 0;
   text-align: center; 
 }
+
+.skip {
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    border-right: 2px solid #FFF;
+    border-bottom: 2px solid #FFF;
+    background-color: #002C61;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+
+.skip:focus {
+    width: auto;
+    height: auto;
+    padding: .5rem 1rem;
+    clip: auto;
+}
