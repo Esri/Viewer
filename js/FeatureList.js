@@ -114,10 +114,11 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
 
         _reloadList : function(ext) {
             if(!this._isVisible()) return;
-
-            this.map.graphics.clear();
-            // window._prevSelected = null;
+            var loading_features = this.domNode.parentNode.querySelector('#loading_features');
+            domStyle.set(loading_features, 'display', '-webkit-inline-box');
             var list = query("#featuresList")[0];
+//             domStyle.set(list, 'display', 'none');
+            this.map.graphics.clear();
             window.tasks.forEach(lang.hitch(this.map, function(t) {
                 t.query.geometry = ext.extent;
                 t.result = t.task.execute(t.query);
@@ -125,62 +126,64 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             promises = all(window.tasks.map(function(t) {return t.result;}));
             promises.then(
                 function(results) {
-                list.innerHTML = "";
-                var preselected = null;
-                if(results) for(var i = 0; i<results.length; i++)
-                {
-                    r = results[i];
-                    var layer = window.tasks[i].layer;
-                    //layer.clearSelection();
-                    var content = '';
-                    if(!layer.infoTemplate) {
-                        var x = 1;
-                    }
-                    var fieldsMap = layer.infoTemplate._fieldsMap;
-                    for(var p in layer.infoTemplate._fieldsMap) {
-                        if(fieldsMap.hasOwnProperty(p) && fieldsMap[p].visible)
-                        {
-                            var pField = fieldsMap[p];
-                            var fieldName = '${'+pField.fieldName+'}';
-                            content+='<tr class="featureItem_${_featureId} hideAttr" tabindex="0">\n';
-                            content+='    <td/>\n';
-                            content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
-                            content+='    <td valign="top">:</td>\n';
-                            content+='    <td valign="top">';
-                            if(pField.format && pField.format.dateFormat) {
-                                content+='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
-                            }
-                            else {
-                                content+=fieldName;
-                            }
-                            content+='</td>\n';
-                            content+='</tr>\n';
+                    list.innerHTML = "";
+                    var preselected = null;
+                    if(results) for(var i = 0; i<results.length; i++)
+                    {
+                        r = results[i];
+                        var layer = window.tasks[i].layer;
+                        //layer.clearSelection();
+                        var content = '';
+                        if(!layer.infoTemplate) {
+                            var x = 1;
                         }
-                    }
-                    for(var j = 0; j<r.features.length; j++) {
-                        var f = r.features[j];
-                        if(window._prevSelected == f.attributes[r.objectIdFieldName]) {
-                            preselected = f;
-                        }
-                        if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
-                            var featureListItem = this._getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
-                            if(featureListItem)
+                        var fieldsMap = layer.infoTemplate._fieldsMap;
+                        for(var p in layer.infoTemplate._fieldsMap) {
+                            if(fieldsMap.hasOwnProperty(p) && fieldsMap[p].visible)
                             {
-                                domConstruct.create("li", {
-                                    tabindex : 0,
-                                    innerHTML : featureListItem
-                                }, list);
+                                var pField = fieldsMap[p];
+                                var fieldName = '${'+pField.fieldName+'}';
+                                content+='<tr class="featureItem_${_featureId} hideAttr" tabindex="0">\n';
+                                content+='    <td/>\n';
+                                content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
+                                content+='    <td valign="top">:</td>\n';
+                                content+='    <td valign="top">';
+                                if(pField.format && pField.format.dateFormat) {
+                                    content+='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
+                                }
+                                else {
+                                    content+=fieldName;
+                                }
+                                content+='</td>\n';
+                                content+='</tr>\n';
+                            }
+                        }
+                        for(var j = 0; j<r.features.length; j++) {
+                            var f = r.features[j];
+                            if(window._prevSelected == f.attributes[r.objectIdFieldName]) {
+                                preselected = f;
+                            }
+                            if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
+                                var featureListItem = this._getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
+                                if(featureListItem)
+                                {
+                                    domConstruct.create("li", {
+                                        tabindex : 0,
+                                        innerHTML : featureListItem
+                                    }, list);
+                                }
                             }
                         }
                     }
-                }
-                if(!preselected) {
-                    window._prevSelected = null;
-                } else {
-                    var checkbox = query("#featureButton_"+preselected.attributes[r.objectIdFieldName])[0];
-                    checkbox.checked = true;
-                    window.featureExpand(checkbox, true);
-                }
+                    if(!preselected) {
+                        window._prevSelected = null;
+                    } else {
+                        var checkbox = query("#featureButton_"+preselected.attributes[r.objectIdFieldName])[0];
+                        checkbox.checked = true;
+                        window.featureExpand(checkbox, true);
+                    }
+                    domStyle.set(loading_features, 'display', 'none');
+//                     domStyle.set(list, 'display', '');
                 }
             );
         },

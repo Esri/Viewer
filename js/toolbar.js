@@ -104,7 +104,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
         },
 
         //Create a tool and return the div where you can place content
-        createTool: function (tool, panelClass) {
+        createTool: function (tool, panelClass, loaderImg) {
             var name = tool.name;
 
             // add tool
@@ -150,8 +150,16 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             domConstruct.create("h1", {
                 className: "pageTitle fc",
                 innerHTML: this.config.i18n.tooltips[name] || name,
+                style: 'display:inline; vertical-align:text-bottom;',
                 id: "pagetitle_" + name
             }, pageHeader);
+
+            if(loaderImg && loaderImg !=="") {
+                domConstruct.create("div", {
+                    id: "loading_" + name,
+                    class: 'small-loading'
+                }, pageHeader);
+            }
 
             // domConstruct.create("div", {
             //     className: "pageHeaderImg",
@@ -168,49 +176,6 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
             domClass.add(pageBody, panelClass);
 
             return pageBody;
-        },
-
-        updatePageNavigation: function () {
-            //Adds the up/down and close tools to the page header. 
-            for (var i = 0; i < this.tools.length; i++) {
-                var name = this.tools[i];
-
-                var pageContent = dom.byId("pageContent_" + name);
-                domAttr.set(pageContent, 'data-name', name);
-            }
-        },
-
-        // showInstructions: function() {
-        //     var Instructions = dom.byId("pageBody_instructions");
-        //     if(Instructions)        
-        //     {
-        //         var desc = Instructions.querySelector(".desc");
-        //         if(desc)
-        //         {
-        //             desc.focus();
-        //         }
-        //     }
-        // },
-
-
-        // selectText: function(text) {
-        //     var doc = document,
-        //         range, selection;    
-        //     if (doc.body.createTextRange) {
-        //         range = document.body.createTextRange();
-        //         range.moveToElementText(text);
-        //         range.select();
-        //     } else if (window.getSelection) {
-        //         selection = window.getSelection();        
-        //         range = document.createRange();
-        //         range.selectNodeContents(text);
-        //         selection.removeAllRanges();
-        //         selection.addRange(range);
-        //     }
-        // },
-    
-        setContent: function (name, content) {
-            domConstruct.place(content, "pageBody_" + name, "last");
         },
 
        _toolClick: function (name) {
