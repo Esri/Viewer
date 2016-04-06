@@ -132,6 +132,9 @@ define(["dojo/ready",
 
         // Map is ready
         _mapLoaded: function () {
+            this.map.resize();
+            this.map.reposition();
+
             query(".esriSimpleSlider").style("backgroundColor", this.theme.toString());
             // remove loading class from body
             domClass.remove(document.body, "app-loading");
@@ -354,7 +357,6 @@ define(["dojo/ready",
                     //Now that all the tools have been added to the toolbar we can add page naviagation
                     //to the toolbar panel, update the color theme and set the active tool.
                     this._updateTheme();
-                    toolbar.updatePageNavigation();
 
                     if(has("instructions")) {
                         //toolbar.activateTool("instructions");
@@ -489,7 +491,7 @@ define(["dojo/ready",
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
             if (has("features")) {
-                var featuresDiv = toolbar.createTool(tool, "");
+                var featuresDiv = toolbar.createTool(tool, "", "reload1.gif");
 
                 var layers = this.config.response.itemInfo.itemData.operationalLayers;
                 
@@ -888,7 +890,7 @@ define(["dojo/ready",
                 // domClass.add(ovMapDiv, 'margin');
                 // domStyle.set(ovMapDiv, {
                 //     // "height": "100%",
-                //     "width": "100%",
+                //     "width": "500px",
                 // });
 
                 var panelHeight = this.map.height;
@@ -929,7 +931,7 @@ define(["dojo/ready",
 
             on(ovMap.overviewMap, "extent-change", lang.hitch(ovMap.overviewMap.container, function() {
                 var images = this.querySelectorAll("img");
-                for(i=0; i<images.length; i++)
+                for(var i=0; i<images.length; i++)
                     domAttr.set(images[i],'alt','');
             }));
         },
