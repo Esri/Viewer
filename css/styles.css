@@ -1688,7 +1688,7 @@ td, th {
   text-align: center; 
 }
 
-.skip {
+.skip a {
     color: white;
     position: absolute;
     /* top: 0; */
@@ -1704,14 +1704,14 @@ td, th {
     clip: rect(1px, 1px, 1px, 1px);
 }
 
-.skip:focus {
+.skip a:focus {
     width: auto;
     height: auto;
     padding: .5rem 1rem;
     clip: auto;
 }
 
-#header {
+.skip {
     position: relative;
     width: 30%;
     right: 1px;
@@ -1724,9 +1724,14 @@ td, th {
 }
 
 .pageBtn {
-  background-color: rgb(3, 126, 175);
-  color: white;
-  background-blend-mode: darken;
-  padding: 3px 10px 0px 10px;
-  border-radius: 5px;
+  
+background-color: rgb(3, 126, 175);
+  
+color: white;
+  
+background-blend-mode: darken;
+  
+padding: 3px 10px 0px 10px;
+  
+border-radius: 5px;
 }
