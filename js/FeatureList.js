@@ -119,7 +119,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             var list = query("#featuresList")[0];
 //             domStyle.set(list, 'display', 'none');
             this.map.graphics.clear();
-            window.tasks.filter(function(t) { return t.layer.visibleAtMapScale;}).forEach(lang.hitch(this.map, function(t) {
+            window.tasks.filter(function(t) { return t.layer.visible && t.layer.visibleAtMapScale;}).forEach(lang.hitch(this.map, function(t) {
                 t.query.geometry = ext.extent;
                 t.result = t.task.execute(t.query);
             }));
@@ -130,7 +130,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     var preselected = null;
                     if(results) for(var i = 0; i<results.length; i++)
                     {
-                        if(window.tasks[i].layer.visibleAtMapScale) {
+                        if(window.tasks[i].layer.visible && window.tasks[i].layer.visibleAtMapScale) {
                             r = results[i];
                             var layer = window.tasks[i].layer;
                             //layer.clearSelection();
@@ -314,7 +314,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                             result = result.replace(matches[5], '');
                         }
                         if(matches[2]===">") {
-                            result = result.replace(matches[3], "<a href='"+matches[3]+"' target='_blank'>More Info</a>");
+                            result = result.replace(matches[3], "<a href='"+matches[3]+"' target='_blank'>Follow Link</a>");
                         }
                         else if(matches[6]==="DATE") {
                             var date = new Date(Number(matches[7]));
