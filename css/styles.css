@@ -1625,13 +1625,12 @@ td, th {
 #instructionsDiv {
   position: absolute;
   bottom: 0;
-  /* margin-bottom: 20px; */
+  width: 100%;
+  background-color: white;
 }
 
 #detailDiv {
-  position: absolute;
   top: 0;
-  /* width: 100%; */
 }
 
 .goThereHint {
@@ -1691,8 +1690,8 @@ td, th {
 .skip a {
     color: white;
     position: absolute;
-    /* top: 0; */
-    /* left: 0; */
+    top: 0;
+    left: 0;
     border-right: 2px solid #FFF;
     border-bottom: 2px solid #FFF;
     background-color: #002C61;
@@ -1724,14 +1723,23 @@ td, th {
 }
 
 .pageBtn {
-  
-background-color: rgb(3, 126, 175);
-  
-color: white;
-  
-background-blend-mode: darken;
-  
-padding: 3px 10px 0px 10px;
-  
-border-radius: 5px;
+    background-color: rgb(3, 126, 175);
+    color: white;
+    background-blend-mode: darken;
+    padding: 3px 10px 0px 10px;
+    border-radius: 5px;
 }
+
+.featureItem tr .filterBtn {
+    width:18px;
+    height:18px;
+    /* padding-top:1px; */
+    opacity: 0.1;
+}
+
+.featureItem tr:focus .filterBtn,
+.featureItem tr:hover .filterBtn
+{
+    opacity: 1;
+}
+

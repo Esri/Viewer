@@ -144,7 +144,9 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                 var pField = fieldsMap[p];
                                 var fieldName = '${'+pField.fieldName+'}';
                                 content+='<tr class="featureItem_${_featureId} hideAttr" tabindex="0">\n';
-                                content+='    <td/>\n';
+                                content+='    <td valign="top">\n';
+                                content+='      <img src="..\\images\\Filter0.png" alt="filter" class="filterBtn"/>\n';
+                                content+='    </td>\n';
                                 content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
                                 content+='    <td valign="top">:</td>\n';
                                 content+='    <td valign="top">';
@@ -163,7 +165,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                             if(window._prevSelected == f.attributes[r.objectIdFieldName]) {
                                 preselected = f;
                             }
-                            if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
+//                             if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
                                 var featureListItem = this._getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
                                 if(featureListItem)
                                 {
@@ -172,7 +174,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                         innerHTML : featureListItem
                                     }, list);
                                 }
-                            }
+//                             }
                         }
                     }
                     if(!preselected) {
@@ -192,7 +194,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             window.tasks = [];
             for(var l = 0; l<this.layers.length; l++) {
                 layer = this.layers[l];
-                if(layer.url && !layer.layerObject._isSnapshot)
+                if(layer.visibility)
                 {
                     var _query = new Query();
                     _query.outFields = ["*"];
@@ -211,11 +213,11 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                 var r = window.tasks[values[0]];
                 var fid = values[1];
                 var layer = r.layer;
+                var objectIdFieldName = r.layer.objectIdField;
 
                     q = new Query();
-                    q.where = "[FID]='"+fid+"'";
-                    q.outFields = ["FID"];
-                    q.returnGeometry = true;
+                    q.where = "["+objectIdFieldName+"]='"+fid+"'";
+                    q.outFields = ['"'+objectIdFieldName+'"'];                    q.returnGeometry = true;
                     r.task.execute(q).then(function(ev) {
                         if(panOnly) {
                             layer._map.centerAt(ev.features[0].geometry);
@@ -239,6 +241,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                 }
                 var values = checkBox.value.split(',');
                 var r = window.tasks[values[0]];
+                var objectIdFieldName = r.layer.objectIdField;
                 var fid = values[1];
                 var layer = r.layer;
                 layer._map.graphics.clear();
@@ -253,8 +256,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     });
 
                     q = new Query();
-                    q.where = "[FID]='"+fid+"'";
-                    q.outFields = ["FID"];
+                    q.where = "["+objectIdFieldName+"]='"+fid+"'";
+                    q.outFields = ['"'+objectIdFieldName+'"'];
                     q.returnGeometry = true;
                     r.task.execute(q).then(function(ev) {
                         //console.log(ev);
@@ -280,6 +283,15 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     var featureId = f.attributes[objectIdFieldName];
                     var attributes = {_featureId:featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
                     lang.mixin(attributes, f.attributes);
+                    var nulls = window.tasks[r].layer.fields.map(function(f){return f.name});
+                    var nullAttrs ={};
+                    nulls.forEach(function(n) {
+                        if(!attributes[n])
+                        {
+                            attributes[n]='';
+                        }
+                        });
+//                  lang.mixin(attributes, nullAttrs);
                     content = string.substitute(content, attributes);
                     listTemplate=string.substitute(listTemplate, attributes);
                     var result =  string.substitute(listTemplate, attributes);
