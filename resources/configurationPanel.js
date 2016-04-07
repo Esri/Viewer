@@ -20,6 +20,29 @@
                "tooltip":"Defaults to sample logo"
             },
             {  
+               "type":"boolean",
+               "fieldName":"animated_marker",
+               "label":"Animated Marker"
+            },
+            {  
+               "label":"Animated Marker File:",
+               "fieldName":"marker",
+               "type":"string",
+               "tooltip":"Defaults to blue-animated"
+            },
+            {  
+               "label":"Marker size:",
+               "fieldName":"marker_size",
+               "type":"int",
+               "tooltip":"Size of the Marker"
+            },
+            {  
+               "label":"Alternate Keys:",
+               "fieldName":"alt_keys",
+               "type":"boolean",
+               "tooltip":"Show hints for alternat keys when pressing ALT key."
+            },
+            {  
                "type":"string",
                "fieldName":"description",
                "label":"Details",
@@ -315,8 +338,15 @@
    "values":{  
       "icons":"white",
       "new_icons":false,
+      "animated_marker":true,
+      "marker":"images/ripple-dot1.gif",
+      "marker_size":"35",
+      "alt_keys":true,
       "logo":"images/logo.png",
       "color":"#fff",
+      "hoverColor":"#00A9E6",
+      "focusColor":"#00FFC5",
+      "activeColor":"#00C5FF",
       "theme":"80ab00",
       "activeTool":"instructions",
       "scalebar":false,

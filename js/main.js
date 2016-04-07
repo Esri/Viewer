@@ -303,40 +303,40 @@ define(["dojo/ready",
                 for (var i = 0; i < this.config.tools.length; i++) {
                     switch (this.config.tools[i].name) {
                         case "details":
-                            toolList.push(this._addDetails(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addDetails(this.config.tools[i], toolbar));
                             break;
                         case "instructions":
-                            toolList.push(this._addInstructions(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addInstructions(this.config.tools[i], toolbar));
                             break;
                         case "features":
-                            toolList.push(this._addFeatures(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addFeatures(this.config.tools[i], toolbar));
                             break;
                         case "legend":
-                            toolList.push(this._addLegend(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addLegend(this.config.tools[i], toolbar));
                             break;
                         case "layers":
-                            toolList.push(this._addLayers(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addLayers(this.config.tools[i], toolbar));
                             break;
                         case "basemap":
-                            toolList.push(this._addBasemapGallery(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addBasemapGallery(this.config.tools[i], toolbar));
                             break;
                         case "overview":
-                            toolList.push(this._addOverviewMap(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addOverviewMap(this.config.tools[i], toolbar));
                             break;
                         case "measure":
-                            toolList.push(this._addMeasure(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addMeasure(this.config.tools[i], toolbar));
                             break;
                         // case "edit":
-                        //     toolList.push(this._addEditor(this.config.tools[i], toolbar, ""));
+                        //     toolList.push(this._addEditor(this.config.tools[i], toolbar));
                         //     break;
                         case "share":
-                            toolList.push(this._addShare(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addShare(this.config.tools[i], toolbar));
                             break;
                         case "bookmarks":
-                            toolList.push(this._addBookmarks(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addBookmarks(this.config.tools[i], toolbar));
                             break;
                         case "print":
-                            toolList.push(this._addPrint(this.config.tools[i], toolbar, ""));
+                            toolList.push(this._addPrint(this.config.tools[i], toolbar));
                             break;
                         default:
                             break;
@@ -531,7 +531,10 @@ define(["dojo/ready",
                 featureList = new FeatureList({
                     map: this.map,
                     layers: layers,
-                    toolbar: toolbar
+                    toolbar: toolbar,
+                    animatedMarker:  this.config.animated_marker,
+                    markerImage: this.config.marker,
+                    markerSize: this.config.marker_size
                 }, featuresDiv);
                 featureList.startup();
 
@@ -1570,7 +1573,7 @@ define(["dojo/ready",
 
         _checkExtent: function () {
             var pt = this.map.extent.getCenter();
-            if (!this.initExt.contains(pt)) {
+            if (this.mapExt && !this.initExt.contains(pt)) {
                 this.map.setExtent(this.mapExt);
             } else {
                 this.mapExt = this.map.extent;

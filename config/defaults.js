@@ -21,7 +21,9 @@ define({
     "appid": //"0d877e183a5e4754adac1a88cd15749f",
              //"c8077b61b6f94fd29371a7cbac6923ba",
              //"5147e7fbc6394546a3b6f58f0c944cb9",
-             "f2d19e3559444846ac5839c5d83ded60",
+             //"f2d19e3559444846ac5839c5d83ded60", //old Incident Map
+             //"440b2da51b2b42878e8cb946c2de0326", //Farmers Markets
+             "3c15248875324167b38bc1525d623ecd", // Incident Map xxx
     "webmap": "",
               //"326320c9eab3489d8d17bc389ce1e023",
     "oauthappid": null, //"AFTKRmv16wj14N3z",
@@ -44,9 +46,14 @@ define({
     //both these values must be specified as hex colors.
     "theme": "#037EAF",
     "color": "#ffffff",
-    "hoverColor": "#BEE8FF",
-    "focusColor": "#00FFFF",
-    "activeColor": "#002673",
+    "hoverColor": "#00A9E6",
+    "focusColor": "#00FFC5",
+    "activeColor": "#00C5FF",
+    "animated_marker":true,
+    "marker":"images/ripple-dot1.gif",
+    "marker_size":"35",
+    "alt_keys":true,
+
     //Specify the tool icon color for the tools on the toolbar and the menu icon.
     // Valid values are white and black.
     "icons": "white",
