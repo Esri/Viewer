@@ -151,8 +151,17 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                     content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
                                     content+='    <td valign="top">:</td>\n';
                                     content+='    <td valign="top">';
-                                    if(pField.format && pField.format.dateFormat) {
-                                        content+='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
+                                    if(pField.format)
+                                    { 
+                                        if(pField.format.dateFormat) {
+                                            content+='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
+                                        }
+                                        else if(pField.format.digitSeparator) {
+                                            content+='FORMAT_NUM('+fieldName+',"'+pField.format.places+'")';
+                                        }
+                                        else {
+                                            content+=fieldName;
+                                        }
                                     }
                                     else {
                                         content+=fieldName;
@@ -285,7 +294,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     var featureId = f.attributes[objectIdFieldName];
                     var attributes = {_featureId:featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
                     lang.mixin(attributes, f.attributes);
-                    var nulls = window.tasks[r].layer.fields.map(function(f){return f.name});
+                    var nulls = window.tasks[r].layer.fields.map(function(f){return f.name;});
                     var nullAttrs ={};
                     nulls.forEach(function(n) {
                         if(!attributes[n])
@@ -296,16 +305,24 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     content = string.substitute(content, attributes);
                     listTemplate=string.substitute(listTemplate, attributes);
                     var result =  string.substitute(listTemplate, attributes);
-                    var re = /FORMAT_(DATE|NUM)\((\d+),\"(.+)\"\)/gm;
+                    var re = /(FORMAT_(DATE|NUM)\((-?\d*\.?\d*),\"(.+)\"\))/gm;
                     do {
                         var matches = re.exec(result);
                         if(!matches) break;
-                        if(matches[1]==="DATE") {
-                            var date = new Date(Number(matches[2]));
-                            result = result.replace(re, date.toLocaleDateString("en-US", {
+                        if(!matches[3] || matches[3] == '') {
+                            result = result.replace(matches[1], '');;
+                        }
+                        if(matches[2]==="DATE") {
+                            var date = new Date(Number(matches[3]));
+                            result = result.replace(matches[1], date.toLocaleDateString("en-US", {
                                 year: "numeric", month: "long", day: "numeric"
                             }));
                         }
+                        else if(matches[2]==="NUM") {
+                            var num = Number(matches[3]);
+                            result = result.replace(matches[1], num);
+                        }
+
                     } while (true);
                     return result;
                 } catch (e) {
