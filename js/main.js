@@ -130,7 +130,18 @@ define(["dojo/ready",
             return outputColor;
         },
 
-        // Map is ready
+//         var featureLayer = new esri.layers.FeatureLayer("https://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Petroleum/KSPetro/MapServer/1",{
+//           mode: esri.layers.FeatureLayer.MODE_ONDEMAND,
+//           outFields: ["*"],
+//           opacity: 0.5
+//         });
+
+//         featureLayer.on("mouse-over", showTooltip);
+//         featureLayer.on("mouse-out", closeDialog);
+
+//         featureLayer.setDefinitionExpression("PROD_GAS='Yes'");
+//         map.addLayer(featureLayer);
+
         _mapLoaded: function () {
             this.map.resize();
             this.map.reposition();
@@ -247,35 +258,6 @@ define(["dojo/ready",
 
         // Create UI
         _createUI: function () {
-            skipToInstructions = function() {
-                var activeTool = query('.panelToolActive');
-                if(activeTool && activeTool.length>0) {
-                    activeTool = activeTool[0];
-                    activeTool.click();
-                }
-                dom.byId('instructionsDiv').focus();            
-            };
-
-            skipToTools = function() {
-                dom.byId('panelTools').focus();
-            };
-
-            skipToSearch = function() {
-                dom.byId('search_input').focus();
-            };
-
-            skipToContent = function() {
-                dom.byId('panelPages').focus();
-            };
-
-            skipToMap = function() {
-                query('.esriSimpleSliderIncrementButton input')[0].focus();
-            };
-
-            skipToSplitter = function() {
-                dom.byId('dijit_layout_ContentPane_0_splitter').focus();
-            };
-
             var borderContainer = new BorderContainer({
                 design:'sidebar',
                 gutters:'true', 
@@ -289,7 +271,7 @@ define(["dojo/ready",
                 style: "width:500px; padding:0; overflow: none;",
                 content: dom.byId("leftPanel"),
                 class: "splitterContent",
-                tabindex: 0
+                // tabindex: 0
             });
             borderContainer.addChild(contentPaneLeft);
               
@@ -298,7 +280,7 @@ define(["dojo/ready",
                 splitter:'true',
                 style: "padding:0",
                 content: dom.byId("mapDiv"),
-                tabindex:0
+                // tabindex:0
             });
             borderContainer.addChild(contentPaneRight);
 
@@ -432,47 +414,20 @@ define(["dojo/ready",
                 if(event.altKey) {
                     query('.goThereHint').forEach(function(h) {
                         domStyle.set(h, 'display','block');
-                        event.stopPropagation();
-                        event.preventDefault();
                     });
-                    switch(event.code) {
-                        case 'Digit0' :
-                            skipToInstructions();    
-                            break;
-                        case 'Digit1' :
-                            skipToTools();
-                            break;
-                        case 'Digit2' :
-                            skipToSearch();
-                            break;
-                        case 'Digit3' :
-                            skipToContent();
-                            break;
-                        case 'Digit4' :
-                            skipToMap();
-                            break;
-                        case 'Digit5' :
-                            skipToSplitter();
-                            break;
-                        case 'Digit6' :
-                            if(featureList) {
-                                featureList.FocusDetails();
-                            }
-                            break;
-                    }
                 }
-                else {
-                    switch(event.code) {
-                        case 'Escape' :
-                            var activeElement = focusUtil.curNode;
-                            var upper = query(activeElement).parent().closest('[tabindex=0]');
-                            if(upper && upper.length>= 1) {
-                                upper[0].focus();
-                            }
-                            break;
-                    }
+                switch(event.code) {
+                    case 'Escape' :
+                        var activeElement = focusUtil.curNode;
+                        var upper = query(activeElement).parent().closest('[tabindex=0]');
+                        if(upper && upper.length>= 1) {
+                            upper[0].focus();
+                        }
+                        break;
                 }
+                
             });
+
             on(document.body, 'keyup', function(event) {
                 if(!event.altKey) {
                     query('.goThereHint').forEach(function(h) {
@@ -481,53 +436,85 @@ define(["dojo/ready",
                 }
             });
 
-            domConstruct.create("div", {
-                id: 'goThereHint_toolPanel', 
-                class:'goThereHint',
-                innerHTML: 'Alt + 0',
-                style:'left:60%; top:-50%;'
-            }, dom.byId('panelBottom'));
 
             domConstruct.create("div", {
-                id: 'goThereHint_toolPanel', 
                 class:'goThereHint',
                 innerHTML: 'Alt + 1',
                 style:'right:20px; top:20%;'
             }, dom.byId('panelTools'));
 
             domConstruct.create("div", {
-                id: 'goThereHint_search', 
                 class:'goThereHint',
                 innerHTML: 'Alt + 2',
                 style:'left:160px; top:20%;'
             }, dom.byId('panelSearch'));
 
             domConstruct.create("div", {
-                id: 'goThereHint_pages', 
                 class:'goThereHint',
                 innerHTML: 'Alt + 3',
                 style:'left:20px; top:200px;'
             }, dom.byId('panelPages'));
 
             domConstruct.create("div", {
-                id: 'goThereHint_zoom_slider', 
                 class:'goThereHint',
                 innerHTML: 'Alt + 4',
+                style:'left:-8px; top:52%;'
+            }, dom.byId('dijit_layout_ContentPane_0_splitter'));
+
+            domConstruct.create("div", {
+                class:'goThereHint',
+                innerHTML: 'Alt + 5',
                 style:'left:20px; top:40px;'
             }, dom.byId('mapDiv_zoom_slider'));
 
             domConstruct.create("div", {
-                id: 'goThereHint_splitter', 
                 class:'goThereHint',
-                innerHTML: 'Alt + 5',
-                style:'left:-8px; top:52%;'
-            }, dom.byId('dijit_layout_ContentPane_0_splitter'));
-            query('#header #skip-tools')[0].addEventListener('click', function (e) { skipToTools(); });
-            query('#header #skip-search')[0].addEventListener('click', function (e) { skipToSearch(); });
-            query('#header #skip-content')[0].addEventListener('click', function (e) { skipToContent(); });
-            query('#header #skip-map')[0].addEventListener('click', function (e) { skipToMap(); });
-            query('#header #skip-instructions')[0].addEventListener('click', function (e) { skipToInstructions(); });
-            query('#header #skip-splitter')[0].addEventListener('click', function (e) { skipToSplitter(); });
+                innerHTML: 'Alt + 6',
+                style:'left:60%; top:-50%;'
+            }, dom.byId('panelBottom'));
+
+            query('.skip #skip-tools')[0].addEventListener('click', function (e) { skipToTools(); });
+            query('.skip #skip-search')[0].addEventListener('click', function (e) { skipToSearch(); });
+            query('.skip #skip-content')[0].addEventListener('click', function (e) { skipToContent(); });
+            query('.skip #skip-splitter')[0].addEventListener('click', function (e) { skipToSplitter(); });
+            query('.skip #skip-map')[0].addEventListener('click', function (e) { skipToMap(); });
+            query('.skip #skip-instructions')[0].addEventListener('click', function (e) { skipToInstructions(); });
+            query('.skip #skip-feature')[0].addEventListener('click', function (e) { skipToFeature(); });
+
+            skipToTools = function() {
+                dom.byId('panelTools').focus();
+            };
+
+            skipToSearch = function() {
+                dom.byId('search_input').focus();
+            };
+
+            skipToContent = function() {
+                dom.byId('panelPages').focus();
+            };
+
+            skipToSplitter = function() {
+                dom.byId('dijit_layout_ContentPane_0_splitter').focus();
+            };
+
+            skipToMap = function() {
+                query('.esriSimpleSliderIncrementButton input')[0].focus();
+            };
+
+            skipToInstructions = function() {
+                var activeTool = query('.panelToolActive');
+                if(activeTool && activeTool.length>0) {
+                    activeTool = activeTool[0];
+                    activeTool.click();
+                }
+                dom.byId('instructionsDiv').focus();            
+            };
+
+            skipToFeature = function() {
+                if(featureList) {
+                    featureList.FocusDetails();
+                }
+            };
 
         },
 
@@ -972,7 +959,7 @@ define(["dojo/ready",
 
             ovwHighlight = div.querySelector('.ovwHighlight');
             dojo.setAttr(ovwHighlight, 'tabindex', 0);
-            dojo.setAttr(ovwHighlight, 'title', 'Drag To Change The Map Extent,\nor focus and use the Arrow keys.');
+            dojo.setAttr(ovwHighlight, 'title', 'Drag to change the Map Extent,\nor focus and use Arrow keys.');
             this._atachArrowKeys(ovwHighlight, ovMap);
 
             on(ovMap.overviewMap, "extent-change", lang.hitch(ovMap.overviewMap.container, function() {
@@ -1625,7 +1612,6 @@ define(["dojo/ready",
                 }
 
             }
-
 
             // create a map based on the input web map id
             arcgisUtils.createMap(itemInfo, "mapDiv", {
