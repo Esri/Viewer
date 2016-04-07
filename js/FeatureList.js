@@ -191,7 +191,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     if(!preselected) {
                         window._prevSelected = null;
                     } else {
-                        var checkbox = query("#featureButton_"+preselected.attributes[r.objectIdFieldName])[0];
+                        var checkbox = query("#featureButton_"+window._prevSelected)[0];
                         checkbox.checked = true;
                         window.featureExpand(checkbox, true);
                     }
@@ -228,7 +228,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
 
                     q = new Query();
                     q.where = "["+objectIdFieldName+"]='"+fid+"'";
-                    q.outFields = ['"'+objectIdFieldName+'"'];                    q.returnGeometry = true;
+                    q.outFields = ['"'+objectIdFieldName+'"'];                    
+                    q.returnGeometry = true;
                     r.task.execute(q).then(function(ev) {
                         if(panOnly) {
                             layer._map.centerAt(ev.features[0].geometry);
@@ -305,22 +306,25 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     content = string.substitute(content, attributes);
                     listTemplate=string.substitute(listTemplate, attributes);
                     var result =  string.substitute(listTemplate, attributes);
-                    var re = /(FORMAT_(DATE|NUM)\((-?\d*\.?\d*),\"(.+)\"\))/gm;
+                    var re = /((>)((?:http:\/\/www\.|https:\/\/www\.|ftp:\/\/www.|www\.)[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(?:\/.*)?)(?:<))|(FORMAT_(DATE|NUM)\((-?\d*\.?\d*),\"(.+)\"\))/gm;
                     do {
                         var matches = re.exec(result);
                         if(!matches) break;
-                        if(!matches[3] || matches[3] == '') {
-                            result = result.replace(matches[1], '');;
+                        if(matches[6] && (!matches[7] || matches[7] === '')) {
+                            result = result.replace(matches[5], '');
                         }
-                        if(matches[2]==="DATE") {
-                            var date = new Date(Number(matches[3]));
-                            result = result.replace(matches[1], date.toLocaleDateString("en-US", {
+                        if(matches[2]===">") {
+                            result = result.replace(matches[3], "<a href='"+matches[3]+"' target='_blank'>More Info</a>");
+                        }
+                        else if(matches[6]==="DATE") {
+                            var date = new Date(Number(matches[7]));
+                            result = result.replace(matches[5], date.toLocaleDateString("en-US", {
                                 year: "numeric", month: "long", day: "numeric"
                             }));
                         }
-                        else if(matches[2]==="NUM") {
-                            var num = Number(matches[3]);
-                            result = result.replace(matches[1], num);
+                        else if(matches[6]==="NUM") {
+                            var num = Number(matches[7]).toFixed(matches[8]);
+                            result = result.replace(matches[5], num);
                         }
 
                     } while (true);
