@@ -42,30 +42,33 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             this.set("map", defaults.map);
             this.set("layers", defaults.layers);
 
-            // this.markerSymbol = new SimpleMarkerSymbol({
-                //   "color": [3,126,175,20],
-                //   "size": 30,
-                //   "xoffset": 0,
-                //   "yoffset": 0,
-                //   "type": "esriSMS",
-                //   "style": "esriSMSCircle",
-                //   "outline": {
-                //     "color": [3,26,255,220],
-                //     "width": 2,
-                //     "type": "esriSLS",
-                //     "style": "esriSLSSolid"
-                //   }
-                // });
-            window.markerSymbol = new esri.symbol.PictureMarkerSymbol({
-                "angle": 0,
-                "xoffset": 0,
-                "yoffset": 0,
-                "type": "esriPMS",
-                "url": require.toUrl("./images/ripple-dot1.gif"),
-                "contentType": "image/gif",
-                "width": 35,
-                "height": 35
-            });
+            if(options.animatedMarker) {
+                window.markerSymbol = new esri.symbol.PictureMarkerSymbol({
+                    "angle": 0,
+                    "xoffset": 0,
+                    "yoffset": 0,
+                    "type": "esriPMS",
+                    "url": require.toUrl("./"+options.markerImage),
+                    "contentType": "image/gif",
+                    "width": options.markerSize,
+                    "height": options.markerSize
+                });
+            } else {
+                window.markerSymbol = new SimpleMarkerSymbol({
+                      "color": [3,126,175,20],
+                      "size": options.markerSize,
+                      "xoffset": 0,
+                      "yoffset": 0,
+                      "type": "esriSMS",
+                      "style": "esriSMSCircle",
+                      "outline": {
+                        "color": [3,26,255,220],
+                        "width": 2,
+                        "type": "esriSLS",
+                        "style": "esriSLSSolid"
+                      }
+                    });
+            }
             this.css = {
             };
         },
@@ -117,7 +120,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             var loading_features = this.domNode.parentNode.querySelector('#loading_features');
             domStyle.set(loading_features, 'display', '-webkit-inline-box');
             var list = query("#featuresList")[0];
-//             domStyle.set(list, 'display', 'none');
             this.map.graphics.clear();
             window.tasks.filter(function(t) { return t.layer.visible && t.layer.visibleAtMapScale;}).forEach(lang.hitch(this.map, function(t) {
                 t.query.geometry = ext.extent;
@@ -133,7 +135,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         if(window.tasks[i].layer.visible && window.tasks[i].layer.visibleAtMapScale) {
                             r = results[i];
                             var layer = window.tasks[i].layer;
-                            //layer.clearSelection();
                             var content = '';
                             if(!layer.infoTemplate) {
                                 var x = 1;
@@ -175,16 +176,15 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                 if(window._prevSelected == f.attributes[r.objectIdFieldName]) {
                                     preselected = f;
                                 }
-    //                             if(f.attributes.Incident_Types && f.attributes.Incident_Types!=="") {
-                                    var featureListItem = this._getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
-                                    if(featureListItem)
-                                    {
-                                        domConstruct.create("li", {
-                                            tabindex : 0,
-                                            innerHTML : featureListItem
-                                        }, list);
-                                    }
-    //                             }
+
+                                var featureListItem = this._getFeatureListItem(i, f, r.objectIdFieldName, layer, content, listTemplate);
+                                if(featureListItem)
+                                {
+                                    domConstruct.create("li", {
+                                        tabindex : 0,
+                                        innerHTML : featureListItem
+                                    }, list);
+                                }
                             }
                         }
                     }
@@ -196,7 +196,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         window.featureExpand(checkbox, true);
                     }
                     domStyle.set(loading_features, 'display', 'none');
-//                     domStyle.set(list, 'display', '');
                 }
             );
         },
@@ -234,7 +233,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         if(panOnly) {
                             layer._map.centerAt(ev.features[0].geometry);
                         } else {
-                            layer._map.centerAndZoom(ev.features[0].geometry, 10);
+                            layer._map.centerAndZoom(ev.features[0].geometry, 13);
                         }
                     });
             };
@@ -328,6 +327,13 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         }
 
                     } while (true);
+
+//                     layer.queryAttachmentInfos(featureId).then(function(a) {
+//                         result = result.replace("</table>",'<tr><td/><td valign="top" align="right">Attachments</td><td valign="top">:</td><td valign="top"></td></tr></table>');
+//                         console.log(a,result);
+//                         }
+//                     );
+
                     return result;
                 } catch (e) {
                     console.log("Error on feature ("+featureId+")\n\t "+layer.infoTemplate.title(f)+"\n\t",e);
