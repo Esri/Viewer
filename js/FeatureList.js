@@ -146,7 +146,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                     var fieldName = '${'+pField.fieldName+'}';
                                     content+='<tr class="featureItem_${_featureId} hideAttr" tabindex="0">\n';
                                     content+='    <td valign="top">\n';
-                                    content+='      <img src="..\\images\\Filter0.png" alt="filter" class="filterBtn"/>\n';
+                                    content+='      <!--<img src="..\\images\\Filter0.png" alt="filter" class="filterBtn"/>-->\n';
                                     content+='    </td>\n';
                                     content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
                                     content+='    <td valign="top">:</td>\n';
