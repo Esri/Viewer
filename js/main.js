@@ -311,6 +311,9 @@ define(["dojo/ready",
                         case "features":
                             toolList.push(this._addFeatures(this.config.tools[i], toolbar));
                             break;
+                        case "filter":
+                            toolList.push(this._addFilter(this.config.tools[i], toolbar));
+                            break;
                         case "legend":
                             toolList.push(this._addLegend(this.config.tools[i], toolbar));
                             break;
@@ -326,9 +329,9 @@ define(["dojo/ready",
                         case "measure":
                             toolList.push(this._addMeasure(this.config.tools[i], toolbar));
                             break;
-                        // case "edit":
-                        //     toolList.push(this._addEditor(this.config.tools[i], toolbar));
-                        //     break;
+                        case "edit":
+                            toolList.push(this._addEditor(this.config.tools[i], toolbar));
+                            break;
                         case "share":
                             toolList.push(this._addShare(this.config.tools[i], toolbar));
                             break;
@@ -436,7 +439,7 @@ define(["dojo/ready",
                 }
             });
 
-            if(!this.config.alt_keys) {
+            if(this.config.alt_keys) {
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 1',
@@ -520,7 +523,7 @@ define(["dojo/ready",
 
         featureList : null,
 
-        _addFeatures: function (tool, toolbar, panelClass) {
+        _addFeatures: function (tool, toolbar) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
             if (has("features")) {
@@ -548,11 +551,36 @@ define(["dojo/ready",
             return deferred.promise;
         },
         
-        _addBasemapGallery: function (tool, toolbar, panelClass) {
+        _addFilter: function (tool, toolbar) {
+            //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
+            var deferred = new Deferred();
+            if (has("filter")) {
+                var filterDiv = toolbar.createTool(tool, "");
+
+                var layers = this.config.response.itemInfo.itemData.operationalLayers;
+                
+                // filter = new Filter({
+                //     map: this.map,
+                //     layers: layers,
+                //     toolbar: toolbar,
+                // }, filterDiv);
+                // filter.startup();
+
+                deferred.resolve(true);
+            } 
+            else {
+                // window._prevSelected = null;
+                deferred.resolve(false);
+            }
+        
+            return deferred.promise;
+        },
+        
+        _addBasemapGallery: function (tool, toolbar) {
             //Add the basemap gallery to the toolbar.
             var deferred = new Deferred();
             if (has("basemap")) {
-                var basemapDiv = toolbar.createTool(tool, panelClass);
+                var basemapDiv = toolbar.createTool(tool);
                 var basemap = new BasemapGallery({
                     id: "basemapGallery",
                     map: this.map,
@@ -595,7 +623,7 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addBookmarks: function (tool, toolbar, panelClass) {
+        _addBookmarks: function (tool, toolbar) {
             //Add the bookmarks tool to the toolbar. 
             //Only activated if the webmap contains bookmarks.
             var deferred = new Deferred();
@@ -606,7 +634,7 @@ define(["dojo/ready",
                         deferred.resolve(false);
                         return;
                     }
-                    var bookmarkDiv = toolbar.createTool(tool, panelClass);
+                    var bookmarkDiv = toolbar.createTool(tool);
                     var bookmarks = new Bookmarks({
                         map: this.map,
                         bookmarks: this.config.response.itemInfo.itemData.bookmarks
@@ -640,14 +668,14 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addDetails: function (tool, toolbar, panelClass) {
+        _addDetails: function (tool, toolbar) {
             //Add the default map description panel
             var deferred = new Deferred();
             if (has("details")) {
                 var description = this.config.description || this.config.response.itemInfo.item.description || this.config.response.itemInfo.item.snippet;
                 if (description) {
 
-                    var detailDiv = //toolbar.createTool(tool, panelClass);
+                    var detailDiv = //toolbar.createTool(tool);
                         domConstruct.create('div',{
                         id:"detailDiv",
                         class:"margin",
@@ -663,14 +691,14 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addEditor: function (tool, toolbar, panelClass) {
+        _addEditor: function (tool, toolbar) {
 
             //Add the editor widget to the toolbar if the web map contains editable layers
             var deferred = new Deferred();
             this.editableLayers = this._getEditableLayers(this.config.response.itemInfo.itemData.operationalLayers);
             if (has("edit") && this.editableLayers.length > 0) {
                 if (this.editableLayers.length > 0) {
-                    this.editorDiv = toolbar.createTool(tool, panelClass);
+                    this.editorDiv = toolbar.createTool(tool);
                     return this._createEditor();
                 } else {
                     console.log("No Editable Layers");
@@ -741,7 +769,7 @@ define(["dojo/ready",
             }
         },
 
-        _addLayers: function (tool, toolbar, panelClass) {
+        _addLayers: function (tool, toolbar) {
             //Toggle layer visibility if web map has operational layers
             var deferred = new Deferred();
 
@@ -753,7 +781,7 @@ define(["dojo/ready",
                 if (has("layers")) {
                     panelClass = "";
 
-                    var layersDiv = toolbar.createTool(tool, panelClass);
+                    var layersDiv = toolbar.createTool(tool);
                     var layersDivDesc = domConstruct.create("div", {class:'margin'}, layersDiv);
 
                     var toc = new TableOfContents({
@@ -770,7 +798,7 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addInstructions: function (tool, toolbar, panelClass) {
+        _addInstructions: function (tool, toolbar) {
             var deferred = new Deferred();
             if (!has("instructions")) {
                deferred.resolve(false);
@@ -788,7 +816,7 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addLegend: function (tool, toolbar, panelClass) {
+        _addLegend: function (tool, toolbar) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
             var layers = arcgisUtils.getLegendLayers(this.config.response);
@@ -853,12 +881,12 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addMeasure: function (tool, toolbar, panelClass) {
+        _addMeasure: function (tool, toolbar) {
             //Add the measure widget to the toolbar.
             var deferred = new Deferred();
             if (has("measure")) {
 
-                var measureDiv = toolbar.createTool(tool, panelClass);
+                var measureDiv = toolbar.createTool(tool);
                 var areaUnit = (this.config.units === "metric") ? "esriSquareKilometers" : "esriSquareMiles";
                 var lengthUnit = (this.config.units === "metric") ? "esriKilometers" : "esriMiles";
 
@@ -917,12 +945,12 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addOverviewMap: function (tool, toolbar, panelClass) {
+        _addOverviewMap: function (tool, toolbar) {
             //Add the overview map to the toolbar
             var deferred = new Deferred();
 
             if (has("overview")) {
-                var ovMapDiv = toolbar.createTool(tool, panelClass);
+                var ovMapDiv = toolbar.createTool(tool);
                 // domClass.add(ovMapDiv, 'margin');
                 // domStyle.set(ovMapDiv, {
                 //     // "height": "100%",
@@ -1035,7 +1063,7 @@ define(["dojo/ready",
             }));
         },
 
-        _addPrint: function (tool, toolbar, panelClass) {
+        _addPrint: function (tool, toolbar) {
             //Add the print widget to the toolbar. TODO: test custom layouts.
             var deferred = new Deferred(),
             legendNode = null,
@@ -1053,7 +1081,7 @@ define(["dojo/ready",
                     return;
                 }
 
-                var printDiv = toolbar.createTool(tool, panelClass);
+                var printDiv = toolbar.createTool(tool);
 
                 //get format
                 this.format = "PDF"; //default if nothing is specified
@@ -1212,14 +1240,14 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addShare: function (tool, toolbar, panelClass) {
+        _addShare: function (tool, toolbar) {
             //Add share links for facebook, twitter and direct linking.
             //Add the measure widget to the toolbar.
             var deferred = new Deferred();
 
             if (has("share")) {
 
-                var shareDiv = toolbar.createTool(tool, panelClass);
+                var shareDiv = toolbar.createTool(tool);
                 // var shareDivMargin = domConstruct.create('div',{class:'margin'}, shareDiv);
                 var shareDialog = new ShareDialog({
                     bitlyLogin: this.config.bitlyLogin,

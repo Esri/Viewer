@@ -48,6 +48,7 @@ define({
         	"home": "Default extent",
         	"locate": "Find my location",
             "features" : "Feature list",
+            "filter" : "Filters",
             "instructions": "Instructions",
             "legend": "Legend",
         	"bookmarks": "Bookmarks",

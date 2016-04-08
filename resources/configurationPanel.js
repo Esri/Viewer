@@ -145,6 +145,10 @@
                      "value":"features"
                   },
                   {  
+                     "label":"Filters",
+                     "value":"filter"
+                  },
+                  {  
                      "label":"Legend",
                      "value":"legend"
                   },
