@@ -127,10 +127,10 @@ input[type=checkbox].checkbox {
 
 #mapDiv {
   /* position: fixed; */
-  padding: 0;
+  padding: 1px;
   margin: 0;
-  width: 100% !important;
-  height: 100% !important;
+  width: calc(100% - 2px) !important;
+  height: calc(100% - 2px) !important;
   }
 
 .loading-indicator {
