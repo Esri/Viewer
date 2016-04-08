@@ -4,11 +4,26 @@
 
    <div class="content">
        <div id="filterContent_${id}" class="contentInner">
-       <div class="filterButtons">
-       		<input type="button" value="Apply" />
-       		<input type="button" value="Ignore" />
-       		<input type="button" value="Save" />
-       </div>
-       </div>
+	       <div class="filterContent">
+	       	<ul id="filtersList_${id}"></ul>
+		       <div class="filterAdd">
+		       		<label for="fields_${id}">Field:</label> 
+		       		<select id="fields_${id}" autofocus tabindex=0>
+		       		</select>
+		       		<!-- <label for="addMode_${id}">Action:</label> 
+		       		<select id="addMode_${id}" autofocus tabindex=0>
+			       		<option value="and">And</option>
+			       		<option value="or">Or</option>
+		       		</select> -->
+		       		<input type="button" value="Add" onclick="filterAdd(this, '${id}')"/>
+		       		</div>
+		       </div>
+		       <div class="filterButtons">
+		       		<input type="button" value="Apply" />
+		       		<input type="button" value="Ignore" />
+		       		<input type="button" value="Save" />
+		       </div>
+	       </div>
+	   </div>
    </div> 
 </div>

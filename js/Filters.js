@@ -41,10 +41,9 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
             // properties
             this.set("map", defaults.map);
             this.set("layers", defaults.layers.filter(function(l){return l.visibility;}));
-            var filters = {};
-            this.set("filters",[]);
+            window.filters = [];
             defaults.layers.filter(function(l){return l.visibility;}).forEach(lang.hitch(this,function(layer){
-                this.filters.push({"layer": layer, fields:layer.popupInfo.fieldInfos.filter(function(l){return l.visible;})});
+                window.filters.push({id: layer.id, "layer": layer, fields:layer.popupInfo.fieldInfos.filter(function(l){return l.visible;})});
             }));
             this.css = {
             };
@@ -70,9 +69,21 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
                 var tab = string.substitute(template, {id:filter.layer.id, name:filter.layer.layerObject.name});
                 filtersTabs.innerHTML += tab;
             };
-            this.filters.forEach(function(filter){
+            window.filters.forEach(function(filter){
                 addTab(filter, filterTabTemplate);
+                var fieldsCombo = dom.byId("fields_"+filter.layer.id);
+                filter.fields.forEach(lang.hitch(this, function(fl){
+                    fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'">'+fl.label+'</option>';
+                }));
             });
+
+            window.filterAdd = function(btn, id) {
+                var fieldId = dom.byId('fields_'+id).value;
+                var field = window.filters.find(function(i) {return i.id === id;}).fields.find(function(f) {return f.fieldName === fieldId});
+                var fieldItem = '<li><div>'+field.label+'</div></li>';
+                var filtersList = dom.byId("filtersList_"+id);
+                filtersList.innerHTML+=fieldItem;
+            };
         },
 
     });
