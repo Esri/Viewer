@@ -3,7 +3,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dojo/Deferred", "dojo/promise/all", 
     "dojo/query", 
     "esri/tasks/query", "esri/tasks/QueryTask",
-    // "dojo/text!application/dijit/templates/FeatureList.html", 
+    "dojo/text!application/dijit/templates/FilterTemplate.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
     "dojo/text!application/dijit/templates/FeatureListTemplate.html",
@@ -17,16 +17,16 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         Deferred, all, 
         query,
         Query, QueryTask,
-        // FeatureList, 
+        FilterTemplate, 
         domClass, domAttr, domStyle, domConstruct, event, 
         string,
         listTemplate,
         SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
         InfoWindow
     ) {
-    var Widget = declare("esri.dijit.Filter", [_WidgetBase, _TemplatedMixin, Evented], {
+    var Widget = declare("esri.dijit.Filters", [_WidgetBase, _TemplatedMixin, Evented], {
         // defaults
-        // templateString: FeatureList,
+        templateString: FilterTemplate,
 
         options: {
             map: null,
@@ -41,7 +41,30 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             // properties
             this.set("map", defaults.map);
             this.set("layers", defaults.layers);
-        }
+            this.css = {
+            };
+        },
+
+        startup: function () {
+            if (!this.map) {
+                this.destroy();
+                console.log("Filter::map required");
+            }
+            if (this.map.loaded) {
+                this._init();
+            } else {
+                on.once(this.map, "load", lang.hitch(this, function () {
+                    this._init();
+                }));
+            }
+        },
+
+        _init: function () {
+        },
 
     });
+    if (has("extend-esri")) {
+        lang.setObject("dijit.Filters", Widget, esriNS);
+    }
+    return Widget;
 });

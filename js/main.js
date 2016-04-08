@@ -27,7 +27,7 @@ define(["dojo/ready",
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
     "esri/layers/FeatureLayer",
-    "application/FeatureList", "application/TableOfContents", "application/ShareDialog",
+    "application/FeatureList", "application/Filters", "application/TableOfContents", "application/ShareDialog",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
     "dojo/text!application/dijit/templates/instructions.html",
@@ -46,7 +46,7 @@ define(["dojo/ready",
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
     FeatureLayer, 
-    FeatureList, TableOfContents, ShareDialog,
+    FeatureList, Filters, TableOfContents, ShareDialog,
     SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
     InfoWindow,
     instructionsText) {
@@ -425,6 +425,8 @@ define(["dojo/ready",
                         var upper = query(activeElement).parent().closest('[tabindex=0]');
                         if(upper && upper.length>= 1) {
                             upper[0].focus();
+                        } else {
+                            skipToMap();
                         }
                         break;
                 }
@@ -559,12 +561,12 @@ define(["dojo/ready",
 
                 var layers = this.config.response.itemInfo.itemData.operationalLayers;
                 
-                // filter = new Filter({
-                //     map: this.map,
-                //     layers: layers,
-                //     toolbar: toolbar,
-                // }, filterDiv);
-                // filter.startup();
+                filter = new Filters({
+                    map: this.map,
+                    layers: layers,
+                    toolbar: toolbar,
+                }, filterDiv);
+                filter.startup();
 
                 deferred.resolve(true);
             } 
