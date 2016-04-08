@@ -1656,6 +1656,7 @@ td, th {
   border: transparent;
   border-width: 10px;
   border-style: solid;
+  height: calc(100% - 35px);
 }
 
 .app-loading .loading-indicator {

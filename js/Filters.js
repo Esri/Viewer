@@ -1,4 +1,4 @@
-define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "esri/kernel", 
+define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/kernel", 
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
     "dojo/Deferred", "dojo/promise/all", 
     "dojo/query", 
@@ -6,21 +6,21 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dojo/text!application/dijit/templates/FilterTemplate.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
-    "dojo/text!application/dijit/templates/FeatureListTemplate.html",
+    "dojo/text!application/dijit/templates/FilterTabTemplate.html",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
     
     ], function (
-        Evented, declare, lang, has, esriNS,
-        _WidgetBase, _TemplatedMixin, on, 
+        Evented, declare, lang, has, dom, esriNS,
+        _WidgetBase, _TemplatedMixin, on,
         Deferred, all, 
         query,
         Query, QueryTask,
         FilterTemplate, 
         domClass, domAttr, domStyle, domConstruct, event, 
         string,
-        listTemplate,
+        filterTabTemplate,
         SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
         InfoWindow
     ) {
@@ -40,7 +40,12 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             this.domNode = srcRefNode;
             // properties
             this.set("map", defaults.map);
-            this.set("layers", defaults.layers);
+            this.set("layers", defaults.layers.filter(function(l){return l.visibility;}));
+            var filters = {};
+            this.set("filters",[]);
+            defaults.layers.filter(function(l){return l.visibility;}).forEach(lang.hitch(this,function(layer){
+                this.filters.push({"layer": layer, fields:layer.popupInfo.fieldInfos.filter(function(l){return l.visible;})});
+            }));
             this.css = {
             };
         },
@@ -60,6 +65,14 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         },
 
         _init: function () {
+            var filtersTabs = dom.byId("filtersTabs");
+            var addTab = function(filter, template) {
+                var tab = string.substitute(template, {id:filter.layer.id, name:filter.layer.layerObject.name});
+                filtersTabs.innerHTML += tab;
+            };
+            this.filters.forEach(function(filter){
+                addTab(filter, filterTabTemplate);
+            });
         },
 
     });
