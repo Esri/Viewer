@@ -43,7 +43,15 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
             this.set("layers", defaults.layers.filter(function(l){return l.visibility;}));
             window.filters = [];
             defaults.layers.filter(function(l){return l.visibility;}).forEach(lang.hitch(this,function(layer){
-                window.filters.push({id: layer.id, "layer": layer, fields:layer.popupInfo.fieldInfos.filter(function(l){return l.visible;})});
+                window.filters.push({
+                    id: layer.id, 
+                    layer: layer, 
+                    fields:layer.popupInfo.fieldInfos.filter(function(l){return l.visible;})
+                });
+
+                // layer.layerObject.fields.filter(function(f){return f.name == field.Id;}).type
+                // esriFieldTypeString, esriFieldTypeDate, esriFieldTypeDouble, esriFieldTypeInteger,
+                // esriFieldTypeOID, 
             }));
             this.css = {
             };
@@ -80,6 +88,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
             window.filterAdd = function(btn, id) {
                 var fieldId = dom.byId('fields_'+id).value;
                 var field = window.filters.find(function(i) {return i.id === id;}).fields.find(function(f) {return f.fieldName === fieldId});
+                console.log(field);
                 var fieldItem = '<li><div>'+field.label+'</div></li>';
                 var filtersList = dom.byId("filtersList_"+id);
                 filtersList.innerHTML+=fieldItem;
