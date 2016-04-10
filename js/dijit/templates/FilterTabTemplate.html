@@ -2,7 +2,7 @@
    <input type="radio" id="tab-${id}" name="tab-group-1" checked>
    <label for="tab-${id}">${name}</label>
 
-   <div class="content">
+   <div class="tabContent">
        <div id="filterContent_${id}" class="contentInner">
 	       <div class="filterContent">
 	       	<ul id="filtersList_${id}"></ul>
@@ -15,13 +15,13 @@
 			       		<option value="and">And</option>
 			       		<option value="or">Or</option>
 		       		</select> -->
-		       		<input type="button" value="Add" onclick="filterAdd(this, '${id}')"/>
+		       		<input type="button" class="pageBtn" value="Add" onclick="filterAdd(this, '${id}')"/>
 		       		</div>
 		       </div>
 		       <div class="filterButtons">
-		       		<input type="button" value="Apply" />
-		       		<input type="button" value="Ignore" />
-		       		<input type="button" value="Save" />
+		       		<input type="button" class="pageBtn" value="Apply" />
+		       		<input type="button" class="pageBtn" value="Ignore" />
+		       		<input type="button" class="pageBtn" value="Save" />
 		       </div>
 	       </div>
 	   </div>

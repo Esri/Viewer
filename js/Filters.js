@@ -7,6 +7,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
     "dojo/text!application/dijit/templates/FilterTabTemplate.html",
+    "dojo/text!application/dijit/templates/FilterItemTemplate.html",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
@@ -20,7 +21,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
         FilterTemplate, 
         domClass, domAttr, domStyle, domConstruct, event, 
         string,
-        filterTabTemplate,
+        filterTabTemplate, filterItemTemplate,
         SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
         InfoWindow
     ) {
@@ -49,9 +50,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
                     fields:layer.popupInfo.fieldInfos.filter(function(l){return l.visible;})
                 });
 
-                // layer.layerObject.fields.filter(function(f){return f.name == field.Id;}).type
-                // esriFieldTypeString, esriFieldTypeDate, esriFieldTypeDouble, esriFieldTypeInteger,
-                // esriFieldTypeOID, 
             }));
             this.css = {
             };
@@ -87,12 +85,27 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
 
             window.filterAdd = function(btn, id) {
                 var fieldId = dom.byId('fields_'+id).value;
-                var field = window.filters.find(function(i) {return i.id === id;}).fields.find(function(f) {return f.fieldName === fieldId});
+                var field = window.filters.find(function(i) {return i.id === id;}).fields.find(function(f) {return f.fieldName === fieldId;});
                 console.log(field);
-                var fieldItem = '<li><div>'+field.label+'</div></li>';
+                
                 var filtersList = dom.byId("filtersList_"+id);
-                filtersList.innerHTML+=fieldItem;
+                // 
+                // esriFieldTypeString, esriFieldTypeDate, esriFieldTypeDouble, esriFieldTypeInteger,
+                // esriFieldTypeOID, 
+                var layer = window.filters.find(function(f){return f.id === id;}).layer;
+
+                var typ = layer.layerObject.fields.find(function(f){return f.name == field.fieldName;}).type;
+                console.log(typ);
+
+                var filterItem = string.substitute(filterItemTemplate, {field_label: field.label, content:''});
+                filtersList.innerHTML+=filterItem;
             };
+
+            window.filterRemove = function(btn) {
+                var li = btn.closest('li');
+                li.remove();
+            };
+
         },
 
     });

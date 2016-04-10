@@ -20,7 +20,7 @@
 .tab [type=radio] {
   display: none;   
 }
-.content {
+.tabContent {
   position: absolute;
   top: 22px;
   left: 0;
@@ -38,12 +38,12 @@
   width: 100%;
 }
 
-[type=radio]:checked ~ label {
+.tab [type=radio]:checked ~ label {
   background: white;
   border-bottom: 1px solid white;
   z-index: 2;
 }
-[type=radio]:checked ~ label ~ .content {
+.tab [type=radio]:checked ~ label ~ .tabContent {
   z-index: 1;
 }
 
@@ -71,7 +71,7 @@
 }
 
 .filterContent ul {list-style-type: none;-webkit-margin-before: 0;-webkit-margin-after: 0;-webkit-margin-start: 0px;-webkit-margin-end: 0px;-webkit-padding-start: 0;/* border-color: gray; *//* border-width: 1px; *//* border-style: solid; *//* padding: 10px; *//* margin-bottom: 10px; */}
-.filterContent ul li div {
+.filterContent ul li {
     border-color: gray;
     border-width: 1px;
     border-style: solid;
