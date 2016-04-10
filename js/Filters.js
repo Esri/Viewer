@@ -8,6 +8,11 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
     "dojo/string", 
     "dojo/text!application/dijit/templates/FilterTabTemplate.html",
     "dojo/text!application/dijit/templates/FilterItemTemplate.html",
+    "dojo/text!application/dijit/templates/FilterString.html",
+    "dojo/text!application/dijit/templates/FilterDate.html",
+    "dojo/text!application/dijit/templates/FilterInteger.html",
+    "dojo/text!application/dijit/templates/FilterDouble.html",
+    "dojo/text!application/dijit/templates/FilterOID.html",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
@@ -21,7 +26,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
         FilterTemplate, 
         domClass, domAttr, domStyle, domConstruct, event, 
         string,
-        filterTabTemplate, filterItemTemplate,
+        filterTabTemplate, filterItemTemplate, 
+        filterString, filterDate, filterInteger, filterDouble, filterOID,
         SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
         InfoWindow
     ) {
@@ -93,11 +99,32 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
                 // esriFieldTypeString, esriFieldTypeDate, esriFieldTypeDouble, esriFieldTypeInteger,
                 // esriFieldTypeOID, 
                 var layer = window.filters.find(function(f){return f.id === id;}).layer;
-
                 var typ = layer.layerObject.fields.find(function(f){return f.name == field.fieldName;}).type;
-                console.log(typ);
 
-                var filterItem = string.substitute(filterItemTemplate, {field_label: field.label, content:''});
+                var content = '';
+                console.log(typ);
+                switch(typ) {
+                    case "esriFieldTypeString":
+                        content = filterString;
+                        break;
+                    case "esriFieldTypeDate":
+                        content = filterDate;
+                        break;
+                    case "esriFieldTypeDouble":
+                        content = filterDouble;
+                        break;
+                    case "esriFieldTypeInteger":
+                        content = filterInteger;
+                        break;
+                    case "esriFieldTypeOID":
+                        content = filterOID;
+                        break;
+                }
+
+                var filterItem = string.substitute(filterItemTemplate, {
+                    field:field.fieldName, 
+                    field_label: field.label, 
+                    content:content});
                 filtersList.innerHTML+=filterItem;
             };
 
