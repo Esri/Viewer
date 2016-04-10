@@ -2,7 +2,8 @@
 	<div>
 		<input type="checkbox" checked aria-label="Active"/>
 		<h2 style="display:inline;">${field_label}</h2>
-		<input type="button" value="Remove" class="pageBtn" style="float:right;" onclick="filterRemove(this);"/>
+		<!-- <input type="button" value="Remove" class="pageBtn" style="float:right;" onclick="filterRemove(this);"/> -->
+		<input type="button" value="Remove" class="pageBtn" style="float:right;" data-dojo-attach-event="onclick: filterRemove"/>
 	</div>
 	${content}
 </li>

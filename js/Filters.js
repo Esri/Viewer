@@ -6,6 +6,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
     "dojo/text!application/dijit/templates/FilterTemplate.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
+    "application/FilterItem", 
     "dojo/text!application/dijit/templates/FilterTabTemplate.html",
     "dojo/text!application/dijit/templates/FilterItemTemplate.html",
     "dojo/text!application/dijit/templates/FilterString.html",
@@ -26,6 +27,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
         FilterTemplate, 
         domClass, domAttr, domStyle, domConstruct, event, 
         string,
+        FilterItem,
         filterTabTemplate, filterItemTemplate, 
         filterString, filterDate, filterInteger, filterDouble, filterOID,
         SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
@@ -129,16 +131,11 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
                     field_label: field.label, 
                     content:string.substitute(content, {field:field.fieldName})
                 });
-                filtersList.innerHTML+=filterItem;
+                //filtersList.innerHTML+=filterItem;
 
-                // if(typ==="esriFieldTypeDate") {
-                //     require(["dojo/parser", "dojo/ready"], function(parser, ready){
-                //       ready(function(){
-                //         alert('hi');
-                //         parser.parse();
-                //       });
-                //     });               
-                // }
+                var myDiv = document.createElement('li');
+                filtersList.appendChild(myDiv);
+                var itemItem = new FilterItem({map:this.map, layer:layer, field:field}, myDiv);
             };
 
             window.filterRemove = function(btn) {
