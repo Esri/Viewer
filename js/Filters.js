@@ -1,5 +1,5 @@
 define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/kernel", 
-    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
+    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on", "dijit/form/DateTextBox",
     "dojo/Deferred", "dojo/promise/all", 
     "dojo/query", 
     "esri/tasks/query", "esri/tasks/QueryTask",
@@ -19,7 +19,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
     
     ], function (
         Evented, declare, lang, has, dom, esriNS,
-        _WidgetBase, _TemplatedMixin, on,
+        _WidgetBase, _TemplatedMixin, on, DateTextBox, 
         Deferred, all, 
         query,
         Query, QueryTask,
@@ -130,6 +130,15 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
                     content:string.substitute(content, {field:field.fieldName})
                 });
                 filtersList.innerHTML+=filterItem;
+
+                // if(typ==="esriFieldTypeDate") {
+                //     require(["dojo/parser", "dojo/ready"], function(parser, ready){
+                //       ready(function(){
+                //         alert('hi');
+                //         parser.parse();
+                //       });
+                //     });               
+                // }
             };
 
             window.filterRemove = function(btn) {
