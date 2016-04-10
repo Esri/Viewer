@@ -121,10 +121,12 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
                         break;
                 }
 
+
                 var filterItem = string.substitute(filterItemTemplate, {
                     field:field.fieldName, 
                     field_label: field.label, 
-                    content:content});
+                    content:string.substitute(content, {field:field.fieldName})
+                });
                 filtersList.innerHTML+=filterItem;
             };
 
