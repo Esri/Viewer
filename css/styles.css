@@ -1695,8 +1695,6 @@ td, th {
     border-right: 2px solid #FFF;
     border-bottom: 2px solid #FFF;
     background-color: #002C61;
-    /* width: 1px; */
-    /* height: 1px; */
     overflow: hidden;
     margin: 0;
     padding: 0;
@@ -1712,11 +1710,11 @@ td, th {
 
 .skip {
     position: relative;
-    width: 30%;
-    right: 1px;
+    /* width: 30%; */
+    /* right: 1px; */
+    left: 5px;
     top: 6px;
     height: 20px;
-    /* float: right; */
     white-space: nowrap;
     display: inline;
     font-size: 22px;

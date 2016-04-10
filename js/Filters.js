@@ -77,16 +77,18 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
 
         _init: function () {
             var filtersTabs = dom.byId("filtersTabs");
-            var addTab = function(filter, template) {
-                var tab = string.substitute(template, {id:filter.layer.id, name:filter.layer.layerObject.name});
+            var addTab = function(filter, template, ck) {
+                var tab = string.substitute(template, {id:filter.layer.id, name:filter.layer.layerObject.name, checked:ck});
                 filtersTabs.innerHTML += tab;
             };
+            var ck='checked';
             window.filters.forEach(function(filter){
-                addTab(filter, filterTabTemplate);
+                addTab(filter, filterTabTemplate, ck);
                 var fieldsCombo = dom.byId("fields_"+filter.layer.id);
                 filter.fields.forEach(lang.hitch(this, function(fl){
                     fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'">'+fl.label+'</option>';
                 }));
+                ck='';
             });
 
             window.filterAdd = function(btn, id) {
