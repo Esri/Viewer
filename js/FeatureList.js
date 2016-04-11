@@ -123,6 +123,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             this.map.graphics.clear();
             window.tasks.filter(function(t) { return t.layer.visible && t.layer.visibleAtMapScale;}).forEach(lang.hitch(this.map, function(t) {
                 t.query.geometry = ext.extent;
+                var exp=t.layer.getDefinitionExpression();
+                t.query.where = exp;
                 t.result = t.task.execute(t.query);
             }));
             promises = all(window.tasks.map(function(t) {return t.result;}));

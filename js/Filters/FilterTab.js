@@ -72,7 +72,7 @@ define([
 
         filterIgnore: function(btn) {
             var layer = this.filter.layer;
-            layer.layerObject.setDefinitionExpression("1 = 1");
+            layer.layerObject.setDefinitionExpression(null);
         },
     });
 
