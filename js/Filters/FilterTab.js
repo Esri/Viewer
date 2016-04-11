@@ -1,11 +1,13 @@
 define([
     "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready", "dojo/on", 
-    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel",
+    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel", 
+    "dojo/dom-style",
     "dojo/text!application/Filters/templates/FilterTab.html",
     "application/Filters/FilterString",
 ], function(
     Evented, declare, domConstruct, parser, ready, on,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
+    domStyle,
     FilterTab,
     FilterString){
     var Widget = declare("FilterTab", [_WidgetBase, _TemplatedMixin, Evented], {
@@ -57,6 +59,7 @@ define([
 
         filterApply: function(btn) {
             var layer = this.filter.layer;
+            domStyle.set(this.setIndicator,'display','');
             this.FilterItems.forEach(function(f) {
                 try {
                     var exp = f.filterField.getFilterExpresion();
@@ -66,13 +69,14 @@ define([
                     }
                 }
                 catch (er) {
-                };
+                }
             });
         },
 
         filterIgnore: function(btn) {
             var layer = this.filter.layer;
             layer.layerObject.setDefinitionExpression(null);
+            domStyle.set(this.setIndicator,'display','none');
         },
     });
 

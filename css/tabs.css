@@ -98,3 +98,11 @@
     border-width: 1px; border-style: solid; 
     margin: 0; 
   }
+
+  .setIndicator {
+    width: 15px;
+    height: 15px;
+    right: 0px;
+    top: -3px;
+    position: absolute;
+  }
