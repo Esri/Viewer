@@ -85,7 +85,7 @@ define([
                 return this.criteria.value;
             } else {
                 if(this.textInput.value !== '') {
-                    return "["+this.field.fieldName+"]"+this.criteria.value+"\""+this.textInput.value+"\"";
+                    return this.field.fieldName+this.criteria.value+"'"+this.textInput.value+"'";
                 }
                 else {
                     return null;

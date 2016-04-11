@@ -56,10 +56,15 @@ define([
         },
 
         filterApply: function(btn) {
+            var layer = this.filter.layer;
             this.FilterItems.forEach(function(f) {
                 try {
                     var exp = f.filterField.getFilterExpresion();
                     console.log(exp);
+                    if(exp) {
+//                         layer.layerObject._outFields = null;
+                        layer.layerObject.setDefinitionExpression(exp);
+                    }
                 }
                 catch (er) {
                 };
