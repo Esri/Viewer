@@ -41,7 +41,6 @@ define([
         },
 
         _init: function () {
-            domConstruct.create("div", {innerHTML: this.field.fieldName}, this.domNode);
             switch(this.field_Type) {
                 case "esriFieldTypeString" :
                     var filterString = new FilterString({map:this.map, layer:this.layer, field:this.field}, this.content);

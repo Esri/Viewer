@@ -96,46 +96,45 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
             window.filterAdd = function(btn, id) {
                 var fieldId = dom.byId('fields_'+id).value;
                 var field = window.filters.find(function(i) {return i.id === id;}).fields.find(function(f) {return f.fieldName === fieldId;});
-                console.log(field);
+//                 console.log(field);
                 
                 var filtersList = dom.byId("filtersList_"+id);
                 // 
                 // esriFieldTypeString, esriFieldTypeDate, esriFieldTypeDouble, esriFieldTypeInteger,
                 // esriFieldTypeOID, 
                 var layer = window.filters.find(function(f){return f.id === id;}).layer;
-                var typ = layer.layerObject.fields.find(function(f){return f.name == field.fieldName;}).type;
+//                 var typ = layer.layerObject.fields.find(function(f){return f.name == field.fieldName;}).type;
 
-                var content = '';
-                console.log(typ);
-                switch(typ) {
-                    case "esriFieldTypeString":
-                        content = filterString;
-                        break;
-                    case "esriFieldTypeDate":
-                        content = filterDate;
-                        break;
-                    case "esriFieldTypeDouble":
-                        content = filterDouble;
-                        break;
-                    case "esriFieldTypeInteger":
-                        content = filterInteger;
-                        break;
-                    case "esriFieldTypeOID":
-                        content = filterOID;
-                        break;
-                }
+//                 var content = '';
+//                 console.log(typ);
+//                 switch(typ) {
+//                     case "esriFieldTypeString":
+//                         content = filterString;
+//                         break;
+//                     case "esriFieldTypeDate":
+//                         content = filterDate;
+//                         break;
+//                     case "esriFieldTypeDouble":
+//                         content = filterDouble;
+//                         break;
+//                     case "esriFieldTypeInteger":
+//                         content = filterInteger;
+//                         break;
+//                     case "esriFieldTypeOID":
+//                         content = filterOID;
+//                         break;
+//                 }
 
 
-                var filterItem = string.substitute(filterItemTemplate, {
-                    field:field.fieldName, 
-                    field_label: field.label, 
-                    content:string.substitute(content, {field:field.fieldName})
-                });
+//                 var filterItem = string.substitute(filterItemTemplate, {
+//                     field:field.fieldName, 
+//                     field_label: field.label, 
+//                     content:string.substitute(content, {field:field.fieldName})
+//                 });
                 //filtersList.innerHTML+=filterItem;
 
-                var myDiv = document.createElement('li');
-                filtersList.appendChild(myDiv);
-                var itemItem = new FilterItem({map:layer.layerObject._map, layer:layer, field:field}, myDiv);
+                var itemItem = new FilterItem({map:layer.layerObject._map, layer:layer, field:field});//, myItem);
+                filtersList.appendChild(itemItem.domNode);
                 itemItem.startup();
             };
 

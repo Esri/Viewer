@@ -88,4 +88,13 @@
   ._filter {
     display:inline-block;
     padding-top: 10px;
+    width: 100%;
+  }
+
+  ._filter ._fieldExamples {
+    max-height: 80px; 
+    overflow: auto; 
+    width: calc(100% - 30px); 
+    border-width: 1px; border-style: solid; 
+    margin: 0; 
   }
