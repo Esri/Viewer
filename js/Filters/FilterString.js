@@ -63,6 +63,7 @@ define([
                         _query.where = "1=1";
                         _query.spatialRelationship = "esriSpatialRelIntersects";
                         _query.returnDistinctValues = true;
+                        _query.orderByFields = [this.field.fieldName];
                         var task = new QueryTask(this.layer.layerObject.url);
                         task.execute(_query).then(lang.hitch(this, function(results) {
                             console.log(results);

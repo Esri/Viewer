@@ -1,0 +1,23 @@
+<div class="tab">
+   <input id="${id}-tabName" type="radio" name="tab-group" ${checked}/>
+   <label for="${id}-tabName"><span tabindex=0>${filter_name}</span></label>
+
+   <div class="tabContent">
+       <div class="contentInner">
+	       <div class="filterContent">
+	       	<ul data-dojo-attach-point="filterList"></ul>
+		       <div class="filterAdd">
+		       		<label>Field:</label> 
+		       		<select autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
+		       		</select>
+		       		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd"/>
+		       </div>
+		       <div class="filterButtons">
+		       		<input type="button" class="pageBtn" value="Apply" data-dojo-attach-event="onclick: filterApply"/>
+		       		<input type="button" class="pageBtn" value="Ignore" data-dojo-attach-event="onclick: filterIgnore"/>
+		       		<input type="button" class="pageBtn" value="Save" />
+		       </div>
+	       </div>
+	   </div>
+   </div> 
+</div>

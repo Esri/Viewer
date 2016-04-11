@@ -1,7 +1,7 @@
 define([
     "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel",
-    "dojo/text!./templates/FilterItemTemplate.html",
+    "dojo/text!application/Filters/templates/FilterItem.html",
     "application/Filters/FilterString",
 ], function(
     declare, domConstruct, parser, ready, 
@@ -41,6 +41,9 @@ define([
         },
 
         _init: function () {
+            // esriFieldTypeString, esriFieldTypeDate, esriFieldTypeDouble, 
+            // esriFieldTypeInteger, esriFieldTypeOID, 
+
             switch(this.field_Type) {
                 case "esriFieldTypeString" :
                     var filterString = new FilterString({map:this.map, layer:this.layer, field:this.field}, this.content);
