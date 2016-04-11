@@ -1,9 +1,11 @@
 <div class="tab">
    <input id="${id}-tabName" type="radio" name="tab-group" ${checked}/>
-   <label for="${id}-tabName">
+   <label for="${id}-tabName" aria-label="${filter_name}">
    		<span tabindex=0>${filter_name}</span>
 		<img src="images/set.png" class="setIndicator" style="display:none;"
-		     data-dojo-attach-point="setIndicator"
+		     data-dojo-attach-point="setIndicator" 
+		     Alt="Some Fiters Apply" title="Some Fiters Apply" role="Presentation"
+		     tabindex=0
 		>
    	</label>
 
@@ -12,8 +14,8 @@
 	       <div class="filterContent">
 	       	<ul data-dojo-attach-point="filterList"></ul>
 		       <div class="filterAdd">
-		       		<label>Field:</label> 
-		       		<select autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
+		       		<label for="${id}-fieldsCombo">Field:</label> 
+		       		<select id="${id}-fieldsCombo" autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
 		       		</select>
 		       		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd"/>
 		       </div>

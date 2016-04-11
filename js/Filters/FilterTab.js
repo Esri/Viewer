@@ -54,7 +54,7 @@ define([
             filterItem.on("removeFilterItem", lang.hitch(this, function (id) {
                 this.FilterItems.splice(this.FilterItems.indexOf(filterItem), 1);
             }));
-     
+            filterItem.domNode.focus();
         },
 
         filterApply: function(btn) {

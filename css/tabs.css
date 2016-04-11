@@ -44,8 +44,13 @@
   border-bottom: 1px solid white;
   z-index: 2;
 }
+.tab [type=radio] ~ label ~ .tabContent {
+  display: none;
+}
+
 .tab [type=radio]:checked ~ label ~ .tabContent {
   z-index: 1;
+  display: inherit;
 }
 
 .tab span {
