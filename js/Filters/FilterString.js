@@ -42,7 +42,7 @@ define([
         },
 
         getListMode : function() {
-            return this.criteria.value === ' In ' || this.criteria.value === ' Not In ';
+            return this.criteria.value === ' IN ' || this.criteria.value === ' NOT IN ';
         },
 
         criteriaChanged: function(ev) {
@@ -85,17 +85,36 @@ define([
                 var list = Array.prototype.slice.call(this.listInput.children).filter(function(c) {
                     return c.nodeName=="INPUT" && c.checked;
                     }).map(function(c) { return c.value; });
-                if(!list || list.length == 0) 
+                if(!list || list.length === 0) 
                 {
                     return null;
                 }
                 else if(list.length == 1) {
-                    return this.field.fieldName+" = '"+list[0]+"'";
+                    var op = " = ";
+                    if(this.criteria.value.indexOf('NOT')>=0) {
+                        op = " != ";
+                    }
+                    return this.field.fieldName+op+"'"+list[0]+"'";
+                } else {
+                    var comma ='';
+                    var inList=list.reduce(function(previousValue, currentValue) {
+                        if(previousValue && previousValue!=='') 
+                            comma = ', ';
+                        return previousValue+"'"+comma+"'"+currentValue;
+                    });
+                    return this.field.fieldName+this.criteria.value + "('"+inList+"')";
                 }
-                return this.criteria.value;
             } else {
                 if(this.textInput.value !== '') {
-                    return this.field.fieldName+this.criteria.value+"'"+this.textInput.value+"'";
+                    var text = this.textInput.value;
+                    if(this.criteria.value.indexOf('LIKE')>=0){
+                        var re = /(.*%.*)|(.*_.*)|(\[.*\])/gm;
+                        var matches = re.exec(text);
+                        if(!matches || !matches.length === 0) {
+                            text += '%';
+                        }
+                    }
+                    return this.field.fieldName+this.criteria.value+"'"+text+"'";
                 }
                 else {
                     return null;
