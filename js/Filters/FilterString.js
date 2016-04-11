@@ -1,12 +1,12 @@
 define([
     "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel",
-    "dojo/text!application/dijit/templates/FilterItemTemplate.html"
+    "dojo/text!./templates/FilterString.html"
 ], function(
     declare, domConstruct, parser, ready, 
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
     FilterItemTemplate){
-    var Widget = declare("FilterItem", [_WidgetBase, _TemplatedMixin], {
+    var Widget = declare("FilterString", [_WidgetBase, _TemplatedMixin], {
         templateString: FilterItemTemplate,
 
         options: {
@@ -19,10 +19,6 @@ define([
             this.set("map", defaults.map);
             this.set("layer", defaults.layer);
             this.set("field", defaults.field);
-
-            this.set("field_label", this.field.fieldName);
-            this.set('field_Type', this.layer.layerObject.fields.find(lang.hitch(this, function(f){return f.name == this.field.fieldName;})).type);
-            this.set("content", this.field_Type);
         },
         
         startup: function () {
@@ -49,7 +45,7 @@ define([
     });
 
     if (has("extend-esri")) {
-        lang.setObject("dijit.FilterItem", Widget, esriNS);
+        lang.setObject("dijit.FilterString", Widget, esriNS);
     }
     return Widget;
 });

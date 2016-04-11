@@ -6,14 +6,14 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
     "dojo/text!application/dijit/templates/FilterTemplate.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
-    "application/FilterItem", 
+    "application/Filters/FilterItem", 
     "dojo/text!application/dijit/templates/FilterTabTemplate.html",
-    "dojo/text!application/dijit/templates/FilterItemTemplate.html",
-    "dojo/text!application/dijit/templates/FilterString.html",
-    "dojo/text!application/dijit/templates/FilterDate.html",
-    "dojo/text!application/dijit/templates/FilterInteger.html",
-    "dojo/text!application/dijit/templates/FilterDouble.html",
-    "dojo/text!application/dijit/templates/FilterOID.html",
+    "dojo/text!application/Filters/templates/FilterItemTemplate.html",
+    "dojo/text!application/Filters/templates/FilterString.html",
+    "dojo/text!application/Filters/templates/FilterDate.html",
+    "dojo/text!application/Filters/templates/FilterInteger.html",
+    "dojo/text!application/Filters/templates/FilterDouble.html",
+    "dojo/text!application/Filters/templates/FilterOID.html",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
@@ -135,7 +135,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "do
 
                 var myDiv = document.createElement('li');
                 filtersList.appendChild(myDiv);
-                var itemItem = new FilterItem({map:this.map, layer:layer, field:field}, myDiv);
+                var itemItem = new FilterItem({map:layer.layerObject._map, layer:layer, field:field}, myDiv);
+                itemItem.startup();
             };
 
             window.filterRemove = function(btn) {
