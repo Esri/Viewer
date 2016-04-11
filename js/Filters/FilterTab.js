@@ -63,7 +63,7 @@ define([
             this.FilterItems.forEach(function(f) {
                 try {
                     var exp = f.filterField.getFilterExpresion();
-                    console.log(exp);
+//                     console.log(exp);
                     if(exp) {
                         layer.layerObject.setDefinitionExpression(exp);
                     }

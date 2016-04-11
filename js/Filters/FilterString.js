@@ -82,6 +82,12 @@ define([
 
         getFilterExpresion: function() {
             if(this.getListMode()) {
+                var list = Array.prototype.slice.call(this.listInput.children).filter(function(c) {
+                    return c.nodeName=="INPUT" && c.checked;
+                    }).map(function(c) { return c.value; });
+                if(list.length == 1) {
+                    return this.field.fieldName+" = '"+list[0]+"'";
+                }
                 return this.criteria.value;
             } else {
                 if(this.textInput.value !== '') {
