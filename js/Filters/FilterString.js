@@ -41,13 +41,13 @@ define([
             this.domNode = domConstruct.create("div", {innerHTML: this.field.fieldName});
         },
 
-        filterRemove: function(btn) {
-            this.domNode.remove();
+        getListMode : function() {
+            return this.criteria.value === ' In ' || this.criteria.value === ' Not In ';
         },
 
         criteriaChanged: function(ev) {
-            var listMode = ev.target.value === 'In' || ev.target.value === 'NotIn';
-            switch(listMode) {
+//             var listMode = ev.target.value === 'In' || ev.target.value === 'NotIn';
+            switch(this.getListMode()) {
                 case false: 
                     domStyle.set(this.textInput,'display', '');
                     domStyle.set(this.listInput,'display', 'none');
@@ -70,7 +70,7 @@ define([
                             results.features.map(lang.hitch(this, function(f) { 
                                 return f.attributes[this.field.fieldName];})).forEach(lang.hitch(this, function(v) {
                                 if(v) {
-                                    console.log(v);
+//                                     console.log(v);
                                     this.listInput.innerHTML += '<input type="checkbox" value="'+v+'" />'+v+'<br />';
                                 }
                             }));
@@ -78,7 +78,20 @@ define([
                     }
                     break;
             }
-        }
+        },
+
+        getFilterExpresion: function() {
+            if(this.getListMode()) {
+                return this.criteria.value;
+            } else {
+                if(this.textInput.value !== '') {
+                    return "["+this.field.fieldName+"]"+this.criteria.value+"\""+this.textInput.value+"\"";
+                }
+                else {
+                    return null;
+                }
+            }
+        }    
     });
 
     if (has("extend-esri")) {

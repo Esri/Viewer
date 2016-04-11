@@ -1,14 +1,14 @@
 define([
-    "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready",
+    "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready", "dojo/on", 
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel",
     "dojo/text!application/Filters/templates/FilterTab.html",
     "application/Filters/FilterString",
 ], function(
-    declare, domConstruct, parser, ready, 
+    Evented, declare, domConstruct, parser, ready, on,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
     FilterTab,
     FilterString){
-    var Widget = declare("FilterTab", [_WidgetBase, _TemplatedMixin], {
+    var Widget = declare("FilterTab", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: FilterTab,
 
         options: {
@@ -18,15 +18,16 @@ define([
             var defaults = lang.mixin({}, this.options, options);
 
             this.domNode = srcRefNode;
-//             this.set("map", defaults.map);
-//             this.set("layer", defaults.layer);
             this.set("filter", defaults.filter);
 
             this.set("filter_name", this.filter.layer.resourceInfo.name);
             this.set("checked", defaults.checked);
+            this.set("FilterItems", []);
 
         },
         
+        FilterItems: [],
+
         startup: function () {
             this._init();
         },
@@ -35,7 +36,6 @@ define([
              this.filter.fields.forEach(lang.hitch(this, function(fl){
                  this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'">'+fl.label+'</option>';
              }));
-
         },
 
         filterAdd: function(ev) {
@@ -45,13 +45,25 @@ define([
             
             var layer = this.filter.layer;
 
-            var itemItem = new FilterItem({map:layer.layerObject._map, layer:layer, field:field});//, myItem);
-            this.filterList.appendChild(itemItem.domNode);
-            itemItem.startup();        
+            var filterItem = new FilterItem({map:layer.layerObject._map, layer:layer, field:field});//, myItem);
+            this.filterList.appendChild(filterItem.domNode);
+            filterItem.startup(); 
+            this.FilterItems.push(filterItem); 
+            filterItem.on("removeFilterItem", lang.hitch(this, function (id) {
+                this.FilterItems.splice(this.FilterItems.indexOf(filterItem), 1);
+            }));
+     
         },
 
         filterApply: function(btn) {
-            alert(1);
+            this.FilterItems.forEach(function(f) {
+                try {
+                    var exp = f.filterField.getFilterExpresion();
+                    console.log(exp);
+                }
+                catch (er) {
+                };
+            });
         },
 
         filterIgnore: function(btn) {

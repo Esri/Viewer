@@ -1,14 +1,14 @@
 define([
-    "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready",
+    "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel",
     "dojo/text!application/Filters/templates/FilterItem.html",
     "application/Filters/FilterString",
 ], function(
-    declare, domConstruct, parser, ready, 
+    Evented, declare, domConstruct, parser, ready, 
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
     FilterItemTemplate,
     FilterString){
-    var Widget = declare("FilterItem", [_WidgetBase, _TemplatedMixin], {
+    var Widget = declare("FilterItem", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: FilterItemTemplate,
 
         options: {
@@ -24,6 +24,7 @@ define([
 
             this.set("field_label", this.field.label);
             this.set('field_Type', this.layer.layerObject.fields.find(lang.hitch(this, function(f){return f.name == this.field.fieldName;})).type);
+            this.set('filterField', null);
         },
         
         startup: function () {
@@ -46,8 +47,8 @@ define([
 
             switch(this.field_Type) {
                 case "esriFieldTypeString" :
-                    var filterString = new FilterString({map:this.map, layer:this.layer, field:this.field}, this.content);
-                    filterString.startup();
+                    this.filterField = new FilterString({map:this.map, layer:this.layer, field:this.field}, this.content);
+                    this.filterField.startup();
                     break;
                 default : 
                     this.content.innerHTML = "Unknown Field Type: '"+this.field_Type+"'";
@@ -56,6 +57,8 @@ define([
         },
 
         filterRemove: function(btn) {
+            var id = this.domNode.id;
+            this.emit("removeFilterItem", {id:id});
             this.domNode.remove();
         },
     });

@@ -74,40 +74,15 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         },
 
         _init: function () {
-            //var filtersTabs = dom.byId("filtersTabs");
-//             var addTab = function(filter, template, ck) {
-//                 var tab = string.substitute(template, {id:filter.layer.id, name:filter.layer.layerObject.name, checked:ck});
-//                 filtersTabs.innerHTML += tab;
-//             };
             var ck='checked';
             window.filters.forEach(lang.hitch(this, function(filter){
                 var filterTabW = new FilterTab({filter:filter, checked:ck});
                 filterTabW.startup();
 
-                //this.filterTabs.append(filterTabW);
-                 dojo.place(filterTabW.domNode, this.filterTabs);
-//                 addTab(filter, filterTab, ck);
-//                 var fieldsCombo = dom.byId("fields_"+filter.layer.id);
-//                 filter.fields.forEach(lang.hitch(this, function(fl){
-//                     fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'">'+fl.label+'</option>';
-//                 }));
+                dojo.place(filterTabW.domNode, this.filterTabs);
                 ck='';
             }));
 
-        },
-
-        filterAdd :function(btn) {
-            alert(0);
-//             var fieldId = dom.byId('fields_'+id).value;
-//             var field = window.filters.find(function(i) {return i.id === id;}).fields.find(function(f) {return f.fieldName === fieldId;});
-// //                 console.log(field);
-            
-//             var filtersList = dom.byId("filtersList_"+id);
-//             var layer = window.filters.find(function(f){return f.id === id;}).layer;
-
-//             var itemItem = new FilterItem({map:layer.layerObject._map, layer:layer, field:field});//, myItem);
-//             filtersList.appendChild(itemItem.domNode);
-//             itemItem.startup();
         },
 
     });
