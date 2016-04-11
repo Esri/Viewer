@@ -22,7 +22,7 @@ define([
             this.set("layer", defaults.layer);
             this.set("field", defaults.field);
 
-            this.set("field_label", this.field.fieldName);
+            this.set("field_label", this.field.label);
             this.set('field_Type', this.layer.layerObject.fields.find(lang.hitch(this, function(f){return f.name == this.field.fieldName;})).type);
         },
         
