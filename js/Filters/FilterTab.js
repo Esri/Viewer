@@ -62,7 +62,6 @@ define([
                     var exp = f.filterField.getFilterExpresion();
                     console.log(exp);
                     if(exp) {
-//                         layer.layerObject._outFields = null;
                         layer.layerObject.setDefinitionExpression(exp);
                     }
                 }
@@ -72,7 +71,8 @@ define([
         },
 
         filterIgnore: function(btn) {
-            alert(2);
+            var layer = this.filter.layer;
+            layer.layerObject.setDefinitionExpression("1 = 1");
         },
     });
 
