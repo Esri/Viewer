@@ -59,18 +59,34 @@ define([
 
         filterApply: function(btn) {
             var layer = this.filter.layer;
-            domStyle.set(this.setIndicator,'display','');
+            var exps = [];
             this.FilterItems.forEach(function(f) {
                 try {
                     var exp = f.filterField.getFilterExpresion();
 //                     console.log(exp);
                     if(exp) {
-                        layer.layerObject.setDefinitionExpression(exp);
+                        exps.push(exp);
                     }
                 }
                 catch (er) {
                 }
             });
+            if(exps.length === 1) {
+                domStyle.set(this.setIndicator,'display','');
+                layer.layerObject.setDefinitionExpression(exps[0]);
+            } else if (exps.length >= 1) {
+                var op ='';
+                var inList=exps.reduce(function(previousValue, currentValue) {
+                    if(previousValue && previousValue!=='') 
+                        op = ' AND ';
+                    return previousValue+")"+op+"("+currentValue;
+                });
+                domStyle.set(this.setIndicator,'display','');
+                layer.layerObject.setDefinitionExpression("("+inList+")");
+            } else {
+                domStyle.set(this.setIndicator,'display','none');
+                layer.layerObject.setDefinitionExpression('')
+            }
         },
 
         filterIgnore: function(btn) {
