@@ -1762,3 +1762,8 @@ td, th {
   padding: 2px;
   width: 120px;
 }
+
+._filter._number .dijitInputField {
+  padding: 0px;
+  width: 140px;
+}

@@ -5,16 +5,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
     "esri/tasks/query", "esri/tasks/QueryTask",
     "dojo/text!application/Filters/templates/FilterTemplate.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
-    "dojo/string", 
     "application/Filters/FilterTab","application/Filters/FilterItem", 
-    "dojo/text!application/Filters/templates/FilterTab.html",
-    "dojo/text!application/Filters/templates/FilterString.html",
-    "dojo/text!application/Filters/templates/FilterDate.html",
-    "dojo/text!application/Filters/templates/FilterInteger.html",
-    "dojo/text!application/Filters/templates/FilterDouble.html",
-    "dojo/text!application/Filters/templates/FilterOID.html",
-    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
-    "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
     
     ], function (
@@ -25,12 +16,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         Query, QueryTask,
         FilterTemplate, 
         domClass, domAttr, domStyle, domConstruct, event, 
-        string,
-        FilterTab, FilterItem,
-        filterTab, 
-        filterString, filterDate, filterInteger, filterDouble, filterOID,
-        SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
-        InfoWindow
+        FilterTab, FilterItem
     ) {
     var Widget = declare("esri.dijit.Filters", [_WidgetBase, _TemplatedMixin], {
         // defaults
@@ -76,10 +62,9 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         _init: function () {
             var ck='checked';
             window.filters.forEach(lang.hitch(this, function(filter){
-                var filterTabW = new FilterTab({filter:filter, checked:ck});
-                filterTabW.startup();
-
-                dojo.place(filterTabW.domNode, this.filterTabs);
+                var filterTab = new FilterTab({filter:filter, checked:ck});
+                dojo.place(filterTab.domNode, this.filterTabs);
+                filterTab.startup();
                 ck='';
             }));
 

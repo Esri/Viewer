@@ -4,11 +4,12 @@ define([
     "dojo/text!application/Filters/templates/FilterItem.html",
     "application/Filters/FilterString",
     "application/Filters/FilterDate",
+    "application/Filters/FilterNumber",
 ], function(
     Evented, declare, domConstruct, parser, ready, 
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
     FilterItemTemplate,
-    FilterString, FilterDate){
+    FilterString, FilterDate, FilterNumber){
     var Widget = declare("FilterItem", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: FilterItemTemplate,
 
@@ -53,6 +54,14 @@ define([
                     break;
                 case "esriFieldTypeDate" :
                     this.filterField = new FilterDate({map:this.map, layer:this.layer, field:this.field}, this.content);
+                    this.filterField.startup();
+                    break;
+                case "esriFieldTypeInteger" :
+                    this.filterField = new FilterNumber({map:this.map, layer:this.layer, field:this.field, format:"\\\\d+"}, this.content);
+                    this.filterField.startup();
+                    break;
+                case "esriFieldTypeDouble" :
+                    this.filterField = new FilterNumber({map:this.map, layer:this.layer, field:this.field, format:"\\\\d+\\\\.?\\\\d*"}, this.content);
                     this.filterField.startup();
                     break;
                 default : 
