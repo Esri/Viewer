@@ -3,15 +3,14 @@ define([
     "dojo/on", "dojo/_base/connect",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel", 
     "dojo/dom-style",
-    "dojo/text!application/Filters/templates/FilterTab.html",
-    "application/Filters/FilterString",
+    "dojo/text!application/Filters/templates/FilterTab.html"
 ], function(
     Evented, declare, domConstruct, parser, ready, 
     on, connect,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
     domStyle,
-    FilterTab,
-    FilterString){
+    FilterTab
+    ){
     var Widget = declare("FilterTab", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: FilterTab,
 

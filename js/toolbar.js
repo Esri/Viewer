@@ -119,9 +119,8 @@ on, mouse, query, Deferred) {
                     src:"images/set.png",
                     class:"setIndicator",
                     style:"margin-left: 16px; display:none;",
-                    Alt:"Some Fiters Apply",
-                    title:"Some Fiters Apply",
-                    role:"Presentation",
+                    Alt:"Some Filters Apply",
+                    title:"Some Filters Apply",
                     tabindex:0
                 }, divTool);
                 refNode = divTool;
