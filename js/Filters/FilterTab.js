@@ -1,11 +1,13 @@
 define([
-    "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready", "dojo/on", 
+    "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready", 
+    "dojo/on", "dojo/_base/connect",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel", 
     "dojo/dom-style",
     "dojo/text!application/Filters/templates/FilterTab.html",
     "application/Filters/FilterString",
 ], function(
-    Evented, declare, domConstruct, parser, ready, on,
+    Evented, declare, domConstruct, parser, ready, 
+    on, connect,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
     domStyle,
     FilterTab,
@@ -72,7 +74,7 @@ define([
                 }
             });
             if(exps.length === 1) {
-                domStyle.set(this.setIndicator,'display','');
+                this.showBadge(true);
                 layer.layerObject.setDefinitionExpression(exps[0]);
             } else if (exps.length >= 1) {
                 var op ='';
@@ -81,18 +83,27 @@ define([
                         op = ' AND ';
                     return previousValue+")"+op+"("+currentValue;
                 });
-                domStyle.set(this.setIndicator,'display','');
+                this.showBadge(true);
                 layer.layerObject.setDefinitionExpression("("+inList+")");
             } else {
-                domStyle.set(this.setIndicator,'display','none');
-                layer.layerObject.setDefinitionExpression('')
+                this.showBadge(false);
+                layer.layerObject.setDefinitionExpression('');
             }
         },
 
         filterIgnore: function(btn) {
             var layer = this.filter.layer;
             layer.layerObject.setDefinitionExpression(null);
-            domStyle.set(this.setIndicator,'display','none');
+            this.showBadge(false);
+        },
+
+        showBadge: function(show) {
+            if (show) {
+                domStyle.set(this.setIndicator,'display','');
+            } else {
+                domStyle.set(this.setIndicator,'display','none');
+            }
+            connect.publish("somefilters", [{id:this.id, show:show}]);
         },
     });
 

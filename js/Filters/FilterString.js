@@ -66,7 +66,7 @@ define([
                         _query.orderByFields = [this.field.fieldName];
                         var task = new QueryTask(this.layer.layerObject.url);
                         task.execute(_query).then(lang.hitch(this, function(results) {
-                            console.log(results);
+//                             console.log(results);
                             results.features.map(lang.hitch(this, function(f) { 
                                 return f.attributes[this.field.fieldName];})).forEach(lang.hitch(this, function(v) {
                                 if(v) {
