@@ -1,10 +1,13 @@
-<div class="_filter _date" data-field="${field}">
-	<select autofocus tabindex=0>
-		<option value="Equal">Equal</option>			
-		<option value="NotEqual">Not Equal</option>			
-		<option value="InBetween">In Between</option>			
-		<option value="NotBetween">Not Between</option>			
+<div class="_filter _date">
+	<select autofocus tabindex=0 
+		data-dojo-attach-event="onchange: criteriaChanged"
+		data-dojo-attach-point="criteria"
+		>
+		<option value=" = ">Equal</option>			
+		<option value=" != ">Not Equal</option>			
+		<option value=" BETWEEN ">Between</option>			
+		<option value=" NOT BETWEEN ">Not Between</option>			
 	</select>
-	<input type="text" aria-label="Enter date to match" data-dojo-type="dijit/form/DateTextBox"/>
-	<input type="text" aria-label="Enter last date" data-dojo-type="dijit/form/DateTextBox"/>
+	<input type="text" data-dojo-attach-point="minValue" data-dojo-type="dijit/form/DateTextBox" aria-label="Enter date to match"/>
+	<input type="text" data-dojo-attach-point="maxValue" data-dojo-type="dijit/form/DateTextBox" aria-label="Enter last date"/>
 </div>

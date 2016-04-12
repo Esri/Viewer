@@ -110,7 +110,7 @@ define([
                     if(this.criteria.value.indexOf('LIKE')>=0){
                         var re = /(.*%.*)|(.*_.*)|(\[.*\])/gm;
                         var matches = re.exec(text);
-                        if(!matches || !matches.length === 0) {
+                        if(!matches || matches.length === 0) {
                             text += '%';
                         }
                     }
