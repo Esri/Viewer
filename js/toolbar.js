@@ -1,9 +1,11 @@
 define([
     "dojo/Evented", "dojo/_base/declare", "dojo/_base/window", "dojo/_base/fx", 
-    "dojo/_base/html", "dojo/_base/lang", "dojo/has", "dojo/dom", 
-    "dojo/dom-class", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-construct", "dojo/dom-geometry", "dojo/on", "dojo/mouse", "dojo/query", "dojo/Deferred"], function (
-Evented, declare, win, fx, html, lang, has, dom, 
-domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferred) {
+    "dojo/_base/html", "dojo/_base/lang", "dojo/has", "dojo/dom", "dojo/_base/connect",
+    "dojo/dom-class", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-construct", "dojo/dom-geometry", 
+    "dojo/on", "dojo/mouse", "dojo/query", "dojo/Deferred"], function (
+Evented, declare, win, fx, html, lang, has, dom, connect,
+domClass, domStyle, domAttr, domConstruct, domGeometry, 
+on, mouse, query, Deferred) {
     return declare([Evented], {
 
         map: null,
@@ -104,11 +106,47 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
         },
 
         //Create a tool and return the div where you can place content
-        createTool: function (tool, panelClass, loaderImg) {
+        createTool: function (tool, panelClass, loaderImg, badgeEvName) {
             var name = tool.name;
 
             // add tool
+            var refNode = this.pTools;
             var tip = this.config.i18n.tooltips[name] || name;
+            if(badgeEvName && badgeEvName !== '') {
+                var divTool =  domConstruct.create("div", {
+                }, refNode);
+                var setIndicator = domConstruct.create("img", {
+                    src:"images/set.png",
+                    class:"setIndicator",
+                    style:"margin-left: 16px; display:none;",
+                    Alt:"Some Fiters Apply",
+                    title:"Some Fiters Apply",
+                    role:"Presentation",
+                    tabindex:0
+                }, divTool);
+                refNode = divTool;
+
+                filtersOn = [];
+                connect.subscribe(badgeEvName, lang.hitch(this, function(message){
+                    var tabIndex = filtersOn.indexOf(message.id);
+                    if(message.show) {
+                        if(tabIndex<0)
+                        {
+                            filtersOn.push(message.id);   
+                        }
+                    } else {
+                        if(tabIndex>=0)
+                        {
+                            filtersOn.splice(tabIndex, 1);  
+                        }                          
+                    }
+                    if(filtersOn.length>0) {
+                        domStyle.set(setIndicator,'display','');
+                    } else {
+                        domStyle.set(setIndicator,'display','none');
+                    }
+                }));
+            }
             var pTool = domConstruct.create("input", {
                 type:"image",
                 className: "panelTool",
@@ -116,7 +154,7 @@ domClass, domStyle, domAttr, domConstruct, domGeometry, on, mouse, query, Deferr
                 "aria-label": tip,
                 alt: tip,
                 src: "images/icons_" + this.config.icons + "/" + name + ".png",
-            }, this.pTools);
+            }, refNode);
 
             if (!has("touch")) 
             {

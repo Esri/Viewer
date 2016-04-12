@@ -62,7 +62,7 @@ define([
         filterApply: function(btn) {
             var layer = this.filter.layer;
             var exps = [];
-            this.FilterItems.forEach(function(f) {
+            this.FilterItems.filter(function(f) { return f.Active.checked;}).forEach(function(f) {
                 try {
                     var exp = f.filterField.getFilterExpresion();
 //                     console.log(exp);
