@@ -1,12 +1,14 @@
 define([
     "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready", 
     "dojo/on", "dojo/_base/connect",
+    "esri/tasks/query", "esri/tasks/QueryTask", "esri/graphicsUtils",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel", 
     "dojo/dom-style",
     "dojo/text!application/Filters/templates/FilterTab.html"
 ], function(
     Evented, declare, domConstruct, parser, ready, 
     on, connect,
+    Query, QueryTask, graphicsUtils,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
     domStyle,
     FilterTab
@@ -74,7 +76,7 @@ define([
             });
             if(exps.length === 1) {
                 this.showBadge(true);
-                layer.layerObject.setDefinitionExpression(exps[0]);
+                this.getDefinitionExtensionExtent(layer,exps[0]);
             } else if (exps.length >= 1) {
                 var op ='';
                 var inList=exps.reduce(function(previousValue, currentValue) {
@@ -83,16 +85,32 @@ define([
                     return previousValue+")"+op+"("+currentValue;
                 });
                 this.showBadge(true);
-                layer.layerObject.setDefinitionExpression("("+inList+")");
+                this.getDefinitionExtensionExtent(layer,"("+inList+")");
             } else {
                 this.showBadge(false);
-                layer.layerObject.setDefinitionExpression('');
+                this.getDefinitionExtensionExtent(layer,'');
             }
+        },
+
+        getDefinitionExtensionExtent: function(layer, expression) {
+            layer.layerObject.setDefinitionExpression(expression);
+            var task = new QueryTask(layer.url);
+            var q = new Query();
+            q.where = expression ? expression : '1=1';
+            q.outFields = [];
+            q.returnGeometry = true;
+            task.execute(q).then(function(ev) {
+//                 console.log(ev);
+                var myExtent = graphicsUtils.graphicsExtent(ev.features);
+                var ext = myExtent.expand(1.5);
+                console.log(myExtent, ext);
+                filter.map.setExtent(ext);
+            });
         },
 
         filterIgnore: function(btn) {
             var layer = this.filter.layer;
-            layer.layerObject.setDefinitionExpression(null);
+            this.getDefinitionExtensionExtent(layer, null);
             this.showBadge(false);
         },
 
