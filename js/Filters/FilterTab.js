@@ -100,11 +100,14 @@ define([
             q.outFields = [];
             q.returnGeometry = true;
             task.execute(q).then(function(ev) {
-//                 console.log(ev);
                 var myExtent = graphicsUtils.graphicsExtent(ev.features);
-                var ext = myExtent.expand(1.5);
-                console.log(myExtent, ext);
-                filter.map.setExtent(ext);
+                if(myExtent.xmin===myExtent.xmax && myExtent.ymin===myExtent.ymax) {
+                    filter.map.centerAndZoom(myExtent.getCenter(), 13);
+                }
+                else {
+                    var ext = myExtent.expand(1.5);
+                    filter.map.setExtent(ext);
+                }
             });
         },
 
