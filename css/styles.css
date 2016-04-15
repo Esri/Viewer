@@ -27,8 +27,8 @@
 label.checkbox{
   padding: 3px 0px;
   margin: 0 !important;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  /* text-overflow: ellipsis; */
+  /* white-space: nowrap; */
   /* overflow-x: hidden; */
   border: 2px solid transparent;
   vertical-align: text-top;
@@ -1548,6 +1548,7 @@ html, body {
     -webkit-padding-start: 0;
     background-color: white;
     overflow-y: auto;
+    overflow-x: hidden;
 }
 #featuresList li {
     /* margin-bottom: 4px; */
