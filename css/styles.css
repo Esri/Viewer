@@ -6,7 +6,7 @@
 }
 
 .TableOfContents .toc-title {
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid #1010ff;
   font-size: 16px;
   line-height: 16px;
   -webkit-user-select: none;
@@ -15,7 +15,8 @@
 }
 
 .TableOfContents .toc-first-layer .toc-title {
-  border-top: 1px solid #e0e0e0; }
+  /* border-top: 1px solid #e0e0e0; */
+  }
 
 .TableOfContents .toc-title-container {
   background: none;
@@ -24,18 +25,16 @@
 }
 
 label.checkbox{
-  /* float: left; */
   padding: 3px 0px;
-  /* margin: 0 !important; */
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  overflow-x: hidden;
-  /* line-height: 20px; */
-  /* height: 20px; */
+  margin: 0 !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  /* overflow-x: hidden; */
   border: 2px solid transparent;
   vertical-align: text-top;
   font-weight: bold;
   font-size: 16px;
+  display: inline-block;
 }
 
 .esriRTL label.checkbox {
@@ -73,7 +72,7 @@ input[type=checkbox].checkbox {
 }
 
 .toc-title label.checkbox{
-  max-width:240px;
+  width: calc(100% - 40px);
 }
 
 .toc-settings:hover {
@@ -417,11 +416,12 @@ input[type=checkbox].checkbox {
 }
 
 .esriBookmarks {
-  border: none; 
+  border: none;
+  width: 100%;
 }
 
 .esriBookmarkItem {
-  width: 300px;
+  width: calc(100% - 20px);
   background: #f8f8f8;
   color: #555;
   border-bottom: 1px solid #e0e0e0;
@@ -1334,7 +1334,7 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
 }
 
 .esriBookmarkItem {
-  width: 281px;
+  /* width: 281px; */
   margin-left: 1px;
 }
 
@@ -1766,4 +1766,8 @@ td, th {
 ._filter._number .dijitInputField {
   padding: 0px;
   width: 140px;
+}
+
+.esriBookmarkTable {
+    width:100%;
 }

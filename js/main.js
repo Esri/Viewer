@@ -656,7 +656,7 @@ define(["dojo/ready",
                             domAttr.set(item, 'tabindex', 0);
                             label = item.querySelector('.esriBookmarkLabel');
                             this._atachEnterKey(item, label);
-                            domStyle.set(label, 'width', '280px');
+                            domStyle.set(label, 'width', '');
 
                             domAttr.set(item.parentNode.parentNode,"role","listitem");
                         }
