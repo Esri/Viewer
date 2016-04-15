@@ -1071,20 +1071,20 @@ define(["dojo/ready",
             legendNode = null,
             print = null;
 
-
             require(["application/has-config!print?esri/dijit/Print"], lang.hitch(this, function (Print) {
-                var layoutOptions = {
-                    "titleText": this.config.title,
-                    "scalebarUnit": this.config.units,
-                    "legendLayers": []
-                };
                 if (!Print) {
                     deferred.resolve(false);
                     return;
                 }
 
-                var printDiv = toolbar.createTool(tool);
+                var layoutOptions = {
+                    "titleText": this.config.title,
+                    "scalebarUnit": this.config.units,
+                    "legendLayers": []
+                };
 
+                var pDiv = toolbar.createTool(tool);
+                var printDiv = domConstruct.create("div",{class:"margin"}, pDiv);
                 //get format
                 this.format = "PDF"; //default if nothing is specified
                 for (var i = 0; i < this.config.tools.length; i++) {
@@ -1098,7 +1098,6 @@ define(["dojo/ready",
                 if (this.config.hasOwnProperty("tool_print_format")) {
                     this.format = this.config.tool_print_format.toLowerCase();
                 }
-
 
                 if (has("print-legend")) {
                     legendNode = domConstruct.create("input", {
@@ -1138,7 +1137,6 @@ define(["dojo/ready",
                                 if (template.layoutOptions && template.layoutOptions.legendLayers) {
                                     template.layoutOptions.legendLayers = [];
                                 }
-
                             });
                         }
                     }));
@@ -1181,8 +1179,6 @@ define(["dojo/ready",
                         domConstruct.place(print.printDomNode, printDiv, "first");
 
                         print.startup();
-
-
 
                         deferred.resolve(true);
                         return;
@@ -1267,7 +1263,6 @@ define(["dojo/ready",
             } else {
                 deferred.resolve(false);
             }
-
 
             return deferred.promise;
         },
