@@ -2,6 +2,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on", "dijit/form/DateTextBox",
     "dojo/Deferred", "dojo/promise/all", 
     "dojo/query", 
+    "dijit/layout/TabContainer", "dijit/layout/ContentPane", 
     "dojo/text!application/Filters/templates/FilterTemplate.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "application/Filters/FilterTab","application/Filters/FilterItem", 
@@ -12,6 +13,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         _WidgetBase, _TemplatedMixin, on, DateTextBox, 
         Deferred, all, 
         query,
+        TabContainer, ContentPane,
         FilterTemplate, 
         domClass, domAttr, domStyle, domConstruct, event, 
         FilterTab, FilterItem
@@ -67,6 +69,26 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
             }));
 
         },
+
+        // postCreate:function() {
+        //     var tc = new TabContainer({
+        //         style: "height: 100%; width: 100%;"
+        //         }, this.filterTabs);
+
+        //     var cp1 = new ContentPane({
+        //          title: "Food",
+        //          content: "We offer amazing food"
+        //     });
+        //     tc.addChild(cp1);
+
+        //     var cp2 = new ContentPane({
+        //          title: "Drinks",
+        //          content: "We are known for our drinks."
+        //     });
+        //     tc.addChild(cp2);
+
+        //     tc.startup();
+        // },
 
     });
     if (has("extend-esri")) {

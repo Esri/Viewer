@@ -1746,12 +1746,12 @@ td, th {
 
 ._filter._date .dijitInputField {
   padding: 2px;
-  width: 120px;
+  width: 80px;
 }
 
 ._filter._number .dijitInputField {
   padding: 0px;
-  width: 140px;
+  width: 100px;
 }
 
 .esriBookmarkTable {
