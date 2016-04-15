@@ -23,14 +23,15 @@
 }
 .tabContent {
   position: absolute;
-  top: 22px;
+  /* top: 22px; */
   left: 0;
   background: white;
   right: 0;
-  bottom: 0;
+  /* bottom: 0; */
   padding: 10px;
   border: 1px solid #ccc;
   border-top-left-radius: 8px;
+  height: calc(100% - 0px);
 }
 
 .contentInner {
