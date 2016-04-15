@@ -268,7 +268,7 @@ define(["dojo/ready",
             var contentPaneLeft = new ContentPane({
                 region: "leading",
                 splitter: 'true',
-                style: "width:500px; padding:0; overflow: none;",
+                style: "width:400px; padding:0; overflow: none;",
                 content: dom.byId("leftPanel"),
                 class: "splitterContent",
                 // tabindex: 0
@@ -636,7 +636,8 @@ define(["dojo/ready",
                         deferred.resolve(false);
                         return;
                     }
-                    var bookmarkDiv = toolbar.createTool(tool);
+                    var bDiv = toolbar.createTool(tool);
+                    var bookmarkDiv = domConstruct.create("div",{ class: "margin"}, bDiv);
                     var bookmarks = new Bookmarks({
                         map: this.map,
                         bookmarks: this.config.response.itemInfo.itemData.bookmarks
@@ -952,12 +953,7 @@ define(["dojo/ready",
             var deferred = new Deferred();
 
             if (has("overview")) {
-                var ovMapDiv = toolbar.createTool(tool);
-                // domClass.add(ovMapDiv, 'margin');
-                // domStyle.set(ovMapDiv, {
-                //     // "height": "100%",
-                //     "width": "500px",
-                // });
+                var ovMapDiv = domConstruct.create('div',{class:'margin'},toolbar.createTool(tool));
 
                 var panelHeight = this.map.height;
 
@@ -1245,7 +1241,7 @@ define(["dojo/ready",
 
             if (has("share")) {
 
-                var shareDiv = toolbar.createTool(tool);
+                var shareDiv = domConstruct.create('div', {class:'margin'}, domConstruct.create('div', {class:'margin'}, toolbar.createTool(tool)));
                 // var shareDivMargin = domConstruct.create('div',{class:'margin'}, shareDiv);
                 var shareDialog = new ShareDialog({
                     bitlyLogin: this.config.bitlyLogin,
@@ -1255,7 +1251,7 @@ define(["dojo/ready",
                     title: this.config.title,
                     summary: this.config.response.itemInfo.item.snippet || ""
                 }, shareDiv);
-                domClass.add(shareDialog.domNode, "margin");
+                // domClass.add(shareDialog.domNode, "margin");
                 shareDialog.startup();
 
                 //domClass.add(dom.byId('_dialogNode'),'margin')
