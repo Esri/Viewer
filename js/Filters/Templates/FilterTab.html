@@ -1,6 +1,24 @@
 <div class="tab">
-   <input id="${id}-tabName" type="radio" name="tab-group" ${checked}/>
-   <label for="${id}-tabName" aria-label="${filter_name}">
+    <div class="tabContent">
+        <div class="contentInner">
+	        <div class="filterContent">
+	       	<ul data-dojo-attach-point="filterList"></ul>
+		        <div class="filterAdd">
+		       		<label for="${id}-fieldsCombo">Field:</label> 
+		       		<select id="${id}-fieldsCombo" autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
+		       		</select>
+		       		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd"/>
+		        </div>
+		        <div class="filterButtons">
+		       		<input type="button" class="pageBtn" value="Apply" data-dojo-attach-event="onclick: filterApply"/>
+		       		<input type="button" class="pageBtn" value="Ignore" data-dojo-attach-event="onclick: filterIgnore"/>
+		       		<!-- <input type="button" class="pageBtn" value="Save" /> -->
+		        </div>
+	        </div>
+	    </div>
+    </div> 
+    <input id="${id}" type="radio" name="tabsGroup" ${checked}/>
+    <label for="${id}" aria-label="${filter_name}">
    		<span tabindex=0>${filter_name}</span>
 		<img src="images/set.png" class="setIndicator" style="display:none; right:-4px;"
 		     data-dojo-attach-point="setIndicator" 
@@ -8,23 +26,4 @@
 		     tabindex=0 
 		>
    	</label>
-
-   <div class="tabContent">
-       <div class="contentInner">
-	       <div class="filterContent">
-	       	<ul data-dojo-attach-point="filterList"></ul>
-		       <div class="filterAdd">
-		       		<label for="${id}-fieldsCombo">Field:</label> 
-		       		<select id="${id}-fieldsCombo" autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
-		       		</select>
-		       		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd"/>
-		       </div>
-		       <div class="filterButtons">
-		       		<input type="button" class="pageBtn" value="Apply" data-dojo-attach-event="onclick: filterApply"/>
-		       		<input type="button" class="pageBtn" value="Ignore" data-dojo-attach-event="onclick: filterIgnore"/>
-		       		<!-- <input type="button" class="pageBtn" value="Save" /> -->
-		       </div>
-	       </div>
-	   </div>
-   </div> 
 </div>

@@ -8,8 +8,10 @@
   /* overflow-x: auto; */
 }
 .tab {
-  height: 24px;
-  /* width: 30px; */
+  height: calc(100% - 20px);
+  /* width: calc(100% - 10px); */
+  /* position: relative; */
+  /* margin: 10px; */
 }
 /*.tab [type=radio]:checked {
   width: ;
@@ -21,35 +23,36 @@
   border: 1px solid #ccc;
   margin-left: 2px;
   position: relative;
-  left: 10px;
-  border-top-left-radius: 8px;
-  /* margin: 5px; */
+  /* left: 10px; */
+  border-bottom-left-radius: 8px;
+  /* margin: 2px; */
+  top: calc(100% - 10px);
+  /* display: -webkit-inline-box; */
 }
 .tab [type=radio] {
-  display: none;   
+  display: none;
 }
 .tabContent {
   position: absolute;
-  /* top: 22px; */
   left: 0;
   background: white;
-  right: 0;
-  /* bottom: 0; */
   padding: 10px;
   border: 1px solid #ccc;
   border-top-left-radius: 8px;
-  height: calc(100% - 0px);
+  height: calc(100% - 56px);
+  width: calc(100% - 22px);
+  /* margin-top: 2px; */
 }
 
 .contentInner {
   overflow: auto;
-  height: calc(100% - 30px);
+  /* height: calc(100% - 30px); */
   width: 100%;
 }
 
 .tab [type=radio]:checked ~ label {
   background: white;
-  border-bottom: 1px solid white;
+  border-top: 1px solid white;
   z-index: 2;
 }
 .tab [type=radio] ~ label ~ .tabContent {
@@ -57,11 +60,18 @@
 }
 
 .tab [type=radio]:checked ~ label ~ .tabContent {
-  z-index: 1;
-  display: inherit;
+  /* z-index: 1; */
+  /* display: inherit; */
+  top: 0;
 }
 
 .tab span {
   padding:2px;
 }
 
+.Flipped, .Flipped .Content
+{
+    transform:rotateX(180deg);
+    -ms-transform:rotateX(180deg); /* IE 9 */
+    -webkit-transform:rotateX(180deg); /* Safari and Chrome */
+}
