@@ -1,7 +1,7 @@
 .filterButtons{
   position: absolute;
   bottom: 0px;
-  padding-top: 10px;
+  /* padding-top: 10px; */
   /* padding-bottom: 10px; */
 }
 
@@ -23,7 +23,7 @@
   margin-left: 10px;
 }
 
-.tabContent ul {list-style-type: none;-webkit-margin-before: 0;-webkit-margin-after: 0;-webkit-margin-start: 0px;-webkit-margin-end: 0px;-webkit-padding-start: 0;/* border-color: gray; *//* border-width: 1px; *//* border-style: solid; *//* padding: 10px; */height: calc(100% - 75px);width: 100%;overflow-y: auto;position: absolute;}
+.tabContent ul {list-style-type: none;-webkit-margin-before: 0;-webkit-margin-after: 0;-webkit-margin-start: 0px;-webkit-margin-end: 0px;-webkit-padding-start: 0;/* border-color: gray; *//* border-width: 1px; *//* border-style: solid; *//* padding: 10px; */height: calc(100% - 70px);width: 100%;overflow-y: auto;position: absolute;}
 .tabContent ul li {
     border-color: gray;
     border-width: 1px;
@@ -83,12 +83,18 @@
   height: 50px;
   overflow-x: auto;
   overflow-y: hidden;
-  /* border-top: 1px solid black; */
+  margin-top: -6px;
+  position: absolute;
+  top: calc(100% - 50px);
 }
 
 .filterTabsContent {
     width: calc(100% - 22px);
-    height: calc(100% - 78px);
+    /* left: 1px; */
+    /* top: 0px; */
+    height: calc(100% - 73px);
     border: 1px solid black;
+    border-top-right-radius: 8px;
     padding: 10px;
+    position: absolute;
 }

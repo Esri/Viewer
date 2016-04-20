@@ -8,8 +8,6 @@
   /* overflow-x: auto; */
 }
 .tab {
-  /* height: calc(100% - 20px); */
-  /* width: calc(100% - 10px); */
   /* position: relative; */
   /* margin: 10px; */
 }
@@ -20,12 +18,13 @@
 .tab label {
   background: #81D6FF;
   padding: 5px;
+  padding-bottom: 4px;
   border: 1px solid black;
   margin-left: 5px;
   position: relative;
-  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
   top: 10px;
-  /* z-index: 1; */
+  z-index: 1;
 }
 .tab [type=radio] {display: none;position: relative;top: calc(100% - 10px);}
 
@@ -36,7 +35,7 @@
 .tabContent {
   position: absolute;
   background: transparent;
-  height: calc(100% - 80px);
+  height: calc(100% - 20px);
   width: calc(100% - 22px);
 }
 
@@ -48,7 +47,7 @@
 
 .tab [type=radio]:checked ~ label {
   background: white;
-  border-bottom: 1px solid white;
+  border-top: 1px solid white;
   /* z-index: 200000; */
 }
 .tab [type=radio] ~ .tabContent  {
@@ -75,7 +74,7 @@
 
 .Flipped, .Flipped .Content
 {
-    transform:rotateX(180deg);
+    /* transform:rotateX(180deg); */
     -ms-transform:rotateX(180deg); /* IE 9 */
-    -webkit-transform:rotateX(180deg); /* Safari and Chrome */
+    /* -webkit-transform:rotateX(180deg); */ /* Safari and Chrome */
 }
