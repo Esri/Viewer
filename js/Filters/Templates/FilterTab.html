@@ -1,29 +1,29 @@
-<div class="tab">
-    <input id="${id}_btn" type="radio" name="tabsGroup" ${checked}>
-    <div class="tabContent">
-        <div class="contentInner">
-	        <div class="filterContent">
-	       	<ul data-dojo-attach-point="filterList"></ul>
-		        <div class="filterAdd">
-		       		<label for="${id}-fieldsCombo">Field:</label> 
-		       		<select id="${id}-fieldsCombo" autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
-		       		</select>
-		       		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd"/>
-		        </div>
-		        <div class="filterButtons">
-		       		<input type="button" class="pageBtn" value="Apply" data-dojo-attach-event="onclick: filterApply"/>
-		       		<input type="button" class="pageBtn" value="Ignore" data-dojo-attach-event="onclick: filterIgnore"/>
-		       		<!-- <input type="button" class="pageBtn" value="Save" /> -->
-		        </div>
-	        </div>
-	    </div>
-    </div> 
-    <label for="${id}_btn" aria-label="${filter_name}">
-   		<span tabindex=0>${filter_name}</span>
-		<img src="images/set.png" class="setIndicator" style="display:none; right:-4px;"
-		     data-dojo-attach-point="setIndicator" 
-		     Alt="Some Filters Apply" title="Some Filters Apply" 
-		     tabindex=0 
-		>
-   	</label>
+<div>
+	<div class="tab Flipped">
+	    <input id="${id}_btn" type="radio" name="tabsGroup" ${checked} data-dojo-attach-event="onchange: filterChange" value="${id}_page" data-dojo-attach-point="btn">
+	    <label for="${id}_btn" aria-label="${filter_name}">
+	   		<span tabindex=0>${filter_name}</span>
+			<img src="images/set.png" class="setIndicator" style="display:none; right:-4px;"
+			     data-dojo-attach-point="setIndicator" 
+			     Alt="Some Filters Apply" title="Some Filters Apply" 
+			     tabindex=0 
+			>
+	   	</label>
+	</div>
+
+	<div class="tabContent tabHide" id="${id}_page">
+       	<ul data-dojo-attach-point="filterList"></ul>
+
+        <div class="filterAdd">
+       		<label for="${id}-fieldsCombo">Field:</label> 
+       		<select id="${id}-fieldsCombo" autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
+       		</select>
+       		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd"/>
+        </div>
+
+        <div class="filterButtons">
+       		<input type="button" class="pageBtn" value="Apply" data-dojo-attach-event="onclick: filterApply"/>
+       		<input type="button" class="pageBtn" value="Ignore" data-dojo-attach-event="onclick: filterIgnore"/>
+        </div>
+    </div>
 </div>

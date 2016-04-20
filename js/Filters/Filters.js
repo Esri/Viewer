@@ -3,7 +3,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
     "dojo/Deferred", "dojo/promise/all", 
     "dojo/query", 
     // "dijit/layout/BorderContainer", "dijit/layout/TabContainer", "dijit/layout/ContentPane", 
-    "dojo/text!application/Filters/templates/FilterTemplate.html", 
+    "dojo/text!application/Filters/templates/Filters.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "application/Filters/FilterTab","application/Filters/FilterItem", 
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
@@ -14,13 +14,13 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         Deferred, all, 
         query,
         // BorderContainer, TabContainer, ContentPane,
-        FilterTemplate, 
+        Filters, 
         domClass, domAttr, domStyle, domConstruct, event, 
         FilterTab, FilterItem
     ) {
     var Widget = declare("esri.dijit.Filters", [_WidgetBase, _TemplatedMixin], {
         // defaults
-        templateString: FilterTemplate,
+        templateString: Filters,
 
         options: {
             map: null,
@@ -65,29 +65,21 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
                 var filterTab = new FilterTab({filter:filter, checked:ck});
                 dojo.place(filterTab.domNode, this.filterTabs);
                 filterTab.startup();
-                ck='';
+
+                var tab = document.querySelector('#'+filterTab.domNode.id+' .tab');
+                var content = document.querySelector('#'+filterTab.domNode.id+' .tabContent');
+
+                dojo.place(tab, this.filterTabsZone);
+                dojo.place(content, this.filterTabsContent);
+
+                this.filterTabs.innerHTML = '';
+
+                if(ck!=='') {
+                    domClass.add(content, 'tabShow');                    
+                    domClass.remove(content, 'tabHide');                    
+                    ck=''; 
+                }
             }));
-
-            // var tc = new TabContainer({tabStrip:'true', nested:'true'}, this.filterTabs);:
-
-            // var tc = new TabContainer({
-            //     style: "width:100%;height:100%;",
-            //     tabStrip:true, nested:true
-            // }, this.filterTabs);
-            // // domConstruct.place(tc.domNode, this.filterTabs);
-            // // tc.setTheme(dojoxTheme);
-
-            // var ck='checked';
-            // window.filters.forEach(lang.hitch(this, function(filter){
-            //     //var filterTab = new FilterTab({filter:filter, checked:ck});
-            //     var cp1 = new ContentPane({
-            //          title: filter.layer.layerObject.name,
-            //          content: "content for "+filter.layer.layerObject.name
-            //     });
-            //     tc.addChild(cp1);
-            //     ck='';
-            // }));
-            // setTimeout(function(){ tc.startup();} ,5000);
         },
     });
     if (has("extend-esri")) {

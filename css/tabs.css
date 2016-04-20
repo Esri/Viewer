@@ -8,7 +8,7 @@
   /* overflow-x: auto; */
 }
 .tab {
-  height: calc(100% - 20px);
+  /* height: calc(100% - 20px); */
   /* width: calc(100% - 10px); */
   /* position: relative; */
   /* margin: 10px; */
@@ -20,14 +20,12 @@
 .tab label {
   background: #81D6FF;
   padding: 5px;
-  border: 1px solid #ccc;
-  margin-left: 2px;
+  border: 1px solid black;
+  margin-left: 5px;
   position: relative;
-  /* left: 10px; */
-  border-bottom-left-radius: 8px;
-  /* margin: 2px; */
-  top: calc(100% - 10px);
-  /* display: -webkit-inline-box; */
+  border-top-left-radius: 8px;
+  top: 10px;
+  /* z-index: 1; */
 }
 .tab [type=radio] {display: none;position: relative;top: calc(100% - 10px);}
 
@@ -37,26 +35,21 @@
 
 .tabContent {
   position: absolute;
-  left: 0;
-  right: 0;
-  background: white;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-top-left-radius: 8px;
-  height: calc(100% - 56px);
+  background: transparent;
+  height: calc(100% - 80px);
   width: calc(100% - 22px);
 }
 
 .contentInner {
-  overflow: auto;
+  /* overflow: auto; */
   /* height: calc(100% - 30px); */
-  width: 100%;
+  /* width: 100%; */
 }
 
 .tab [type=radio]:checked ~ label {
   background: white;
-  border-top: 1px solid white;
-  z-index: 2;
+  border-bottom: 1px solid white;
+  /* z-index: 200000; */
 }
 .tab [type=radio] ~ .tabContent  {
   display: none;
@@ -66,6 +59,14 @@
   z-index: 1; 
   display: inherit; 
   top: 0;
+}
+
+.tabHide {
+  display: none;
+}
+
+.tabShow {
+  display: inherit; 
 }
 
 .tab span {

@@ -1,12 +1,12 @@
 define([
-    "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready", 
+    "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/dom-class", "dojo/parser", "dojo/ready", 
     "dojo/on", "dojo/_base/connect",
     "esri/tasks/query", "esri/tasks/QueryTask", "esri/graphicsUtils",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel", 
     "dojo/dom-style",
     "dojo/text!application/Filters/templates/FilterTab.html"
 ], function(
-    Evented, declare, domConstruct, parser, ready, 
+    Evented, declare, domConstruct, domClass, parser, ready, 
     on, connect,
     Query, QueryTask, graphicsUtils,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
@@ -19,16 +19,15 @@ define([
         options: {
         },        
 
-        constructor: function(options, srcRefNode){
+        constructor: function(options, srcRefTabsZone, srcRefTabsContent){
             var defaults = lang.mixin({}, this.options, options);
 
-            this.domNode = srcRefNode;
+            //this.domNode = srcRefNode;
             this.set("filter", defaults.filter);
 
             this.set("filter_name", this.filter.layer.resourceInfo.name);
-            this.set("checked", defaults.checked);
+            // this.set("checked", defaults.checked);
             this.set("FilterItems", []);
-
         },
         
         FilterItems: [],
@@ -43,11 +42,29 @@ define([
              }));
         },
 
+        filterChange: function(ev) {
+             var pageId = ev.target.value;
+//             console.log(page, ev);
+            var pages = document.querySelectorAll('.tabContent');
+            for(var i = 0; i< pages.length; i++) {
+                var page = pages[i];
+                if(page.id === pageId) {
+                    domClass.add(page, 'tabShow');
+                    domClass.remove(page, 'tabHide');
+                } else {
+                    domClass.add(page, 'tabHide');
+                    domClass.remove(page, 'tabShow');
+                }
+            }
+        },
+
+        check: function() {
+            this.btn.checked=true;
+        },
+
         filterAdd: function(ev) {
             var fieldId = this.fieldsCombo.value;
             var field = this.filter.fields.find(function(f) {return f.fieldName === fieldId;});
-//                 console.log(field);
-            
             var layer = this.filter.layer;
 
             var filterItem = new FilterItem({map:layer.layerObject._map, layer:layer, field:field});//, myItem);
@@ -66,7 +83,6 @@ define([
             this.FilterItems.filter(function(f) { return f.Active.checked;}).forEach(function(f) {
                 try {
                     var exp = f.filterField.getFilterExpresion();
-//                     console.log(exp);
                     if(exp) {
                         exps.push(exp);
                     }
