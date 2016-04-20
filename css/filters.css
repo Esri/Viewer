@@ -1,7 +1,8 @@
 .filterButtons{
   position: absolute;
   bottom: 0;
-  padding: 10px;
+  padding-top: 10px;
+  padding-bottom: 14px;
 }
 
 .filterContent {
@@ -22,7 +23,7 @@
   margin-left: 10px;
 }
 
-.filterContent ul {list-style-type: none;-webkit-margin-before: 0;-webkit-margin-after: 0;-webkit-margin-start: 0px;-webkit-margin-end: 0px;-webkit-padding-start: 0;/* border-color: gray; *//* border-width: 1px; *//* border-style: solid; *//* padding: 10px; */height: calc(100% - 110px);width: calc(100% - 10px);overflow-y: auto;position: absolute;}
+.filterContent ul {list-style-type: none;-webkit-margin-before: 0;-webkit-margin-after: 0;-webkit-margin-start: 0px;-webkit-margin-end: 0px;-webkit-padding-start: 0;/* border-color: gray; *//* border-width: 1px; *//* border-style: solid; *//* padding: 10px; */height: calc(100% - 95px);width: calc(100% - 10px);overflow-y: auto;position: absolute;}
 .filterContent ul li {
     border-color: gray;
     border-width: 1px;
