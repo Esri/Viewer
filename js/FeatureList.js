@@ -175,7 +175,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                             }
                             for(var j = 0; j<r.features.length; j++) {
                                 var f = r.features[j];
-                                if(window._prevSelected == f.attributes[r.objectIdFieldName]) {
+                                if(window._prevSelected.split('_')[1] == f.attributes[r.objectIdFieldName]) {
                                     preselected = f;
                                 }
 
@@ -261,7 +261,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
 
                 if(checkBox.checked)
                 {
-                    _prevSelected = fid;
+                    _prevSelected = fid;//.split('_')[1];
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
                         dojo.addClass(e, 'showAttr');
                         dojo.removeClass(e, 'hideAttr');
@@ -269,7 +269,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     });
 
                     q = new Query();
-                    q.where = "["+objectIdFieldName+"]='"+fid+"'";
+                    q.where = "["+objectIdFieldName+"]='"+fid.split('_')[1]+"'";
                     q.outFields = ['"'+objectIdFieldName+'"'];
                     q.returnGeometry = true;
                     r.task.execute(q).then(function(ev) {
@@ -294,7 +294,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             _getFeatureListItem = function(r, f, objectIdFieldName, layer, content, listTemplate) {
                 try {
                     var featureId = f.attributes[objectIdFieldName];
-                    var attributes = {_featureId:featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
+                    var attributes = {_featureId:r+'_'+featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
                     lang.mixin(attributes, f.attributes);
                     var nulls = window.tasks[r].layer.fields.map(function(f){return f.name;});
                     var nullAttrs ={};
