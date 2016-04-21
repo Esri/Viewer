@@ -175,7 +175,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                             }
                             for(var j = 0; j<r.features.length; j++) {
                                 var f = r.features[j];
-                                if(window._prevSelected.split('_')[1] == f.attributes[r.objectIdFieldName]) {
+                                if(window._prevSelected && window._prevSelected.split('_')[1] == f.attributes[r.objectIdFieldName]) {
                                     preselected = f;
                                 }
 
