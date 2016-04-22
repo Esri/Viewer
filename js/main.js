@@ -533,6 +533,10 @@ define(["dojo/ready",
                 }, featuresDiv);
                 featureList.startup();
 
+                // on(toolbar, 'updateTool_features', lang.hitch(this, function(name) {
+                //     dom.byId('pageBody_features').focus();
+                // }));
+
                 deferred.resolve(true);
             } 
             else {
@@ -558,6 +562,10 @@ define(["dojo/ready",
                 }, filterDiv);
                 filter.startup();
 
+                // on(toolbar, 'updateTool_filter', lang.hitch(this, function(name) {
+                //     dom.byId('pageBody_filter').focus();
+                // }));
+
                 deferred.resolve(true);
             } 
             else {
@@ -582,6 +590,12 @@ define(["dojo/ready",
                 }, domConstruct.create("div", {}, basemapDiv));
 
                 basemap.startup();
+
+                // on(toolbar, 'updateTool_basemap', lang.hitch(this, function(name) {
+                //     dom.byId('pageBody_basemap').focus();
+                // }));
+
+
                 on(basemap, "load", lang.hitch(basemap, function () {
                     var list = this.domNode.querySelector("div");
                     domAttr.set(list, "role", "list");
@@ -782,6 +796,10 @@ define(["dojo/ready",
                     }, domConstruct.create("div", {}, layersDivDesc));
                     toc.startup();
 
+                    // on(toolbar, 'updateTool_layers', lang.hitch(this, function(name) {
+                    //     dom.byId('pageBody_layers').focus();
+                    // }));
+
                     deferred.resolve(true);
                 } else {
                     deferred.resolve(false);
@@ -827,6 +845,7 @@ define(["dojo/ready",
 
                     on(toolbar, 'updateTool_legend', lang.hitch(this, function(name) {
                         fixLegend();
+                        // dom.byId('pageBody_legend').focus();
                     }));
 
                     var fixLegend = function() {

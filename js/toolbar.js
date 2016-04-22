@@ -212,6 +212,10 @@ on, mouse, query, Deferred) {
             pageContent);
             domClass.add(pageBody, panelClass);
 
+            on(this, "updateTool_" + name, lang.hitch(this, function(name) {
+                pageBody.focus();
+            }));
+
             return pageBody;
         },
 

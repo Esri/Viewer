@@ -80,6 +80,11 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
                     ck=''; 
                 }
             }));
+
+            on(this.toolbar, 'updateTool_filter', lang.hitch(this, function(name) {
+                dom.byId('pageBody_filter').focus();
+            }));
+
         },
     });
     if (has("extend-esri")) {

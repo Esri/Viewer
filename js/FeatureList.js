@@ -4,7 +4,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dojo/query", 
     "esri/tasks/query", "esri/tasks/QueryTask",
     "dojo/text!application/dijit/templates/FeatureList.html", 
-    "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
+    "dojo/dom", "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
     "dojo/text!application/dijit/templates/FeatureListTemplate.html",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
@@ -18,7 +18,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         query,
         Query, QueryTask,
         FeatureList, 
-        domClass, domAttr, domStyle, domConstruct, event, 
+        dom, domClass, domAttr, domStyle, domConstruct, event, 
         string,
         listTemplate,
         SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
@@ -94,6 +94,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
 
             on(this.toolbar, 'updateTool_features', lang.hitch(this, function(name) {
                 this._reloadList(this.map);
+                dom.byId('pageBody_features').focus();
             }));
         },
 
