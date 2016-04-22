@@ -180,7 +180,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                 if(featureListItem)
                                 {
                                     domConstruct.create("li", {
-                                        tabindex : 0,
+                                        // tabindex : 0,
                                         innerHTML : featureListItem
                                     }, list);
                                 }

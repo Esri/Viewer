@@ -484,8 +484,8 @@ define(["dojo/ready",
             };
 
             skipToContent = function() {
-                // dom.byId('panelPages').focus();
-                document.querySelector("#panelPages .page.showAttr .pageBody").focus();
+                dom.byId('panelPages').focus();
+                // document.querySelector("#panelPages .page.showAttr .pageBody").focus();
             };
 
             skipToSplitter = function() {
