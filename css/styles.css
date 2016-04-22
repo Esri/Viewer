@@ -15,8 +15,7 @@
 }
 
 .TableOfContents .toc-first-layer .toc-title {
-  /* border-top: 1px solid #e0e0e0; */
-  }
+}
 
 .TableOfContents .toc-title-container {
   background: none;
@@ -41,13 +40,10 @@ label.checkbox{
   float: right; }
 
 input[type=checkbox].checkbox {
-  /* float: left; */
   height: 20px;
   width: 20px;
   border: 1px solid #bababa;
   vertical-align: top;
-  /* font-size: 12px; */
-  /* line-height: 16px; */
   background-color: #fff;
   color: #000;
   cursor: pointer;
@@ -115,22 +111,19 @@ input[type=checkbox].checkbox {
   src: url('../fonts/helveticaneue.eot');
   src: url('../fonts/helveticaneue.eot?#iefix') format('embedded-opentype'), url('../fonts/helveticaneue.woff') format('woff'), url('../fonts/helveticaneue.ttf') format('truetype'), url('../fonts/helveticaneue.svg#HelveticaNeue') format('svg');
   font-style: normal;
-  font-weight: normal; }
+  font-weight: normal; 
+}
 
 @font-face {
   font-family: "HelveticaNeueUltraLight";
   src: url('../fonts/helveticaneueultralight.eot');
   src: url('../fonts/helveticaneueultralight.eot?#iefix') format('embedded-opentype'), url('../fonts/helveticaneueultralight.woff') format('woff'), url('../fonts/helveticaneueultralight.ttf') format('truetype'), url('../fonts/helveticaneueultralight.svg#HelveticaNeueUltraLight') format('svg');
   font-style: normal;
-  font-weight: normal; }
+  font-weight: normal; 
+}
 
 #mapDiv {
-  /* position: fixed; */
-  /* padding: 1px; */
-  margin: 0;
-  width: 100% !important;
-  height: 100% !important;
-  }
+}
 
 .loading-indicator {
   /* Loading status */
@@ -142,17 +135,20 @@ input[type=checkbox].checkbox {
   top: 0;
   left: 0;
   overflow: hidden;
-  background: #fff; }
+  background: #fff; 
+}
 
 .app-loading .loading-indicator, .app-error .loading-indicator {
   /* Show this class when loading or error */
-  display: block; }
+  display: block; 
+}
 
 .app-loading .loading-indicator {
   /* Loading image */
   background-position: center center;
   background-image: url(../images/ajax-loader.gif);
-  background-repeat: no-repeat; }
+  background-repeat: no-repeat; 
+}
 
 .app-error .loading-message {
   /* Error status */
@@ -165,36 +161,36 @@ input[type=checkbox].checkbox {
   z-index: 2;
   top: 40%;
   left: 0;
-  text-align: center; }
+  text-align: center; 
+}
 
 /*Styles for the print dialog checkbox*/
 #pageBody_print 
-input[type=checkbox].checkbox {
+  input[type=checkbox].checkbox {
 }
 
 /*Layer list dialog*/
 .layer-menu {
-  width: 100%; }
+  width: 100%; 
+}
 
 .layer-menu .dijitMenuItem:hover {
-  background: #d3d3d3; }
+  background: #d3d3d3; 
+}
 
 .layer-menu .dijitMenuItemSelected {
-  background: #d3d3d3; }
+  background: #d3d3d3; 
+}
 
 /* Esri Javascript API*/
 .templatePicker {
-  /* height: 100%; */
-  /* padding-top: 30px; */
-  /* padding-bottom: 120px; */
-  /* border: none; */
-  }
+}
 
 .esriEditor {
   height: 100%;
   width: 100%;
   /* position: absolute; */
-  }
+}
 
 .esriEditor .esriDrawingToolbar {
   --position: absolute;
@@ -204,25 +200,31 @@ input[type=checkbox].checkbox {
   /* border-top: none; */
   /* border-right: none; */
   /* border-left: none; */
-  }
+}
 
 @media only screen and (min-width: 720px) {
   .esriEditor .esriDrawingToolbar {
     top: 10px;
     right: 0;
-    left: 0; } }
+    left: 0; 
+  } 
+}
 
 .esriPopup .pointer.bottom, .esriPopup .pointer.bottomLeft, .esriPopup .pointer.bottomRight {
-  background: #f7f7f7 !important; }
+  background: #f7f7f7 !important; 
+}
 
 .esriPopupMaximized {
-  top: 100px !important; }
+  top: 100px !important; 
+}
 
 .esriPopup.light .actionsPane .action.zoomTo {
-  background-position: 0 -224px; }
+  background-position: 0 -224px; 
+}
 
 .esriPopup .actionsPane .action {
-  margin-right: 10px; }
+  margin-right: 10px; 
+}
 
 .esriPopup.light .actionsPane .action {
   position: absolute;
@@ -230,44 +232,55 @@ input[type=checkbox].checkbox {
   background-image: url("http://js.arcgis.com/3.12/esri/css/calcite/images/popup-sprite.png");
   width: 12px;
   height: 12px;
-  text-indent: -9999px; }
+  text-indent: -9999px; 
+}
 
 .esriPrintout a {
-  color: #5daddd; }
+  color: #5daddd; 
+}
 
 .esriMeasurement .esriMeasurementButtonPane {
-  padding-left: 6px; }
+  padding-left: 6px; 
+}
 
 .esriMeasurement .esriMeasurementResultLabel {
-  padding-left: 4px; }
+  padding-left: 4px; 
+}
 
 .esriMeasurement .areaIcon {
   background-image: url(../images/area_measure.png);
   width: 28px;
-  height: 28px; }
+  height: 28px; 
+}
 
 .esriMeasurement .distanceIcon {
   background-image: url(../images/dist_measure.png);
   width: 28px;
-  height: 28px; }
+  height: 28px; 
+}
 
 .esriMeasurement .locationIcon {
   background-image: url(../images/dist_point.png);
   width: 28px;
-  height: 28px; }
+  height: 28px; 
+}
 
 .esriMeasurement .esriButtonHover .dijitButtonNode {
-  background: #a9a9a9; }
+  background: #a9a9a9; 
+}
 
 .esriMeasurement .esriButtonChecked .dijitButtonNode {
-  background: #a9a9a9; }
+  background: #a9a9a9; 
+}
 
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:hover {
-  background: #a9a9a9; }
+  background: #a9a9a9; 
+}
 
 .locationIcon {
   width: 32px;
-  height: 32px; }
+  height: 32px; 
+}
 
 .esriSimpleSlider {
   text-align: center;
@@ -281,12 +294,13 @@ input[type=checkbox].checkbox {
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   display: none;
-  }
+}
 
 @media only screen and (min-width: 760px) {
   .esriSimpleSlider {
     display: block;
-    } }
+  } 
+}
 
 .esriSimpleSlider div {
   width: 30px;
@@ -296,7 +310,7 @@ input[type=checkbox].checkbox {
   font-weight: bold;
   line-height: 40px;
   -webkit-user-select: none;
-  }
+}
 
 .arcgisSearch .searchGroup .searchInput {
   /* width: 298px; */
@@ -305,30 +319,33 @@ input[type=checkbox].checkbox {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
   zoom: 1;
   color: #fff;
-  }
+}
 
 @media only screen and (min-width: 800px) {
   .arcgisSearch .searchGroup .searchInput {
     /* max-width: 300px; */
     display: block;
-    } }
+  } 
+}
 
 .arcgisSearch .searchClear {
   background: none;
   background-color: inherit;
-  color: #a8a8a8; }
+  color: #a8a8a8; 
+}
 
 .notools div {
   width: 30px;
   height: 30px;
   line-height: 25px;
-  font-size: 24px; }
+  font-size: 24px; 
+}
 
 .esriSimpleSliderTL {
   top: 10px;
   left: 10px;
   border: none;
-  }
+}
 
 .esriSimpleSliderDecrementButton:hover, .esriSimpleSliderIncrementButton:hover {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
@@ -356,28 +373,34 @@ input[type=checkbox].checkbox {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  border-radius: 5px; }
+  border-radius: 5px; 
+}
 
 .simpleGeocoder .esriGeocoderMenu {
-  color: #333; }
+  color: #333; 
+}
 
 .simpleGeocoder .esriGeocoderResults {
   border: transparent;
   background-color: transparent;
   background-color: rgba(0, 0, 0, 0.6);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#99000000,endColorstr=#99000000);
-  zoom: 1; }
+  zoom: 1; 
+}
 
 .simpleGeocoder .esriGeocoder input {
-  color: #FFF !important; }
+  color: #FFF !important; 
+}
 
 .simpleGeocoder .esriGeocoderResult:hover, .simpleGeocoder .esriGeocoderResultEven:focus, .simpleGeocoder .esriGeocoderResultOdd:focus {
   --background-color: rgba(0, 0, 0, 0.3);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
-  zoom: 1; }
+  zoom: 1; 
+}
 
 .simpleGeocoder .esriGeocoder .esriGeocoderMenuArrow {
-  background: none; }
+  background: none; 
+}
 
 .simpleGeocoder .esriGeocoder .esriGeocoderMenuArrow:before {
   content: "\e809";
@@ -385,26 +408,31 @@ input[type=checkbox].checkbox {
   height: 16px;
   font-size: 16px;
   color: #a8a8a8;
-  font-family: "tool-icons"; }
+  font-family: "tool-icons"; 
+}
 
 .esriMeasurement .esriMeasurementResultLabel {
   text-align: left;
-  font-weight: 500; }
+  font-weight: 500; 
+}
 
 .esriControlsBR {
   position: absolute;
   left: 0px;
-  bottom: 0px; }
+  bottom: 0px; 
+}
 
 .logo-med {
   position: absolute;
   left: 0px;
-  bottom: 0px; }
+  bottom: 0px; 
+}
 
 .logo-sm {
   position: absolute;
   left: 0px;
-  bottom: 0px; }
+  bottom: 0px; 
+}
 
 .esriAttribution {
   position: absolute;
@@ -451,7 +479,8 @@ input[type=checkbox].checkbox {
 
 .scalebar_bottom-left {
   left: 25px;
-  bottom: 40px; }
+  bottom: 40px; 
+}
 
 .HomeButton .home {
   padding: 0 !important;
@@ -469,7 +498,8 @@ input[type=checkbox].checkbox {
   -ms-border-radius: 13px;
   border-radius: 13px;
   background-size: 14px 14px;
-  background-image: none; }
+  background-image: none; 
+}
 
 .scalebar_bottom-left {
   left: 25px;
@@ -491,14 +521,15 @@ input[type=checkbox].checkbox {
   -webkit-border-radius: 13px;
   -moz-border-radius: 13px;
   -ms-border-radius: 13px;
-  border-radius: 13px; }
+  border-radius: 13px; 
+}
 
 img {
-  border: 0; }
+  border: 0; 
+}
 
 /*custom tooltips for toolbar tools. Test on early IE*/
-[data-title]:hover:after
-{
+[data-title]:hover:after {
   content: attr(data-title);
   padding: 4px 8px;
   color: #fff;
@@ -524,25 +555,26 @@ img {
 
 /* Template */
 .bg {
-  /* display: block; */
-  }
+}
 
 .rounded {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
-  border-radius: 5px; }
+  border-radius: 5px; 
+}
 
 .roundedTop {
   -moz-border-radius: 5px 5px 0 0;
   /* -webkit-border-radius: 5px 5px 0 0; */
   /* border-radius: 5px 5px 0 0; */
-  }
+}
 
 .shadow {
   -webkit-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
   -moz-box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3);
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3); }
+  box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.3); 
+}
 
 #panelContent {
   font-family: Helvetica, Arial, sans-serif;
@@ -553,26 +585,28 @@ img {
 #panelPages {
   font-family: Helvetica, Arial, sans-serif;
   width: 100%;
-  height: calc(100% - 150px);
+  height: calc(100% - 155px);
   background-color: #F9F9F9;
   overflow: auto;
 }
 
 .page {
-  /* overflow: visible; */
+  overflow: hidden;
   /* background-color: transparent; */
-  /* background-color: rgba(0, 0, 0, 0.5); */
-  height: calc(100% - 10px);
+  background-color: rgba(0, 0, 0, 0.5);
+  height: calc(100% - 22px);
+  height: 100%;
   position: relative;
-  width: 100%;
+  /* width: calc(100% - 22px); */
   top: 0;
-  /* margin: 10px; */
+  /* margin: 0 1px; */
+  /* padding: 10px; */
 }
 
 .pageblank {
   width: 0px;
   height: 100%;
-  }
+}
 
 @media only screen and (min-width: 600px) {
   .pageContent {
@@ -582,27 +616,15 @@ img {
     width: 100%;
     position: absolute;
     top: 0;
-    } }
-
-/*Panel sizes*/
-.small {
-  /* max-height: 205px; */
-  height: 100%;
-}
-
-.medium {
-  max-height: 350px; 
-}
-
-.large {
-  /* height: 100%; */
+  }
 }
 
 .pageHeader {
   position: relative;
-  width: 100%;
+  width: calc(100% + 2px);
   top: 0;
-  }
+  margin: 0 -1px;
+}
 
 .pageTitle {
   font-size: 20px;
@@ -610,7 +632,7 @@ img {
   overflow: hidden;
   padding: 4px;
   margin: 0;
-  }
+}
 
 .esriLegendServiceLabel {
   -webkit-margin-before: 0;
@@ -631,105 +653,33 @@ img {
   -webkit-border-radius: 35px;
   -moz-border-radius: 35px;
   -ms-border-radius: 35px;
-  border-radius: 35px; }
+  border-radius: 35px; 
+}
 
 .pageIcon {
   position: absolute;
   left: 11px;
   top: 11px;
   width: 40px;
-  height: 40px; }
-
-.pageClose {
-  cursor: pointer;
-  position: absolute;
-  right: 5px;
-  top: 4px;
-  --background: url(../images/close.png) no-repeat;
-  --background-size: 24px;
-  width: 24px;
-  height: 24px;
-  display: block;
-  }
-
-.pageUp {
-  position: absolute;
-  top: 35px;
-  right: 5px;
-  --background: url(../images/up.png) no-repeat;
-  --background-size: 24px;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  display: block; }
-
-.pageDown {
-  position: absolute;
-  top: 60px;
-  right: 5px;
-  --background: url(../images/down.png) no-repeat;
-  --background-size: 24px;
-  cursor: pointer;
-  width: 24px;
-  height: 24px;
-  display: block; }
-
-.pageBody {
-  
-  --
-  
-height: 100%;
-  
-width: 100%;
-  
-height: calc(100% - 20px);
-  
-color: #000000;
-  
-overflow: hidden;
-  
-overflow-y: auto;
-  
-background-color: transparent;
-  
-display: inline-block;
-  
-position: relative;
+  height: 40px; 
 }
 
-#pageBody_overview {
-  /* padding-bottom: 350px; */
+.pageBody {
+  height: 100%;
+  width: 100%;
+  height: calc(100% - 20px);
+  color: #000000;
+  overflow: hidden;
+  overflow-y: auto;
+  background-color: transparent;
+  display: inline-block;
+  position: relative;
 }
 
 .esriPrint {
-  padding: 4px;
+  padding: 0px;
   padding-bottom: 16px;
 }
-
-#pageBody_legend, #pageBody_share, #pageBody_print {
-  /* padding-left: 20px; */
-  /* padding-top: 20px; */
-  /* padding-right: 22px; */
-}
-
-#pageBody_share {
-  /* max-width: 280px; */
-  /* padding-right: 0px; */
-}
-
-#pageBody_print {
-  /* padding-bottom: 20px; */
-}
-
-@media only screen and (min-width: 720px) {
-  #pageBody_share {
-    max-height: none;
-    } }
-
-@media only screen and (min-width: 720px) {
-  #pageBody_bookmarks {
-    /* max-height: 80%; */
-    } }
 
 @media only screen and (min-width: 760px) {
   #panelTop {
@@ -1100,7 +1050,7 @@ position: relative;
 }
 
 .calcite .share-map-url {
-  width:    calc(100% - 10px) !important;
+  width: calc(100% - 0px) !important;
   height: 24px;
   font-size: 14px;
   color: #777;
@@ -1136,9 +1086,9 @@ position: relative;
     display: block; } }
 
 .calcite .share-dialog-textarea {
-  max-width: calc(100% - 10px) !important;
+  max-width: calc(100% - 0px) !important;
   margin: 0 !important;
-  width: calc(100% - 10px) !important;
+  width: calc(100% - 0px) !important;
   height: 100px;
   font-size: 14px;
   color: #777;
@@ -1587,9 +1537,9 @@ text-align: left;
 #mapDiv {
     /* position: absolute !important; */
     /* padding: 25px; */
-    /* margin: 0; */
-     width: 100%; 
-     height: 100%; 
+    margin: 0;
+    width: 100% !important;
+    height: 100%  !important;
 }
 
 .splitterContent {
@@ -1620,17 +1570,19 @@ td, th {
 }
 
 #fixContent {
-  width: 100%;
-  height: 100%;
+  width: calc(100% - 2px);
+  height: calc(100% - 2px);
+  /* height: 100%; */
   /* position: relative; */
-  overflow: auto;
+  /* overflow: hidden; */
 }
 
 #instructionsDiv {
   position: absolute;
   bottom: 0;
-  width: 100%;
-  background-color: white;
+  width: calc(100% - 20px);
+  /* background-color: white; */
+  margin: 0 10px;
 }
 
 #detailDiv {
@@ -1658,11 +1610,11 @@ td, th {
 }
 
 .margin {
-  border: transparent;
-  border-width: 10px;
-  border-style: solid;
-  height: calc(100% - 28px);
-  width: calc(100% - 20px);
+  /* border: transparent; */
+  /* border-width: 10px; */
+  /* border-style: solid; */
+  /* height: calc(100% - 28px); */
+  /* width: calc(100% - 22px); */
 }
 
 .app-loading .loading-indicator {
@@ -1782,6 +1734,6 @@ td, th {
   top: calc(50% - 200px);
 }
 
-.legend {
+.legend, .ShareDialog, .PrintDialog {
   padding: 10px;
 }

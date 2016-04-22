@@ -484,7 +484,8 @@ define(["dojo/ready",
             };
 
             skipToContent = function() {
-                dom.byId('panelPages').focus();
+                // dom.byId('panelPages').focus();
+                document.querySelector("#panelPages .page.showAttr .pageBody").focus();
             };
 
             skipToSplitter = function() {
@@ -492,7 +493,8 @@ define(["dojo/ready",
             };
 
             skipToMap = function() {
-                query('.esriSimpleSliderIncrementButton input')[0].focus();
+                document.querySelector('.esriSimpleSliderIncrementButton input').focus();
+                //dom.byId('mapDiv').focus();
             };
 
             skipToInstructions = function() {
@@ -624,8 +626,8 @@ define(["dojo/ready",
                         deferred.resolve(false);
                         return;
                     }
-                    var bDiv = toolbar.createTool(tool);
-                    var bookmarkDiv = domConstruct.create("div",{ class: "margin"}, bDiv);
+                    var bookmarkDiv = toolbar.createTool(tool);
+                    // var bookmarkDiv = domConstruct.create("div",{ class: "margin"}, bDiv);
                     var bookmarks = new Bookmarks({
                         map: this.map,
                         bookmarks: this.config.response.itemInfo.itemData.bookmarks
@@ -669,7 +671,6 @@ define(["dojo/ready",
                     var detailDiv = //toolbar.createTool(tool);
                         domConstruct.create('div',{
                         id:"detailDiv",
-                        class:"margin",
                         tabindex:0
                     }, dom.byId('fixContent'));
                     detailDiv.innerHTML = description;
@@ -772,8 +773,8 @@ define(["dojo/ready",
                 if (has("layers")) {
                     panelClass = "";
 
-                    var layersDiv = toolbar.createTool(tool);
-                    var layersDivDesc = domConstruct.create("div", {class:'margin'}, layersDiv);
+                    var layersDivDesc = toolbar.createTool(tool);
+                    // var layersDivDesc = domConstruct.create("div", {class:'margin'}, layersDiv);
 
                     var toc = new TableOfContents({
                         map: this.map,
@@ -793,12 +794,12 @@ define(["dojo/ready",
             var deferred = new Deferred();
             if (!has("instructions")) {
                deferred.resolve(false);
-            } else 
+            } 
+            else 
             {
                 var instructionsDiv = //toolbar.createTool(tool, "");
                 domConstruct.create('div',{
                     id:"instructionsDiv",
-                    // class:"margin"
                 }, dom.byId('fixContent'));
 
                 instructionsDiv.innerHTML = instructionsText;
@@ -1083,8 +1084,9 @@ define(["dojo/ready",
                     "legendLayers": []
                 };
 
-                var pDiv = toolbar.createTool(tool);
-                var printDiv = domConstruct.create("div",{class:"margin"}, pDiv);
+                var printDiv = domConstruct.create("div", {
+                    class:"PrintDialog"
+                }, toolbar.createTool(tool));
                 //get format
                 this.format = "PDF"; //default if nothing is specified
                 for (var i = 0; i < this.config.tools.length; i++) {
@@ -1245,8 +1247,8 @@ define(["dojo/ready",
 
             if (has("share")) {
 
-                var shareDiv = domConstruct.create('div', {class:'margin'}, domConstruct.create('div', {class:'margin'}, toolbar.createTool(tool)));
-                // var shareDivMargin = domConstruct.create('div',{class:'margin'}, shareDiv);
+                var shareDiv = domConstruct.create('div', {class:'pageBody'},toolbar.createTool(tool));//);
+                
                 var shareDialog = new ShareDialog({
                     bitlyLogin: this.config.bitlyLogin,
                     bitlyKey: this.config.bitlyKey,
