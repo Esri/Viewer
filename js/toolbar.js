@@ -238,14 +238,14 @@ on, mouse, query, Deferred) {
             var tool = dom.byId("toolButton_"+name);
             var tools = query(".panelTool");           
             this.emit("updateTool", name);
-            this.emit("updateTool_"+name);
-            tools.forEach(function(t){
+            tools.forEach(lang.hitch(this, function(t){
                 if(active && t === tool) {
                     domClass.add(t, "panelToolActive");
+                    this.emit("updateTool_"+name);
                 } else {
                     domClass.remove(t,"panelToolActive");
                 }
-            });
+            }));
 
             var fixContent = dom.byId('fixContent');
             if(active) {
@@ -261,17 +261,6 @@ on, mouse, query, Deferred) {
                 this.click();
             }));
         },
-
-        // // highlight the active tool on the toolbar
-        // _updateTool: function (num) {
-        //     query(".panelTool").removeClass("panelToolActive");
-        //     var name = this.tools[num - 1];
-        //     if (name) {
-        //         domClass.add("toolButton_" + name, "panelToolActive");
-        //     }
-        //     this.emit("updateTool", name);
-        //     this.emit("updateTool_"+name);
-        // },
 
         _updateMap: function () {
             if (this.map) {
