@@ -130,18 +130,6 @@ define(["dojo/ready",
             return outputColor;
         },
 
-//         var featureLayer = new esri.layers.FeatureLayer("https://sampleserver3.arcgisonline.com/ArcGIS/rest/services/Petroleum/KSPetro/MapServer/1",{
-//           mode: esri.layers.FeatureLayer.MODE_ONDEMAND,
-//           outFields: ["*"],
-//           opacity: 0.5
-//         });
-
-//         featureLayer.on("mouse-over", showTooltip);
-//         featureLayer.on("mouse-out", closeDialog);
-
-//         featureLayer.setDefinitionExpression("PROD_GAS='Yes'");
-//         map.addLayer(featureLayer);
-
         _mapLoaded: function () {
             this.map.resize();
             this.map.reposition();
@@ -829,51 +817,67 @@ define(["dojo/ready",
             } else {
                 if (has("legend")) {
                     var legendDiv = toolbar.createTool(tool, "");
-                    var legentDivDesc = domConstruct.create("div", {class:'margin', 'tabindex':0}, legendDiv);
-                    // dojo.setAttr(legendDiv, 'tabindex', 0);
                     var legend = new Legend({
                         map: this.map,
                         layerInfos: layers
-                    }, domConstruct.create("div", {role:'application'}, legentDivDesc));
+                    }, domConstruct.create("div", {role:'application'}, legendDiv));//Desc));
                     domClass.add(legend.domNode, "legend");
                     legend.startup();
 
-                    var LegendServiceLabel = legend.domNode.querySelector(".esriLegendServiceLabel");
-                    if(LegendServiceLabel)
-                    {
-                        var h3 = domConstruct.create("h2",{
-                            className: LegendServiceLabel.className,
-                            innerHTML: LegendServiceLabel.innerHTML,
-                            tabindex: 0
-                        });
-                        LegendServiceLabel.parentNode.replaceChild(h3, LegendServiceLabel);
-                    }
-
-                    var LegendLayers = legend.domNode.querySelectorAll(".esriLegendLayer");
-                    for(j=0; j<LegendLayers.length; j++) {
-                        //var LegendServiceLists = legend.domNode.querySelectorAll(".esriLegendLayer tbody");
-                        var LegendServiceList = LegendLayers[j].querySelector("tbody");
-
-
-                        var header = document.createElement("tr");
-                        header.innerHTML = "<th style='display:none;'>Layer</th>";
-                        LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
-
-
-                        domAttr.set(LegendServiceList, "role", "list");
-                        //domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
-
-                        for(i=0; i<LegendServiceList.childNodes.length; i++) {
-                            var item = LegendServiceList.childNodes[i];
-                            domAttr.set(item, "role", "listitem");
-                            domAttr.set(item, "tabindex", "0");
+                    on(toolbar, 'updateTool', lang.hitch(this, function(name) {
+                        //console.log(name);
+                        if(name == "legend") {
+                            fixLegend();
                         }
-                    }
+                    }));
 
-                    var LegendLayerImages = legend.domNode.querySelectorAll(".esriLegendLayer image");
-                    for(i = 0; i<LegendLayerImages.length; i++) {
-                        domAttr.set(LegendLayerImages[i],'alt','');
-                    }
+                    var fixLegend = function() {
+                        var LegendServiceLabels = legend.domNode.querySelectorAll(".esriLegendServiceLabel");
+                        if(LegendServiceLabels && LegendServiceLabels.length>0)
+                        {
+                            for(var i=0; i<LegendServiceLabels.length; i++) {
+                                var LegendServiceLabel = LegendServiceLabels[i];
+                                var h2 = domConstruct.create("h2",{
+                                    className: LegendServiceLabel.className,
+                                    innerHTML: LegendServiceLabel.innerHTML,
+                                    tabindex: 0
+                                });
+                                LegendServiceLabel.parentNode.replaceChild(h2, LegendServiceLabel);
+                            }
+                        }
+
+                        var LegendLayers = legend.domNode.querySelectorAll(".esriLegendLayer");
+                        for(var j=0; j<LegendLayers.length; j++) {
+                            //var LegendServiceLists = legend.domNode.querySelectorAll(".esriLegendLayer tbody");
+                            var LegendServiceList = LegendLayers[j].querySelector("tbody");
+
+                            var header = document.createElement("tr");
+                            header.innerHTML = "<th style='display:none;'>Layer</th>";
+                            LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
+
+                            domAttr.set(LegendServiceList, "role", "list");
+                            //domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
+
+                            for(var k=0; k<LegendServiceList.childNodes.length; k++) {
+                                var item = LegendServiceList.childNodes[k];
+                                domAttr.set(item, "role", "listitem");
+                                domAttr.set(item, "tabindex", "0");
+                            }
+                        }
+
+                        var LegendLayerImages = legend.domNode.querySelectorAll(".esriLegendLayer image");
+                        for(var n = 0; n<LegendLayerImages.length; n++) {
+                            domAttr.set(LegendLayerImages[n],'alt','');
+                        }
+
+                        var messages = legend.domNode.querySelectorAll(".esriLegendMsg");
+                        for(var m = 0; m<messages.length; m++) {
+                            domAttr.set(messages[m],'tabindex',0);
+                        }
+                    };
+                    
+                    on(this.map, "extent-change", lang.hitch(this, fixLegend));
+                    // dojo.setAttr(legendDiv, 'tabindex', 0);
 
                     deferred.resolve(true);
 
@@ -953,7 +957,7 @@ define(["dojo/ready",
             var deferred = new Deferred();
 
             if (has("overview")) {
-                var ovMapDiv = domConstruct.create('div',{class:'margin'},toolbar.createTool(tool));
+                var ovMapDiv = toolbar.createTool(tool);
 
                 var panelHeight = this.map.height;
 
@@ -1568,23 +1572,23 @@ define(["dojo/ready",
                     styleCss = css;
                     break;
                 }
-            };
+            }
 
             if(styleCss) {
                 for(i=0; i<styleCss.cssRules.length; i++) {
                     rule = styleCss.cssRules[i];
-                    if(typeof(rule.selectorText)!='undefined' && rule.selectorText!=null) {
+                    if(typeof(rule.selectorText)!='undefined' && rule.selectorText!==null) {
                         //hover
                         if(rule.selectorText.indexOf(':hover') >= 0) {
-                            rule.style['backgroundColor'] = this.hoverColor;
+                            rule.style.backgroundColor = this.hoverColor;
                         }
                         //focus
                         if(rule.selectorText.indexOf(':focus') >= 0) {
-                            rule.style['outlineColor'] = this.focusColor;
+                            rule.style.outlineColor = this.focusColor;
                         }
                         //active
                         if(rule.selectorText.indexOf('.activeMarker') >= 0) {
-                            rule.style['backgroundColor'] = this.activeColor;
+                            rule.style.backgroundColor = this.activeColor;
                         }
                     }
                 }

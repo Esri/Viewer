@@ -677,15 +677,24 @@ img {
 .pageBody {
   
   --
-  height: 100%;
-  width: 100%;
-  height: calc(100% - 20px);
-  color: #000000;
-  overflow: hidden;
-  overflow-y: auto;
-  background-color: transparent;
-  display: inline-block;
-  position: relative;
+  
+height: 100%;
+  
+width: 100%;
+  
+height: calc(100% - 20px);
+  
+color: #000000;
+  
+overflow: hidden;
+  
+overflow-y: auto;
+  
+background-color: transparent;
+  
+display: inline-block;
+  
+position: relative;
 }
 
 #pageBody_overview {
@@ -1441,7 +1450,7 @@ h3 {
 
 .esriOverviewMap .ovwContainer {
   display: block;
-  position: relative;
+  position: absolute;
 }
 
 #panelTool_instructions,
@@ -1544,7 +1553,7 @@ html, body {
 
 #featuresList {
     list-style: none;
-    margin: 0;
+    margin: 10px;
     -webkit-padding-start: 0;
     background-color: white;
     overflow-y: auto;
@@ -1757,4 +1766,22 @@ td, th {
 
 .esriBookmarkTable {
     width:100%;
+}
+
+.esriOverviewMap {
+    margin: 4px;
+    width: calc(100% - 8px);
+    height: calc(100% - 8px);
+}
+
+.ovwContainer {
+  width: 400px !important;
+  height: 400px !important;
+  background-color: transparent !important;
+  left: calc(50% - 200px);
+  top: calc(50% - 200px);
+}
+
+.legend {
+  padding: 10px;
 }
