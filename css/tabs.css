@@ -1,19 +1,11 @@
 .tabs {
   position: relative;
-  /* min-height: 200px; */ /* This part sucks */
   clear: both;
-  /* margin: 25px 0; */
   height: calc(100% -  50px);
   display: -webkit-box;
-  /* overflow-x: auto; */
 }
 .tab {
-  /* position: relative; */
-  /* margin: 10px; */
 }
-/*.tab [type=radio]:checked {
-  width: ;
-}*/
 
 .tab label {
   background: #81D6FF;
@@ -40,15 +32,11 @@
 }
 
 .contentInner {
-  /* overflow: auto; */
-  /* height: calc(100% - 30px); */
-  /* width: 100%; */
 }
 
 .tab [type=radio]:checked ~ label {
   background: white;
   border-top: 1px solid white;
-  /* z-index: 200000; */
 }
 .tab [type=radio] ~ .tabContent  {
   display: none;
