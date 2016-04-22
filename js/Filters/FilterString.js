@@ -70,8 +70,10 @@ define([
                             results.features.map(lang.hitch(this, function(f) { 
                                 return f.attributes[this.field.fieldName];})).forEach(lang.hitch(this, function(v) {
                                 if(v) {
-//                                     console.log(v);
-                                    this.listInput.innerHTML += '<input type="checkbox" value="'+v+'" />'+v+'<br />';
+                                    var id = this.id+'_'+v;
+                                    this.listInput.innerHTML += '<input type="checkbox" class="checkbox" value="'+v+'" id="'+id+'"/>';
+                                    this.listInput.innerHTML += '<label for="'+id+'" class="checkbox">'+v+'</label>';
+                                    this.listInput.innerHTML += '<br />';
                                 }
                             }));
                         }));

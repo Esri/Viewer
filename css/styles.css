@@ -26,9 +26,6 @@
 label.checkbox{
   padding: 3px 0px;
   margin: 0 !important;
-  /* text-overflow: ellipsis; */
-  /* white-space: nowrap; */
-  /* overflow-x: hidden; */
   border: 2px solid transparent;
   vertical-align: text-top;
   font-weight: bold;
