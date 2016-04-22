@@ -234,6 +234,7 @@ on, mouse, query, Deferred) {
             var tool = dom.byId("toolButton_"+name);
             var tools = query(".panelTool");           
             this.emit("updateTool", name);
+            this.emit("updateTool_"+name);
             tools.forEach(function(t){
                 if(active && t === tool) {
                     domClass.add(t, "panelToolActive");
@@ -257,15 +258,16 @@ on, mouse, query, Deferred) {
             }));
         },
 
-        // highlight the active tool on the toolbar
-        _updateTool: function (num) {
-            query(".panelTool").removeClass("panelToolActive");
-            var name = this.tools[num - 1];
-            if (name) {
-                domClass.add("toolButton_" + name, "panelToolActive");
-            }
-            this.emit("updateTool", name);
-        },
+        // // highlight the active tool on the toolbar
+        // _updateTool: function (num) {
+        //     query(".panelTool").removeClass("panelToolActive");
+        //     var name = this.tools[num - 1];
+        //     if (name) {
+        //         domClass.add("toolButton_" + name, "panelToolActive");
+        //     }
+        //     this.emit("updateTool", name);
+        //     this.emit("updateTool_"+name);
+        // },
 
         _updateMap: function () {
             if (this.map) {

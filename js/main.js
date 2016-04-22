@@ -825,11 +825,8 @@ define(["dojo/ready",
                     domClass.add(legend.domNode, "legend");
                     legend.startup();
 
-                    on(toolbar, 'updateTool', lang.hitch(this, function(name) {
-                        //console.log(name);
-                        if(name == "legend") {
-                            fixLegend();
-                        }
+                    on(toolbar, 'updateTool_legend', lang.hitch(this, function(name) {
+                        fixLegend();
                     }));
 
                     var fixLegend = function() {

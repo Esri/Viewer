@@ -1737,3 +1737,7 @@ td, th {
 .legend, .ShareDialog, .PrintDialog {
   padding: 10px;
 }
+
+.legend table {
+  width:100%;
+}

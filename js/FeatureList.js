@@ -92,11 +92,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             this.set("loaded", true);
             this.emit("load", {});
 
-            on(this.toolbar, 'updateTool', lang.hitch(this, function(name) {
-                //console.log(name);
-                if(name == "features") {
-                    this._reloadList(this.map);
-                }
+            on(this.toolbar, 'updateTool_features', lang.hitch(this, function(name) {
+                this._reloadList(this.map);
             }));
         },
 
