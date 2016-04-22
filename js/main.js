@@ -849,9 +849,9 @@ define(["dojo/ready",
                             //var LegendServiceLists = legend.domNode.querySelectorAll(".esriLegendLayer tbody");
                             var LegendServiceList = LegendLayers[j].querySelector("tbody");
 
-                            var header = document.createElement("tr");
-                            header.innerHTML = "<th style='display:none;'>Layer</th>";
-                            LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
+//                             var header = document.createElement("tr");
+//                             header.innerHTML = "<th style='display:none;'>Layer</th>";
+//                             LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
 
                             domAttr.set(LegendServiceList, "role", "list");
                             //domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
