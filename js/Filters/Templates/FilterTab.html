@@ -2,7 +2,7 @@
 	<div class="tab">
 	    <input id="${id}_btn" type="radio" name="tabsGroup" ${checked} data-dojo-attach-event="onchange: filterChange" value="${id}_page" data-dojo-attach-point="btn">
 	    <label for="${id}_btn" aria-label="${filter_name}">
-	   		<span tabindex=0>${filter_name}</span>
+	   		<span tabindex=0 data-dojo-attach-event="onkeypress: filterKeyPress">${filter_name}</span>
 			<img src="images/set.png" class="setIndicator" style="display:none; left:-4px;"
 			     data-dojo-attach-point="setIndicator" 
 			     Alt="Some Filters Apply" title="Some Filters Apply" 

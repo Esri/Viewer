@@ -42,6 +42,13 @@ define([
              }));
         },
 
+        filterKeyPress: function(btn) {
+            // console.log(btn, btn.currentTarget.parentElement);
+            if(btn.keyCode == 13 || btn.keyCode == 32) {
+                btn.currentTarget.parentElement.click();
+            }
+        },
+
         filterChange: function(ev) {
              var pageId = ev.target.value;
 //             console.log(page, ev);
