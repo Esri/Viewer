@@ -1042,7 +1042,7 @@ define(["dojo/ready",
                         }
                         break;
                     case 40 : // down
-                        if(top < this.map.height - this.div.clientHeight/2) {
+                        if(top < this.div.parentElement.offsetHeight - this.div.clientHeight/2) {
                             dojo.style(this.div, 'top', ++top + 'px');
                         }
                         break;
@@ -1052,7 +1052,7 @@ define(["dojo/ready",
                         }
                         break;
                     case 39 : // right
-                        if(left < this.map.width - this.div.clientWidth/2) {
+                        if(left < this.div.parentElement.offsetWidth - this.div.clientWidth/2) {
                             dojo.style(this.div, 'left', ++left + 'px');
                         }
                         break;
