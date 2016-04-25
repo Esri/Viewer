@@ -187,7 +187,7 @@ on, mouse, query, Deferred) {
             domConstruct.create("h1", {
                 className: "pageTitle fc",
                 innerHTML: this.config.i18n.tooltips[name] || name,
-                style: 'display:inline; vertical-align:text-bottom;',
+                style: 'display:inline',
                 id: "pagetitle_" + name
             }, pageHeader);
 

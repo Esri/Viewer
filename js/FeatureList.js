@@ -104,7 +104,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             var details = this.domNode.querySelector('.showAttr');
             if(details) {
                 var page = query(details).closest('.borderLi')[0];
-                page.focus();
+                page.querySelector('.checkbox').focus();
             }
         },
 
@@ -145,7 +145,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                 {
                                     var pField = fieldsMap[p];
                                     var fieldName = '${'+pField.fieldName+'}';
-                                    content+='<tr class="featureItem_${_featureId} hideAttr" tabindex="0">\n';
+                                    content+='<tr class="featureItem_${_layerId}_${_featureId} hideAttr" tabindex="0">\n';
                                     content+='    <td valign="top">\n';
                                     content+='      <!--<img src="..\\images\\Filter0.png" alt="filter" class="filterBtn"/>-->\n';
                                     content+='    </td>\n';
@@ -219,9 +219,9 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             }
 
             window.featurePanZoom = function(btn, panOnly) {
-                values = btn.attributes.tag.value.split(',');
-                var r = window.tasks[values[0]];
-                var fid = values[1].split('_')[1];
+                //values = btn.dataset.tag.split(',');
+                var r = window.tasks[btn.dataset.layerid];
+                var fid = btn.dataset.featureid;
                 var layer = r.layer;
                 var objectIdFieldName = r.layer.objectIdField;
 
@@ -244,7 +244,10 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
                         dojo.removeClass(e, 'showAttr');
                         dojo.addClass(e, 'hideAttr');
-                        query(e).closest('li').removeClass('borderLi');
+                        var li = query(e).closest('li');
+                        li.removeClass('borderLi');
+//                         domAttr.set(li,'tabindex','-1');
+
                     });
                     dojo.query('#featureButton_'+_prevSelected).forEach(function(e) {
                         e.checked=false;
@@ -259,15 +262,17 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
 
                 if(checkBox.checked)
                 {
-                    _prevSelected = fid;//.split('_')[1];
+                    _prevSelected = values[0]+'_'+fid;
                     dojo.query('.featureItem_'+_prevSelected).forEach(function(e) {
                         dojo.addClass(e, 'showAttr');
                         dojo.removeClass(e, 'hideAttr');
-                        query(e).closest('li').addClass('borderLi');
+                        var li = query(e).closest('li');
+                        li.addClass('borderLi');
+//                         domAttr.set(li,'tabindex',0);
                     });
 
                     q = new Query();
-                    q.where = "["+objectIdFieldName+"]='"+fid.split('_')[1]+"'";
+                    q.where = "["+objectIdFieldName+"]='"+fid+"'";
                     q.outFields = ['"'+objectIdFieldName+'"'];
                     q.returnGeometry = true;
                     r.task.execute(q).then(function(ev) {
@@ -292,7 +297,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             _getFeatureListItem = function(r, f, objectIdFieldName, layer, content, listTemplate) {
                 try {
                     var featureId = f.attributes[objectIdFieldName];
-                    var attributes = {_featureId:r+'_'+featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
+                    var attributes = {_featureId:featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
                     lang.mixin(attributes, f.attributes);
                     var nulls = window.tasks[r].layer.fields.map(function(f){return f.name;});
                     var nullAttrs ={};
