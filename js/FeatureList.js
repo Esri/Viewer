@@ -194,6 +194,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         var checkbox = query("#featureButton_"+window._prevSelected)[0];
                         checkbox.checked = true;
                         window.featureExpand(checkbox, true);
+                        checkbox.focus();
                     }
                     domStyle.set(loading_features, 'display', 'none');
                 }
@@ -218,24 +219,23 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                 }   
             }
 
-            window.featurePanZoom = function(btn, panOnly) {
-                //values = btn.dataset.tag.split(',');
-                var r = window.tasks[btn.dataset.layerid];
-                var fid = btn.dataset.featureid;
+            window.featurePanZoom = function(el, panOnly) {
+                var r = window.tasks[el.dataset.layerid];
+                var fid = el.dataset.featureid;
                 var layer = r.layer;
                 var objectIdFieldName = r.layer.objectIdField;
 
-                    q = new Query();
-                    q.where = "["+objectIdFieldName+"]='"+fid+"'";
-                    q.outFields = ['"'+objectIdFieldName+'"'];                    
-                    q.returnGeometry = true;
-                    r.task.execute(q).then(function(ev) {
-                        if(panOnly) {
-                            layer._map.centerAt(ev.features[0].geometry);
-                        } else {
-                            layer._map.centerAndZoom(ev.features[0].geometry, 13);
-                        }
-                    });
+                q = new Query();
+                q.where = "["+objectIdFieldName+"]='"+fid+"'";
+                q.outFields = ['"'+objectIdFieldName+'"'];                    
+                q.returnGeometry = true;
+                r.task.execute(q).then(function(ev) {
+                    if(panOnly) {
+                        layer._map.centerAt(ev.features[0].geometry);
+                    } else {
+                        layer._map.centerAndZoom(ev.features[0].geometry, 13);
+                    }
+                });
             };
 
             window._prevSelected = null;                
