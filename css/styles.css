@@ -1231,6 +1231,7 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 .esriBasemapGalleryNode
 {
   margin: 1px 8px !important;
+  padding: 5px 8px 0px 5px;
 }
 
 li[role='menuitem']:hover, 
