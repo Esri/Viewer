@@ -1509,7 +1509,7 @@ html, body {
 #featuresList li {
     /* margin-bottom: 4px; */
     /* margin-left: -10px; */
-    padding: 2px;
+    margin: 3px;
     /* padding-left: 10px; */
 }
 
@@ -1521,7 +1521,7 @@ html, body {
 }
 
 .borderLi {
-  border: solid 1px #037eaf;
+  border: solid 1px gray;
 }
 
 .featureItem h2 {
