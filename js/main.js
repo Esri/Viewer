@@ -1615,6 +1615,7 @@ define(["dojo/ready",
                         //focus
                         if(rule.selectorText.indexOf(':focus') >= 0) {
                             rule.style.outlineColor = this.focusColor;
+                            rule.style.boxShadow = '0 0 12px '+this.theme;
                         }
                         //active
                         if(rule.selectorText.indexOf('.activeMarker') >= 0) {
