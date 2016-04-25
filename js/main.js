@@ -485,7 +485,7 @@ define(["dojo/ready",
 
             skipToContent = function() {
                 dom.byId('panelPages').focus();
-                // document.querySelector("#panelPages .page.showAttr .pageBody").focus();
+                //dojo.query("#panelPages .page.showAttr .pageBody :focusable")[0].focus();
             };
 
             skipToSplitter = function() {
@@ -592,7 +592,7 @@ define(["dojo/ready",
                 basemap.startup();
 
                 // on(toolbar, 'updateTool_basemap', lang.hitch(this, function(name) {
-                //     dom.byId('pageBody_basemap').focus();
+
                 // }));
 
 
@@ -603,22 +603,34 @@ define(["dojo/ready",
                     var nodes = this.domNode.querySelectorAll(".esriBasemapGalleryNode");
                     array.forEach(nodes, function(node){
                         domAttr.set(node, "role", "listitem");
-                        img = node.querySelector("img");
+                        var img = node.querySelector("img");
                         img.alt='';
                         domAttr.set(img, "tabindex", -1);
                         domAttr.remove(img, "title");
 
-                        aNode = node.querySelector("a");
-                        labelNode = node.querySelector(".esriBasemapGalleryLabelContainer");
+                        var aNode = node.querySelector("a");
+                        var labelNode = node.querySelector(".esriBasemapGalleryLabelContainer");
                         domAttr.remove(labelNode.firstChild, "alt");
                         domAttr.remove(labelNode.firstChild, "title");
                         dojo.place(labelNode, aNode, "last");
                         //domStyle.set(labelNode, "width", img.width);
-                        domAttr.set(aNode, "tabindex", -1);
-                        domAttr.set(node, "tabindex", 0);
-                        domStyle.set(node, "padding", "5px 8px 0px 5px");
+                        domAttr.set(node, "tabindex", 0);   
                         on(aNode, "focus", function() { node.focus();});
                         on(img, "click", function() { node.focus();});
+                        on(node,"keydown", function(ev) {
+//                             console.log(ev);
+                            if(ev.code === "Enter" || ev.code === "Space") {
+                                aNode.click();  
+                            } else if(ev.code === "Tab" && !ev.shiftKey) {
+                                if(node.nextElementSibling.nodeName != "BR") {
+                                    node.nextElementSibling.focus();
+                                } else {
+                                   document.querySelector('#dijit_layout_ContentPane_0_splitter').focus();
+                                }
+                            } else if(ev.code === "Tab" && ev.shiftKey) {
+                                node.focus();
+                            }
+                        });
                     });
                 }));
                 deferred.resolve(true);
