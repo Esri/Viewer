@@ -271,7 +271,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             }
             else {
                 domAttr.set(this._nodes[index].checkbox, "checked", "");
-            };
+            }
         },
 
         _layerEvent: function (layer, index) {

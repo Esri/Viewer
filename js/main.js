@@ -866,12 +866,20 @@ define(["dojo/ready",
                         {
                             for(var i=0; i<LegendServiceLabels.length; i++) {
                                 var LegendServiceLabel = LegendServiceLabels[i];
-                                var h2 = domConstruct.create("h2",{
-                                    className: LegendServiceLabel.className,
-                                    innerHTML: LegendServiceLabel.innerHTML,
-                                    tabindex: 0
-                                });
-                                LegendServiceLabel.parentNode.replaceChild(h2, LegendServiceLabel);
+                                if(LegendServiceLabel.nodeName !== 'H2') {
+                                    var h2 = domConstruct.create("h2",{
+                                        className: LegendServiceLabel.className,
+                                        innerHTML: LegendServiceLabel.innerHTML
+                                    });
+                                    LegendServiceLabel.parentNode.replaceChild(h2, LegendServiceLabel);
+                                }
+                                console.log(LegendServiceLabel);
+                                var service = LegendServiceLabel.closest('.esriLegendService');
+                                if(service && (!service.style || service.style.display !== 'none')) {
+                                    domAttr.set(LegendServiceLabel, 'tabindex', 0);
+                                } else {
+                                    domAttr.set(LegendServiceLabel, 'tabindex', -1);
+                                }
                             }
                         }
 
@@ -880,10 +888,11 @@ define(["dojo/ready",
                             //var LegendServiceLists = legend.domNode.querySelectorAll(".esriLegendLayer tbody");
                             var LegendServiceList = LegendLayers[j].querySelector("tbody");
 
-//                             var header = document.createElement("tr");
-//                             header.innerHTML = "<th style='display:none;'>Layer</th>";
-//                             LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
-
+                            if(LegendServiceList.querySelector('.layerHeader')) {
+                                var header = document.createElement("tr");
+                                header.innerHTML = "<th style='display:none;' class='layerHeader'>Layer</th>";
+                                LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
+                            }
                             domAttr.set(LegendServiceList, "role", "list");
                             //domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
 
