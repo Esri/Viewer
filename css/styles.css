@@ -620,14 +620,14 @@ img {
   position: relative;
   width: calc(100% + 2px);
   top: 0;
-  margin: 0 -1px;
+  /* margin: 0 -1px; */
 }
 
 .pageTitle {
-  font-size: 20px;
+  font-size: 18px;
   color: #ffffff;
   overflow: hidden;
-  padding: 4px;
+  padding: 0 4px;
   margin: 0;
 }
 

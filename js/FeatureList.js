@@ -221,7 +221,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             window.featurePanZoom = function(btn, panOnly) {
                 values = btn.attributes.tag.value.split(',');
                 var r = window.tasks[values[0]];
-                var fid = values[1];
+                var fid = values[1].split('_')[1];
                 var layer = r.layer;
                 var objectIdFieldName = r.layer.objectIdField;
 
