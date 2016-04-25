@@ -1028,9 +1028,9 @@ img {
   cursor: pointer;
   margin: 0 10px 0 0;
   text-decoration: none;
-  display: block; 
+  display: block;
   height: 32px;
-  opacity: 0.5;
+  /* opacity: 0.5; */
 }
 
 .calcite .share-dialog-icon:hover, .calcite .share-dialog-icon:focus {
