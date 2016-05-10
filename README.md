@@ -4,23 +4,25 @@ basic-viewer-template
 
 ![Screen Shot](https://dl.dropboxusercontent.com/u/24627279/screenshots/Viewer_screenshot.png)
 
-[View it live] (http://www.arcgis.com/apps/Viewer/index.html?webmap=f5b13dbed07c46cdb783cf361833aa6b)
+[View it live](http://www.arcgis.com/apps/Viewer/index.html?webmap=f5b13dbed07c46cdb783cf361833aa6b)
 
-#November 2015 Release Updates
-- **Splash Screen:**  Add a configurable splash screen and specify custom title and contents. 
-- **LayerList:**  The layer list widget has been updated to add support for displaying legend info and setting layer opacity. 
-#July 2015 Release Updates
-- **Optional Subtitle:** Added support for specifying a subtitle. To specify subtitle text update config/defaults.js and specify the subtitle text using the subtitle property. 
--  **Custom URL Parameters:** The template now supports the ability to define a custom url parameter along with the search layer and field. This can be used to build applications that display a particular feature at application startup. For example if your app displays parcel features you could define a custom url parameter called parcel and then users can navigate there directly by appending ?parcel=1245243242343 and the map will zoom to that feature on startup. Define these values using by setting the customUrlParam and customUrlLayer properties in config/defaults.js. 
--  **Support for toggling sub layers:** The layers feature now allows you to toggle the visilibity of sub layers. 
--  **Define custom print layout title:** The print feature now provides an option for users to define a custom title for the print layout. 
--  **Reduce white space on panels:** Reduced white space on panels. Now the panels (Legend, layer, desc etc) size to fit the content. 
-#Features
+# November 2015 Release Updates
+- **Splash Screen:**  Add a configurable splash screen and specify custom title and contents.
+- **LayerList:**  The layer list widget has been updated to add support for displaying legend info and setting layer opacity.
+
+# July 2015 Release Updates
+- **Optional Subtitle:** Added support for specifying a subtitle. To specify subtitle text update config/defaults.js and specify the subtitle text using the subtitle property.
+-  **Custom URL Parameters:** The template now supports the ability to define a custom url parameter along with the search layer and field. This can be used to build applications that display a particular feature at application startup. For example if your app displays parcel features you could define a custom url parameter called parcel and then users can navigate there directly by appending ?parcel=1245243242343 and the map will zoom to that feature on startup. Define these values using by setting the customUrlParam and customUrlLayer properties in config/defaults.js.
+-  **Support for toggling sub layers:** The layers feature now allows you to toggle the visibility of sub layers.
+-  **Define custom print layout title:** The print feature now provides an option for users to define a custom title for the print layout.
+-  **Reduce white space on panels:** Reduced white space on panels. Now the panels (Legend, layer, desc etc) size to fit the content.
+
+# Features
 The template can be configured using the following options:
 
 - **Map:** Choose the web map used in your application.
 - **Color Scheme:** Choose a color scheme for the application.
-- **Show Title:** Choose whether to include an application title. 
+- **Show Title:** Choose whether to include an application title.
 - **Title Text:** The application title. The default title is the web map name.
 - **Logo:** Choose a custom logo for your application.
 - **Overview Map:** Display a retractable overview map to add context for panning and zooming.
@@ -29,20 +31,17 @@ The template can be configured using the following options:
 - **Editor:** Allows users to interactively create, modify, or delete features in editable layers. *
 - **Print:** Enables printing the map at the current extent. It can be configured to include a legend and supports different layout options.
 - **Layer List:** Enables toggling the visibility of operational layers within the web map. *
-- **Basemaps:** Enables the display of the basemap gallery. 
+- **Basemaps:** Enables the display of the basemap gallery.
 - **Bookmarks:** Enables the use of web map bookmarks for navigation. *
 - **Measure:** Enables measure tool for interactive area, length, and point measurement.
 - **Share:** Allows users to share the application with others via email, Twitter, or Facebook.
-- **Search:** Displays the Search box to enable navigation to addresses and places. 
-
+- **Search:** Displays the Search box to enable navigation to addresses and places.
 
 *These options will appear in the application when the web map has properties or layers that support them.
 
+# Instructions
 
-
-#Instructions
-
-## Instructions
+## Local setup
 
 1. Download and unzip the .zip file or clone the repository.
 2. Web-enable the directory.
@@ -64,26 +63,26 @@ The template can be configured using the following options:
 
 **Note:** If your application edits features in a feature service, contains secure services or web maps that aren't shared publicly, or generate requests that exceed 200 characters, you may need to set up and use a proxy page. Common situations where you may exceed the URL length are using complex polygons as input to a task or specifying a spatial reference using well-known text (WKT). For details on installing and configuring a proxy page see [Using the proxy](https://developers.arcgis.com/javascript/jshelp/ags_proxy.html). If you do not have an Internet connection, you will need to access and deploy the ArcGIS API for JavaScript documentation from [developers.arcgis.com](https://developers.arcgis.com/).
 
-For addtional customization options view the [wiki](https://github.com/Esri/Viewer/wiki/Viewer-Template-Wiki). 
+For additional customization options view the [wiki](https://github.com/Esri/Viewer/wiki/Viewer-Template-Wiki).
 
-#Requirements
+# Requirements
 
 - Notepad or HTML editor
 - Some background with HTML, CSS and JavaScript
-- Experience with the ArcGIS API for JavaScript is helpful. 
+- Experience with the ArcGIS API for JavaScript is helpful.
 
-#Resources
+# Resources
 
 - [ArcGIS API for JavaScript Resource Center](http://help.arcgis.com/en/webapi/javascript/arcgis/index.html)
-- [Loading a locally-defined webmap, instead of from AGOL](LocalWebmap.md)
+- [Loading a locally-defined webmap, instead of from AGOL](https://github.com/Esri/Viewer/wiki/local-definition)
 
-#Issues
-Found a bug or want to request a new feature? Please let us know by submitting an issue. 
+# Issues
+Found a bug or want to request a new feature? Please let us know by submitting an issue.
 
-#Contributing
-Anyone and everyone is welcome to contribute. 
+# Contributing
+Anyone and everyone is welcome to contribute.
 
-#Licensing 
+# Licensing
 
 Copyright 2012 Esri
 
@@ -94,5 +93,5 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 A copy of the license is available in the repository's license.txt file.
-[](Esri Tags: ArcGIS Online Web Application Templates) 
+[](Esri Tags: ArcGIS Online Web Application Templates)
 [](Esri Language: JavaScript)
