@@ -8,7 +8,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dojo/string", 
     "dojo/text!application/dijit/templates/FeatureListTemplate.html",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", 
-    "esri/symbols/CartographicLineSymbol",
+    "esri/symbols/CartographicLineSymbol", 
+    "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol",
     "esri/graphic", "esri/Color", 
     "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
@@ -23,7 +24,9 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         dom, domClass, domAttr, domStyle, domConstruct, event, 
         string,
         listTemplate,
-        SimpleMarkerSymbol, PictureMarkerSymbol, CartographicLineSymbol,
+        SimpleMarkerSymbol, PictureMarkerSymbol, 
+        CartographicLineSymbol, 
+        SimpleFillSymbol, SimpleLineSymbol,
         Graphic, Color,
         InfoWindow
     ) {
@@ -242,7 +245,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     } else {
                         if(geometry.type === "point") {
                             layer._map.centerAndZoom(geometry, 13);
-                        } else if (geometry.type === "line" || geometry.type === "polyline") {
+                        } else {
                             var extent = geometry.getExtent().expand(1.5);
                             layer._map.setExtent(extent);
                         }
@@ -311,11 +314,16 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                 CartographicLineSymbol.JOIN_ROUND, 5);
                             break;
                         default:
-                            // if the graphic is a line or polygon
-                            markerGeometry = graphic.geometry.getExtent().getCenter();
+                            // if the graphic is a polygon
+                            markerGeometry = graphic.geometry;
+                            marker = new SimpleFillSymbol(
+                                SimpleFillSymbol.STYLE_SOLID, 
+                                new SimpleLineSymbol(
+                                    SimpleLineSymbol.STYLE_SOLID,
+                                    new Color([0, 127, 255]), 3),
+                                    new Color([0, 127, 255, 0.25]));
                             break;
                         }
-
 
                         var graphic = new Graphic(markerGeometry, marker);
                         layer._map.graphics.add(graphic);
