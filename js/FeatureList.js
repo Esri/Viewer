@@ -7,7 +7,9 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dojo/dom", "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
     "dojo/text!application/dijit/templates/FeatureListTemplate.html",
-    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
+    "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", 
+    "esri/symbols/CartographicLineSymbol",
+    "esri/graphic", "esri/Color", 
     "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
     
@@ -21,7 +23,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         dom, domClass, domAttr, domStyle, domConstruct, event, 
         string,
         listTemplate,
-        SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
+        SimpleMarkerSymbol, PictureMarkerSymbol, CartographicLineSymbol,
+        Graphic, Color,
         InfoWindow
     ) {
     var Widget = declare("esri.dijit.FeatureList", [_WidgetBase, _TemplatedMixin, Evented], {
@@ -230,10 +233,19 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                 q.outFields = ['"'+objectIdFieldName+'"'];                    
                 q.returnGeometry = true;
                 r.task.execute(q).then(function(ev) {
+                    var geometry = ev.features[0].geometry;
                     if(panOnly) {
-                        layer._map.centerAt(ev.features[0].geometry);
+                        if (geometry.type !== "point") {
+                            geometry = geometry.getExtent().getCenter();
+                        }
+                        layer._map.centerAt(geometry);
                     } else {
-                        layer._map.centerAndZoom(ev.features[0].geometry, 13);
+                        if(geometry.type === "point") {
+                            layer._map.centerAndZoom(geometry, 13);
+                        } else if (geometry.type === "line" || geometry.type === "polyline") {
+                            var extent = geometry.getExtent().expand(1.5);
+                            layer._map.setExtent(extent);
+                        }
                     }
                 });
             };
@@ -277,7 +289,35 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     q.returnGeometry = true;
                     r.task.execute(q).then(function(ev) {
                         //console.log(ev);
-                        var graphic = new Graphic(ev.features[0].geometry, markerSymbol);
+
+                        var graphic = ev.features[0];
+                        var markerGeometry;
+                        var marker;
+
+                        switch (graphic.geometry.type) {
+                            case "point":
+                                markerGeometry = graphic.geometry;
+                                marker = markerSymbol;
+                                break;
+                        case "extent":
+                            markerGeometry = graphic.getCenter();
+                            // marker = new SimpleMarkerSymbol
+                            break;
+                        case "polyline" :
+                            markerGeometry = graphic.geometry;
+                            marker = new CartographicLineSymbol(
+                                CartographicLineSymbol.STYLE_SOLID, new Color([0, 127, 255]), 10, 
+                                CartographicLineSymbol.CAP_ROUND,
+                                CartographicLineSymbol.JOIN_ROUND, 5);
+                            break;
+                        default:
+                            // if the graphic is a line or polygon
+                            markerGeometry = graphic.geometry.getExtent().getCenter();
+                            break;
+                        }
+
+
+                        var graphic = new Graphic(markerGeometry, marker);
                         layer._map.graphics.add(graphic);
                     });
                     // layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
