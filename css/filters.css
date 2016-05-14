@@ -90,6 +90,7 @@
   margin-top: -6px;
   position: absolute;
   top: calc(100% - 50px);
+  width: 100%;
 }
 
 .filterTabsContent {
