@@ -46,7 +46,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             this.domNode = srcRefNode;
             // properties
             this.set("map", defaults.map);
-            this.set("layers", defaults.layers);
+            var Layers = this._getLayers(defaults.layers);
+            this.set("Layers", Layers);
 
             if(options.animatedMarker) {
                 window.markerSymbol = new esri.symbol.PictureMarkerSymbol({
@@ -77,6 +78,15 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             }
             this.css = {
             };
+        },
+
+        _getLayers : function(layers) {
+            var l1 = layers.filter(l => l.hasOwnProperty("url"));
+            var l2 = layers.filter(l => !l.hasOwnProperty("url"));
+            if(l2.length>0) {
+                console.info("Feature List - These Layers are not services: ", l2);
+            }
+            return l1;
         },
 
         startup: function () {
@@ -209,8 +219,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
 
         _createList: function(){
             window.tasks = [];
-            for(var l = 0; l<this.layers.length; l++) {
-                layer = this.layers[l];
+            for(var l = 0; l<this.Layers.length; l++) {
+                layer = this.Layers[l];
                 if(layer.visibility)
                 {
                     var _query = new Query();

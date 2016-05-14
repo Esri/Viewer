@@ -34,15 +34,26 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
             this.domNode = srcRefNode;
             // properties
             this.set("map", defaults.map);
-            this.set("layers", defaults.layers.filter(function(l){return l.visibility;}));
+            var Layers = this._getLayers(defaults.layers);
+            var VisibleLayers = Layers.filter(l => l.visibility);
+            this.set("layers", VisibleLayers);
             window.filters = [];
-            defaults.layers.filter(function(l){return l.visibility;}).forEach(lang.hitch(this,function(layer){
+            VisibleLayers.forEach(lang.hitch(this,function(layer){
                 window.filters.push({
                     id: layer.id, 
                     layer: layer, 
                     fields:layer.popupInfo.fieldInfos.filter(function(l){return l.visible;})
                 });
             }));
+        },
+
+        _getLayers : function(layers) {
+            var l1 = layers.filter(l => l.hasOwnProperty("url"));
+            var l2 = layers.filter(l => !l.hasOwnProperty("url"));
+            if(l2.length>0) {
+                console.info("Filters - These Layers are not services: ", l2);
+            }
+            return l1;
         },
 
         startup: function () {

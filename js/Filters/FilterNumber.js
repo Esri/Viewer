@@ -68,7 +68,7 @@ define([
                 var maxNumb = this.maxValue.value;
                 if(minNumb && maxNumb) {
                     var where = this.field.fieldName+this.criteria.value+"'"+minNumb+"' AND '"+maxNumb+"'";
-                    console.log(where);
+                    //console.log(where);
                     return where;
                 }
                 else {
@@ -78,7 +78,7 @@ define([
                 var numb = this.minValue.value;
                 if(numb) {
                     var where1 = this.field.fieldName+this.criteria.value+"'"+numb+"'";
-                    console.log(where1);
+                    //console.log(where1);
                     return where1;
                 }
                 else {
