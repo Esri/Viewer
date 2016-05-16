@@ -14,9 +14,14 @@
 	<div class="tabContent tabHide" id="${id}_page">
         <div class="filterAdd">
        		<label for="${id}-fieldsCombo">Attribute:</label> 
-       		<select id="${id}-fieldsCombo" autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
+       		<!-- <div data-dojo-attach-point="fieldsDiv" style="display: initial;"/> -->
+       		<select id="${id}-fieldsCombo" autofocus tabindex=0 data-dojo-attach-point="fieldsCombo" role="list">
        		</select>
        		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd" style="float: right;"/>
+
+       		<div data-dojo-attach-point="AComboBoxTest">
+       			
+       		</div>
         </div>
 
        	<ul data-dojo-attach-point="filterList"></ul>

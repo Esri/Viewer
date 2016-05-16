@@ -4,14 +4,15 @@ define([
     "esri/tasks/query", "esri/tasks/QueryTask", "esri/graphicsUtils",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel", 
     "dojo/dom-style",
-    "dojo/text!application/Filters/templates/FilterTab.html"
+    "dojo/text!application/Filters/templates/FilterTab.html",
+    "application/AComboBoxWidget/AComboBoxWidget"
 ], function(
     Evented, declare, domConstruct, domClass, parser, ready, 
     on, connect,
     Query, QueryTask, graphicsUtils,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
     domStyle,
-    FilterTab
+    FilterTab, AComboBox
     ){
     var Widget = declare("FilterTab", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: FilterTab,
@@ -36,10 +37,43 @@ define([
             this._init();
         },
 
+        fieldSelect:null,
+
         _init: function () {
-             this.filter.fields.forEach(lang.hitch(this, function(fl){
-                 this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'">'+fl.label+'</option>';
-             }));
+            // this.fieldSelect = new Select({
+            //     id: this.id+"-fieldsCombo",
+            //     "data-dojo-attach-point": "fieldsCombo",
+            //     options:[]
+            // });
+            // this.filter.fields.forEach(lang.hitch(this, function(fl){
+            //     this.fieldSelect.options.push({ label: fl.label, value: fl.fieldName});
+            // }));
+
+            // this.fieldSelect.startup();
+            // this.fieldSelect.placeAt(this.fieldsDiv);
+
+            var aComboBoxTest = new AComboBox({items:[
+                     {name:'List Item 1', value:1},       
+                     {name:'List Item 2', value:2},       
+                     {name:'List Item 3', value:3},       
+                     {name:'List Item 4', value:4},       
+                     {name:'List Item 5', value:5},       
+                     {name:'List Item 6', value:6},       
+                     {name:'List Item 7', value:7},       
+                     {name:'List Item 8', value:8},       
+                     {name:'List Item 9', value:9},       
+                     {name:'List Item 10', value:10},       
+                     {name:'List Item 11', value:11},       
+                     {name:'List Item 12', value:12},       
+                ],
+                selectedItem:2
+            });
+            aComboBoxTest.placeAt(this.AComboBoxTest);
+            aComboBoxTest.startup();
+
+            this.filter.fields.forEach(lang.hitch(this, function(fl){
+                this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'" role="listitem">'+fl.label+'</option>';
+            }));
         },
 
         filterKeyPress: function(btn) {
@@ -71,6 +105,7 @@ define([
 
         filterAdd: function(ev) {
             var fieldId = this.fieldsCombo.value;
+            // var fieldId = this.fieldSelect.get("value");
             var field = this.filter.fields.find(function(f) {return f.fieldName === fieldId;});
             var layer = this.filter.layer;
 
