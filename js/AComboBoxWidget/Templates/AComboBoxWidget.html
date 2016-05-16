@@ -1,0 +1,69 @@
+<div class="aComboBox">
+	<button type="button" title="Open Combobox" data-dojo-attach-event="onclick: expandCombo">
+		<img src="images/caret-down.png" Alt=""/>
+	</button>
+	<input 
+		type="text" 
+		id="${id}_input" 
+		role="combobox" 
+		aria-owns="${id}_listbox" 
+		aria-busy="false" 
+		aria-autocomplete="inline" 
+		aria-expanded="false" 
+		aria-haspopup="true" 
+		class="rw-input rw-input" 
+		autocomplete="off" 
+		aria-disabled="false" 
+		aria-readonly="false" 
+		aria-activedescendant="${id}_listbox__option__0"></input>
+	<div 
+		class="popup_container popup_animating" 
+		data-dojo-attach-point="popup_container"
+		style="display: none;">
+		<ul 
+			data-dojo-attach-point="items"
+			id="${id}_listbox" 
+			tabindex="-1" 
+			class="rw-list" 
+			role="listbox" 
+			aria-hidden="true" 
+			aria-labelledby="${id}_input" 
+			aria-live="false" 
+			aria-activedescendant="${id}_listbox__option__0">
+			<li 
+				role="option" 
+				tabindex="0" 
+				aria-selected="true" 
+				id="${id}_listbox__option__0">List Item 1</li>
+			<li 
+				role="option" 
+				tabindex="0" 
+				aria-selected="true" class="selected" 
+				id="${id}_listbox__option__1">List Item 2</li>
+			<li 
+				role="option" 
+				tabindex="0" 
+				id="${id}_listbox__option__2">List Item 3</li>
+			<li 
+				role="option" 
+				tabindex="0" 
+				id="${id}_listbox__option__3">List Item 4</li>
+			<li 
+				role="option" 
+				tabindex="0" 
+				id="${id}_listbox__option__4">List Item 5</li>
+			<li 
+				role="option" 
+				tabindex="0" 
+				id="${id}_listbox__option__5">List Item 6</li>
+			<li 
+				role="option" 
+				tabindex="0" 
+				id="${id}_listbox__option__6">List Item 7</li>
+			<li 
+				role="option" 
+				tabindex="0" 
+				id="${id}_listbox__option__7">List Item 8</li>
+		</ul>
+	</div>
+</div>
