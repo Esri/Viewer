@@ -66,7 +66,7 @@ define([
                      {name:'List Item 11', value:11},       
                      {name:'List Item 12', value:12},       
                 ],
-                selectedItem:2
+                selectedIndex:2
             });
             aComboBoxTest.placeAt(this.AComboBoxTest);
             aComboBoxTest.startup();

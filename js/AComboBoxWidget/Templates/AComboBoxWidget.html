@@ -9,19 +9,21 @@
 		aria-owns="${id}_listbox" 
 		aria-busy="false" 
 		aria-autocomplete="inline" 
-		aria-expanded="false" 
+		aria-expanded="${expanded}" 
 		aria-haspopup="true" 
 		class="rw-input rw-input" 
 		autocomplete="off" 
 		aria-disabled="false" 
 		aria-readonly="false" 
-		aria-activedescendant="${id}_listbox__option__0"></input>
+		aria-activedescendant="${id}_listbox__option__0"
+		data-dojo-attach-point="inputControl"
+		data-dojo-attach-event="onkeydown: navigateCombo"></input>
 	<div 
 		class="popup_container popup_animating" 
 		data-dojo-attach-point="popup_container"
 		style="display: none;">
 		<ul 
-			data-dojo-attach-point="items"
+			data-dojo-attach-point="ListItems"
 			id="${id}_listbox" 
 			tabindex="-1" 
 			class="rw-list" 
