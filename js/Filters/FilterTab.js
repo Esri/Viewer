@@ -54,13 +54,13 @@ define([
 
             var items = [];
             this.filter.fields.forEach(lang.hitch(this, function(fl){
-                this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'" role="listitem">'+fl.label+'</option>';
+//                 this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'" role="listitem">'+fl.label+'</option>';
                 items.push({name:fl.label, value:fl.fieldName});
             }));
 
-            var aComboBoxTest = new AComboBox({items:items},null,this.labelForComboAttributes);
-            aComboBoxTest.placeAt(this.AComboBoxTest);
-            aComboBoxTest.startup();
+            this.aComboBox = new AComboBox({items:items},null,this.labelForComboAttributes);
+            this.aComboBox.placeAt(this.AComboBoxTest);
+            this.aComboBox.startup();
 
     },
 
@@ -91,9 +91,7 @@ define([
             this.btn.checked=true;
         },
 
-        filterAdd: function(ev) {
-            var fieldId = this.fieldsCombo.value;
-            // var fieldId = this.fieldSelect.get("value");
+        _filterAdd: function(fieldId) {
             var field = this.filter.fields.find(function(f) {return f.fieldName === fieldId;});
             var layer = this.filter.layer;
 
@@ -105,6 +103,12 @@ define([
                 this.FilterItems.splice(this.FilterItems.indexOf(filterItem), 1);
             }));
             filterItem.domNode.focus();
+        },
+        
+        filterAdd: function(ev) {
+//             var fieldId = this.fieldsCombo.value;
+            var fieldId = this.aComboBox.selectedValue;
+            this._filterAdd(fieldId);
         },
 
         filterApply: function(btn) {

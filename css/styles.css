@@ -1685,7 +1685,7 @@ td, th {
     color: white;
     background-blend-mode: darken;
     padding: 3px 10px 0px 10px;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 
 .featureItem tr .filterBtn {
