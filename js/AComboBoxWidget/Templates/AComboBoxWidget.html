@@ -1,7 +1,8 @@
 <div class="aComboBox">
-	<!-- <button type="button" title="" > -->
-		<img src="images/caret-down.png" Alt="Expand" Title="Expand" data-dojo-attach-event="onclick: expandCombo" tabindex="-1"/>
-	<!-- </button> -->
+	<div class="aComboBox_btn" data-dojo-attach-event="onclick: expandCombo">
+		<img src="images/caret-down.png" Alt="Expand" Title="Expand" tabindex="-1"
+		data-dojo-attach-point="imgExpand"/>
+	</div>
 	<input 
 		type="text" 
 		id="${id}_input" 

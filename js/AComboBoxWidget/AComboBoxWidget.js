@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/kernel", 
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on", "dijit/form/DateTextBox",
     "dojo/Deferred", "dojo/promise/all", 
-    "dojo/query", 
+    "dojo/query", "dojo/_base/fx", "dojo/dom-style",
     "dojo/text!application/AComboBoxWidget/templates/AComboBoxWidget.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
@@ -10,7 +10,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         declare, lang, has, dom, esriNS,
         _WidgetBase, _TemplatedMixin, on, DateTextBox, 
         Deferred, all, 
-        query,
+        query, fx, style,
         AComboBox, 
         domClass, domAttr, domStyle, domConstruct, event
     ) {
@@ -37,9 +37,6 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         },
 
         _init: function () {
-//             this.inputControl.onfocus = lang.hitch(this, function() { 
-//                 this._expandCombo(false);
-//             });
             this.inputControl.onblur = lang.hitch(this, function() { 
                 this._expandCombo(true);
             });
@@ -61,10 +58,6 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
                 on(li, 'click', lang.hitch(this, this.selectItem));
                 
                 domConstruct.place(li, this.ListItems);
-
-                // this.ListItems.innerHTML+= '<li role="option" tabindex="-1" aria-selected="'+
-                // (i === this.SelectedIndex ? 'true" class="selected' : 'false')+
-                // '" id="'+itemId+'" value="'+item.value+'" onclick="this.selectItem(this);" data-index="'+i+'">'+item.name+'</li>';
 
                 if(i === this.SelectedIndex) {
                     this._setSelectedIndex(i);
@@ -105,14 +98,44 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         },
 
         _expandCombo : function(expand) {
-            domStyle.set(this.popup_container,'display', expand ? 'none' : '');
-            domAttr.set(this.inputControl, 'aria-expanded', (!expand)+'');
-            this.expanded = expand;
+
+            if(expand) {
+                fx.fadeOut({
+                    node: this.popup_container,
+                    duration: 450,
+                    onBegin: lang.hitch(this, function(){
+                        style.set(this.popup_container, "opacity", "1");
+                    }),
+                    onEnd: lang.hitch(this, function(){
+                        domStyle.set(this.popup_container,'display', 'none');
+                        domAttr.set(this.inputControl, 'aria-expanded', 'false');
+                        this.expanded = expand;
+                    }),
+                }).play();
+            } else {
+                fx.fadeIn({
+                    node: this.popup_container,
+                    duration: 450,
+                    onBegin: lang.hitch(this, function(){
+                        style.set(this.popup_container, "opacity", "0");
+                        domStyle.set(this.popup_container,'display', '');
+                        domAttr.set(this.inputControl, 'aria-expanded', 'true');
+                        this.expanded = expand;
+                    }),
+                }).play();
+            }
         },
 
         navigateCombo : function(ev) {
             // console.log('keyDown', ev);
             switch(ev.keyIdentifier) {
+//                 case "Alt" : //?
+//                     ev.preventDefault = true;
+//                     break;
+                case "Enter" :
+                    lang.hitch(this, this._expandCombo(false));
+                    ev.preventDefault = true;
+                    break;
                 case "Down" :
                     if(this.SelectedIndex < this.ComboItems.length-1) {
                         this._setSelectedIndex(++this.SelectedIndex);

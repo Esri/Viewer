@@ -9,40 +9,26 @@
 	/* max-width: 300px; */
 }
 
-.aComboBox button {
-	/*height: 100%;*/
+.aComboBox_btn {
 	border: 1px solid transparent;
 	/*border-left: 1px solid #ccc;*/
-	/*position: absolute;*/
-	/* width: 1.9em; */
+	position: absolute;
 	right: 0;
-	/*top: 0;*/
+	top: -1px;
 	cursor: pointer;
-	/* line-height: 2.286em; */
 	display: inline-block;
-	/* margin: 0; */
-	text-align: left;
-	background: none;
-	background-image: none;
-	padding: 0;
-	/*-webkit-appearance: button;*/
+	margin: 1px;
+	/**/
+	-webkit-appearance: button;
+	height:calc(100% - 3px);
 }
 
 .aComboBox img {
-	border: 1px solid transparent;
-	border-left: 1px solid #ccc;
-	position: absolute;
-	right: 0;
-	top: 0;
-	cursor: pointer;
-	/* line-height: 2.286em; */
-	display: inline-block;
-	/* margin-top: 5px; */
 	width: 10px;
-	margin: 1px;
+	height:10px;
 	padding: 3px;
-	-webkit-appearance: button;
 }
+
 .aComboBox input[type="text"] {
 	width: calc(100% - 1.9em);
 	border: none;
@@ -92,3 +78,4 @@
 .aComboBox .selected {
 	background-color: #ccf;
 }
+
