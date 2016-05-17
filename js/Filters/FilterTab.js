@@ -52,29 +52,17 @@ define([
             // this.fieldSelect.startup();
             // this.fieldSelect.placeAt(this.fieldsDiv);
 
-            var aComboBoxTest = new AComboBox({items:[
-                     {name:'List Item 1', value:1},       
-                     {name:'List Item 2', value:2},       
-                     {name:'List Item 3', value:3},       
-                     {name:'List Item 4', value:4},       
-                     {name:'List Item 5', value:5},       
-                     {name:'List Item 6', value:6},       
-                     {name:'List Item 7', value:7},       
-                     {name:'List Item 8', value:8},       
-                     {name:'List Item 9', value:9},       
-                     {name:'List Item 10', value:10},       
-                     {name:'List Item 11', value:11},       
-                     {name:'List Item 12', value:12},       
-                ],
-                selectedIndex:2
-            });
+            var items = [];
+            this.filter.fields.forEach(lang.hitch(this, function(fl){
+                this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'" role="listitem">'+fl.label+'</option>';
+                items.push({name:fl.label, value:fl.fieldName});
+            }));
+
+            var aComboBoxTest = new AComboBox({items:items});
             aComboBoxTest.placeAt(this.AComboBoxTest);
             aComboBoxTest.startup();
 
-            this.filter.fields.forEach(lang.hitch(this, function(fl){
-                this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'" role="listitem">'+fl.label+'</option>';
-            }));
-        },
+    },
 
         filterKeyPress: function(btn) {
             // console.log(btn, btn.currentTarget.parentElement);

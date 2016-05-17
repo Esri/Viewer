@@ -26,7 +26,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
 
         constructor: function (options, srcRefNode) {
             var defaults = lang.mixin({}, this.options, options);
-            this.set("Items", defaults.items);
+            this.set("ComboItems", defaults.items);
             this.set("SelectedIndex", defaults.selectedIndex);
             this.domNode = srcRefNode;
             this.set('expanded', defaults.expanded);
@@ -37,22 +37,48 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         },
 
         _init: function () {
+//             this.inputControl.onfocus = lang.hitch(this, function() { 
+//                 this._expandCombo(false);
+//             });
+            this.inputControl.onblur = lang.hitch(this, function() { 
+                this._expandCombo(true);
+            });
             this.ListItems.innerHTML= '';
-            for(var i=0; i<this.Items.length; i++) {
-                var item = this.Items[i];
+            for(var i=0; i<this.ComboItems.length; i++) {
+                var item = this.ComboItems[i];
                 var itemId = this.id+'_listbox__option__'+i;
-                this.ListItems.innerHTML+= '<li role="option" tabindex="-1" aria-selected="'+
-                (i === this.SelectedIndex ? 'true" class="selected' : 'false')+
-                '" id="'+itemId+'" value="'+item.value+'">'+item.name+'</li>';
+
+                var li = domConstruct.create("li", {
+                    id: itemId,
+                    role:"option",
+                    tabindex: 0,
+                    value: item.value,
+                    'data-index':i,
+                    innerHTML: item.name,
+                    class: (i === this.SelectedIndex) ? 'selected' : '',
+                    'aria-selected': (i === this.SelectedIndex) ? 'true' : 'false',
+                });
+                on(li, 'click', lang.hitch(this, this.selectItem));
+                
+                domConstruct.place(li, this.ListItems);
+
+                // this.ListItems.innerHTML+= '<li role="option" tabindex="-1" aria-selected="'+
+                // (i === this.SelectedIndex ? 'true" class="selected' : 'false')+
+                // '" id="'+itemId+'" value="'+item.value+'" onclick="this.selectItem(this);" data-index="'+i+'">'+item.name+'</li>';
 
                 if(i === this.SelectedIndex) {
                     this._setSelectedIndex(i);
                 }
             }
+
+        },
+
+        selectItem : function(ev) {
+            this._setSelectedIndex(ev.currentTarget.dataset.index);
         },
 
         _setSelectedIndex : function(index) {
-            var item = this.Items[index];
+            var item = this.ComboItems[index];
             var itemId = this.id+'_listbox__option__'+index;
             this.SelectedIndex = index;
             domAttr.set(this.inputControl, 'aria-activedescendant', itemId);
@@ -61,9 +87,11 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
             this.selectedValue = item.value;
 
             var oldSelectedNode = document.querySelector('#'+this.id+' .selected');
-            domAttr.set(oldSelectedNode, 'class', '');
-            domAttr.set(oldSelectedNode, 'aria-selected', 'false');
-
+            if(oldSelectedNode) {
+                domAttr.set(oldSelectedNode, 'class', '');
+                domAttr.set(oldSelectedNode, 'aria-selected', 'false');
+            }
+            
             var node = document.querySelector('#'+itemId);
             domAttr.set(node, 'class', 'selected');
             domAttr.set(node, 'aria-selected', 'true');
@@ -72,19 +100,21 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         },
 
         expandCombo : function(ev) {
-            var display = domStyle.get(this.popup_container,'display') === 'none';
-            console.log('expand', display);
-            domStyle.set(this.popup_container,'display', display ? '' : 'none');
-            domAttr.set(this.inputControl, 'aria-expanded', display+'');
+            var display = domStyle.get(this.popup_container,'display') !== 'none';
+            this._expandCombo(display);
+        },
 
-            this.expanded = display;
+        _expandCombo : function(expand) {
+            domStyle.set(this.popup_container,'display', expand ? 'none' : '');
+            domAttr.set(this.inputControl, 'aria-expanded', (!expand)+'');
+            this.expanded = expand;
         },
 
         navigateCombo : function(ev) {
-            console.log('keyDown', ev);
+            // console.log('keyDown', ev);
             switch(ev.keyIdentifier) {
                 case "Down" :
-                    if(this.SelectedIndex < this.Items.length-1) {
+                    if(this.SelectedIndex < this.ComboItems.length-1) {
                         this._setSelectedIndex(++this.SelectedIndex);
                     }
                     ev.preventDefault = true;
@@ -100,7 +130,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
                     ev.preventDefault = true;
                     break;
                 case "End" :
-                    this._setSelectedIndex(this.Items.length-1);
+                    this._setSelectedIndex(this.ComboItems.length-1);
                     ev.preventDefault = true;
                     break;
             }

@@ -1,10 +1,11 @@
 <div class="aComboBox">
-	<button type="button" title="Open Combobox" data-dojo-attach-event="onclick: expandCombo">
-		<img src="images/caret-down.png" Alt=""/>
-	</button>
+	<!-- <button type="button" title="" > -->
+		<img src="images/caret-down.png" Alt="Expand" Title="Expand" data-dojo-attach-event="onclick: expandCombo" tabindex="-1"/>
+	<!-- </button> -->
 	<input 
 		type="text" 
 		id="${id}_input" 
+		tabindex=0
 		role="combobox" 
 		aria-owns="${id}_listbox" 
 		aria-busy="false" 
@@ -17,7 +18,9 @@
 		aria-readonly="false" 
 		aria-activedescendant="${id}_listbox__option__0"
 		data-dojo-attach-point="inputControl"
-		data-dojo-attach-event="onkeydown: navigateCombo"></input>
+		data-dojo-attach-event="onkeydown: navigateCombo"
+		>
+	</input>
 	<div 
 		class="popup_container popup_animating" 
 		data-dojo-attach-point="popup_container"
@@ -25,7 +28,7 @@
 		<ul 
 			data-dojo-attach-point="ListItems"
 			id="${id}_listbox" 
-			tabindex="-1" 
+			tabindex="0" 
 			class="rw-list" 
 			role="listbox" 
 			aria-hidden="true" 
@@ -37,35 +40,6 @@
 				tabindex="0" 
 				aria-selected="true" 
 				id="${id}_listbox__option__0">List Item 1</li>
-			<li 
-				role="option" 
-				tabindex="0" 
-				aria-selected="true" class="selected" 
-				id="${id}_listbox__option__1">List Item 2</li>
-			<li 
-				role="option" 
-				tabindex="0" 
-				id="${id}_listbox__option__2">List Item 3</li>
-			<li 
-				role="option" 
-				tabindex="0" 
-				id="${id}_listbox__option__3">List Item 4</li>
-			<li 
-				role="option" 
-				tabindex="0" 
-				id="${id}_listbox__option__4">List Item 5</li>
-			<li 
-				role="option" 
-				tabindex="0" 
-				id="${id}_listbox__option__5">List Item 6</li>
-			<li 
-				role="option" 
-				tabindex="0" 
-				id="${id}_listbox__option__6">List Item 7</li>
-			<li 
-				role="option" 
-				tabindex="0" 
-				id="${id}_listbox__option__7">List Item 8</li>
 		</ul>
 	</div>
 </div>
