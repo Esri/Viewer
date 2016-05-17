@@ -19,9 +19,11 @@
        		</select>
        		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd" style="float: right;"/>
 
-       		<div data-dojo-attach-point="AComboBoxTest">
-       			
-       		</div>
+       		<div style="display: -webkit-box; margin-top:10px;">
+	   			<Label data-dojo-attach-point="labelForComboAttributes">Attribute:&nbsp;</Label>
+	       		<div data-dojo-attach-point="AComboBoxTest" style="width:calc(100% - 120px);">
+	       		</div>
+	       	</div>
         </div>
 
        	<ul data-dojo-attach-point="filterList"></ul>

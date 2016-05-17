@@ -21,14 +21,22 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         options: {
             visible: true,
             selectedIndex: 0,
-            expanded: false
+            expanded: false,
         },
 
-        constructor: function (options, srcRefNode) {
+        constructor: function (options, srcRefNode, labelRefNode) {
             var defaults = lang.mixin({}, this.options, options);
             this.set("ComboItems", defaults.items);
             this.set("SelectedIndex", defaults.selectedIndex);
-            this.domNode = srcRefNode;
+            if(srcRefNode)
+            {
+                this.domNode = srcRefNode;
+            }
+            if(labelRefNode)
+            {
+                this.labelRefNode = labelRefNode;
+            }
+
             this.set('expanded', defaults.expanded);
         },
 
@@ -40,6 +48,9 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
             this.inputControl.onblur = lang.hitch(this, function() { 
                 this._expandCombo(true);
             });
+            if(this.labelRefNode){
+                domAttr.set(this.labelRefNode,'for',this.inputControl.id);
+            }
             this.ListItems.innerHTML= '';
             for(var i=0; i<this.ComboItems.length; i++) {
                 var item = this.ComboItems[i];
@@ -99,6 +110,8 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
 
         _expandCombo : function(expand) {
 
+            this.expanded = expand;
+            domAttr.set(this.inputControl, 'aria-expanded', !expand+'');
             if(expand) {
                 fx.fadeOut({
                     node: this.popup_container,
@@ -108,8 +121,6 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
                     }),
                     onEnd: lang.hitch(this, function(){
                         domStyle.set(this.popup_container,'display', 'none');
-                        domAttr.set(this.inputControl, 'aria-expanded', 'false');
-                        this.expanded = expand;
                     }),
                 }).play();
             } else {
@@ -119,8 +130,6 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
                     onBegin: lang.hitch(this, function(){
                         style.set(this.popup_container, "opacity", "0");
                         domStyle.set(this.popup_container,'display', '');
-                        domAttr.set(this.inputControl, 'aria-expanded', 'true');
-                        this.expanded = expand;
                     }),
                 }).play();
             }

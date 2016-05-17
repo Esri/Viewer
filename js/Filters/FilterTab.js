@@ -58,7 +58,7 @@ define([
                 items.push({name:fl.label, value:fl.fieldName});
             }));
 
-            var aComboBoxTest = new AComboBox({items:items});
+            var aComboBoxTest = new AComboBox({items:items},null,this.labelForComboAttributes);
             aComboBoxTest.placeAt(this.AComboBoxTest);
             aComboBoxTest.startup();
 
