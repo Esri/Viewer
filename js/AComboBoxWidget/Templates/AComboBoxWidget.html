@@ -1,5 +1,7 @@
-<div class="aComboBox">
-	<div class="aComboBox_btn" data-dojo-attach-event="onclick: expandCombo">
+<div class="aComboBox" 
+	data-dojo-attach-event="onclick: expandCombo"
+	data-dojo-attach-event="mouseover: btnPointer">
+	<div class="aComboBox_btn" data-dojo-attach-point="CaretDownButton">
 		<img src="images/caret-down.png" Alt="Expand" Title="Expand" tabindex="-1"
 		data-dojo-attach-point="imgExpand"/>
 	</div>
@@ -15,6 +17,7 @@
 		aria-activedescendant="${id}_listbox__option__0"
 		data-dojo-attach-point="inputControl"
 		data-dojo-attach-event="onkeydown: navigateCombo"
+
 		>
 	</input>
 	<div 

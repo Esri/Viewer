@@ -6,8 +6,7 @@
 	border-radius: 4px;
 	position: relative;
 	background-clip: border-box;
-	/* max-width: 300px; */
-	/* right: 0; */
+	cursor: pointer;
 }
 
 .aComboBox_btn {
@@ -20,12 +19,14 @@
 	/**/
 	-webkit-appearance: button;
 	height: calc(100% - 4px);
+	pointer-events: none;
 }
 
 .aComboBox img {
 	width: 10px;
 	height: 10px;
 	padding: 3px;
+	/* pointer-events: none; */
 }
 
 .aComboBox input[type="text"] {
@@ -35,6 +36,7 @@
 	padding: 1px 4px;
 	background-color: #fff;
 	font: inherit;
+	cursor: default;
 }
 
 .aComboBox .popup_container {

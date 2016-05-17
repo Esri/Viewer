@@ -54,13 +54,13 @@ define([
 
             var items = [];
             this.filter.fields.forEach(lang.hitch(this, function(fl){
-//                 this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'" role="listitem">'+fl.label+'</option>';
-                items.push({name:fl.label, value:fl.fieldName});
+                this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'">'+fl.label+'</option>';
+//                 items.push({name:fl.label, value:fl.fieldName});
             }));
 
-            this.aComboBox = new AComboBox({items:items},null,this.labelForComboAttributes);
-            this.aComboBox.placeAt(this.AComboBoxTest);
-            this.aComboBox.startup();
+            // this.aComboBox = new AComboBox({items:items},null,this.labelForComboAttributes);
+            // this.aComboBox.placeAt(this.AComboBoxHolder);
+            // this.aComboBox.startup();
 
     },
 
@@ -106,8 +106,8 @@ define([
         },
         
         filterAdd: function(ev) {
-//             var fieldId = this.fieldsCombo.value;
-            var fieldId = this.aComboBox.selectedValue;
+            var fieldId = this.fieldsCombo.value;
+//             var fieldId = this.aComboBox.selectedValue;
             this._filterAdd(fieldId);
         },
 
