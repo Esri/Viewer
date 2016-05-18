@@ -4,15 +4,16 @@ define([
     "esri/tasks/query", "esri/tasks/QueryTask", "esri/graphicsUtils",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel", 
     "dojo/dom-style",
-    "dojo/text!application/Filters/templates/FilterTab.html",
-    "application/AComboBoxWidget/AComboBoxWidget"
+    //"application/AComboBoxWidget/AComboBoxWidget",
+    "dojo/text!application/Filters/templates/FilterTab.html"
 ], function(
     Evented, declare, domConstruct, domClass, parser, ready, 
     on, connect,
     Query, QueryTask, graphicsUtils,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
-    domStyle,
-    FilterTab, AComboBox
+    domStyle, 
+    //AComboBox,
+    FilterTab
     ){
     var Widget = declare("FilterTab", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: FilterTab,

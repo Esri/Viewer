@@ -861,6 +861,15 @@ define(["dojo/ready",
                     }));
 
                     var fixLegend = function() {
+                        var tables = legend.domNode.querySelectorAll("table");
+                        if(tables && tables.length>0)
+                        {
+                            for(var t=0; t<tables.length; t++) {
+                                var table = tables[t];
+                                domAttr.set(table, 'role', "presentation");
+                            }
+                        }
+
                         var LegendServiceLabels = legend.domNode.querySelectorAll(".esriLegendServiceLabel");
                         if(LegendServiceLabels && LegendServiceLabels.length>0)
                         {
@@ -873,7 +882,7 @@ define(["dojo/ready",
                                     });
                                     LegendServiceLabel.parentNode.replaceChild(h2, LegendServiceLabel);
                                 }
-                                console.log(LegendServiceLabel);
+//                                 console.log(LegendServiceLabel);
                                 var service = LegendServiceLabel.closest('.esriLegendService');
                                 if(service && (!service.style || service.style.display !== 'none')) {
                                     domAttr.set(LegendServiceLabel, 'tabindex', 0);

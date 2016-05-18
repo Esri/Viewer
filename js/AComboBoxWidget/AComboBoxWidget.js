@@ -1,7 +1,7 @@
 define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/kernel", 
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on", "dijit/form/DateTextBox",
     "dojo/Deferred", "dojo/promise/all", 
-    "dojo/query", "dojo/_base/fx", "dojo/dom-style",
+    "dojo/query", "dojo/_base/fx", "dojo/dom-style", "dojo/mouse", 
     "dojo/text!application/AComboBoxWidget/templates/AComboBoxWidget.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
@@ -10,7 +10,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         declare, lang, has, dom, esriNS,
         _WidgetBase, _TemplatedMixin, on, DateTextBox, 
         Deferred, all, 
-        query, fx, style,
+        query, fx, style, mouse,
         AComboBox, 
         domClass, domAttr, domStyle, domConstruct, event
     ) {
@@ -46,11 +46,13 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
 
         _init: function () {
             this.inputControl.onblur = lang.hitch(this, function() { 
-                this._expandCombo(true);
+                this._expandCombo(false);
             });
+
             if(this.labelRefNode){
                 domAttr.set(this.labelRefNode,'for',this.inputControl.id);
             }
+
             this.ListItems.innerHTML= '';
             for(var i=0; i<this.ComboItems.length; i++) {
                 var item = this.ComboItems[i];
@@ -100,49 +102,70 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
             domAttr.set(node, 'class', 'selected');
             domAttr.set(node, 'aria-selected', 'true');
             node.scrollIntoView(false);
+            if(this.SelectedIndex !== index) {
+                this.emit("changed", {source: this} );
+                // this._expandCombo(false);
+            }
             return item;
         },
 
         expandCombo : function(ev) {
-            var display = domStyle.get(this.popup_container,'display') !== 'none';
-            this._expandCombo(display);
+//             this.inputControl.focus();
+            var w = ev.currentTarget.clientWidth;
+            var h = ev.currentTarget.clientHeight;
+            var x = ev.offsetX;
+            var y = ev.offsetY;
+            if(x >= w-h) {
+                var display = domStyle.get(this.popup_container,'display') === 'none';
+                this._expandCombo(display);
+            }
+        },
+
+        mousePointer: function(ev) {
+            var w = ev.currentTarget.clientWidth;
+            var h = ev.currentTarget.clientHeight;
+            var x = ev.offsetX;
+            var y = ev.offsetY;
+            if(x >= w-h) {
+            }
         },
 
         _expandCombo : function(expand) {
-
-            this.expanded = expand;
-            domAttr.set(this.inputControl, 'aria-expanded', !expand+'');
-            if(expand) {
+            domAttr.set(this.inputControl, 'aria-expanded', expand+'');
+            if(!expand) {
                 fx.fadeOut({
                     node: this.popup_container,
-                    duration: 450,
+                    duration: 250,
                     onBegin: lang.hitch(this, function(){
                         style.set(this.popup_container, "opacity", "1");
                     }),
                     onEnd: lang.hitch(this, function(){
                         domStyle.set(this.popup_container,'display', 'none');
+                        this.expanded = false;
                     }),
                 }).play();
             } else {
                 fx.fadeIn({
                     node: this.popup_container,
-                    duration: 450,
+                    duration: 250,
                     onBegin: lang.hitch(this, function(){
                         style.set(this.popup_container, "opacity", "0");
                         domStyle.set(this.popup_container,'display', '');
+                    }),
+                    onEnd: lang.hitch(this, function(){
+                        this.expanded = true;
                     }),
                 }).play();
             }
         },
 
         navigateCombo : function(ev) {
-            // console.log('keyDown', ev);
             switch(ev.keyIdentifier) {
 //                 case "Alt" : //?
 //                     ev.preventDefault = true;
 //                     break;
                 case "Enter" :
-                    lang.hitch(this, this._expandCombo(false));
+                    lang.hitch(this, this._expandCombo(!this.expanded));
                     ev.preventDefault = true;
                     break;
                 case "Down" :
