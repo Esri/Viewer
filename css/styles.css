@@ -522,7 +522,7 @@ input[type=checkbox].checkbox {
 }
 
 img {
-  border: 0; 
+  border: 0;
 }
 
 /*custom tooltips for toolbar tools. Test on early IE*/
@@ -762,18 +762,19 @@ img {
 }
 
 #panelTools {
-  position: relative;
+  /* position: relative; */
   left: 0px;
   top: 0px;
-  min-height: 30px;
+  min-height: 28px;
   width: 100%;
   /* display: block; */
   clear: both;
+  /* height: 48px; */
   }
 
 @media only screen and (min-width: 720px) {
   #panelTools {
-    /* display: block !important; */
+    display: block !important;
     } }
 
 #panelMenu {
@@ -791,19 +792,45 @@ img {
 
 .panelTool {
   float: left;
-  width: 26px;
-  height: 26px;
-  margin-top: 2px;
-  text-align: center;
-  line-height: 26px;
+  /* width: 40px; */
+  /* height: 40px; */
+  /* margin-top: 2px; */
+  /* background-color: gray; */
+  padding: 1px;
+  /* margin-left: 1px; */
+  /* margin-right: 1px; */
+  /* padding: 1px; */
+  /* display: -webkit-inline-box; */
+  /* left: 50%; */
+  /* margin: 2px; */
+  border-color: transparent;
+  /* border-width: 2px; */
+  vertical-align: middle;
+  box-sizing: border-box;
   background-color: transparent;
-  padding: 0;
-  border-left-color: transparent;
-  border-top-color: transparent;
-  border-right-color: transparent;
-  border-bottom-color: transparent;
-  margin-left: 1px;
-  margin-right: 1px;
+  /* border: 1px solid rgb(169, 169, 169); */
+  /* border-radius: 4px; */
+  position: relative;
+  background-clip: border-box;
+  cursor: pointer;
+  background: transparent;
+  /* -webkit-appearance: button; */
+}
+
+.panelTool input[type="image"] {
+  margin:1px;
+  width: 24px;
+  height: 24px;
+  /* position: absolute; */
+  /*left: 0;
+  right: 0;*/
+  /* margin-left: -25%; */
+  /* margin-top: -25%; */
+  float: left;
+  /*top: 0;*/
+  /*bottom: 0;*/
+  border-width: 0px;
+  border-color: transparent;
 }
 
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/

@@ -112,18 +112,33 @@ on, mouse, query, Deferred) {
             // add tool
             var refNode = this.pTools;
             var tip = this.config.i18n.tooltips[name] || name;
+            var panelTool = domConstruct.create("div", {
+                className: "panelTool",
+                tabindex: -1,
+                id: "toolButton_" + name,
+                // "aria-label": tip,
+            }, refNode);
+            var pTool = domConstruct.create("input", {
+                type: "image",
+                src: "images/icons_" + this.config.icons + "/" + name + ".png",
+                title: tip,
+            }, panelTool);
+
+            if (!has("touch")) 
+            {
+                domAttr.set(pTool, "title", tip);
+            }
+
+
             if(badgeEvName && badgeEvName !== '') {
-                var divTool =  domConstruct.create("div", {
-                }, refNode);
                 var setIndicator = domConstruct.create("img", {
                     src:"images/set.png",
                     class:"setIndicator",
-                    style:"margin-left: 16px; display:none;",
-                    Alt:"Some Filters Apply",
-                    title:"Some Filters Apply",
-                    tabindex:0
-                }, divTool);
-                refNode = divTool;
+                    style:"display:none;",
+                    tabindex:0,
+                    alt:""
+                });
+                domConstruct.place(setIndicator, panelTool);
 
                 filtersOn = [];
                 connect.subscribe(badgeEvName, lang.hitch(this, function(message){
@@ -141,24 +156,15 @@ on, mouse, query, Deferred) {
                     }
                     if(filtersOn.length>0) {
                         domStyle.set(setIndicator,'display','');
+                        domAttr.set(pTool, "title", this.config.i18n.tooltips["filtersApply"] || "Some Filters Apply");            
+
                     } else {
                         domStyle.set(setIndicator,'display','none');
+                        domAttr.set(pTool, "title", tip); 
                     }
                 }));
             }
-            var pTool = domConstruct.create("input", {
-                type:"image",
-                className: "panelTool",
-                id: "toolButton_" + name,
-                "aria-label": tip,
-                alt: tip,
-                src: "images/icons_" + this.config.icons + "/" + name + ".png",
-            }, refNode);
 
-            if (!has("touch")) 
-            {
-                domAttr.set(pTool, "title", tip);
-            }
 
             on(pTool, "click", lang.hitch(this, this._toolClick, name));
             this.tools.push(name);
@@ -202,7 +208,6 @@ on, mouse, query, Deferred) {
             //     className: "pageHeaderImg",
             //     innerHTML: "<img class='pageIcon' src ='images/icons_" + this.config.icons + "/" + name + ".png' alt=''/>"
             // }, pageHeader);
-
 
             var pageBody = domConstruct.create("div", {
                 className: "pageBody",

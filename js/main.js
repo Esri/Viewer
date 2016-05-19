@@ -433,7 +433,7 @@ define(["dojo/ready",
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 1',
-                    style:'right:20px; top:20%;'
+                    style:'right:20px;'
                 }, dom.byId('panelTools'));
 
                 domConstruct.create("div", {
@@ -870,6 +870,15 @@ define(["dojo/ready",
                             }
                         }
 
+                        var svgs = legend.domNode.querySelectorAll("svg");
+                        if(svgs && svgs.length>0)
+                        {
+                            for(var s=0; s<svgs.length; s++) {
+                                var svg = svgs[s];
+                                domAttr.set(svg, 'title', "symbol");
+                            }
+                        }
+
                         var LegendServiceLabels = legend.domNode.querySelectorAll(".esriLegendServiceLabel");
                         if(LegendServiceLabels && LegendServiceLabels.length>0)
                         {
@@ -897,11 +906,11 @@ define(["dojo/ready",
                             //var LegendServiceLists = legend.domNode.querySelectorAll(".esriLegendLayer tbody");
                             var LegendServiceList = LegendLayers[j].querySelector("tbody");
 
-                            if(LegendServiceList.querySelector('.layerHeader')) {
-                                var header = document.createElement("tr");
-                                header.innerHTML = "<th style='display:none;' class='layerHeader'>Layer</th>";
-                                LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
-                            }
+                            // if(LegendServiceList.querySelector('.layerHeader')) {
+                            //     var header = document.createElement("tr");
+                            //     header.innerHTML = "<th style='display:none;' class='layerHeader'>Layer</th>";
+                            //     LegendServiceList.insertBefore(header, LegendServiceList.childNodes[0]);
+                            // }
                             domAttr.set(LegendServiceList, "role", "list");
                             //domAttr.set(LegendServiceList, "aria-label", LegendServiceLabel.innerHTML);
 

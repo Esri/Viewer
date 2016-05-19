@@ -52,8 +52,8 @@ h3[tabindex='0']:focus,
 .icon-link:focus,
 input[type='image']:focus
 {
-    --outline-offset: 0px;
-    box-shadow: 0 0 12px #38c;
+    /* --outline-offset: 0px; */
+    /* box-shadow: 0 0 12px #38c; */
 }
 
 .homeContainer input:focus, .locateContainer input:focus 
@@ -68,10 +68,12 @@ tr[tabindex='0']:focus
     background-color: rgba(0, 0, 0, 0.1); 
 }
 
-.panelTool:focus 
+.panelTool input[type="image" i]:focus
 {
-    outline-offset: 0px;
-    background-color: rgba(0, 0, 0, 0.25); 
+    outline-width: 2px;
+    /*outline-offset: -5px;
+    outline-width: 5px;*/
+    /* background-color: rgba(0, 0, 0, 0.25); */
 }
 
 .ovwHighlight:focus{
