@@ -355,7 +355,7 @@ input[type=checkbox].checkbox {
 }
 
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton input[type='image']{
-  border-bottom: 0;
+  /* border-bottom: 0; */
 }
 
 .simpleGeocoder .esriGeocoder {
@@ -481,21 +481,17 @@ input[type=checkbox].checkbox {
 
 .HomeButton .home {
   padding: 0 !important;
+  background-color: transparent;
   width: 26px;
   height: 26px;
-  line-height: 24px;
-  font-size: 20px;
-  background-color: transparent;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   cursor: pointer;
-  -webkit-border-radius: 13px;
-  -moz-border-radius: 13px;
-  -ms-border-radius: 13px;
-  border-radius: 13px;
-  background-size: 14px 14px;
-  background-image: none; 
+  /* margin-left: 1px; */
+  -webkit-border-radius: 0px; */
+  -moz-border-radius: 5px;
+  -o-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
+  background-image: none;
 }
 
 .scalebar_bottom-left {
@@ -507,18 +503,16 @@ input[type=checkbox].checkbox {
   padding: 0;
   width: 26px;
   height: 26px;
-  font-size: 20px;
-  line-height: 26px;
+  /* font-size: 20px; */
+  /* line-height: 26px; */
   background-color: transparent;
   background-image: none;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   cursor: pointer;
-  -webkit-border-radius: 13px;
-  -moz-border-radius: 13px;
-  -ms-border-radius: 13px;
-  border-radius: 13px; 
+  margin-left: 1px;
+  -webkit-border-radius: 0px;
+  -o-border-radius: 0px;
+  -moz-border-radius: 0px;
+  border-radius: 0px;
 }
 
 img {
@@ -638,6 +632,8 @@ img {
   -webkit-margin-after: 0;
   margin-top: 0;
   margin-bottom: 0;
+  padding: 6px;
+  margin: 0 -4px;
 }
 
 .pageHeaderImg {
@@ -765,11 +761,12 @@ img {
   /* position: relative; */
   left: 0px;
   top: 0px;
-  min-height: 28px;
-  width: 100%;
-  /* display: block; */
+  min-height: 26px;
+  width: calc(100% - 2px);
+  display: block;
   clear: both;
   /* height: 48px; */
+  margin: 1px 1px 1px 1px;
   }
 
 @media only screen and (min-width: 720px) {
@@ -792,33 +789,28 @@ img {
 
 .panelTool {
   float: left;
-  /* width: 40px; */
-  /* height: 40px; */
-  /* margin-top: 2px; */
-  /* background-color: gray; */
-  padding: 1px;
+  /* background-color: black !important; */
+  /* padding: 1px; */
   /* margin-left: 1px; */
   /* margin-right: 1px; */
-  /* padding: 1px; */
-  /* display: -webkit-inline-box; */
-  /* left: 50%; */
+  padding: 1px;
   /* margin: 2px; */
   border-color: transparent;
   /* border-width: 2px; */
-  vertical-align: middle;
-  box-sizing: border-box;
+  /* vertical-align: middle; */
+  /* box-sizing: border-box; */
   background-color: transparent;
   /* border: 1px solid rgb(169, 169, 169); */
   /* border-radius: 4px; */
   position: relative;
-  background-clip: border-box;
+  /* background-clip: border-box; */
   cursor: pointer;
   background: transparent;
   /* -webkit-appearance: button; */
 }
 
 .panelTool input[type="image"] {
-  margin:1px;
+  /* margin: 1px; */
   width: 24px;
   height: 24px;
   /* position: absolute; */
@@ -827,10 +819,11 @@ img {
   /* margin-left: -25%; */
   /* margin-top: -25%; */
   float: left;
-  /*top: 0;*/
-  /*bottom: 0;*/
-  border-width: 0px;
-  border-color: transparent;
+  /* top: 0; */
+  /* bottom: 0; */
+  /* border-width: 0px; */
+  /* border-color: transparent; */
+  /* display: none; */
 }
 
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/
@@ -840,19 +833,20 @@ img {
 }
 
 .tool {
-  margin: 1px;
-  width: 24px;
-  height: 24px;
-  cursor: pointer; }
+  /* margin: 1px; */
+  /* width: 24px; */
+  /* height: 24px; */
+  cursor: pointer;
+  }
 
 #panelHome, #panelLocate {
   float: left;
-  width: 26px;
-  height: 26px;
-  margin-left: 1px;
-  margin-top: 2px; 
-  line-height: 26px;
-  text-align: center;
+  /* width: 26px; */
+  /* height: 26px; */
+  /* margin-left: 1px; */
+  /* margin-top: 2px; */
+  /* line-height: 26px; */
+  /* text-align: center; */
 }
 
 #panelLocate {
@@ -1237,14 +1231,16 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 
 .homeContainer, .locateContainer
 {
-  margin-bottom: 7px;
+  /* margin-bottom: 7px; */
 }
 
 .homeContainer input, .locateContainer input
 {
-  margin-top: 3px; 
-  height:19px; 
-  width:19px;
+  /* margin-top: 3px; */
+  height: 22px;
+  width: 22px;
+  margin: 1px;
+  padding: 1px;
 }
 
 .esriBasemapGallery{
@@ -1270,8 +1266,8 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
 }
 
 .panelToolActive:focus, .panelToolActive:hover {
-  border-radius: 15px !important;
-  -webkit-border-radius: 15px !important;  
+  /* border-radius: 15px !important; */
+  /* -webkit-border-radius: 15px !important; */
 }
 
 .searchBtn:focus, .searchClear:focus {
@@ -1291,8 +1287,8 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
 }
 
 .HomeButton .home:before{
-    width:26px;
-    height:26px;
+    /* width:26px; */
+    /* height:26px; */
     margin-top: 2px;
     content:"";
     text-align:center;
@@ -1361,7 +1357,7 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
 
 .arcgisSearch .searchBtn:focus, .arcgisSearch .searchClear:focus,
 input[type='checkbox']:focus {
-  outline-style: none;
+  /* outline-style: none; */
 }
 
 #dijit_form_ComboButton_0 {
@@ -1440,9 +1436,9 @@ h3 {
 }
 
 .pageBody h2, .groupLabel {
-  padding:3px;
+  /* padding: 8px; */
+  /* margin: 0 -4px; */
   font-size:16px;
-  margin:0;
   -webkit-margin-before: 0;
   -webkit-margin-after: 0;
 }
@@ -1475,9 +1471,9 @@ h3 {
 }
 
 html, body {
-    width: 100%;
-    height: 100%;
-    margin: 0;
+    width: 100%; 
+    height: 100%; 
+    margin: 0; 
     overflow:hidden;
     padding: 0;
     font-family: Arial, Helvetica, sans-serif;
@@ -1770,3 +1766,17 @@ td, th {
 .legend table {
   width:100%;
 }
+
+.arcgisSearch .searchInput::-moz-placeholder {
+    color: #c6c6c1; !important
+    opacity: 1;
+}
+
+.arcgisSearch .searchInput:-ms-input-placeholder {
+    color: #c6c6c1; !important
+}
+
+.arcgisSearch .searchInput::-webkit-input-placeholder {
+    color: #c6c6c1; !important
+}
+
