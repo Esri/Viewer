@@ -500,10 +500,10 @@ define(["dojo/ready",
             skipToInstructions = function() {
                 var activeTool = query('.panelToolActive');
                 if(activeTool && activeTool.length>0) {
-                    activeTool = activeTool[0];
+                    activeTool = activeTool[0].childNodes[0];
                     activeTool.click();
                 }
-                dom.byId('instructionsDiv').focus();            
+                dom.byId('instructionsDiv').childNodes[0].focus();            
             };
 
             skipToFeature = function() {

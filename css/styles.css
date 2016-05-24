@@ -785,7 +785,8 @@ img {
 
 @media only screen and (min-width: 720px) {
   #panelMenu {
-    display: none; } }
+    display: none;
+    } }
 
 .panelTool {
   float: left;
@@ -1697,7 +1698,7 @@ td, th {
     /* right: 1px; */
     left: 5px;
     top: 6px;
-    height: 20px;
+    /* height: 20px; */
     white-space: nowrap;
     display: inline;
     font-size: 22px;
