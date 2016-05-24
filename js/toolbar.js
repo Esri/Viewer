@@ -135,7 +135,7 @@ on, mouse, query, Deferred) {
                     src:"images/set.png",
                     class:"setIndicator",
                     style:"display:none;",
-                    tabindex:0,
+                    tabindex:-1,
                     alt:""
                 });
                 domConstruct.place(setIndicator, panelTool);
