@@ -16,9 +16,17 @@ button:hover,
   background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
-li[role='menuitem']:focus, 
+:focus {
+    --outline: -webkit-focus-ring-color auto 5px !important;
+    outline-width: 2px;
+    outline-offset: -1px;
+    outline-style: solid;
+    outline-color: rgba(0, 0, 0, 0.9);
+}
+
+/*li[role='menuitem']:focus, 
 div[role='button']:not(.searchBtn):not(.searchClear):not(.pageBody):focus,
-div[tabindex]:not(.panelPages):not(.pageBody):not(.searchBtn):not(.searchClear):focus,
+div[tabindex]:not(.panelPages):not(.panelTool):not(.pageBody):not(.searchBtn):not(.searchClear):focus,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:focus,
 input[type='text']:focus,
 button:focus,.pageBtn:focus,
@@ -35,45 +43,26 @@ h1:focus, h2:focus, h3:focus,
 h3[tabindex='0']:focus,
 .tab label span:focus
 {
-    /*outline-width: 2px;
-    outline-offset: -2px;
-    outline-style: solid;
-    outline-color: rgba(0, 0, 0, 0.9);
-    border-bottom: 0;*/
-    box-shadow: 0 0 12px #38c;
-    outline: -webkit-focus-ring-color auto 5px;
-}
+}*/
 
 .esriSimpleSliderIncrementButton:focus, 
 .esriSimpleSliderDecrementButton:focus{
     outline-offset: 2px;
 }
 
-.icon-link:focus,
-input[type='image']:focus
-{
-    /* --outline-offset: 0px; */
-    /* box-shadow: 0 0 12px #38c; */
-}
-
 .homeContainer input:focus, .locateContainer input:focus 
 {
-    --outline-offset: 2px;
-    box-shadow: 0 0 12px #38c;
 }
 
-tr[tabindex='0']:focus
+/*tr[tabindex='0']:focus
 {
     outline-offset: 0px;
     background-color: rgba(0, 0, 0, 0.1); 
-}
+}*/
 
 .panelTool input[type="image" i]:focus
 {
     outline-width: 2px;
-    /*outline-offset: -5px;
-    outline-width: 5px;*/
-    /* background-color: rgba(0, 0, 0, 0.25); */
 }
 
 .ovwHighlight:focus{
@@ -100,20 +89,5 @@ tr[tabindex='0']:focus
 .esriBasemapGallerySelectedNode:hover span {
   color: black;
   text-align: center;
-}
-
-
-
-.arcgisSearch .searchInput::-moz-placeholder {
-    color: #c6c6c1; !important
-    opacity: 1;
-}
-
-.arcgisSearch .searchInput:-ms-input-placeholder {
-    color: #c6c6c1; !important
-}
-
-.arcgisSearch .searchInput::-webkit-input-placeholder {
-    color: #c6c6c1; !important
 }
 
