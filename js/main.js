@@ -259,16 +259,15 @@ define(["dojo/ready",
                 style: "width:400px; padding:0; overflow: none;",
                 content: dom.byId("leftPanel"),
                 class: "splitterContent",
-                // tabindex: 0
             });
             borderContainer.addChild(contentPaneLeft);
               
             var contentPaneRight = new ContentPane({
                 region: "center",
                 splitter:'true',
-                style: "padding:0",
                 content: dom.byId("mapDiv"),
-                // tabindex:0
+                // tabindex:0,
+                // style: "margin: 1px; background-color: navy;",
             });
             borderContainer.addChild(contentPaneRight);
 
@@ -433,37 +432,37 @@ define(["dojo/ready",
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 1',
-                    style:'right:20px;'
+                    style:'right:20px; background-color: '+this.hoverColor.toString()+';'
                 }, dom.byId('panelTools'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 2',
-                    style:'left:160px; top:20%;'
+                    style:'left:160px; top:20%; background-color: '+this.hoverColor.toString()+';'
                 }, dom.byId('panelSearch'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 3',
-                    style:'left:20px; top:200px;'
+                    style:'left:20px; top:200px; background-color: '+this.hoverColor.toString()+';'
                 }, dom.byId('panelPages'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 4',
-                    style:'left:-8px; top:52%;'
+                    style:'left:-8px; top:52%; background-color: '+this.hoverColor.toString()+';'
                 }, dom.byId('dijit_layout_ContentPane_0_splitter'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 5',
-                    style:'left:20px; top:40px;'
+                    style:'left:20px; top:40px; background-color: '+this.hoverColor.toString()+';'
                 }, dom.byId('mapDiv'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 6',
-                    style:'left:60%; top:-50%;'
+                    style:'left:60%; top:-75%; background-color: '+this.hoverColor.toString()+';'
                 }, dom.byId('panelBottom'));
             }
             
@@ -493,8 +492,8 @@ define(["dojo/ready",
             };
 
             skipToMap = function() {
-                document.querySelector('.esriSimpleSliderIncrementButton input').focus();
-                //dom.byId('mapDiv').focus();
+                //document.querySelector('.esriSimpleSliderIncrementButton input').focus();
+                document.querySelector('#mapDiv').focus();
             };
 
             skipToInstructions = function() {
@@ -1707,6 +1706,66 @@ define(["dojo/ready",
                 usePopupManager: true,
                 bingMapsKey: this.config.bingKey
             }).then(lang.hitch(this, function (response) {
+
+                var mapDiv = document.querySelector('#mapDiv');
+                on(mapDiv, 'keydown', lang.hitch(this, function(evn){
+                    if(!document.querySelector(':focus') || document.querySelector(':focus').id !== "mapDiv") return; 
+                    switch(evn.keyCode)  {
+                        case 40 : //down
+                            this.map._fixedPan(0, this.map.height * 0.0135);
+                            evn.preventDefault();
+                            evn.stopPropagation();
+                            break;
+                        case 38 : //up
+                            this.map._fixedPan(0, this.map.height * -0.0135);
+                            evn.preventDefault();
+                            evn.stopPropagation();
+                            break;
+                        case 39 : //left
+                            this.map._fixedPan(this.map.width * -0.0135, 0);
+                            evn.preventDefault();
+                            evn.stopPropagation();
+                            break;
+                        case 37 : //right
+                            this.map._fixedPan(this.map.width * 0.0135, 0);
+                            evn.preventDefault();
+                            evn.stopPropagation();
+                            break;
+                        case 33 : //pgup
+                            this.map._fixedPan(this.map.width * 0.0135, this.map.height * -0.0135);
+                            evn.preventDefault();
+                            evn.stopPropagation();
+                            break;
+                        case 34 : //pgdn
+                            this.map._fixedPan(this.map.width * 0.0135, this.map.height * 0.0135);
+                            evn.preventDefault();
+                            evn.stopPropagation();
+                            break;
+                        case 35 : //end
+                            this.map._fixedPan(this.map.width * -0.0135, this.map.height * 0.0135);
+                            evn.preventDefault();
+                            evn.stopPropagation();
+                            break;
+                        case 36 : //home
+                            this.map._fixedPan(this.map.width * -0.0135, this.map.height * -0.0135);
+                            evn.preventDefault();
+                            evn.stopPropagation();
+                            break;
+                    }
+                }));
+                on(mapDiv, 'keypress', lang.hitch(this, function(evn){
+                  if(!document.querySelector(':focus') || document.querySelector(':focus').id !== "mapDiv") return;  
+                  evn.preventDefault();
+                  evn.stopPropagation();
+                  if((evn.keyCode === 43) && !evn.ctrlKey && !evn.altKey)  // Shift-'+'
+                  {
+                      this.map.setLevel(this.map.getLevel() + 1);
+                  };
+                  if((evn.keyCode === 45) && !evn.ctrlKey && !evn.altKey)  // Shift-'-'
+                  {
+                      this.map.setLevel(this.map.getLevel() - 1);
+                  };
+                }));
 
                 this.map = response.map;
                 domClass.add(this.map.infoWindow.domNode, "light");
