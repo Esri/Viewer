@@ -474,6 +474,15 @@ define(["dojo/ready",
             query('.skip #skip-instructions')[0].addEventListener('click', function (e) { skipToInstructions(); });
             query('.skip #skip-feature')[0].addEventListener('click', function (e) { skipToFeature(); });
 
+            query('.skip').forEach(function(h) {
+                h.addEventListener('keydown', function (e) {
+                    if(e.code === "Enter" || e.code === "Space")
+                    {
+                        e.target.click();
+                    }
+                });
+            });
+
             skipToTools = function() {
                 dom.byId('panelTools').focus();
             };
