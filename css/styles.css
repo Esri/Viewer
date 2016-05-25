@@ -355,7 +355,7 @@ input[type=checkbox].checkbox {
 }
 
 .esriSimpleSliderVertical .esriSimpleSliderIncrementButton input[type='image']{
-  /* border-bottom: 0; */
+  border-bottom: 0;
 }
 
 .simpleGeocoder .esriGeocoder {
