@@ -459,11 +459,12 @@ input[type=checkbox].checkbox {
 }
 
 .esriBookmarkLabel {
-  font-size: 16px; 
+  font-size: 16px;
   text-overflow: ellipsis;
   color: inherit;
   margin-left:0;
   padding-left:0;
+  width: 100%;
 }
 
 .esriBookmarkHighlight {
