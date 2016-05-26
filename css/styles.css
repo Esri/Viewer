@@ -354,8 +354,11 @@ input[type=checkbox].checkbox {
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
-.esriSimpleSliderVertical .esriSimpleSliderIncrementButton input[type='image']{
-  border-bottom: 0;
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton input[type='image'],
+.esriSimpleSliderVertical .esriSimpleSliderDecrementButton input[type='image'] {
+    border-bottom: 0;
+    width: 20px;
+    height: 20px;
 }
 
 .simpleGeocoder .esriGeocoder {
