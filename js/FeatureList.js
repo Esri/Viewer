@@ -263,6 +263,18 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                 });
             };
 
+            window.featureExpandAndZoom = function(event, checkbox) {
+                if(event.charCode === 43 || event.charCode === 45 || event.charCode === 46) { // +,- or .
+                    //console.log(event.charCode, checkbox);
+                    checkbox.checked = !checkbox.checked;
+                    window.featureExpand(checkbox);
+                    if(checkbox.checked) {
+                        var btn = document.querySelector(((event.charCode === 43) ? '#zoomBtn_' : '#panBtn_')+checkbox.value.replace(',','_'));
+                        btn.click();
+                    }
+                }
+            };
+
             window._prevSelected = null;                
             window.featureExpand = function(checkBox, restore) {
                 if(_prevSelected && !restore) {
@@ -271,7 +283,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         dojo.addClass(e, 'hideAttr');
                         var li = query(e).closest('li');
                         li.removeClass('borderLi');
-//                         domAttr.set(li,'tabindex','-1');
 
                     });
                     dojo.query('#featureButton_'+_prevSelected).forEach(function(e) {
@@ -293,7 +304,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         dojo.removeClass(e, 'hideAttr');
                         var li = query(e).closest('li');
                         li.addClass('borderLi');
-//                         domAttr.set(li,'tabindex',0);
                     });
 
                     q = new Query();
@@ -335,8 +345,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                             break;
                         }
 
-                        var graphic = new Graphic(markerGeometry, marker);
-                        layer._map.graphics.add(graphic);
+                        var gr = new Graphic(markerGeometry, marker);
+                        layer._map.graphics.add(gr);
                     });
                     // layer.selectFeatures(q, FeatureLayer.SELECTION_NEW).then(function(f) {
                     //     f[0].symbol.size = 40;
@@ -349,7 +359,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     window._prevSelected = null;
                 }
             };
-
+            
             on(this.map, "extent-change", lang.hitch(this, this._reloadList), this);
 
             _getFeatureListItem = function(r, f, objectIdFieldName, layer, content, listTemplate) {

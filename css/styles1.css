@@ -91,3 +91,7 @@ h3[tabindex='0']:focus,
   text-align: center;
 }
 
+.goThereHint {
+  background-color: black;
+}
+
