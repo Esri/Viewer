@@ -406,6 +406,13 @@ define(["dojo/ready",
                             skipToMap();
                         }
                         break;
+                    case 'Digit0' :
+                        if (event.altKey) {
+                            skipSkip();
+                        }
+                        break;
+                    default:
+                        break;
                 }
                 
             });
@@ -472,6 +479,10 @@ define(["dojo/ready",
                     }
                 });
             });
+
+            skipSkip = function() {
+                dom.byId('skip-tools').focus();
+            };
 
             skipToTools = function() {
                 dom.byId('panelTools').focus();
@@ -1752,11 +1763,11 @@ define(["dojo/ready",
                   if((evn.keyCode === 43) && !evn.ctrlKey && !evn.altKey)  // Shift-'+'
                   {
                       this.map.setLevel(this.map.getLevel() + 1);
-                  };
+                  }
                   if((evn.keyCode === 45) && !evn.ctrlKey && !evn.altKey)  // Shift-'-'
                   {
                       this.map.setLevel(this.map.getLevel() - 1);
-                  };
+                  }
                 }));
 
                 this.map = response.map;
