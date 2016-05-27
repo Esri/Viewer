@@ -141,13 +141,10 @@ define(["dojo/ready",
             this._adjustPopupSize();
 
             zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
-            //dojo.setAttr(zoomSlider, 'role', 'list');
-            //dojo.setAttr(zoomSlider, 'aria-label', 'Zoom Slider');
 
             esriSimpleSliderIncrementNode = dojo.query(".esriSimpleSliderIncrementButton")[0];
             var zoomIn_click = esriSimpleSliderIncrementNode.OnClick;
             dojo.empty(esriSimpleSliderIncrementNode);
-            //dojo.setAttr(esriSimpleSliderIncrementNode, 'data-title', 'Zoom In');
 
             plusbtn = domConstruct.create("input", {
                 className: "esriSimpleSliderIncrementButton",
@@ -162,7 +159,6 @@ define(["dojo/ready",
             esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
             var zoomOut_click = esriSimpleSliderDecrementNode.OnClick;
             dojo.empty(esriSimpleSliderDecrementNode);
-            //dojo.setAttr(esriSimpleSliderDecrementNode, 'data-title', 'Zoom Out');
 
             minusbtn = domConstruct.create("input", {
                 className: "esriSimpleSliderDecrementButton",
@@ -174,17 +170,13 @@ define(["dojo/ready",
             }, esriSimpleSliderDecrementNode);
             on(minusbtn, "click", zoomOut_click);
 
-
             on(this.map.infoWindow, "show", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);
             }));
 
-
             on(this.map.infoWindow, "selection-change", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);
             }));
-
-
         },
 
         _initPopup : function (node) {
@@ -266,8 +258,6 @@ define(["dojo/ready",
                 region: "center",
                 splitter:'true',
                 content: dom.byId("mapDiv"),
-                // tabindex:0,
-                // style: "margin: 1px; background-color: navy;",
             });
             borderContainer.addChild(contentPaneRight);
 
@@ -519,6 +509,7 @@ define(["dojo/ready",
                     featureList.FocusDetails();
                 }
             };
+
         },
 
         featureList : null,
@@ -585,7 +576,6 @@ define(["dojo/ready",
         },
         
         _addBasemapGallery: function (tool, toolbar) {
-            //Add the basemap gallery to the toolbar.
             var deferred = new Deferred();
             if (has("basemap")) {
                 var basemapDiv = toolbar.createTool(tool);
@@ -598,11 +588,6 @@ define(["dojo/ready",
                 }, domConstruct.create("div", {}, basemapDiv));
 
                 basemap.startup();
-
-                // on(toolbar, 'updateTool_basemap', lang.hitch(this, function(name) {
-
-                // }));
-
 
                 on(basemap, "load", lang.hitch(basemap, function () {
                     var list = this.domNode.querySelector("div");
@@ -626,7 +611,6 @@ define(["dojo/ready",
                         on(aNode, "focus", function() { node.focus();});
                         on(img, "click", function() { node.focus();});
                         on(node,"keydown", function(ev) {
-//                             console.log(ev);
                             if(ev.code === "Enter" || ev.code === "Space") {
                                 aNode.click();  
                             } else if(ev.code === "Tab" && !ev.shiftKey) {
@@ -650,11 +634,9 @@ define(["dojo/ready",
         },
 
         _addBookmarks: function (tool, toolbar) {
-            //Add the bookmarks tool to the toolbar. 
-            //Only activated if the webmap contains bookmarks.
             var deferred = new Deferred();
             if (this.config.response.itemInfo.itemData.bookmarks) {
-                //Conditionally load this module since most apps won't have bookmarks
+
                 require(["application/has-config!bookmarks?esri/dijit/Bookmarks"], lang.hitch(this, function (Bookmarks) {
                     if (!Bookmarks) {
                         deferred.resolve(false);
@@ -718,7 +700,6 @@ define(["dojo/ready",
         },
 
         _addEditor: function (tool, toolbar) {
-
             //Add the editor widget to the toolbar if the web map contains editable layers
             var deferred = new Deferred();
             this.editableLayers = this._getEditableLayers(this.config.response.itemInfo.itemData.operationalLayers);
@@ -786,6 +767,22 @@ define(["dojo/ready",
             }));
 
             return deferred.promise;
+        },
+
+        _getEditableLayers: function (layers) {
+            var layerInfos = [];
+            array.forEach(layers, lang.hitch(this, function (layer) {
+
+                if (layer && layer.layerObject) {
+                    var eLayer = layer.layerObject;
+                    if (eLayer instanceof FeatureLayer && eLayer.isEditable()) {
+                        layerInfos.push({
+                            "featureLayer": eLayer
+                        });
+                    }
+                }
+            }));
+            return layerInfos;
         },
 
         _destroyEditor: function () {
@@ -899,7 +896,6 @@ define(["dojo/ready",
                                     });
                                     LegendServiceLabel.parentNode.replaceChild(h2, LegendServiceLabel);
                                 }
-//                                 console.log(LegendServiceLabel);
                                 var service = LegendServiceLabel.closest('.esriLegendService');
                                 if(service && (!service.style || service.style.display !== 'none')) {
                                     domAttr.set(LegendServiceLabel, 'tabindex', 0);
@@ -1332,22 +1328,6 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _getEditableLayers: function (layers) {
-            var layerInfos = [];
-            array.forEach(layers, lang.hitch(this, function (layer) {
-
-                if (layer && layer.layerObject) {
-                    var eLayer = layer.layerObject;
-                    if (eLayer instanceof FeatureLayer && eLayer.isEditable()) {
-                        layerInfos.push({
-                            "featureLayer": eLayer
-                        });
-                    }
-                }
-            }));
-            return layerInfos;
-        },
-
         _getBasemapGroup: function () {
             //Get the id or owner and title for an organizations custom basemap group.
             var basemapGroup = null;
@@ -1382,7 +1362,7 @@ define(["dojo/ready",
 
             // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
             if (has("home")) {
-                panelHome = domConstruct.create("div", {
+                var panelHome = domConstruct.create("div", {
                     id: "panelHome",
                     className: "icon-color tool",
                     innerHTML: "<div id='btnHome'></div>"
@@ -1394,12 +1374,12 @@ define(["dojo/ready",
 
                 home.startup();
 
-                homeButton = dojo.query(".homeContainer")[0];
-                homeNode = dojo.query(".home")[0];
+                var homeButton = dojo.query(".homeContainer")[0];
+                var homeNode = dojo.query(".home")[0];
                 dojo.empty(homeNode);
-                homeHint = dojo.attr(homeButton, 'title');
+                var homeHint = dojo.attr(homeButton, 'title');
 
-                btnHome = domConstruct.create("input", {
+                var btnHome = domConstruct.create("input", {
                     type: 'image',
                     src: 'images/icons_' + this.config.icons + '/home.png',
                     alt: homeHint,
@@ -1410,7 +1390,7 @@ define(["dojo/ready",
 
 
             if (has("locate")) {
-                panelLocate = domConstruct.create("div", {
+                var panelLocate = domConstruct.create("div", {
                     id: "panelLocate",
                     className: "icon-color tool",
                     innerHTML: "<div id='btnLocate'></div>"
@@ -1421,10 +1401,10 @@ define(["dojo/ready",
 
                 geoLocate.startup();
 
-                locateButton = dojo.query(".locateContainer")[0];
-                zoomLocateButton = dojo.query(".zoomLocateButton")[0];
+                var locateButton = dojo.query(".locateContainer")[0];
+                var zoomLocateButton = dojo.query(".zoomLocateButton")[0];
                 dojo.empty(zoomLocateButton);
-                locateHint = dojo.attr(zoomLocateButton, 'title');
+                var locateHint = dojo.attr(zoomLocateButton, 'title');
 
                 domConstruct.create("input", {
                     type: 'image',
@@ -1824,7 +1804,10 @@ define(["dojo/ready",
                     this.map.setExtent(this.initExt);
                 }
                 this.initExt = this.map.extent;
-                on.once(this.map, "extent-change", lang.hitch(this, this._checkExtent));
+                on.once(this.map, "extent-change", lang.hitch(this, function() {
+                    this._checkExtent();
+                    document.querySelector(".HomeButton input[type='image']").click();
+                }));
                 on(this.map, "extent-change", function() {
                     var imgs = this.container.querySelectorAll("img");
                     for(i=0; i<imgs.length; i++)
