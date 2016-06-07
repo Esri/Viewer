@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,57 +14,56 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-     ({
-        "map": {
-            "error": "ไม่สามารถสร้างแผนที่ได้"
-        },
-        "nav":{
-            "next": "ถัดไป",
-            "previous": "ก่อนหน้า",
-            "close": "ปิด"
-        },
-        "tools":{
-            "search":{
-                "error": "ไม่พบตำแหน่งนี้",
-                "notWhatYouWanted": "ไม่ใช่สิ่งที่คุณต้องการ",
-                "selectAnother": "เลือกตำแหน่งอื่น",
-                "currentLocation": "ตำแหน่งปัจจุบัน",
-                "title": "ตำแหน่ง"
-            },
-	    	"print": {
-			    "layouts":{
-			      "label1": 'แนวนอน',
-			      "label2": 'แนวตั้ง',
-			      "label3": 'แนวนอน',
-			      "label4": 'แนวตั้ง'
-			    },
-			    "legend": "เพิ่มคำอธิบายแผนที่ไปยังส่วนผลลัพธ์",
-                "title": "ชื่อ",
-                "titlePrompt": "เพิ่มชื่อที่ต้องการ"
-            },
-			"share": {
-				"extent": "ใช้ขนาดของแแผนที่ปัจจุบัน",
-				"label": "แชร์แผนที่นี้",
-				"link": "เชื่อมโยงแผนที่",
-				"facebook": "เฟสบุค",
-				"twitter": "ทวิตเตอร์"
-			}
-        },
-        "tooltips":{
-        	"home": "ขนาดเริ่มต้น",
-        	"locate": "ค้นหาตำแหน่งของฉัน",
-        	"legend": "คำอธิบายแผนที่",
-        	"bookmarks": "บุคมาร์ค",
-        	"layers": "ชั้นข้อมูล",
-        	"basemap": "แกลเลอรีแผนที่ฐาน",
-        	"overview": "ดูภาพรวมแผนที่",
-        	"measure": "การวัด",
-        	"edit": "แก้ไข",
-        	"time": "เวลา",
-        	"print": "พิมพ์",
-        	"details": "รายละเอียด",
-        	"share": "แชร์"
-        }
-    })
-);
+define({
+  "map": {
+    "error": "ก้_Unable to create map_______ษฺ",
+    "overviewDetails": "ก้_Overview map shows current extent of map within the context of larger area________________________ษฺ."
+  },
+  "nav": {
+    "next": "ก้_Next__ษฺ",
+    "previous": "ก้_Previous___ษฺ",
+    "close": "ก้_Close___ษฺ"
+  },
+  "tools": {
+    "search": {
+      "error": "ก้_Location could not be found_________ษฺ",
+      "notWhatYouWanted": "ก้_Not what you wanted_______ษฺ?",
+      "selectAnother": "ก้_Select another location________ษฺ",
+      "currentLocation": "ก้_Current Location______ษฺ",
+      "title": "ก้_Location___ษฺ"
+    },
+    "print": {
+      "layouts": {
+        "label1": "ก้_Landscape____ษฺ",
+        "label2": "ก้_Portrait___ษฺ",
+        "label3": "ก้_Landscape____ษฺ",
+        "label4": "ก้_Portrait___ษฺ"
+      },
+      "legend": "ก้_Add legend to output_______ษฺ",
+      "title": "ก้_Title___ษฺ",
+      "titlePrompt": "ก้_Add custom title______ษฺ"
+    },
+    "share": {
+      "extent": "ก้_Use current map extent________ษฺ",
+      "label": "ก้_Share this map_____ษฺ",
+      "link": "ก้_Map Link___ษฺ",
+      "facebook": "ก้_Facebook___ษฺ",
+      "twitter": "ก้_Twitter___ษฺ"
+    }
+  },
+  "tooltips": {
+    "home": "ก้_Default extent_____ษฺ",
+    "locate": "ก้_Find my location______ษฺ",
+    "legend": "ก้_Legend___ษฺ",
+    "bookmarks": "ก้_Bookmarks____ษฺ",
+    "layers": "ก้_Layers___ษฺ",
+    "basemap": "ก้_Basemap gallery______ษฺ",
+    "overview": "ก้_Overview map_____ษฺ",
+    "measure": "ก้_Measure___ษฺ",
+    "edit": "ก้_Edit__ษฺ",
+    "time": "ก้_Time__ษฺ",
+    "print": "ก้_Print___ษฺ",
+    "details": "ก้_Details___ษฺ",
+    "share": "ก้_Share___ษฺ"
+  }
+});

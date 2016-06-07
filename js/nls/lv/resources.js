@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,57 +14,56 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-     ({
-        "map": {
-            "error": "Nevar izveidot karti"
-        },
-        "nav":{
-            "next": "Tālāk",
-            "previous": "Iepriekšējais",
-            "close": "Aizvērt"
-        },
-        "tools":{
-            "search":{
-                "error": "Izvietojumu nevarēja atrast",
-                "notWhatYouWanted": "Vai tas nav vajadzīgais?",
-                "selectAnother": "Izvēlieties citu izvietojumu",
-                "currentLocation": "Pašreizējais izvietojums",
-                "title": "Izvietojums"
-            },
-	    	"print": {
-			    "layouts":{
-			      "label1": 'Ainava',
-			      "label2": 'Portrets',
-			      "label3": 'Ainava',
-			      "label4": 'Portrets'
-			    },
-			    "legend": "Pievienot apzīmējumus izvadei",
-                "title": "Nosaukums",
-                "titlePrompt": "Pievienot pielāgotu virsrakstu"
-            },
-			"share": {
-				"extent": "Lieto pašreizējo kartes pārklājumu",
-				"label": "Koplietot šo karti",
-				"link": "Kartes saite",
-				"facebook": "Facebook",
-				"twitter": "Twitter"
-			}
-        },
-        "tooltips":{
-        	"home": "Noklusējuma pārklājums",
-        	"locate": "Atrast manu izvietojumu",
-        	"legend": "Leģenda",
-        	"bookmarks": "Grāmatzīmes",
-        	"layers": "Slāņi",
-        	"basemap": "Pamatkartes galerija",
-        	"overview": "Pārskatīt karti",
-        	"measure": "Izmērīt",
-        	"edit": "Rediģēt",
-        	"time": "Laiks",
-        	"print": "Drukāt",
-        	"details": "Detaļas",
-        	"share": "Koplietošana"
-        }
-    })
-);
+define({
+  "map": {
+    "error": "ķ_Unable to create map_______ū",
+    "overviewDetails": "ķ_Overview map shows current extent of map within the context of larger area________________________ū."
+  },
+  "nav": {
+    "next": "ķ_Next__ū",
+    "previous": "ķ_Previous___ū",
+    "close": "ķ_Close___ū"
+  },
+  "tools": {
+    "search": {
+      "error": "ķ_Location could not be found_________ū",
+      "notWhatYouWanted": "ķ_Not what you wanted_______ū?",
+      "selectAnother": "ķ_Select another location________ū",
+      "currentLocation": "ķ_Current Location______ū",
+      "title": "ķ_Location___ū"
+    },
+    "print": {
+      "layouts": {
+        "label1": "ķ_Landscape____ū",
+        "label2": "ķ_Portrait___ū",
+        "label3": "ķ_Landscape____ū",
+        "label4": "ķ_Portrait___ū"
+      },
+      "legend": "ķ_Add legend to output_______ū",
+      "title": "ķ_Title___ū",
+      "titlePrompt": "ķ_Add custom title______ū"
+    },
+    "share": {
+      "extent": "ķ_Use current map extent________ū",
+      "label": "ķ_Share this map_____ū",
+      "link": "ķ_Map Link___ū",
+      "facebook": "ķ_Facebook___ū",
+      "twitter": "ķ_Twitter___ū"
+    }
+  },
+  "tooltips": {
+    "home": "ķ_Default extent_____ū",
+    "locate": "ķ_Find my location______ū",
+    "legend": "ķ_Legend___ū",
+    "bookmarks": "ķ_Bookmarks____ū",
+    "layers": "ķ_Layers___ū",
+    "basemap": "ķ_Basemap gallery______ū",
+    "overview": "ķ_Overview map_____ū",
+    "measure": "ķ_Measure___ū",
+    "edit": "ķ_Edit__ū",
+    "time": "ķ_Time__ū",
+    "print": "ķ_Print___ū",
+    "details": "ķ_Details___ū",
+    "share": "ķ_Share___ū"
+  }
+});

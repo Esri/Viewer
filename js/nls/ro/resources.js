@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,57 +14,56 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-     ({
-        "map": {
-            "error": "Nu se poate crea harta"
-        },
-        "nav":{
-            "next": "Următorul",
-            "previous": "Anterior",
-            "close": "Închidere"
-        },
-        "tools":{
-            "search":{
-                "error": "Locaţia nu a putut fi găsită",
-                "notWhatYouWanted": "Nu este ce doreaţi?",
-                "selectAnother": "Selectaţi altă locaţie",
-                "currentLocation": "Locaţie curentă",
-                "title": "Locaţie"
-            },
-	    	"print": {
-			    "layouts":{
-			      "label1": 'Peisaj',
-			      "label2": 'Portret',
-			      "label3": 'Peisaj',
-			      "label4": 'Portret'
-			    },
-			    "legend": "Adăugare legendă în rezultate",
-                "title": "Titlu",
-                "titlePrompt": "Adăugare titlu particularizat"
-            },
-			"share": {
-				"extent": "Utilizare extindere curentă a hărţii",
-				"label": "Se partajează această hartă",
-				"link": "Link către hartă",
-				"facebook": "Facebook",
-				"twitter": "Twitter"
-			}
-        },
-        "tooltips":{
-        	"home": "Extindere implicită",
-        	"locate": "Găsire locaţie proprie",
-        	"legend": "Legendă",
-        	"bookmarks": "Semne de carte",
-        	"layers": "Straturi tematice",
-        	"basemap": "Galerie de hărţi fundal",
-        	"overview": "Hartă de prezentare generală",
-        	"measure": "Măsurare",
-        	"edit": "Editare",
-        	"time": "Timp",
-        	"print": "Imprimare",
-        	"details": "Detalii",
-        	"share": "Partajare"
-        }
-    })
-);
+define({
+  "map": {
+    "error": "Ă_Unable to create map_______ș",
+    "overviewDetails": "Ă_Overview map shows current extent of map within the context of larger area________________________ș."
+  },
+  "nav": {
+    "next": "Ă_Next__ș",
+    "previous": "Ă_Previous___ș",
+    "close": "Ă_Close___ș"
+  },
+  "tools": {
+    "search": {
+      "error": "Ă_Location could not be found_________ș",
+      "notWhatYouWanted": "Ă_Not what you wanted_______ș?",
+      "selectAnother": "Ă_Select another location________ș",
+      "currentLocation": "Ă_Current Location______ș",
+      "title": "Ă_Location___ș"
+    },
+    "print": {
+      "layouts": {
+        "label1": "Ă_Landscape____ș",
+        "label2": "Ă_Portrait___ș",
+        "label3": "Ă_Landscape____ș",
+        "label4": "Ă_Portrait___ș"
+      },
+      "legend": "Ă_Add legend to output_______ș",
+      "title": "Ă_Title___ș",
+      "titlePrompt": "Ă_Add custom title______ș"
+    },
+    "share": {
+      "extent": "Ă_Use current map extent________ș",
+      "label": "Ă_Share this map_____ș",
+      "link": "Ă_Map Link___ș",
+      "facebook": "Ă_Facebook___ș",
+      "twitter": "Ă_Twitter___ș"
+    }
+  },
+  "tooltips": {
+    "home": "Ă_Default extent_____ș",
+    "locate": "Ă_Find my location______ș",
+    "legend": "Ă_Legend___ș",
+    "bookmarks": "Ă_Bookmarks____ș",
+    "layers": "Ă_Layers___ș",
+    "basemap": "Ă_Basemap gallery______ș",
+    "overview": "Ă_Overview map_____ș",
+    "measure": "Ă_Measure___ș",
+    "edit": "Ă_Edit__ș",
+    "time": "Ă_Time__ș",
+    "print": "Ă_Print___ș",
+    "details": "Ă_Details___ș",
+    "share": "Ă_Share___ș"
+  }
+});

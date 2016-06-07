@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,57 +14,56 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-     ({
-        "map": {
-            "error": "无法创建地图"
-        },
-        "nav":{
-            "next": "下一页",
-            "previous": "上一页",
-            "close": "关闭"
-        },
-        "tools":{
-            "search":{
-                "error": "无法找到位置",
-                "notWhatYouWanted": "不是您想要的位置?",
-                "selectAnother": "选择其他位置",
-                "currentLocation": "当前位置",
-                "title": "位置"
-            },
-	    	"print": {
-			    "layouts":{
-			      "label1": '横向',
-			      "label2": '纵向',
-			      "label3": '横向',
-			      "label4": '纵向'
-			    },
-			    "legend": "向输出添加图例",
-                "title": "标题",
-                "titlePrompt": "添加自定义标题"
-            },
-			"share": {
-				"extent": "使用当前地图范围",
-				"label": "共享此地图",
-				"link": "地图链接",
-				"facebook": "Facebook",
-				"twitter": "Twitter"
-			}
-        },
-        "tooltips":{
-        	"home": "默认范围",
-        	"locate": "查找我的位置",
-        	"legend": "图例",
-        	"bookmarks": "书签",
-        	"layers": "图层",
-        	"basemap": "底图库",
-        	"overview": "鹰眼图",
-        	"measure": "测量",
-        	"edit": "编辑",
-        	"time": "时间",
-        	"print": "打印",
-        	"details": "详细信息",
-        	"share": "共享"
-        }
-    })
-);
+define({
+  "map": {
+    "error": "试_Unable to create map_______验",
+    "overviewDetails": "试_Overview map shows current extent of map within the context of larger area________________________验."
+  },
+  "nav": {
+    "next": "试_Next__验",
+    "previous": "试_Previous___验",
+    "close": "试_Close___验"
+  },
+  "tools": {
+    "search": {
+      "error": "试_Location could not be found_________验",
+      "notWhatYouWanted": "试_Not what you wanted_______验?",
+      "selectAnother": "试_Select another location________验",
+      "currentLocation": "试_Current Location______验",
+      "title": "试_Location___验"
+    },
+    "print": {
+      "layouts": {
+        "label1": "试_Landscape____验",
+        "label2": "试_Portrait___验",
+        "label3": "试_Landscape____验",
+        "label4": "试_Portrait___验"
+      },
+      "legend": "试_Add legend to output_______验",
+      "title": "试_Title___验",
+      "titlePrompt": "试_Add custom title______验"
+    },
+    "share": {
+      "extent": "试_Use current map extent________验",
+      "label": "试_Share this map_____验",
+      "link": "试_Map Link___验",
+      "facebook": "试_Facebook___验",
+      "twitter": "试_Twitter___验"
+    }
+  },
+  "tooltips": {
+    "home": "试_Default extent_____验",
+    "locate": "试_Find my location______验",
+    "legend": "试_Legend___验",
+    "bookmarks": "试_Bookmarks____验",
+    "layers": "试_Layers___验",
+    "basemap": "试_Basemap gallery______验",
+    "overview": "试_Overview map_____验",
+    "measure": "试_Measure___验",
+    "edit": "试_Edit__验",
+    "time": "试_Time__验",
+    "print": "试_Print___验",
+    "details": "试_Details___验",
+    "share": "试_Share___验"
+  }
+});

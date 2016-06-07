@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,57 +14,56 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-     ({
-        "map": {
-            "error": "Karttaa ei voi luoda"
-        },
-        "nav":{
-            "next": "Seuraava",
-            "previous": "Edellinen",
-            "close": "Sulje"
-        },
-        "tools":{
-            "search":{
-                "error": "Sijaintia ei löytynyt",
-                "notWhatYouWanted": "Etkö löytänyt etsimääsi?",
-                "selectAnother": "Valitse toinen sijainti",
-                "currentLocation": "Nykyinen sijainti",
-                "title": "Sijainti"
-            },
-	    	"print": {
-			    "layouts":{
-			      "label1": 'Vaaka',
-			      "label2": 'Pysty',
-			      "label3": 'Vaaka',
-			      "label4": 'Pysty'
-			    },
-			    "legend": "Lisää selite tulokseen",
-                "title": "Otsikko",
-                "titlePrompt": "Lisää mukautettu otsikko"
-            },
-			"share": {
-				"extent": "Käytä nykyisen kartan laajuutta.",
-				"label": "Jaa tämä kartta",
-				"link": "Karttalinkki",
-				"facebook": "Facebook",
-				"twitter": "Twitter"
-			}
-        },
-        "tooltips":{
-        	"home": "Oletuslaajuus",
-        	"locate": "Etsi sijaintini",
-        	"legend": "Selite",
-        	"bookmarks": "Kirjanmerkit",
-        	"layers": "Karttatasot",
-        	"basemap": "Taustakarttagalleria",
-        	"overview": "Yleiskatsauskartta",
-        	"measure": "Mittaus",
-        	"edit": "Muokkaa",
-        	"time": "Kellonaika",
-        	"print": "Tulosta",
-        	"details": "Yksityiskohdat",
-        	"share": "Jaa"
-        }
-    })
-);
+define({
+  "map": {
+    "error": "Å_Unable to create map_______ö",
+    "overviewDetails": "Å_Overview map shows current extent of map within the context of larger area________________________ö."
+  },
+  "nav": {
+    "next": "Å_Next__ö",
+    "previous": "Å_Previous___ö",
+    "close": "Å_Close___ö"
+  },
+  "tools": {
+    "search": {
+      "error": "Å_Location could not be found_________ö",
+      "notWhatYouWanted": "Å_Not what you wanted_______ö?",
+      "selectAnother": "Å_Select another location________ö",
+      "currentLocation": "Å_Current Location______ö",
+      "title": "Å_Location___ö"
+    },
+    "print": {
+      "layouts": {
+        "label1": "Å_Landscape____ö",
+        "label2": "Å_Portrait___ö",
+        "label3": "Å_Landscape____ö",
+        "label4": "Å_Portrait___ö"
+      },
+      "legend": "Å_Add legend to output_______ö",
+      "title": "Å_Title___ö",
+      "titlePrompt": "Å_Add custom title______ö"
+    },
+    "share": {
+      "extent": "Å_Use current map extent________ö",
+      "label": "Å_Share this map_____ö",
+      "link": "Å_Map Link___ö",
+      "facebook": "Å_Facebook___ö",
+      "twitter": "Å_Twitter___ö"
+    }
+  },
+  "tooltips": {
+    "home": "Å_Default extent_____ö",
+    "locate": "Å_Find my location______ö",
+    "legend": "Å_Legend___ö",
+    "bookmarks": "Å_Bookmarks____ö",
+    "layers": "Å_Layers___ö",
+    "basemap": "Å_Basemap gallery______ö",
+    "overview": "Å_Overview map_____ö",
+    "measure": "Å_Measure___ö",
+    "edit": "Å_Edit__ö",
+    "time": "Å_Time__ö",
+    "print": "Å_Print___ö",
+    "details": "Å_Details___ö",
+    "share": "Å_Share___ö"
+  }
+});

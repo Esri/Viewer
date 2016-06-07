@@ -11,50 +11,52 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <!-- End Responsive -->
-    <!-- Use protocol relative urls that way if the browser is viewing the page via HTTPS the js/css file will be requested using the HTTPS protocol -->
-    <link rel="stylesheet" href="//js.arcgis.com/3.16/esri/css/calcite/calcite.css">
+    <link rel="stylesheet" href="//js.arcgis.com/3.17/esri/themes/calcite/dijit/calcite.css">
 
-    <link rel="stylesheet"  href="//js.arcgis.com/3.16/esri/css/esri.css">
+    <link rel="stylesheet"  href="//js.arcgis.com/3.17/esri/css/esri.css">
     <!-- Load any application specific styles -->
     <link rel="stylesheet" href="css/styles.css">
-    <!--[if IE 8]>
-      <link rel="stylesheet" href="css/ie.css">
-    <![endif]-->
   </head>
   <body class="calcite app-loading no-touch">
    <div>
-    <!--Modal Splash Screen-->
-    <div id="modal" class="hide">
-      <div class="modal-content">
-        <div class="modal-header bg fc">
-          <h2 id="modalTitle"></h2>
-        </div>
-        <div class="copy">
-          <div id="modalContent"></div>
-          <input  id="closeOverlay" class="bg fc" type="button"/>
-        </div>
-      </div>
-    <!--  <div class="overlay"></div>-->
-    </div>
     <!-- Loading Indicator -->
-    <div class="loading-indicator">
+    <div class="loading-indicator" role="presentation">
       <div class="loading-message" id="loading_message"></div>
     </div>
     <!-- Map -->
-    <!-- The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
-    <div id="mapDiv" dir="ltr"></div>
-
+    <div id="mapDiv" dir="ltr">
+      <div id="locateDiv"></div>
+    </div>
+    <!-- Panel Top -->
+    <div id="panelTop" class="bg shadow">
+      <!-- Panel Title -->
+       <div id="panelTitle">
+        <header class="fc" id="panelText" role="banner">
+          <hgroup>
+            <h1 id="title"></h1>
+            <h2 id="subtitle"</h2>
+          </hgroup>
+        </header>
+        <div role="search" id="panelSearch">
+          <div id="panelGeocoder"></div>
+        </div>
+        <div id="panelMenu" class="icon-menu icon-color"></div>
+      </div>
+      <!-- Panel Tools -->
+      <div role="toolbar" id="panelTools">
+        <!--Tools are created programatically-->
+      </div>
+    </div>
     <!-- Panel Content -->
-
     <div id="panelContent">
       <div id="panelPages"></div>
-      <div class="pageContent rounded shadow medium panelPopup" id="pageContent_popup">
-        <div id="pageHeader_popup" class="popupHeader bg roundedTop">
+      <div class="pageContent shadow medium panelPopup" tabindex="0" role="button" id="pageContent_popup">
+        <div id="pageHeader_popup" class="popupHeader bg">
           <div class="popupTitle fc">
             <div id="popupTitle"></div>
-            <div id="popupButtonPrev" class="popupButton prev"></div>
-            <div id="popupButtonNext" class="popupButton next"></div>
-            <div id="popupButtonClose" class="popupButton close"></div>
+            <button id="popupButtonPrev" role="button" class="popupButton prev icon-color"></button>
+            <button id="popupButtonNext" role="button" class="popupButton next icon-color"></button>
+            <button id="popupButtonClose" role="button" class="popupButton close icon-color"></button>
           </div>
         </div>
         <div class="pageBody" id="pageBody_popup">
@@ -63,29 +65,19 @@
         </div>
       </div>
       </div>
-    <!-- Panel Top -->
-    <div id="panelTop" class="bg rounded shadow">
-      <!-- Panel Title -->
-       <div id="panelTitle">
-        <div class="fc" id="panelText">
-            <h1 id="title"></h1>
-            <h2 id="subtitle"></h2>
+      <!--Modal Splash Screen-->
+      <div id="modal" class="hide dialog-modal" role="dialog" tabindex="-1">
+        <div class="modal-content">
+          <header class="modal-header bg fc" >
+            <h2 id="modalTitle" class="dialog-modal" tabindex="0"></h2>
+          </header>
+          <div class="copy">
+            <div id="modalContent" class="dialog-modal" tabindex="0" ></div>
+            <input id="closeOverlay" class="dialog-modal bg fc" type="button" tabindex="0"/>
+          </div>
         </div>
-        <div id="panelSearch">
-          <div id="panelGeocoder"></div>
-        </div>
-        <div id="panelMenu" class="icon-menu icon-color"></div>
       </div>
-
-      <!-- Panel Tools -->
-      <div id="panelTools">
-        <!--Tools are created programatically-->
-      </div>
-
     </div>
-    </div>
-
-
     <script type="text/javascript">
          var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
          var dojoConfig = {
@@ -114,24 +106,23 @@
             }
             return (false);
         }
-
     </script>
-    <script type="text/javascript" src="//js.arcgis.com/3.16/"></script>
+    <script type="text/javascript" src="//js.arcgis.com/3.17/"></script>
         <script type="text/javascript">
         require([
-            "dojo/parser",
             "config/templateConfig",
+            "dojo/parser",
             "application/template",
             "application/main",
-            "dijit/layout/BorderContainer",
             "dijit/layout/ContentPane",
-        ], function(
-            parser,
+            "dijit/layout/BorderContainer"
+          ], function(
             templateConfig,
+            parser,
             Template,
             Main
         ){
-            parser.parse();
+          parser.parse();
           // create the template. This will take care of all the logic required for template applications
           var myTemplate = new Template(templateConfig);
           // create my main application. Start placing your logic in the main.js file.

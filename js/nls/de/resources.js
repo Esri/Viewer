@@ -1,4 +1,4 @@
-﻿/*global define */
+/*global define */
 /*
  | Copyright 2014 Esri
  |
@@ -14,57 +14,56 @@
  | See the License for the specific language governing permissions and
  | limitations under the License.
  */
-define(
-     ({
-        "map": {
-            "error": "Karte kann nicht erstellt werden"
-        },
-        "nav":{
-            "next": "Nächste(r)",
-            "previous": "Vorherige(r)",
-            "close": "Schließen"
-        },
-        "tools":{
-            "search":{
-                "error": "Position wurde nicht gefunden",
-                "notWhatYouWanted": "Nicht das gewünschte Ergebnis?",
-                "selectAnother": "Andere Position auswählen",
-                "currentLocation": "Aktuelle Position",
-                "title": "Position"
-            },
-	    	"print": {
-			    "layouts":{
-			      "label1": 'Querformat',
-			      "label2": 'Hochformat',
-			      "label3": 'Querformat',
-			      "label4": 'Hochformat'
-			    },
-			    "legend": "Legende zu Ausgabe hinzufügen",
-                "title": "Titel",
-                "titlePrompt": "Benutzerdefinierten Titel hinzufügen"
-            },
-			"share": {
-				"extent": "Aktuelle Kartenausdehnung verwenden",
-				"label": "Diese Karte freigeben",
-				"link": "Karten-Link",
-				"facebook": "Facebook",
-				"twitter": "Twitter"
-			}
-        },
-        "tooltips":{
-        	"home": "Standardausdehnung",
-        	"locate": "Eigenen Standort suchen",
-        	"legend": "Legende",
-        	"bookmarks": "Lesezeichen",
-        	"layers": "Layer",
-        	"basemap": "Grundkarten-Galerie",
-        	"overview": "Übersichtskarte",
-        	"measure": "Messen",
-        	"edit": "Bearbeiten",
-        	"time": "Zeit",
-        	"print": "Drucken",
-        	"details": "Details",
-        	"share": "Freigeben"
-        }
-    })
-);
+define({
+  "map": {
+    "error": "ä_Unable to create map_______Ü",
+    "overviewDetails": "ä_Overview map shows current extent of map within the context of larger area________________________Ü."
+  },
+  "nav": {
+    "next": "ä_Next__Ü",
+    "previous": "ä_Previous___Ü",
+    "close": "ä_Close___Ü"
+  },
+  "tools": {
+    "search": {
+      "error": "ä_Location could not be found_________Ü",
+      "notWhatYouWanted": "ä_Not what you wanted_______Ü?",
+      "selectAnother": "ä_Select another location________Ü",
+      "currentLocation": "ä_Current Location______Ü",
+      "title": "ä_Location___Ü"
+    },
+    "print": {
+      "layouts": {
+        "label1": "ä_Landscape____Ü",
+        "label2": "ä_Portrait___Ü",
+        "label3": "ä_Landscape____Ü",
+        "label4": "ä_Portrait___Ü"
+      },
+      "legend": "ä_Add legend to output_______Ü",
+      "title": "ä_Title___Ü",
+      "titlePrompt": "ä_Add custom title______Ü"
+    },
+    "share": {
+      "extent": "ä_Use current map extent________Ü",
+      "label": "ä_Share this map_____Ü",
+      "link": "ä_Map Link___Ü",
+      "facebook": "ä_Facebook___Ü",
+      "twitter": "ä_Twitter___Ü"
+    }
+  },
+  "tooltips": {
+    "home": "ä_Default extent_____Ü",
+    "locate": "ä_Find my location______Ü",
+    "legend": "ä_Legend___Ü",
+    "bookmarks": "ä_Bookmarks____Ü",
+    "layers": "ä_Layers___Ü",
+    "basemap": "ä_Basemap gallery______Ü",
+    "overview": "ä_Overview map_____Ü",
+    "measure": "ä_Measure___Ü",
+    "edit": "ä_Edit__Ü",
+    "time": "ä_Time__Ü",
+    "print": "ä_Print___Ü",
+    "details": "ä_Details___Ü",
+    "share": "ä_Share___Ü"
+  }
+});
