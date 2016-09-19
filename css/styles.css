@@ -146,14 +146,16 @@ g#mapDiv_graphics_layer path {
   position: absolute;
   right: 0;
   left: 0;
-  top: 10px;
+  top: 0;
   border-top: none;
   border-right: none;
   border-left: none; }
-
+  .esriEditor .dojoxGridScrollbox{
+    top:20px;
+  }
 @media only screen and (min-width: 720px) {
   .esriEditor .esriDrawingToolbar {
-    top: 10px;
+    top: 0;
     right: 0;
     left: 0; } }
 
@@ -588,6 +590,22 @@ img {
   text-decoration: none;
   color: #000;
 }
+.titlePane{
+  height:20px;
+  line-height: 16px;
+}
+.esriPopup.light .titlePane, .esriPopup.dark .titlePane{
+  font-size: 12px;
+  line-height: 16px;
+  height: 30px;
+  padding: 10px;
+  border: 0;
+  border-radius: 3px 3px 0 0;
+  -webkit-border-radius: 3px 3px 0 0;
+}
+.esriPopup.light .titlePane .title, .esriPopup.dark .titlePane .title{
+  line-height: 16px;
+}
 .popupTitle{
   width:100%;
   padding:10px;
@@ -606,6 +624,7 @@ img {
   cursor:pointer;
   background-color: transparent;
   border:none;
+  overflow:visible;
 }
 .popupButton:hover{
   /*match out of the box hover color for home and locate*/
@@ -985,7 +1004,7 @@ h1, h2{
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/
 .no-touch .panelTool:hover {
   background-color: transparent;
-  background-color: rgba(102, 102, 102, 0.9);
+  background-color: rgba(102, 102, 102, 0.4);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#E6666666,endColorstr=#E6666666);
   zoom: 1; }
 

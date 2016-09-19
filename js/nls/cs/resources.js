@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "Ř_Unable to create map_______ů",
-    "overviewDetails": "Ř_Overview map shows current extent of map within the context of larger area________________________ů."
+    "error": "Nelze vytvořit mapu",
+    "overviewDetails": "Přehledová mapa zobrazuje aktuální rozsah mapy v kontextu větší oblasti."
   },
   "nav": {
-    "next": "Ř_Next__ů",
-    "previous": "Ř_Previous___ů",
-    "close": "Ř_Close___ů"
+    "next": "Další",
+    "previous": "Předchozí",
+    "close": "Zavřít"
   },
   "tools": {
     "search": {
-      "error": "Ř_Location could not be found_________ů",
-      "notWhatYouWanted": "Ř_Not what you wanted_______ů?",
-      "selectAnother": "Ř_Select another location________ů",
-      "currentLocation": "Ř_Current Location______ů",
-      "title": "Ř_Location___ů"
+      "error": "Umístění nebylo nalezeno.",
+      "notWhatYouWanted": "Nenašli jste, co jste hledali?",
+      "selectAnother": "Vybrat jiné umístění",
+      "currentLocation": "Aktuální umístění",
+      "title": "Umístění"
     },
     "print": {
       "layouts": {
-        "label1": "Ř_Landscape____ů",
-        "label2": "Ř_Portrait___ů",
-        "label3": "Ř_Landscape____ů",
-        "label4": "Ř_Portrait___ů"
+        "label1": "Na šířku",
+        "label2": "Na výšku",
+        "label3": "Na šířku",
+        "label4": "Na výšku"
       },
-      "legend": "Ř_Add legend to output_______ů",
-      "title": "Ř_Title___ů",
-      "titlePrompt": "Ř_Add custom title______ů"
+      "legend": "Přidat legendu do výstupu",
+      "title": "Název",
+      "titlePrompt": "Přidat vlastní název"
     },
     "share": {
-      "extent": "Ř_Use current map extent________ů",
-      "label": "Ř_Share this map_____ů",
-      "link": "Ř_Map Link___ů",
-      "facebook": "Ř_Facebook___ů",
-      "twitter": "Ř_Twitter___ů"
+      "extent": "Použít aktuální rozsah mapy",
+      "label": "Sdílejte tuto mapu",
+      "link": "Odkaz na mapu",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "Ř_Default extent_____ů",
-    "locate": "Ř_Find my location______ů",
-    "legend": "Ř_Legend___ů",
-    "bookmarks": "Ř_Bookmarks____ů",
-    "layers": "Ř_Layers___ů",
-    "basemap": "Ř_Basemap gallery______ů",
-    "overview": "Ř_Overview map_____ů",
-    "measure": "Ř_Measure___ů",
-    "edit": "Ř_Edit__ů",
-    "time": "Ř_Time__ů",
-    "print": "Ř_Print___ů",
-    "details": "Ř_Details___ů",
-    "share": "Ř_Share___ů"
+    "home": "Výchozí rozsah",
+    "locate": "Najdi moji polohu",
+    "legend": "Legenda",
+    "bookmarks": "Záložky",
+    "layers": "Vrstvy",
+    "basemap": "Galerie podkladových map",
+    "overview": "Přehledová mapa",
+    "measure": "Měření",
+    "edit": "Upravit",
+    "time": "Čas",
+    "print": "Tisk",
+    "details": "Podrobnosti",
+    "share": "Sdílet"
   }
 });

@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "å_Unable to create map_______ø",
-    "overviewDetails": "å_Overview map shows current extent of map within the context of larger area________________________ø."
+    "error": "Kan ikke opprette kart",
+    "overviewDetails": "Oversiktskart viser den gjeldende utstrekningen for kartet innenfor konteksten av et større område."
   },
   "nav": {
-    "next": "å_Next__ø",
-    "previous": "å_Previous___ø",
-    "close": "å_Close___ø"
+    "next": "Neste",
+    "previous": "Forrige",
+    "close": "Ja"
   },
   "tools": {
     "search": {
-      "error": "å_Location could not be found_________ø",
-      "notWhatYouWanted": "å_Not what you wanted_______ø?",
-      "selectAnother": "å_Select another location________ø",
-      "currentLocation": "å_Current Location______ø",
-      "title": "å_Location___ø"
+      "error": "Finner ikke lokasjonen",
+      "notWhatYouWanted": "Ikke det du lette etter?",
+      "selectAnother": "Velg en annen lokasjon",
+      "currentLocation": "Gjeldende lokasjon",
+      "title": "Lokasjon"
     },
     "print": {
       "layouts": {
-        "label1": "å_Landscape____ø",
-        "label2": "å_Portrait___ø",
-        "label3": "å_Landscape____ø",
-        "label4": "å_Portrait___ø"
+        "label1": "Landskap",
+        "label2": "Stående",
+        "label3": "Landskap",
+        "label4": "Stående"
       },
-      "legend": "å_Add legend to output_______ø",
-      "title": "å_Title___ø",
-      "titlePrompt": "å_Add custom title______ø"
+      "legend": "Legg til kartforklaring i resultatet",
+      "title": "Tittel",
+      "titlePrompt": "Legg til egendefinert tittel"
     },
     "share": {
-      "extent": "å_Use current map extent________ø",
-      "label": "å_Share this map_____ø",
-      "link": "å_Map Link___ø",
-      "facebook": "å_Facebook___ø",
-      "twitter": "å_Twitter___ø"
+      "extent": "Bruk gjeldende kartutstrekning",
+      "label": "Del dette kartet",
+      "link": "Kartkobling",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "å_Default extent_____ø",
-    "locate": "å_Find my location______ø",
-    "legend": "å_Legend___ø",
-    "bookmarks": "å_Bookmarks____ø",
-    "layers": "å_Layers___ø",
-    "basemap": "å_Basemap gallery______ø",
-    "overview": "å_Overview map_____ø",
-    "measure": "å_Measure___ø",
-    "edit": "å_Edit__ø",
-    "time": "å_Time__ø",
-    "print": "å_Print___ø",
-    "details": "å_Details___ø",
-    "share": "å_Share___ø"
+    "home": "Standard utstrekning",
+    "locate": "Finn min lokasjon",
+    "legend": "Tegnforklaring",
+    "bookmarks": "Bokmerker",
+    "layers": "Lag",
+    "basemap": "Bakgrunnskartgalleri",
+    "overview": "Oversiktskart",
+    "measure": "Mål",
+    "edit": "Rediger",
+    "time": "Tid",
+    "print": "Skriv ut",
+    "details": "Detaljer",
+    "share": "Dele"
   }
 });

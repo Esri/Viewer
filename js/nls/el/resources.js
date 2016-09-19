@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "Đ_Unable to create map_______ớ",
-    "overviewDetails": "Đ_Overview map shows current extent of map within the context of larger area________________________ớ."
+    "error": "Δεν είναι δυνατή η δημιουργία χάρτη",
+    "overviewDetails": "Ο χάρτης επισκόπησης εμφανίζει την τρέχουσα έκταση του χάρτη εντός του περιβάλλοντος της ευρύτερης περιοχής."
   },
   "nav": {
-    "next": "Đ_Next__ớ",
-    "previous": "Đ_Previous___ớ",
-    "close": "Đ_Close___ớ"
+    "next": "Επόμενο",
+    "previous": "ΠΡΟΗΓΟΥΜΕΝΟ",
+    "close": "Κλείσιμο"
   },
   "tools": {
     "search": {
-      "error": "Đ_Location could not be found_________ớ",
-      "notWhatYouWanted": "Đ_Not what you wanted_______ớ?",
-      "selectAnother": "Đ_Select another location________ớ",
-      "currentLocation": "Đ_Current Location______ớ",
-      "title": "Đ_Location___ớ"
+      "error": "Δεν ήταν δυνατή η εύρεση της τοποθεσίας",
+      "notWhatYouWanted": "Δεν είναι αυτή που θέλετε;",
+      "selectAnother": "Επιλέξτε άλλη τοποθεσία",
+      "currentLocation": "Τρέχουσα τοποθεσία",
+      "title": "Τοποθεσία"
     },
     "print": {
       "layouts": {
-        "label1": "Đ_Landscape____ớ",
-        "label2": "Đ_Portrait___ớ",
-        "label3": "Đ_Landscape____ớ",
-        "label4": "Đ_Portrait___ớ"
+        "label1": "Οριζόντιος",
+        "label2": "Κατακόρυφος",
+        "label3": "Οριζόντιος",
+        "label4": "Κατακόρυφος"
       },
-      "legend": "Đ_Add legend to output_______ớ",
-      "title": "Đ_Title___ớ",
-      "titlePrompt": "Đ_Add custom title______ớ"
+      "legend": "Προσθήκη υπομνήματος στο αποτέλεσμα",
+      "title": "Τίτλος",
+      "titlePrompt": "Προσθήκη προσαρμοσμένου τίτλου"
     },
     "share": {
-      "extent": "Đ_Use current map extent________ớ",
-      "label": "Đ_Share this map_____ớ",
-      "link": "Đ_Map Link___ớ",
-      "facebook": "Đ_Facebook___ớ",
-      "twitter": "Đ_Twitter___ớ"
+      "extent": "Χρήση τρέχουσας έκτασης χάρτη",
+      "label": "Κοινοποίηση αυτού του χάρτη",
+      "link": "Σύνδεσμος χάρτη",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "Đ_Default extent_____ớ",
-    "locate": "Đ_Find my location______ớ",
-    "legend": "Đ_Legend___ớ",
-    "bookmarks": "Đ_Bookmarks____ớ",
-    "layers": "Đ_Layers___ớ",
-    "basemap": "Đ_Basemap gallery______ớ",
-    "overview": "Đ_Overview map_____ớ",
-    "measure": "Đ_Measure___ớ",
-    "edit": "Đ_Edit__ớ",
-    "time": "Đ_Time__ớ",
-    "print": "Đ_Print___ớ",
-    "details": "Đ_Details___ớ",
-    "share": "Đ_Share___ớ"
+    "home": "Προκαθορισμένη έκταση",
+    "locate": "Εύρεση της τοποθεσίας μου",
+    "legend": "Υπόμνημα",
+    "bookmarks": "Σελιδοδείκτες",
+    "layers": "Θεματικά επίπεδα",
+    "basemap": "Συλλογή υποβάθρων",
+    "overview": "Χάρτης επισκόπησης",
+    "measure": "Μέτρηση",
+    "edit": "Επεξεργασία",
+    "time": "Ώρα",
+    "print": "Εκτύπωση",
+    "details": "Λεπτομ.",
+    "share": "Κοινοποίηση"
   }
 });

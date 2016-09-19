@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "á_Unable to create map_______Ó",
-    "overviewDetails": "á_Overview map shows current extent of map within the context of larger area________________________Ó."
+    "error": "No se puede crear el mapa",
+    "overviewDetails": "El mapa de vista general muestra la extensión de mapa actual en el contexto de un área más grande."
   },
   "nav": {
-    "next": "á_Next__Ó",
-    "previous": "á_Previous___Ó",
-    "close": "á_Close___Ó"
+    "next": "Siguiente",
+    "previous": "Anterior",
+    "close": "Cerrar"
   },
   "tools": {
     "search": {
-      "error": "á_Location could not be found_________Ó",
-      "notWhatYouWanted": "á_Not what you wanted_______Ó?",
-      "selectAnother": "á_Select another location________Ó",
-      "currentLocation": "á_Current Location______Ó",
-      "title": "á_Location___Ó"
+      "error": "La ubicación no se puede encontrar",
+      "notWhatYouWanted": "¿No es lo que querías?",
+      "selectAnother": "Seleccionar otra ubicación",
+      "currentLocation": "Ubicación actual",
+      "title": "Ubicación"
     },
     "print": {
       "layouts": {
-        "label1": "á_Landscape____Ó",
-        "label2": "á_Portrait___Ó",
-        "label3": "á_Landscape____Ó",
-        "label4": "á_Portrait___Ó"
+        "label1": "Horizontal",
+        "label2": "Vertical",
+        "label3": "Horizontal",
+        "label4": "Vertical"
       },
-      "legend": "á_Add legend to output_______Ó",
-      "title": "á_Title___Ó",
-      "titlePrompt": "á_Add custom title______Ó"
+      "legend": "Agregar leyenda a la salida",
+      "title": "Título",
+      "titlePrompt": "Agregar título personalizado"
     },
     "share": {
-      "extent": "á_Use current map extent________Ó",
-      "label": "á_Share this map_____Ó",
-      "link": "á_Map Link___Ó",
-      "facebook": "á_Facebook___Ó",
-      "twitter": "á_Twitter___Ó"
+      "extent": "Usar la extensión del mapa actual",
+      "label": "Compartir este mapa",
+      "link": "Enlace del mapa",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "á_Default extent_____Ó",
-    "locate": "á_Find my location______Ó",
-    "legend": "á_Legend___Ó",
-    "bookmarks": "á_Bookmarks____Ó",
-    "layers": "á_Layers___Ó",
-    "basemap": "á_Basemap gallery______Ó",
-    "overview": "á_Overview map_____Ó",
-    "measure": "á_Measure___Ó",
-    "edit": "á_Edit__Ó",
-    "time": "á_Time__Ó",
-    "print": "á_Print___Ó",
-    "details": "á_Details___Ó",
-    "share": "á_Share___Ó"
+    "home": "Extensión predeterminada",
+    "locate": "Buscar mi ubicación",
+    "legend": "Leyenda",
+    "bookmarks": "Marcadores",
+    "layers": "Capas",
+    "basemap": "Galería de mapa base",
+    "overview": "Mapa de vista general",
+    "measure": "Medir",
+    "edit": "Editar",
+    "time": "Tiempo",
+    "print": "Imprimir",
+    "details": "Detalles",
+    "share": "Compartir"
   }
 });

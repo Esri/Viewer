@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "بيت_Unable to create map_______لاحقة",
-    "overviewDetails": "بيت_Overview map shows current extent of map within the context of larger area________________________لاحقة."
+    "error": "يتعذر إنشاء الخريطة",
+    "overviewDetails": "تعرض خريطة النظرة العامة نطاق الخريطة الحالي من خلال سياق منطقة أكبر."
   },
   "nav": {
-    "next": "بيت_Next__لاحقة",
-    "previous": "بيت_Previous___لاحقة",
-    "close": "بيت_Close___لاحقة"
+    "next": "التالي",
+    "previous": "السابق",
+    "close": "إغلاق"
   },
   "tools": {
     "search": {
-      "error": "بيت_Location could not be found_________لاحقة",
-      "notWhatYouWanted": "بيت_Not what you wanted_______لاحقة?",
-      "selectAnother": "بيت_Select another location________لاحقة",
-      "currentLocation": "بيت_Current Location______لاحقة",
-      "title": "بيت_Location___لاحقة"
+      "error": "تعذر العثور على الموقع",
+      "notWhatYouWanted": "هل هذا ليس ما تحتاجه؟",
+      "selectAnother": "تحديد موقع أخر",
+      "currentLocation": "الموقع الحالي",
+      "title": "الموقع"
     },
     "print": {
       "layouts": {
-        "label1": "بيت_Landscape____لاحقة",
-        "label2": "بيت_Portrait___لاحقة",
-        "label3": "بيت_Landscape____لاحقة",
-        "label4": "بيت_Portrait___لاحقة"
+        "label1": "أفقي",
+        "label2": "عمودي",
+        "label3": "أفقي",
+        "label4": "عمودي"
       },
-      "legend": "بيت_Add legend to output_______لاحقة",
-      "title": "بيت_Title___لاحقة",
-      "titlePrompt": "بيت_Add custom title______لاحقة"
+      "legend": "إضافة وسيلة الإيضاح إلى الناتج",
+      "title": "عنوان",
+      "titlePrompt": "إضافة عنوان مخصص"
     },
     "share": {
-      "extent": "بيت_Use current map extent________لاحقة",
-      "label": "بيت_Share this map_____لاحقة",
-      "link": "بيت_Map Link___لاحقة",
-      "facebook": "بيت_Facebook___لاحقة",
-      "twitter": "بيت_Twitter___لاحقة"
+      "extent": "استخدم نطاق الخريطة الحالي",
+      "label": "مشاركة هذه الخريطة",
+      "link": "رابط الخريطة",
+      "facebook": "فيس بوك",
+      "twitter": "تويتر"
     }
   },
   "tooltips": {
-    "home": "بيت_Default extent_____لاحقة",
-    "locate": "بيت_Find my location______لاحقة",
-    "legend": "بيت_Legend___لاحقة",
-    "bookmarks": "بيت_Bookmarks____لاحقة",
-    "layers": "بيت_Layers___لاحقة",
-    "basemap": "بيت_Basemap gallery______لاحقة",
-    "overview": "بيت_Overview map_____لاحقة",
-    "measure": "بيت_Measure___لاحقة",
-    "edit": "بيت_Edit__لاحقة",
-    "time": "بيت_Time__لاحقة",
-    "print": "بيت_Print___لاحقة",
-    "details": "بيت_Details___لاحقة",
-    "share": "بيت_Share___لاحقة"
+    "home": "النطاق الافتراضي",
+    "locate": "العثور على الموقع الخاص بي",
+    "legend": "وسيلة إيضاح",
+    "bookmarks": "إشارات مرجعية",
+    "layers": "طبقات",
+    "basemap": "معرض خريطة الأساس",
+    "overview": "خريطة النظرة العامة",
+    "measure": "قياس",
+    "edit": "تحرير",
+    "time": "زمن",
+    "print": "طباعة",
+    "details": "تفاصيل",
+    "share": "مشاركة"
   }
 });

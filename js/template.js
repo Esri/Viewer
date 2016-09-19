@@ -67,6 +67,7 @@ define([
     groupInfoConfig: {},
     itemConfig: {},
     customUrlConfig: {},
+    sharedThemeConfig: {},
     commonUrlItems: ["webmap", "appid", "group", "oauthappid"],
     constructor: function(templateConfig) {
       // template settings
@@ -141,6 +142,8 @@ define([
             groupInfo: this.queryGroupInfo(),
             // group items
             groupItems: this.queryGroupItems(),
+            // shared themes
+            sharedTheme: this.querySharedTheme()
           }).then(lang.hitch(this, function() {
             // mixin all new settings from item, group info and group items.
             this._mixinAll();
@@ -593,6 +596,90 @@ define([
         fields[fieldName] = queryString.substring(fieldIndex, result ? result.index : queryString.length).replace(/^\s+|\s+$/g, "").replace(/\"/g, ""); //remove extra quotes in title
       }
       return fields;
+    },
+    querySharedTheme: function() {
+      var deferred = new Deferred();
+      if (this.config && this.config.sharedTheme) {
+        esriConfig.defaults.io.corsEnabledServers.push("opendata.arcgis.com");
+        var sharedThemeStatus = this._getSharedThemeStatus(this.config.sharedTheme);
+        this._getSharedThemeObject(sharedThemeStatus).then(function(response) {
+          deferred.resolve(response);
+        }, function() {
+          var error = new Error("Unable to get theme");
+          deferred.reject(error);
+        });
+
+      } else if (this.config && this.config.sharedThemeItem) {
+        arcgisUtils.getItem(this.config.sharedThemeItem).then(lang.hitch(this, function(response) {
+          if (response && response.itemData && response.itemData.data) {
+            this.config.sharedThemeConfig = response.itemData.data;
+          }
+          deferred.resolve();
+        }), function(error) {
+          deferred.reject(error);
+        });
+
+
+      } else {
+        deferred.resolve();
+      }
+      return deferred.promise;
+    },
+    _getSharedThemeStatus: function(input) {
+      // we have a theme url param get  theming
+      var result = {};
+      if (/\d+/.test(input)) { // numeric theme value
+        result.status = "siteId";
+        result.output = input;
+      } else if (input === "current") {
+        result.status = "domain";
+        result.output = window.location.href;
+      } // leaving out appid for now
+      return result;
+    },
+    _getSharedThemeObject: function(sharedThemeStatus) {
+      var deferred = new Deferred();
+      var requestUrl = this._generateRequestUrl(sharedThemeStatus);
+      // if the status is site id or domain lookup make an external API call to opendatadev.arcgis.com
+      if (sharedThemeStatus.status === "siteId" || sharedThemeStatus.status === "domain") {
+        var themeRequest = esriRequest({
+          url: requestUrl,
+          handleAs: "json"
+        });
+        themeRequest.then(lang.hitch(this, function(response) {
+          // return for a domain call is an array so adjust the call slightly
+          if (sharedThemeStatus.status === "domain" && response && response.data && response.data.length && response.data.length > 0) {
+            this.config.sharedThemeConfig = response.data[0];
+          } else if (response && response.data) {
+            this.config.sharedThemeConfig = response.data;
+          }
+          deferred.resolve();
+        }), function(error) {
+          deferred.reject(error);
+        });
+      } else {
+        deferred.resolve();
+      }
+      return deferred.promise;
+    },
+    _generateRequestUrl: function(status) {
+      var requestUrl;
+      switch (status.status) {
+        // "https://opendata.arcgis.com/api/v2/sites/" + status.output;
+        case "siteId":
+          requestUrl = "https://opendata.arcgis.com/api/v2/sites/" + status.output;
+          break;
+        case "domain":
+          //"https://opendatadev.arcgis.com/api/v2/sites?filter%5Burl%5D=" + status.output;
+          requestUrl = status.output;
+          requestUrl = "https://opendata.arcgis.com/api/v2/sites?filter%5Burl%5D=" + status.output;
+          break;
+        case "appId":
+          break;
+        default:
+      }
+      return requestUrl;
     }
+
   });
 });

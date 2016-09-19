@@ -272,7 +272,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
         var n = dom.byId("panelTool_" + name);
         domClass.add(n, "panelToolActive");
         focus.focus(n);
-
       }
       this.emit("updateTool", name);
     },

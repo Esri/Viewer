@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "한_Unable to create map_______빠",
-    "overviewDetails": "한_Overview map shows current extent of map within the context of larger area________________________빠."
+    "error": "맵을 생성할 수 없음",
+    "overviewDetails": "오버뷰 맵에 더 큰 맵 영역 안에서의 현재 범위를 보여 줍니다."
   },
   "nav": {
-    "next": "한_Next__빠",
-    "previous": "한_Previous___빠",
-    "close": "한_Close___빠"
+    "next": "다음",
+    "previous": "이전",
+    "close": "닫기"
   },
   "tools": {
     "search": {
-      "error": "한_Location could not be found_________빠",
-      "notWhatYouWanted": "한_Not what you wanted_______빠?",
-      "selectAnother": "한_Select another location________빠",
-      "currentLocation": "한_Current Location______빠",
-      "title": "한_Location___빠"
+      "error": "위치를 찾을 수 없습니다.",
+      "notWhatYouWanted": "원하는 위치가 아닙니까?",
+      "selectAnother": "다른 위치 선택",
+      "currentLocation": "현재 위치",
+      "title": "위치"
     },
     "print": {
       "layouts": {
-        "label1": "한_Landscape____빠",
-        "label2": "한_Portrait___빠",
-        "label3": "한_Landscape____빠",
-        "label4": "한_Portrait___빠"
+        "label1": "가로",
+        "label2": "세로",
+        "label3": "가로",
+        "label4": "세로"
       },
-      "legend": "한_Add legend to output_______빠",
-      "title": "한_Title___빠",
-      "titlePrompt": "한_Add custom title______빠"
+      "legend": "범례를 결과에 추가",
+      "title": "제목",
+      "titlePrompt": "사용자 정의 제목 추가"
     },
     "share": {
-      "extent": "한_Use current map extent________빠",
-      "label": "한_Share this map_____빠",
-      "link": "한_Map Link___빠",
-      "facebook": "한_Facebook___빠",
-      "twitter": "한_Twitter___빠"
+      "extent": "현재 맵 범위 사용",
+      "label": "이 맵 공유",
+      "link": "맵 링크",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "한_Default extent_____빠",
-    "locate": "한_Find my location______빠",
-    "legend": "한_Legend___빠",
-    "bookmarks": "한_Bookmarks____빠",
-    "layers": "한_Layers___빠",
-    "basemap": "한_Basemap gallery______빠",
-    "overview": "한_Overview map_____빠",
-    "measure": "한_Measure___빠",
-    "edit": "한_Edit__빠",
-    "time": "한_Time__빠",
-    "print": "한_Print___빠",
-    "details": "한_Details___빠",
-    "share": "한_Share___빠"
+    "home": "기본 범위",
+    "locate": "내 위치 찾기",
+    "legend": "범례",
+    "bookmarks": "책갈피",
+    "layers": "레이어",
+    "basemap": "베이스맵 갤러리",
+    "overview": "오버뷰 맵",
+    "measure": "측정",
+    "edit": "편집",
+    "time": "시간",
+    "print": "인쇄",
+    "details": "세부정보",
+    "share": "공유"
   }
 });

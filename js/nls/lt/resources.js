@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "Į_Unable to create map_______š",
-    "overviewDetails": "Į_Overview map shows current extent of map within the context of larger area________________________š."
+    "error": "Žemėlapio sukurti nepavyko",
+    "overviewDetails": "Apžvalgos žemėlapyje rodoma esama žemėlapio aprėptis."
   },
   "nav": {
-    "next": "Į_Next__š",
-    "previous": "Į_Previous___š",
-    "close": "Į_Close___š"
+    "next": "Kitas",
+    "previous": "Ankstesnis",
+    "close": "Uždaryti"
   },
   "tools": {
     "search": {
-      "error": "Į_Location could not be found_________š",
-      "notWhatYouWanted": "Į_Not what you wanted_______š?",
-      "selectAnother": "Į_Select another location________š",
-      "currentLocation": "Į_Current Location______š",
-      "title": "Į_Location___š"
+      "error": "Vietos surasti nepavyko",
+      "notWhatYouWanted": "Ne tai, ko norėjote?",
+      "selectAnother": "Pasirinkite kitą vietą",
+      "currentLocation": "Esama vieta",
+      "title": "Vieta"
     },
     "print": {
       "layouts": {
-        "label1": "Į_Landscape____š",
-        "label2": "Į_Portrait___š",
-        "label3": "Į_Landscape____š",
-        "label4": "Į_Portrait___š"
+        "label1": "Horizontalus",
+        "label2": "Vertikalus",
+        "label3": "Horizontalus",
+        "label4": "Vertikalus"
       },
-      "legend": "Į_Add legend to output_______š",
-      "title": "Į_Title___š",
-      "titlePrompt": "Į_Add custom title______š"
+      "legend": "Įtraukti legendą į išvestį",
+      "title": "Pavadinimas",
+      "titlePrompt": "Pridėti adaptuotą pavadinimą"
     },
     "share": {
-      "extent": "Į_Use current map extent________š",
-      "label": "Į_Share this map_____š",
-      "link": "Į_Map Link___š",
-      "facebook": "Į_Facebook___š",
-      "twitter": "Į_Twitter___š"
+      "extent": "Naudoti esamą žemėlapio aprėptį",
+      "label": "Bendrinti šį žemėlapį",
+      "link": "Žemėlapio nuoroda",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "Į_Default extent_____š",
-    "locate": "Į_Find my location______š",
-    "legend": "Į_Legend___š",
-    "bookmarks": "Į_Bookmarks____š",
-    "layers": "Į_Layers___š",
-    "basemap": "Į_Basemap gallery______š",
-    "overview": "Į_Overview map_____š",
-    "measure": "Į_Measure___š",
-    "edit": "Į_Edit__š",
-    "time": "Į_Time__š",
-    "print": "Į_Print___š",
-    "details": "Į_Details___š",
-    "share": "Į_Share___š"
+    "home": "Numatytoji aprėptis",
+    "locate": "Rasti mano vietą",
+    "legend": "Legenda",
+    "bookmarks": "Žymės",
+    "layers": "Sluoksniai",
+    "basemap": "Pagrindo žemėlapių galerija",
+    "overview": "Apžvalga",
+    "measure": "Matuoti",
+    "edit": "Redaguoti",
+    "time": "Laikas",
+    "print": "Spausdinti",
+    "details": "Išsamiau",
+    "share": "Bendrinti"
   }
 });

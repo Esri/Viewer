@@ -116,6 +116,12 @@ define([
       // and application id and any url parameters and any application specific configuration information.
       if (config) {
         this.config = config;
+        if (this.config.sharedThemeConfig && this.config.sharedThemeConfig.attributes && this.config.sharedThemeConfig.attributes.theme) {
+          var sharedTheme = this.config.sharedThemeConfig.attributes;
+          this.config.logo = sharedTheme.layout.header.component.settings.logoUrl || sharedTheme.theme.logo.small || null;
+          this.config.color = sharedTheme.theme.text.color;
+          this.config.theme = sharedTheme.theme.body.bg;
+        }
         this.color = this._setColor(this.config.color);
         this.theme = this._setColor(this.config.theme);
         this.iconColor = this._setColor(this.config.iconColor);
@@ -288,7 +294,6 @@ define([
           }
 
           // if no tools are active let's setup support for setting
-          //this._setActiveTool(toolbar);
           on(toolbar, "updateTool", lang.hitch(this,
             function(name) {
               if (name === "measure") {
@@ -318,7 +323,6 @@ define([
                   }));
               }
             }));
-
           domStyle.set("panelPages", "visibility",
             "visible");
           //Now that all the tools have been added to the toolbar we can add page naviagation
@@ -346,7 +350,6 @@ define([
     _showSplashScreen: function(toolbar) {
       // Setup the modal overlay if enabled
       if (this.config.splashModal) {
-
         domClass.add(document.body, "noscroll");
         domClass.remove("modal", "hide");
         domAttr.set("modal", "aria-label", this.config.splashTitle || "Splash Screen");
@@ -393,7 +396,6 @@ define([
       } else {
         deferred.resolve(false);
       }
-
       return deferred.promise;
     },
 
@@ -459,7 +461,6 @@ define([
 
     },
     _addEditor: function(tool, toolbar, panelClass) {
-
       //Add the editor widget to the toolbar if the web map contains editable layers
       var deferred = new Deferred();
       this.editableLayers = this._getEditableLayers(this.config.response
@@ -475,7 +476,6 @@ define([
       } else {
         deferred.resolve(false);
       }
-
       return deferred.promise;
     },
     _createEditor: function() {
@@ -488,7 +488,6 @@ define([
           deferred.resolve(false);
           return;
         }
-
         //add field infos if necessary. Field infos will contain hints if defined in the popup and hide fields where visible is set
         //to false. The popup logic takes care of this for the info window but not the edit window.
         array.forEach(this.editableLayers, lang.hitch(this,
@@ -502,7 +501,6 @@ define([
               var fieldInfos = [];
               array.forEach(fields, lang.hitch(this,
                 function(field) {
-
                   //added support for editing date and time
                   if (field.format && field.format.dateFormat &&
                     array.indexOf(this.timeFormats,
@@ -511,10 +509,10 @@ define([
                       time: true
                     };
                   }
-                  //Add all editable fields even if not visible.
-                  //if (field.visible) {
-                  fieldInfos.push(field);
-                //}
+                  //Only add visible fields
+                  if (field.visible) {
+                    fieldInfos.push(field);
+                  }
                 }));
 
               layer.fieldInfos = fieldInfos;
@@ -526,29 +524,32 @@ define([
           toolbarVisible: has("edit-toolbar")
         };
         this.map.enableSnapping();
+        //show the editor panel so layers render in the widget correctly.
+        domClass.remove(dom.byId("page_edit"), "hide");
         this.editor = new Editor({
           settings: settings
         }, domConstruct.create("div", {}, this.editorDiv));
-
-
+        this.editor.on("load", lang.hitch(this, function() {
+          // hide the panel
+          domClass.add(dom.byId("page_edit"), "hide");
+          deferred.resolve(true);
+        }), function(error) {
+          domClass.add(dom.byId("page_edit"), "hide");
+          deferred.resolve(true);
+        });
         this.editor.startup();
-        deferred.resolve(true);
-
       }));
       return deferred.promise;
-
     },
     _destroyEditor: function() {
       if (this.editor) {
         this.editor.destroy();
         this.editor = null;
       }
-
     },
     _addLayers: function(tool, toolbar, panelClass) {
       //Toggle layer visibility if web map has operational layers
       var deferred = new Deferred();
-
       var layers = this.config.response.itemInfo.itemData.operationalLayers;
 
       if (layers.length === 0) {
@@ -616,7 +617,6 @@ define([
       }
       return deferred.promise;
     },
-
     _addMeasure: function(tool, toolbar, panelClass) {
       //Add the measure widget to the toolbar.
       var deferred = new Deferred();
@@ -675,6 +675,7 @@ define([
               height: "auto"
             }, domConstruct.create("div", {}, ovMapDiv));
             ovMap.startup();
+
             query(".ovwHighlight").forEach(function(node) {
               domAttr.set(node, "tabindex", "0");
               domAttr.set(node, "aria-label", this.config.i18n.map.overviewDetails);
@@ -984,12 +985,10 @@ define([
             createdOptions.activeSourceIndex = this.config.searchConfig
               .activeSourceIndex;
           }
-          console.log(this.config)
           createdOptions.enableSearchingAll = false;
-          if(this.config.searchConfig && this.config.searchConfig.enableSearchingAll && this.config.searchConfig.enableSearchingAll ==  true){
+          if (this.config.searchConfig && this.config.searchConfig.enableSearchingAll && this.config.searchConfig.enableSearchingAll === true) {
             createdOptions.enableSearchingAll = true;
           }
-      console.log(createdOptions.enableSearchingAll)
         }
         var search = new Search(createdOptions, domConstruct.create(
           "div", {
@@ -1176,7 +1175,7 @@ define([
       //Set the font color using the configured color value
       query(".fc").style("color", this.color.toString());
       query(".esriPopup .titlePane").style("color", this.color.toString());
-      query(".esriPopup. .titleButton").style("color", this.color.toString());
+      query(".esriPopup .titleButton").style("color", this.color.toString());
 
     },
     _adjustPopupSize: function() {
@@ -1221,6 +1220,7 @@ define([
       }).then(lang.hitch(this, function(response) {
 
         this.map = response.map;
+        domClass.add(this.map.infoWindow.domNode, "light");
 
         if (params.markerGraphic) {
           // Add a marker graphic with an optional info window if

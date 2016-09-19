@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "ø_Unable to create map_______å",
-    "overviewDetails": "ø_Overview map shows current extent of map within the context of larger area________________________å."
+    "error": "Kan ikke oprette kort",
+    "overviewDetails": "Oversigtskort viser kortets nuværende udstrækning i et større områdes kontekst."
   },
   "nav": {
-    "next": "ø_Next__å",
-    "previous": "ø_Previous___å",
-    "close": "ø_Close___å"
+    "next": "Næste",
+    "previous": "Forrige",
+    "close": "Luk"
   },
   "tools": {
     "search": {
-      "error": "ø_Location could not be found_________å",
-      "notWhatYouWanted": "ø_Not what you wanted_______å?",
-      "selectAnother": "ø_Select another location________å",
-      "currentLocation": "ø_Current Location______å",
-      "title": "ø_Location___å"
+      "error": "Placeringen blev ikke fundet",
+      "notWhatYouWanted": "Var det ikke det, du ville?",
+      "selectAnother": "Vælg et andet sted",
+      "currentLocation": "Aktuel position",
+      "title": "Position"
     },
     "print": {
       "layouts": {
-        "label1": "ø_Landscape____å",
-        "label2": "ø_Portrait___å",
-        "label3": "ø_Landscape____å",
-        "label4": "ø_Portrait___å"
+        "label1": "På langs",
+        "label2": "På højkant",
+        "label3": "På langs",
+        "label4": "På højkant"
       },
-      "legend": "ø_Add legend to output_______å",
-      "title": "ø_Title___å",
-      "titlePrompt": "ø_Add custom title______å"
+      "legend": "Føj signaturforklaring til output",
+      "title": "Titel",
+      "titlePrompt": "Tilføj brugerdefineret titel"
     },
     "share": {
-      "extent": "ø_Use current map extent________å",
-      "label": "ø_Share this map_____å",
-      "link": "ø_Map Link___å",
-      "facebook": "ø_Facebook___å",
-      "twitter": "ø_Twitter___å"
+      "extent": "Gem aktuelt kortområde",
+      "label": "Del dette kort",
+      "link": "Kort-link",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "ø_Default extent_____å",
-    "locate": "ø_Find my location______å",
-    "legend": "ø_Legend___å",
-    "bookmarks": "ø_Bookmarks____å",
-    "layers": "ø_Layers___å",
-    "basemap": "ø_Basemap gallery______å",
-    "overview": "ø_Overview map_____å",
-    "measure": "ø_Measure___å",
-    "edit": "ø_Edit__å",
-    "time": "ø_Time__å",
-    "print": "ø_Print___å",
-    "details": "ø_Details___å",
-    "share": "ø_Share___å"
+    "home": "Standardudstrækning",
+    "locate": "Find min placering",
+    "legend": "Signaturforklaring",
+    "bookmarks": "Bogmærker",
+    "layers": "Lag",
+    "basemap": "Baggrundskortgalleri",
+    "overview": "Oversigtskort",
+    "measure": "Mål",
+    "edit": "Redigér",
+    "time": "Tid",
+    "print": "Udskriv",
+    "details": "%1 - Vælg app-mappe",
+    "share": "Opdatér"
   }
 });

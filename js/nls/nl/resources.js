@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "Ĳ_Unable to create map_______ä",
-    "overviewDetails": "Ĳ_Overview map shows current extent of map within the context of larger area________________________ä."
+    "error": "Kaart kan niet gemaakt worden",
+    "overviewDetails": "De Overview map toont de huidige extent van de kaart binnen de context van een groter gebied."
   },
   "nav": {
-    "next": "Ĳ_Next__ä",
-    "previous": "Ĳ_Previous___ä",
-    "close": "Ĳ_Close___ä"
+    "next": "Volgende",
+    "previous": "Vorige",
+    "close": "Sluiten"
   },
   "tools": {
     "search": {
-      "error": "Ĳ_Location could not be found_________ä",
-      "notWhatYouWanted": "Ĳ_Not what you wanted_______ä?",
-      "selectAnother": "Ĳ_Select another location________ä",
-      "currentLocation": "Ĳ_Current Location______ä",
-      "title": "Ĳ_Location___ä"
+      "error": "Locatie is niet gevonden",
+      "notWhatYouWanted": "Niet wat u wilde?",
+      "selectAnother": "Een andere locatie selecteren",
+      "currentLocation": "Huidige locatie",
+      "title": "Locatie"
     },
     "print": {
       "layouts": {
-        "label1": "Ĳ_Landscape____ä",
-        "label2": "Ĳ_Portrait___ä",
-        "label3": "Ĳ_Landscape____ä",
-        "label4": "Ĳ_Portrait___ä"
+        "label1": "Liggend",
+        "label2": "Staand",
+        "label3": "Liggend",
+        "label4": "Staand"
       },
-      "legend": "Ĳ_Add legend to output_______ä",
-      "title": "Ĳ_Title___ä",
-      "titlePrompt": "Ĳ_Add custom title______ä"
+      "legend": "Legenda toevoegen aan uitvoer",
+      "title": "Titel",
+      "titlePrompt": "Aangepaste titel toevoegen"
     },
     "share": {
-      "extent": "Ĳ_Use current map extent________ä",
-      "label": "Ĳ_Share this map_____ä",
-      "link": "Ĳ_Map Link___ä",
-      "facebook": "Ĳ_Facebook___ä",
-      "twitter": "Ĳ_Twitter___ä"
+      "extent": "Huidig kaartextent gebruiken",
+      "label": "Deze kaart delen",
+      "link": "Kaartkoppeling",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "Ĳ_Default extent_____ä",
-    "locate": "Ĳ_Find my location______ä",
-    "legend": "Ĳ_Legend___ä",
-    "bookmarks": "Ĳ_Bookmarks____ä",
-    "layers": "Ĳ_Layers___ä",
-    "basemap": "Ĳ_Basemap gallery______ä",
-    "overview": "Ĳ_Overview map_____ä",
-    "measure": "Ĳ_Measure___ä",
-    "edit": "Ĳ_Edit__ä",
-    "time": "Ĳ_Time__ä",
-    "print": "Ĳ_Print___ä",
-    "details": "Ĳ_Details___ä",
-    "share": "Ĳ_Share___ä"
+    "home": "Standaardextent",
+    "locate": "Mijn locatie vinden",
+    "legend": "Legenda",
+    "bookmarks": "Bladwijzers",
+    "layers": "Kaartlagen",
+    "basemap": "basiskaartgalerij",
+    "overview": "Overzichtskaart",
+    "measure": "Meten",
+    "edit": "Bewerken",
+    "time": "Tijd",
+    "print": "Afdrukken",
+    "details": "Details",
+    "share": "Delen"
   }
 });

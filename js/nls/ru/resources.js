@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "Ж_Unable to create map_______Я",
-    "overviewDetails": "Ж_Overview map shows current extent of map within the context of larger area________________________Я."
+    "error": "Не удалось создать карту",
+    "overviewDetails": "Обзорная карта отображает текущий экстент карты в контексте более обширной области."
   },
   "nav": {
-    "next": "Ж_Next__Я",
-    "previous": "Ж_Previous___Я",
-    "close": "Ж_Close___Я"
+    "next": "Следующий",
+    "previous": "Предыдущий",
+    "close": "Закрыть"
   },
   "tools": {
     "search": {
-      "error": "Ж_Location could not be found_________Я",
-      "notWhatYouWanted": "Ж_Not what you wanted_______Я?",
-      "selectAnother": "Ж_Select another location________Я",
-      "currentLocation": "Ж_Current Location______Я",
-      "title": "Ж_Location___Я"
+      "error": "Невозможно найти местоположение",
+      "notWhatYouWanted": "Не то, что хотели?",
+      "selectAnother": "Выбрать другое местоположение",
+      "currentLocation": "Текущее местоположение",
+      "title": "Местоположение"
     },
     "print": {
       "layouts": {
-        "label1": "Ж_Landscape____Я",
-        "label2": "Ж_Portrait___Я",
-        "label3": "Ж_Landscape____Я",
-        "label4": "Ж_Portrait___Я"
+        "label1": "Альбомная",
+        "label2": "Книжная",
+        "label3": "Альбомная",
+        "label4": "Книжная"
       },
-      "legend": "Ж_Add legend to output_______Я",
-      "title": "Ж_Title___Я",
-      "titlePrompt": "Ж_Add custom title______Я"
+      "legend": "Добавить легенду к результату",
+      "title": "Заголовок",
+      "titlePrompt": "Добавить пользовательское название"
     },
     "share": {
-      "extent": "Ж_Use current map extent________Я",
-      "label": "Ж_Share this map_____Я",
-      "link": "Ж_Map Link___Я",
-      "facebook": "Ж_Facebook___Я",
-      "twitter": "Ж_Twitter___Я"
+      "extent": "Использовать текущий экстент карты",
+      "label": "Общий доступ к карте",
+      "link": "Ссылка на карту",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "Ж_Default extent_____Я",
-    "locate": "Ж_Find my location______Я",
-    "legend": "Ж_Legend___Я",
-    "bookmarks": "Ж_Bookmarks____Я",
-    "layers": "Ж_Layers___Я",
-    "basemap": "Ж_Basemap gallery______Я",
-    "overview": "Ж_Overview map_____Я",
-    "measure": "Ж_Measure___Я",
-    "edit": "Ж_Edit__Я",
-    "time": "Ж_Time__Я",
-    "print": "Ж_Print___Я",
-    "details": "Ж_Details___Я",
-    "share": "Ж_Share___Я"
+    "home": "Экстент по умолчанию",
+    "locate": "Найти мое местоположение",
+    "legend": "Легенда",
+    "bookmarks": "Закладки",
+    "layers": "Слои",
+    "basemap": "Галерея базовых карт",
+    "overview": "Обзорная карта",
+    "measure": "Измерения",
+    "edit": "Редактировать",
+    "time": "Время",
+    "print": "Печать",
+    "details": "Детали",
+    "share": "Опубликовать"
   }
 });

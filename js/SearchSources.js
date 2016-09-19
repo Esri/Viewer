@@ -159,7 +159,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/_base/array", "dojo/_base
             });
           }
           // Set default search fields if not specified
-          if (source.searchFields.length === 0) {
+          if (source.searchFields && source.searchFields.length === 0) {
             if (featureLayer && featureLayer.displayField) {
               source.searchFields = [featureLayer.displayField];
             }

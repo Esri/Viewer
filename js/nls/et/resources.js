@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "Š_Unable to create map_______ä",
-    "overviewDetails": "Š_Overview map shows current extent of map within the context of larger area________________________ä."
+    "error": "Kaarti ei saa luua",
+    "overviewDetails": "Ülevaatekaart kuvab kaardi praeguse kuvaulatuse suurema ala kontekstis."
   },
   "nav": {
-    "next": "Š_Next__ä",
-    "previous": "Š_Previous___ä",
-    "close": "Š_Close___ä"
+    "next": "Järgmine",
+    "previous": "Eelmine",
+    "close": "Sulge"
   },
   "tools": {
     "search": {
-      "error": "Š_Location could not be found_________ä",
-      "notWhatYouWanted": "Š_Not what you wanted_______ä?",
-      "selectAnother": "Š_Select another location________ä",
-      "currentLocation": "Š_Current Location______ä",
-      "title": "Š_Location___ä"
+      "error": "Asukohta ei leitud",
+      "notWhatYouWanted": "Ei ole see, mida soovisid?",
+      "selectAnother": "Vali muu asukoht",
+      "currentLocation": "Praegune asukoht",
+      "title": "Asukoht"
     },
     "print": {
       "layouts": {
-        "label1": "Š_Landscape____ä",
-        "label2": "Š_Portrait___ä",
-        "label3": "Š_Landscape____ä",
-        "label4": "Š_Portrait___ä"
+        "label1": "Horisontaalpaigutus",
+        "label2": "Vertikaalpaigutus",
+        "label3": "Horisontaalpaigutus",
+        "label4": "Vertikaalpaigutus"
       },
-      "legend": "Š_Add legend to output_______ä",
-      "title": "Š_Title___ä",
-      "titlePrompt": "Š_Add custom title______ä"
+      "legend": "Lisa väljundile legend",
+      "title": "Pealkiri",
+      "titlePrompt": "Lisa kohandatud pealkiri"
     },
     "share": {
-      "extent": "Š_Use current map extent________ä",
-      "label": "Š_Share this map_____ä",
-      "link": "Š_Map Link___ä",
-      "facebook": "Š_Facebook___ä",
-      "twitter": "Š_Twitter___ä"
+      "extent": "Kasuta praeguse kaardi ulatust",
+      "label": "Jaga seda kaarti",
+      "link": "Kaardi link",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "Š_Default extent_____ä",
-    "locate": "Š_Find my location______ä",
-    "legend": "Š_Legend___ä",
-    "bookmarks": "Š_Bookmarks____ä",
-    "layers": "Š_Layers___ä",
-    "basemap": "Š_Basemap gallery______ä",
-    "overview": "Š_Overview map_____ä",
-    "measure": "Š_Measure___ä",
-    "edit": "Š_Edit__ä",
-    "time": "Š_Time__ä",
-    "print": "Š_Print___ä",
-    "details": "Š_Details___ä",
-    "share": "Š_Share___ä"
+    "home": "Vaikimisi kuvaulatus",
+    "locate": "Leia minu asukoht",
+    "legend": "Legendiga kaart",
+    "bookmarks": "Järjehoidjad",
+    "layers": "Kihid",
+    "basemap": "Aluskaartide galerii",
+    "overview": "Ülevaatekaart",
+    "measure": "Mõõda",
+    "edit": "Muuda",
+    "time": "Aeg",
+    "print": "Prindi",
+    "details": "Detailid",
+    "share": "Jaga"
   }
 });

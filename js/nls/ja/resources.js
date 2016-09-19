@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "須_Unable to create map_______鷗",
-    "overviewDetails": "須_Overview map shows current extent of map within the context of larger area________________________鷗."
+    "error": "マップを作成できません",
+    "overviewDetails": "概観図は、より大きなエリア内でマップの現在の範囲を表示します。"
   },
   "nav": {
-    "next": "須_Next__鷗",
-    "previous": "須_Previous___鷗",
-    "close": "須_Close___鷗"
+    "next": "次へ",
+    "previous": "前へ",
+    "close": "閉じる"
   },
   "tools": {
     "search": {
-      "error": "須_Location could not be found_________鷗",
-      "notWhatYouWanted": "須_Not what you wanted_______鷗?",
-      "selectAnother": "須_Select another location________鷗",
-      "currentLocation": "須_Current Location______鷗",
-      "title": "須_Location___鷗"
+      "error": "場所が見つかりませんでした",
+      "notWhatYouWanted": "他の住所の候補を表示しますか？",
+      "selectAnother": "他の候補を選択",
+      "currentLocation": "現在の位置",
+      "title": "位置"
     },
     "print": {
       "layouts": {
-        "label1": "須_Landscape____鷗",
-        "label2": "須_Portrait___鷗",
-        "label3": "須_Landscape____鷗",
-        "label4": "須_Portrait___鷗"
+        "label1": "横",
+        "label2": "縦",
+        "label3": "横",
+        "label4": "縦"
       },
-      "legend": "須_Add legend to output_______鷗",
-      "title": "須_Title___鷗",
-      "titlePrompt": "須_Add custom title______鷗"
+      "legend": "凡例を出力に追加",
+      "title": "タイトル",
+      "titlePrompt": "カスタム タイトルの追加"
     },
     "share": {
-      "extent": "須_Use current map extent________鷗",
-      "label": "須_Share this map_____鷗",
-      "link": "須_Map Link___鷗",
-      "facebook": "須_Facebook___鷗",
-      "twitter": "須_Twitter___鷗"
+      "extent": "現在のマップ範囲を使用",
+      "label": "このマップを共有",
+      "link": "マップ リンク",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "須_Default extent_____鷗",
-    "locate": "須_Find my location______鷗",
-    "legend": "須_Legend___鷗",
-    "bookmarks": "須_Bookmarks____鷗",
-    "layers": "須_Layers___鷗",
-    "basemap": "須_Basemap gallery______鷗",
-    "overview": "須_Overview map_____鷗",
-    "measure": "須_Measure___鷗",
-    "edit": "須_Edit__鷗",
-    "time": "須_Time__鷗",
-    "print": "須_Print___鷗",
-    "details": "須_Details___鷗",
-    "share": "須_Share___鷗"
+    "home": "デフォルトの表示範囲",
+    "locate": "現在の場所を検索",
+    "legend": "凡例",
+    "bookmarks": "ブックマーク",
+    "layers": "レイヤー",
+    "basemap": "ベースマップ ギャラリー",
+    "overview": "概観図",
+    "measure": "計測",
+    "edit": "編集",
+    "time": "時間",
+    "print": "印刷",
+    "details": "詳細",
+    "share": "共有"
   }
 });

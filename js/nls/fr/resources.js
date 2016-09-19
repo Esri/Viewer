@@ -16,54 +16,54 @@
  */
 define({
   "map": {
-    "error": "æ_Unable to create map_______Â",
-    "overviewDetails": "æ_Overview map shows current extent of map within the context of larger area________________________Â."
+    "error": "Impossible de créer la carte",
+    "overviewDetails": "La vue générale affiche l'étendue actuelle de la carte incluse dans une zone plus étendue."
   },
   "nav": {
-    "next": "æ_Next__Â",
-    "previous": "æ_Previous___Â",
-    "close": "æ_Close___Â"
+    "next": "Suivant",
+    "previous": "Précédent",
+    "close": "Fermer"
   },
   "tools": {
     "search": {
-      "error": "æ_Location could not be found_________Â",
-      "notWhatYouWanted": "æ_Not what you wanted_______Â?",
-      "selectAnother": "æ_Select another location________Â",
-      "currentLocation": "æ_Current Location______Â",
-      "title": "æ_Location___Â"
+      "error": "Emplacement introuvable",
+      "notWhatYouWanted": "Ce n'est pas ce que vous vouliez ?",
+      "selectAnother": "Sélectionnez un autre emplacement",
+      "currentLocation": "Emplacement actuel",
+      "title": "Emplacement"
     },
     "print": {
       "layouts": {
-        "label1": "æ_Landscape____Â",
-        "label2": "æ_Portrait___Â",
-        "label3": "æ_Landscape____Â",
-        "label4": "æ_Portrait___Â"
+        "label1": "Paysage",
+        "label2": "Portrait",
+        "label3": "Paysage",
+        "label4": "Portrait"
       },
-      "legend": "æ_Add legend to output_______Â",
-      "title": "æ_Title___Â",
-      "titlePrompt": "æ_Add custom title______Â"
+      "legend": "Ajouter la légende à la sortie",
+      "title": "Titre",
+      "titlePrompt": "Ajouter un titre personnalisé"
     },
     "share": {
-      "extent": "æ_Use current map extent________Â",
-      "label": "æ_Share this map_____Â",
-      "link": "æ_Map Link___Â",
-      "facebook": "æ_Facebook___Â",
-      "twitter": "æ_Twitter___Â"
+      "extent": "Utiliser l’étendue courante de la carte",
+      "label": "Partager cette carte",
+      "link": "Lien de la carte",
+      "facebook": "Facebook",
+      "twitter": "Twitter"
     }
   },
   "tooltips": {
-    "home": "æ_Default extent_____Â",
-    "locate": "æ_Find my location______Â",
-    "legend": "æ_Legend___Â",
-    "bookmarks": "æ_Bookmarks____Â",
-    "layers": "æ_Layers___Â",
-    "basemap": "æ_Basemap gallery______Â",
-    "overview": "æ_Overview map_____Â",
-    "measure": "æ_Measure___Â",
-    "edit": "æ_Edit__Â",
-    "time": "æ_Time__Â",
-    "print": "æ_Print___Â",
-    "details": "æ_Details___Â",
-    "share": "æ_Share___Â"
+    "home": "Etendue par défaut",
+    "locate": "Rechercher mon emplacement",
+    "legend": "Légende",
+    "bookmarks": "Géosignets",
+    "layers": "Couches",
+    "basemap": "Bibliothèque de fonds de carte",
+    "overview": "Vue générale",
+    "measure": "Mesurer",
+    "edit": "Modifie",
+    "time": "Heure",
+    "print": "Imprimer",
+    "details": "Détails",
+    "share": "Partager"
   }
 });
