@@ -1787,3 +1787,10 @@ td, th {
     color: #c6c6c1; !important
 }
 
+#detailDiv {
+  background: white;
+    overflow-y: auto;
+    position: absolute;
+    height: calc(100% - 260px);
+    color: black;
+}
