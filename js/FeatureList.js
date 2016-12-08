@@ -81,8 +81,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         },
 
         _getLayers : function(layers) {
-            var l1 = layers.filter(l => l.hasOwnProperty("url"));
-            var l2 = layers.filter(l => !l.hasOwnProperty("url"));
+            var l1 = layers.filter(function (l) { return l.hasOwnProperty("url");}); //l => l.hasOwnProperty("url"));
+            var l2 = layers.filter(function (l) { return !l.hasOwnProperty("url");}); //l => !l.hasOwnProperty("url"));
             if(l2.length>0) {
                 console.info("Feature List - These Layers are not services: ", l2);
             }

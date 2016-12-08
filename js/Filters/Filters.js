@@ -35,7 +35,7 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
             // properties
             this.set("map", defaults.map);
             var Layers = this._getLayers(defaults.layers);
-            var VisibleLayers = Layers.filter(l => l.visibility);
+            var VisibleLayers = Layers.filter(function(l) { return l.visibility; });//l => l.visibility);
             this.set("layers", VisibleLayers);
             window.filters = [];
             VisibleLayers.forEach(lang.hitch(this,function(layer){
@@ -48,8 +48,10 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
         },
 
         _getLayers : function(layers) {
-            var l1 = layers.filter(l => l.hasOwnProperty("url"));
-            var l2 = layers.filter(l => !l.hasOwnProperty("url"));
+            var l1 = layers.filter(function (l) { return l.hasOwnProperty("url");}); //l => l.hasOwnProperty("url"));
+            var l2 = layers.filter(function (l) { return !l.hasOwnProperty("url");}); //l => !l.hasOwnProperty("url"));
+            // var l1 = layers.filter(l => l.hasOwnProperty("url"));
+            // var l2 = layers.filter(l => !l.hasOwnProperty("url"));
             if(l2.length>0) {
                 console.info("Filters - These Layers are not services: ", l2);
             }

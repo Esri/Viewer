@@ -16,12 +16,17 @@ button:hover,
   background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
+/*
+INTERNET EXPLORER and FIREFOX : not supported or buggy:
+http://reference.sitepoint.com/css/outline-color
+*/
 :focus {
     --outline: -webkit-focus-ring-color auto 5px !important;
     outline-width: 2px;
     outline-offset: -1px;
     outline-style: solid;
     outline-color: rgba(0, 0, 0, 0.9);
+    }
 }
 
 /*li[role='menuitem']:focus, 

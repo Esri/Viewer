@@ -907,12 +907,13 @@ define(["dojo/ready",
                                     });
                                     LegendServiceLabel.parentNode.replaceChild(h2, LegendServiceLabel);
                                 }
-                                var service = LegendServiceLabel.closest('.esriLegendService');
-                                if(service && (!service.style || service.style.display !== 'none')) {
-                                    domAttr.set(LegendServiceLabel, 'tabindex', 0);
-                                } else {
-                                    domAttr.set(LegendServiceLabel, 'tabindex', -1);
-                                }
+
+                                    // var service = LegendServiceLabel.closest('.esriLegendService');
+                                    // if(service && (!service.style || service.style.display !== 'none')) {
+                                         domAttr.set(LegendServiceLabel, 'tabindex', 0);
+                                    // } else {
+                                    //     domAttr.set(LegendServiceLabel, 'tabindex', -1);
+                                    // }
                             }
                         }
 
