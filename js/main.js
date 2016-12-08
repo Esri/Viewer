@@ -1725,12 +1725,12 @@ define(["dojo/ready",
                             evn.preventDefault();
                             evn.stopPropagation();
                             break;
-                        case 39 : //left
+                        case 37 : //left
                             this.map._fixedPan(this.map.width * -0.0135, 0);
                             evn.preventDefault();
                             evn.stopPropagation();
                             break;
-                        case 37 : //right
+                        case 39 : //right
                             this.map._fixedPan(this.map.width * 0.0135, 0);
                             evn.preventDefault();
                             evn.stopPropagation();
