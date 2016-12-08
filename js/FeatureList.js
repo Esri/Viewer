@@ -161,29 +161,27 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                 {
                                     var pField = fieldsMap[p];
                                     var fieldName = '${'+pField.fieldName+'}';
-                                    content+='<tr class="featureItem_${_layerId}_${_featureId} hideAttr" tabindex="0">\n';
+                                    var fieldValue = fieldName;
+                                    if(pField.format)
+                                    { 
+                                        if(pField.format.dateFormat) {
+                                            fieldValue='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
+                                        }
+                                        else if(pField.format.digitSeparator) {
+                                            fieldValue='FORMAT_NUM('+fieldName+',"'+pField.format.places+'")';
+                                        }
+                                        else {
+                                            fieldValue=fieldName;
+                                        }
+                                    }
+
+                                    content+='<tr class="featureItem_${_layerId}_${_featureId} hideAttr" tabindex="0" aria-label="'+pField.label+', '+fieldValue+',"">\n';
                                     content+='    <td valign="top">\n';
                                     content+='      <!--<img src="..\\images\\Filter0.png" alt="filter" class="filterBtn"/>-->\n';
                                     content+='    </td>\n';
                                     content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
                                     content+='    <td valign="top">:</td>\n';
-                                    content+='    <td valign="top">';
-                                    if(pField.format)
-                                    { 
-                                        if(pField.format.dateFormat) {
-                                            content+='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
-                                        }
-                                        else if(pField.format.digitSeparator) {
-                                            content+='FORMAT_NUM('+fieldName+',"'+pField.format.places+'")';
-                                        }
-                                        else {
-                                            content+=fieldName;
-                                        }
-                                    }
-                                    else {
-                                        content+=fieldName;
-                                    }
-                                    content+='</td>\n';
+                                    content+='    <td valign="top">'+fieldValue+'</td>\n';
                                     content+='</tr>\n';
                                 }
                             }
