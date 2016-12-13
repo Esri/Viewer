@@ -240,7 +240,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                 var objectIdFieldName = r.layer.objectIdField;
 
                 q = new Query();
-                q.where = "["+objectIdFieldName+"]='"+fid+"'";
+                q.where = objectIdFieldName+"="+fid;
                 q.outFields = [objectIdFieldName];                    
                 q.returnGeometry = true;
                 r.task.execute(q).then(function(ev) {
