@@ -241,7 +241,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
 
                 q = new Query();
                 q.where = "["+objectIdFieldName+"]='"+fid+"'";
-                q.outFields = ['"'+objectIdFieldName+'"'];                    
+                q.outFields = [objectIdFieldName];                    
                 q.returnGeometry = true;
                 r.task.execute(q).then(function(ev) {
                     var geometry = ev.features[0].geometry;
