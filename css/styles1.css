@@ -6,7 +6,7 @@ button:hover,
 .panelToolActive:hover,
 .esriMeasurement .esriToggleButton .dijitButtonNode:hover,
 .panelTool:hover, .esriBookmarkItem:hover,
-.esriSimpleSliderDecrementButton:hover, .esriSimpleSliderIncrementButton:hover
+.esriSimpleSliderDecrementButton:hover, .esriSimpleSliderHomeButton:hover, .esriSimpleSliderIncrementButton:hover
 {
   background-color: rgba(255, 255, 255, 0.5) !important;
 }
@@ -29,28 +29,8 @@ http://reference.sitepoint.com/css/outline-color
     }
 }
 
-/*li[role='menuitem']:focus, 
-div[role='button']:not(.searchBtn):not(.searchClear):not(.pageBody):focus,
-div[tabindex]:not(.panelPages):not(.panelTool):not(.pageBody):not(.searchBtn):not(.searchClear):focus,
-.no-touch .esriMeasurement .esriButton .dijitButtonNode:focus,
-input[type='text']:focus,
-button:focus,.pageBtn:focus,
-textarea:focus, label:focus,
-select[tabindex='0']:not(#embedMapSizeDropDown):focus,
-#dijit_form_ComboButton_0_arrow:focus,
-input[type='checkbox']:focus,
-input[type='textbox']:focus,
-input[type='image']:focus, 
-.icon-link:focus, .borderLi:focus,
-h1:focus, h2:focus, h3:focus,
-.esriOverviewMap:focus,
-.esriSimpleSliderIncrementButton:focus, .esriSimpleSliderDecrementButton:focus,
-h3[tabindex='0']:focus,
-.tab label span:focus
-{
-}*/
-
 .esriSimpleSliderIncrementButton:focus, 
+.esriSimpleSliderHomeButton:hover,
 .esriSimpleSliderDecrementButton:focus{
     outline-offset: 2px;
 }
@@ -58,12 +38,6 @@ h3[tabindex='0']:focus,
 .homeContainer input:focus, .locateContainer input:focus 
 {
 }
-
-/*tr[tabindex='0']:focus
-{
-    outline-offset: 0px;
-    background-color: rgba(0, 0, 0, 0.1); 
-}*/
 
 .panelTool input[type="image" i]:focus
 {

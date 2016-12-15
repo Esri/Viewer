@@ -361,11 +361,11 @@ html, body {
     border: none;
 }
 
-.esriSimpleSliderVertical .esriSimpleSliderIncrementButton{
+.esriSimpleSliderVertical .esriSimpleSliderIncrementButton, .esriSimpleSliderVertical .esriSimpleSliderHomeButton{
     border:none !important;
 }
 
-.esriSimpleSliderDecrementButton:hover, .esriSimpleSliderIncrementButton:hover {
+.esriSimpleSliderDecrementButton:hover, esriSimpleSliderHomeButton:hover, .esriSimpleSliderIncrementButton:hover {
     @include transparent($black-color, 0.3);
 }
 

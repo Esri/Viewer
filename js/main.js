@@ -156,6 +156,40 @@ define(["dojo/ready",
             }, esriSimpleSliderIncrementNode);
             on(plusbtn, "click", zoomIn_click);
 
+
+            if (has("home")) {
+
+
+                var panelHome = domConstruct.create("div", {
+                    id: "panelHome",
+                    className: "esriSimpleSliderHomeButton borderBottom",
+                    innerHTML: "<div id='btnHome'></div>"
+                });//, dom.byId("mapDiv_zoom_slider"), 2); 
+
+                dojo.query(".esriSimpleSliderIncrementButton")[0].after(panelHome);
+
+                var home = new HomeButton({
+                    map: this.map
+                }, dom.byId("btnHome"));
+
+                home.startup();
+
+                var homeButton = dojo.query(".homeContainer")[0];
+                var homeNode = dojo.query(".home")[0];
+                dojo.empty(homeNode);
+                var homeHint = dojo.attr(homeButton, 'title');
+
+                var btnHome = domConstruct.create("input", {
+                    type: 'image',
+                    src: 'images/icons_' + this.config.icons + '/home.png',
+                    alt: homeHint,
+                    //title: homeHint,
+                    'aria-label': homeHint,
+                }, homeNode);
+            }
+
+
+
             esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
             var zoomOut_click = esriSimpleSliderDecrementNode.OnClick;
             dojo.empty(esriSimpleSliderDecrementNode);
@@ -169,6 +203,7 @@ define(["dojo/ready",
                 title: 'Zoom Out',
             }, esriSimpleSliderDecrementNode);
             on(minusbtn, "click", zoomOut_click);
+
 
             on(this.map.infoWindow, "show", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);
@@ -1373,33 +1408,6 @@ define(["dojo/ready",
             }));
 
             // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
-            if (has("home")) {
-                var panelHome = domConstruct.create("div", {
-                    id: "panelHome",
-                    className: "icon-color tool",
-                    innerHTML: "<div id='btnHome'></div>"
-                }, dom.byId("panelTools"), 0);
-                var home = new HomeButton({
-                    map: this.map
-                // }, dom.byId("mapDiv_zoom_slider"));
-                }, dom.byId("btnHome"));
-
-                home.startup();
-
-                var homeButton = dojo.query(".homeContainer")[0];
-                var homeNode = dojo.query(".home")[0];
-                dojo.empty(homeNode);
-                var homeHint = dojo.attr(homeButton, 'title');
-
-                var btnHome = domConstruct.create("input", {
-                    type: 'image',
-                    src: 'images/icons_' + this.config.icons + '/home.png',
-                    alt: homeHint,
-                    //title: homeHint,
-                    'aria-label': homeHint,
-                }, homeNode);
-            }
-
 
             if (has("locate")) {
                 var panelLocate = domConstruct.create("div", {
@@ -1779,7 +1787,7 @@ define(["dojo/ready",
                 if (this.config.logo) {
                     domConstruct.create("div", {
                         id: "panelLogo",
-                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt=''></>"
+                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt='' TabIndex=0 aria-label='Logo image'></>"
                     }, dom.byId("panelTitle"), "first");
                     domClass.add("panelTop", "largerTitle");
                 }
@@ -1811,6 +1819,7 @@ define(["dojo/ready",
                 else {
                     dom.byId("panelText").innerHTML = this.config.title;
                 }
+                domAttr.set(dom.byId("panelText"),"TabIndex",0);
                 this.config.title = title;
                 this.config.response = response;
                 window.config = this.config;
