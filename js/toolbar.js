@@ -105,10 +105,34 @@ on, mouse, query, Deferred) {
             return (contentOverflows && overflowShown) || (alwaysShowScroll);
         },
 
+        createBtnTool: function(name, tip, imgName) {
+            
+            var refNode = this.pTools;
+            var panelTool = domConstruct.create("div", {
+                className: "panelTool",
+                tabindex: -1,
+                id: "toolButton_" + name,
+                // "aria-label": tip,
+            }, refNode);
+            var pTool = domConstruct.create("input", {
+                type: "image",
+                src: "images/icons_" + this.config.icons + "/" + imgName + ".png",
+                title: tip,
+            }, panelTool);
+
+            if (!has("touch")) 
+            {
+                domAttr.set(pTool, "title", tip);
+            }
+
+            return pTool;
+        },
+
         //Create a tool and return the div where you can place content
         createTool: function (tool, panelClass, loaderImg, badgeEvName) {
             var name = tool.name;
 
+            //this.createBtnTool(name, this.config.i18n.tooltips[name] || name, name);
             // add tool
             var refNode = this.pTools;
             var tip = this.config.i18n.tooltips[name] || name;
@@ -156,7 +180,7 @@ on, mouse, query, Deferred) {
                     }
                     if(filtersOn.length>0) {
                         domStyle.set(setIndicator,'display','');
-                        domAttr.set(pTool, "title", this.config.i18n.tooltips["filtersApply"] || "Some Filters Apply");            
+                        domAttr.set(pTool, "title", this.config.i18n.tooltips.filtersApply || "Some Filters Apply");            
 
                     } else {
                         domStyle.set(setIndicator,'display','none');
