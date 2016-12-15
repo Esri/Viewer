@@ -42,9 +42,9 @@
 		<!-- The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
 
 		<div style="display:none;">
-			<div id="leftPanel">
+			<div id="leftPanel" class="leftWrapper">
 				
-				<div id="panelTop" class="bg" style="color:transparent !important;">
+				<header id="panelTop" class="bg" style="color:transparent !important;">
 					<!-- Panel Title -->
 					<div id="panelTitle" class="fc bg borderBottom">
 						<h1 class="fc" id="panelText">WCAG Viewer</h1>
@@ -67,14 +67,14 @@
 						<div class="searchLabel"><label for="panelGeocoder">Search: </label></div>
 						<div id="panelGeocoder"></div>
 					</div>
-				</div>
-				<div id="panelPages" tabindex="0">
+				</header>
+				<main id="panelPages" tabindex="0" class="leftContent">
 					<div id="fixContent" class="page showAttr">
 					</div>
-				</div>
-				<div id="panelBottom" class="bg">
+				</main>
+				<footer id="panelBottom" class="bg">
 					<span>Press <strong>ALT + 0 to 7</strong> keys for fast navigation</span>
-				</div>
+				</footer>
 			</div>
 
 			<div id="mapDiv" dir="ltr" tabindex=0></div>

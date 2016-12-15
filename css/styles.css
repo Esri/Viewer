@@ -609,7 +609,7 @@ img {
     margin: 0;
     height: 100%;
     width: 100%;
-    position: absolute;
+    /*position: absolute;*/
     top: 0;
   }
 }
@@ -665,7 +665,7 @@ img {
 
 .pageBody {
   width: 100%;
-  height: calc(100% - 12px);
+  height: calc(100% - 52px);
   color: #000000;
   overflow: hidden;
   overflow-y: auto;
@@ -1590,9 +1590,9 @@ td, th {
 
 #fixContent {
   width: calc(100% - 2px);
-  height: calc(100% - 2px);
+  height: calc(100% - 27px);
   /* height: 100%; */
-  /* position: relative; */
+   osition: relative; 
   /* overflow: hidden; */
 }
 
@@ -1783,4 +1783,21 @@ td, th {
     position: absolute;
     height: calc(100% - 260px);
     color: black;
+}
+
+.leftWrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    height: auto;
+}
+
+footer {
+    height: auto;
+}
+
+main {
+    flex: 1;
 }
