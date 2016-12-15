@@ -1409,7 +1409,7 @@ define(["dojo/ready",
 
             // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
             var isChrome = !!window.chrome && !!window.chrome.webstore;
-            if (has("locate") && ! isChrome) {
+            if (has("locate") && (!isChrome || (window.location.protocol === "https:"))) {
                 var panelLocate = domConstruct.create("div", {
                     id: "panelLocate",
                     className: "icon-color tool",
