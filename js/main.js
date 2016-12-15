@@ -166,7 +166,7 @@ define(["dojo/ready",
                     innerHTML: "<div id='btnHome'></div>"
                 });//, dom.byId("mapDiv_zoom_slider"), 2); 
 
-                dojo.query(".esriSimpleSliderIncrementButton")[0].after(panelHome);
+                domConstruct.place(panelHome, dojo.query(".esriSimpleSliderIncrementButton")[0], "after");
 
                 var home = new HomeButton({
                     map: this.map
