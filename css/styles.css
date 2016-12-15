@@ -1521,7 +1521,8 @@ html, body {
 
 #featuresList {
     list-style: none;
-    margin: 10px;
+    /*margin: 10px;*/
+    padding-left: 0;
     -webkit-padding-start: 0;
     background-color: white;
     overflow-y: auto;
