@@ -226,7 +226,7 @@ on, mouse, query, Deferred) {
             
             var defaultBtns = dojo.query(".panelToolDefault");
             var defaultBtn;
-            if(defaultBtns !== undefined) {
+            if(defaultBtns !== undefined && defaultBtns.length > 0) {
                 defaultBtn = defaultBtns[0].id.split("_")[1];
             }
 

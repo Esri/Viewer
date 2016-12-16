@@ -720,7 +720,8 @@ define(["dojo/ready",
             //Add the default map description panel
             //var deferred = new Deferred();
             if (has("details")) {
-                var description = this.config.description || this.config.response.itemInfo.item.description || this.config.response.itemInfo.item.snippet;
+                var description = this.config.description || this.config.response.itemInfo.item.description || this.config.response.itemInfo.item.snippet || "No Description";
+
                 if (description) {
 
                     var detailDiv = toolbar.createTool(tool);
