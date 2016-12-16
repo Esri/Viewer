@@ -70,8 +70,6 @@ on, mouse, query, Deferred) {
 
 
             }));
-//             domConstruct.empty(this.pPages);
-            // add blank page
             deferred.resolve();
 
             return deferred.promise;
@@ -105,34 +103,10 @@ on, mouse, query, Deferred) {
             return (contentOverflows && overflowShown) || (alwaysShowScroll);
         },
 
-        createBtnTool: function(name, tip, imgName) {
-            
-            var refNode = this.pTools;
-            var panelTool = domConstruct.create("div", {
-                className: "panelTool",
-                tabindex: -1,
-                id: "toolButton_" + name,
-                // "aria-label": tip,
-            }, refNode);
-            var pTool = domConstruct.create("input", {
-                type: "image",
-                src: "images/icons_" + this.config.icons + "/" + imgName + ".png",
-                title: tip,
-            }, panelTool);
-
-            if (!has("touch")) 
-            {
-                domAttr.set(pTool, "title", tip);
-            }
-
-            return pTool;
-        },
-
         //Create a tool and return the div where you can place content
         createTool: function (tool, panelClass, loaderImg, badgeEvName) {
             var name = tool.name;
 
-            //this.createBtnTool(name, this.config.i18n.tooltips[name] || name, name);
             // add tool
             var refNode = this.pTools;
             var tip = this.config.i18n.tooltips[name] || name;
@@ -249,39 +223,56 @@ on, mouse, query, Deferred) {
         },
 
        _toolClick: function (name) {
-            this._updateMap(); // ! out of place
+            
+            var defaultBtns = dojo.query(".panelToolDefault");
+            var defaultBtn;
+            if(defaultBtns !== undefined) {
+                defaultBtn = defaultBtns[0].id.split("_")[1];
+            }
 
+            this._updateMap(); // ! out of place
             var active = false;
             var page = dom.byId("page_"+name);
             var hidden = page.classList.contains("hideAttr");
             var pages = query(".page");
             pages.forEach(function(p){
                 if(hidden && p === page) {
-                    domClass.replace(p, "showAttr","hideAttr");
                     active = true;
-                } else {
-                    domClass.replace(p,"hideAttr","showAttr");
                 }
             });
-            
-            var tool = dom.byId("toolButton_"+name);
-            var tools = query(".panelTool");           
-            this.emit("updateTool", name);
-            tools.forEach(lang.hitch(this, function(t){
-                if(active && t === tool) {
-                    domClass.add(t, "panelToolActive");
-                    this.emit("updateTool_"+name);
-                } else {
-                    domClass.remove(t,"panelToolActive");
-                }
-            }));
 
-            var fixContent = dom.byId('fixContent');
-            if(active) {
-                domClass.replace(fixContent, "hideAttr", "showAttr");
-            } else {
-                domClass.replace(fixContent, "showAttr", "hideAttr");
+            if(defaultBtns === undefined || (active || defaultBtn !== name)) {
+                pages.forEach(function(p){
+                    if(hidden && p === page) {
+                        domClass.replace(p, "showAttr","hideAttr");
+                    } else {
+                        domClass.replace(p,"hideAttr","showAttr");
+                    }
+                });
+                var tool = dom.byId("toolButton_"+name);
+                var tools = query(".panelTool");           
+                this.emit("updateTool", name);
+                tools.forEach(lang.hitch(this, function(t){
+                    if(active && t === tool) {
+                        domClass.add(t, "panelToolActive");
+                        this.emit("updateTool_"+name);
+                    } else {
+                        domClass.remove(t,"panelToolActive");
+                    }
+                }));
+
+                if(!active && defaultBtns !== undefined) {
+                    this._toolClick(defaultBtn);
+                }
             }
+            
+
+            // var fixContent = dom.byId('fixContent');
+            // if(active) {
+            //     domClass.replace(fixContent, "hideAttr", "showAttr");
+            // } else {
+            //     domClass.replace(fixContent, "showAttr", "hideAttr");
+            // }
          },
 
         _atachEnterKey: function(onButton, clickButton) {

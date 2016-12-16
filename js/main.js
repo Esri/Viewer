@@ -312,14 +312,15 @@ define(["dojo/ready",
                 // set map so that it can be repositioned when page is scrolled
                 toolbar.map = this.map;
                 var toolList = [];
-                this._addInfoTool(toolbar);
+                //this._addInfoTool(toolbar);
+                var deferredDetails = new Deferred();
                 for (var i = 0; i < this.config.tools.length; i++) {
                     switch (this.config.tools[i].name) {
                         case "details":
-                            toolList.push(this._addDetails(this.config.tools[i], toolbar));
+                            toolList.push(this._addDetails(this.config.tools[i], toolbar, deferredDetails));
                             break;
                         case "instructions":
-                            toolList.push(this._addInstructions(this.config.tools[i], toolbar));
+                            toolList.push(this._addInstructions(this.config.tools[i], toolbar, deferredDetails));
                             break;
                         case "features":
                             toolList.push(this._addFeatures(this.config.tools[i], toolbar));
@@ -724,19 +725,22 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addDetails: function (tool, toolbar) {
+        _addDetails: function (tool, toolbar, deferred) {
             //Add the default map description panel
-            var deferred = new Deferred();
+            //var deferred = new Deferred();
             if (has("details")) {
                 var description = this.config.description || this.config.response.itemInfo.item.description || this.config.response.itemInfo.item.snippet;
                 if (description) {
 
-                    var detailDiv = //toolbar.createTool(tool);
+                    var detailDiv = toolbar.createTool(tool);
                         domConstruct.create('div',{
                         id:"detailDiv",
                         tabindex:0
                     }, dom.byId('fixContent'));
                     detailDiv.innerHTML = description;
+
+                    var detailBtn = dojo.query("#toolButton_details")[0];
+                    domClass.add(detailBtn, "panelToolDefault");
                 }
                 deferred.resolve(true);
             } else {
@@ -872,36 +876,33 @@ define(["dojo/ready",
             return deferred.promise;
         },
 
-        _addInfoTool: function (toolbar) {
-            var name = 'details';
-            var btn = toolbar.createBtnTool(name, this.config.i18n.tooltips[name] || name, name);
-            on(btn, "click", lang.hitch(toolbar, function () {
-                try {
-                    var active = dojo.query(".panelToolActive");
-                    if(active !== undefined) {
-                        domClass.toggle(active[0],"panelToolActive");
-                        domClass.replace(dojo.query(".showAttr")[0], "hideAttr", "showAttr");
-                        domClass.replace(dojo.query("#fixContent")[0], "showAttr", "hideAttr");
-                    }
-                } 
-                catch (ex) { /* ignore */ }
-            }), name);
-        },
-
-        _addInstructions: function (tool, toolbar) {
+        _addInstructions: function (tool, toolbar, deferedDetails) {
             var deferred = new Deferred();
             if (!has("instructions")) {
                deferred.resolve(false);
             } 
             else 
-            {
-                var instructionsDiv = //toolbar.createTool(tool, "");
-                domConstruct.create('div',{
-                    id:"instructionsDiv",
-                }, dom.byId('fixContent'));
+            { 
+                if(!has("details"))
+                {
+                    var instructionsDiv = toolbar.createTool(tool, "");
+                    domConstruct.create('div',{
+                        id:"instructionsDiv",
+                    }, dom.byId('fixContent'));
 
-                instructionsDiv.innerHTML = instructionsText;
-                deferred.resolve(true);
+                    instructionsDiv.innerHTML = instructionsText;
+                    deferred.resolve(true);
+                } 
+                else {
+                    deferedDetails.then(function(r) {
+                        var instructionsDiv = domConstruct.create('div',{
+                            id:"instructionsDiv",
+                            innerHTML: instructionsText
+                        }, dom.byId("pageBody_details"));
+
+                        deferred.resolve(true);
+                    });
+                }
             }
             return deferred.promise;
         },
