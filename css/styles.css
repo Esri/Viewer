@@ -1784,6 +1784,7 @@ td, th {
     position: absolute;
     height: calc(100% - 260px);
     color: black;
+    padding: 2px;
 }
 
 .leftWrapper {
