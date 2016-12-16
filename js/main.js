@@ -384,16 +384,7 @@ define(["dojo/ready",
                     //to the toolbar panel, update the color theme and set the active tool.
                     this._updateTheme();
 
-                    if(has("instructions")) {
-                        //toolbar.activateTool("instructions");
-                        setTimeout(lang.hitch(toolbar, toolbar.showInstructions), 400);
-                    }
-                    else if (this.config.activeTool !== "") {
-                        toolbar.activateTool(this.config.activeTool);
-                    } else {
-                        toolbar._closePage();
-                    }
-
+                    toolbar._activateDefautTool();
 
                     on(toolbar, "updateTool", lang.hitch(this, function (name) {
                         if (name === "measure") {
@@ -734,10 +725,10 @@ define(["dojo/ready",
 
                     var detailDiv = toolbar.createTool(tool);
                         domConstruct.create('div',{
-                        id:"detailDiv",
+                        // id:"detailDiv",
                         tabindex:0
-                    }, dom.byId('fixContent'));
-                    detailDiv.innerHTML = description;
+                    });//, dom.byId('fixContent'));
+                        detailDiv.innerHTML = "<div tabindex=0 id='detailDiv'>"+description+"</div>";
 
                     var detailBtn = dojo.query("#toolButton_details")[0];
                     domClass.add(detailBtn, "panelToolDefault");

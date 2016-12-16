@@ -262,7 +262,7 @@ on, mouse, query, Deferred) {
                 }));
 
                 if(!active && defaultBtns !== undefined) {
-                    this._toolClick(defaultBtn);
+                    this._activateDefautTool();
                 }
             }
             
@@ -273,7 +273,24 @@ on, mouse, query, Deferred) {
             // } else {
             //     domClass.replace(fixContent, "showAttr", "hideAttr");
             // }
-         },
+        },
+
+        _activateDefautTool: function() {
+            var defaultBtns = dojo.query(".panelToolDefault");
+            var defaultBtn;
+            if(defaultBtns !== undefined) {
+                defaultBtn = defaultBtns[0].id.split("_")[1];
+            }
+            if(defaultBtn !== undefined) {
+                this._toolClick(defaultBtn);
+            }
+            else if (this.config.activeTool !== "") {
+                toolbar.activateTool(this.config.activeTool);
+            } 
+            else {
+                toolbar._closePage();
+            }
+        },
 
         _atachEnterKey: function(onButton, clickButton) {
             on(onButton, 'keydown', lang.hitch(clickButton, function(event){
