@@ -14,11 +14,18 @@
                "tooltip":"Defaults to web map title"
             },
             {  
-               "label":"Title logo:",
+               "label":"Logo Image:",
                "fieldName":"logo",
                "type":"string",
                "tooltip":"Defaults to sample logo"
             },
+            {  
+               "label":"Logo Alternate Text:",
+               "fieldName":"logoAltText",
+               "type":"string",
+               "tooltip":"Type here the text from the Logo Image"
+            },
+
             {  
                "type":"boolean",
                "fieldName":"animated_marker",
@@ -347,6 +354,7 @@
       "marker_size":"35",
       "alt_keys":true,
       "logo":"images/logo.png",
+      "logoAltText":"",
       "color":"#fff",
       "hoverColor":"#00A9E6",
       "focusColor":"#00FFC5",

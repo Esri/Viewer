@@ -1793,11 +1793,20 @@ define(["dojo/ready",
                 domClass.add(this.map.infoWindow.domNode, "light");
                 this._updateTheme();
 
-                //Add a logo if provided
+                var title;
+                if (this.config.title === null || this.config.title === "") {
+                    title = response.itemInfo.item.title + " - WCAG Viewer";
+                } else {
+                    title = this.config.title+': '+response.itemInfo.item.title + " - WCAG Viewer";
+                }
+                          //Add a logo if provided
                 if (this.config.logo) {
+                    var altText = this.config.logoAltText;
+                    if(!altText || altText === '')
+                        altText = title;
                     domConstruct.create("div", {
                         id: "panelLogo",
-                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt='' TabIndex=0 aria-label='Logo image'></>"
+                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt='" + altText + "' TabIndex=0 aria-label='" + altText + "'></>"
                     }, dom.byId("panelTitle"), "first");
                     domClass.add("panelTop", "largerTitle");
                 }
@@ -1806,14 +1815,7 @@ define(["dojo/ready",
                 //this.map = response.map;
                 //Set the title - use the config value if provided.
                 //var title = (this.config.title === null) ? response.itemInfo.item.title : this.config.title;
-                var title;
-                if (this.config.title === null || this.config.title === "") {
-                    title = response.itemInfo.item.title + " - WCAG Viewer";
-                } else {
-                    title = this.config.title+': '+response.itemInfo.item.title + " - WCAG Viewer";
-                }
-                // dom.byId("loadingTitle").innerHTML = title;
-
+          
                 //if title is short make title area smaller
                 if (title && title.length && title.length === 0) {
                     domClass.add("panelTop", "smallerTitle");
