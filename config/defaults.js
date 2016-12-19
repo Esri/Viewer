@@ -18,18 +18,20 @@
 define({
     //Default configuration settings for the application. This is where you'll define things like a bing maps key,
     //default web map, default app color theme and more. These values can be overwritten by template configuration settings and url parameters.
-        "appid": null, //"0d877e183a5e4754adac1a88cd15749f",
+        "appid":  null, //
+             //"0d877e183a5e4754adac1a88cd15749f",
              //"c8077b61b6f94fd29371a7cbac6923ba",
              //"5147e7fbc6394546a3b6f58f0c944cb9",
              //"f2d19e3559444846ac5839c5d83ded60", //old Incident Map
              //"440b2da51b2b42878e8cb946c2de0326", //Farmers Markets
              //"3c15248875324167b38bc1525d623ecd", // Incident Map xxx
              //"142adb5e5e1d4bddb578aefc6f6e6deb", // TH Demo
-    "webmap": "d5e02a0c1f2b4ec399823fdd3c2fdebd", 
+    "webmap":  "8ddeecbe106344efb9ce2bcb87537351", 
     		 //"fe35efe129f845ef8de5296c15325118", // MAtt English 
              //"326320c9eab3489d8d17bc389ce1e023",
 
-    "oauthappid": null, //"AFTKRmv16wj14N3z",
+    "oauthappid": "", //"7PTVuv3XrYx5M5l6", 
+    "portalUrl": "https://www.arcgis.com",
     //Group templates must support a group url parameter. This will contain the id of the group.
     //group: "",
     //Enter the url to the proxy if needed by the application. See the 'Using the proxy page' help topic for details

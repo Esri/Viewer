@@ -60,8 +60,8 @@
             {  
                "type":"color",
                "fieldName":"theme",
-               "tooltip":"Color theme to use",
-               "label":"Color Theme:"
+               "tooltip":"Title bar color",
+               "label":"Theme Color:"
             },
             {  
                "type":"color",
@@ -355,12 +355,14 @@
       "alt_keys":true,
       "logo":"images/logo.png",
       "logoAltText":"",
-      "color":"#fff",
+
+      "color":"#ffffff",
       "hoverColor":"#00A9E6",
       "focusColor":"#00FFC5",
-      "activeColor":"#00C5FF",
-      "theme":"80ab00",
-      "activeTool":"instructions",
+      "activeColor":"#00b9f6",
+      "theme":"#005ce6",
+      
+      "activeTool":"details",
       "scalebar":false,
       "tool_print":true,
       "tool_print_layouts":false,
