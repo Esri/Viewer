@@ -153,7 +153,7 @@
                   },
                   {  
                      "label":"Filters",
-                     "value":"filter"
+                     "value":"filters"
                   },
                   {  
                      "label":"Legend",
@@ -195,22 +195,7 @@
             {  
                "type":"boolean",
                "fieldName":"tool_home",
-               "label":"Home Extent Button"
-            },
-            {  
-               "type":"boolean",
-               "fieldName":"scalebar",
-               "label":"Scalebar"
-            },
-            {  
-               "type":"boolean",
-               "fieldName":"tool_features",
-               "label":"Feature List"
-            },
-            {  
-               "type":"boolean",
-               "fieldName":"tool_layers",
-               "label":"Layer List"
+               "label":"Default Extent Button"
             },
             {  
                "type":"boolean",
@@ -219,13 +204,28 @@
             },
             {  
                "type":"boolean",
-               "fieldName":"tool_instructions",
-               "label":"Instructions"
+               "fieldName":"tool_layers",
+               "label":"Layers"
+            },
+            {  
+               "type":"boolean",
+               "fieldName":"tool_features",
+               "label":"Feature List"
+            },
+            {  
+               "type":"boolean",
+               "fieldName":"tool_filters",
+               "label":"Filters"
             },
             {  
                "type":"boolean",
                "fieldName":"tool_details",
-               "label":"Map Details"
+               "label":"Details"
+            },
+            {  
+               "type":"boolean",
+               "fieldName":"tool_instructions",
+               "label":"Instructions"
             },
             {  
                "type":"boolean",
@@ -241,6 +241,16 @@
                "type":"boolean",
                "fieldName":"tool_share",
                "label":"Share Tools"
+            },
+            {  
+               "type":"boolean",
+               "fieldName":"tool_print",
+               "label":"Print Button"
+            },
+            {  
+               "type":"boolean",
+               "fieldName":"scalebar",
+               "label":"Scalebar"
             }
          ]
       },
@@ -361,7 +371,7 @@
       "focusColor":"#00FFC5",
       "activeColor":"#00b9f6",
       "theme":"#005ce6",
-      
+
       "activeTool":"details",
       "scalebar":false,
       "tool_print":true,
@@ -371,6 +381,7 @@
       "tool_overview":true,
       "tool_measure":true,
       "tool_details":true,
+      "tool_filters":true,
       "tool_legend":true,
       "tool_instructions":true,
       "tool_layers":true,
@@ -381,6 +392,7 @@
       "tool_bookmarks":true,
       "tool_basemap":true,
       "tool_search":true,
+      "tool_print":true,
       "locationSearch": true,
       "searchExtent":false
    }

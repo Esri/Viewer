@@ -68,7 +68,7 @@ define({
         {"name": "layers", "enabled": true},
         {"name": "basemap", "enabled": true},
         {"name": "features", "enabled": true},
-        {"name": "filter", "enabled": true},
+        {"name": "filters", "enabled": true},
         {"name": "measure", "enabled": true},
         {"name": "edit", "enabled": true, "toolbar": true}, 
         {"name": "share", "enabled": true},
