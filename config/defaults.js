@@ -19,18 +19,13 @@ define({
     //Default configuration settings for the application. This is where you'll define things like a bing maps key,
     //default web map, default app color theme and more. These values can be overwritten by template configuration settings and url parameters.
         "appid":  null, //
-             //"0d877e183a5e4754adac1a88cd15749f",
-             //"c8077b61b6f94fd29371a7cbac6923ba",
-             //"5147e7fbc6394546a3b6f58f0c944cb9",
-             //"f2d19e3559444846ac5839c5d83ded60", //old Incident Map
              //"440b2da51b2b42878e8cb946c2de0326", //Farmers Markets
-             //"3c15248875324167b38bc1525d623ecd", // Incident Map xxx
              //"142adb5e5e1d4bddb578aefc6f6e6deb", // TH Demo
-    "webmap":  "8ddeecbe106344efb9ce2bcb87537351", 
+    "webmap":  "116178b11f0f41bb9b1c7c96aa09fd5a", 
     		 //"fe35efe129f845ef8de5296c15325118", // MAtt English 
              //"326320c9eab3489d8d17bc389ce1e023",
 
-    "oauthappid": "", //"7PTVuv3XrYx5M5l6", 
+    "oauthappid": "", //"i0sXrSseaL5Ifovc", 
     "portalUrl": "https://www.arcgis.com",
     //Group templates must support a group url parameter. This will contain the id of the group.
     //group: "",
@@ -39,7 +34,7 @@ define({
     "proxyurl": "",
     "bingKey": "", //Enter the url to your organizations bing maps key if you want to use bing basemaps
     //Defaults to arcgis.com. Set this value to your portal or organization host name.
-    "sharinghost": location.protocol + "//" + "www.arcgis.com",
+    "sharinghost": "https://www.arcgis.com",
     //If you need localization set the localize value to true to get the localized strings
     //from the javascript/nls/resource files.
     //Note that we've included a placeholder nls folder and a resource file with one error string
