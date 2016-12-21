@@ -153,7 +153,7 @@
                   },
                   {  
                      "label":"Filters",
-                     "value":"filters"
+                     "value":"filter"
                   },
                   {  
                      "label":"Legend",
@@ -214,7 +214,7 @@
             },
             {  
                "type":"boolean",
-               "fieldName":"tool_filters",
+               "fieldName":"tool_filter",
                "label":"Filters"
             },
             {  
@@ -381,7 +381,7 @@
       "tool_overview":true,
       "tool_measure":true,
       "tool_details":true,
-      "tool_filters":true,
+      "tool_filter":true,
       "tool_legend":true,
       "tool_instructions":true,
       "tool_layers":true,

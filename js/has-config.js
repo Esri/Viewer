@@ -97,12 +97,12 @@ define(["dojo/has"], function (has) {
         return features;
     });
     has.add("filter", function (g) {
-        var filters = getTool("filters", g.config);
+        var filter = getTool("filter", g.config);
         //overwrite the default with app settings
-        if (g.config.hasOwnProperty("tool_filters")) {
-            filters = g.config.tool_filters;
+        if (g.config.hasOwnProperty("tool_filter")) {
+            filter = g.config.tool_filter;
         }
-        return filters;
+        return filter;
     });
     has.add("layers", function (g) {
         var layers = getTool("layers", g.config);
