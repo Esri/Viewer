@@ -27,7 +27,8 @@ define(["dojo/ready",
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
     "esri/layers/FeatureLayer",
-    "application/FeatureList", "application/Filters/Filters", "application/TableOfContents", "application/ShareDialog",
+    "application/FeatureList", "application/Filters/Filters", "application/TableOfContents", 
+    "application/ShareDialog", //"application/SearchSources",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
     "dojo/text!application/dijit/templates/instructions.html",
@@ -46,7 +47,8 @@ define(["dojo/ready",
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
     FeatureLayer, 
-    FeatureList, Filters, TableOfContents, ShareDialog,
+    FeatureList, Filters, TableOfContents, 
+    ShareDialog, //SearchSources,
     SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
     InfoWindow,
     instructionsText) {
@@ -1445,7 +1447,9 @@ define(["dojo/ready",
             }
 
             //Add the location search widget
-            require(["application/has-config!search?esri/dijit/Search", "application/has-config!search?esri/tasks/locator"], lang.hitch(this, function (Search, Locator) {
+            require(["application/has-config!search?esri/dijit/Search", 
+                "application/has-config!search?esri/tasks/locator"], 
+                lang.hitch(this, function (Search, Locator) {
                 if (!Search && !Locator) {
                     //add class so we know we don't have to hide title since search isn't visible
                     domClass.add("panelTop", "no-search");
@@ -1454,8 +1458,11 @@ define(["dojo/ready",
 
                 var options = {
                     map: this.map,
-                    addLayersFromMap: false
+                    addLayersFromMap: false,
+                    enableSearchingAll: true,
+                    activeSourceIndex: "All"
                 };
+
                 var searchLayers = false;
                 var search = new Search(options, domConstruct.create("div", {
                     id: "search"
@@ -1566,26 +1573,6 @@ define(["dojo/ready",
                 search.set("sources", defaultSources);
 
                 search.startup();
-
-                //noResultsBody = search.domNode.querySelector('.noResultsBody');
-                //debugger;
-
-                //set the first non esri layer as active if search layers are defined. 
-                var activeIndex = 0;
-                if (searchLayers) {
-                    array.some(defaultSources, function (s, index) {
-                        if (!s.hasEsri) {
-                            activeIndex = index;
-                            return true;
-                        }
-                    });
-
-
-                    if (activeIndex > 0) {
-                        search.set("activeSourceIndex", activeIndex);
-                    }
-                }
-
 
                 if (search && search.domNode) {
                     domConstruct.place(search.domNode, "panelGeocoder");
