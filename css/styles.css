@@ -685,14 +685,8 @@ img {
     } }
 
 #panelTitle {
-  /*height: 50px; */
   width: 100%;
-  /*float: left;
-  color: #ffffff;
-  display: block;
-  font-family: "Helvetica Neue", "Arial", sans-serif;
-  font-weight: normal;
-  font-size: 25px;*/
+  min-height: 44.8px;
   }
 
 .no-search #panelText {
@@ -718,6 +712,7 @@ img {
 
 #panelText:focus {
   white-space: inherit;
+  font-size: 14px;
 }
 
 #panelTitle h1 {
