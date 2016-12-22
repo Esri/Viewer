@@ -1814,7 +1814,6 @@ define(["dojo/ready",
                     domClass.add("panelTop", "smallerTitle");
                 }
 
-
                 document.title = title;
                 if (this.config.title === null || this.config.title === "") {
                     dom.byId("panelText").innerHTML = response.itemInfo.item.title;
@@ -1822,6 +1821,7 @@ define(["dojo/ready",
                 else {
                     dom.byId("panelText").innerHTML = this.config.title;
                 }
+
                 domAttr.set(dom.byId("panelText"),"TabIndex",0);
                 this.config.title = title;
                 this.config.response = response;

@@ -699,18 +699,12 @@ img {
   display: block; }
 
 #panelLogo {
-  /*--width: 50px;
-  height: 50px;*/
   overflow: hidden;
   float: left;
-  /*line-height: 50px;*/
-  /*margin-left: 5px;
-  padding-top: 7px;*/
   padding: 5px 4px 0 4px;
 }
 
 #panelLogo img {
-  /*max-width: 32px;*/
   max-height: 32px; 
 }
 
@@ -718,12 +712,12 @@ img {
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 28px; 
-  /*float: left;
-  max-width: 196px;*/
-  /*overflow: hidden;*/
-  /*margin-left: 5px;
-  margin-top: 10px;
-  display: none;*/
+  overflow: hidden;
+  display: block;
+}
+
+#panelText:focus {
+  white-space: inherit;
 }
 
 #panelTitle h1 {
@@ -735,32 +729,15 @@ img {
   -webkit-margin-end: 0px; 
 }
 
-@media only screen and (min-width: 720px) {
-  #panelText {
-    display: block;
-    /*max-width: 300px;*/
-  } 
-}
-
-@media only screen and (min-width: 800px) {
-  #panelText {
-    /*max-width: 400px;*/
-  }
-}
-
 #panelText.nosearch {
-  display: block; }
-
-@media only screen and (min-width: 720px) {
-  #panelSearch {
-    /* margin: 10px 4px 10px 20px; */
-    } }
+  display: block; 
+}
 
 #panelSearch {
   margin: 0;
   width:100%;
   position: relative;
-  }
+}
 
 #panelSearch .searchLabel {
   padding: 8px 4px;
@@ -774,13 +751,13 @@ img {
   width: calc(100% - 2px);
   display: block;
   clear: both;
-  /*margin: 1px 1px 1px 1px;*/
   }
 
 @media only screen and (min-width: 720px) {
   #panelTools {
     display: block !important;
-    } }
+  } 
+}
 
 #panelMenu {
   position: absolute;
@@ -789,50 +766,29 @@ img {
   font-size: 24px;
   cursor: pointer;
   color: #fff;
-  display: block; }
+  display: block; 
+}
 
 @media only screen and (min-width: 720px) {
   #panelMenu {
     display: none;
-    } }
+  } 
+}
 
 .panelTool {
   float: left;
-  /* background-color: black !important; */
-  /* padding: 1px; */
-  /* margin-left: 1px; */
-  /* margin-right: 1px; */
   padding: 1px;
-  /* margin: 2px; */
   border-color: transparent;
-  /* border-width: 2px; */
-  /* vertical-align: middle; */
-  /* box-sizing: border-box; */
   background-color: transparent;
-  /* border: 1px solid rgb(169, 169, 169); */
-  /* border-radius: 4px; */
   position: relative;
-  /* background-clip: border-box; */
   cursor: pointer;
   background: transparent;
-  /* -webkit-appearance: button; */
 }
 
 .panelTool input[type="image"] {
-  /* margin: 1px; */
   width: 24px;
   height: 24px;
-  /* position: absolute; */
-  /*left: 0;
-  right: 0;*/
-  /* margin-left: -25%; */
-  /* margin-top: -25%; */
   float: left;
-  /* top: 0; */
-  /* bottom: 0; */
-  /* border-width: 0px; */
-  /* border-color: transparent; */
-  /* display: none; */
 }
 
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/
