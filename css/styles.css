@@ -685,60 +685,68 @@ img {
     } }
 
 #panelTitle {
-  height: 50px; 
+  /*height: 50px; */
   width: 100%;
-  float: left;
+  /*float: left;
   color: #ffffff;
   display: block;
   font-family: "Helvetica Neue", "Arial", sans-serif;
   font-weight: normal;
-  font-size: 25px;
+  font-size: 25px;*/
   }
 
 .no-search #panelText {
   display: block; }
 
 #panelLogo {
-  --width: 50px;
-  height: 50px;
+  /*--width: 50px;
+  height: 50px;*/
   overflow: hidden;
   float: left;
-  line-height: 50px;
-  margin-left: 5px;
-  padding-top: 7px;
+  /*line-height: 50px;*/
+  /*margin-left: 5px;
+  padding-top: 7px;*/
+  padding: 5px 4px 0 4px;
 }
 
 #panelLogo img {
-  max-width: 32px;
+  /*max-width: 32px;*/
   max-height: 32px; 
 }
 
 #panelText {
-  float: left;
-  max-width: 196px;
-  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  margin-left: 5px;
+  font-size: 28px; 
+  /*float: left;
+  max-width: 196px;*/
+  /*overflow: hidden;*/
+  /*margin-left: 5px;
   margin-top: 10px;
-  display: none;
-  font-size: 28px; }
+  display: none;*/
+}
 
 #panelTitle h1 {
-  padding: 8px;
+  padding: 6px 2px;
   margin: 0;
+  -webkit-margin-before: 0; 
+  -webkit-margin-after: 0; 
+  -webkit-margin-start: 0px; 
+  -webkit-margin-end: 0px; 
 }
 
 @media only screen and (min-width: 720px) {
   #panelText {
     display: block;
-    max-width: 300px;
-    } }
+    /*max-width: 300px;*/
+  } 
+}
 
 @media only screen and (min-width: 800px) {
   #panelText {
-    max-width: 400px;
-    } }
+    /*max-width: 400px;*/
+  }
+}
 
 #panelText.nosearch {
   display: block; }
@@ -751,7 +759,6 @@ img {
 #panelSearch {
   margin: 0;
   width:100%;
-  /* display: block; */
   position: relative;
   }
 
@@ -761,15 +768,13 @@ img {
 }
 
 #panelTools {
-  /* position: relative; */
   left: 0px;
   top: 0px;
   min-height: 26px;
   width: calc(100% - 2px);
   display: block;
   clear: both;
-  /* height: 48px; */
-  margin: 1px 1px 1px 1px;
+  /*margin: 1px 1px 1px 1px;*/
   }
 
 @media only screen and (min-width: 720px) {
@@ -1690,15 +1695,15 @@ td, th {
 }
 
 .skip {
-    position: relative;
+    position: absolute;
     /* width: 30%; */
     /* right: 1px; */
-    left: 5px;
-    top: 6px;
+    left: 2px;
+    top: 2px;
     /* height: 20px; */
     white-space: nowrap;
-    display: inline;
-    font-size: 22px;
+    /*display: inline;*/
+    font-size: 18px;
 }
 
 .pageBtn {

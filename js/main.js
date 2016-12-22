@@ -639,17 +639,20 @@ define(["dojo/ready",
                         domAttr.set(node, "role", "listitem");
                         var img = node.querySelector("img");
                         img.alt='';
-                        domAttr.set(img, "tabindex", -1);
+                        //domAttr.set(img, "tabindex", -1);
                         domAttr.remove(img, "title");
+                        domAttr.remove(img, "tabindex");
 
                         var aNode = node.querySelector("a");
+                        domAttr.set(aNode, "tabindex", 0);
                         var labelNode = node.querySelector(".esriBasemapGalleryLabelContainer");
                         domAttr.remove(labelNode.firstChild, "alt");
                         domAttr.remove(labelNode.firstChild, "title");
                         dojo.place(labelNode, aNode, "last");
                         //domStyle.set(labelNode, "width", img.width);
-                        domAttr.set(node, "tabindex", 0);   
-                        on(aNode, "focus", function() { node.focus();});
+                        //domAttr.set(node, "tabindex", 0);   
+                        //domAttr.set(labelNode, "tabindex", 0);   
+                        //on(aNode, "focus", function() { node.focus();});
                         on(img, "click", function() { node.focus();});
                         on(node,"keydown", function(ev) {
                             if(ev.code === "Enter" || ev.code === "Space") {
@@ -1786,14 +1789,15 @@ define(["dojo/ready",
                 } else {
                     title = this.config.title+': '+response.itemInfo.item.title + " - WCAG Viewer";
                 }
-                          //Add a logo if provided
+                
+                //Add a logo if provided
                 if (this.config.logo) {
                     var altText = this.config.logoAltText;
                     if(!altText || altText === '')
                         altText = title;
                     domConstruct.create("div", {
                         id: "panelLogo",
-                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt='" + altText + "' TabIndex=0 aria-label='" + altText + "'></>"
+                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt='" + altText + "' Title='" + altText + "' TabIndex=0 aria-label='" + altText + "'></>"
                     }, dom.byId("panelTitle"), "first");
                     domClass.add("panelTop", "largerTitle");
                 }
