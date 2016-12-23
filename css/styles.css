@@ -579,10 +579,12 @@ img {
 
 #panelPages {
   font-family: Helvetica, Arial, sans-serif;
-  width: 100%;
+  width: calc(100% - 2px);
   height: calc(100% - 155px);
   background-color: #F9F9F9;
   overflow: auto;
+  padding: 1px;
+  background: #aaa;
 }
 
 .page {
@@ -592,7 +594,7 @@ img {
   height: calc(100% - 22px);
   height: 100%;
   position: relative;
-  /* width: calc(100% - 22px); */
+  /*width: calc(100% - 2px); */
   top: 0;
   /* margin: 0 1px; */
   /* padding: 10px; */
@@ -712,7 +714,7 @@ img {
 
 #panelText:focus {
   white-space: inherit;
-  font-size: 14px;
+  /*font-size: 14px;*/
 }
 
 #panelTitle h1 {
@@ -1511,6 +1513,7 @@ text-align: left;
 
 #dijit_layout_ContentPane_1 {
   padding:1px;
+  background: #ccc;
 }
 
 #mapDiv {
