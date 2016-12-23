@@ -523,8 +523,8 @@ define(["dojo/ready",
             };
 
             skipToContent = function() {
-                dom.byId('panelPages').focus();
-                //dojo.query("#panelPages .page.showAttr .pageBody :focusable")[0].focus();
+                //dom.byId('panelPages').focus();
+                dojo.query(".page.showAttr .pageBody")[0].focus();
             };
 
             skipToSplitter = function() {
