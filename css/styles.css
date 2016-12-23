@@ -1460,9 +1460,8 @@ html, body {
     border-right: 1px solid #d3d3d3 !important;
 }
 .dijitSplitterV {
-    width: 7px;
-    border-left: 1px;
-    border-right: 1px;
+    width: 6px;
+    margin: 1px;
     cursor: col-resize;
     -webkit-tap-highlight-color: transparent;
 }
