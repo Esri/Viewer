@@ -429,6 +429,11 @@ define(["dojo/ready",
                 switch(event.code) {
                     case 'Escape' :
                         var activeElement = focusUtil.curNode;
+                        if(dojo.hasClass(activeElement, 'pageBody')) {
+                            var id=activeElement.id.replace('pageBody','toolButton');
+                            document.querySelector('#'+id).focus();
+                            break;
+                        }
                         var upper = query(activeElement).parent().closest('[tabindex=0]');
                         if(upper && upper.length>= 1) {
                             upper[0].focus();
