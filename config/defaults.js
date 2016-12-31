@@ -62,7 +62,7 @@ define({
     //Set of tools that will be added to the toolbar
     "tools": [
         {"name": "instructions", "enabled": true},
-        {"name": "details", "enabled": true},
+        {"name": "details", "enabled": false},
         {"name": "overview", "enabled": true},
         {"name": "legend", "enabled": true},
         {"name": "layers", "enabled": true},

@@ -1558,15 +1558,9 @@ td, th {
 #instructionsDiv {
   position: absolute;
   bottom: 0;
-  width: calc(100% - 20px);
-  margin: 0 10px;
-}
-
-#detailDiv {
-  top: 10px;
-  width: calc(100% - 20px);
-  margin: 0 10px;
-  position: absolute;
+  /*width: calc(100% - 20px);*/
+  /*margin: 0 10px;*/
+  padding: 0 10px;
 }
 
 .goThereHint {
@@ -1740,9 +1734,17 @@ td, th {
   background: white;
     overflow-y: auto;
     position: absolute;
-    height: calc(100% - 260px);
     color: black;
-    padding: 2px;
+    width: calc(100% - 20px);
+    padding: 10px 10px 0 10px;
+}
+
+.detailFull {
+    height: calc(100% - 10px);
+}
+
+.detailHalf {
+    height: calc(100% - 274px);
 }
 
 .leftWrapper {
@@ -1761,3 +1763,8 @@ footer {
 main {
     flex: 1;
 }
+
+/*#pageBody_details, #pageBody_instructions {
+    width: calc(100% - 20px) !important; 
+    padding: 10px 10px 0 10px;
+}*/

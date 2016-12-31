@@ -52,7 +52,7 @@
             {  
                "type":"string",
                "fieldName":"description",
-               "label":"Details",
+               "label":"Description",
                "placeHolder":"Defaults to web map description.",
                "tooltip":"Enter content for the details panel",
                "stringFieldOption":"richtext"
@@ -136,16 +136,16 @@
                      "value":"details"
                   },
                   {  
+                     "label":"Instructions",
+                     "value":"instructions"
+                  },                 
+                  {  
                      "label":"Edit",
                      "value":"edit"
                   },
                   {  
                      "label":"Layers",
                      "value":"layers"
-                  },
-                  {  
-                     "label":"Instructions",
-                     "value":"instructions"
                   },
                   {  
                      "label":"Features",
@@ -374,16 +374,15 @@
 
       "activeTool":"details",
       "scalebar":false,
-      "tool_print":true,
       "tool_print_layouts":false,
       "tool_print_legend":false,
       "tool_share":true,
       "tool_overview":true,
       "tool_measure":true,
       "tool_details":true,
+      "tool_instructions":true,
       "tool_filter":true,
       "tool_legend":true,
-      "tool_instructions":true,
       "tool_layers":true,
       "tool_home":true,
       "tool_locate":true,

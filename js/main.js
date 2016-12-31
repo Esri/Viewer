@@ -315,6 +315,7 @@ define(["dojo/ready",
                 toolbar.map = this.map;
                 var toolList = [];
                 //this._addInfoTool(toolbar);
+
                 var deferredDetails = new Deferred();
                 for (var i = 0; i < this.config.tools.length; i++) {
                     switch (this.config.tools[i].name) {
@@ -736,19 +737,57 @@ define(["dojo/ready",
 
                     var detailDiv = toolbar.createTool(tool);
                         domConstruct.create('div',{
-                        // id:"detailDiv",
                         tabindex:0
-                    });//, dom.byId('fixContent'));
-                        detailDiv.innerHTML = "<div tabindex=0 id='detailDiv'>"+description+"</div>";
+                    });
+                    detailDiv.innerHTML = "<div tabindex=0 id='detailDiv'>"+description+"</div>";
+                    var detailDiv = dojo.query("#detailDiv")[0];
+                    if(!has("instructions"))
+                        domClass.add(detailDiv, "detailFull");
+                    else
+                        domClass.add(detailDiv, "detailHalf");
 
                     var detailBtn = dojo.query("#toolButton_details")[0];
                     domClass.add(detailBtn, "panelToolDefault");
                 }
                 deferred.resolve(true);
             } else {
-                deferred.resolve(false);
+                deferred.resolve(true);
             }
 
+            return deferred.promise;
+        },
+
+        _addInstructions: function (tool, toolbar, deferedDetails) {
+            var deferred = new Deferred();
+            if (!has("instructions")) {
+               deferred.resolve(false);
+            } 
+            else 
+            { 
+                if(!has("details"))
+                {
+                    var instructionsDiv = toolbar.createTool(tool);
+                    domConstruct.create('div',{
+                        id:"instructionsDiv",
+                        innerHTML: instructionsText,
+                        tabindex: 0
+                    }, domConstruct.create("div", {}, instructionsDiv));
+
+                    var instructionsBtn = dojo.query("#toolButton_instructions")[0];
+                    domClass.add(instructionsBtn, "panelToolDefault");
+                } 
+                else {
+                    deferedDetails.then(function(r) {
+                        var instructionsDiv = domConstruct.create('div',{
+                            id:"instructionsDiv",
+                            innerHTML: instructionsText,
+                            tabindex: 0
+                        }, dom.byId("pageBody_details"));
+
+                    });
+                }
+                deferred.resolve(true);
+            }
             return deferred.promise;
         },
 
@@ -873,37 +912,6 @@ define(["dojo/ready",
                     deferred.resolve(true);
                 } else {
                     deferred.resolve(false);
-                }
-            }
-            return deferred.promise;
-        },
-
-        _addInstructions: function (tool, toolbar, deferedDetails) {
-            var deferred = new Deferred();
-            if (!has("instructions")) {
-               deferred.resolve(false);
-            } 
-            else 
-            { 
-                if(!has("details"))
-                {
-                    var instructionsDiv = toolbar.createTool(tool, "");
-                    domConstruct.create('div',{
-                        id:"instructionsDiv",
-                    }, dom.byId('fixContent'));
-
-                    instructionsDiv.innerHTML = instructionsText;
-                    deferred.resolve(true);
-                } 
-                else {
-                    deferedDetails.then(function(r) {
-                        var instructionsDiv = domConstruct.create('div',{
-                            id:"instructionsDiv",
-                            innerHTML: instructionsText
-                        }, dom.byId("pageBody_details"));
-
-                        deferred.resolve(true);
-                    });
                 }
             }
             return deferred.promise;
