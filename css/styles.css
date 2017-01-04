@@ -1764,6 +1764,15 @@ main {
     flex: 1;
 }
 
+.showLoading {
+    display: -webkit-inline-box; 
+    vertical-align: -webkit-baseline-middle;
+    vertical-align: middle;
+}
+
+.hideLoading {
+    display:none;
+}
 /*#pageBody_details, #pageBody_instructions {
     width: calc(100% - 20px) !important; 
     padding: 10px 10px 0 10px;

@@ -1,18 +1,14 @@
 define([
     "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/dom-class", "dojo/parser", "dojo/ready", 
-    "dojo/on", "dojo/_base/connect",
-    "esri/tasks/query", "esri/tasks/QueryTask", "esri/graphicsUtils",
+    "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "esri/graphicsUtils",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel", 
-    "dojo/dom-style",
-    //"application/AComboBoxWidget/AComboBoxWidget",
+    "dojo/dom", "dojo/query", "dojo/dom-attr", "dojo/dom-style",
     "dojo/text!application/Filters/templates/FilterTab.html"
 ], function(
     Evented, declare, domConstruct, domClass, parser, ready, 
-    on, connect,
-    Query, QueryTask, graphicsUtils,
+    on, Query, QueryTask, graphicsUtils,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
-    domStyle, 
-    //AComboBox,
+    dom, query, domAttr, domStyle, 
     FilterTab
     ){
     var Widget = declare("FilterTab", [_WidgetBase, _TemplatedMixin, Evented], {
@@ -30,6 +26,10 @@ define([
             this.set("filter_name", this.filter.layer.resourceInfo.name);
             // this.set("checked", defaults.checked);
             this.set("FilterItems", []);
+            //this.set("filtersOn", []);
+            if(window.filtersOn === undefined) {
+                window.filtersOn = [];
+            }
         },
         
         FilterItems: [],
@@ -41,29 +41,11 @@ define([
         fieldSelect:null,
 
         _init: function () {
-            // this.fieldSelect = new Select({
-            //     id: this.id+"-fieldsCombo",
-            //     "data-dojo-attach-point": "fieldsCombo",
-            //     options:[]
-            // });
-            // this.filter.fields.forEach(lang.hitch(this, function(fl){
-            //     this.fieldSelect.options.push({ label: fl.label, value: fl.fieldName});
-            // }));
-
-            // this.fieldSelect.startup();
-            // this.fieldSelect.placeAt(this.fieldsDiv);
-
             var items = [];
             this.filter.fields.forEach(lang.hitch(this, function(fl){
                 this.fieldsCombo.innerHTML += '<option value="'+fl.fieldName+'">'+fl.label+'</option>';
-//                 items.push({name:fl.label, value:fl.fieldName});
             }));
-
-            // this.aComboBox = new AComboBox({items:items},null,this.labelForComboAttributes);
-            // this.aComboBox.placeAt(this.AComboBoxHolder);
-            // this.aComboBox.startup();
-
-    },
+        },
 
         filterKeyPress: function(btn) {
             // console.log(btn, btn.currentTarget.parentElement);
@@ -73,8 +55,7 @@ define([
         },
 
         filterChange: function(ev) {
-             var pageId = ev.target.value;
-//             console.log(page, ev);
+            var pageId = ev.target.value;
             var pages = document.querySelectorAll('.tabContent');
             for(var i = 0; i< pages.length; i++) {
                 var page = pages[i];
@@ -108,7 +89,6 @@ define([
         
         filterAdd: function(ev) {
             var fieldId = this.fieldsCombo.value;
-//             var fieldId = this.aComboBox.selectedValue;
             this._filterAdd(fieldId);
         },
 
@@ -169,12 +149,31 @@ define([
         },
 
         showBadge: function(show) {
-            if (show) {
-                domStyle.set(this.setIndicator,'display','');
+            var tabIndex = window.filtersOn.indexOf(this.id);
+            var tabIndicator = query('#'+this.id+"_img")[0];
+            if(show) {
+                domStyle.set(tabIndicator,'display','');
+                if(tabIndex<0)
+                {
+                    window.filtersOn.push(this.id);   
+                }
             } else {
-                domStyle.set(this.setIndicator,'display','none');
+                domStyle.set(tabIndicator,'display','none');
+                if(tabIndex>=0)
+                {
+                    window.filtersOn.splice(tabIndex, 1);  
+                }                          
             }
-            connect.publish("somefilters", [{id:this.id, show:show}]);
+            
+            var badgeindicator = query('#badge_somefilters')[0];
+                if (window.filtersOn.length>0) {
+                    domStyle.set(badgeindicator,'display','');
+                    domAttr.set(badgeindicator, "title", "Some Filters Apply");
+                    domAttr.set(badgeindicator, "alt", "Some Filters Apply");
+                } else {
+                    domStyle.set(badgeindicator,'display','none');
+                }
+
         },
     });
 

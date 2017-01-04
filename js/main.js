@@ -565,7 +565,7 @@ define(["dojo/ready",
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
             if (has("features")) {
-                var featuresDiv = toolbar.createTool(tool, "", "reload1.gif");
+                var featuresDiv = toolbar.createTool(tool, "", "reload1.gif", "featureSelected");
 
                 var layers = this.config.response.itemInfo.itemData.operationalLayers;
                 

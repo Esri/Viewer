@@ -1,9 +1,9 @@
 define([
     "dojo/Evented", "dojo/_base/declare", "dojo/_base/window", "dojo/_base/fx", 
-    "dojo/_base/html", "dojo/_base/lang", "dojo/has", "dojo/dom", "dojo/_base/connect",
+    "dojo/_base/html", "dojo/_base/lang", "dojo/has", "dojo/dom", 
     "dojo/dom-class", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-construct", "dojo/dom-geometry", 
     "dojo/on", "dojo/mouse", "dojo/query", "dojo/Deferred"], function (
-Evented, declare, win, fx, html, lang, has, dom, connect,
+Evented, declare, win, fx, html, lang, has, dom, 
 domClass, domStyle, domAttr, domConstruct, domGeometry, 
 on, mouse, query, Deferred) {
     return declare([Evented], {
@@ -45,7 +45,7 @@ on, mouse, query, Deferred) {
             on(window, "resize", lang.hitch(this, this._windowScrolled));
             this.pTools = dom.byId("panelTools");
             this.pMenu = dom.byId("panelMenu");
-            on(this.pMenu, "click", lang.hitch(this, this._menuClick));
+            // on(this.pMenu, "click", lang.hitch(this, this._menuClick));
             this.pPages = dom.byId("panelPages");
             //Prevent body scroll when scrolling to the end of the panel content
             on(this.pPages, mouse.enter, lang.hitch(this, function () {
@@ -130,39 +130,15 @@ on, mouse, query, Deferred) {
 
             if(badgeEvName && badgeEvName !== '') {
                 var setIndicator = domConstruct.create("img", {
-                    src:"images/set.png",
+                    src:"images/"+badgeEvName+".png",
                     class:"setIndicator",
                     style:"display:none;",
                     tabindex:-1,
+                    id: 'badge_'+badgeEvName,
                     alt:""
                 });
                 domConstruct.place(setIndicator, panelTool);
-
-                filtersOn = [];
-                connect.subscribe(badgeEvName, lang.hitch(this, function(message){
-                    var tabIndex = filtersOn.indexOf(message.id);
-                    if(message.show) {
-                        if(tabIndex<0)
-                        {
-                            filtersOn.push(message.id);   
-                        }
-                    } else {
-                        if(tabIndex>=0)
-                        {
-                            filtersOn.splice(tabIndex, 1);  
-                        }                          
-                    }
-                    if(filtersOn.length>0) {
-                        domStyle.set(setIndicator,'display','');
-                        domAttr.set(pTool, "title", this.config.i18n.tooltips.filtersApply || "Some Filters Apply");            
-
-                    } else {
-                        domStyle.set(setIndicator,'display','none');
-                        domAttr.set(pTool, "title", tip); 
-                    }
-                }));
             }
-
 
             on(pTool, "click", lang.hitch(this, this._toolClick, name));
             this.tools.push(name);
@@ -198,7 +174,7 @@ on, mouse, query, Deferred) {
             if(loaderImg && loaderImg !=="") {
                 domConstruct.create("div", {
                     id: "loading_" + name,
-                    class: 'small-loading'
+                    class: 'hideLoading small-loading'
                 }, pageHeader);
             }
 
@@ -241,55 +217,28 @@ on, mouse, query, Deferred) {
                 }
             });
 
-            if(defaultBtns === undefined || (active || defaultBtn !== name)) {
-                pages.forEach(function(p){
-                    if(hidden && p === page) {
-                        domClass.replace(p, "showAttr","hideAttr");
-                    } else {
-                        domClass.replace(p,"hideAttr","showAttr");
-                    }
-                });
-                var tool = dom.byId("toolButton_"+name);
-                var tools = query(".panelTool");           
-                this.emit("updateTool", name);
-                tools.forEach(lang.hitch(this, function(t){
-                    if(active && t === tool) {
-                        domClass.add(t, "panelToolActive");
-                        this.emit("updateTool_"+name);
-                    } else {
-                        domClass.remove(t,"panelToolActive");
-                    }
-                }));
-
-                if(!active && defaultBtns !== undefined) {
-                    this._activateDefautTool();
+            pages.forEach(function(p){
+                if(hidden && p === page) {
+                    domClass.replace(p, "showAttr","hideAttr");
+                } else {
+                    domClass.replace(p,"hideAttr","showAttr");
                 }
-            }
-            
+            });
+            var tool = dom.byId("toolButton_"+name);
+            var tools = query(".panelTool");           
+            this.emit("updateTool", name);
+            tools.forEach(lang.hitch(this, function(t){
+                if(active && t === tool) {
+                    domClass.add(t, "panelToolActive");
+                    this.emit("updateTool_"+name);
+                } else {
+                    domClass.remove(t,"panelToolActive");
+                }
+            }));           
 
-            // var fixContent = dom.byId('fixContent');
-            // if(active) {
-            //     domClass.replace(fixContent, "hideAttr", "showAttr");
-            // } else {
-            //     domClass.replace(fixContent, "showAttr", "hideAttr");
-            // }
-        },
-
-        _activateDefautTool: function() {
-            var defaultBtns = dojo.query(".panelToolDefault");
-            var defaultBtn;
-            if(defaultBtns !== undefined && defaultBtns.length>0) {
-                defaultBtn = defaultBtns[0].id.split("_")[1];
+            if(!active && defaultBtns !== undefined) {
+                this._activateDefautTool();
             }
-            if(defaultBtn !== undefined) {
-                this._toolClick(defaultBtn);
-            }
-            else if (this.config.activeTool !== "" && has(this.config.activeTool)) {
-                toolbar.activateTool(this.config.activeTool);
-            } 
-            // else {
-            //     toolbar._closePage();
-            // }
         },
 
         _atachEnterKey: function(onButton, clickButton) {
@@ -306,15 +255,32 @@ on, mouse, query, Deferred) {
             }
         },
 
-        // menu click
-        _menuClick: function () {
-            if (query("#panelTools").style("display") == "block") {
-                query("#panelTools").style("display", "none");
-                this._closePage();
-            } else {
-                query("#panelTools").style("display", "block");
+       _activateDefautTool: function() {
+            var defaultBtns = dojo.query(".panelToolDefault");
+            var defaultBtn;
+            if(defaultBtns !== undefined && defaultBtns.length>0) {
+                defaultBtn = defaultBtns[0].id.split("_")[1];
             }
-            this._updateMap();
-        }
+            if(defaultBtn !== undefined) {
+                this._toolClick(defaultBtn);
+            }
+            else if (this.config.activeTool !== "" && has(this.config.activeTool)) {
+                toolbar.activateTool(this.config.activeTool);
+            } 
+            // else {
+            //     toolbar._closePage();
+            // }
+        },
+        
+        // // menu click
+        // _menuClick: function () {
+        //     if (query("#panelTools").style("display") == "block") {
+        //         query("#panelTools").style("display", "none");
+        //         this._closePage();
+        //     } else {
+        //         query("#panelTools").style("display", "block");
+        //     }
+        //     this._updateMap();
+        // }
     });
 });
