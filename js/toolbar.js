@@ -133,7 +133,7 @@ on, mouse, query, Deferred) {
                     src:"images/"+badgeEvName+".png",
                     class:"setIndicator",
                     style:"display:none;",
-                    tabindex:-1,
+                    tabindex:0,
                     id: 'badge_'+badgeEvName,
                     alt:""
                 });

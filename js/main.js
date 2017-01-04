@@ -432,7 +432,8 @@ define(["dojo/ready",
                         var activeElement = focusUtil.curNode;
                         if(dojo.hasClass(activeElement, 'pageBody')) {
                             var id=activeElement.id.replace('pageBody','toolButton');
-                            document.querySelector('#'+id).focus();
+                            var toolBtn = document.querySelector("#"+id+" input[type='image'").focus();
+
                             break;
                         }
                         var upper = query(activeElement).parent().closest('[tabindex=0]');
