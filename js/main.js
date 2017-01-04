@@ -138,6 +138,7 @@ define(["dojo/ready",
 
             query(".esriSimpleSlider").style("backgroundColor", this.theme.toString());
             // remove loading class from body
+            
             domClass.remove(document.body, "app-loading");
             on(window, "orientationchange", lang.hitch(this, this._adjustPopupSize));
             this._adjustPopupSize();
@@ -145,35 +146,37 @@ define(["dojo/ready",
             zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
 
             esriSimpleSliderIncrementNode = dojo.query(".esriSimpleSliderIncrementButton")[0];
-            var zoomIn_click = esriSimpleSliderIncrementNode.OnClick;
             dojo.empty(esriSimpleSliderIncrementNode);
-
             plusbtn = domConstruct.create("input", {
-                className: "esriSimpleSliderIncrementButton",
                 type: "image",
-                "aria-label": "Zoom In",
                 src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom In',
                 title: 'Zoom In',
+                tabindex: 0
             }, esriSimpleSliderIncrementNode);
-            on(plusbtn, "click", zoomIn_click);
 
+            esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
+            dojo.empty(esriSimpleSliderDecrementNode);
+            minusbtn = domConstruct.create("input", {
+                type: "image",
+                "aria-label": "Zoom Out",
+                src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
+                alt: 'Zoom Out',
+                title: 'Zoom Out',
+                tabindex: 0
+            }, esriSimpleSliderDecrementNode);
 
             if (has("home")) {
-
-
                 var panelHome = domConstruct.create("div", {
                     id: "panelHome",
                     className: "esriSimpleSliderHomeButton borderBottom",
-                    innerHTML: "<div id='btnHome'></div>"
-                });//, dom.byId("mapDiv_zoom_slider"), 2); 
+                }); 
 
                 domConstruct.place(panelHome, dojo.query(".esriSimpleSliderIncrementButton")[0], "after");
 
                 var home = new HomeButton({
                     map: this.map
-                }, dom.byId("btnHome"));
-
+                }, panelHome);
                 home.startup();
 
                 var homeButton = dojo.query(".homeContainer")[0];
@@ -186,26 +189,8 @@ define(["dojo/ready",
                     src: 'images/icons_' + this.config.icons + '/home.png',
                     alt: homeHint,
                     title: homeHint,
-                    //'aria-label': homeHint,
                 }, homeNode);
             }
-
-
-
-            esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
-            var zoomOut_click = esriSimpleSliderDecrementNode.OnClick;
-            dojo.empty(esriSimpleSliderDecrementNode);
-
-            minusbtn = domConstruct.create("input", {
-                className: "esriSimpleSliderDecrementButton",
-                type: "image",
-                "aria-label": "Zoom Out",
-                src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
-                alt: 'Zoom Out',
-                title: 'Zoom Out',
-            }, esriSimpleSliderDecrementNode);
-            on(minusbtn, "click", zoomOut_click);
-
 
             on(this.map.infoWindow, "show", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);
@@ -1845,19 +1830,17 @@ define(["dojo/ready",
                     this.map.setExtent(this.initExt);
                 }
                 this.initExt = this.map.extent;
+                
+                // ???
                 on.once(this.map, "extent-change", lang.hitch(this, function() {
                     this._checkExtent();
                     document.querySelector(".HomeButton input[type='image']").click();
                 }));
+
                 on(this.map, "extent-change", function() {
                     var imgs = this.container.querySelectorAll("img");
                     for(i=0; i<imgs.length; i++)
                         domAttr.set(imgs[i],'alt','');
-
-                    // // mapDiv_layers
-                    // var images = this.container.querySelectorAll("image");
-                    // for(i=0; i<images.length; i++)
-                    //     domAttr.set(images[i],'tabindex','0');
                 });
 
                 this._createMapUI();
