@@ -1773,6 +1773,18 @@ main {
 .hideLoading {
     display:none;
 }
+
+.setIndicator {
+  width: 15px;
+  height: 15px;
+  top: -3px;
+  right: -6px;
+  position: absolute;
+  /*pointer-events: none;*/
+  z-index: 1000;
+}
+
+
 /*#pageBody_details, #pageBody_instructions {
     width: calc(100% - 20px) !important; 
     padding: 10px 10px 0 10px;
