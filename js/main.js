@@ -145,38 +145,50 @@ define(["dojo/ready",
 
             zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
 
-            esriSimpleSliderIncrementNode = dojo.query(".esriSimpleSliderIncrementButton")[0];
-            dojo.empty(esriSimpleSliderIncrementNode);
-            plusbtn = domConstruct.create("input", {
+            esriSimpleSliderIncrement = dojo.query(".esriSimpleSliderIncrementButton")[0];
+            esriSimpleSliderIncrementSpan = dojo.query("span", esriSimpleSliderIncrement)[0];
+            dojo.empty(esriSimpleSliderIncrementSpan);
+            plusbtn = domConstruct.create("img", {
                 type: "image",
                 src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom In',
                 title: 'Zoom In',
                 tabindex: 0
-            }, esriSimpleSliderIncrementNode);
+            }, esriSimpleSliderIncrementSpan);
+            on(esriSimpleSliderIncrementSpan, 'keydown', function(event) {
+                if(event.key === "Enter") {
+                    esriSimpleSliderIncrement.click();
+                }
+            });
 
-            esriSimpleSliderDecrementNode = dojo.query(".esriSimpleSliderDecrementButton")[0];
-            dojo.empty(esriSimpleSliderDecrementNode);
-            minusbtn = domConstruct.create("input", {
+            esriSimpleSliderDecrement = dojo.query(".esriSimpleSliderDecrementButton")[0];
+            esriSimpleSliderDecrementSpan = dojo.query("span", esriSimpleSliderDecrement)[0];
+            dojo.empty(esriSimpleSliderDecrementSpan);
+            minusbtn = domConstruct.create("img", {
                 type: "image",
                 "aria-label": "Zoom Out",
                 src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom Out',
                 title: 'Zoom Out',
                 tabindex: 0
-            }, esriSimpleSliderDecrementNode);
+            }, esriSimpleSliderDecrementSpan);
+            on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
+                if(event.key === "Enter")
+                    esriSimpleSliderDecrement.click();
+            });
 
             if (has("home")) {
                 var panelHome = domConstruct.create("div", {
                     id: "panelHome",
                     className: "esriSimpleSliderHomeButton borderBottom",
+                    innerHTML: "<div id='btnHome'></div>"
                 }); 
 
                 domConstruct.place(panelHome, dojo.query(".esriSimpleSliderIncrementButton")[0], "after");
 
                 var home = new HomeButton({
                     map: this.map
-                }, panelHome);
+                }, dom.byId("btnHome"));
                 home.startup();
 
                 var homeButton = dojo.query(".homeContainer")[0];
