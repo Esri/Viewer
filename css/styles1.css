@@ -21,11 +21,12 @@ INTERNET EXPLORER and FIREFOX : not supported or buggy:
 http://reference.sitepoint.com/css/outline-color
 */
 :focus {
-    --outline: -webkit-focus-ring-color auto 5px !important;
-    outline-width: 2px;
-    outline-offset: -1px;
-    outline-style: solid;
-    outline-color: rgba(0, 0, 0, 0.9);
+    /*--outline: -webkit-focus-ring-color auto 5px !important;*/
+    /*outline-width: 2px;*/
+    outline-offset: 0px;
+    outline-style: none;
+    outline-color: transparent;
+    box-shadow: 0 0 0 4px red inset;
     }
 }
 
@@ -41,17 +42,20 @@ http://reference.sitepoint.com/css/outline-color
 
 .panelTool input[type="image" i]:focus
 {
+    /*--outline: -webkit-focus-ring-color auto 5px !important;*/
     outline-width: 2px;
 }
 
 .ovwHighlight:focus{
-  outline-offset: 2px !important;
+    /*--outline: -webkit-focus-ring-color auto 5px !important;*/
+    outline-offset: 2px !important;
 }
 
 #embedMapSizeDropDown:focus {
-    outline-width: 2px;
+    /*--outline: -webkit-focus-ring-color auto 5px !important;
+    outline-width: 2px;*/
     outline-style: solid;
-    outline-color: rgba(0, 0, 0, 0.9);
+    /*outline-color: rgba(0, 0, 0, 0.9);*/
 }
 
 .arcgisSearch .searchMenu li:hover, .arcgisSearch .searchMenu li:focus {
@@ -73,4 +77,10 @@ http://reference.sitepoint.com/css/outline-color
 .goThereHint {
   background-color: black;
 }
+
+.searchBtn:focus, .searchClear:focus, .searchInput:focus {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+
 

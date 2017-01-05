@@ -311,7 +311,7 @@ input[type=checkbox].checkbox {
 
 .arcgisSearch .searchGroup .searchInput {
   /* width: 298px; */
-  padding: 6px 17px 6px 18px;
+  /*padding: 6px 17px 6px 18px;*/
   background-color: rgba(0, 0, 0, 0.3);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
   zoom: 1;
@@ -1218,16 +1218,16 @@ div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
   /* -webkit-border-radius: 5px; */
 }
 
-.panelToolActive:focus, .panelToolActive:hover {
-  /* border-radius: 15px !important; */
+/*.panelToolActive:focus, .panelToolActive:hover {
+   border-radius: 15px !important; 
   /* -webkit-border-radius: 15px !important; */
-}
+}*/
 
-.searchBtn:focus, .searchClear:focus {
+/*.searchBtn:focus, .searchClear:focus, .searchInput:focus {
   background-color: rgba(0, 0, 0, 0.7) !important;
 }
 
-.HomeButton:focus, .LocateButton:focus,
+*/.HomeButton:focus, .LocateButton:focus,
 .share-dialog-icon
 {
   border-radius: 5px;
@@ -1622,22 +1622,26 @@ td, th {
 
 .skip a {
     color: white;
+    background-color: #002C61;
+    border-right: 1px solid #FFF;
+    border-bottom: 1px solid #FFF;
+    
     position: absolute;
     top: 0;
     left: 0;
-    border-right: 2px solid #FFF;
-    border-bottom: 2px solid #FFF;
-    background-color: #002C61;
     overflow: hidden;
     margin: 0;
-    padding: 0;
+    width: auto;
+    height: auto;
+    padding: 10px;
     clip: rect(1px, 1px, 1px, 1px);
+    /*box-shadow: 0 0 0 0 !important;*/
 }
 
 .skip a:focus {
-    width: auto;
+    /*width: auto;
     height: auto;
-    padding: .5rem 1rem;
+    padding: .5rem 1rem;*/
     clip: auto;
 }
 

@@ -150,15 +150,17 @@ define(["dojo/ready",
 
             zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
 
-            esriSimpleSliderIncrementSpan = dojo.query(".esriSimpleSliderIncrementButton span")[0];
+            esriSimpleSliderIncrementSpan = dojo.query(".esriSimpleSliderIncrementButton")[0];
             dojo.empty(esriSimpleSliderIncrementSpan);
             plusbtn = domConstruct.create("input", {
                 type: "image",
                 src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom In',
                 title: 'Zoom In',
-                tabindex: 0,
-            }, esriSimpleSliderIncrementSpan);
+            }, domConstruct.create("div", {
+                role:"button",
+                style:"display: block;",
+            }, esriSimpleSliderIncrementSpan));
             on(esriSimpleSliderIncrementSpan, 'keydown', function(event) {
                 if(event.key === "Enter") {
                     _map.setLevel(_map.getLevel()+1);
@@ -173,7 +175,6 @@ define(["dojo/ready",
                 src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom Out',
                 title: 'Zoom Out',
-                tabindex: 0,
             }, esriSimpleSliderDecrementSpan);
             on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
                 if(event.key === "Enter")
@@ -427,7 +428,8 @@ define(["dojo/ready",
                         domStyle.set(h, 'display','block');
                     });
                 }
-                switch(event.code) {
+                switch(event.key) {
+                    case 'Esc' :
                     case 'Escape' :
                         var activeElement = focusUtil.curNode;
                         if(dojo.hasClass(activeElement, 'pageBody')) {
@@ -510,7 +512,7 @@ define(["dojo/ready",
 
             query('.skip').forEach(function(h) {
                 h.addEventListener('keydown', function (e) {
-                    if(e.code === "Enter" || e.code === "Space")
+                    if(e.key === "Enter" || e.key === "Space")
                     {
                         e.target.click();
                     }
@@ -522,7 +524,8 @@ define(["dojo/ready",
             };
 
             skipToTools = function() {
-                dom.byId('panelTools').focus();
+                query('#panelTools .panelToolActive input[type="image"]')[0].focus();
+                //dom.byId('panelTools').focus();
             };
 
             skipToSearch = function() {
@@ -646,31 +649,31 @@ define(["dojo/ready",
                         domAttr.set(node, "role", "listitem");
                         var img = node.querySelector("img");
                         img.alt='';
-                        //domAttr.set(img, "tabindex", -1);
+                        domAttr.set(img, "tabindex", -1);
                         domAttr.remove(img, "title");
                         domAttr.remove(img, "tabindex");
 
                         var aNode = node.querySelector("a");
-                        domAttr.set(aNode, "tabindex", 0);
+                        domAttr.set(aNode, "tabindex", -1);
                         var labelNode = node.querySelector(".esriBasemapGalleryLabelContainer");
                         domAttr.remove(labelNode.firstChild, "alt");
                         domAttr.remove(labelNode.firstChild, "title");
                         dojo.place(labelNode, aNode, "last");
                         //domStyle.set(labelNode, "width", img.width);
                         //domAttr.set(node, "tabindex", 0);   
-                        //domAttr.set(labelNode, "tabindex", 0);   
+                        domAttr.set(labelNode, "tabindex", 0);   
                         //on(aNode, "focus", function() { node.focus();});
                         on(img, "click", function() { node.focus();});
                         on(node,"keydown", function(ev) {
-                            if(ev.code === "Enter" || ev.code === "Space") {
+                            if(ev.key === "Enter" || ev.key === "Space") {
                                 aNode.click();  
-                            } else if(ev.code === "Tab" && !ev.shiftKey) {
+                            } else if(ev.key === "Tab" && !ev.shiftKey) {
                                 if(node.nextElementSibling.nodeName != "BR") {
                                     node.nextElementSibling.focus();
                                 } else {
                                    document.querySelector('#dijit_layout_ContentPane_0_splitter').focus();
                                 }
-                            } else if(ev.code === "Tab" && ev.shiftKey) {
+                            } else if(ev.key === "Tab" && ev.shiftKey) {
                                 node.focus();
                             }
                         });
@@ -1572,9 +1575,7 @@ define(["dojo/ready",
 
                             source.featureLayer = new FeatureLayer(url);
 
-
                             source.name = name;
-
 
                             source.exactMatch = searchLayer.field.exactMatch;
                             source.displayField = searchLayer.field.name;
@@ -1666,12 +1667,16 @@ define(["dojo/ready",
                         }
                         //focus
                         if(rule.selectorText.indexOf(':focus') >= 0) {
-                            rule.style.outlineColor = this.focusColor;
-                            // rule.style.boxShadow = '0 0 12px '+this.theme;
+                            rule.style.outlineStyle = 'none';
+                            rule.style.outlineColor = 'transparent';
+                            rule.style.boxShadow = '0 0 0 1.5px '+this.focusColor+' inset';
                         }
                         //active
                         if(rule.selectorText.indexOf('.activeMarker') >= 0) {
-                            rule.style.backgroundColor = this.activeColor;
+                            //rule.style.backgroundColor = this.activeColor;
+                            rule.style.outlineStyle = 'none';
+                            rule.style.outlineColor = 'transparent';
+                            rule.style.boxShadow = '0 0 5px 5px '+this.activeColor+' inset';
                         }
                     }
                 }
