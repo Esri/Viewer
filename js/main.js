@@ -23,6 +23,7 @@ define(["dojo/ready",
     "application/has-config", "esri/arcgis/utils", "esri/lang", 
     "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/focus",
     "esri/tasks/query",
+    "esri/toolbars/navigation",
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
@@ -43,7 +44,7 @@ define(["dojo/ready",
     has, arcgisUtils, esriLang, 
     BorderContainer, ContentPane, focusUtil,
     Query,
-    HomeButton, LocateButton, 
+    Navigation, HomeButton, LocateButton, 
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
     FeatureLayer, 
@@ -143,38 +144,40 @@ define(["dojo/ready",
             on(window, "orientationchange", lang.hitch(this, this._adjustPopupSize));
             this._adjustPopupSize();
 
+            var _map = this.map;
+            window.nav = new Navigation(this.map);
+            
+
             zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
 
-            esriSimpleSliderIncrement = dojo.query(".esriSimpleSliderIncrementButton")[0];
-            esriSimpleSliderIncrementSpan = dojo.query("span", esriSimpleSliderIncrement)[0];
+            esriSimpleSliderIncrementSpan = dojo.query(".esriSimpleSliderIncrementButton span")[0];
             dojo.empty(esriSimpleSliderIncrementSpan);
-            plusbtn = domConstruct.create("img", {
+            plusbtn = domConstruct.create("input", {
                 type: "image",
                 src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom In',
                 title: 'Zoom In',
-                tabindex: 0
+                tabindex: 0,
             }, esriSimpleSliderIncrementSpan);
             on(esriSimpleSliderIncrementSpan, 'keydown', function(event) {
                 if(event.key === "Enter") {
-                    esriSimpleSliderIncrement.click();
+                    _map.setLevel(_map.getLevel()+1);
                 }
             });
 
-            esriSimpleSliderDecrement = dojo.query(".esriSimpleSliderDecrementButton")[0];
-            esriSimpleSliderDecrementSpan = dojo.query("span", esriSimpleSliderDecrement)[0];
+            esriSimpleSliderDecrementSpan = dojo.query(".esriSimpleSliderDecrementButton span")[0];
             dojo.empty(esriSimpleSliderDecrementSpan);
-            minusbtn = domConstruct.create("img", {
+            minusbtn = domConstruct.create("input", {
                 type: "image",
                 "aria-label": "Zoom Out",
                 src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom Out',
                 title: 'Zoom Out',
-                tabindex: 0
+                tabindex: 0,
             }, esriSimpleSliderDecrementSpan);
             on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
                 if(event.key === "Enter")
-                    esriSimpleSliderDecrement.click();
+                    _map.setLevel(_map.getLevel()-1);
             });
 
             if (has("home")) {
@@ -1846,7 +1849,8 @@ define(["dojo/ready",
                 // ???
                 on.once(this.map, "extent-change", lang.hitch(this, function() {
                     this._checkExtent();
-                    document.querySelector(".HomeButton input[type='image']").click();
+                    window.nav.zoomToPrevExtent();
+                    //document.querySelector(".HomeButton input[type='image']").click();
                 }));
 
                 on(this.map, "extent-change", function() {
