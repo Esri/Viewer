@@ -1669,7 +1669,7 @@ define(["dojo/ready",
                         if(rule.selectorText.indexOf(':focus') >= 0) {
                             rule.style.outlineStyle = 'none';
                             rule.style.outlineColor = 'transparent';
-                            rule.style.boxShadow = '0 0 0 1.5px '+this.focusColor+' inset';
+                            rule.style.boxShadow = '0 0 0 2px '+this.focusColor+' inset';
                         }
                         //active
                         if(rule.selectorText.indexOf('.activeMarker') >= 0) {
@@ -1854,8 +1854,8 @@ define(["dojo/ready",
                 // ???
                 on.once(this.map, "extent-change", lang.hitch(this, function() {
                     this._checkExtent();
-                    window.nav.zoomToPrevExtent();
-                    //document.querySelector(".HomeButton input[type='image']").click();
+                    //window.nav.zoomToPrevExtent();
+                    document.querySelector(".HomeButton input[type='image']").click();
                 }));
 
                 on(this.map, "extent-change", function() {
