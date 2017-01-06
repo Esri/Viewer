@@ -294,7 +294,8 @@ define(["dojo/ready",
               
             var contentPaneRight = new ContentPane({
                 region: "center",
-                splitter:'true',
+                splitter: "true",
+                class: "bg",
                 content: dom.byId("mapDiv"),
             });
             borderContainer.addChild(contentPaneRight);
