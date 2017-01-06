@@ -44,7 +44,7 @@
          ]
       },
       {  
-         "category":"<strong>Configure Colors</strong>",
+         "category":"<strong>Colors</strong>",
          "fields":[  
             {  "label":"Theme Color:",
                "type":"color",
@@ -313,7 +313,7 @@
 
       "color":"#ffffff",
       "hoverColor":"#00A9E6",
-      "focusColor":"#00FFC5",
+      "focusColor":"#FF7700",
       "activeColor":"#00b9f6",
       "theme":"#005ce6",
 
