@@ -27,7 +27,7 @@ define(["dojo/ready",
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
-    "esri/layers/FeatureLayer",
+    "esri/layers/FeatureLayer", "application/NavToolBar/NavToolBar", 
     "application/FeatureList", "application/Filters/Filters", "application/TableOfContents", 
     "application/ShareDialog", //"application/SearchSources",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
@@ -47,7 +47,7 @@ define(["dojo/ready",
     Navigation, HomeButton, LocateButton, 
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
-    FeatureLayer, 
+    FeatureLayer, NavToolBar,
     FeatureList, Filters, TableOfContents, 
     ShareDialog, //SearchSources,
     SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
@@ -147,67 +147,67 @@ define(["dojo/ready",
             var _map = this.map;
             window.nav = new Navigation(this.map);
             
+            if (true || !has("navigation")) {
+                zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
 
-            zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
+                esriSimpleSliderIncrementSpan = dojo.query(".esriSimpleSliderIncrementButton")[0];
+                dojo.empty(esriSimpleSliderIncrementSpan);
+                plusbtn = domConstruct.create("input", {
+                    type: "image",
+                    src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
+                    alt: 'Zoom In',
+                    title: 'Zoom In',
+                }, domConstruct.create("div", {
+                    role:"button",
+                    style:"display: block;",
+                }, esriSimpleSliderIncrementSpan));
+                on(esriSimpleSliderIncrementSpan, 'keydown', function(event) {
+                    if(event.key === "Enter") {
+                        _map.setLevel(_map.getLevel()+1);
+                    }
+                });
 
-            esriSimpleSliderIncrementSpan = dojo.query(".esriSimpleSliderIncrementButton")[0];
-            dojo.empty(esriSimpleSliderIncrementSpan);
-            plusbtn = domConstruct.create("input", {
-                type: "image",
-                src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
-                alt: 'Zoom In',
-                title: 'Zoom In',
-            }, domConstruct.create("div", {
-                role:"button",
-                style:"display: block;",
-            }, esriSimpleSliderIncrementSpan));
-            on(esriSimpleSliderIncrementSpan, 'keydown', function(event) {
-                if(event.key === "Enter") {
-                    _map.setLevel(_map.getLevel()+1);
+                esriSimpleSliderDecrementSpan = dojo.query(".esriSimpleSliderDecrementButton span")[0];
+                dojo.empty(esriSimpleSliderDecrementSpan);
+                minusbtn = domConstruct.create("input", {
+                    type: "image",
+                    "aria-label": "Zoom Out",
+                    src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
+                    alt: 'Zoom Out',
+                    title: 'Zoom Out',
+                }, esriSimpleSliderDecrementSpan);
+                on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
+                    if(event.key === "Enter")
+                        _map.setLevel(_map.getLevel()-1);
+                });
+
+                if (has("home")) {
+                    var panelHome = domConstruct.create("div", {
+                        id: "panelHome",
+                        className: "esriSimpleSliderHomeButton borderBottom",
+                        innerHTML: "<div id='btnHome'></div>"
+                    }); 
+
+                    domConstruct.place(panelHome, dojo.query(".esriSimpleSliderIncrementButton")[0], "after");
+
+                    var home = new HomeButton({
+                        map: this.map
+                    }, dom.byId("btnHome"));
+                    home.startup();
+
+                    var homeButton = dojo.query(".homeContainer")[0];
+                    var homeNode = dojo.query(".home")[0];
+                    dojo.empty(homeNode);
+                    var homeHint = "Default Extent";//dojo.attr(homeButton, 'title');
+
+                    var btnHome = domConstruct.create("input", {
+                        type: 'image',
+                        src: 'images/icons_' + this.config.icons + '/home.png',
+                        alt: homeHint,
+                        title: homeHint,
+                    }, homeNode);
                 }
-            });
-
-            esriSimpleSliderDecrementSpan = dojo.query(".esriSimpleSliderDecrementButton span")[0];
-            dojo.empty(esriSimpleSliderDecrementSpan);
-            minusbtn = domConstruct.create("input", {
-                type: "image",
-                "aria-label": "Zoom Out",
-                src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
-                alt: 'Zoom Out',
-                title: 'Zoom Out',
-            }, esriSimpleSliderDecrementSpan);
-            on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
-                if(event.key === "Enter")
-                    _map.setLevel(_map.getLevel()-1);
-            });
-
-            if (has("home")) {
-                var panelHome = domConstruct.create("div", {
-                    id: "panelHome",
-                    className: "esriSimpleSliderHomeButton borderBottom",
-                    innerHTML: "<div id='btnHome'></div>"
-                }); 
-
-                domConstruct.place(panelHome, dojo.query(".esriSimpleSliderIncrementButton")[0], "after");
-
-                var home = new HomeButton({
-                    map: this.map
-                }, dom.byId("btnHome"));
-                home.startup();
-
-                var homeButton = dojo.query(".homeContainer")[0];
-                var homeNode = dojo.query(".home")[0];
-                dojo.empty(homeNode);
-                var homeHint = "Default Extent";//dojo.attr(homeButton, 'title');
-
-                var btnHome = domConstruct.create("input", {
-                    type: 'image',
-                    src: 'images/icons_' + this.config.icons + '/home.png',
-                    alt: homeHint,
-                    title: homeHint,
-                }, homeNode);
             }
-
             on(this.map.infoWindow, "show", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);
             }));
@@ -360,7 +360,7 @@ define(["dojo/ready",
                             toolList.push(this._addPrint(this.config.tools[i], toolbar));
                             break;
                         case "navigation":
-                            toolList.push(this._addNavigation(this.config.tools[i], toolbar));
+                            toolList.push(this._addNavigation(this.config.tools[i], query("#mapDiv_zoom_slider")[0]));
                             break;
                         default:
                             break;
@@ -603,10 +603,20 @@ define(["dojo/ready",
             return deferred.promise;
         },
         
-        _addNavigation: function (tool, toolbar) {
+        _addNavigation: function (tool, oldNaviagationToolBar) {
             var deferred = new Deferred();
             if (has("navigation")) {
-                //alert('Navigation goes here!');
+               //alert('Navigation goes here!');
+                var navToolBar = domConstruct.create("div", {
+                    id: "newNaviagationToolBar",
+                });
+                
+                nav = new NavToolBar({
+                    map:this.map,
+                    navToolBar:oldNaviagationToolBar,
+                }, navToolBar);
+                nav.startup();
+
                 deferred.resolve(true);
             }
             else {
