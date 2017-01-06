@@ -157,6 +157,7 @@ define(["dojo/ready",
                 src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom In',
                 title: 'Zoom In',
+                autofocus: true,
             }, domConstruct.create("div", {
                 role:"button",
                 style:"display: block;",
@@ -175,6 +176,7 @@ define(["dojo/ready",
                 src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom Out',
                 title: 'Zoom Out',
+                autofocus: true,
             }, esriSimpleSliderDecrementSpan);
             on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
                 if(event.key === "Enter")
@@ -515,6 +517,7 @@ define(["dojo/ready",
                     if(e.key === "Enter" || e.key === "Space")
                     {
                         e.target.click();
+                        e.preventDefault();
                     }
                 });
             });
@@ -1667,9 +1670,10 @@ define(["dojo/ready",
                         }
                         //focus
                         if(rule.selectorText.indexOf(':focus') >= 0) {
-                            rule.style.outlineStyle = 'none';
-                            rule.style.outlineColor = 'transparent';
-                            rule.style.boxShadow = '0 0 0 2px '+this.focusColor+' inset';
+                            // rule.style.outlineStyle = 'none';
+                            // rule.style.outlineColor = 'transparent';
+                            // rule.style.boxShadow = '0 0 0 2px '+this.focusColor+' inset';
+                            rule.style.outlineColor = this.focusColor;
                         }
                         //active
                         if(rule.selectorText.indexOf('.activeMarker') >= 0) {

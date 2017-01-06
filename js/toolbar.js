@@ -114,6 +114,7 @@ on, mouse, query, Deferred) {
                 className: "panelTool",
                 tabindex: -1,
                 id: "toolButton_" + name,
+                autofocus: true,
                 // "aria-label": tip,
             }, refNode);
             var pTool = domConstruct.create("input", {

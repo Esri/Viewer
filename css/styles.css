@@ -120,6 +120,14 @@ input[type=checkbox].checkbox {
 }
 
 #mapDiv {
+    width: calc(100% - 0px) !important;
+    height: calc(100% - 0px) !important;
+    /*padding: 1px;*/
+}
+
+.map .container {
+  /*padding:1px;
+  background-color: transparent !important;*/ 
 }
 
 .loading-indicator {
@@ -1446,8 +1454,8 @@ html, body {
 .dijitSplitterV .dijitSplitterThumb {
     background: #90BBFF none;
     height: 10%;
-    /* left: 2px; */
-    width: 100%;
+     left: 2px; 
+    width: calc(100% - 4px);
     margin: 0;
     overflow: hidden;
     position: absolute;
@@ -1516,8 +1524,6 @@ text-align: left;
 }
 
 #mapDiv {
-    width: calc(100% - 0px) !important;
-    height: calc(100% - 0px) !important;
 }
 
 .splitterContent {
