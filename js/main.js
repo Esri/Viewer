@@ -1702,7 +1702,8 @@ define(["dojo/ready",
                             rule.style.outlineColor = this.focusColor;
                         }
                         //active
-                        if(rule.selectorText.indexOf('.activeMarker') >= 0) {
+                        if(rule.selectorText.indexOf('.activeMarker') >= 0 || 
+                            rule.selectorText.indexOf('dijitSplitterThumb') >= 0) {
                             //rule.style.backgroundColor = this.activeColor;
                             rule.style.outlineStyle = 'none';
                             rule.style.outlineColor = 'transparent';

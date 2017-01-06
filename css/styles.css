@@ -1339,8 +1339,7 @@ input[type='checkbox']:focus {
   width: auto;
 }
 
-@media only screen and (min-width: 720px) {
-  .esriEditor .esriDrawingToolbar {
+.esriEditor .esriDrawingToolbar {
   top:0px;
 }
 
@@ -1452,7 +1451,7 @@ html, body {
     margin: 0;
 }
 .dijitSplitterV .dijitSplitterThumb {
-    background: #90BBFF none;
+    background: gray none;
     height: 10%;
     left: 0.5px; 
     width: calc(100% - 1.5px);
