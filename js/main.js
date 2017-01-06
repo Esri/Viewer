@@ -157,7 +157,6 @@ define(["dojo/ready",
                 src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom In',
                 title: 'Zoom In',
-                autofocus: true,
             }, domConstruct.create("div", {
                 role:"button",
                 style:"display: block;",
@@ -176,7 +175,6 @@ define(["dojo/ready",
                 src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
                 alt: 'Zoom Out',
                 title: 'Zoom Out',
-                autofocus: true,
             }, esriSimpleSliderDecrementSpan);
             on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
                 if(event.key === "Enter")
