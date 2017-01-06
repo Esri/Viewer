@@ -1454,8 +1454,8 @@ html, body {
 .dijitSplitterV .dijitSplitterThumb {
     background: #90BBFF none;
     height: 10%;
-     left: 2px; 
-    width: calc(100% - 4px);
+    left: 0.5px; 
+    width: calc(100% - 1.5px);
     margin: 0;
     overflow: hidden;
     position: absolute;
