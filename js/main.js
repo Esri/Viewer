@@ -359,12 +359,16 @@ define(["dojo/ready",
                         case "print":
                             toolList.push(this._addPrint(this.config.tools[i], toolbar));
                             break;
+                        case "navigation":
+                            toolList.push(this._addNavigation(this.config.tools[i], toolbar));
+                            break;
                         default:
                             break;
                     }
                 }
 
                 all(toolList).then(lang.hitch(this, function (results) {
+                    
                     //If all the results are false and locate and home are also false we can hide the toolbar
                     var tools = array.some(results, function (r) {
                         return r;
@@ -386,6 +390,7 @@ define(["dojo/ready",
 
                     //Now that all the tools have been added to the toolbar we can add page naviagation
                     //to the toolbar panel, update the color theme and set the active tool.
+                    
                     this._updateTheme();
 
                     toolbar._activateDefautTool();
@@ -598,6 +603,18 @@ define(["dojo/ready",
             return deferred.promise;
         },
         
+        _addNavigation: function (tool, toolbar) {
+            var deferred = new Deferred();
+            if (has("navigation")) {
+                //alert('Navigation goes here!');
+                deferred.resolve(true);
+            }
+            else {
+                deferred.resolve(false);
+            }
+            return deferred.promise;
+        },
+
         _addFilter: function (tool, toolbar) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
