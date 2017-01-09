@@ -493,16 +493,11 @@ input[type=checkbox].checkbox {
 }
 
 .HomeButton .home {
-    /* padding: 0 !important; */
     background-color: transparent;
     width: 26px;
-    /* height: 26px; */
     cursor: pointer;
-    /* margin-left: 1px; */
-    /* -webkit-border-radius: 0px; */
     -o-border-radius: 0px;
     -moz-border-radius: 0px;
-    /* border-radius: 0px; */
     background-image: none;
 }
 
@@ -512,11 +507,8 @@ input[type=checkbox].checkbox {
 }
 
 .LocateButton .zoomLocateButton {
-  padding: 0;
   width: 26px;
   height: 26px;
-  /* font-size: 20px; */
-  /* line-height: 26px; */
   background-color: transparent;
   background-image: none;
   cursor: pointer;
@@ -1808,3 +1800,7 @@ main {
     height: 20px;
 }
 
+.HomeButton .home:hover,
+.LocateButton .zoomLocateButton:hover {
+  background-color: transparent !important;
+}

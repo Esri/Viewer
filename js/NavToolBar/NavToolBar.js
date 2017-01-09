@@ -1,6 +1,6 @@
 define([
     "dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/kernel", 
-    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on", 
+    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
     "dojo/query", "esri/toolbars/navigation", "dijit/registry",
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "dojo/text!application/NavToolBar/templates/NavToolBar.html", 
@@ -10,7 +10,7 @@ define([
     
     ], function (
         Evented, declare, lang, has, dom, esriNS,
-        _WidgetBase, _TemplatedMixin, on,  
+        _WidgetBase, _TemplatedMixin, on, 
         query, Navigation, registry,
         HomeButton, LocateButton, 
         NavToolBarTemplate, 
@@ -54,30 +54,55 @@ define([
             on(dom.byId("navZoomIn"), "click", lang.hitch(this, function(e) {
                 this.map.setLevel(this.map.getLevel()+1);
             }));
-            // on(dom.byId("navHome"), "click", lang.hitch(this, function(e) {
-            //     this.map.setLevel(this.nav.zoomToFullExtent());
-            //     //this.map.setExtent(this.map.);
-            // }));
-            var home = new HomeButton({
-                map: this.map
-            }, domConstruct.create("div",{},dom.byId("navHome")));
-            home.startup();
-
-            var homeButton = dojo.query(".homeContainer")[0];
-            var homeNode = dojo.query(".home")[0];
-            dojo.empty(homeNode);
-            var homeHint = "Default Extent";
-
-            var btnHome = domConstruct.create("input", {
-                type: 'image',
-                src: 'images/icons_white/home.png',
-                alt: homeHint,
-                title: homeHint,
-            }, homeNode);
 
             on(dom.byId("navZoomOut"), "click", lang.hitch(this, function(e) {
                 this.map.setLevel(this.map.getLevel()-1);
             }));
+
+            if(has("home")) {
+                var home = new HomeButton({
+                    map: this.map
+                }, domConstruct.create("div",{},dom.byId("navHome")));
+                home.startup();
+
+                var homeButton = dojo.query(".homeContainer")[0];
+                var homeNode = dojo.query(".home")[0];
+                dojo.empty(homeNode);
+                var homeHint = "Default Extent";
+
+                var btnHome = domConstruct.create("input", {
+                    type: 'image',
+                    src: 'images/icons_white/home.png',
+                    alt: homeHint,
+                    title: homeHint,
+                }, homeNode);
+            } else {
+                dojo.destroy("navHome");
+            }
+
+            var isChrome = !!window.chrome && !!window.chrome.webstore;
+            if (has("locate") && (!isChrome || (window.location.protocol === "https:"))) {
+                var geoLocate = new LocateButton({
+                    map: this.map
+                }, domConstruct.create("div",{},dom.byId("navLocate")));
+                geoLocate.startup();
+
+                var locateButton = dojo.query(".locateContainer")[0];
+                var zoomLocateButton = dojo.query(".zoomLocateButton")[0];
+                dojo.empty(zoomLocateButton);
+                var locateHint = dojo.attr(zoomLocateButton, 'title');
+
+                domConstruct.create("input", {
+                    type: 'image',
+                    src: 'images/icons_white/locate.png',
+                    alt: locateHint,
+                    title: locateHint,
+                }, zoomLocateButton);
+            } else {
+                dojo.destroy("navLocate");
+            }
+
+
 
             //registry.byId("zoomprev").disabled = navToolbar.isFirstExtent();
 

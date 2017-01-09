@@ -1466,32 +1466,32 @@ define(["dojo/ready",
                 });
             }));
 
-            // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
-            var isChrome = !!window.chrome && !!window.chrome.webstore;
-            if (has("locate") && (!isChrome || (window.location.protocol === "https:"))) {
-                var panelLocate = domConstruct.create("div", {
-                    id: "panelLocate",
-                    className: "icon-color tool",
-                    innerHTML: "<div id='btnLocate'></div>"
-                    }, dom.byId("panelTools"), 1);
-                var geoLocate = new LocateButton({
-                    map: this.map
-                }, dom.byId("btnLocate"));
+            // // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
+            // var isChrome = !!window.chrome && !!window.chrome.webstore;
+            // if (has("locate") && (!isChrome || (window.location.protocol === "https:"))) {
+            //     var panelLocate = domConstruct.create("div", {
+            //         id: "panelLocate",
+            //         className: "icon-color tool",
+            //         innerHTML: "<div id='btnLocate'></div>"
+            //         }, dom.byId("panelTools"), 1);
+            //     var geoLocate = new LocateButton({
+            //         map: this.map
+            //     }, dom.byId("btnLocate"));
 
-                geoLocate.startup();
+            //     geoLocate.startup();
 
-                var locateButton = dojo.query(".locateContainer")[0];
-                var zoomLocateButton = dojo.query(".zoomLocateButton")[0];
-                dojo.empty(zoomLocateButton);
-                var locateHint = dojo.attr(zoomLocateButton, 'title');
+            //     var locateButton = dojo.query(".locateContainer")[0];
+            //     var zoomLocateButton = dojo.query(".zoomLocateButton")[0];
+            //     dojo.empty(zoomLocateButton);
+            //     var locateHint = dojo.attr(zoomLocateButton, 'title');
 
-                domConstruct.create("input", {
-                    type: 'image',
-                    src: 'images/icons_' + this.config.icons + '/locate.png',
-                    alt: locateHint,
-                    'aria-label': locateHint,
-                }, zoomLocateButton);
-            }
+            //     domConstruct.create("input", {
+            //         type: 'image',
+            //         src: 'images/icons_' + this.config.icons + '/locate.png',
+            //         alt: locateHint,
+            //         'aria-label': locateHint,
+            //     }, zoomLocateButton);
+            // }
 
             //Add the location search widget
             require(["application/has-config!search?esri/dijit/Search", 

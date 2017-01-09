@@ -1,5 +1,5 @@
 li[role='menuitem']:hover, 
-div[role='button']:not(.searchBtn):not(.searchClear):hover,
+div[role='button']:not(.searchBtn):not(.searchClear):not(.home):not(.zoomLocateButton):hover,
 .no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
 #dijit_form_ComboButton_0_arrow:hover,
 button:hover,
@@ -11,11 +11,11 @@ button:hover,
   background-color: rgba(255, 255, 255, 0.5) !important;
 }
 
-.HomeButton .home:hover,
+/*.HomeButton .home:hover,
 .LocateButton .zoomLocateButton:hover {
   background-color: rgba(255, 255, 255, 0.5) !important;
 }
-
+*/
 /*
 INTERNET EXPLORER and FIREFOX : not supported or buggy:
 http://reference.sitepoint.com/css/outline-color
