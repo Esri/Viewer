@@ -102,7 +102,21 @@ define([
                 dojo.destroy("navLocate");
             }
 
+            on(dom.byId("navPrev"), "click", lang.hitch(this, function(e) {
+                this.nav.zoomToPrevExtent();
+            }));
 
+            on(dom.byId("navNext"), "click", lang.hitch(this, function(e) {
+                this.nav.zoomToNextExtent();
+            }));
+
+            on(dom.byId("navZoomInTool"), "click", lang.hitch(this, function(e) {
+                this.nav.activate("zoomin");
+            }));
+
+            on(dom.byId("navZoomOutTool"), "click", lang.hitch(this, function(e) {
+                this.nav.activate("zoomout");
+            }));
 
             //registry.byId("zoomprev").disabled = navToolbar.isFirstExtent();
 
