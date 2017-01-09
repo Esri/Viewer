@@ -1536,6 +1536,10 @@ td, th {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 
+.borderTop {
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+}
+
 #leftPanel{
     min-width: 400px;
     height: 100%;
@@ -1794,7 +1798,13 @@ main {
 }
 
 
-/*#pageBody_details, #pageBody_instructions {
-    width: calc(100% - 20px) !important; 
-    padding: 10px 10px 0 10px;
-}*/
+.navToolBar {
+    height: auto !important; 
+    border-radius: 5px; 
+}
+
+.navToolBar input[type="image"] {
+    width: 20px;
+    height: 20px;
+}
+

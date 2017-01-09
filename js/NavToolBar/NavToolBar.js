@@ -1,7 +1,8 @@
 define([
     "dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/kernel", 
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on", 
-    "dojo/query", 
+    "dojo/query", "esri/toolbars/navigation", "dijit/registry",
+    "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "dojo/text!application/NavToolBar/templates/NavToolBar.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", 
     "dojo/dom-construct", "dojo/_base/event", 
@@ -10,7 +11,8 @@ define([
     ], function (
         Evented, declare, lang, has, dom, esriNS,
         _WidgetBase, _TemplatedMixin, on,  
-        query,
+        query, Navigation, registry,
+        HomeButton, LocateButton, 
         NavToolBarTemplate, 
         domClass, domAttr, domStyle, 
         domConstruct, event
@@ -30,6 +32,7 @@ define([
 
             this.set("map", defaults.map);
             this.set("navToolBar", defaults.navToolBar);
+            this.set("nav", new Navigation(this.map));
         },
 
         startup: function () {
@@ -44,16 +47,42 @@ define([
         },
         
         _init: function () {
-            //dojo.empty(this.navToolBar);
+            dojo.empty(this.navToolBar);
+
             domConstruct.place(this.domNode, this.navToolBar);
+
             on(dom.byId("navZoomIn"), "click", lang.hitch(this, function(e) {
                 this.map.setLevel(this.map.getLevel()+1);
             }));
+            // on(dom.byId("navHome"), "click", lang.hitch(this, function(e) {
+            //     this.map.setLevel(this.nav.zoomToFullExtent());
+            //     //this.map.setExtent(this.map.);
+            // }));
+            var home = new HomeButton({
+                map: this.map
+            }, domConstruct.create("div",{},dom.byId("navHome")));
+            home.startup();
+
+            var homeButton = dojo.query(".homeContainer")[0];
+            var homeNode = dojo.query(".home")[0];
+            dojo.empty(homeNode);
+            var homeHint = "Default Extent";
+
+            var btnHome = domConstruct.create("input", {
+                type: 'image',
+                src: 'images/icons_white/home.png',
+                alt: homeHint,
+                title: homeHint,
+            }, homeNode);
+
             on(dom.byId("navZoomOut"), "click", lang.hitch(this, function(e) {
                 this.map.setLevel(this.map.getLevel()-1);
             }));
-        },
 
+            //registry.byId("zoomprev").disabled = navToolbar.isFirstExtent();
+
+        },
+//window.nav.zoomToPrevExtent();
     });
 
     if (has("extend-esri")) {
