@@ -1804,3 +1804,10 @@ main {
 .LocateButton .zoomLocateButton:hover {
   background-color: transparent !important;
 }
+
+#extenderNav {
+    height: 12px;
+    font-size: 0;
+    line-height: 0;
+    padding: 1px 0;
+}
