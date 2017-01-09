@@ -66,6 +66,8 @@ define([
                 home.startup();
 
                 var homeButton = dojo.query(".homeContainer")[0];
+                dojo.attr(homeButton, "role", "presentation");
+                dojo.attr(query("div", homeButton)[0], "role", "presentation");
                 var homeNode = dojo.query(".home")[0];
                 dojo.empty(homeNode);
                 var homeHint = "Default Extent";
