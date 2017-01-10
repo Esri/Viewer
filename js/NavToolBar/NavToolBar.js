@@ -147,6 +147,12 @@ define([
                 dojo.setStyle(dom.byId("extendedTools"), "display", ck?"inherit":"none");
                 this.nav.deactivate();
             }));
+
+            // on(dom.byId("testBtn"), "click", lang.hitch(this, function(e) {
+            //     this.map._createLabelLayer();
+            // }));
+
+
         },
 
         //disTabs : 1,
