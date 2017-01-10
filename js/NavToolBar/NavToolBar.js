@@ -22,7 +22,8 @@ define([
 
         options: {
             map: null,
-            navToolBar:null
+            navToolBar:null,
+            iconColor:"white"
         },
 
         constructor: function (options, srcRefNode) {
@@ -33,6 +34,7 @@ define([
             this.set("map", defaults.map);
             this.set("navToolBar", defaults.navToolBar);
             this.set("nav", new Navigation(this.map));
+            this.set("iconColor", defaults.iconColor);
         },
 
         startup: function () {
@@ -77,7 +79,7 @@ define([
 
                 var btnHome = domConstruct.create("input", {
                     type: 'image',
-                    src: 'images/icons_white/home.png',
+                    src: 'images/icons_'+this.iconColor+'/home.png',
                     alt: homeHint,
                     title: homeHint,
                 }, homeNode);
@@ -138,6 +140,7 @@ define([
                 this.tryDisableBtn("navZoomOut", zoom == this.map.getMinZoom());
                 this.tryDisableBtn("navPrev",this.nav.isFirstExtent());
                 this.tryDisableBtn("navNext",this.nav.isLastExtent());
+                this.tryDisableBtn("navHome",window.initExt === this.map.extent);
                 this.nav.deactivate();
             }));
 

@@ -12,19 +12,23 @@
 				aria-label="Maximum Zoom In" role="button"></div>
 			<input 
 				type="image" 
-				src="images/icons_white/plus.png" 
+				src="images/icons_${iconColor}/plus.png" 
 				alt="Zoom In" 
 				title="Zoom In"
 				>
 		</div>
-		<div id="navHome" class="navBtn borderBottom"></div>
+		<div id="navHome" class="navBtn borderBottom">
+			<div 
+				class="disabledBtn" style="display:none" 
+				aria-label="At Default Extent" role="button"></div>
+		</div>
 		<div id="navZoomOut" class="navBtn borderBottom">
 			<div 
 				class="disabledBtn" style="display:none" 
 				aria-label="Maximum Zoom Out" role="button"></div>
 			<input 
 				type="image" 
-				src="images/icons_white/minus.png" 
+				src="images/icons_${iconColor}/minus.png" 
 				alt="Zoom Out" 
 				title="Zoom Out"
 				>
@@ -43,13 +47,13 @@
 					for="extenderNavCheckbox" tabindex=0>
 					<img 
 						class="extenderNavExtend"
-						src="images/icons_white/down.png" 
+						src="images/icons_${iconColor}/down.png" 
 						alt="Extended Navigation" 
 						title="Extended Navigation"
 						style="width: 24px;height: 12px; display:none;"/>
 					<img 
 						class="extenderNavCollapse"
-						src="images/icons_white/Up.png" 
+						src="images/icons_${iconColor}/Up.png" 
 						alt="Extended Navigation" 
 						title="Extended Navigation"
 						style="width: 24px;height: 12px; display:inline-block;"/>
@@ -67,7 +71,7 @@
 							aria-label="Previous Extent, Disabled" role="button"></div>
 						<input 
 							type="image" 
-							src="images/icons_white/prev.png" 
+							src="images/icons_${iconColor}/prev.png" 
 							alt="Previous Extent" 
 							title="Previous Extent">
 					</div>
@@ -77,7 +81,7 @@
 							aria-label="Next Extent, Disabled" role="button" ></div>
 						<input 
 							type="image" 
-							src="images/icons_white/next.png" 
+							src="images/icons_${iconColor}/next.png" 
 							alt="Next Extent" 
 							title="Next Extent">
 					</div>
@@ -87,14 +91,14 @@
 					<div id="navZoomInTool" class="navBtn borderTop borderBottom">
 						<input 
 							type="image" 
-							src="images/icons_white/ZoomPlus.png" 
+							src="images/icons_${iconColor}/ZoomPlus.png" 
 							alt="Zoom In Tool" 
 							title="Zoom In Tool">
 					</div>
 					<div id="navZoomOutTool" class="navBtn" >
 						<input 
 							type="image" 
-							src="images/icons_white/ZoomMinus.png" 
+							src="images/icons_${iconColor}/ZoomMinus.png" 
 							alt="Zoom Out Tool" 
 							title="Zoom Out Tool">
 					</div>

@@ -133,8 +133,8 @@ define(["dojo/ready",
         },
 
         _mapLoaded: function () {
-            this.map.resize();
-            this.map.reposition();
+            // this.map.resize();
+            // this.map.reposition();
 
             query(".esriSimpleSlider").style("backgroundColor", this.theme.toString());
             // remove loading class from body
@@ -611,8 +611,9 @@ define(["dojo/ready",
                 });
                 
                 nav = new NavToolBar({
-                    map:this.map,
-                    navToolBar:oldNaviagationToolBar,
+                    map: this.map,
+                    navToolBar: oldNaviagationToolBar,
+                    iconColor: this.config.icons,
                 }, navToolBar);
                 nav.startup();
 
@@ -1843,7 +1844,7 @@ define(["dojo/ready",
                 if (this.initExt !== null) {
                     this.map.setExtent(this.initExt);
                 }
-                this.initExt = this.map.extent;
+                window.initExt = this.initExt = this.map.extent;
                 
                 // // ???
                 // if(!has("navigation")) {
