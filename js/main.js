@@ -313,8 +313,7 @@ define(["dojo/ready",
 
                 // set map so that it can be repositioned when page is scrolled
                 toolbar.map = this.map;
-                var toolList = [];
-                //this._addInfoTool(toolbar);
+                var toolList = [this._addNavigation("navigation", query("#mapDiv_zoom_slider")[0])];
 
                 var deferredDetails = new Deferred();
                 for (var i = 0; i < this.config.tools.length; i++) {
@@ -359,13 +358,12 @@ define(["dojo/ready",
                             toolList.push(this._addPrint(this.config.tools[i], toolbar));
                             break;
                         case "navigation":
-                            toolList.push(this._addNavigation(this.config.tools[i], query("#mapDiv_zoom_slider")[0]));
                             break;
                         default:
                             break;
                     }
                 }
-
+    
                 all(toolList).then(lang.hitch(this, function (results) {
                     
                     //If all the results are false and locate and home are also false we can hide the toolbar
@@ -604,25 +602,18 @@ define(["dojo/ready",
         
         _addNavigation: function (tool, oldNaviagationToolBar) {
             var deferred = new Deferred();
-            if (has("navigation")) {
-               //alert('Navigation goes here!');
-                var navToolBar = domConstruct.create("div", {
-                    id: "newNaviagationToolBar",
-                });
-                
-                nav = new NavToolBar({
-                    map: this.map,
-                    navToolBar: oldNaviagationToolBar,
-                    iconColor: this.config.icons,
-                    newIcons:this.config.new_icons?'.new':'',
-                }, navToolBar);
-                nav.startup();
-
-                deferred.resolve(true);
-            }
-            else {
-                deferred.resolve(false);
-            }
+            var navToolBar = domConstruct.create("div", {
+                id: "newNaviagationToolBar",
+            });
+            
+            nav = new NavToolBar({
+                map: this.map,
+                navToolBar: oldNaviagationToolBar,
+                iconColor: this.config.icons,
+                newIcons:this.config.new_icons?'.new':'',
+            }, navToolBar);
+            nav.startup();
+            deferred.resolve(true);
             return deferred.promise;
         },
 

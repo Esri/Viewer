@@ -89,8 +89,10 @@ define([
                 dojo.destroy("navHome");
             }
 
-            var isChrome = !!window.chrome && !!window.chrome.webstore;
-            if (has("locate") && (!isChrome || (window.location.protocol === "https:"))) {
+            var isLocationEnabled = !(!!window.chrome && !!window.chrome.webstore) || 
+                (window.location.protocol === "https:") || 
+                (window.location.hostname === "localhost");
+            if (has("locate") && isLocationEnabled) {
                 var geoLocate = new LocateButton({
                     map: this.map
                 }, domConstruct.create("div",{},dom.byId("navLocate")));
