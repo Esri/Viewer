@@ -131,10 +131,12 @@ define([
                 }));
 
                 on(dom.byId("navZoomInTool"), "click", lang.hitch(this, function(e) {
+                    this.map.setMapCursor("crosshair");
                     this.nav.activate("zoomin");
                 }));
 
                 on(dom.byId("navZoomOutTool"), "click", lang.hitch(this, function(e) {
+                    this.map.setMapCursor("crosshair");
                     this.nav.activate("zoomout");
                 }));
 
@@ -149,6 +151,7 @@ define([
 
                     dojo.setStyle(dom.byId("extendedTools"), "display", ck?"inherit":"none");
                     this.nav.deactivate();
+                    this.map.setMapCursor("default");
                 }));
 
             } else {
@@ -167,6 +170,7 @@ define([
                     this.tryDisableBtn("navPrev",this.nav.isFirstExtent());
                     this.tryDisableBtn("navNext",this.nav.isLastExtent());
                     this.nav.deactivate();
+                    this.map.setMapCursor("default");
                 }
             }));
 
