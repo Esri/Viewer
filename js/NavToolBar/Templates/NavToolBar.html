@@ -3,7 +3,7 @@
 	style="height:auto; position: absolute;"
 	>
 
-	<div id="navToolBar" class="navToolBar bg">
+	<div id="navToolBar" class="navToolBar bg" title="Zoom In">
 		<div 
 			id="navZoomIn" 
 			class="navBtn borderBottom" >
@@ -22,7 +22,7 @@
 				class="disabledBtn" style="display:none" 
 				aria-label="At Default Extent" role="button"></div>
 		</div>
-		<div id="navZoomOut" class="navBtn borderBottom">
+		<div id="navZoomOut" class="navBtn borderBottom" title="Zoom Out">
 			<div 
 				class="disabledBtn" style="display:none" 
 				aria-label="Maximum Zoom Out" role="button"></div>
@@ -37,7 +37,7 @@
 	
 	<div id="extendedNav">
 		<div id="extendedNavTools" class="navToolBar bg" style="margin-top:4px;">
-			<div id="extenderNav" class="navBtn">
+			<div id="extenderNav" class="navBtn" title="Extended Navigation">
 				<input 
 					id="extenderNavCheckbox"
 					type="checkbox" 
@@ -48,14 +48,14 @@
 					<img 
 						class="extenderNavExtend"
 						src="images/icons_${iconColor}/down.png" 
-						alt="Extended Navigation" 
-						title="Extended Navigation"
+						alt="Show Extended Navigation Tools" 
+						title="Show Extended Navigation Tools"
 						style="width: 24px;height: 12px; display:none;"/>
 					<img 
 						class="extenderNavCollapse"
 						src="images/icons_${iconColor}/Up.png" 
-						alt="Extended Navigation" 
-						title="Extended Navigation"
+						alt="Hide Extended Navigation Tools" 
+						title="Hide Extended Navigation Tools"
 						style="width: 24px;height: 12px; display:inline-block;"/>
 				</label>
 
@@ -65,7 +65,7 @@
 				<div id="navLocate" class="navBtn borderTop"></div>
 
 				<div id="navPrevNext" style="height: auto;">
-					<div id="navPrev" class="navBtn borderTop borderBottom">
+					<div id="navPrev" class="navBtn borderTop borderBottom" title="Previous Extent">
 						<div 
 							class="disabledBtn" style="display:none" 
 							aria-label="Previous Extent, Disabled" role="button"></div>
@@ -75,7 +75,7 @@
 							alt="Previous Extent" 
 							title="Previous Extent">
 					</div>
-					<div id="navNext" class="navBtn">
+					<div id="navNext" class="navBtn" title="Next Extent">
 						<div 
 							class="disabledBtn" style="display:none" 
 							aria-label="Next Extent, Disabled" role="button" ></div>
@@ -88,14 +88,14 @@
 				</div>
 
 				<div id="ZoomTools" style="height: auto;">
-					<div id="navZoomInTool" class="navBtn borderTop borderBottom">
+					<div id="navZoomInTool" class="navBtn borderTop borderBottom" title="Zoom In Tool">
 						<input 
 							type="image" 
 							src="images/icons_${iconColor}/ZoomPlus.png" 
 							alt="Zoom In Tool" 
 							title="Zoom In Tool">
 					</div>
-					<div id="navZoomOutTool" class="navBtn" >
+					<div id="navZoomOutTool" class="navBtn" title="Zoom Out Tool">
 						<input 
 							type="image" 
 							src="images/icons_${iconColor}/ZoomMinus.png" 

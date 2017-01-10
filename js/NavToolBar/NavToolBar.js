@@ -73,7 +73,6 @@ define([
 
                 var homeButton = dojo.query(".homeContainer")[0];
                 var homen = dojo.query(".homeContainer .home")[0];
-                dojo.removeAttr(homen, 'title');
                 dojo.removeAttr(homen, 'role');
                 var homeNode = dojo.query(".home")[0];
                 dojo.empty(homeNode);
@@ -100,11 +99,11 @@ define([
 
                 var locateButton = dojo.query(".locateContainer")[0];
                 var zoomLocateButton = dojo.query(".zoomLocateButton")[0];
-                dojo.removeAttr(zoomLocateButton, 'title');
+                //dojo.removeAttr(zoomLocateButton, 'title');
+                var locateHint = dojo.attr(zoomLocateButton, 'title');
                 dojo.removeAttr(zoomLocateButton, 'role');
 
                 dojo.empty(zoomLocateButton);
-                var locateHint = dojo.attr(zoomLocateButton, 'title');
 
                 domConstruct.create("input", {
                     type: 'image',
