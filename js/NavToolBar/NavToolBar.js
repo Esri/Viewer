@@ -126,6 +126,12 @@ define([
                 this.nav.activate("zoomout");
             }));
 
+            on(dom.byId("extenderNavLabel"), "keypress", lang.hitch(this, function(e) {
+                if(e.key === " " || e.char === " ") {
+                    e.target.click();
+                }
+            }));
+
             //registry.byId("zoomprev").disabled = navToolbar.isFirstExtent();
 
         },
