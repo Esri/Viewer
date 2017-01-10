@@ -135,12 +135,14 @@ define([
             this.nav.on("extent-history-change", lang.hitch(this, function () {
                 this.disableBtn("navPrev",this.nav.isFirstExtent());
                 this.disableBtn("navNext",this.nav.isLastExtent());
+                this.nav.deactivate();
             }));
             //registry.byId("zoomprev").disabled = navToolbar.isFirstExtent();
             on(dom.byId("extenderNavCheckbox"), "change", lang.hitch(this, function(e) {
                 var ck = e.target.checked;
 
                 dojo.setStyle(dom.byId("extendedTools"), "display", ck?"inherit":"none");
+                this.nav.deactivate();
             }));
         },
 
