@@ -29,11 +29,26 @@
 		<div id="extendedNavTools" class="navToolBar bg" style="margin-top:4px;">
 			<div id="extenderNav" class="navBtn">
 				<input 
-					type="image" 
-					src="images/icons_white/down.png" 
-					alt="Extended Navigation" 
-					title="Extended Navigation"
-					style="width: 24px;height: 12px; display:inline-block;">
+					id="extenderNavCheckbox"
+					type="checkbox" 
+					>
+				<label for="extenderNavCheckbox">
+					<img 
+						class="extenderNavExtend"
+						src="images/icons_white/down.png" 
+						alt="Extended Navigation" 
+						title="Extended Navigation"
+						tabindex=0
+						style="width: 24px;height: 12px; display:none;"/>
+					<img 
+						class="extenderNavCollapse"
+						src="images/icons_white/Up.png" 
+						alt="Extended Navigation" 
+						title="Extended Navigation"
+						tabindex=0
+						style="width: 24px;height: 12px; display:inline-block;"/>
+				</label>
+
 			</div>
 
 			<div id="navLocate" class="navBtn borderTop"></div>

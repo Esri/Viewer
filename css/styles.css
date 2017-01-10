@@ -1815,3 +1815,23 @@ main {
     line-height: 0;
     padding: 1px 0;
 }
+
+#extenderNav input[type="checkbox"] {
+    display:none;
+}
+
+#extenderNav input[type="checkbox"] + label .extenderNavExtend {
+    display:none !important;
+}
+
+#extenderNav input[type="checkbox"] + label .extenderNavCollapse {
+    display:inline-block !important;
+}
+
+#extenderNav input[type="checkbox"]:checked + label .extenderNavExtend {
+    display:inline-block !important;
+}
+
+#extenderNav input[type="checkbox"]:checked + label .extenderNavCollapse {
+    display:none !important;
+}
