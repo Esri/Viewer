@@ -610,7 +610,8 @@ define(["dojo/ready",
                 map: this.map,
                 navToolBar: oldNaviagationToolBar,
                 iconColor: this.config.icons,
-                newIcons:this.config.new_icons?'.new':'',
+                newIcons: this.config.new_icons?'.new':'',
+                zoomColor: this.focusColor,
             }, navToolBar);
             nav.startup();
             deferred.resolve(true);

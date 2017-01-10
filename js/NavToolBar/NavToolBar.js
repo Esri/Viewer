@@ -3,6 +3,7 @@ define([
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
     "dojo/query", "esri/toolbars/navigation", "dijit/registry",
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
+    "esri/symbols/SimpleLineSymbol", "esri/Color",
     "dojo/text!application/NavToolBar/templates/NavToolBar.html", 
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", 
     "dojo/dom-construct", "dojo/_base/event", 
@@ -13,6 +14,7 @@ define([
         _WidgetBase, _TemplatedMixin, on, 
         query, Navigation, registry,
         HomeButton, LocateButton, 
+        SimpleLineSymbol, Color,
         NavToolBarTemplate, 
         domClass, domAttr, domStyle, 
         domConstruct, event
@@ -24,7 +26,8 @@ define([
             map: null,
             navToolBar:null,
             iconColor:"white",
-            newIcons:''
+            newIcons:'',
+            zoomColor:'red',
         },
 
         constructor: function (options, srcRefNode) {
@@ -37,6 +40,7 @@ define([
             this.set("nav", new Navigation(this.map));
             this.set("iconColor", defaults.iconColor);
             this.set("newIcons", defaults.newIcons);
+            this.set("zoomColor", defaults.zoomColor);
         },
 
         startup: function () {
@@ -52,6 +56,8 @@ define([
         
         _init: function () {
             // this.map.showPanArrows(); //???
+
+            this.nav.setZoomSymbol(new SimpleLineSymbol("SOLID", new Color(this.zoomColor), 4));
 
             dojo.empty(this.navToolBar);
 
@@ -137,7 +143,7 @@ define([
                         e.target.click();
                     }
                 }));
-                
+
                 on(dom.byId("extenderNavCheckbox"), "change", lang.hitch(this, function(e) {
                     var ck = e.target.checked;
 
