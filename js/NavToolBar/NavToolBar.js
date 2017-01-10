@@ -47,6 +47,8 @@ define([
         },
         
         _init: function () {
+            // this.map.showPanArrows(); //???
+
             dojo.empty(this.navToolBar);
 
             domConstruct.place(this.domNode, this.navToolBar);
@@ -69,8 +71,6 @@ define([
                 var homen = dojo.query(".homeContainer .home")[0];
                 dojo.removeAttr(homen, 'title');
                 dojo.removeAttr(homen, 'role');
-                // dojo.attr(homeButton, "role", "presentation");
-                // dojo.attr(query("div", homeButton)[0], "role", "presentation");
                 var homeNode = dojo.query(".home")[0];
                 dojo.empty(homeNode);
                 var homeHint = "Default Extent";
@@ -133,13 +133,14 @@ define([
             }));
 
             this.nav.on("extent-history-change", lang.hitch(this, function () {
-                // this.disableBtn("navZoomIn",this.nav.isFirstExtent());
-                // this.disableBtn("navZoomOut",this.nav.isLastExtent());
-                this.disableBtn("navPrev",this.nav.isFirstExtent());
-                this.disableBtn("navNext",this.nav.isLastExtent());
+                var zoom = this.map.getZoom();
+                this.tryDisableBtn("navZoomIn", zoom == this.map.getMaxZoom());
+                this.tryDisableBtn("navZoomOut", zoom == this.map.getMinZoom());
+                this.tryDisableBtn("navPrev",this.nav.isFirstExtent());
+                this.tryDisableBtn("navNext",this.nav.isLastExtent());
                 this.nav.deactivate();
             }));
-            //registry.byId("zoomprev").disabled = navToolbar.isFirstExtent();
+
             on(dom.byId("extenderNavCheckbox"), "change", lang.hitch(this, function(e) {
                 var ck = e.target.checked;
 
@@ -150,7 +151,7 @@ define([
 
         //disTabs : 1,
 
-        disableBtn:function(id, disable) {
+        tryDisableBtn:function(id, disable) {
             var div = query("#"+id)[0];
             var btn = query("input", div)[0];
             var dis = query(".disabledBtn", div)[0];
@@ -168,6 +169,7 @@ define([
             // if(disable && dojo.getStyle(dis, "display") !== "none" )
             //     this.blurAll();//dojo.getAttr(dis, 'aria-label'));
             dojo.setStyle(dis, "display", disable?"inherit":"none");
+            return disable;
         },
 
         blurAll: function(text) {
