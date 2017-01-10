@@ -137,7 +137,11 @@ define([
                 this.disableBtn("navNext",this.nav.isLastExtent());
             }));
             //registry.byId("zoomprev").disabled = navToolbar.isFirstExtent();
+            on(dom.byId("extenderNavCheckbox"), "change", lang.hitch(this, function(e) {
+                var ck = e.target.checked;
 
+                dojo.setStyle(dom.byId("extendedTools"), "display", ck?"inherit":"none");
+            }));
         },
 
         //disTabs : 1,

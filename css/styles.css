@@ -1820,19 +1820,19 @@ main {
     display:none;
 }
 
-#extenderNav input[type="checkbox"] + label .extenderNavExtend {
+#extenderNav input[type="checkbox"] + label .extenderNavCollapse {
     display:none !important;
 }
 
-#extenderNav input[type="checkbox"] + label .extenderNavCollapse {
-    display:inline-block !important;
-}
-
-#extenderNav input[type="checkbox"]:checked + label .extenderNavExtend {
+#extenderNav input[type="checkbox"] + label .extenderNavExtend {
     display:inline-block !important;
 }
 
 #extenderNav input[type="checkbox"]:checked + label .extenderNavCollapse {
+    display:inline-block !important;
+}
+
+#extenderNav input[type="checkbox"]:checked + label .extenderNavExtend {
     display:none !important;
 }
 
