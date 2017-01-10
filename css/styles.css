@@ -1210,24 +1210,24 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   padding: 5px 8px 0px 5px;
 }
 
-li[role='menuitem']:hover, 
+/*li[role='menuitem']:hover, 
 div[role='button']:hover,
 div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
 {
   /* border-radius: 5px; */
-  /* -webkit-border-radius: 5px; */
-}
+  /* -webkit-border-radius: 5px; 
+}*/
 
 /*.panelToolActive:focus, .panelToolActive:hover {
    border-radius: 15px !important; 
-  /* -webkit-border-radius: 15px !important; */
+  /* -webkit-border-radius: 15px !important; 
 }*/
 
 /*.searchBtn:focus, .searchClear:focus, .searchInput:focus {
   background-color: rgba(0, 0, 0, 0.7) !important;
-}
+}*/
 
-*/.HomeButton:focus, .LocateButton:focus,
+.HomeButton:focus, .LocateButton:focus,
 .share-dialog-icon
 {
   border-radius: 5px;
@@ -1793,6 +1793,10 @@ main {
 .navToolBar {
     height: auto !important; 
     border-radius: 5px; 
+}
+
+.navToolBar div {
+    display:block;
 }
 
 .navToolBar input[type="image"] {
