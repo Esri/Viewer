@@ -132,10 +132,44 @@ define([
                 }
             }));
 
+            this.nav.on("extent-history-change", lang.hitch(this, function () {
+                this.disableBtn("navPrev",this.nav.isFirstExtent());
+                this.disableBtn("navNext",this.nav.isLastExtent());
+            }));
             //registry.byId("zoomprev").disabled = navToolbar.isFirstExtent();
 
         },
-//window.nav.zoomToPrevExtent();
+
+        //disTabs : 1,
+
+        disableBtn:function(id, disable) {
+            var div = query("#"+id)[0];
+            var btn = query("input", div)[0];
+            var dis = query(".disabledBtn", div)[0];
+            var crs = disable ? "not-allowed": "pointer";
+            dojo.setStyle(btn, "cursor", crs);
+            dojo.setStyle(div, "cursor", crs);
+            dojo.setAttr(btn, "tabIndex", disable?-1:0);
+            // if(this.disTabs>=0 && disable) {
+            //     this.disTabs-=1;
+            // } else {
+            //     dojo.setAttr(dis, "tabIndex", disable?-1:0);
+            // }
+            //dojo.setStyle(btn, "pointer-events", disable?"none":"all");
+            dojo.setStyle(dis, "display", disable?"inherit":"none");
+            if(disable) 
+                this.blurAll();//dojo.getAttr(dis, 'aria-label'));
+        },
+
+        blurAll: function(text) {
+            if(text===undefined) 
+                text='';
+            var tmp = domConstruct.create("div", {tabindex:0, 'aria-label':text}, document.body);
+            //document.body.appendChild(tmp);
+            tmp.focus();
+            document.body.removeChild(tmp);
+        }
+
     });
 
     if (has("extend-esri")) {
