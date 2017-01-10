@@ -23,7 +23,8 @@ define([
         options: {
             map: null,
             navToolBar:null,
-            iconColor:"white"
+            iconColor:"white",
+            newIcons:''
         },
 
         constructor: function (options, srcRefNode) {
@@ -35,6 +36,7 @@ define([
             this.set("navToolBar", defaults.navToolBar);
             this.set("nav", new Navigation(this.map));
             this.set("iconColor", defaults.iconColor);
+            this.set("newIcons", defaults.newIcons);
         },
 
         startup: function () {

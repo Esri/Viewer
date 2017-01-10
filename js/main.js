@@ -614,6 +614,7 @@ define(["dojo/ready",
                     map: this.map,
                     navToolBar: oldNaviagationToolBar,
                     iconColor: this.config.icons,
+                    newIcons:this.config.new_icons?'.new':'',
                 }, navToolBar);
                 nav.startup();
 
