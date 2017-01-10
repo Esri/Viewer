@@ -115,43 +115,53 @@ define([
                 dojo.destroy("navLocate");
             }
 
-            on(dom.byId("navPrev"), "click", lang.hitch(this, function(e) {
-                this.nav.zoomToPrevExtent();
-            }));
+            if(has("navigation")) {
+                on(dom.byId("navPrev"), "click", lang.hitch(this, function(e) {
+                    this.nav.zoomToPrevExtent();
+                }));
 
-            on(dom.byId("navNext"), "click", lang.hitch(this, function(e) {
-                this.nav.zoomToNextExtent();
-            }));
+                on(dom.byId("navNext"), "click", lang.hitch(this, function(e) {
+                    this.nav.zoomToNextExtent();
+                }));
 
-            on(dom.byId("navZoomInTool"), "click", lang.hitch(this, function(e) {
-                this.nav.activate("zoomin");
-            }));
+                on(dom.byId("navZoomInTool"), "click", lang.hitch(this, function(e) {
+                    this.nav.activate("zoomin");
+                }));
 
-            on(dom.byId("navZoomOutTool"), "click", lang.hitch(this, function(e) {
-                this.nav.activate("zoomout");
-            }));
+                on(dom.byId("navZoomOutTool"), "click", lang.hitch(this, function(e) {
+                    this.nav.activate("zoomout");
+                }));
 
-            on(dom.byId("extenderNavLabel"), "keypress", lang.hitch(this, function(e) {
-                if(e.key === " " || e.char === " ") {
-                    e.target.click();
-                }
-            }));
+                on(dom.byId("extenderNavLabel"), "keypress", lang.hitch(this, function(e) {
+                    if(e.key === " " || e.char === " ") {
+                        e.target.click();
+                    }
+                }));
+                
+                on(dom.byId("extenderNavCheckbox"), "change", lang.hitch(this, function(e) {
+                    var ck = e.target.checked;
+
+                    dojo.setStyle(dom.byId("extendedTools"), "display", ck?"inherit":"none");
+                    this.nav.deactivate();
+                }));
+
+            } else {
+                dojo.destroy("navPrevNext");
+                dojo.destroy("ZoomTools");
+                dojo.destroy("extenderNav");
+                dojo.setStyle(dom.byId("extendedTools"), "display", "inherit");
+            }
 
             this.nav.on("extent-history-change", lang.hitch(this, function () {
                 var zoom = this.map.getZoom();
                 this.tryDisableBtn("navZoomIn", zoom == this.map.getMaxZoom());
                 this.tryDisableBtn("navZoomOut", zoom == this.map.getMinZoom());
-                this.tryDisableBtn("navPrev",this.nav.isFirstExtent());
-                this.tryDisableBtn("navNext",this.nav.isLastExtent());
                 this.tryDisableBtn("navHome",window.initExt === this.map.extent);
-                this.nav.deactivate();
-            }));
-
-            on(dom.byId("extenderNavCheckbox"), "change", lang.hitch(this, function(e) {
-                var ck = e.target.checked;
-
-                dojo.setStyle(dom.byId("extendedTools"), "display", ck?"inherit":"none");
-                this.nav.deactivate();
+                if(has("navigation")) {
+                    this.tryDisableBtn("navPrev",this.nav.isFirstExtent());
+                    this.tryDisableBtn("navNext",this.nav.isLastExtent());
+                    this.nav.deactivate();
+                }
             }));
 
             // on(dom.byId("testBtn"), "click", lang.hitch(this, function(e) {
