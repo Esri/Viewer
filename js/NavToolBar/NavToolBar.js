@@ -133,6 +133,8 @@ define([
             }));
 
             this.nav.on("extent-history-change", lang.hitch(this, function () {
+                // this.disableBtn("navZoomIn",this.nav.isFirstExtent());
+                // this.disableBtn("navZoomOut",this.nav.isLastExtent());
                 this.disableBtn("navPrev",this.nav.isFirstExtent());
                 this.disableBtn("navNext",this.nav.isLastExtent());
                 this.nav.deactivate();
@@ -155,6 +157,7 @@ define([
             var crs = disable ? "not-allowed": "pointer";
             dojo.setStyle(btn, "cursor", crs);
             dojo.setStyle(div, "cursor", crs);
+            dojo.setStyle(dis, "cursor", crs);
             dojo.setAttr(btn, "tabIndex", disable?-1:0);
             // if(this.disTabs>=0 && disable) {
             //     this.disTabs-=1;
@@ -162,9 +165,9 @@ define([
             //     dojo.setAttr(dis, "tabIndex", disable?-1:0);
             // }
             //dojo.setStyle(btn, "pointer-events", disable?"none":"all");
+            // if(disable && dojo.getStyle(dis, "display") !== "none" )
+            //     this.blurAll();//dojo.getAttr(dis, 'aria-label'));
             dojo.setStyle(dis, "display", disable?"inherit":"none");
-            if(disable) 
-                this.blurAll();//dojo.getAttr(dis, 'aria-label'));
         },
 
         blurAll: function(text) {
