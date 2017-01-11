@@ -131,12 +131,12 @@ define([
                 }));
 
                 on(dom.byId("navZoomInTool"), "click", lang.hitch(this, function(e) {
-                    this.map.setMapCursor("crosshair");
+                    this.map.setMapCursor("url(images/ZoomIn.cur),auto");
                     this.nav.activate("zoomin");
                 }));
 
                 on(dom.byId("navZoomOutTool"), "click", lang.hitch(this, function(e) {
-                    this.map.setMapCursor("crosshair");
+                    this.map.setMapCursor("url(images/ZoomOut.cur),auto");
                     this.nav.activate("zoomout");
                 }));
 
