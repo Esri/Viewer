@@ -488,7 +488,7 @@ define(["dojo/ready",
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 4',
-                    style:'left:-8px; top:52%;'
+                    style:'left:-8px; top:75%;'
                 }, dom.byId('dijit_layout_ContentPane_0_splitter'));
 
                 domConstruct.create("div", {
@@ -1741,34 +1741,42 @@ define(["dojo/ready",
                         case 40 : //down
                             this.map._fixedPan(0, this.map.height * 0.0135);
                             evn.preventDefault();
+                            evn.stopPropagation();
                             break;
                         case 38 : //up
                             this.map._fixedPan(0, this.map.height * -0.0135);
                             evn.preventDefault();
+                            evn.stopPropagation();
                             break;
                         case 37 : //left
                             this.map._fixedPan(this.map.width * -0.0135, 0);
                             evn.preventDefault();
+                            evn.stopPropagation();
                             break;
                         case 39 : //right
                             this.map._fixedPan(this.map.width * 0.0135, 0);
                             evn.preventDefault();
+                            evn.stopPropagation();
                             break;
                         case 33 : //pgup
                             this.map._fixedPan(this.map.width * 0.0135, this.map.height * -0.0135);
                             evn.preventDefault();
+                            evn.stopPropagation();
                             break;
                         case 34 : //pgdn
                             this.map._fixedPan(this.map.width * 0.0135, this.map.height * 0.0135);
                             evn.preventDefault();
+                            evn.stopPropagation();
                             break;
                         case 35 : //end
                             this.map._fixedPan(this.map.width * -0.0135, this.map.height * 0.0135);
                             evn.preventDefault();
+                            evn.stopPropagation();
                             break;
                         case 36 : //home
                             this.map._fixedPan(this.map.width * -0.0135, this.map.height * -0.0135);
                             evn.preventDefault();
+                            evn.stopPropagation();
                             break;
                     }
                 }));
