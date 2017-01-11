@@ -164,7 +164,7 @@ input[type=checkbox].checkbox {
   width: 100%;
   position: absolute;
   z-index: 2;
-  top: 40%;
+  top: 75%;
   left: 0;
   text-align: center; 
 }
