@@ -164,7 +164,7 @@ input[type=checkbox].checkbox {
   width: 100%;
   position: absolute;
   z-index: 2;
-  top: 40%;
+  top: 75%;
   left: 0;
   text-align: center; 
 }
@@ -493,16 +493,11 @@ input[type=checkbox].checkbox {
 }
 
 .HomeButton .home {
-    /* padding: 0 !important; */
     background-color: transparent;
     width: 26px;
-    /* height: 26px; */
     cursor: pointer;
-    /* margin-left: 1px; */
-    /* -webkit-border-radius: 0px; */
     -o-border-radius: 0px;
     -moz-border-radius: 0px;
-    /* border-radius: 0px; */
     background-image: none;
 }
 
@@ -512,11 +507,8 @@ input[type=checkbox].checkbox {
 }
 
 .LocateButton .zoomLocateButton {
-  padding: 0;
   width: 26px;
   height: 26px;
-  /* font-size: 20px; */
-  /* line-height: 26px; */
   background-color: transparent;
   background-image: none;
   cursor: pointer;
@@ -1218,24 +1210,24 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   padding: 5px 8px 0px 5px;
 }
 
-li[role='menuitem']:hover, 
+/*li[role='menuitem']:hover, 
 div[role='button']:hover,
 div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
 {
   /* border-radius: 5px; */
-  /* -webkit-border-radius: 5px; */
-}
+  /* -webkit-border-radius: 5px; 
+}*/
 
 /*.panelToolActive:focus, .panelToolActive:hover {
    border-radius: 15px !important; 
-  /* -webkit-border-radius: 15px !important; */
+  /* -webkit-border-radius: 15px !important; 
 }*/
 
 /*.searchBtn:focus, .searchClear:focus, .searchInput:focus {
   background-color: rgba(0, 0, 0, 0.7) !important;
-}
+}*/
 
-*/.HomeButton:focus, .LocateButton:focus,
+.HomeButton:focus, .LocateButton:focus,
 .share-dialog-icon
 {
   border-radius: 5px;
@@ -1339,8 +1331,7 @@ input[type='checkbox']:focus {
   width: auto;
 }
 
-@media only screen and (min-width: 720px) {
-  .esriEditor .esriDrawingToolbar {
+.esriEditor .esriDrawingToolbar {
   top:0px;
 }
 
@@ -1452,10 +1443,10 @@ html, body {
     margin: 0;
 }
 .dijitSplitterV .dijitSplitterThumb {
-    background: #90BBFF none;
+    background: gray none;
     height: 10%;
-     left: 2px; 
-    width: calc(100% - 4px);
+    left: 0.5px; 
+    width: calc(100% - 1.5px);
     margin: 0;
     overflow: hidden;
     position: absolute;
@@ -1535,6 +1526,10 @@ td, th {
 
 .borderBottom {
     border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.borderTop {
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 #leftPanel{
@@ -1795,7 +1790,57 @@ main {
 }
 
 
-/*#pageBody_details, #pageBody_instructions {
-    width: calc(100% - 20px) !important; 
-    padding: 10px 10px 0 10px;
-}*/
+.navToolBar {
+    height: auto !important; 
+    border-radius: 5px; 
+}
+
+.navToolBar div {
+    display:block;
+}
+
+.navToolBar input[type="image"] {
+    width: 20px;
+    height: 20px;
+}
+
+.HomeButton .home:hover,
+.LocateButton .zoomLocateButton:hover {
+  background-color: transparent !important;
+}
+
+#extenderNav {
+    height: 12px;
+    font-size: 0;
+    line-height: 0;
+    padding: 1px 0;
+}
+
+#extenderNav input[type="checkbox"] {
+    display:none;
+}
+
+#extenderNav input[type="checkbox"] + label .extenderNavCollapse {
+    display:none !important;
+}
+
+#extenderNav input[type="checkbox"] + label .extenderNavExtend {
+    display:inline-block !important;
+}
+
+#extenderNav input[type="checkbox"]:checked + label .extenderNavCollapse {
+    display:inline-block !important;
+}
+
+#extenderNav input[type="checkbox"]:checked + label .extenderNavExtend {
+    display:none !important;
+}
+
+.disabledBtn {
+    background-color: rgba(255, 255, 255, 0.5);
+    position: absolute;
+}
+
+.disabledBtn:focus {
+    outline-style: none;
+}

@@ -23,11 +23,10 @@ define(["dojo/ready",
     "application/has-config", "esri/arcgis/utils", "esri/lang", 
     "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/focus",
     "esri/tasks/query",
-    "esri/toolbars/navigation",
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
-    "esri/layers/FeatureLayer",
+    "esri/layers/FeatureLayer", "application/NavToolBar/NavToolBar", 
     "application/FeatureList", "application/Filters/Filters", "application/TableOfContents", 
     "application/ShareDialog", //"application/SearchSources",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
@@ -44,10 +43,10 @@ define(["dojo/ready",
     has, arcgisUtils, esriLang, 
     BorderContainer, ContentPane, focusUtil,
     Query,
-    Navigation, HomeButton, LocateButton, 
+    HomeButton, LocateButton, 
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
-    FeatureLayer, 
+    FeatureLayer, NavToolBar,
     FeatureList, Filters, TableOfContents, 
     ShareDialog, //SearchSources,
     SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
@@ -134,8 +133,8 @@ define(["dojo/ready",
         },
 
         _mapLoaded: function () {
-            this.map.resize();
-            this.map.reposition();
+            // this.map.resize();
+            // this.map.reposition();
 
             query(".esriSimpleSlider").style("backgroundColor", this.theme.toString());
             // remove loading class from body
@@ -145,71 +144,68 @@ define(["dojo/ready",
             this._adjustPopupSize();
 
             var _map = this.map;
-            window.nav = new Navigation(this.map);
-            
+                        
+            // if (true || !has("navigation")) {
+            //     zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
 
-            zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
+            //     esriSimpleSliderIncrementSpan = dojo.query(".esriSimpleSliderIncrementButton")[0];
+            //     dojo.empty(esriSimpleSliderIncrementSpan);
+            //     plusbtn = domConstruct.create("input", {
+            //         type: "image",
+            //         src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
+            //         alt: 'Zoom In',
+            //         title: 'Zoom In',
+            //     }, domConstruct.create("div", {
+            //         role:"button",
+            //         style:"display: block;",
+            //     }, esriSimpleSliderIncrementSpan));
+            //     on(esriSimpleSliderIncrementSpan, 'keydown', function(event) {
+            //         if(event.key === "Enter") {
+            //             _map.setLevel(_map.getLevel()+1);
+            //         }
+            //     });
 
-            esriSimpleSliderIncrementSpan = dojo.query(".esriSimpleSliderIncrementButton")[0];
-            dojo.empty(esriSimpleSliderIncrementSpan);
-            plusbtn = domConstruct.create("input", {
-                type: "image",
-                src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
-                alt: 'Zoom In',
-                title: 'Zoom In',
-                autofocus: true,
-            }, domConstruct.create("div", {
-                role:"button",
-                style:"display: block;",
-            }, esriSimpleSliderIncrementSpan));
-            on(esriSimpleSliderIncrementSpan, 'keydown', function(event) {
-                if(event.key === "Enter") {
-                    _map.setLevel(_map.getLevel()+1);
-                }
-            });
+            //     esriSimpleSliderDecrementSpan = dojo.query(".esriSimpleSliderDecrementButton span")[0];
+            //     dojo.empty(esriSimpleSliderDecrementSpan);
+            //     minusbtn = domConstruct.create("input", {
+            //         type: "image",
+            //         "aria-label": "Zoom Out",
+            //         src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
+            //         alt: 'Zoom Out',
+            //         title: 'Zoom Out',
+            //     }, esriSimpleSliderDecrementSpan);
+            //     on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
+            //         if(event.key === "Enter")
+            //             _map.setLevel(_map.getLevel()-1);
+            //     });
 
-            esriSimpleSliderDecrementSpan = dojo.query(".esriSimpleSliderDecrementButton span")[0];
-            dojo.empty(esriSimpleSliderDecrementSpan);
-            minusbtn = domConstruct.create("input", {
-                type: "image",
-                "aria-label": "Zoom Out",
-                src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
-                alt: 'Zoom Out',
-                title: 'Zoom Out',
-                autofocus: true,
-            }, esriSimpleSliderDecrementSpan);
-            on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
-                if(event.key === "Enter")
-                    _map.setLevel(_map.getLevel()-1);
-            });
+            //     if (has("home")) {
+            //         var panelHome = domConstruct.create("div", {
+            //             id: "panelHome",
+            //             className: "esriSimpleSliderHomeButton borderBottom",
+            //             innerHTML: "<div id='btnHome'></div>"
+            //         }); 
 
-            if (has("home")) {
-                var panelHome = domConstruct.create("div", {
-                    id: "panelHome",
-                    className: "esriSimpleSliderHomeButton borderBottom",
-                    innerHTML: "<div id='btnHome'></div>"
-                }); 
+            //         domConstruct.place(panelHome, dojo.query(".esriSimpleSliderIncrementButton")[0], "after");
 
-                domConstruct.place(panelHome, dojo.query(".esriSimpleSliderIncrementButton")[0], "after");
+            //         var home = new HomeButton({
+            //             map: this.map
+            //         }, dom.byId("btnHome"));
+            //         home.startup();
 
-                var home = new HomeButton({
-                    map: this.map
-                }, dom.byId("btnHome"));
-                home.startup();
+            //         var homeButton = dojo.query(".homeContainer")[0];
+            //         var homeNode = dojo.query(".home")[0];
+            //         dojo.empty(homeNode);
+            //         var homeHint = "Default Extent";//dojo.attr(homeButton, 'title');
 
-                var homeButton = dojo.query(".homeContainer")[0];
-                var homeNode = dojo.query(".home")[0];
-                dojo.empty(homeNode);
-                var homeHint = "Default Extent";//dojo.attr(homeButton, 'title');
-
-                var btnHome = domConstruct.create("input", {
-                    type: 'image',
-                    src: 'images/icons_' + this.config.icons + '/home.png',
-                    alt: homeHint,
-                    title: homeHint,
-                }, homeNode);
-            }
-
+            //         var btnHome = domConstruct.create("input", {
+            //             type: 'image',
+            //             src: 'images/icons_' + this.config.icons + '/home.png',
+            //             alt: homeHint,
+            //             title: homeHint,
+            //         }, homeNode);
+            //     }
+            // }
             on(this.map.infoWindow, "show", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);
             }));
@@ -296,7 +292,8 @@ define(["dojo/ready",
               
             var contentPaneRight = new ContentPane({
                 region: "center",
-                splitter:'true',
+                splitter: "true",
+                class: "bg",
                 content: dom.byId("mapDiv"),
             });
             borderContainer.addChild(contentPaneRight);
@@ -316,8 +313,7 @@ define(["dojo/ready",
 
                 // set map so that it can be repositioned when page is scrolled
                 toolbar.map = this.map;
-                var toolList = [];
-                //this._addInfoTool(toolbar);
+                var toolList = [this._addNavigation("navigation", query("#mapDiv_zoom_slider")[0])];
 
                 var deferredDetails = new Deferred();
                 for (var i = 0; i < this.config.tools.length; i++) {
@@ -361,12 +357,15 @@ define(["dojo/ready",
                         case "print":
                             toolList.push(this._addPrint(this.config.tools[i], toolbar));
                             break;
+                        case "navigation":
+                            break;
                         default:
                             break;
                     }
                 }
-
+    
                 all(toolList).then(lang.hitch(this, function (results) {
+                    
                     //If all the results are false and locate and home are also false we can hide the toolbar
                     var tools = array.some(results, function (r) {
                         return r;
@@ -388,6 +387,7 @@ define(["dojo/ready",
 
                     //Now that all the tools have been added to the toolbar we can add page naviagation
                     //to the toolbar panel, update the color theme and set the active tool.
+                    
                     this._updateTheme();
 
                     toolbar._activateDefautTool();
@@ -488,7 +488,7 @@ define(["dojo/ready",
                 domConstruct.create("div", {
                     class:'goThereHint',
                     innerHTML: 'Alt + 4',
-                    style:'left:-8px; top:52%;'
+                    style:'left:-8px; top:75%;'
                 }, dom.byId('dijit_layout_ContentPane_0_splitter'));
 
                 domConstruct.create("div", {
@@ -600,6 +600,24 @@ define(["dojo/ready",
             return deferred.promise;
         },
         
+        _addNavigation: function (tool, oldNaviagationToolBar) {
+            var deferred = new Deferred();
+            var navToolBar = domConstruct.create("div", {
+                id: "newNaviagationToolBar",
+            });
+            
+            nav = new NavToolBar({
+                map: this.map,
+                navToolBar: oldNaviagationToolBar,
+                iconColor: this.config.icons,
+                newIcons: this.config.new_icons?'.new':'',
+                zoomColor: this.focusColor,
+            }, navToolBar);
+            nav.startup();
+            deferred.resolve(true);
+            return deferred.promise;
+        },
+
         _addFilter: function (tool, toolbar) {
             //Add the legend tool to the toolbar. Only activated if the web map has operational layers.
             var deferred = new Deferred();
@@ -1442,33 +1460,6 @@ define(["dojo/ready",
                 });
             }));
 
-            // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
-            var isChrome = !!window.chrome && !!window.chrome.webstore;
-            if (has("locate") && (!isChrome || (window.location.protocol === "https:"))) {
-                var panelLocate = domConstruct.create("div", {
-                    id: "panelLocate",
-                    className: "icon-color tool",
-                    innerHTML: "<div id='btnLocate'></div>"
-                    }, dom.byId("panelTools"), 1);
-                var geoLocate = new LocateButton({
-                    map: this.map
-                }, dom.byId("btnLocate"));
-
-                geoLocate.startup();
-
-                var locateButton = dojo.query(".locateContainer")[0];
-                var zoomLocateButton = dojo.query(".zoomLocateButton")[0];
-                dojo.empty(zoomLocateButton);
-                var locateHint = dojo.attr(zoomLocateButton, 'title');
-
-                domConstruct.create("input", {
-                    type: 'image',
-                    src: 'images/icons_' + this.config.icons + '/locate.png',
-                    alt: locateHint,
-                    'aria-label': locateHint,
-                }, zoomLocateButton);
-            }
-
             //Add the location search widget
             require(["application/has-config!search?esri/dijit/Search", 
                 "application/has-config!search?esri/tasks/locator"], 
@@ -1676,7 +1667,8 @@ define(["dojo/ready",
                             rule.style.outlineColor = this.focusColor;
                         }
                         //active
-                        if(rule.selectorText.indexOf('.activeMarker') >= 0) {
+                        if(rule.selectorText.indexOf('.activeMarker') >= 0 || 
+                            rule.selectorText.indexOf('dijitSplitterThumb') >= 0) {
                             //rule.style.backgroundColor = this.activeColor;
                             rule.style.outlineStyle = 'none';
                             rule.style.outlineColor = 'transparent';
@@ -1853,14 +1845,15 @@ define(["dojo/ready",
                 if (this.initExt !== null) {
                     this.map.setExtent(this.initExt);
                 }
-                this.initExt = this.map.extent;
+                window.initExt = this.initExt = this.map.extent;
                 
-                // ???
-                on.once(this.map, "extent-change", lang.hitch(this, function() {
-                    this._checkExtent();
-                    //window.nav.zoomToPrevExtent();
-                    document.querySelector(".HomeButton input[type='image']").click();
-                }));
+                // // ???
+                // if(!has("navigation")) {
+                //     on.once(this.map, "extent-change", lang.hitch(this, function() {
+                //         this._checkExtent();
+                //         document.querySelector(".HomeButton input[type='image']").click();
+                //     }));
+                // }
 
                 on(this.map, "extent-change", function() {
                     var imgs = this.container.querySelectorAll("img");

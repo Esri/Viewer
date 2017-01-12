@@ -17,6 +17,14 @@ define(["dojo/has"], function (has) {
     };
 
     /*App capabilities*/
+    has.add("navigation", function (g) {
+        var navigation = getTool("navigation", g.config);
+        //overwrite the default with app settings
+        if (g.config.hasOwnProperty("navigation")) {
+            navigation = g.config.navigation;
+        }
+        return navigation;
+    });
     has.add("search", function (g) {
         var search = g.config.search || false;
         //overwrite the default with app settings

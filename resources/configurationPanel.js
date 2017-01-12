@@ -3,95 +3,73 @@
       {  
          "category":"<strong>Configure template</strong>",
          "fields":[  
-            {  
-               "type":"webmap"
-            },
-            {  
+            {  "type":"webmap"},
+            {  "label":"Title:",
                "placeHolder":"Defaults to web map title",
-               "label":"Title:",
                "fieldName":"title",
                "type":"string",
-               "tooltip":"Defaults to web map title"
-            },
-            {  
-               "label":"Logo Image:",
+               "tooltip":"Defaults to web map title" },
+            {  "label":"Logo Image:",
                "fieldName":"logo",
                "type":"string",
-               "tooltip":"Defaults to sample logo"
-            },
-            {  
-               "label":"Logo Alternate Text:",
+               "tooltip":"Defaults to sample logo"},
+            {  "label":"Logo Alternate Text:",
                "fieldName":"logoAltText",
                "type":"string",
-               "tooltip":"Type here the text from the Logo Image"
-            },
-
-            {  
+               "tooltip":"Type here the text from the Logo Image"},
+            {  "label":"Animated Marker",
                "type":"boolean",
-               "fieldName":"animated_marker",
-               "label":"Animated Marker"
-            },
-            {  
-               "label":"Animated Marker File:",
+               "fieldName":"animated_marker"},
+            {  "label":"Animated Marker File:",
                "fieldName":"marker",
                "type":"string",
-               "tooltip":"Defaults to blue-animated"
-            },
-            {  
-               "label":"Marker size:",
+               "tooltip":"Defaults to blue-animated"},
+            {  "label":"Marker size:",
                "fieldName":"marker_size",
                "type":"int",
-               "tooltip":"Size of the Marker"
-            },
-            {  
-               "label":"Alternate Keys:",
+               "tooltip":"Size of the Marker"},
+            {  "label":"Alternate Keys:",
                "fieldName":"alt_keys",
                "type":"boolean",
-               "tooltip":"Show hints for alternat keys when pressing ALT key."
-            },
-            {  
+               "tooltip":"Show hints for alternat keys when pressing ALT key."},
+            {  "label":"Description",
                "type":"string",
                "fieldName":"description",
-               "label":"Description",
                "placeHolder":"Defaults to web map description.",
                "tooltip":"Enter content for the details panel",
-               "stringFieldOption":"richtext"
-            },
-            {  
+               "stringFieldOption":"richtext"},
+            {  "label":"New Icons",
+               "type":"boolean",
+               "fieldName":"new_icons"}
+         ]
+      },
+      {  
+         "category":"<strong>Colors</strong>",
+         "fields":[  
+            {  "label":"Theme Color:",
                "type":"color",
                "fieldName":"theme",
-               "tooltip":"Title bar color",
-               "label":"Theme Color:"
-            },
-            {  
+               "tooltip":"Title bar color"},
+            {  "label":"Title Color:",
                "type":"color",
                "fieldName":"color",
-               "tooltip":"Title bar text color",
-               "label":"Title Color:"
-            },
-            {  
+               "tooltip":"Title bar text color"},
+            {  "label":"Hover Color:",
                "type":"color",
                "fieldName":"hoverColor",
-               "tooltip":"Hover over color",
-               "label":"Hover Color:"
-            },
-            {  
+               "tooltip":"Hover over color"},
+            {  "label":"Focus Color:",
                "type":"color",
                "fieldName":"focusColor",
-               "tooltip":"Focus border color",
-               "label":"Focus Color:"
-            },
-            {  
+               "tooltip":"Focus border color"},
+            {  "label":"Active Color:",
                "type":"color",
                "fieldName":"activeColor",
-               "tooltip":"Selection color",
-               "label":"Active Color:"
-            },
-            {  
+               "tooltip":"Selection color"},
+            {  "label":"Icon color:",
                "type":"string",
                "fieldName":"icons",
                "tooltip":"Icon color",
-               "label":"Icon color:",
                "options":[  
                   {  
                      "label":"White",
@@ -101,23 +79,16 @@
                      "label":"Black",
                      "value":"black"
                   }
-               ]
-            },
-            {  
-               "type":"boolean",
-               "fieldName":"new_icons",
-               "label":"New Icons"
-            }
+               ]}
          ]
       },
       {  
          "category":"Tools",
          "fields":[  
-            {  
+            {  "label":"Active Tool:",
                "type":"string",
                "fieldName":"activeTool",
                "tooltip":"Active Tool",
-               "label":"Active Tool:",
                "options":[  
                   {  
                      "label":"None",
@@ -175,83 +146,57 @@
                      "label":"Share",
                      "value":"share"
                   }
-               ]
-            },
-            {  
+               ]},
+            
+            {  "label":"Details",
                "type":"boolean",
-               "fieldName":"tool_basemap",
-               "label":"Basemap Gallery"
-            },
-            {  
+               "fieldName":"tool_details"},
+            {  "label":"Instructions",
                "type":"boolean",
-               "fieldName":"tool_bookmarks",
-               "label":"Bookmarks"
-            },
-            {  
+               "fieldName":"tool_instructions"},
+            {  "label":"Overview Map",
                "type":"boolean",
-               "fieldName":"tool_locate",
-               "label":"Find Location"
-            },
-            {  
+               "fieldName":"tool_overview"},
+            {  "label":"Basemap Gallery",
                "type":"boolean",
-               "fieldName":"tool_home",
-               "label":"Default Extent Button"
-            },
-            {  
+               "fieldName":"tool_basemap"},
+            {  "label":"Bookmarks",
                "type":"boolean",
-               "fieldName":"tool_legend",
-               "label":"Legend"
-            },
-            {  
+               "fieldName":"tool_bookmarks"},
+            {  "label":"Find Location",
                "type":"boolean",
-               "fieldName":"tool_layers",
-               "label":"Layers"
-            },
-            {  
+               "fieldName":"tool_locate"},
+            {  "label":"Home Button",
                "type":"boolean",
-               "fieldName":"tool_features",
-               "label":"Feature List"
-            },
-            {  
+               "tooltip":"(Default Extent)",
+               "fieldName":"tool_home"},
+            {  "label":"Legend",
                "type":"boolean",
-               "fieldName":"tool_filter",
-               "label":"Filters"
-            },
-            {  
+               "fieldName":"tool_legend"},
+            {  "label":"Layers",
                "type":"boolean",
-               "fieldName":"tool_details",
-               "label":"Details"
-            },
-            {  
+               "fieldName":"tool_layers"},
+            {  "label":"Feature List",
                "type":"boolean",
-               "fieldName":"tool_instructions",
-               "label":"Instructions"
-            },
-            {  
+               "fieldName":"tool_features"},
+            {  "label":"Filters",
                "type":"boolean",
-               "fieldName":"tool_measure",
-               "label":"Measure Tool"
-            },
-            {  
+               "fieldName":"tool_filter"},
+            {  "label":"Measure Tool",
                "type":"boolean",
-               "fieldName":"tool_overview",
-               "label":"Overview Map"
-            },
-            {  
+               "fieldName":"tool_measure"},
+            {  "label":"Share Tools",
                "type":"boolean",
-               "fieldName":"tool_share",
-               "label":"Share Tools"
-            },
-            {  
+               "fieldName":"tool_share"},
+            {  "label":"Print Button",
                "type":"boolean",
-               "fieldName":"tool_print",
-               "label":"Print Button"
-            },
-            {  
+               "fieldName":"tool_print"},
+            {  "label":"Scalebar",
                "type":"boolean",
-               "fieldName":"scalebar",
-               "label":"Scalebar"
-            }
+               "fieldName":"scalebar"},
+            {  "label":"Navigation Tools",
+               "type":"boolean",
+               "fieldName":"navigation"}
          ]
       },
       {
@@ -368,12 +313,13 @@
 
       "color":"#ffffff",
       "hoverColor":"#00A9E6",
-      "focusColor":"#00FFC5",
+      "focusColor":"#FF7700",
       "activeColor":"#00b9f6",
       "theme":"#005ce6",
 
       "activeTool":"details",
       "scalebar":false,
+      "navigation":false,
       "tool_print_layouts":false,
       "tool_print_legend":false,
       "tool_share":true,

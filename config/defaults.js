@@ -73,6 +73,7 @@ define({
         {"name": "edit", "enabled": true, "toolbar": true}, 
         {"name": "share", "enabled": true},
         {"name": "bookmarks", "enabled": true},
+        {"name": "navigation", "enabled": true},
         {"name": "print", "enabled": true, "legend": false, "layouts":false, "format":"pdf"}
     ],
     //Set the active tool on the toolbar. Note home and locate can't be the active tool.
