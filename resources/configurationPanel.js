@@ -1,44 +1,63 @@
 {  
-   "configurationSettings":[  
+   "configurationSettings":[ 
       {  
          "category":"<strong>Configure template</strong>",
          "fields":[  
             {  "type":"webmap"},
-            {  "label":"Title:",
+            
+            {  "type":"string",
+               "stringFieldOption": "richtext",
+               "label": "<strong>Alternate Map Text</strong>",
+               "tooltip": "Define text that will be read by screen reader",
+               "fieldName":"altMapText"
+            },
+            {  "type": "paragraph",
+               "value": "The primary purpose of alternative map text is to be read by screen readers to allow the content and function of the map to be accessible to users with visual or certain cognitive disabilities."
+            },
+
+            {  "label":"<strong>Description</strong>",
+               "type":"string",
+               "fieldName":"description",
+               "placeHolder":"Defaults to web map description.",
+               "stringFieldOption":"richtext"},
+            {  "type": "paragraph",
+               "value": "When present, this markup will replace the map description in the Details panel."
+            },   
+            {  "label":"<strong>Title:</strong>",
                "placeHolder":"Defaults to web map title",
                "fieldName":"title",
                "type":"string",
                "tooltip":"Defaults to web map title" },
-            {  "label":"Logo Image:",
+            {  "label":"<strong>Logo Image:</strong>",
                "fieldName":"logo",
                "type":"string",
                "tooltip":"Defaults to sample logo"},
-            {  "label":"Logo Alternate Text:",
+            {  "label":"<strong>Logo Alternate Text:</strong>",
                "fieldName":"logoAltText",
                "type":"string",
                "tooltip":"Type here the text from the Logo Image"},
-            {  "label":"Animated Marker",
+            {  "label":"<strong>Animated Marker</strong>",
                "type":"boolean",
                "fieldName":"animated_marker"},
-            {  "label":"Animated Marker File:",
+            {  "label":"<strong>Animated Marker File:</strong>",
                "fieldName":"marker",
                "type":"string",
                "tooltip":"Defaults to blue-animated"},
-            {  "label":"Marker size:",
+            {  "label":"<strong>Marker size:</strong>",
                "fieldName":"marker_size",
                "type":"int",
                "tooltip":"Size of the Marker"},
-            {  "label":"Alternate Keys:",
+            
+            {  "label":"<strong>Access Keys</strong>",
                "fieldName":"alt_keys",
                "type":"boolean",
-               "tooltip":"Show hints for alternat keys when pressing ALT key."},
-            {  "label":"Description",
-               "type":"string",
-               "fieldName":"description",
-               "placeHolder":"Defaults to web map description.",
-               "tooltip":"Enter content for the details panel",
-               "stringFieldOption":"richtext"},
-            {  "label":"New Icons",
+               "tooltip":"Show hints for alternate keys when pressing ALT key."},
+            {  "type": "paragraph",
+               "value": "The Access Key is a shortcut to activate or focus a screen control. <br/>The way of accessing the shortcut key is varying in different browsers.<br/>Most browsers use the [Alt]+# or [Alt][Shift]+#.<br/>However the shortcut can be set to another combination of keys."
+            },
+
+            
+            {  "label":"<strong>New Icons</strong>",
                "type":"boolean",
                "fieldName":"new_icons"}
          ]
@@ -194,7 +213,7 @@
             {  "label":"Scalebar",
                "type":"boolean",
                "fieldName":"scalebar"},
-            {  "label":"Navigation Tools",
+            {  "label":"Extended Navigation Tool Bar",
                "type":"boolean",
                "fieldName":"navigation"}
          ]

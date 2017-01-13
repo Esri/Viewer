@@ -22,7 +22,7 @@ define(["dojo/ready",
     "dojo/query", "dijit/Menu", "dijit/CheckedMenuItem", "application/toolbar", 
     "application/has-config", "esri/arcgis/utils", "esri/lang", 
     "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/focus",
-    "esri/tasks/query",
+    "esri/tasks/query", 
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
@@ -1803,6 +1803,11 @@ define(["dojo/ready",
                     title = response.itemInfo.item.title + " - WCAG Viewer";
                 } else {
                     title = this.config.title+': '+response.itemInfo.item.title + " - WCAG Viewer";
+                }
+
+                if(this.config.altMapText !== undefined) {
+                    var altMapText = esriLang.stripTags(this.config.altMapText);
+                    domAttr.set(this.map.container, "aria-label", altMapText);
                 }
                 
                 //Add a logo if provided
