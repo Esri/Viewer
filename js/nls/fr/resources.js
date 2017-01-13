@@ -58,6 +58,8 @@ define(
         	"print": "Imprimer",
         	"details": "Détails",
         	"share": "Partager",
+            "filter": "Filtres",
+            "features": "Liste des Caractéristiques"
         }
     })
 );
