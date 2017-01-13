@@ -19,10 +19,11 @@
 
 	<div class="tabContent tabHide" id="${id}_page">
         <div class="filterAdd">
-       		<label for="${id}-fieldsCombo">Attribute:</label> 
+       		<label for="${id}-fieldsCombo">${_i18n.widgets.FilterTab.attribute}:</label> 
+       		<!-- <label for="${id}-fieldsCombo">Attribute:</label>  -->
        		<select id="${id}-fieldsCombo" autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
        		</select>
-       		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd" style="float: right;"/>
+       		<input type="button" class="pageBtn" value="${_i18n.widgets.FilterTab.add}" data-dojo-attach-event="onclick: filterAdd" style="float: right;"/>
 
        		<!-- <div style="display: -webkit-box; margin-top:10px;">
 	   			<Label data-dojo-attach-point="labelForComboAttributes">Attribute:&nbsp;</Label>
@@ -35,8 +36,8 @@
        	<ul data-dojo-attach-point="filterList"></ul>
 
         <div class="filterButtons">
-       		<input type="button" class="pageBtn" value="Apply" data-dojo-attach-event="onclick: filterApply"/>
-       		<input type="button" class="pageBtn" value="Ignore" data-dojo-attach-event="onclick: filterIgnore"/>
+       		<input type="button" class="pageBtn" value="${_i18n.widgets.FilterTab.apply}" data-dojo-attach-event="onclick: filterApply"/>
+       		<input type="button" class="pageBtn" value="${_i18n.widgets.FilterTab.ignore}" data-dojo-attach-event="onclick: filterIgnore"/>
         </div>
     </div>
 </div>

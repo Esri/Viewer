@@ -57,7 +57,7 @@ define(
         	"time": "Heure",
         	"print": "Imprimer",
         	"details": "Détails",
-        	"share": "Partager"
+        	"share": "Partager",
         }
     })
 );

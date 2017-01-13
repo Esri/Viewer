@@ -3,22 +3,25 @@ define([
     "dojo/on", "esri/tasks/query", "esri/tasks/QueryTask", "esri/graphicsUtils",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel", 
     "dojo/dom", "dojo/query", "dojo/dom-attr", "dojo/dom-style",
-    "dojo/text!application/Filters/templates/FilterTab.html"
+    "dojo/text!application/Filters/templates/FilterTab.html",
+    "dojo/i18n!application/nls/FilterDialog"
 ], function(
     Evented, declare, domConstruct, domClass, parser, ready, 
     on, Query, QueryTask, graphicsUtils,
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
     dom, query, domAttr, domStyle, 
-    FilterTab
+    FilterTabTemplate,
+    i18n
     ){
     var Widget = declare("FilterTab", [_WidgetBase, _TemplatedMixin, Evented], {
-        templateString: FilterTab,
+        templateString: FilterTabTemplate,
 
         options: {
         },        
 
         constructor: function(options, srcRefTabsZone, srcRefTabsContent){
             var defaults = lang.mixin({}, this.options, options);
+            this._i18n = i18n;
 
             //this.domNode = srcRefNode;
             this.set("filter", defaults.filter);
@@ -27,6 +30,8 @@ define([
             // this.set("checked", defaults.checked);
             this.set("FilterItems", []);
             //this.set("filtersOn", []);
+
+
             if(window.filtersOn === undefined) {
                 window.filtersOn = [];
             }

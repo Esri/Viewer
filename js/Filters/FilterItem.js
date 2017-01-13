@@ -2,13 +2,14 @@ define([
     "dojo/Evented", "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready",
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/_base/lang", "dojo/has", "esri/kernel",
     "dojo/text!application/Filters/templates/FilterItem.html",
+    "dojo/i18n!application/nls/FilterDialog",
     "application/Filters/FilterString",
     "application/Filters/FilterDate",
     "application/Filters/FilterNumber",
 ], function(
     Evented, declare, domConstruct, parser, ready, 
     _WidgetBase, _TemplatedMixin, lang, has, esriNS,
-    FilterItemTemplate,
+    FilterItemTemplate, i18n,
     FilterString, FilterDate, FilterNumber){
     var Widget = declare("FilterItem", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: FilterItemTemplate,
@@ -18,7 +19,7 @@ define([
 
         constructor: function(options, srcRefNode){
             var defaults = lang.mixin({}, this.options, options);
-
+            this._i18n = i18n;
             this.domNode = srcRefNode;
             this.set("map", defaults.map);
             this.set("layer", defaults.layer);
