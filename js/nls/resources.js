@@ -62,7 +62,8 @@ define({
         	"details": "Details",
         	"share": "Share"
         },
-        instructions:"instructions"
+        instructions:"instructions",
+        wcagViewer : "WCAG Viewer"
     }),
 "ar": 1,
 "cs": 1,

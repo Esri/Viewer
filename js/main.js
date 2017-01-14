@@ -1803,9 +1803,9 @@ define(["dojo/ready",
 
                 var title;
                 if (this.config.title === null || this.config.title === "") {
-                    title = response.itemInfo.item.title + " - WCAG Viewer";
+                    title = response.itemInfo.item.title + " - " + this.config.i18n.wcagViewer;
                 } else {
-                    title = this.config.title+': '+response.itemInfo.item.title + " - WCAG Viewer";
+                    title = this.config.title+': '+response.itemInfo.item.title + " - " + this.config.i18n.wcagViewer;
                 }
 
                 if(this.config.altMapText !== undefined) {

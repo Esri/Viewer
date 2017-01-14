@@ -50,7 +50,7 @@ define(
         	"legend": "Légende",
         	"bookmarks": "Géosignets",
         	"layers": "Couches",
-        	"basemap": "Galerie de fonds de carte",
+        	"basemap": "Galerie des cartes de base",
         	"overview": "Vue générale",
         	"measure": "Mesurer",
         	"edit": "Modifier",
@@ -61,6 +61,7 @@ define(
             "filter": "Filtres",
             "features": "Liste des Caractéristiques"
         },
-        instructions:"instructions.french"
+        instructions:"instructions.french",
+        wcagViewer : "Explorateur WCAG"
     })
 );
