@@ -31,7 +31,6 @@ define(["dojo/ready",
     "application/ShareDialog", //"application/SearchSources",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
-    "dojo/text!application/dijit/templates/instructions.html",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"], 
     function (
     ready, 
@@ -50,8 +49,7 @@ define(["dojo/ready",
     FeatureList, Filters, TableOfContents, 
     ShareDialog, //SearchSources,
     SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
-    InfoWindow,
-    instructionsText) {
+    InfoWindow) {
 
     return declare(null, {
         config: {},
@@ -791,24 +789,29 @@ define(["dojo/ready",
             { 
                 if(!has("details"))
                 {
-                    var instructionsDiv = toolbar.createTool(tool);
-                    domConstruct.create('div',{
-                        id:"instructionsDiv",
-                        innerHTML: instructionsText,
-                        tabindex: 0
-                    }, domConstruct.create("div", {}, instructionsDiv));
+                    require(["dojo/text!application/dijit/templates/"+this.config.i18n.instructions+".html"], 
+                        function(instructionsText){
+                        var instructionsDiv = toolbar.createTool(tool);
+                        domConstruct.create('div',{
+                            id:"instructionsDiv",
+                            innerHTML: instructionsText,
+                            tabindex: 0
+                        }, domConstruct.create("div", {}, instructionsDiv));
+                    });
 
                     var instructionsBtn = dojo.query("#toolButton_instructions")[0];
                     domClass.add(instructionsBtn, "panelToolDefault");
                 } 
                 else {
                     deferedDetails.then(function(r) {
-                        var instructionsDiv = domConstruct.create('div',{
-                            id:"instructionsDiv",
-                            innerHTML: instructionsText,
-                            tabindex: 0
-                        }, dom.byId("pageBody_details"));
-
+                        require(["dojo/text!application/dijit/templates/"+this.config.i18n.instructions+".html"], 
+                            function(instructionsText){
+                            var instructionsDiv = domConstruct.create('div',{
+                                id:"instructionsDiv",
+                                innerHTML: instructionsText,
+                                tabindex: 0
+                            }, dom.byId("pageBody_details"));
+                        });
                     });
                 }
                 deferred.resolve(true);

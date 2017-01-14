@@ -61,7 +61,8 @@ define({
         	"print": "Print",
         	"details": "Details",
         	"share": "Share"
-        }
+        },
+        instructions:"instructions"
     }),
 "ar": 1,
 "cs": 1,

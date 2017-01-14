@@ -60,6 +60,7 @@ define(
         	"share": "Partager",
             "filter": "Filtres",
             "features": "Liste des Caractéristiques"
-        }
+        },
+        instructions:"instructions.french"
     })
 );
