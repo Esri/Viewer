@@ -5,6 +5,7 @@ define([
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/symbols/SimpleLineSymbol", "esri/Color",
     "dojo/text!application/NavToolBar/templates/NavToolBar.html", 
+    "dojo/i18n!application/nls/NavToolBar",
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", 
     "dojo/dom-construct", "dojo/_base/event", 
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
@@ -15,7 +16,7 @@ define([
         query, Navigation, registry,
         HomeButton, LocateButton, 
         SimpleLineSymbol, Color,
-        NavToolBarTemplate, 
+        NavToolBarTemplate, i18n,
         domClass, domAttr, domStyle, 
         domConstruct, event
     ) {
@@ -32,7 +33,7 @@ define([
 
         constructor: function (options, srcRefNode) {
             var defaults = lang.mixin({}, this.options, options);
-
+            this._i18n = i18n;
             this.domNode = srcRefNode;
 
             this.set("map", defaults.map);

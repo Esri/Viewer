@@ -3,41 +3,41 @@
 	style="height:auto; position: absolute;"
 	>
 
-	<div id="navToolBar" class="navToolBar bg" title="Zoom In">
+	<div id="navToolBar" class="navToolBar bg" title="${_i18n.widgets.navToolBar.zoomIn}">
 		<div 
 			id="navZoomIn" 
 			class="navBtn borderBottom" >
 			<div 
 				class="disabledBtn" style="display:none" 
-				aria-label="Maximum Zoom In" role="button"></div>
+				aria-label="${_i18n.widgets.navToolBar.aria.maxZoomIn}" role="button"></div>
 			<input 
 				type="image" 
 				src="images/icons_${iconColor}/plus${newIcons}.png" 
-				alt="Zoom In" 
-				title="Zoom In"
+				alt="${_i18n.widgets.navToolBar.zoomIn}" 
+				title="${_i18n.widgets.navToolBar.zoomIn}"
 				>
 		</div>
 		<div id="navHome" class="navBtn borderBottom">
 			<div 
 				class="disabledBtn" style="display:none" 
-				aria-label="At Default Extent" role="button"></div>
+				aria-label="${_i18n.widgets.navToolBar.aria.atDefaultExt}" role="button"></div>
 		</div>
-		<div id="navZoomOut" class="navBtn borderBottom" title="Zoom Out">
+		<div id="navZoomOut" class="navBtn borderBottom" title="${_i18n.widgets.navToolBar.zoomOut}">
 			<div 
 				class="disabledBtn" style="display:none" 
-				aria-label="Maximum Zoom Out" role="button"></div>
+				aria-label="${_i18n.widgets.navToolBar.aria.maxZoomOut}" role="button"></div>
 			<input 
 				type="image" 
 				src="images/icons_${iconColor}/minus${newIcons}.png" 
-				alt="Zoom Out" 
-				title="Zoom Out"
+				alt="${_i18n.widgets.navToolBar.zoomOut}" 
+				title="${_i18n.widgets.navToolBar.zoomOut}"
 				>
 		</div>
 	</div>
 	
 	<div id="extendedNav">
 		<div id="extendedNavTools" class="navToolBar bg" style="margin-top:4px;">
-			<div id="extenderNav" class="navBtn" title="Extended Navigation">
+			<div id="extenderNav" class="navBtn" title="${_i18n.widgets.navToolBar.extNav}">
 				<input 
 					id="extenderNavCheckbox"
 					type="checkbox" 
@@ -48,14 +48,14 @@
 					<img 
 						class="extenderNavExtend"
 						src="images/icons_${iconColor}/down.png" 
-						alt="Show Extended Navigation Tools" 
-						title="Show Extended Navigation Tools"
+						alt="${_i18n.widgets.navToolBar.showNav}" 
+						title="${_i18n.widgets.navToolBar.showNav}"
 						style="width: 24px;height: 12px; display:none;"/>
 					<img 
 						class="extenderNavCollapse"
 						src="images/icons_${iconColor}/Up.png" 
-						alt="Hide Extended Navigation Tools" 
-						title="Hide Extended Navigation Tools"
+						alt="${_i18n.widgets.navToolBar.hideNav}" 
+						title="${_i18n.widgets.navToolBar.hideNav}"
 						style="width: 24px;height: 12px; display:inline-block;"/>
 				</label>
 
@@ -65,42 +65,42 @@
 				<div id="navLocate" class="navBtn borderTop"></div>
 
 				<div id="navPrevNext" style="height: auto;">
-					<div id="navPrev" class="navBtn borderTop borderBottom" title="Previous Extent">
+					<div id="navPrev" class="navBtn borderTop borderBottom" title="${_i18n.widgets.navToolBar.prevExt}">
 						<div 
 							class="disabledBtn" style="display:none" 
-							aria-label="Previous Extent, Disabled" role="button"></div>
+							aria-label="${_i18n.widgets.navToolBar.aria.prevExtDisabled}" role="button"></div>
 						<input 
 							type="image" 
 							src="images/icons_${iconColor}/prev.png" 
-							alt="Previous Extent" 
-							title="Previous Extent">
+							alt="${_i18n.widgets.navToolBar.prevExt}" 
+							title="${_i18n.widgets.navToolBar.prevExt}">
 					</div>
-					<div id="navNext" class="navBtn" title="Next Extent">
+					<div id="navNext" class="navBtn" title="${_i18n.widgets.navToolBar.nextExt}">
 						<div 
 							class="disabledBtn" style="display:none" 
-							aria-label="Next Extent, Disabled" role="button" ></div>
+							aria-label="${_i18n.widgets.navToolBar.aria.nextExtDisabled}" role="button" ></div>
 						<input 
 							type="image" 
 							src="images/icons_${iconColor}/next.png" 
-							alt="Next Extent" 
-							title="Next Extent">
+							alt="${_i18n.widgets.navToolBar.nextExt}" 
+							title="${_i18n.widgets.navToolBar.nextExt}">
 					</div>
 				</div>
 
 				<div id="ZoomTools" style="height: auto;">
-					<div id="navZoomInTool" class="navBtn borderTop borderBottom" title="Zoom In Tool">
+					<div id="navZoomInTool" class="navBtn borderTop borderBottom" title="${_i18n.widgets.navToolBar.zoomToolIn}">
 						<input 
 							type="image" 
 							src="images/icons_${iconColor}/ZoomPlus.png" 
-							alt="Zoom In Tool" 
-							title="Zoom In Tool">
+							alt="${_i18n.widgets.navToolBar.zoomToolIn}" 
+							title="${_i18n.widgets.navToolBar.zoomToolIn}">
 					</div>
-					<div id="navZoomOutTool" class="navBtn" title="Zoom Out Tool">
+					<div id="navZoomOutTool" class="navBtn" title="${_i18n.widgets.navToolBar.zoomToolOut}">
 						<input 
 							type="image" 
 							src="images/icons_${iconColor}/ZoomMinus.png" 
-							alt="Zoom Out Tool" 
-							title="Zoom Out Tool">
+							alt="${_i18n.widgets.navToolBar.zoomToolOut}" 
+							title="${_i18n.widgets.navToolBar.zoomToolOut}">
 					</div>
 				</div>
 				<!-- <div id="testBtn" class="navBtn borderTop borderBottom">
