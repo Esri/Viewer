@@ -62,6 +62,17 @@ define({
         	"details": "Details",
         	"share": "Share"
         },
+        "skip":{
+            "tools" : "1. Skip to Tools",
+            "search" : "2. Skip to Search",
+            "content" : "3. Skip to Content",
+            "splitter" : "4. Skip to Splitter",
+            "map" : "5. Skip to Map",
+            "help" : "6. Skip to Help",
+            "featureDetaills" : "7. Skip to Feature Details"
+        },
+        search : "Search: ",
+        pressAlt : "Press ALT + 0 to 7 keys for fast navigation",
         instructions:"instructions",
         wcagViewer : "WCAG Viewer"
     }),

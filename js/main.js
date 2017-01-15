@@ -282,7 +282,7 @@ define(["dojo/ready",
             var contentPaneLeft = new ContentPane({
                 region: "leading",
                 splitter: 'true',
-                style: "width:400px; padding:0; overflow: none;",
+                style: "width:425px; padding:0; overflow: none;",
                 content: dom.byId("leftPanel"),
                 class: "splitterContent",
             });
@@ -502,13 +502,29 @@ define(["dojo/ready",
                 }, dom.byId('panelBottom'));
             }
             
-            query('.skip #skip-tools')[0].addEventListener('click', function (e) { skipToTools(); });
-            query('.skip #skip-search')[0].addEventListener('click', function (e) { skipToSearch(); });
-            query('.skip #skip-content')[0].addEventListener('click', function (e) { skipToContent(); });
-            query('.skip #skip-splitter')[0].addEventListener('click', function (e) { skipToSplitter(); });
-            query('.skip #skip-map')[0].addEventListener('click', function (e) { skipToMap(); });
-            query('.skip #skip-instructions')[0].addEventListener('click', function (e) { skipToInstructions(); });
-            query('.skip #skip-feature')[0].addEventListener('click', function (e) { skipToFeature(); });
+            var skipTools = query('.skip #skip-tools')[0];
+            var skipSearch = query('.skip #skip-search')[0];
+            var skipContent = query('.skip #skip-content')[0];
+            var skipSplitter = query('.skip #skip-splitter')[0];
+            var skipMap = query('.skip #skip-map')[0];
+            var skipInstructions = query('.skip #skip-instructions')[0];
+            var skipFeature = query('.skip #skip-feature')[0];
+
+            dojo.html.set(skipTools, this.config.i18n.skip.tools);
+            dojo.html.set(skipSearch, this.config.i18n.skip.search);
+            dojo.html.set(skipContent, this.config.i18n.skip.content);
+            dojo.html.set(skipSplitter, this.config.i18n.skip.splitter);
+            dojo.html.set(skipMap, this.config.i18n.skip.map);
+            dojo.html.set(skipInstructions, this.config.i18n.skip.help);
+            dojo.html.set(skipFeature, this.config.i18n.skip.featureDetaills);
+
+            skipTools.addEventListener('click', function (e) { skipToTools(); });
+            skipSearch.addEventListener('click', function (e) { skipToSearch(); });
+            skipContent.addEventListener('click', function (e) { skipToContent(); });
+            skipSplitter.addEventListener('click', function (e) { skipToSplitter(); });
+            skipMap.addEventListener('click', function (e) { skipToMap(); });
+            skipInstructions.addEventListener('click', function (e) { skipToInstructions(); });
+            skipFeature.addEventListener('click', function (e) { skipToFeature(); });
 
             query('.skip').forEach(function(h) {
                 h.addEventListener('keydown', function (e) {
@@ -519,6 +535,9 @@ define(["dojo/ready",
                     }
                 });
             });
+
+            dojo.html.set(dom.byId('panelBottom'), this.config.i18n.pressAlt);
+            dojo.html.set(dom.byId('searchLabel'), this.config.i18n.search);
 
             skipSkip = function() {
                 dom.byId('skip-tools').focus();

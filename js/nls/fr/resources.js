@@ -61,6 +61,17 @@ define(
             "filter": "Filtres",
             "features": "Liste des Caractéristiques"
         },
+        "skip":{
+            "tools" : "1. Aller aux outils",
+            "search" : "2. Aller à la recherche",
+            "content" : "3. Aller au contenu",
+            "splitter" : "4. Aller au séparateur d’écran",
+            "map" : "5. Aller à la carte",
+            "help" : "6. Aller à l’aide",
+            "featureDetaills" : "7. Aller aux fonctionnalités détaillées"
+        },
+        search : "Recherche: ",
+        pressAlt : "Appuyer sur ALT + 0 à 7 pour naviguer rapidement",
         instructions:"instructions.french",
         wcagViewer : "Explorateur WCAG"
     })
