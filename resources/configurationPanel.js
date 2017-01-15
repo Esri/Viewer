@@ -341,13 +341,19 @@
             {  "type":"paragraph",
                "value":"The name that will appear in the combo-box pull-down.<br/>Note: may contain an image."
             },
-
             {  "label": "Language code",
                "fieldName":"lang1code",
                "type":"string"
             },
             {  "type":"paragraph",
                "value":"Enter the locale of the language. Example: 'en-us'"
+            },
+            {  "label": "Application Id",
+               "fieldName":"lang1appId",
+               "type":"string"
+            },
+            {  "type":"paragraph",
+               "value":"ID of application that will restart for this language.<br/>Note: you may want another application to customize layers, data and other custom attributes.<br/>Leave blank to use same application."
             },
 
             {  "type":"paragraph",
@@ -357,18 +363,23 @@
             {  "label": "Language Short Name",
                "fieldName":"lang2shortName",
                "type":"string",
-               "placeHolder": "The name that will appear on the Language widget."
+               "tooltip": "The name that will appear on the Language widget."
             },
             {  "label": "Language name",
                "fieldName":"lang2name",
                "type":"string",
-               "placeHolder": "The name that will appear in the combo-box pull-down."
+               "tooltip": "The name that will appear in the combo-box pull-down."
             },
 
             {  "label": "Language code",
                "fieldName":"lang2code",
                "type":"string",
-               "placeHolder": "The locale of the language."
+               "tooltip": "The locale of language 2."
+            },
+            {  "label": "Application Id",
+               "fieldName":"lang2appId",
+               "type":"string",
+               "tooltip": "Application ID for language 2."
             },
 
             {  "type":"paragraph",
@@ -377,18 +388,23 @@
             {  "label": "Language Short Name",
                "fieldName":"lang3shortName",
                "type":"string",
-               "placeHolder": "The name that will appear on the Language widget."
+               "tooltip": "The name that will appear on the Language widget."
             },
             {  "label": "Language name",
                "fieldName":"lang3name",
                "type":"string",
-               "placeHolder": "The name that will appear in the combo-box pull-down."
+               "tooltip": "The name that will appear in the combo-box pull-down."
             },
 
             {  "label": "Language code",
                "fieldName":"lang3code",
                "type":"string",
-               "placeHolder": "The locale of the language."
+               "tooltip": "The locale of language 3."
+            },
+            {  "label": "Application Id",
+               "fieldName":"lang2appId",
+               "type":"string",
+               "tooltip": "Application ID for language 3."
             }
           ]
       }
@@ -431,6 +447,18 @@
       "tool_search":true,
       "tool_print":true,
       "locationSearch": true,
-      "searchExtent":false
+      "searchExtent":false,
+
+      "lang1shortName": "EN",
+      "lang1name": "English",
+      "lang1code": "EN-US",
+
+      "lang2shortName": "FR",
+      "lang2name": "French",
+      "lang2code": "FR-CA",
+
+      "lang3shortName": "",
+      "lang3name": "",
+      "lang3code": ""
    }
 }
