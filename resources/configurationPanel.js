@@ -318,6 +318,79 @@
                "label":"Add Legend to Output"
             }
          ]
+      },
+      {
+         "category":"Languages",
+         "fields":[
+            {  
+               "type":"paragraph",
+               "value":"<strong>Language 1</strong>"
+            },
+
+            {  "label": "Language Short Name",
+               "fieldName":"lang1shortName",
+               "type":"string"
+            },
+            {  "type": "paragraph",
+               "value":"The name that will appear on the Language widget as active language.<br/>Note: may contain an image."
+            },
+            {  "label": "Language name",
+               "fieldName":"lang1name",
+               "type":"string"
+            },
+            {  "type":"paragraph",
+               "value":"The name that will appear in the combo-box pull-down.<br/>Note: may contain an image."
+            },
+
+            {  "label": "Language code",
+               "fieldName":"lang1code",
+               "type":"string"
+            },
+            {  "type":"paragraph",
+               "value":"Enter the locale of the language. Example: 'en-us'"
+            },
+
+            {  "type":"paragraph",
+               "value":"<strong>Language 2</strong>"
+
+            },
+            {  "label": "Language Short Name",
+               "fieldName":"lang2shortName",
+               "type":"string",
+               "placeHolder": "The name that will appear on the Language widget."
+            },
+            {  "label": "Language name",
+               "fieldName":"lang2name",
+               "type":"string",
+               "placeHolder": "The name that will appear in the combo-box pull-down."
+            },
+
+            {  "label": "Language code",
+               "fieldName":"lang2code",
+               "type":"string",
+               "placeHolder": "The locale of the language."
+            },
+
+            {  "type":"paragraph",
+               "value":"<strong>Language 3</strong>"
+            },
+            {  "label": "Language Short Name",
+               "fieldName":"lang3shortName",
+               "type":"string",
+               "placeHolder": "The name that will appear on the Language widget."
+            },
+            {  "label": "Language name",
+               "fieldName":"lang3name",
+               "type":"string",
+               "placeHolder": "The name that will appear in the combo-box pull-down."
+            },
+
+            {  "label": "Language code",
+               "fieldName":"lang3code",
+               "type":"string",
+               "placeHolder": "The locale of the language."
+            }
+          ]
       }
    ],
    "values":{  
