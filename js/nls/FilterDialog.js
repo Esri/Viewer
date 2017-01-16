@@ -6,7 +6,8 @@ define({
                 add: "Add",
                 remove: "Remove",
                 apply: "Apply",
-                ignore: "Ignore"
+                ignore: "Ignore",
+                someFilters: "Some Filters Apply"
             },
             FilterItem: {
                 remove: "Remove",
@@ -16,6 +17,8 @@ define({
                 notLike: "Not Like",
                 in: "In",
                 notIn: "Not In",
+                lessThen: "Less Then",
+                moreThen: "More Then",
                 between: "Between",
                 notBetween: "Not Between"
             }

@@ -4,7 +4,8 @@ define({
             attribute : "Attribut",
             add: "Ajouter",
             apply: "Accepter",
-            ignore: "Ignorer"
+            ignore: "Ignorer",
+            someFilters: "Appliqué quelques filtres"
         },
         FilterItem: {
             remove: "Supprimer",
@@ -14,6 +15,8 @@ define({
             notLike: "Pas comme",
             in: "Dans",
             notIn: "Pas en",
+            lessThen: "Moins que",
+            moreThen: "Plus que",
             between: "Entre",
             notBetween: "Pas Entre"
         }

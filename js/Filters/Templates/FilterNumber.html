@@ -3,12 +3,12 @@
 		data-dojo-attach-event="onchange: criteriaChanged"
 		data-dojo-attach-point="criteria"
 		>
-		<option value=" = ">Equal</option>			
-		<option value=" != ">Not Equal</option>			
-		<option value=" < ">Less Then</option>			
-		<option value=" > ">More Then</option>			
-		<option value=" BETWEEN ">Between</option>			
-		<option value=" NOT BETWEEN ">Not Between</option>			
+		<option value=" = ">${_i18n.widgets.FilterItem.equal}</option>			
+		<option value=" != ">${_i18n.widgets.FilterItem.notEqual}</option>			
+		<option value=" < ">${_i18n.widgets.FilterItem.lessThen}</option>			
+		<option value=" > ">${_i18n.widgets.FilterItem.moreThen}</option>			
+		<option value=" BETWEEN ">${_i18n.widgets.FilterItem.between}</option>			
+		<option value=" NOT BETWEEN ">${_i18n.widgets.FilterItem.notBetween}</option>			
 	</select>
 	<input type="textbox" data-dojo-attach-point="minValue" aria-label="Enter value to match"
 	data-dojo-type="dijit/form/ValidationTextBox"
