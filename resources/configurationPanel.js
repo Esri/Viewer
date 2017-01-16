@@ -467,10 +467,12 @@
       "lang1shortName": "EN",
       "lang1name": "English",
       "lang1code": "EN-US",
+      "lang1imageSrc": "images/flag.us.22.png",
 
       "lang2shortName": "FR",
       "lang2name": "French",
       "lang2code": "FR-CA",
+      "lang2imageSrc": "images/flag.fr.22.png",
 
       "lang3shortName": "",
       "lang3name": "",

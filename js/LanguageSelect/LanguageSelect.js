@@ -24,7 +24,8 @@ define([
         options: {
             locale: 'en-us',
             location: '',
-            languages:{}
+            languages:{}, 
+            textColor:null
         },
 
         constructor: function (options, srcRefNode) {
@@ -91,6 +92,7 @@ define([
                         currentIcon = domConstruct.create("img",{
                             src:lang.img,
                             alt:'',
+                            class: 'langIcon',
                         });
                         if(lang.shortName && lang.shortName !== "") {
                             currentLocale = "";
@@ -113,6 +115,9 @@ define([
                 dojo.place(currentIcon, this.button.iconNode);
                 dojo.attr(this.button.iconNode,'aria-label', i18n.widgets.languageSelect.aria.currentLanguage+" "+currentLanguage);
                 dojo.attr(this.button.iconNode,'title', i18n.widgets.languageSelect.aria.currentLanguage+" "+currentLanguage);
+            } else {
+                if(this.defaults.textColor)
+                    dojo.attr(this.button,'style', 'color:'+this.defaults.textColor+';');
             }
 
             dom.byId("languageSelectNode").appendChild(this.button.domNode);
