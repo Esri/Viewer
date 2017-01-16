@@ -81,6 +81,7 @@ define([
                     }, iconCell);
                 }
                 dojo.attr(menuItem.domNode,'aria-label', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
+                dojo.attr(menuItem.domNode,'title', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
                 dojo.attr(menuItem.domNode,'data-code', lang.code);
                 dojo.attr(menuItem.domNode,'data-appId', lang.appId);
                 menu.addChild(menuItem);
@@ -111,7 +112,7 @@ define([
                 dojo.removeClass(this.button.iconNode, "dijitNoIcon");
                 dojo.place(currentIcon, this.button.iconNode);
                 dojo.attr(this.button.iconNode,'aria-label', i18n.widgets.languageSelect.aria.currentLanguage+" "+currentLanguage);
-                
+                dojo.attr(this.button.iconNode,'title', i18n.widgets.languageSelect.aria.currentLanguage+" "+currentLanguage);
             }
 
             dom.byId("languageSelectNode").appendChild(this.button.domNode);
