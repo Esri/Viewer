@@ -43,8 +43,14 @@ define([
         Click: function(e) { 
             //console.log(e.srcElement.parentElement);
             var locale=e.srcElement.parentElement.dataset.code;
-            var appId=e.srcElement.parentElement.dataset.appId;
-            location.search='?appid=b54efa235b7f455f91b14396090ad3e3&locale='+locale;
+            var appId=e.srcElement.parentElement.dataset.appid;
+            if(!appId || appId==='') {
+                appId = /(?:[?|&]appid=)([a-z0-9]*)/gi.exec(location.search);
+                if(appId && appId.length===2) {
+                    appId = appId[1];
+                }
+            }
+            location.search=('?appid='+appId+'&locale='+locale).toLowerCase();
             location.refresh();
         },
 
