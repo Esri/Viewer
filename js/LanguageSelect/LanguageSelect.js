@@ -43,33 +43,24 @@ define([
             if(this.button) return;
 
             var menu = new DropDownMenu({ style: "display: none;"});
-            var menuItem1 = new MenuItem({
-                label: "Item1",
-                //iconClass:"dijitEditorIcon dijitEditorIconSave",
-                onClick: function(){ alert('Item1'); }
-            });
-            menu.addChild(menuItem1);
 
-            var menuItem2 = new MenuItem({
-                label: "Item2",
-                //iconClass:"dijitEditorIcon dijitEditorIconCut",
-                onClick: function(){ alert('Item2'); }
-            });
+            for(var i = 0; i<this.defaults.languages.length; i++)
+            {
+                var lang = this.defaults.languages[i];
+                if(!lang.code || lang.code==='') continue;
 
-            menu.addChild(menuItem2);
-
-            var menuItem3 = new MenuItem({
-                label: "Item3",
-                //iconClass:"dijitEditorIcon dijitEditorIconCut",
-                onClick: function(){ alert('Item3'); }
-            });
-
-            menu.addChild(menuItem3);
+                var menuItem = new MenuItem({
+                    label: lang.name,
+                    //onClick: function(){ alert('Item1'); }
+                });
+                menu.addChild(menuItem);
+            }
 
             menu.startup();
 
             this.button = new DropDownButton({
                 label: this.defaults.locale.substring(0,2).toUpperCase(),
+                image: 'images/flag.fr.22.png',
                 name: "languageSelect",
                 dropDown: menu,
                 // id: "languageSelect"

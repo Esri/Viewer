@@ -327,12 +327,26 @@
                "value":"<strong>Language 1</strong>"
             },
 
+            {  "label": "Language code",
+               "fieldName":"lang1code",
+               "type":"string"
+            },
+            {  "type":"paragraph",
+               "value":"Enter the locale of the language. Example: 'en-us'"
+            },
             {  "label": "Language Short Name",
                "fieldName":"lang1shortName",
                "type":"string"
             },
             {  "type": "paragraph",
-               "value":"The name that will appear on the Language widget as active language.<br/>Note: may contain an image."
+               "value":"The name that will appear on the Language widget as active language.<br/>Note: Leave it blang to display no code."
+            },
+            {  "label": "Flag Image",
+               "fieldName":"lang1imageSrc",
+               "type":"string"
+            },
+            {  "type": "paragraph",
+               "value":"The location of the image representing the flag of the country.<br/>Note: Leave it blang to display no image."
             },
             {  "label": "Language name",
                "fieldName":"lang1name",
@@ -340,13 +354,6 @@
             },
             {  "type":"paragraph",
                "value":"The name that will appear in the combo-box pull-down.<br/>Note: may contain an image."
-            },
-            {  "label": "Language code",
-               "fieldName":"lang1code",
-               "type":"string"
-            },
-            {  "type":"paragraph",
-               "value":"Enter the locale of the language. Example: 'en-us'"
             },
             {  "label": "Application Id",
                "fieldName":"lang1appId",
@@ -360,21 +367,25 @@
                "value":"<strong>Language 2</strong>"
 
             },
+            {  "label": "Language code",
+               "fieldName":"lang2code",
+               "type":"string",
+               "tooltip": "The locale of language 2."
+            },
             {  "label": "Language Short Name",
                "fieldName":"lang2shortName",
                "type":"string",
                "tooltip": "The name that will appear on the Language widget."
             },
+            {  "label": "Flag Image",
+               "fieldName":"lang2imageSrc",
+               "type":"string",
+               "tooltip": "The location of a 22x22 image."
+            },
             {  "label": "Language name",
                "fieldName":"lang2name",
                "type":"string",
                "tooltip": "The name that will appear in the combo-box pull-down."
-            },
-
-            {  "label": "Language code",
-               "fieldName":"lang2code",
-               "type":"string",
-               "tooltip": "The locale of language 2."
             },
             {  "label": "Application Id",
                "fieldName":"lang2appId",
@@ -385,21 +396,25 @@
             {  "type":"paragraph",
                "value":"<strong>Language 3</strong>"
             },
+            {  "label": "Language code",
+               "fieldName":"lang3code",
+               "type":"string",
+               "tooltip": "The locale of language 3."
+            },
             {  "label": "Language Short Name",
                "fieldName":"lang3shortName",
                "type":"string",
                "tooltip": "The name that will appear on the Language widget."
             },
+            {  "label": "Flag Image",
+               "fieldName":"lang3imageSrc",
+               "type":"string",
+               "tooltip": "The location of a 22x22 image."
+            },
             {  "label": "Language name",
                "fieldName":"lang3name",
                "type":"string",
                "tooltip": "The name that will appear in the combo-box pull-down."
-            },
-
-            {  "label": "Language code",
-               "fieldName":"lang3code",
-               "type":"string",
-               "tooltip": "The locale of language 3."
             },
             {  "label": "Application Id",
                "fieldName":"lang2appId",

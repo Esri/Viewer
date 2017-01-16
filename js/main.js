@@ -101,16 +101,19 @@ define(["dojo/ready",
             var languages = [
                 {
                     code:this.config.lang1code,
+                    img:this.config.lang1imgSrc,
                     shortName:this.config.lang1shortName,
                     name:this.config.lang1name,
                 },
                 {
                     code:this.config.lang2code,
+                    img:this.config.lang2imgSrc,
                     shortName:this.config.lang2shortName,
                     name:this.config.lang2name,
                 },
                 {
                     code:this.config.lang3code,
+                    img:this.config.lang3imgSrc,
                     shortName:this.config.lang3shortName,
                     name:this.config.lang3name,
                 }
