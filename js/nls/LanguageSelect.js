@@ -3,7 +3,8 @@ define({
         widgets: ({
             languageSelect: ({
                 aria: ({
-                    changeLanguage: "Change the language to"
+                    changeLanguage: "Change the language to",
+                    currentLanguage: "Current language is"
                 })
             })
         })

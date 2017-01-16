@@ -43,15 +43,15 @@ define([
             if(this.button) return;
 
             var menu = new DropDownMenu({ style: "display: none;"});
+            var currentLocale = this.defaults.locale.substring(0,2).toUpperCase();
+            var currentIcon = null;
+            var currentLanguage = null;
 
             for(var i = 0; i<this.defaults.languages.length; i++)
             {
                 var lang = this.defaults.languages[i];
                 if(!lang.code || lang.code==='') continue;
 
-                // var label = (lang.img && lang.img !== '') ?
-                //    '<div class="langMenuItem"><img alt="" role="presentation" src="'+lang.img+'"> '+lang.name+'</div>'
-                // :  lang.name;
                 var menuItem = new MenuItem({
                     label: lang.name,
                     //onClick: function(){ alert('Item1'); }
@@ -66,18 +66,39 @@ define([
                 }
                 dojo.attr(menuItem.domNode,'aria-label', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
                 menu.addChild(menuItem);
+
+                if(lang.code.toUpperCase() === this.defaults.locale.toUpperCase()) {
+                    if(lang.img && lang.img !== '') {
+                        currentIcon = domConstruct.create("img",{
+                            src:lang.img,
+                            alt:'',
+                            //class: 'langMenuItemIcon',
+                        });
+                        if(lang.shortName && lang.shortName !== "") {
+                            currentLocale = "";
+                        }
+                        currentLanguage = lang.name;
+                    }
+                }
             }
 
             menu.startup();
 
             this.button = new DropDownButton({
-                label: this.defaults.locale.substring(0,2).toUpperCase(),
-                image: 'images/flag.fr.22.png',
-                name: "languageSelect",
+                label: currentLocale,
+                // image: 'images/flag.fr.22.png',
+                // name: "languageSelect",
                 dropDown: menu,
                 // id: "languageSelect"
             });
             this.button.startup();
+
+            if(currentIcon) {
+                dojo.removeClass(this.button.iconNode, "dijitNoIcon");
+                dojo.place(currentIcon, this.button.iconNode);
+                dojo.attr(this.button.iconNode,'aria-label', i18n.widgets.languageSelect.aria.currentLanguage+" "+currentLanguage);
+                
+            }
 
             dom.byId("languageSelectNode").appendChild(this.button.domNode);
         }
