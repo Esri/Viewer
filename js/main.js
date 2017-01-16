@@ -97,6 +97,30 @@ define(["dojo/ready",
                 var error = new Error("Main:: Config is not defined");
                 this.reportError(error);
             }
+
+            var languages = [
+                {
+                    code:this.config.lang1code,
+                    shortName:this.config.lang1shortName,
+                    name:this.config.lang1name,
+                },
+                {
+                    code:this.config.lang2code,
+                    shortName:this.config.lang2shortName,
+                    name:this.config.lang2name,
+                },
+                {
+                    code:this.config.lang3code,
+                    shortName:this.config.lang3shortName,
+                    name:this.config.lang3name,
+                }
+            ];
+            new LanguageSelect({
+                locale: document.documentElement.lang,
+                params: window.location.search,
+                languages:languages,
+            }, dom.byId('languageSelectNode')).startup();
+
         },
 
         reportError: function (error) {
@@ -365,10 +389,6 @@ define(["dojo/ready",
     
                 all(toolList).then(lang.hitch(this, function (results) {
                     
-                    var languageSelect = new LanguageSelect({
-
-                    }, dom.byId('languageSelectNode'));
-                    languageSelect.startup();
                     
                     // dom.byId("dropDownButtonContainer").appendChild(button.domNode);
 

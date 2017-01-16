@@ -22,15 +22,26 @@ define([
         templateString: LanguageSelectTemplate,
 
         options: {
+            locale: 'en-us',
+            params: '',
+            languages:{}
         },
 
         constructor: function (options, srcRefNode) {
-            var defaults = lang.mixin({}, this.options, options);
+            this.defaults = lang.mixin({}, this.options, options);
             //this._i18n = i18n;
             this.domNode = srcRefNode;
+
+            var link = document.createElement("link");
+            link.href = "js/LanguageSelect/Templates/LanguageSelect.css";
+            link.type = "text/css";
+            link.rel = "stylesheet";
+            document.getElementsByTagName("head")[0].appendChild(link);
         },
 
         startup: function () {
+            if(this.button) return;
+
             var menu = new DropDownMenu({ style: "display: none;"});
             var menuItem1 = new MenuItem({
                 label: "Item1",
@@ -44,19 +55,28 @@ define([
                 //iconClass:"dijitEditorIcon dijitEditorIconCut",
                 onClick: function(){ alert('Item2'); }
             });
+
             menu.addChild(menuItem2);
+
+            var menuItem3 = new MenuItem({
+                label: "Item3",
+                //iconClass:"dijitEditorIcon dijitEditorIconCut",
+                onClick: function(){ alert('Item3'); }
+            });
+
+            menu.addChild(menuItem3);
 
             menu.startup();
 
-            var button = new DropDownButton({
-                // label: "hello!",
+            this.button = new DropDownButton({
+                label: this.defaults.locale.substring(0,2).toUpperCase(),
                 name: "languageSelect",
                 dropDown: menu,
                 // id: "languageSelect"
             });
-            button.startup();
+            this.button.startup();
 
-            dom.byId("languageSelectNode").appendChild(button.domNode);
+            dom.byId("languageSelectNode").appendChild(this.button.domNode);
         }
     });
 
