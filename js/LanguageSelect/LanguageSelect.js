@@ -23,7 +23,7 @@ define([
 
         options: {
             locale: 'en-us',
-            params: '',
+            location: '',
             languages:{}
         },
 
@@ -49,10 +49,22 @@ define([
                 var lang = this.defaults.languages[i];
                 if(!lang.code || lang.code==='') continue;
 
+                // var label = (lang.img && lang.img !== '') ?
+                //    '<div class="langMenuItem"><img alt="" role="presentation" src="'+lang.img+'"> '+lang.name+'</div>'
+                // :  lang.name;
                 var menuItem = new MenuItem({
                     label: lang.name,
                     //onClick: function(){ alert('Item1'); }
                 });
+                if(lang.img && lang.img !== '') {
+                    var iconCell = query(".dijitMenuItemIconCell",menuItem.domNode)[0];
+                    domConstruct.create("img",{
+                        src:lang.img,
+                        alt:'',
+                        class: 'langMenuItemIcon',
+                    }, iconCell);
+                }
+                dojo.attr(menuItem.domNode,'aria-label', 'Change the language to '+lang.name);
                 menu.addChild(menuItem);
             }
 

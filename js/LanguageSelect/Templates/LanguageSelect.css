@@ -22,3 +22,8 @@
     vertical-align: middle;
     padding: 3px 1px;
 }
+
+.langMenuItemIcon {
+   height:20px; 
+   vertical-align: middle;
+}
