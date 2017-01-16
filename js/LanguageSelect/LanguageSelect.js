@@ -37,6 +37,15 @@ define([
             link.type = "text/css";
             link.rel = "stylesheet";
             document.getElementsByTagName("head")[0].appendChild(link);
+
+        },
+
+        Click: function(e) { 
+            //console.log(e.srcElement.parentElement);
+            var locale=e.srcElement.parentElement.dataset.code;
+            var appId=e.srcElement.parentElement.dataset.appId;
+            location.search='?appid=b54efa235b7f455f91b14396090ad3e3&locale='+locale;
+            location.refresh();
         },
 
         startup: function () {
@@ -54,8 +63,9 @@ define([
 
                 var menuItem = new MenuItem({
                     label: lang.name,
-                    //onClick: function(){ alert('Item1'); }
                 });
+                on(menuItem, 'click', this.Click);
+
                 if(lang.img && lang.img !== '') {
                     var iconCell = query(".dijitMenuItemIconCell",menuItem.domNode)[0];
                     domConstruct.create("img",{
@@ -65,6 +75,8 @@ define([
                     }, iconCell);
                 }
                 dojo.attr(menuItem.domNode,'aria-label', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
+                dojo.attr(menuItem.domNode,'data-code', lang.code);
+                dojo.attr(menuItem.domNode,'data-appId', lang.appId);
                 menu.addChild(menuItem);
 
                 if(lang.code.toUpperCase() === this.defaults.locale.toUpperCase()) {
@@ -72,7 +84,6 @@ define([
                         currentIcon = domConstruct.create("img",{
                             src:lang.img,
                             alt:'',
-                            //class: 'langMenuItemIcon',
                         });
                         if(lang.shortName && lang.shortName !== "") {
                             currentLocale = "";
@@ -86,10 +97,7 @@ define([
 
             this.button = new DropDownButton({
                 label: currentLocale,
-                // image: 'images/flag.fr.22.png',
-                // name: "languageSelect",
                 dropDown: menu,
-                // id: "languageSelect"
             });
             this.button.startup();
 

@@ -104,18 +104,21 @@ define(["dojo/ready",
                     img:this.config.lang1imageSrc,
                     shortName:this.config.lang1shortName,
                     name:this.config.lang1name,
+                    appId:this.config.lang1appId 
                 },
                 {
                     code:this.config.lang2code,
                     img:this.config.lang2imageSrc,
                     shortName:this.config.lang2shortName,
                     name:this.config.lang2name,
+                    appId:this.config.lang2appId
                 },
                 {
                     code:this.config.lang3code,
                     img:this.config.lang3imageSrc,
                     shortName:this.config.lang3shortName,
                     name:this.config.lang3name,
+                    appId:this.config.lang3appId
                 }
             ];
             new LanguageSelect({
