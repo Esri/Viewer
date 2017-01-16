@@ -1,0 +1,13 @@
+select {
+   margin: 2px;
+    border: 1px solid #111;
+   background: transparent;
+   padding-left: 30px;
+   font-size: 16px;
+   border: 1px solid #ccc;
+   height: 34px;
+   -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+    background: url(http://www.stackoverflow.com/favicon.ico) 4px / 26px no-repeat #eee;
+} 

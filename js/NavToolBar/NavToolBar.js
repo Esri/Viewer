@@ -52,12 +52,9 @@ define([
                     this._init();
                 }));
             }
-
         },
         
         _init: function () {
-            // this.map.showPanArrows(); //???
-
             this.nav.setZoomSymbol(new SimpleLineSymbol("SOLID", new Color(this.zoomColor), 4));
 
             dojo.empty(this.navToolBar);

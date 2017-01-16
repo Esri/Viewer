@@ -28,6 +28,7 @@ define(["dojo/ready",
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
     "esri/layers/FeatureLayer", "application/NavToolBar/NavToolBar", 
     "application/FeatureList", "application/Filters/Filters", "application/TableOfContents", 
+    "application/LanguageSelect/LanguageSelect",
     "application/ShareDialog", //"application/SearchSources",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
     "esri/dijit/InfoWindow",
@@ -46,7 +47,7 @@ define(["dojo/ready",
     Legend, BasemapGallery, 
     Measurement, OverviewMap, Extent, 
     FeatureLayer, NavToolBar,
-    FeatureList, Filters, TableOfContents, 
+    FeatureList, Filters, TableOfContents, LanguageSelect,
     ShareDialog, //SearchSources,
     SimpleMarkerSymbol, PictureMarkerSymbol, Graphic,
     InfoWindow) {
@@ -364,6 +365,14 @@ define(["dojo/ready",
     
                 all(toolList).then(lang.hitch(this, function (results) {
                     
+                    var languageSelect = new LanguageSelect({
+
+                    }, dom.byId('languageSelectNode'));
+                    languageSelect.startup();
+                    
+                    // dom.byId("dropDownButtonContainer").appendChild(button.domNode);
+
+                    
                     //If all the results are false and locate and home are also false we can hide the toolbar
                     var tools = array.some(results, function (r) {
                         return r;
@@ -536,7 +545,7 @@ define(["dojo/ready",
                 });
             });
 
-            dojo.html.set(dom.byId('panelBottom'), this.config.i18n.pressAlt);
+            dojo.html.set(dom.byId('panelBottomSpan'), this.config.i18n.pressAlt);
             dojo.html.set(dom.byId('searchLabel'), this.config.i18n.search);
 
             skipSkip = function() {
