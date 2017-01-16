@@ -2,6 +2,7 @@ define({
     root: ({
         widgets: ({
             navToolBar: ({
+                home: "Default Extent",
                 zoomIn : "Zoom In",
                 zoomOut : "Zoom Out",
                 hideNav : "Hide Extended Navigation Tools",

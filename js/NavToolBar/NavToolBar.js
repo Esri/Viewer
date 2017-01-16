@@ -80,7 +80,7 @@ define([
                 dojo.removeAttr(homen, 'role');
                 var homeNode = dojo.query(".home")[0];
                 dojo.empty(homeNode);
-                var homeHint = "Default Extent";
+                var homeHint = i18n.widgets.navToolBar.home;
 
                 var btnHome = domConstruct.create("input", {
                     type: 'image',

@@ -1,6 +1,7 @@
 define({
     widgets: ({
         navToolBar: ({
+            home: "Taille de la carte par défaut",
             zoomIn : "Zoom avant",
             zoomOut : "Zoom arrière",
             hideNav : "Masquer les outils de navigation étendus",
