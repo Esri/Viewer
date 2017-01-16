@@ -3,7 +3,7 @@ define([
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
     "dojo/query", "dijit/registry",
     "dojo/text!application/LanguageSelect/templates/LanguageSelect.html", 
-    //"dojo/i18n!application/nls/LanguageSelect",
+    "dojo/i18n!application/nls/LanguageSelect",
     "dijit/form/DropDownButton", "dijit/DropDownMenu", "dijit/MenuItem",
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", 
     "dojo/dom-construct", "dojo/_base/event", 
@@ -13,7 +13,7 @@ define([
         Evented, declare, lang, has, dom, esriNS,
         _WidgetBase, _TemplatedMixin, on, 
         query, registry,
-        LanguageSelectTemplate, //i18n,
+        LanguageSelectTemplate, i18n,
         DropDownButton, DropDownMenu, MenuItem,
         domClass, domAttr, domStyle, 
         domConstruct, event
@@ -64,7 +64,7 @@ define([
                         class: 'langMenuItemIcon',
                     }, iconCell);
                 }
-                dojo.attr(menuItem.domNode,'aria-label', 'Change the language to '+lang.name);
+                dojo.attr(menuItem.domNode,'aria-label', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
                 menu.addChild(menuItem);
             }
 
