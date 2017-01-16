@@ -25,6 +25,7 @@ define(["dojo/ready",
     "esri/tasks/query", 
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
+    "dojo/i18n!application/nls/BaseMapLabels",
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
     "esri/layers/FeatureLayer", "application/NavToolBar/NavToolBar", 
     "application/FeatureList", "application/Filters/Filters", "application/TableOfContents", 
@@ -45,6 +46,7 @@ define(["dojo/ready",
     Query,
     HomeButton, LocateButton, 
     Legend, BasemapGallery, 
+    i18n_BaseMapLabels,
     Measurement, OverviewMap, Extent, 
     FeatureLayer, NavToolBar,
     FeatureList, Filters, TableOfContents, LanguageSelect,
@@ -395,11 +397,6 @@ define(["dojo/ready",
     
                 all(toolList).then(lang.hitch(this, function (results) {
                     
-                    
-                    // dom.byId("dropDownButtonContainer").appendChild(button.domNode);
-
-                    
-                    //If all the results are false and locate and home are also false we can hide the toolbar
                     var tools = array.some(results, function (r) {
                         return r;
                     });
@@ -407,20 +404,6 @@ define(["dojo/ready",
                     var home = has("home");
                     var locate = has("locate");
 
-                    // //No tools are specified in the configuration so hide the panel and update the title area styles
-                    // if (!tools && !home && !locate) {
-                    //     domConstruct.destroy("panelTools");
-                    //     domStyle.set("panelContent", "display", "none");
-                    //     domStyle.set("panelTitle", "border-bottom", "none");
-                    //     domStyle.set("panelTop", "height", "52px");
-                    //     query(".esriSimpleSlider").addClass("notools");
-                    //     this._updateTheme();
-                    //     return;
-                    // }
-
-                    //Now that all the tools have been added to the toolbar we can add page naviagation
-                    //to the toolbar panel, update the color theme and set the active tool.
-                    
                     this._updateTheme();
 
                     toolbar._activateDefautTool();
@@ -732,10 +715,16 @@ define(["dojo/ready",
                         domAttr.remove(labelNode.firstChild, "alt");
                         domAttr.remove(labelNode.firstChild, "title");
                         dojo.place(labelNode, aNode, "last");
-                        //domStyle.set(labelNode, "width", img.width);
-                        //domAttr.set(node, "tabindex", 0);   
+
+                        var aSpan = node.querySelector("a span");
+                        var aSpanLabel = aSpan.innerHTML.toLowerCase().replace(/\s/g, '_');
+                        try {
+                            var localizedLabel = i18n_BaseMapLabels.baseMapLabels[aSpanLabel];
+                            if(localizedLabel && localizedLabel !== undefined)
+                                aSpan.innerText = localizedLabel;
+                        } catch(e) {}
+                        
                         domAttr.set(labelNode, "tabindex", 0);   
-                        //on(aNode, "focus", function() { node.focus();});
                         on(img, "click", function() { node.focus();});
                         on(node,"keydown", function(ev) {
                             if(ev.key === "Enter" || ev.key === "Space") {
