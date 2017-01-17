@@ -339,21 +339,21 @@
                "type":"string"
             },
             {  "type": "paragraph",
-               "value":"The name that will appear on the Language widget as active language.<br/>Note: Leave it blang to display no code."
+               "value":"The name that will appear on the Language widget as active language.<br/>Leave it blank to display first two letters of language code when no image.<br/>You may use national charactes here to change the default display."
             },
             {  "label": "Flag Image",
                "fieldName":"lang1imageSrc",
                "type":"string"
             },
             {  "type": "paragraph",
-               "value":"The location of the image representing the flag of the country.<br/>Note: Leave it blang to display no image."
+               "value":"The location of the image representing the flag of the country.<br/>Note: Leave it blank to display no image and show the Language Short Name instead."
             },
             {  "label": "Language name",
                "fieldName":"lang1name",
                "type":"string"
             },
             {  "type":"paragraph",
-               "value":"The name that will appear in the combo-box pull-down.<br/>Note: may contain an image."
+               "value":"The name that will appear in the combo-box pull-down."
             },
             {  "label": "Application Id",
                "fieldName":"lang1appId",
@@ -375,7 +375,7 @@
             {  "label": "Language Short Name",
                "fieldName":"lang2shortName",
                "type":"string",
-               "tooltip": "The name that will appear on the Language widget."
+               "tooltip": "The two-letter name that will appear on the Language widget."
             },
             {  "label": "Flag Image",
                "fieldName":"lang2imageSrc",
