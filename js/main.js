@@ -177,67 +177,6 @@ define(["dojo/ready",
 
             var _map = this.map;
                         
-            // if (true || !has("navigation")) {
-            //     zoomSlider = dojo.query("#mapDiv_zoom_slider")[0];
-
-            //     esriSimpleSliderIncrementSpan = dojo.query(".esriSimpleSliderIncrementButton")[0];
-            //     dojo.empty(esriSimpleSliderIncrementSpan);
-            //     plusbtn = domConstruct.create("input", {
-            //         type: "image",
-            //         src: 'images/icons_' + this.config.icons + '/plus' + (this.config.new_icons ? ".new" : "") + '.png',
-            //         alt: 'Zoom In',
-            //         title: 'Zoom In',
-            //     }, domConstruct.create("div", {
-            //         role:"button",
-            //         style:"display: block;",
-            //     }, esriSimpleSliderIncrementSpan));
-            //     on(esriSimpleSliderIncrementSpan, 'keydown', function(event) {
-            //         if(event.key === "Enter") {
-            //             _map.setLevel(_map.getLevel()+1);
-            //         }
-            //     });
-
-            //     esriSimpleSliderDecrementSpan = dojo.query(".esriSimpleSliderDecrementButton span")[0];
-            //     dojo.empty(esriSimpleSliderDecrementSpan);
-            //     minusbtn = domConstruct.create("input", {
-            //         type: "image",
-            //         "aria-label": "Zoom Out",
-            //         src: 'images/icons_' + this.config.icons + '/minus' + (this.config.new_icons ? ".new" : "") + '.png',
-            //         alt: 'Zoom Out',
-            //         title: 'Zoom Out',
-            //     }, esriSimpleSliderDecrementSpan);
-            //     on(esriSimpleSliderDecrementSpan, 'keydown', function(event) {
-            //         if(event.key === "Enter")
-            //             _map.setLevel(_map.getLevel()-1);
-            //     });
-
-            //     if (has("home")) {
-            //         var panelHome = domConstruct.create("div", {
-            //             id: "panelHome",
-            //             className: "esriSimpleSliderHomeButton borderBottom",
-            //             innerHTML: "<div id='btnHome'></div>"
-            //         }); 
-
-            //         domConstruct.place(panelHome, dojo.query(".esriSimpleSliderIncrementButton")[0], "after");
-
-            //         var home = new HomeButton({
-            //             map: this.map
-            //         }, dom.byId("btnHome"));
-            //         home.startup();
-
-            //         var homeButton = dojo.query(".homeContainer")[0];
-            //         var homeNode = dojo.query(".home")[0];
-            //         dojo.empty(homeNode);
-            //         var homeHint = "Default Extent";//dojo.attr(homeButton, 'title');
-
-            //         var btnHome = domConstruct.create("input", {
-            //             type: 'image',
-            //             src: 'images/icons_' + this.config.icons + '/home.png',
-            //             alt: homeHint,
-            //             title: homeHint,
-            //         }, homeNode);
-            //     }
-            // }
             on(this.map.infoWindow, "show", lang.hitch(this, function() {
                 this._initPopup(this.map.infoWindow.domNode);
             }));
@@ -345,7 +284,7 @@ define(["dojo/ready",
 
                 // set map so that it can be repositioned when page is scrolled
                 toolbar.map = this.map;
-                var toolList = [this._addNavigation("navigation", query("#mapDiv_zoom_slider")[0])];
+                var toolList = [this._addNavigation("navigation", query("#mapDiv_zoom_slider")[0], navDeferred = new Deferred())];
 
                 var deferredDetails = new Deferred();
                 for (var i = 0; i < this.config.tools.length; i++) {
@@ -636,8 +575,9 @@ define(["dojo/ready",
             return deferred.promise;
         },
         
-        _addNavigation: function (tool, oldNaviagationToolBar) {
-            var deferred = new Deferred();
+        navDeferred : null,
+
+        _addNavigation: function (tool, oldNaviagationToolBar, deferred) {
             var navToolBar = domConstruct.create("div", {
                 id: "newNaviagationToolBar",
             });
@@ -1899,13 +1839,14 @@ define(["dojo/ready",
                 }
                 window.initExt = this.initExt = this.map.extent;
                 
-                // // ???
-                // if(!has("navigation")) {
-                //     on.once(this.map, "extent-change", lang.hitch(this, function() {
-                //         this._checkExtent();
-                //         document.querySelector(".HomeButton input[type='image']").click();
-                //     }));
-                // }
+                on.once(this.map, "extent-change", lang.hitch(this, function() {
+                    navDeferred.then(lang.hitch(this, function (results) {
+                        this._checkExtent();
+                        var homeButton = document.querySelector(".HomeButton input[type='image']");
+                        if(homeButton) 
+                            homeButton.click();
+                    }));
+                }));
 
                 on(this.map, "extent-change", function() {
                     var imgs = this.container.querySelectorAll("img");
