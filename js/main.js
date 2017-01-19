@@ -1637,26 +1637,26 @@ define(["dojo/ready",
 
             if(styleCss) {
                 for(i=0; i<styleCss.cssRules.length; i++) {
-                    rule = styleCss.cssRules[i];
+                    var rule = styleCss.cssRules[i];
                     if(typeof(rule.selectorText)!='undefined' && rule.selectorText!==null) {
                         //hover
                         if(rule.selectorText.indexOf(':hover') >= 0) {
-                            rule.style.backgroundColor = this.hoverColor;
+                            rule.style.backgroundColor = this._rgbaColor(this.hoverColor);
                         }
                         if(rule.selectorText.indexOf('.goThereHint') >= 0) {
-                            rule.style.backgroundColor = this.hoverColor;
+                            rule.style.backgroundColor = this._rgbaColor(this.hoverColor);
                         }
                         //focus
                         if(rule.selectorText.indexOf(':focus') >= 0) {
                             // rule.style.outlineStyle = 'none';
                             // rule.style.outlineColor = 'transparent';
                             // rule.style.boxShadow = '0 0 0 2px '+this.focusColor+' inset';
-                            rule.style.outlineColor = this.focusColor;
+                            rule.style.outlineColor = this._rgbaColor(this.focusColor);
                         }
                         //active
                         if(rule.selectorText.indexOf('.activeMarker') >= 0 || 
                             rule.selectorText.indexOf('dijitSplitterThumb') >= 0) {
-                            //rule.style.backgroundColor = this.activeColor;
+                            rule.style.backgroundColor = this._rgbaColor(this.activeColor);
                             rule.style.outlineStyle = 'none';
                             rule.style.outlineColor = 'transparent';
                             rule.style.boxShadow = '0 0 15px 15px '+this.activeColor+' inset';
@@ -1665,6 +1665,10 @@ define(["dojo/ready",
                 }
             }
             //debugger;
+        },
+
+        _rgbaColor: function(color) {
+            return 'rgb('+color.r+', '+color.g+', '+color.b+')';
         },
 
         _checkExtent: function () {
