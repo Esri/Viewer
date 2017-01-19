@@ -1610,14 +1610,14 @@ define(["dojo/ready",
                         '<img src="images\\searchClear.png" alt="Clear search" width="16" height="16">';
                 }
 
-                // var emptySearchItems = query('.searchInputGroup > input[type="text"] ');
-                // emptySearchItems.forEach(function(s) {
-                //     if(domAttr.get(s, "placeholder") ==='')
-                //     {
-                //         domAttr.set(s, "placeholder", i18n.searchPlaceholder);
-                //         domAttr.set(s, "title", i18n.searchPlaceholder);
-                //     }
-                // });
+                var emptySearchItems = query('.searchInputGroup > input[type="text"] ');
+                emptySearchItems.forEach(function(s) {
+                    if(domAttr.get(s, "placeholder") ==='')
+                    {
+                        domAttr.set(s, "placeholder", i18n.searchPlaceholder);
+                        domAttr.set(s, "title", i18n.searchPlaceholder);
+                    }
+                });
             }));
 
             //create the tools
