@@ -92,7 +92,10 @@ declare, lang, array, dojoJson, domConstruct, esriLang, Locator, FeatureLayer, S
         },
 
         _createWebMapItemSources: function () {
-            if (this.itemData && this.itemData.applicationProperties && this.itemData.applicationProperties.viewing && this.itemData.applicationProperties.viewing.search) {
+            if (this.itemData && 
+                this.itemData.applicationProperties && 
+                this.itemData.applicationProperties.viewing && 
+                this.itemData.applicationProperties.viewing.search) {
                 //search is configured on the web map item 
                 var searchOptions = this.itemData.applicationProperties.viewing.search;
                 array.forEach(searchOptions.layers, lang.hitch(this, function (searchLayer) {
