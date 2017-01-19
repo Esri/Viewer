@@ -6,6 +6,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dojo/dom", "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
     "dojo/text!application/dijit/templates/FeatureListTemplate.html",
+    "dojo/i18n!application/nls/FeatureList",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", 
     "esri/symbols/CartographicLineSymbol", 
     "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol",
@@ -21,7 +22,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         FeatureList, 
         dom, domClass, domAttr, domStyle, domConstruct, event, 
         string,
-        listTemplate,
+        listTemplate, i18n,
         SimpleMarkerSymbol, PictureMarkerSymbol, 
         CartographicLineSymbol, 
         SimpleFillSymbol, SimpleLineSymbol,
@@ -40,7 +41,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
 
         constructor: function (options, srcRefNode) {
             var defaults = lang.mixin({}, this.options, options);
-
             this.domNode = srcRefNode;
             // properties
             this.set("map", defaults.map);
@@ -231,8 +231,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             var indicator = dom.byId('badge_featureSelected');
             if (show) {
                 domStyle.set(indicator,'display','');
-                domAttr.set(indicator, "title", "Feature Selected");
-                domAttr.set(indicator, "alt", "Feature Selected");
+                domAttr.set(indicator, "title", i18n.widgets.featureList.featureSelected);
+                domAttr.set(indicator, "alt", i18n.widgets.featureList.featureSelected);
             } else {
                 domStyle.set(indicator,'display','none');
             }
@@ -389,7 +389,14 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             _getFeatureListItem = function(r, f, objectIdFieldName, layer, content, listTemplate) {
                 try {
                     var featureId = f.attributes[objectIdFieldName];
-                    var attributes = {_featureId:featureId, _layerId:r, _title:layer.infoTemplate.title(f), _content:content};
+                    var attributes = {
+                        _featureId:featureId, 
+                        _layerId:r, 
+                        _title:layer.infoTemplate.title(f), 
+                        _content:content,
+                        _panTo: i18n.widgets.featureList.panTo,
+                        _zoomTo: i18n.widgets.featureList.zoomTo,
+                    };
                     lang.mixin(attributes, f.attributes);
                     var nulls = window.tasks[r].layer.fields.map(function(f){return f.name;});
                     var nullAttrs ={};

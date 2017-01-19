@@ -12,9 +12,9 @@
 			<td>
 			</td>
 			<td colspan="3" >
-				<input id="panBtn_${_layerId}_${_featureId}" class="fg pageBtn" type="button" value="Pan To" onclick="featurePanZoom(this, true)" data-layerId="${_layerId}" data-featureId="${_featureId}"/>
+				<input id="panBtn_${_layerId}_${_featureId}" class="fg pageBtn" type="button" value="${_panTo}" onclick="featurePanZoom(this, true)" data-layerId="${_layerId}" data-featureId="${_featureId}"/>
 			
-				<input id="zoomBtn_${_layerId}_${_featureId}" class="fg pageBtn" type="button" value="Zoom To" onclick="featurePanZoom(this, false)" data-layerId="${_layerId}" data-featureId="${_featureId}"/>
+				<input id="zoomBtn_${_layerId}_${_featureId}" class="fg pageBtn" type="button" value="${_zoomTo}" onclick="featurePanZoom(this, false)" data-layerId="${_layerId}" data-featureId="${_featureId}"/>
 			</td>
 		</tr>
 		<tr class="featureItem_${_layerId}_${_featureId} hideAttr">
