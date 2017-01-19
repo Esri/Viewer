@@ -1562,6 +1562,8 @@ td, th {
   /*width: calc(100% - 20px);*/
   /*margin: 0 10px;*/
   padding: 0 10px;
+  max-height: 264px;
+  overflow-y: auto;
 }
 
 .goThereHint {
