@@ -1659,7 +1659,7 @@ define(["dojo/ready",
                             //rule.style.backgroundColor = this.activeColor;
                             rule.style.outlineStyle = 'none';
                             rule.style.outlineColor = 'transparent';
-                            rule.style.boxShadow = '0 0 5px 5px '+this.activeColor+' inset';
+                            rule.style.boxShadow = '0 0 15px 15px '+this.activeColor+' inset';
                         }
                     }
                 }

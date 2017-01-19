@@ -53,7 +53,7 @@ define({
             "legend": "Legend",
         	"bookmarks": "Bookmarks",
         	"layers": "Layers",
-        	"basemap": "Basemap gallery",
+        	"basemap": "Basemap Gallery",
         	"overview": "Overview map",
         	"measure": "Measure",
         	"edit": "Edit",
