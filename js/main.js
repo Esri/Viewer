@@ -25,6 +25,7 @@ define(["dojo/ready",
     "esri/tasks/query", 
     "esri/dijit/HomeButton", "esri/dijit/LocateButton", 
     "esri/dijit/Legend", "esri/dijit/BasemapGallery", 
+    "dojo/i18n!application/nls/resources",
     "dojo/i18n!application/nls/BaseMapLabels",
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
     "esri/layers/FeatureLayer", "application/NavToolBar/NavToolBar", 
@@ -46,7 +47,7 @@ define(["dojo/ready",
     Query,
     HomeButton, LocateButton, 
     Legend, BasemapGallery, 
-    i18n_BaseMapLabels,
+    i18n, i18n_BaseMapLabels,
     Measurement, OverviewMap, Extent, 
     FeatureLayer, NavToolBar,
     FeatureList, Filters, TableOfContents, LanguageSelect,
@@ -1594,9 +1595,16 @@ define(["dojo/ready",
                     domClass.remove(esriIconCloseNode, "esriIconClose");
                     esriIconCloseNode.innerHTML = 
                         '<img src="images\\searchClear.png" alt="Clear search" width="16" height="16">';
-
                 }
 
+                var emptySearchItems = query('.searchInputGroup > input[type="text"] ');
+                emptySearchItems.forEach(function(s) {
+                    if(domAttr.get(s, "placeholder") ==='')
+                    {
+                        domAttr.set(s, "placeholder", i18n.searchPlaceholder);
+                        domAttr.set(s, "title", i18n.searchPlaceholder);
+                    }
+                });
             }));
 
             //create the tools

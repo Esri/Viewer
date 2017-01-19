@@ -72,6 +72,7 @@ define({
             "featureDetaills" : "7. Skip to Feature Details"
         },
         search : "Search: ",
+        searchPlaceholder: "Find address or place",
         pressAlt : "Press ALT + 0 to 7 keys for fast navigation",
         instructions:"instructions",
         wcagViewer : "WCAG Viewer"

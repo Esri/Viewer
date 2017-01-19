@@ -71,6 +71,7 @@ define(
             "featureDetaills" : "7. Aller aux fonctionnalités détaillées"
         },
         search : "Recherche: ",
+        searchPlaceholder: "Trouver une adresse ou un lieu",
         pressAlt : "Appuyer sur ALT + 0 à 7 pour naviguer rapidement",
         instructions:"instructions.french",
         wcagViewer : "Explorateur WCAG"
