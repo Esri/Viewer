@@ -45,7 +45,7 @@ define([
             //console.log(e.srcElement.parentElement);
             var locale=e.srcElement.parentElement.dataset.code;
             var appId=e.srcElement.parentElement.dataset.appid;
-            if(!appId || appId==='') {
+            if(!appId || appId==='' || appid === undefined) {
                 appId = /(?:[?|&]appid=)([a-z0-9]*)/gi.exec(location.search);
                 if(appId && appId.length===2) {
                     appId = appId[1];
