@@ -1856,6 +1856,8 @@ define(["dojo/ready",
 
                 domAttr.set(dom.byId("panelText"),"TabIndex",0);
                 this.config.title = title;
+                if(!response.itemInfo.itemData)
+                    response.itemInfo.itemData = {};
                 if(!response.itemInfo.itemData.applicationProperties)
                     response.itemInfo.itemData.applicationProperties = {};
                 if(!response.itemInfo.itemData.applicationProperties.viewing)
