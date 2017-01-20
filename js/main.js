@@ -1856,7 +1856,12 @@ define(["dojo/ready",
 
                 domAttr.set(dom.byId("panelText"),"TabIndex",0);
                 this.config.title = title;
-                response.itemInfo.itemData.applicationProperties.viewing.search = {hintText:"Enter Site Address"};
+                if(!response.itemInfo.itemData.applicationProperties)
+                    response.itemInfo.itemData.applicationProperties = {};
+                if(!response.itemInfo.itemData.applicationProperties.viewing)
+                    response.itemInfo.itemData.applicationProperties.viewing = {};
+                if(!response.itemInfo.itemData.applicationProperties.viewing.search)
+                    response.itemInfo.itemData.applicationProperties.viewing.search = { hintText: i18n.searchPlaceholder };
                 this.config.response = response;
                 window.config = this.config;
 
