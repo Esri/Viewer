@@ -3,10 +3,7 @@
 }
 
 .TableOfContents {
-  --padding-bottom: 100px;
-  --position: relative;
-  --width: 297px;
-  --overflow: auto; 
+    width: auto; 
 }
 
 .TableOfContents .toc-title {
@@ -18,16 +15,14 @@
   margin: 1px 2px;
 }
 
-.TableOfContents .toc-first-layer .toc-title {
-}
-
 .TableOfContents .toc-title-container {
   background: none;
   color: #555;
   position: relative;
 }
 
-label.checkbox{
+label.checkbox {
+  /*width: 60%; */
   padding: 3px 0px;
   margin: 0 !important;
   border: 2px solid transparent;
@@ -38,7 +33,12 @@ label.checkbox{
 }
 
 .esriRTL label.checkbox {
-  float: right; }
+  float: right; 
+}
+
+/*.toc-title label.checkbox{
+  width: calc(100% - 40px);
+}*/
 
 input[type=checkbox].checkbox {
   height: 20px;
@@ -68,10 +68,6 @@ input[type=checkbox].checkbox {
   height:16px;
 }
 
-.toc-title label.checkbox{
-  width: calc(100% - 40px);
-}
-
 .toc-settings:hover {
   opacity: 1;
 }
@@ -92,13 +88,6 @@ input[type=checkbox].checkbox {
 .esriRTL .toc-account {
   margin-left: 0;
   margin-right: 4px; }
-
-@media screen and (max-width: 300px) {
-  .TableOfContents {
-    width: auto; }
-  label.checkbox {
-    width: 60%; } 
-  }
 
 .clear {
   clear: both; }
@@ -202,21 +191,9 @@ input[type=checkbox].checkbox {
 }
 
 .esriEditor .esriDrawingToolbar {
-  --position: absolute;
   right: 0;
   left: 0;
   top: 10px;
-  /* border-top: none; */
-  /* border-right: none; */
-  /* border-left: none; */
-}
-
-@media only screen and (min-width: 720px) {
-  .esriEditor .esriDrawingToolbar {
-    top: 10px;
-    right: 0;
-    left: 0; 
-  } 
 }
 
 .esriPopup .pointer.bottom, .esriPopup .pointer.bottomLeft, .esriPopup .pointer.bottomRight {
@@ -291,7 +268,7 @@ input[type=checkbox].checkbox {
   height: 32px; 
 }
 
-.esriSimpleSlider {
+/*.esriSimpleSlider {
   text-align: center;
   color: #ffffff;
   background-color: transparent;
@@ -305,11 +282,11 @@ input[type=checkbox].checkbox {
   display: none;
 }
 
-@media only screen and (min-width: 760px) {
+@media only screen and (min-width: 760px) {*/
   .esriSimpleSlider {
     display: block;
   } 
-}
+/*}*/
 
 .esriSimpleSlider div {
   width: 30px;
@@ -330,12 +307,12 @@ input[type=checkbox].checkbox {
   color: #fff;
 }
 
-@media only screen and (min-width: 800px) {
+/*@media only screen and (min-width: 800px) {*/
   .arcgisSearch .searchGroup .searchInput {
     /* max-width: 300px; */
     display: block;
   } 
-}
+/*}*/
 
 .arcgisSearch .searchClear {
   background: none;
@@ -350,7 +327,7 @@ input[type=checkbox].checkbox {
   font-size: 24px; 
 }
 
-.esriSimpleSliderTL {
+/*.esriSimpleSliderTL {
   top: 10px;
   left: 10px;
   border: none;
@@ -372,7 +349,7 @@ input[type=checkbox].checkbox {
     border-bottom: 0;
     width: 20px;
     height: 20px;
-}
+}*/
 
 .simpleGeocoder .esriGeocoder {
   display: block;
@@ -544,17 +521,17 @@ img {
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#80000000,endColorstr=#80000000);
 }
 
-.esriSimpleSliderIncrementButton[data-title]:hover:after {
+/*.esriSimpleSliderIncrementButton[data-title]:hover:after {
     line-height: 11;
 }
 
 .esriSimpleSliderDecrementButton[data-title]:hover:after {
     line-height: 0;
-}
+}*/
 
-/* Template */
+/* Template
 .bg {
-}
+} */
 
 .rounded {
   -webkit-border-radius: 5px;
@@ -609,7 +586,7 @@ img {
   height: 100%;
 }
 
-@media only screen and (min-width: 600px) {
+/*@media only screen and (min-width: 600px) {*/
   .pageContent {
     background-color: white;
     margin: 0;
@@ -618,7 +595,7 @@ img {
     /*position: absolute;*/
     top: 0;
   }
-}
+/*}*/
 
 .pageHeader {
   position: relative;
@@ -685,10 +662,11 @@ img {
   padding-bottom: 16px;
 }
 
-@media only screen and (min-width: 760px) {
+/*@media only screen and (min-width: 760px) {*/
   #panelTop {
     width: 100%;
-    } }
+    } 
+/*}*/
 
 #panelTitle {
   width: 100%;
@@ -754,11 +732,11 @@ img {
   clear: both;
   }
 
-@media only screen and (min-width: 720px) {
+/*@media only screen and (min-width: 720px) {*/
   #panelTools {
     display: block !important;
   } 
-}
+/*}*/
 
 #panelMenu {
   position: absolute;
@@ -770,11 +748,11 @@ img {
   display: block; 
 }
 
-@media only screen and (min-width: 720px) {
+/*@media only screen and (min-width: 720px) {*/
   #panelMenu {
     display: none;
   } 
-}
+/*}*/
 
 .panelTool {
   float: left;
@@ -985,9 +963,10 @@ img {
   margin: 10px 0 10px;
   display: none; }
 
-@media only screen and (min-width: 720px) {
+/*@media only screen and (min-width: 720px) {*/
   .calcite .icon-container {
-    display: block; } }
+    display: block; } 
+/*}*/
 
 .calcite .map-size-label {
   float: left;
@@ -1058,9 +1037,10 @@ img {
   font-size: 17px;
   display: none; }
 
-@media only screen and (min-width: 720px) {
+/*@media only screen and (min-width: 720px) {*/
   .calcite .share-dialog-subheader {
-    display: block; } }
+    display: block; } 
+/*}*/
 
 .calcite .share-dialog-textarea {
   max-width: calc(100% - 0px) !important;
