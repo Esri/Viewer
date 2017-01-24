@@ -42,8 +42,8 @@ define([
 
         Click: function(e) { 
             //console.log(e.srcElement.parentElement);
-            var locale=e.srcElement.parentElement.dataset.code;
-            var appId=e.srcElement.parentElement.dataset.appid;
+            var locale=e.srcElement.dataset.code || e.srcElement.parentElement.dataset.code;
+            var appId=e.srcElement.dataset.appid || e.srcElement.parentElement.dataset.appid;
             if(!appId || appId==='' || appId === "undefined" || appId === undefined) {
                 appId = /(?:[?|&]appid=)([a-z0-9]*)/gi.exec(window.location.search);
                 if(appId && appId.length===2) {
@@ -68,6 +68,8 @@ define([
 
                 var menuItem = new MenuItem({
                     label: lang.name,
+                    'data-code': lang.code,
+                    'data-appId': lang.appId,
                 });
                 on(menuItem, 'click', this.Click);
 
@@ -77,6 +79,8 @@ define([
                         src:lang.img,
                         alt:'',
                         class: 'langMenuItemIcon',
+                        'data-code': lang.code,
+                        'data-appId': lang.appId,
                     }, iconCell);
                 }
                 dojo.attr(menuItem.domNode,'aria-label', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
@@ -91,6 +95,8 @@ define([
                             src:lang.img,
                             alt:'',
                             class: 'langIcon',
+                            'data-code': lang.code,
+                            'data-appId': lang.appId,
                         });
                         if(lang.shortName && lang.shortName !== "") {
                             currentLocale = "";
