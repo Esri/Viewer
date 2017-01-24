@@ -23,7 +23,6 @@ define([
 
         options: {
             locale: 'en-us',
-            location: '',
             languages:{}, 
             textColor:null
         },
@@ -45,14 +44,13 @@ define([
             //console.log(e.srcElement.parentElement);
             var locale=e.srcElement.parentElement.dataset.code;
             var appId=e.srcElement.parentElement.dataset.appid;
-            if(!appId || appId==='' || appId === "undefined") {
-                appId = /(?:[?|&]appid=)([a-z0-9]*)/gi.exec(location.search);
+            if(!appId || appId==='' || appId === "undefined" || appId === undefined) {
+                appId = /(?:[?|&]appid=)([a-z0-9]*)/gi.exec(window.location.search);
                 if(appId && appId.length===2) {
                     appId = appId[1];
                 }
             }
-            location.search=('?appid='+appId+'&locale='+locale).toLowerCase();
-            location.refresh();
+            window.location.search=('?appid='+appId+'&locale='+locale).toLowerCase();
         },
 
         startup: function () {

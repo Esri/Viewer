@@ -126,7 +126,7 @@ define(["dojo/ready",
             ];
             new LanguageSelect({
                 locale: document.documentElement.lang,
-                location: window.location,
+                //location: window.location,
                 languages:languages,
                 textColor:this.activeColor
             }, dom.byId('languageSelectNode')).startup();
