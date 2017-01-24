@@ -487,7 +487,7 @@ define(["dojo/ready",
 
             query('.skip').forEach(function(h) {
                 h.addEventListener('keydown', function (e) {
-                    if(e.key === "Enter" || e.key === "Space")
+                    if(e.key === "Enter" || e.key === "Space" || e.char === " ")
                     {
                         e.target.click();
                         e.preventDefault();
@@ -669,7 +669,7 @@ define(["dojo/ready",
                         domAttr.set(labelNode, "tabindex", 0);   
                         on(img, "click", function() { node.focus();});
                         on(node,"keydown", function(ev) {
-                            if(ev.key === "Enter" || ev.key === "Space" || ev.key === " ") {
+                            if(ev.key === "Enter" || ev.key === "Space" || ev.char === " ") {
                                 aNode.click();  
                             } else if(ev.key === "Tab" && !ev.shiftKey) {
                                 if(node.nextElementSibling.nodeName != "BR") {
