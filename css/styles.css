@@ -575,103 +575,88 @@ img {
   height: calc(100% - 22px);
   height: 100%;
   position: relative;
-  /*width: calc(100% - 2px); */
   top: 0;
-  /* margin: 0 1px; */
-  /* padding: 10px; */
 }
 
-.pageblank {
-  width: 0px;
-  height: 100%;
-}
-
-/*@media only screen and (min-width: 600px) {*/
-  .pageContent {
+.pageContent {
     background-color: white;
     margin: 0;
     height: 100%;
     width: 100%;
-    /*position: absolute;*/
     top: 0;
-  }
-/*}*/
+}
 
 .pageHeader {
   position: relative;
   width: calc(100% + 2px);
-  /* top: 0; */
-  /* margin: 0 -1px; */
   height: 25px;
 }
 
 .pageTitle {
-  font-size: 18px;
-  color: #ffffff;
-  overflow: hidden;
-  padding: 0 4px;
-  margin: 0;
-  vertical-align: -webkit-baseline-middle;
+    font-size: 18px;
+    color: #ffffff;
+    overflow: hidden;
+    padding: 0 4px;
+    margin: 0;
+    vertical-align: -webkit-baseline-middle;
 }
 
 .esriLegendServiceLabel {
-  -webkit-margin-before: 0;
-  -webkit-margin-after: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding: 6px;
-  margin: 0 -4px;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 6px;
+    margin: 0 -4px;
 }
 
 .pageHeaderImg {
-  position: absolute;
-  left: 5px;
-  margin-left: 0px;
-  top: 11px;
-  width: 60px;
-  height: 60px;
-  line-height: 60px;
-  border: 5px solid rgba(0, 0, 0, 0.1);
-  -webkit-border-radius: 35px;
-  -moz-border-radius: 35px;
-  -ms-border-radius: 35px;
-  border-radius: 35px; 
+    position: absolute;
+    left: 5px;
+    margin-left: 0px;
+    top: 11px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    -webkit-border-radius: 35px;
+    -moz-border-radius: 35px;
+    -ms-border-radius: 35px;
+    border-radius: 35px; 
 }
 
 .pageIcon {
-  position: absolute;
-  left: 11px;
-  top: 11px;
-  width: 40px;
-  height: 40px; 
+    position: absolute;
+    left: 11px;
+    top: 11px;
+    width: 40px;
+    height: 40px; 
 }
 
 .pageBody {
-  width: 100%;
-  height: calc(100% - 52px);
-  color: #000000;
-  overflow: hidden;
-  overflow-y: auto;
-  background-color: transparent;
-  display: inline-block;
-  position: relative;
+    width: 100%;
+    height: calc(100% - 52px);
+    color: #000000;
+    overflow: hidden;
+    overflow-y: auto;
+    background-color: transparent;
+    display: inline-block;
+    position: relative;
 }
 
 .esriPrint {
-  padding: 0px;
-  padding-bottom: 16px;
+    padding: 0px;
+    padding-bottom: 16px;
 }
 
-/*@media only screen and (min-width: 760px) {*/
-  #panelTop {
+#panelTop {
     width: 100%;
-    } 
-/*}*/
+} 
 
 #panelTitle {
-  width: 100%;
-  min-height: 44.8px;
-  }
+    width: 100%;
+    min-height: 44.8px;
+}
 
 .no-search #panelText {
   display: block; }
@@ -732,12 +717,6 @@ img {
   clear: both;
   }
 
-/*@media only screen and (min-width: 720px) {*/
-  #panelTools {
-    display: block !important;
-  } 
-/*}*/
-
 #panelMenu {
   position: absolute;
   top: 10px;
@@ -745,14 +724,8 @@ img {
   font-size: 24px;
   cursor: pointer;
   color: #fff;
-  display: block; 
+  display: none; 
 }
-
-/*@media only screen and (min-width: 720px) {*/
-  #panelMenu {
-    display: none;
-  } 
-/*}*/
 
 .panelTool {
   float: left;
@@ -1080,23 +1053,15 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   font-size: 15px; }
 
 /*Icon Fonts*/
-@font-face {
+/*@font-face {
   font-family: 'tool-icons';
   src: url('../fonts/tool-icons.eot?23344103');
   src: url('../fonts/tool-icons.eot?23344103#iefix') format('embedded-opentype'), url('../fonts/tool-icons.woff?23344103') format('woff'), url('../fonts/tool-icons.ttf?23344103') format('truetype'), url('../fonts/tool-icons.svg?23344103#tool-icons') format('svg');
   font-weight: normal;
-  font-style: normal; }
-
-/* Chrome hack: SVG is rendered more smooth in Windozze. 100% magic, uncomment if you need it. */
-/* Note, that will break hinting! In other OS-es font will be not as sharp as it could be */
-/*
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-  @font-face {
-    font-family: 'tool-icons';
-    src: url('../fonts/tool-icons.svg?23344103#tool-icons') format('svg');  }
-}
-*/ 
-[class^="icon-"]:before, [class*=" icon-"]:before {
+  font-style: normal; 
+}*/
+ 
+/*[class^="icon-"]:before, [class*=" icon-"]:before {
   --font-family: "tool-icons";
   --font-style: normal;
   --font-weight: normal;
@@ -1105,71 +1070,71 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   --text-decoration: inherit;
   --width: 1em;
   --margin-right: 0.2em;
-  --text-align: center;
+  --text-align: center;*/
   /* opacity: .8; */
   /* For safety - reset parent styles, that can break glyph codes*/
-  --font-variant: normal;
-  --text-transform: none;
+  /*--font-variant: normal;
+  --text-transform: none;*/
   /* fix buttons height, for twitter bootstrap */
-  --line-height: 1em;
+  /*--line-height: 1em;*/
   /* Animation center compensation - margins should be symmetric */
   /* remove if not needed */
-  --margin-left: 0.2em;
+  /*--margin-left: 0.2em;*/
   /* you can be more comfortable with increased icons size */
   /* font-size: 120%; */
   /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ }
+  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ 
+/*}*/
 
-.icon-home-1:before {
-  content: '\e800'; }
+/*.icon-home-1:before {
+  content: '\e800'; }*/
 
 /* ' ' */
-.icon-menu:before {
-  content: '\e801'; }
+/*.icon-menu:before {
+  content: '\e801'; }*/
 
 /* '' */
-.icon-twitter:before {
-  --content: '\e802'; }
+/*.icon-twitter:before {
+  --content: '\e802'; }*/
 
 /* '' */
-.icon-facebook-squared:before {
+/*.icon-facebook-squared:before {
   --content: '\e803'; 
-}
+}*/
 
 /* '' */
-.icon-gplus:before {
+/*.icon-gplus:before {
   --content: '\e804'; 
-}
+}*/
 
 /* '' */
-.icon-mail-alt:before {
+/*.icon-mail-alt:before {
   --content: '\e805'; 
-}
+}*/
 
 /* '' */
-.icon-link:before {
+/*.icon-link:before {
   --content: '\e806'; 
-}
+}*/
 
 /* '' */
-.icon-buffer:before {
+/*.icon-buffer:before {
   content: '\e80b'; 
-}
+}*/
 
 /* '' */
-.icon-target:before {
+/*.icon-target:before {
   content: '\e80c'; 
-}
+}*/
 
 /* '' */
-.icon-angle-down:before {
+/*.icon-angle-down:before {
   content: '\e809'; 
-}
+}*/
 
-.homeContainer, .locateContainer
+/*.homeContainer, .locateContainer
 {
-  /* margin-bottom: 7px; */
-}
+}*/
 
 .homeContainer input, .locateContainer input
 {
