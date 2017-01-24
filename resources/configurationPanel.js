@@ -417,7 +417,7 @@
                "tooltip": "The name that will appear in the combo-box pull-down."
             },
             {  "label": "Application Id",
-               "fieldName":"lang2appId",
+               "fieldName":"lang3appId",
                "type":"string",
                "tooltip": "Application ID for language 3."
             }
