@@ -1,3 +1,7 @@
+#loadingTitle {
+  display:none;
+}
+
 .TableOfContents {
   --padding-bottom: 100px;
   --position: relative;
