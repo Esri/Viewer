@@ -737,7 +737,6 @@ define(["dojo/ready",
 
         _addDetails: function (tool, toolbar, deferred) {
             //Add the default map description panel
-            //var deferred = new Deferred();
             if (has("details")) {
                 var description = this.config.description || this.config.response.itemInfo.item.description || this.config.response.itemInfo.item.snippet || " ";
 
@@ -748,7 +747,7 @@ define(["dojo/ready",
                         tabindex:0
                     });
                     detailDiv.innerHTML = "<div tabindex=0 id='detailDiv'>"+description+"</div>";
-                    var detailDiv = dojo.query("#detailDiv")[0];
+                    detailDiv = dojo.query("#detailDiv")[0];
                     if(!has("instructions"))
                         domClass.add(detailDiv, "detailFull");
                     else
@@ -1526,7 +1525,11 @@ define(["dojo/ready",
                 }));
 
                 //Add search layers defined on the web map item 
-                if (this.config.response.itemInfo.itemData && this.config.response.itemInfo.itemData.applicationProperties && this.config.response.itemInfo.itemData.applicationProperties.viewing && this.config.response.itemInfo.itemData.applicationProperties.viewing.search) {
+                if (this.config.response.itemInfo.itemData && 
+                    this.config.response.itemInfo.itemData.applicationProperties && 
+                    this.config.response.itemInfo.itemData.applicationProperties.viewing && 
+                    this.config.response.itemInfo.itemData.applicationProperties.viewing.search) {
+                    
                     var searchOptions = this.config.response.itemInfo.itemData.applicationProperties.viewing.search;
 
                     array.forEach(searchOptions.layers, lang.hitch(this, function (searchLayer) {
@@ -1570,6 +1573,16 @@ define(["dojo/ready",
                     }));
                 }
 
+                defaultSources.forEach(function(source) {
+                    if(!source.placeholder || source.placeholder === undefined || source.placeholder ==="") {
+                        if(source.featureLayer && source.featureLayer.name) {
+                            source.placeholder = i18n.searchEnterCriteria+" "+source.featureLayer.name;
+                        } 
+                        else {
+                            source.placeholder = i18n.searchPlaceholder;
+                        }
+                    }
+                });
                 search.set("sources", defaultSources);
 
                 search.startup();
@@ -1843,6 +1856,14 @@ define(["dojo/ready",
 
                 domAttr.set(dom.byId("panelText"),"TabIndex",0);
                 this.config.title = title;
+                if(!response.itemInfo.itemData)
+                    response.itemInfo.itemData = {};
+                if(!response.itemInfo.itemData.applicationProperties)
+                    response.itemInfo.itemData.applicationProperties = {};
+                if(!response.itemInfo.itemData.applicationProperties.viewing)
+                    response.itemInfo.itemData.applicationProperties.viewing = {};
+                if(!response.itemInfo.itemData.applicationProperties.viewing.search)
+                    response.itemInfo.itemData.applicationProperties.viewing.search = { hintText: i18n.searchPlaceholder };
                 this.config.response = response;
                 window.config = this.config;
 
