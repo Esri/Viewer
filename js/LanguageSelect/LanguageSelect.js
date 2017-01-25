@@ -69,7 +69,7 @@ define([
                 var menuItem = new MenuItem({
                     label: lang.name,
                     'data-code': lang.code,
-                    'data-appId': lang.appId,
+                    'data-apiId': lang.appId,
                 });
                 on(menuItem, 'click', this.Click);
 
@@ -80,13 +80,13 @@ define([
                         alt:'',
                         class: 'langMenuItemIcon',
                         'data-code': lang.code,
-                        'data-appId': lang.appId,
+                        'data-appid': lang.appId,
                     }, iconCell);
                 }
                 dojo.attr(menuItem.domNode,'aria-label', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
                 dojo.attr(menuItem.domNode,'title', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
                 dojo.attr(menuItem.domNode,'data-code', lang.code);
-                dojo.attr(menuItem.domNode,'data-appId', lang.appId);
+                dojo.attr(menuItem.domNode,'data-appid', lang.appId);
                 menu.addChild(menuItem);
 
                 if(lang.code.toUpperCase() === this.defaults.locale.toUpperCase()) {
@@ -96,7 +96,7 @@ define([
                             alt:'',
                             class: 'langIcon',
                             'data-code': lang.code,
-                            'data-appId': lang.appId,
+                            'data-appid': lang.appId,
                         });
                         if(lang.shortName && lang.shortName !== "") {
                             currentLocale = "";
