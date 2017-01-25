@@ -165,18 +165,22 @@ on, mouse, query, Deferred) {
             }, 
             pageContent);
 
-            domConstruct.create("h1", {
+            domConstruct.create("h2", {
                 className: "pageTitle fc",
                 innerHTML: this.config.i18n.tooltips[name] || name,
-                style: 'display:inline',
+                //style: 'display:inline',
                 id: "pagetitle_" + name
             }, pageHeader);
 
             if(loaderImg && loaderImg !=="") {
-                domConstruct.create("div", {
+                domConstruct.create('img',{
+                    src: 'images/reload1.gif',
+                    alt: 'Reloading',
+                    title: 'Reloading'
+                }, domConstruct.create("div", {
                     id: "loading_" + name,
                     class: 'hideLoading small-loading'
-                }, pageHeader);
+                }, pageHeader));
             }
 
             // domConstruct.create("div", {
