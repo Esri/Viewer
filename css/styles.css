@@ -585,19 +585,26 @@ img {
 .pageHeader {
     position: relative;
     width: calc(100% + 2px);
-    height: 25px;
+    /*height: 25px;*/
 }
 
 .pageTitle {
     display: inline-block;
-    font-size: 18px;
+    font-size: 12px;
     font-weight: bolder;
     overflow: hidden;
     padding: 0 4px;
     margin: 0;
     -webkit-margin-before: 0px;
     -webkit-margin-after: 0px;
-    vertical-align: -webkit-baseline-middle
+    vertical-align: baseline;
+}
+
+@media only screen and (min-width: 720px) {
+    .pageTitle {
+        font-size: 18px;
+        font-weight: bold;
+    }
 }
 
 .esriLegendServiceLabel {
@@ -654,7 +661,7 @@ img {
 
 #panelTitle {
     width: 100%;
-    min-height: 44.8px;
+    /*min-height: 44.8px;*/
 }
 
 .no-search #panelText {
@@ -667,15 +674,27 @@ img {
 }
 
 #panelLogo img {
-  max-height: 32px; 
+  max-height: 16px; 
+}
+
+@media only screen and (min-width: 720px) {
+  #panelLogo img {
+    max-height: 32px; 
+  }
 }
 
 #panelText {
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 28px; 
+  font-size: 14px; 
   overflow: hidden;
   display: block;
+}
+
+@media only screen and (min-width: 720px) {
+  #panelText {
+    font-size: 28px; 
+  }
 }
 
 #panelText:focus {
@@ -708,13 +727,19 @@ img {
 }
 
 #panelTools {
-  left: 0px;
-  top: 0px;
-  min-height: 26px;
-  width: calc(100% - 2px);
-  display: block;
-  clear: both;
-  }
+    left: 0px;
+    top: 0px;
+    min-height: 16px;
+    width: calc(100% - 2px);
+    display: block;
+    clear: both;
+}
+
+@media only screen and (min-width: 720px) {
+    #panelTools {
+        min-height: 26px;
+    }
+}
 
 #panelMenu {
   position: absolute;
@@ -737,9 +762,17 @@ img {
 }
 
 .panelTool input[type="image"] {
-  width: 24px;
-  height: 24px;
+  width: 14px;
+  height: 14px;
   float: left;
+}
+
+@media only screen and (min-width: 720px) {
+  .panelTool input[type="image"] {
+    width: 24px;
+    height: 24px;
+    float: left;
+  }
 }
 
 /*Added hover to match the out-of-the-box hover for the home and locate buttons*/
@@ -1489,11 +1522,20 @@ td, th {
 
 #panelBottom {
     position:absolute;
-    bottom: 1px;
-    width: calc(100% - 20px);
-    padding: 4px 10px;
+    bottom: 0px;
     color: white;
     white-space: nowrap;
+    width: calc(100% - 4px);
+    padding: 2px;
+    font-size: 10px;
+}
+
+@media only screen and (min-width: 720px) {
+    #panelBottom {
+        width: calc(100% - 8px);
+        padding: 4px;
+        font-size: 16px;
+    }
 }
 
 #fixContent {
@@ -1552,12 +1594,19 @@ td, th {
 
 .small-loading {
     display: inline-block;
-    vertical-align: -webkit-baseline-middle;
+    vertical-align: baseline;
 }
 
 .small-loading img {
-    width: 22px;
-    height: 22px;
+    width: 14px;
+    height: 14px;
+}
+
+@media only screen and (min-width: 720px) {
+    .small-loading img {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 #loadingTitle {
