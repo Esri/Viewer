@@ -1547,13 +1547,17 @@ td, th {
 }
 
 #instructionsDiv {
-  position: absolute;
-  bottom: 0;
-  /*width: calc(100% - 20px);*/
-  /*margin: 0 10px;*/
-  padding: 0 10px;
-  max-height: 264px;
-  overflow-y: auto;
+    position: absolute;
+    bottom: 0;
+    padding: 0 5px;
+    max-height: 48%;
+    overflow-y: auto;
+}
+
+@media only screen and (min-width: 720px) {
+    #instructionsDiv {
+        padding: 0 10px;
+    }
 }
 
 .goThereHint {
@@ -1746,7 +1750,8 @@ td, th {
 }
 
 .detailHalf {
-    height: calc(100% - 274px);
+    /*height: calc(100% - 274px);*/
+    max-height:50%;
 }
 
 .leftWrapper {
@@ -1834,4 +1839,30 @@ main {
 
 .disabledBtn:focus {
     outline-style: none;
+}
+
+#instructionsList {
+    margin: 0;
+    -webkit-padding-start: 16px;
+    font-size: 12px;
+}
+
+@media only screen and (min-width: 720px) {
+    #instructionsList {
+        -webkit-padding-start: 20px;
+        font-size: 14px;
+    }
+}
+
+.instructionsTitle {
+    padding: 0;
+    margin: 2px;
+    font-size: 14px;
+}
+
+@media only screen and (min-width: 720px) {
+    .instructionsTitle {
+      margin: 4px;
+      font-size: 18px;
+    }
 }
