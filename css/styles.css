@@ -21,29 +21,8 @@
   position: relative;
 }
 
-label.checkbox {
-  /*width: 60%; */
-  padding: 3px 0px;
-  margin: 0 !important;
-  border: 2px solid transparent;
-  vertical-align: text-top;
-  font-weight: bold;
-  font-size: 16px;
-  display: inline-block;
-}
-
 .esriRTL label.checkbox {
   float: right; 
-}
-
-input[type=checkbox].checkbox {
-  height: 20px;
-  width: 20px;
-  border: 1px solid #bababa;
-  vertical-align: top;
-  background-color: #fff;
-  color: #000;
-  cursor: pointer;
 }
 
 .esriRTL .checkbox {
@@ -156,11 +135,6 @@ input[type=checkbox].checkbox {
   top: 75%;
   left: 0;
   text-align: center; 
-}
-
-/*Styles for the print dialog checkbox*/
-#pageBody_print 
-  input[type=checkbox].checkbox {
 }
 
 /*Layer list dialog*/
@@ -583,15 +557,6 @@ img {
         font-size: 18px;
         font-weight: bold;
     }
-}
-
-.esriLegendServiceLabel {
-    -webkit-margin-before: 0;
-    -webkit-margin-after: 0;
-    margin-top: 0;
-    margin-bottom: 0;
-    padding: 6px;
-    margin: 0 -4px;
 }
 
 .pageHeaderImg {
@@ -1155,10 +1120,6 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   padding:10px 0 10px 10px;
 }
 
-.toc-title-container {
-  padding: 8px;
-}
-
 .esriBasemapGalleryNode
 {
   margin: 1px 8px !important;
@@ -1340,14 +1301,6 @@ h3 {
 
 .ovwHighlight {
     background-color: rgba(0, 0, 0, 0.5);
-}
-
-.pageBody h2, .groupLabel {
-  /* padding: 8px; */
-  /* margin: 0 -4px; */
-  font-size:16px;
-  -webkit-margin-before: 0;
-  -webkit-margin-after: 0;
 }
 
 .dojoxGrid .dojoxGridCell {
@@ -1709,10 +1662,6 @@ td, th {
   padding: 10px;
 }
 
-.legend table {
-  width:100%;
-}
-
 .arcgisSearch .searchInput::-moz-placeholder {
     color: #c6c6c1; !important
     opacity: 1;
@@ -1990,4 +1939,74 @@ main {
         right: 4px;
     }
 
+}
+
+.pageBody h2, .groupLabel {
+  font-size:14px;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+}
+
+.esriLegendServiceLabel {
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding: 2px;
+    margin: 0;
+}
+
+.legend table {
+    width:100%;
+    font-size: 14px;
+}
+
+@media only screen and (min-width: 720px) {
+    .pageBody h2, .groupLabel {
+        font-size:16px;
+    }
+    .legend table {
+        font-size: 16px;
+    }
+
+}
+
+label.checkbox {
+    padding: 1.2px 0px;
+    font-size: 14px;
+    margin: 0 !important;
+    border: 2px solid transparent;
+    vertical-align: text-top;
+    font-weight: bold;
+    display: inline-block;
+}
+
+input[type=checkbox].checkbox {
+    height: 16px;
+    width: 16px;
+    border: 1px solid #bababa;
+    vertical-align: top;
+    background-color: #fff;
+    color: #000;
+    cursor: pointer;
+}
+
+.toc-title-container {
+    padding: 2px;
+}
+
+@media only screen and (min-width: 720px) {
+    input[type=checkbox].checkbox {
+        height: 20px;
+        width: 20px;
+    }
+
+    label.checkbox {
+        padding: 3px 0px;
+        font-size: 16px;
+    }
+
+    .toc-title-container {
+        padding: 6px;
+    }
 }
