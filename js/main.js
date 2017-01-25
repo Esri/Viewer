@@ -1594,7 +1594,7 @@ define(["dojo/ready",
                     domClass.remove(esriIconDownArrowNode, "esriIconDownArrow");
 
                     esriIconDownArrowNode.innerHTML = 
-                        '<img src="images\\downArrow.png" alt="Search in" width="20" height="20">';
+                        '<img src="images\\downArrow.png" alt="Search in">';
 
                     searchInput = dojo.query(".searchInput")[0];
                     dojo.setAttr(searchInput, 'role', 'search');
@@ -1602,12 +1602,12 @@ define(["dojo/ready",
                     esriIconZoomNode = dojo.query(".esriIconZoom")[0];
                     domClass.remove(esriIconZoomNode, "esriIconZoom");
                     esriIconZoomNode.innerHTML = 
-                        '<img src="images\\searchZoom.png" alt="Search" width="20" height="20">';
+                        '<img src="images\\searchZoom.png" alt="Search">';
 
                     esriIconCloseNode = dojo.query(".esriIconClose")[0]; 
                     domClass.remove(esriIconCloseNode, "esriIconClose");
                     esriIconCloseNode.innerHTML = 
-                        '<img src="images\\searchClear.png" alt="Clear search" width="16" height="16">';
+                        '<img src="images\\searchClear.png" alt="Clear search">';
                 }
 
                 var emptySearchItems = query('.searchInputGroup > input[type="text"] ');

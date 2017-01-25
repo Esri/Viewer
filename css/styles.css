@@ -294,28 +294,6 @@ input[type=checkbox].checkbox {
   -webkit-user-select: none;
 }
 
-.arcgisSearch .searchGroup .searchInput {
-  /* width: 298px; */
-  /*padding: 6px 17px 6px 18px;*/
-  background-color: rgba(0, 0, 0, 0.3);
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
-  zoom: 1;
-  color: #fff;
-}
-
-/*@media only screen and (min-width: 800px) {*/
-  .arcgisSearch .searchGroup .searchInput {
-    /* max-width: 300px; */
-    display: block;
-  } 
-/*}*/
-
-.arcgisSearch .searchClear {
-  background: none;
-  background-color: inherit;
-  color: #a8a8a8; 
-}
-
 .notools div {
   width: 30px;
   height: 30px;
@@ -713,17 +691,6 @@ img {
 
 #panelText.nosearch {
   display: block; 
-}
-
-#panelSearch {
-  margin: 0;
-  width:100%;
-  position: relative;
-}
-
-#panelSearch .searchLabel {
-  padding: 8px 4px;
-  float: left;
 }
 
 #panelTools {
@@ -1514,10 +1481,16 @@ td, th {
 }
 
 #leftPanel{
-    min-width: 425px;
+    min-width: 300px;
     height: 100%;
     width: 100%;
     background-color: white;
+}
+
+@media only screen and (min-width: 720px) {
+    #leftPanel{
+        min-width: 425px;
+    }
 }
 
 #panelBottom {
@@ -1865,4 +1838,135 @@ main {
       margin: 4px;
       font-size: 18px;
     }
+}
+
+#panelSearch {
+    margin: 0;
+    width:100%;
+    position: relative;
+}
+
+#panelSearch .searchLabel {
+    padding: 4px 5px;
+    float: left;
+    font-size: 12px;
+    margin-bottom: 0 !important;
+}
+
+.arcgisSearch .searchIcon {
+    font-size: 16px;
+    width: auto;
+    height: auto;
+    line-height: 10px;
+    display: inline-block;
+}
+
+.arcgisSearch .searchIcon img {
+    width: 14px;
+    height: 14px;
+}
+
+.arcgisSearch .searchBtn {
+    padding: 3px;
+    font-size: 10px;
+    line-height: 14px;
+    height: 14px;
+    -webkit-border-radius: 0 2px 2px 0;
+    border-radius: 0 2px 2px 0;
+}
+
+.arcgisSearch .searchGroup .searchInput {
+    height:14px;
+    width: 150px;
+    padding: 3px 20px 3px 6px ;
+    font-size: 12px;
+    line-height: 16px;
+    -webkit-border-radius: 2px 0 0 2px;
+    border-radius: 2px 0 0 2px;
+}
+
+.arcgisSearch .searchGroup .searchInput {
+    /* width: 298px; */
+    /*padding: 6px 17px 6px 18px;*/
+    background-color: rgba(0, 0, 0, 0.3);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000);
+    zoom: 1;
+    color: #fff;
+}
+
+/*@media only screen and (min-width: 800px) {*/
+    .arcgisSearch .searchGroup .searchInput {
+      /* max-width: 300px; */
+      display: block;
+    } 
+/*}*/
+
+.arcgisSearch .searchClear {
+    background: none;
+    background-color: inherit;
+    /*color: #a8a8a8; */
+    top: 2px;
+    right: 2px;
+    z-index: 2;
+    height: 0;
+    width: 0;
+}
+
+.arcgisSearch .searchClose, .arcgisSearch .searchSpinner {
+    vertical-align: baseline;
+    margin-top: 2.5px;
+    position: absolute;
+    right: 2px;
+}
+
+@media only screen and (min-width: 720px) {
+    #panelSearch {
+        margin: 0;
+        width:100%;
+        position: relative;
+    }
+
+    #panelSearch .searchLabel {
+        padding: 8px 4px;
+        float: left;
+        font-size: 14px;
+    }
+
+    .arcgisSearch .searchIcon {
+        width: auto;
+        height: auto;
+        line-height: 20px;
+    }
+
+    .arcgisSearch .searchIcon img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .arcgisSearch .searchBtn {
+        padding: 6px;
+        font-size: 16px;
+        line-height: 20px;
+        height: 20px;
+        -webkit-border-radius: 0 4px 4px 0;
+        border-radius: 0 4px 4px 0;
+    }
+
+    .arcgisSearch .searchGroup .searchInput {
+        height: 20px;
+        width: 200px;
+        padding: 6px 28px 6px 12px;
+        font-size: 14px;
+        line-height: 20px;
+        -webkit-border-radius: 4px 0 0 4px;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .arcgisSearch .searchClose, .arcgisSearch .searchSpinner {
+        vertical-align: baseline;
+        margin-top: 5px;
+        position: absolute;
+        right: 4px;
+    }
+
 }
