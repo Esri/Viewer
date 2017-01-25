@@ -36,10 +36,6 @@ label.checkbox {
   float: right; 
 }
 
-/*.toc-title label.checkbox{
-  width: calc(100% - 40px);
-}*/
-
 input[type=checkbox].checkbox {
   height: 20px;
   width: 20px;
@@ -587,18 +583,21 @@ img {
 }
 
 .pageHeader {
-  position: relative;
-  width: calc(100% + 2px);
-  height: 25px;
+    position: relative;
+    width: calc(100% + 2px);
+    height: 25px;
 }
 
 .pageTitle {
+    display: inline-block;
     font-size: 18px;
-    color: #ffffff;
+    font-weight: bolder;
     overflow: hidden;
     padding: 0 4px;
     margin: 0;
-    vertical-align: -webkit-baseline-middle;
+    -webkit-margin-before: 0px;
+    -webkit-margin-after: 0px;
+    vertical-align: -webkit-baseline-middle
 }
 
 .esriLegendServiceLabel {
@@ -1552,15 +1551,13 @@ td, th {
 }
 
 .small-loading {
-    background-position: center center;
-    background-image: url(../images/reload1.gif);
-    background-repeat: no-repeat;
-    background-size: 22px 22px;
-    display: -webkit-inline-box;
+    display: inline-block;
     vertical-align: -webkit-baseline-middle;
+}
+
+.small-loading img {
     width: 22px;
     height: 22px;
-    z-index: 2000;
 }
 
 #loadingTitle {
@@ -1718,12 +1715,6 @@ footer {
 
 main {
     flex: 1;
-}
-
-.showLoading {
-    display: -webkit-inline-box; 
-    vertical-align: -webkit-baseline-middle;
-    vertical-align: middle;
 }
 
 .hideLoading {
