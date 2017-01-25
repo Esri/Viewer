@@ -619,13 +619,20 @@ img {
 
 .pageBody {
     width: 100%;
-    height: calc(100% - 52px);
+    height: calc(100% - 34px);
     color: #000000;
     overflow: hidden;
     overflow-y: auto;
     background-color: transparent;
     display: inline-block;
     position: relative;
+}
+
+@media only screen and (min-width: 720px) {
+    .pageBody {
+        width: 100%;
+        height: calc(100% - 52px);
+    }
 }
 
 .esriPrint {
@@ -1525,11 +1532,13 @@ td, th {
     padding: 0 5px;
     max-height: 48%;
     overflow-y: auto;
+    width: calc(100% - 10px);
 }
 
 @media only screen and (min-width: 720px) {
     #instructionsDiv {
         padding: 0 10px;
+        width: calc(100% - 20px);
     }
 }
 
