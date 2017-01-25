@@ -1605,21 +1605,29 @@ td, th {
 }
 
 .skip a {
-    color: white;
-    background-color: #002C61;
-    border-right: 1px solid #FFF;
-    border-bottom: 1px solid #FFF;
+    color: black;
+    background-color: white;
     
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 2px;
+    left: 2px;
     overflow: hidden;
     margin: 0;
     width: auto;
     height: auto;
-    padding: 10px;
+    padding: 5px 20px;
     clip: rect(1px, 1px, 1px, 1px);
-    /*box-shadow: 0 0 0 0 !important;*/
+    box-shadow: 2px 2px 2px 2px rgba(0,0,0,0.5) !important;
+    z-index: 1000;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+@media only screen and (min-width: 720px) {
+    .skip a {
+        font-size: 18px;
+        padding: 10px 40px;
+    }
 }
 
 .skip a:focus {
@@ -1886,7 +1894,7 @@ main {
 
 .arcgisSearch .searchGroup .searchInput {
     height:14px;
-    width: 150px;
+    width: 155px;
     padding: 3px 20px 3px 6px ;
     font-size: 12px;
     line-height: 16px;
@@ -1928,6 +1936,11 @@ main {
     right: 2px;
 }
 
+.arcgisSearch .hasMultipleSources .searchToggle {
+    display: inline-block;
+    float: left;
+}
+
 @media only screen and (min-width: 720px) {
     #panelSearch {
         margin: 0;
@@ -1944,7 +1957,6 @@ main {
     .arcgisSearch .searchIcon {
         width: auto;
         height: auto;
-        line-height: 20px;
     }
 
     .arcgisSearch .searchIcon img {
