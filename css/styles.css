@@ -2,6 +2,11 @@
   display:none;
 }
 
+.arcgisSearch .showNoResults .noResultsMenu {
+    width: calc(100% - 6px);
+    margin: 0 2px;
+}
+
 .TableOfContents {
     width: auto; 
 }
@@ -1867,27 +1872,39 @@ main {
     } 
 /*}*/
 
-.arcgisSearch .searchClear {
+/*.arcgisSearch .searchClear {
     background: none;
     background-color: inherit;
-    /*color: #a8a8a8; */
+    color: #a8a8a8; 
     top: 2px;
     right: 2px;
     z-index: 2;
     height: 0;
     width: 0;
-}
+}*/
 
 .arcgisSearch .searchClose, .arcgisSearch .searchSpinner {
     vertical-align: baseline;
-    margin-top: 2.5px;
+    margin-top: 3.5px;
     position: absolute;
     right: 2px;
+}
+
+.arcgisSearch .searchSpinner {
+    display: none;
 }
 
 .arcgisSearch .hasMultipleSources .searchToggle {
     display: inline-block;
     float: left;
+}
+
+.arcgisSearch .hasValue .searchClear {
+    background-color: inherit;
+    display: inline-block;
+    width: 18px;
+    height: 100%;
+    top: 0;
 }
 
 @media only screen and (min-width: 720px) {
@@ -1934,9 +1951,13 @@ main {
 
     .arcgisSearch .searchClose, .arcgisSearch .searchSpinner {
         vertical-align: baseline;
-        margin-top: 5px;
+        margin-top: 7.5px;
         position: absolute;
         right: 4px;
+    }
+
+    .arcgisSearch .hasValue .searchClear {
+        width: 28px;
     }
 
 }
