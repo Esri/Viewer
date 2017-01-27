@@ -417,7 +417,7 @@ define(["dojo/ready",
                             skipToMap();
                         }
                         break;
-                    case 'Digit0' :
+                    case '0' :
                         if (event.altKey) {
                             skipSkip();
                         }
