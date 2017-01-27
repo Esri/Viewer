@@ -645,6 +645,7 @@ define(["dojo/ready",
                     var nodes = this.domNode.querySelectorAll(".esriBasemapGalleryNode");
                     array.forEach(nodes, function(node){
                         domAttr.set(node, "role", "listitem");
+                        domAttr.set(node, "aria-hidden", "true");
                         var img = node.querySelector("img");
                         img.alt='';
                         domAttr.set(img, "tabindex", -1);
