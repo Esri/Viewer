@@ -6,7 +6,7 @@ define([
     "dojo/i18n!application/nls/LanguageSelect",
     "dijit/form/DropDownButton", "dijit/DropDownMenu", "dijit/MenuItem",
     "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", 
-    "dojo/dom-construct", "dojo/_base/event", 
+    "dojo/dom-construct", "dojo/_base/event", "esri/lang", 
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
     
     ], function (
@@ -16,7 +16,7 @@ define([
         LanguageSelectTemplate, i18n,
         DropDownButton, DropDownMenu, MenuItem,
         domClass, domAttr, domStyle, 
-        domConstruct, event
+        domConstruct, event, esriLang
     ) {
     var Widget = declare("esri.dijit.LanguageSelect", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: LanguageSelectTemplate,
@@ -83,8 +83,9 @@ define([
                         'data-appid': lang.appId,
                     }, iconCell);
                 }
-                dojo.attr(menuItem.domNode,'aria-label', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
-                dojo.attr(menuItem.domNode,'title', i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name);
+                var langHint = i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name;
+                dojo.attr(menuItem.domNode,'aria-label', langHint);
+                dojo.attr(menuItem.domNode,'title', esriLang.stripTags(langHint));
                 dojo.attr(menuItem.domNode,'data-code', lang.code);
                 dojo.attr(menuItem.domNode,'data-appId', lang.appId);
                 menu.addChild(menuItem);
@@ -117,8 +118,9 @@ define([
             if(currentIcon) {
                 dojo.removeClass(this.button.iconNode, "dijitNoIcon");
                 dojo.place(currentIcon, this.button.iconNode);
-                dojo.attr(this.button.iconNode,'aria-label', i18n.widgets.languageSelect.aria.currentLanguage+" "+currentLanguage);
-                dojo.attr(this.button.iconNode,'title', i18n.widgets.languageSelect.aria.currentLanguage+" "+currentLanguage);
+                var currentHint = i18n.widgets.languageSelect.aria.currentLanguage+" "+currentLanguage;
+                dojo.attr(this.button.iconNode,'aria-label', currentHint);
+                dojo.attr(this.button.iconNode,'title', esriLang.stripTags(currentHint));
             } else {
                 if(this.defaults.textColor)
                     dojo.attr(this.button,'style', 'color:'+this.defaults.textColor+';');

@@ -2,6 +2,14 @@
   display:none;
 }
 
+blockquote {
+    display: inherit;
+    -webkit-margin-before: 0;
+    -webkit-margin-after: 0;
+    -webkit-margin-start: 0;
+    -webkit-margin-end: 0;
+}
+
 .arcgisSearch .showNoResults .noResultsMenu {
     width: calc(100% - 6px);
     margin: 0 2px;
@@ -1871,17 +1879,6 @@ main {
       display: block;
     } 
 /*}*/
-
-/*.arcgisSearch .searchClear {
-    background: none;
-    background-color: inherit;
-    color: #a8a8a8; 
-    top: 2px;
-    right: 2px;
-    z-index: 2;
-    height: 0;
-    width: 0;
-}*/
 
 .arcgisSearch .searchClose, .arcgisSearch .searchSpinner {
     vertical-align: baseline;
