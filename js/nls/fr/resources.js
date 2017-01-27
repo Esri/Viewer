@@ -75,6 +75,6 @@ define(
         searchEnterCriteria : "Terme recherché pour",
         pressAlt : "Appuyer sur ALT + 1 à 7 pour naviguer rapidement",
         instructions:"instructions.french",
-        wcagViewer : "Explorateur WCAG"
+        wcagViewer : "Visualiseur Accessible"
     })
 );

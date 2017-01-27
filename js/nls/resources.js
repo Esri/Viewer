@@ -76,7 +76,7 @@ define({
         searchEnterCriteria : "Enter search term for",
         pressAlt : "Press ALT + 1 to 7 keys for fast navigation",
         instructions:"instructions",
-        wcagViewer : "WCAG Viewer"
+        wcagViewer : "Accessible Viewer"
     }),
 "ar": 1,
 "cs": 1,
