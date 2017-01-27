@@ -1372,7 +1372,9 @@ html, body {
     /* padding-left: 10px; */
 }
 
-.showAttr {display: grid;}
+.showAttr {
+    display: grid;
+}
 
 .hideAttr {
     display:none;
@@ -1380,29 +1382,16 @@ html, body {
 }
 
 .borderLi {
-  border: solid 1px gray;
+    border: solid 1px gray;
 }
 
 .featureItem h2 {
-    
-font-size: 16px;
-    
-text-align: left;
-}
-
-#dijit_layout_ContentPane_1 {
-  padding:1px;
-  background: #ccc;
-}
-
-#mapDiv {
+    font-size: 16px;
+    text-align: left;
 }
 
 .splitterContent {
     overflow-y: hidden !important;
-}
-
-td, th {
 }
 
 .borderBottom {
