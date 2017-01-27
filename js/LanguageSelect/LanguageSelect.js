@@ -124,7 +124,15 @@ define([
                     dojo.attr(this.button,'style', 'color:'+this.defaults.textColor+';');
             }
 
-            dom.byId("languageSelectNode").appendChild(this.button.domNode);
+            this.domNode.appendChild(this.button.domNode);
+
+            query('.dijitMenuTable').forEach(function(table){
+                dojo.attr(table, "role", "presentation");
+            });
+
+            query('.dijitPopup').forEach(function(table){
+                dojo.attr(table, "role", "menu");
+            });
         }
     });
 

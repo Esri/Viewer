@@ -130,14 +130,6 @@ define(["dojo/ready",
                 languages:languages,
                 textColor:this.activeColor
             }, dom.byId('languageSelectNode')).startup();
-
-            query('.dijitMenuTable').forEach(function(table){
-                dojo.attr(table, "role", "presentation");
-            });
-
-            query('.dijitPopup').forEach(function(table){
-                dojo.attr(table, "role", "menu");
-            });
         },
 
         reportError: function (error) {
