@@ -36,21 +36,30 @@ define([
             link.href = "js/LanguageSelect/Templates/LanguageSelect.css";
             link.type = "text/css";
             link.rel = "stylesheet";
-            document.getElementsByTagName("head")[0].appendChild(link);
-
+            query('html')[0].appendChild(link);
         },
 
         Click: function(e) { 
             //console.log(e.srcElement.parentElement);
-            var locale=e.srcElement.dataset.code || e.srcElement.parentElement.dataset.code || e.srcElement.parentElement.parentElement.dataset.code;
-            var appId=e.srcElement.dataset.appid || e.srcElement.parentElement.dataset.appid || e.srcElement.parentElement.parentElement.dataset.appid;
+            var menuItemDataSet = query(e.srcElement).closest('.dijitMenuItem')[0].dataset;
+            var docLocale = query('html')[0].lang;
+            var locale = menuItemDataSet.code;
+            if(!locale || locale==='' || locale === "undefined" || locale === undefined)
+            {
+                locale = navigator.language;
+            }
+            locale = locale.toLowerCase();
+
+            if(docLocale.toLowerCase() === locale) return;
+
+            var appId = menuItemDataSet.appid;
             if(!appId || appId==='' || appId === "undefined" || appId === undefined) {
                 appId = /(?:[?|&]appid=)([a-z0-9]*)/gi.exec(window.location.search);
                 if(appId && appId.length===2) {
                     appId = appId[1];
                 }
             }
-            window.location.search=('?appid='+appId+'&locale='+locale).toLowerCase();
+            window.location.search=('?appid='+appId+'&locale='+locale);
         },
 
         startup: function () {
@@ -79,8 +88,6 @@ define([
                         src:lang.img,
                         alt:'',
                         class: 'langMenuItemIcon',
-                        'data-code': lang.code,
-                        'data-appid': lang.appId,
                     }, iconCell);
                 }
                 var langHint = i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name;
@@ -96,8 +103,6 @@ define([
                             src:lang.img,
                             alt:'',
                             class: 'langIcon',
-                            'data-code': lang.code,
-                            'data-appid': lang.appId,
                         });
                         if(lang.shortName && lang.shortName !== "") {
                             currentLocale = "";

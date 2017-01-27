@@ -8,6 +8,7 @@ blockquote {
     -webkit-margin-after: 0;
     -webkit-margin-start: 0;
     -webkit-margin-end: 0;
+    font-style: italic; 
 }
 
 .arcgisSearch .showNoResults .noResultsMenu {

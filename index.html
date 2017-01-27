@@ -92,7 +92,7 @@
          if(locale && locale.length===2) {
          	locale = locale[1];
          }
-         else locale = 'en-us';
+         else locale = navigator.language.toLowerCase();//'en-us';
          document.documentElement.lang = locale;
 
          var dojoConfig = {
