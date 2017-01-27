@@ -1842,7 +1842,8 @@ define(["dojo/ready",
                         altText = title;
                     var panelLogo = domConstruct.create("div", {
                         id: "panelLogo",
-                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt='" + altText + "' Title='" + altText + "' TabIndex=0 aria-label='" + altText + "'></>"
+                        TabIndex:0, 
+                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt='" + altText + "' Title='" + altText + "' aria-label='" + altText + "'></>"
                     }, dom.byId("panelTitle"));//, "first");
                     //domClass.add("panelTop", "largerTitle");
                     dojo.place(panelLogo, dojo.byId('panelText'), 'before');

@@ -91,7 +91,7 @@ define([
                     }, iconCell);
                 }
                 var langHint = i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name;
-                dojo.attr(menuItem.domNode,'aria-label', langHint);
+                dojo.attr(menuItem.domNode,'aria-label', esriLang.stripTags(langHint));
                 dojo.attr(menuItem.domNode,'title', esriLang.stripTags(langHint));
                 dojo.attr(menuItem.domNode,'data-code', lang.code);
                 dojo.attr(menuItem.domNode,'data-appId', lang.appId);
@@ -136,6 +136,7 @@ define([
                 for: 'langageButton',
                 innerHTML: i18n.widgets.languageSelect.language,
                 title: i18n.widgets.languageSelect.changeHere,
+                'aria-label': i18n.widgets.languageSelect.changeHere,
                 tabindex: 0
             }, this.domNode);
 

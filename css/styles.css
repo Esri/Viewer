@@ -2023,8 +2023,8 @@ input[type=checkbox].checkbox {
 
 #panelLogo {
     overflow: hidden;
-    float: left;
     line-height: 0;
+    margin:1px;
 }
 
 #panelLogo img {
@@ -2032,10 +2032,19 @@ input[type=checkbox].checkbox {
     padding: 2px;
 }
 
+#panelTitle {
+    height:28px;
+}
+
 @media only screen and (min-width: 720px) {
     #panelLogo img {
         max-height: 32px; 
-        padding: 4px;
+        padding: 3px;
+    }
+
+    #panelTitle {
+        height:45px;
     }
 }
+
 
