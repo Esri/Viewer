@@ -42,23 +42,25 @@
 		<!-- The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
 
 		<div style="display:none;">
+			<div id="layoutTopPanel"/>
+				<div id="panelTitle" class="fc bg borderBottom">
+					<h1 class="fc" id="panelText">WCAG Viewer</h1>
+					<div id="panelMenu" class="icon-menu icon-color"></div>
+					<div class="skip" role="banner">
+						<a accesskey="1" href="#" tabindex="0" aria-hidden=true id="skip-tools">1. Skip to Tools</a>
+						<a accesskey="2" href="#" tabindex="0" aria-hidden=true id="skip-search">2. Skip to Search</a>
+						<a accesskey="3" href="#" tabindex="0" aria-hidden=true id="skip-content">3. Skip to Content</a>
+						<a accesskey="4" href="#" tabindex="0" aria-hidden=true id="skip-splitter">4. Skip to Splitter</a>
+						<a accesskey="5" href="#" tabindex="0" aria-hidden=true id="skip-map">5. Skip to Map</a>
+						<a accesskey="6" href="#" tabindex="0" aria-hidden=true id="skip-instructions">6. Skip to Help</a>
+						<a accesskey="7" href="#" tabindex="0" aria-hidden=true id="skip-feature">7. Skip to Feature Details</a>
+				    </div>
+				</div>
+			</div>
+
 			<div id="leftPanel" class="leftWrapper">
-				
 				<header id="panelTop" class="bg" style="color:transparent !important;">
 					<!-- Panel Title -->
-					<div id="panelTitle" class="fc bg borderBottom">
-						<h1 class="fc" id="panelText">WCAG Viewer</h1>
-						<div id="panelMenu" class="icon-menu icon-color"></div>
-						<div class="skip" role="banner">
-							<a accesskey="1" href="#" tabindex="0" aria-hidden=true id="skip-tools">1. Skip to Tools</a>
-							<a accesskey="2" href="#" tabindex="0" aria-hidden=true id="skip-search">2. Skip to Search</a>
-							<a accesskey="3" href="#" tabindex="0" aria-hidden=true id="skip-content">3. Skip to Content</a>
-							<a accesskey="4" href="#" tabindex="0" aria-hidden=true id="skip-splitter">4. Skip to Splitter</a>
-							<a accesskey="5" href="#" tabindex="0" aria-hidden=true id="skip-map">5. Skip to Map</a>
-							<a accesskey="6" href="#" tabindex="0" aria-hidden=true id="skip-instructions">6. Skip to Help</a>
-							<a accesskey="7" href="#" tabindex="0" aria-hidden=true id="skip-feature">7. Skip to Feature Details</a>
-					    </div>
-					</div>
 					<!-- Panel Tools -->
 					<div id="panelTools" class="fc bg borderBottom" role="toolbar">
 						<!--Tools are created programatically-->
@@ -79,7 +81,6 @@
 			</div>
 
 			<div id="mapDiv" dir="ltr" tabindex=0></div>
-		</div>
 
 		<script type="text/javascript" src="js/utils.js">
 		</script>

@@ -246,26 +246,37 @@ define(["dojo/ready",
         // Create UI
         _createUI: function () {
             var borderContainer = new BorderContainer({
-                design:'sidebar',
-                gutters:'true', 
+                //design:'sidebar',
+                gutters:'false', 
                 liveSplitters:'false',
                 id:"borderContainer"
             });
              
+            var contentPaneTop = new ContentPane({
+                region: "top",
+                splitter: 'false',
+                style: "padding:0;",
+                //gutters: 'false',
+                content: dojo.byId("layoutTopPanel"),
+                class: "splitterContent",
+            });
+            borderContainer.addChild(contentPaneTop);
+              
             var contentPaneLeft = new ContentPane({
                 region: "leading",
                 splitter: 'true',
                 style: "width:425px; padding:0; overflow: none;",
-                content: dom.byId("leftPanel"),
+                content: dojo.byId("leftPanel"),
                 class: "splitterContent",
             });
             borderContainer.addChild(contentPaneLeft);
               
             var contentPaneRight = new ContentPane({
+                style: "padding:1px;",
                 region: "center",
                 splitter: "true",
                 class: "bg",
-                content: dom.byId("mapDiv"),
+                content: dojo.byId("mapDiv"),
             });
             borderContainer.addChild(contentPaneRight);
 
