@@ -121,6 +121,7 @@ on, mouse, query, Deferred) {
                 type: "image",
                 src: "images/icons_" + this.config.icons + "/" + name + ".png",
                 title: tip,
+                alt: tip
             }, panelTool);
 
             if (!has("touch")) 

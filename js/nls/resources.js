@@ -45,9 +45,9 @@ define({
 			}
         },
         "tooltips":{
-        	"home": "Default extent",
-        	"locate": "Find my location",
-            "features" : "Feature list",
+        	"home": "Default Extent",
+        	"locate": "Find my Location",
+            "features" : "Feature List",
             "filter" : "Filters",
             "instructions": "Instructions",
             "legend": "Legend",

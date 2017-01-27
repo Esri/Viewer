@@ -45,13 +45,13 @@ define(
 			}
         },
         "tooltips":{
-        	"home": "Etendue par défaut",
-        	"locate": "Rechercher mon site",
+        	"home": "Etendue par Défaut",
+        	"locate": "Rechercher mon Site",
         	"legend": "Légende",
         	"bookmarks": "Géosignets",
         	"layers": "Couches",
-        	"basemap": "Galerie des cartes de base",
-        	"overview": "Vue générale",
+        	"basemap": "Galerie des Cartes de Base",
+        	"overview": "Vue Générale",
         	"measure": "Mesurer",
         	"edit": "Modifier",
         	"time": "Heure",
