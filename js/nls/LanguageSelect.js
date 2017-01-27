@@ -4,8 +4,10 @@ define({
             languageSelect: ({
                 aria: ({
                     changeLanguage: "Change the language to",
-                    currentLanguage: "Current language is"
-                })
+                    currentLanguage: "Current language is",
+                }),
+                language: "Language: ",
+                changeHere: "Change the language here."
             })
         })
     }),

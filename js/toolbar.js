@@ -7,7 +7,6 @@ Evented, declare, win, fx, html, lang, has, dom,
 domClass, domStyle, domAttr, domConstruct, domGeometry, 
 on, mouse, query, Deferred) {
     return declare([Evented], {
-
         map: null,
         tools: [],
         toollist: [],
@@ -15,7 +14,6 @@ on, mouse, query, Deferred) {
         scrollTimer: null,
         config: {},
         pTools: null,
-        pMenu: null,
         pPages: null,
 
         constructor: function (config) {
@@ -44,8 +42,7 @@ on, mouse, query, Deferred) {
             on(window, "scroll", lang.hitch(this, this._windowScrolled));
             on(window, "resize", lang.hitch(this, this._windowScrolled));
             this.pTools = dom.byId("panelTools");
-            this.pMenu = dom.byId("panelMenu");
-            // on(this.pMenu, "click", lang.hitch(this, this._menuClick));
+
             this.pPages = dom.byId("panelPages");
             //Prevent body scroll when scrolling to the end of the panel content
             on(this.pPages, mouse.enter, lang.hitch(this, function () {

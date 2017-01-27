@@ -129,7 +129,7 @@ define(["dojo/ready",
                 //location: window.location,
                 languages:languages,
                 textColor:this.activeColor
-            }, dom.byId('languageSelectNode')).startup();
+            }, dojo.byId('languageSelectNode')).startup();
         },
 
         reportError: function (error) {
@@ -258,7 +258,7 @@ define(["dojo/ready",
                 style: "padding:0;",
                 //gutters: 'false',
                 content: dojo.byId("layoutTopPanel"),
-                class: "splitterContent",
+                //class: "splitterContent",
             });
             borderContainer.addChild(contentPaneTop);
               
@@ -282,6 +282,8 @@ define(["dojo/ready",
 
             borderContainer.placeAt(document.body);
             borderContainer.startup();
+
+            domConstruct.destroy('dijit_layout_ContentPane_0_splitter');
 
             aspect.after(contentPaneRight, "resize", lang.hitch(this, function() {
                 this.map.resize();
@@ -1838,11 +1840,12 @@ define(["dojo/ready",
                     var altText = this.config.logoAltText;
                     if(!altText || altText === '')
                         altText = title;
-                    domConstruct.create("div", {
+                    var panelLogo = domConstruct.create("div", {
                         id: "panelLogo",
                         innerHTML: "<img id='logo' src=" + this.config.logo + " alt='" + altText + "' Title='" + altText + "' TabIndex=0 aria-label='" + altText + "'></>"
-                    }, dom.byId("panelTitle"), "first");
-                    domClass.add("panelTop", "largerTitle");
+                    }, dom.byId("panelTitle"));//, "first");
+                    //domClass.add("panelTop", "largerTitle");
+                    dojo.place(panelLogo, dojo.byId('panelText'), 'before');
                 }
 
                 //Set the application title

@@ -591,28 +591,8 @@ img {
     width: 100%;
 } 
 
-#panelTitle {
-    width: 100%;
-    /*min-height: 44.8px;*/
-}
-
 .no-search #panelText {
-  display: block; }
-
-#panelLogo {
-  overflow: hidden;
-  float: left;
-  padding: 5px 4px 0 4px;
-}
-
-#panelLogo img {
-  max-height: 16px; 
-}
-
-@media only screen and (min-width: 720px) {
-  #panelLogo img {
-    max-height: 32px; 
-  }
+  display: block; 
 }
 
 #panelText {
@@ -635,7 +615,7 @@ img {
 }
 
 #panelTitle h1 {
-  padding: 6px 2px;
+  padding: 6px;
   margin: 0;
   -webkit-margin-before: 0; 
   -webkit-margin-after: 0; 
@@ -1554,13 +1534,7 @@ html, body {
 
 .skip {
     position: absolute;
-    /* width: 30%; */
-    /* right: 1px; */
-    left: 2px;
-    top: 2px;
-    /* height: 20px; */
     white-space: nowrap;
-    /*display: inline;*/
     font-size: 18px;
 }
 
@@ -2046,3 +2020,22 @@ input[type=checkbox].checkbox {
         height: 12px; 
     }
 }
+
+#panelLogo {
+    overflow: hidden;
+    float: left;
+    line-height: 0;
+}
+
+#panelLogo img {
+    max-height: 24px; 
+    padding: 2px;
+}
+
+@media only screen and (min-width: 720px) {
+    #panelLogo img {
+        max-height: 32px; 
+        padding: 4px;
+    }
+}
+

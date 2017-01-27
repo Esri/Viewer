@@ -117,6 +117,7 @@ define([
             this.button = new DropDownButton({
                 label: currentLocale,
                 dropDown: menu,
+                id:'langageButton'
             });
             this.button.startup();
 
@@ -130,6 +131,13 @@ define([
                 if(this.defaults.textColor)
                     dojo.attr(this.button,'style', 'color:'+this.defaults.textColor+';');
             }
+
+            domConstruct.create("label", {
+                for: 'langageButton',
+                innerHTML: i18n.widgets.languageSelect.language,
+                title: i18n.widgets.languageSelect.changeHere,
+                tabindex: 0
+            }, this.domNode);
 
             this.domNode.appendChild(this.button.domNode);
 

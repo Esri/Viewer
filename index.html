@@ -43,17 +43,18 @@
 
 		<div style="display:none;">
 			<div id="layoutTopPanel"/>
-				<div id="panelTitle" class="fc bg borderBottom">
-					<h1 class="fc" id="panelText">WCAG Viewer</h1>
-					<div id="panelMenu" class="icon-menu icon-color"></div>
-					<div class="skip" role="banner">
-						<a accesskey="1" href="#" tabindex="0" aria-hidden=true id="skip-tools">1. Skip to Tools</a>
-						<a accesskey="2" href="#" tabindex="0" aria-hidden=true id="skip-search">2. Skip to Search</a>
-						<a accesskey="3" href="#" tabindex="0" aria-hidden=true id="skip-content">3. Skip to Content</a>
-						<a accesskey="4" href="#" tabindex="0" aria-hidden=true id="skip-splitter">4. Skip to Splitter</a>
-						<a accesskey="5" href="#" tabindex="0" aria-hidden=true id="skip-map">5. Skip to Map</a>
-						<a accesskey="6" href="#" tabindex="0" aria-hidden=true id="skip-instructions">6. Skip to Help</a>
-						<a accesskey="7" href="#" tabindex="0" aria-hidden=true id="skip-feature">7. Skip to Feature Details</a>
+				<div class="skip" role="banner">
+					<a accesskey="1" href="#" tabindex="0" aria-hidden=true id="skip-tools">1. Skip to Tools</a>
+					<a accesskey="2" href="#" tabindex="0" aria-hidden=true id="skip-search">2. Skip to Search</a>
+					<a accesskey="3" href="#" tabindex="0" aria-hidden=true id="skip-content">3. Skip to Content</a>
+					<a accesskey="4" href="#" tabindex="0" aria-hidden=true id="skip-splitter">4. Skip to Splitter</a>
+					<a accesskey="5" href="#" tabindex="0" aria-hidden=true id="skip-map">5. Skip to Map</a>
+					<a accesskey="6" href="#" tabindex="0" aria-hidden=true id="skip-instructions">6. Skip to Help</a>
+					<a accesskey="7" href="#" tabindex="0" aria-hidden=true id="skip-feature">7. Skip to Feature Details</a>
+			    </div>
+				<div id="panelTitle" class="fc bg borderBottom" style="display: flex; flex-direction: row;">
+					<h1 id="panelText" class="fc" style="flex:1"></h1>
+				    <div id="languageSelectNode">
 				    </div>
 				</div>
 			</div>
@@ -76,7 +77,7 @@
 				</main>
 				<footer id="panelBottom" class="bg">
 					<span id="panelBottomSpan">Press <strong>ALT + 1 to 7</strong> keys for fast navigation</span>
-					<div id="languageSelectNode"></div>
+					<!-- <div id="languageSelectNode"></div> -->
 				</footer>
 			</div>
 

@@ -70,7 +70,7 @@ define(
             "help" : "6. Aller à l’aide",
             "featureDetaills" : "7. Aller aux fonctionnalités détaillées"
         },
-        search : "Recherche: ",
+        search : "Recherche : ",
         searchPlaceholder: "Trouver une adresse ou un lieu",
         searchEnterCriteria : "Terme recherché pour",
         pressAlt : "Appuyer sur ALT + 1 à 7 pour naviguer rapidement",
