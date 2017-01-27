@@ -336,7 +336,8 @@ define(["dojo/ready",
                 }
     
                 all(toolList).then(lang.hitch(this, function (results) {
-                    
+
+
                     var tools = array.some(results, function (r) {
                         return r;
                     });
@@ -538,7 +539,6 @@ define(["dojo/ready",
                     featureList.FocusDetails();
                 }
             };
-
         },
 
         featureList : null,
@@ -1879,6 +1879,16 @@ define(["dojo/ready",
                         if(homeButton) 
                             homeButton.click();
                     }));
+
+                    // legend heades missing
+                    var dojoxGridRowTables = query('.dojoxGridRowTable');
+                    if(dojoxGridRowTables)
+                    {
+                        dojoxGridRowTables.forEach(function(table) {
+                            dojo.removeAttr(table,"role");
+                        });
+                    }
+
                 }));
 
                 on(this.map, "extent-change", function() {
