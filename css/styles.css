@@ -272,16 +272,6 @@ blockquote {
   } 
 /*}*/
 
-.esriSimpleSlider div {
-  width: 30px;
-  height: 40px;
-  font-size: 24px;
-  font-family: verdana, helvetica;
-  font-weight: bold;
-  line-height: 40px;
-  -webkit-user-select: none;
-}
-
 .notools div {
   width: 30px;
   height: 30px;
@@ -435,31 +425,9 @@ blockquote {
   bottom: 40px; 
 }
 
-.HomeButton .home {
-    background-color: transparent;
-    width: 26px;
-    cursor: pointer;
-    -o-border-radius: 0px;
-    -moz-border-radius: 0px;
-    background-image: none;
-}
-
 .scalebar_bottom-left {
   left: 25px;
   bottom: 40px; 
-}
-
-.LocateButton .zoomLocateButton {
-  width: 26px;
-  height: 26px;
-  background-color: transparent;
-  background-image: none;
-  cursor: pointer;
-  margin-left: 1px;
-  -webkit-border-radius: 0px;
-  -o-border-radius: 0px;
-  -moz-border-radius: 0px;
-  border-radius: 0px;
 }
 
 img {
@@ -1121,15 +1089,6 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
 {
 }*/
 
-.homeContainer input, .locateContainer input
-{
-  /* margin-top: 3px; */
-  height: 22px;
-  width: 22px;
-  margin: 1px;
-  padding: 1px;
-}
-
 .esriBasemapGallery{
   padding:10px 0 10px 10px;
 }
@@ -1748,11 +1707,6 @@ main {
     display:block;
 }
 
-.navToolBar input[type="image"] {
-    width: 20px;
-    height: 20px;
-}
-
 .HomeButton .home:hover,
 .LocateButton .zoomLocateButton:hover {
   background-color: transparent !important;
@@ -2027,5 +1981,79 @@ input[type=checkbox].checkbox {
 
     .toc-title-container {
         padding: 6px;
+    }
+}
+
+.esriSimpleSlider {
+    border-style: none;
+}
+
+.esriSimpleSliderTL {
+    top: 10px;
+    left: 10px;
+}
+
+.esriSimpleSlider div {
+  width: 20px;
+  height: 28px;
+}
+
+.navToolBar input[type="image"] {
+    width: 15px;
+    height: 15px;
+}
+
+#extenderNav {
+    height: 8px;
+    font-size: 0;
+    line-height: 0;
+    padding: 1px 0;
+}
+
+#extenderNavLabel img {
+    width: 18px;
+    height: 8px; 
+}
+
+.HomeButton .home, .LocateButton .zoomLocateButton {
+    background-color: transparent;
+    width: inherit;
+    height: inherit;
+    padding: 0;
+    cursor: pointer;
+    background-image: none;
+}
+
+.homeContainer input, .locateContainer input
+{
+  height: 22px;
+  width: 22px;
+  padding: 1px;
+}
+
+@media only screen and (min-width: 720px) {
+    .esriSimpleSliderTL {
+        top: 20px;
+        left: 20px;
+    }
+
+    .esriSimpleSlider div {
+        width: 30px;
+        height: 40px;
+        line-height: 40px;
+    }
+
+    #extenderNav {
+        height: 12px;
+    }
+
+    .navToolBar input[type="image"] {
+        width: 20px;
+        height: 20px;
+    }
+
+    #extenderNavLabel img {
+        width: 24px;
+        height: 12px; 
     }
 }
