@@ -166,8 +166,11 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                         if(pField.format.dateFormat) {
                                             fieldValue='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
                                         }
+                                        else if(pField.format.time) {
+                                            fieldValue='FORMAT_TIME('+fieldName+',"'+pField.format.time+'")';
+                                        }
                                         else if(pField.format.digitSeparator) {
-                                            fieldValue='FORMAT_NUM('+fieldName+',"'+pField.format.places+'")';
+                                            fieldValue='FORMAT_NUM('+fieldName+',"'+pField.format.places+'|'+pField.format.digitSeparator+'")';
                                         }
                                         else {
                                             fieldValue=fieldName;
@@ -408,7 +411,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     content = string.substitute(content, attributes);
                     listTemplate=string.substitute(listTemplate, attributes);
                     var result =  string.substitute(listTemplate, attributes);
-                    var re = /((>)((?:http:\/\/www\.|https:\/\/www\.|ftp:\/\/www.|www\.)[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(?:\/.*)?)(?:<))|(FORMAT_(DATE|NUM)\((-?\d*\.?\d*),\"(.+)\"\))/gm;
+                    var re = /((>)((?:http:\/\/www\.|https:\/\/www\.|ftp:\/\/www.|www\.)[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(?:\/.*)?)(?:<))|(FORMAT_(DATE|TIME|NUM)\((-?\d*\.?\d*),\"(.+)\"\))/gm;
                     do {
                         var matches = re.exec(result);
                         if(!matches) break;
@@ -419,14 +422,49 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                             result = result.replace(matches[3], "<a href='"+matches[3]+"' target='_blank'>Follow Link</a>");
                         }
                         else if(matches[6]==="DATE") {
-                            var date = new Date(Number(matches[7]));
-                            result = result.replace(matches[5], date.toLocaleDateString("en-US", {
-                                year: "numeric", month: "long", day: "numeric"
-                            }));
+                            var dateNum = matches[7];
+                            if(!isNaN(parseFloat(dateNum)) && isFinite(dateNum)) {
+                                var date = new Date(Number(dateNum));
+                                result = result.replace(matches[5], date.toLocaleDateString(
+                                    document.documentElement.lang, 
+                                    {
+                                        year: "numeric", month: "long", day: "numeric"
+                                    }
+                                ));
+                            } else 
+                                result = result.replace(matches[5],'');
+                        }
+                        else if(matches[6]==="TIME") {
+                            var timeNum = matches[7];
+                            if(!isNaN(parseFloat(timeNum)) && isFinite(timeNum)) {
+                                var time = new Date(Number(timeNum));
+                                result = result.replace(matches[5], time.toLocaleDateString(
+                                    document.documentElement.lang, 
+                                    {
+                                        year: "numeric", month: "numeric", day: "numeric",
+                                        hour: "2-digit", minute: "2-digit"
+                                    }
+                                ));
+                            } else 
+                                result = result.replace(matches[5],'');
                         }
                         else if(matches[6]==="NUM") {
-                            var num = Number(matches[7]).toFixed(matches[8]);
-                            result = result.replace(matches[5], num);
+                            var num = matches[7];
+                            if(!isNaN(parseFloat(num)) && isFinite(num)) {
+                                num = Number(num);
+                                var d89=matches[8].split('|');
+                                var dec = Number(d89[0]);
+                                num = num.toLocaleString(document.documentElement.lang, 
+                                    {
+                                        minimumFractionDigits: dec,
+                                        maximumFractionDigits: dec,
+                                        useGrouping: d89[1]
+                                    }
+                                );
+                                
+                                result = result.replace(matches[5], num);
+                            } else 
+                                result = result.replace(matches[5],'');
                         }
 
                     } while (true);
