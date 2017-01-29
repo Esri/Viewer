@@ -24,7 +24,8 @@ define([
         options: {
             locale: 'en-us',
             languages:{}, 
-            textColor:null
+            textColor:null,
+            showLabel:true
         },
 
         constructor: function (options, srcRefNode) {
@@ -137,13 +138,15 @@ define([
                     dojo.attr(this.button,'style', 'color:'+this.defaults.textColor+';');
             }
 
-            domConstruct.create("label", {
-                for: 'langageButton',
-                innerHTML: i18n.widgets.languageSelect.language,
-                title: i18n.widgets.languageSelect.changeHere,
-                'aria-label': i18n.widgets.languageSelect.changeHere,
-                tabindex: -1
-            }, this.domNode);
+            if(this.defaults.showLabel) {
+                domConstruct.create("label", {
+                    for: 'langageButton',
+                    innerHTML: i18n.widgets.languageSelect.language,
+                    title: i18n.widgets.languageSelect.changeHere,
+                    'aria-label': i18n.widgets.languageSelect.changeHere,
+                    tabindex: -1
+                }, this.domNode);
+            }
 
             this.domNode.appendChild(this.button.domNode);
 

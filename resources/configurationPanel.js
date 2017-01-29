@@ -322,6 +322,10 @@
       {
          "category":"Languages",
          "fields":[
+            {  "label":"Control with label",
+               "type":"boolean",
+               "fieldName":"languageLabel",
+               "tooltip": "Place a localized label in front of the Language control."},
             {  
                "type":"paragraph",
                "value":"<strong>Language 1</strong>"
