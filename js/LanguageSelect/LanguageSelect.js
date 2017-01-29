@@ -10,7 +10,7 @@ define([
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
     
     ], function (
-        Evented, declare, lang, has, dom, esriNS,
+        Evented, declare, _lang, has, dom, esriNS,
         _WidgetBase, _TemplatedMixin, on, 
         query, registry,
         LanguageSelectTemplate, i18n,
@@ -28,7 +28,7 @@ define([
         },
 
         constructor: function (options, srcRefNode) {
-            this.defaults = lang.mixin({}, this.options, options);
+            this.defaults = _lang.mixin({}, this.options, options);
             //this._i18n = i18n;
             this.domNode = srcRefNode;
 
@@ -97,7 +97,8 @@ define([
                 dojo.attr(menuItem.domNode,'data-appId', lang.appId);
                 menu.addChild(menuItem);
 
-                if(lang.code.toUpperCase() === this.defaults.locale.toUpperCase()) {
+                if(lang.code.substring(0,2).toLowerCase() === this.defaults.locale.substring(0,2).toLowerCase()) {
+                    document.documentElement.lang = lang.code.toLowerCase();
                     if(lang.img && lang.img !== '') {
                         currentIcon = domConstruct.create("img",{
                             src:lang.img,
@@ -121,6 +122,10 @@ define([
             });
             this.button.startup();
 
+            // var input= query('input[type="button"]',this.button.domNode)[0];
+            // domAttr.set(input,'id','langageButton');
+            // domAttr.set(input,'tabindex',0);
+
             if(currentIcon) {
                 dojo.removeClass(this.button.iconNode, "dijitNoIcon");
                 dojo.place(currentIcon, this.button.iconNode);
@@ -137,7 +142,7 @@ define([
                 innerHTML: i18n.widgets.languageSelect.language,
                 title: i18n.widgets.languageSelect.changeHere,
                 'aria-label': i18n.widgets.languageSelect.changeHere,
-                tabindex: 0
+                tabindex: -1
             }, this.domNode);
 
             this.domNode.appendChild(this.button.domNode);
@@ -153,7 +158,7 @@ define([
     });
 
     if (has("extend-esri")) {
-        lang.setObject("dijit.LanguageSelect", Widget, esriNS);
+        _lang.setObject("dijit.LanguageSelect", Widget, esriNS);
     }
     return Widget;
 });
