@@ -7,7 +7,8 @@ define({
                     currentLanguage: "Current language is",
                 }),
                 language: "Language: ",
-                changeHere: "Change the language here."
+                changeHere: "Change the language here.",
+                flag: "_ Flag"
             })
         })
     }),

@@ -468,10 +468,12 @@
       "locationSearch": true,
       "searchExtent":false,
 
+      "languageLabel":true,
+
       "lang1shortName": "EN",
       "lang1name": "English",
       "lang1code": "EN-US",
-      "lang1imageSrc": "images/flag.us.22.png",
+      "lang1imageSrc": "images/flag.uk.22.png",
 
       "lang2shortName": "FR",
       "lang2name": "French",

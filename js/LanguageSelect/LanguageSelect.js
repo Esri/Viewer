@@ -87,7 +87,7 @@ define([
                     var iconCell = query(".dijitMenuItemIconCell",menuItem.domNode)[0];
                     domConstruct.create("img",{
                         src:lang.img,
-                        alt:'',
+                        alt: esriLang.stripTags(i18n.widgets.languageSelect.flag.replace("_",lang.name)),
                         class: 'langMenuItemIcon',
                     }, iconCell);
                 }
@@ -103,7 +103,7 @@ define([
                     if(lang.img && lang.img !== '') {
                         currentIcon = domConstruct.create("img",{
                             src:lang.img,
-                            alt:'',
+                            alt: esriLang.stripTags(i18n.widgets.languageSelect.flag.replace("_",lang.name)),
                             class: 'langIcon',
                         });
                         if(lang.shortName && lang.shortName !== "") {

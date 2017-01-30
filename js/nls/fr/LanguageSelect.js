@@ -6,7 +6,8 @@ define({
                 currentLanguage: "La langue actuelle est"
             }),
             language: "Langue : ",
-            changeHere: "Changer la langue ici."
+            changeHere: "Changer la langue ici.",
+            flag: "Drapeau _"
         })
     })
 });
