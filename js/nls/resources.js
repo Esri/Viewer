@@ -42,7 +42,10 @@ define({
 				"link": "Map Link",
 				"facebook": "Facebook",
 				"twitter": "Twitter"
-			}
+			},
+            "basemapGallery": {
+                selected: "Base map selected"
+            }
         },
         "tooltips":{
         	"home": "Default Extent",

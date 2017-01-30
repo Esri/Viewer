@@ -668,13 +668,35 @@ define(["dojo/ready",
                     var list = this.domNode.querySelector("div");
                     domAttr.set(list, "role", "list");
 
+                    var galleryNodeObserver = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            //console.log(mutation);
+                            var node = mutation.target;
+                            var aSpan = node.querySelector("a span");
+                            var l = aSpan.innerText;
+                            if(dojo.hasClass(node, "esriBasemapGallerySelectedNode"))
+                            {
+                                l += ' '+this.config.i18n.tools.basemapGallery.selected;
+                            }       
+                            l += '.';                          
+                            domAttr.set(aSpan, 'aria-label', l);
+                        });    
+                    });
+
+                    var observerCfg = { attributes: true, childList: false, characterData: false };
+
                     var nodes = this.domNode.querySelectorAll(".esriBasemapGalleryNode");
                     array.forEach(nodes, function(node){
                         domAttr.set(node, "role", "listitem");
-                        domAttr.set(node, "aria-hidden", "true");
+                        //domAttr.set(node, "aria-hidden", "true");
+
+
+                        galleryNodeObserver.observe(node, observerCfg);
+
+
                         var img = node.querySelector("img");
                         img.alt='';
-                        domAttr.set(img, "tabindex", -1);
+                        domAttr.set(img, "aria-hidden", true);
                         domAttr.remove(img, "title");
                         domAttr.remove(img, "tabindex");
 
@@ -691,6 +713,14 @@ define(["dojo/ready",
                             var localizedLabel = i18n_BaseMapLabels.baseMapLabels[aSpanLabel];
                             if(localizedLabel && localizedLabel !== undefined)
                                 aSpan.innerText = localizedLabel;
+                            var l = aSpan.innerText;
+                            if(dojo.hasClass(node, "esriBasemapGallerySelectedNode"))
+                            {
+                                l += ' '+this.config.i18n.tools.basemapGallery.selected;
+                            }       
+                            l += '.';                          
+                            domAttr.set(aSpan, 'aria-label', l);
+                            //img.alt=aSpan.innerText;
                         } catch(e) {}
                         
                         domAttr.set(labelNode, "tabindex", 0);   
