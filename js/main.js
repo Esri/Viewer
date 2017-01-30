@@ -460,7 +460,7 @@ define(["dojo/ready",
                     class:'goThereHint',
                     innerHTML: 'Alt + 4',
                     style:'left:-8px; top:75%;'
-                }, dom.byId('dijit_layout_ContentPane_0_splitter'));
+                }, dom.byId('dijit_layout_ContentPane_1_splitter'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
@@ -544,7 +544,7 @@ define(["dojo/ready",
             };
 
             skipToSplitter = function() {
-                dom.byId('dijit_layout_ContentPane_0_splitter').focus();
+                dom.byId('dijit_layout_ContentPane_1_splitter').focus();
             };
 
             skipToMap = function() {
@@ -690,9 +690,7 @@ define(["dojo/ready",
                         domAttr.set(node, "role", "listitem");
                         //domAttr.set(node, "aria-hidden", "true");
 
-
                         galleryNodeObserver.observe(node, observerCfg);
-
 
                         var img = node.querySelector("img");
                         img.alt='';
@@ -1675,6 +1673,23 @@ define(["dojo/ready",
                         domAttr.set(s, "title", i18n.searchPlaceholder);
                     }
                 });
+
+
+                // var noResultsMenuNode = dojo.query(".arcgisSearch .noResultsMenu");
+                // if(noResultsMenuNode && noResultsMenuNode.length > 0) {
+                //     var noResultsMenuNodeObserver = new MutationObserver(function(mutations) {
+                //         mutations.forEach(function(mutation) {
+                //             console.log(mutation);
+                //             var s = mutation.addedNode.length>0 ? mutation.addedNodes["0"].firstChild.childNodes["0"].data : '';                     
+                //             // domAttr.set(aSpan, 'aria-label', l);
+                //         });    
+                //     });
+
+                //     var observerCfg = { attributes: true, childList: true, characterData: true };
+
+                //     noResultsMenuNodeObserver.observe(noResultsMenuNode[0], observerCfg);
+                // }
+
             }));
 
             //create the tools
