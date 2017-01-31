@@ -398,7 +398,7 @@ define(["dojo/ready",
             on(document.body, 'keydown', function(event) {
                 if(event.altKey) {
                     query('.goThereHint').forEach(function(h) {
-                        domStyle.set(h, 'display','block');
+                        domStyle.set(h, 'display','inline-table');
                     });
                 }
                 switch(event.key) {
@@ -440,38 +440,38 @@ define(["dojo/ready",
             if(this.config.alt_keys) {
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 1',
-                    style:'right:20px;'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;1</b> '+this.config.i18n.skip.tools,
+                    style:'left:20%; top:10px;'
                 }, dom.byId('panelTools'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 2',
-                    style:'left:160px; top:20%;'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;2</b> '+this.config.i18n.skip.search,
+                    style:'left:20%; top:50%;'
                 }, dom.byId('panelSearch'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 3',
-                    style:'left:20px; top:200px;'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;3</b> '+this.config.i18n.skip.content,
+                    style:'left:20%; top:50%;'
                 }, dom.byId('panelPages'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 4',
-                    style:'left:-8px; top:75%;'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;4</b> '+this.config.i18n.skip.splitter,
+                    style:'left:-30px; top:40%;'
                 }, dom.byId('dijit_layout_ContentPane_1_splitter'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 5',
-                    style:'left:20px; top:40px'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;5</b> '+this.config.i18n.skip.map,
+                    style:'left:10%; top:30%'
                 }, dom.byId('mapDiv'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 6',
-                    style:'left:60%; top:-75%;'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;6</b> '+this.config.i18n.skip.help,
+                    style:'left:20%; top:-75%;'
                 }, dom.byId('panelBottom'));
             }
             
@@ -483,13 +483,13 @@ define(["dojo/ready",
             var skipInstructions = query('.skip #skip-instructions')[0];
             var skipFeature = query('.skip #skip-feature')[0];
 
-            dojo.html.set(skipTools, this.config.i18n.skip.tools);
-            dojo.html.set(skipSearch, this.config.i18n.skip.search);
-            dojo.html.set(skipContent, this.config.i18n.skip.content);
-            dojo.html.set(skipSplitter, this.config.i18n.skip.splitter);
-            dojo.html.set(skipMap, this.config.i18n.skip.map);
-            dojo.html.set(skipInstructions, this.config.i18n.skip.help);
-            dojo.html.set(skipFeature, this.config.i18n.skip.featureDetaills);
+            dojo.html.set(skipTools, "1. "+this.config.i18n.skip.tools);
+            dojo.html.set(skipSearch, "2. "+this.config.i18n.skip.search);
+            dojo.html.set(skipContent, "3. "+this.config.i18n.skip.content);
+            dojo.html.set(skipSplitter, "4. "+this.config.i18n.skip.splitter);
+            dojo.html.set(skipMap, "5. "+this.config.i18n.skip.map);
+            dojo.html.set(skipInstructions, "6. "+this.config.i18n.skip.help);
+            dojo.html.set(skipFeature, "7. "+this.config.i18n.skip.featureDetaills);
 
             skipTools.addEventListener('click', function (e) { skipToTools(); });
             skipSearch.addEventListener('click', function (e) { skipToSearch(); });
@@ -1759,9 +1759,9 @@ define(["dojo/ready",
                         if(rule.selectorText.indexOf(':hover') >= 0) {
                             rule.style.backgroundColor = this._rgbaColor(this.hoverColor);
                         }
-                        if(rule.selectorText.indexOf('.goThereHint') >= 0) {
-                            rule.style.backgroundColor = this._rgbaColor(this.hoverColor);
-                        }
+                        // if(rule.selectorText.indexOf('.goThereHint') >= 0) {
+                        //     rule.style.backgroundColor = this._rgbaColor(this.hoverColor);
+                        // }
                         //focus
                         if(rule.selectorText.indexOf(':focus') >= 0) {
                             // rule.style.outlineStyle = 'none';
@@ -1771,6 +1771,7 @@ define(["dojo/ready",
                         }
                         //active
                         if(rule.selectorText.indexOf('.activeMarker') >= 0 || 
+                            rule.selectorText.indexOf('.goThereHint') >= 0 ||
                             rule.selectorText.indexOf('dijitSplitterThumb') >= 0) {
                             rule.style.backgroundColor = this._rgbaColor(this.activeColor);
                             rule.style.outlineStyle = 'none';

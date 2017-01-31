@@ -65,13 +65,13 @@ define(
             "features": "Liste des Caractéristiques"
         },
         "skip":{
-            "tools" : "1. Aller aux outils",
-            "search" : "2. Aller à la recherche",
-            "content" : "3. Aller au contenu",
-            "splitter" : "4. Aller au séparateur d’écran",
-            "map" : "5. Aller à la carte",
-            "help" : "6. Aller à l’aide",
-            "featureDetaills" : "7. Aller aux fonctionnalités détaillées"
+            "tools" : "Aller au outils",
+            "search" : "Aller à la recherche",
+            "content" : "Aller au contenu",
+            "splitter" : "Aller au séparateur d’écran",
+            "map" : "Aller à la carte",
+            "help" : "Aller à l’aide",
+            "featureDetaills" : "Aller aux fonctionnalités détaillées"
         },
         search : "Recherche : ",
         searchPlaceholder: "Trouver une adresse ou un lieu",

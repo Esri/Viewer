@@ -66,13 +66,13 @@ define({
         	"share": "Share"
         },
         "skip":{
-            "tools" : "1. Skip to Tools",
-            "search" : "2. Skip to Search",
-            "content" : "3. Skip to Content",
-            "splitter" : "4. Skip to Splitter",
-            "map" : "5. Skip to Map",
-            "help" : "6. Skip to Help",
-            "featureDetaills" : "7. Skip to Feature Details"
+            "tools" : "Skip to Tools",
+            "search" : "Skip to Search",
+            "content" : "Skip to Content",
+            "splitter" : "Skip to Splitter",
+            "map" : "Skip to Map",
+            "help" : "Skip to Help",
+            "featureDetaills" : "Skip to Feature Details"
         },
         search : "Search: ",
         searchPlaceholder: "Find address or place",

@@ -985,90 +985,6 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   font-size: 15px; }
 
-/*Icon Fonts*/
-/*@font-face {
-  font-family: 'tool-icons';
-  src: url('../fonts/tool-icons.eot?23344103');
-  src: url('../fonts/tool-icons.eot?23344103#iefix') format('embedded-opentype'), url('../fonts/tool-icons.woff?23344103') format('woff'), url('../fonts/tool-icons.ttf?23344103') format('truetype'), url('../fonts/tool-icons.svg?23344103#tool-icons') format('svg');
-  font-weight: normal;
-  font-style: normal; 
-}*/
- 
-/*[class^="icon-"]:before, [class*=" icon-"]:before {
-  --font-family: "tool-icons";
-  --font-style: normal;
-  --font-weight: normal;
-  --speak: none;
-  --display: inline-block;
-  --text-decoration: inherit;
-  --width: 1em;
-  --margin-right: 0.2em;
-  --text-align: center;*/
-  /* opacity: .8; */
-  /* For safety - reset parent styles, that can break glyph codes*/
-  /*--font-variant: normal;
-  --text-transform: none;*/
-  /* fix buttons height, for twitter bootstrap */
-  /*--line-height: 1em;*/
-  /* Animation center compensation - margins should be symmetric */
-  /* remove if not needed */
-  /*--margin-left: 0.2em;*/
-  /* you can be more comfortable with increased icons size */
-  /* font-size: 120%; */
-  /* Uncomment for 3D effect */
-  /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */ 
-/*}*/
-
-/*.icon-home-1:before {
-  content: '\e800'; }*/
-
-/* ' ' */
-/*.icon-menu:before {
-  content: '\e801'; }*/
-
-/* '' */
-/*.icon-twitter:before {
-  --content: '\e802'; }*/
-
-/* '' */
-/*.icon-facebook-squared:before {
-  --content: '\e803'; 
-}*/
-
-/* '' */
-/*.icon-gplus:before {
-  --content: '\e804'; 
-}*/
-
-/* '' */
-/*.icon-mail-alt:before {
-  --content: '\e805'; 
-}*/
-
-/* '' */
-/*.icon-link:before {
-  --content: '\e806'; 
-}*/
-
-/* '' */
-/*.icon-buffer:before {
-  content: '\e80b'; 
-}*/
-
-/* '' */
-/*.icon-target:before {
-  content: '\e80c'; 
-}*/
-
-/* '' */
-/*.icon-angle-down:before {
-  content: '\e809'; 
-}*/
-
-/*.homeContainer, .locateContainer
-{
-}*/
-
 .esriBasemapGallery{
   padding:10px 0 10px 10px;
 }
@@ -1078,23 +994,6 @@ input[type=checkbox]:checked.share-dialog-checkbox + .share-dialog-checkbox:befo
   margin: 1px 8px !important;
   padding: 5px 8px 0px 5px;
 }
-
-/*li[role='menuitem']:hover, 
-div[role='button']:hover,
-div[tabindex='0']:not(.pageClose):not(.pageUp):not(.pageDown):hover
-{
-  /* border-radius: 5px; */
-  /* -webkit-border-radius: 5px; 
-}*/
-
-/*.panelToolActive:focus, .panelToolActive:hover {
-   border-radius: 15px !important; 
-  /* -webkit-border-radius: 15px !important; 
-}*/
-
-/*.searchBtn:focus, .searchClear:focus, .searchInput:focus {
-  background-color: rgba(0, 0, 0, 0.7) !important;
-}*/
 
 .HomeButton:focus, .LocateButton:focus,
 .share-dialog-icon
@@ -1439,7 +1338,7 @@ html, body {
 
 .goThereHint {
   position: absolute;
-  padding: 2px 4px !important;
+  padding: 1px 2px !important;
   z-index: 100;
   background-color: navy;
   border-radius: 4px;
@@ -1447,11 +1346,11 @@ html, body {
   border-color: #FFFFFF;
   border-style: solid;
   color: #FFFFFF;
-  font-size: 16px !important;
+  font-size: 14px !important;
   font-family: verdana, helvetica;
-  font-weight: bold;
+  /*font-weight: bold;*/
   box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.75);
-  width: 64px !important;
+  /*width: 64px !important;*/
   height: 18px !important;
   line-height: 18px !important;
   overflow: hidden;
