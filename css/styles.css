@@ -1337,24 +1337,32 @@ html, body {
 }
 
 .goThereHint {
-  position: absolute;
-  padding: 1px 4px !important;
-  z-index: 100;
-  background-color: white;
-  border-radius: 4px;
-  border:2px;
-  border-color: black;
-  border-style: solid;
-  color: black;
-  font-size: 14px !important;
-  font-family: verdana, helvetica;
-  /*font-weight: bold;*/
-  box-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
-  /*width: 64px !important;*/
-  height: 18px !important;
-  /*line-height: 18px !important;*/
-  overflow: hidden;
-  display: none;
+    position: absolute;
+    padding: 0px 2px !important;
+    border-radius: 2px;
+    border-width: 2px;
+    font-size: 11px !important;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 1);
+    z-index: 100;
+    background-color: white;
+    border-color: black;
+    border-style: solid;
+    color: black;
+    font-family: verdana, helvetica;
+    /*height: 18px !important;*/
+    /*line-height: 18px !important;*/
+    overflow: hidden;
+    display: none;
+}
+
+@media only screen and (min-width: 720px) {
+    .goThereHint {
+        padding: 1px 4px !important;
+        border-radius: 4px;
+        border-width: 2px;
+        font-size: 14px !important;
+        box-shadow: 3px 3px 10px rgba(0, 0, 0, 1);
+    }
 }
 
 .margin {
