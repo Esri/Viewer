@@ -1685,7 +1685,16 @@ define(["dojo/ready",
                             var box = dojo.query('#search .searchInputGroup')[0];
                             if(dojo.hasClass(mutation.target, 'showNoResults'))
                             {
-                                var nrText = query('.noResultsHeader')[0].innerHTML+': '+query('.noResultsText')[0].innerHTML;
+                                var nrText = '';
+                                var h = query('#search .noResultsText');
+                                if(h && h.length>0) {
+                                    nrText = query('#search .noResultsHeader')[0].innerHTML+': '+h[0].innerHTML;
+                                } else {
+                                    h = query('#search .noValueText');
+                                    if(h && h.length > 0) {
+                                        nrText = h[0].innerHTML;
+                                    }
+                                }
                                 //console.log(nrText);
                                 //console.log(mutation.target);
                                 dojo.attr(box, 'aria-label', nrText);
