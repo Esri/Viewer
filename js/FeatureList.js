@@ -7,6 +7,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dojo/string", 
     "dojo/text!application/dijit/templates/FeatureListTemplate.html",
     "dojo/i18n!application/nls/FeatureList",
+    "dojo/i18n!application/nls/resources",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", 
     "esri/symbols/CartographicLineSymbol", 
     "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol",
@@ -22,7 +23,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         FeatureList, 
         dom, domClass, domAttr, domStyle, domConstruct, event, 
         string,
-        listTemplate, i18n,
+        listTemplate, i18n, Ri18n,
         SimpleMarkerSymbol, PictureMarkerSymbol, 
         CartographicLineSymbol, 
         SimpleFillSymbol, SimpleLineSymbol,
@@ -398,6 +399,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         _content:content,
                         _panTo: i18n.widgets.featureList.panTo,
                         _zoomTo: i18n.widgets.featureList.zoomTo,
+                        hint:Ri18n.skip.featureDetaills,
                     };
                     lang.mixin(attributes, f.attributes);
                     var nulls = window.tasks[r].layer.fields.map(function(f){return f.name;});

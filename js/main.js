@@ -1769,9 +1769,13 @@ define(["dojo/ready",
                             // rule.style.boxShadow = '0 0 0 2px '+this.focusColor+' inset';
                             rule.style.outlineColor = this._rgbaColor(this.focusColor);
                         }
+                        if(rule.selectorText.indexOf('.goThereHint') >= 0) {
+                            rule.style.borderColor = this._rgbaColor(this.focusColor);
+                            //rule.style.boxShadow = "3px 3px 10px "+this._rgbaColor(this.focusColor);
+                        }
                         //active
                         if(rule.selectorText.indexOf('.activeMarker') >= 0 || 
-                            rule.selectorText.indexOf('.goThereHint') >= 0 ||
+                            //rule.selectorText.indexOf('.goThereHint') >= 0 ||
                             rule.selectorText.indexOf('dijitSplitterThumb') >= 0) {
                             rule.style.backgroundColor = this._rgbaColor(this.activeColor);
                             rule.style.outlineStyle = 'none';
