@@ -679,7 +679,9 @@ define(["dojo/ready",
                                 l += ' '+this.config.i18n.tools.basemapGallery.selected;
                             }       
                             l += '.';                          
+                            //node.querySelector('a').focus();
                             domAttr.set(aSpan, 'aria-label', l);
+                            //aSpan.focus();
                         });    
                     });
 
@@ -1675,20 +1677,32 @@ define(["dojo/ready",
                 });
 
 
-                // var noResultsMenuNode = dojo.query(".arcgisSearch .noResultsMenu");
-                // if(noResultsMenuNode && noResultsMenuNode.length > 0) {
-                //     var noResultsMenuNodeObserver = new MutationObserver(function(mutations) {
-                //         mutations.forEach(function(mutation) {
-                //             console.log(mutation);
-                //             var s = mutation.addedNode.length>0 ? mutation.addedNodes["0"].firstChild.childNodes["0"].data : '';                     
-                //             // domAttr.set(aSpan, 'aria-label', l);
-                //         });    
-                //     });
+                var containerNode = dojo.query('#search [data-dojo-attach-point=containerNode]');
+                if(containerNode && containerNode.length > 0) {
+                    var containerNodeObserver = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            //console.log(mutation.target);
+                            var box = dojo.query('#search .searchInputGroup')[0];
+                            if(dojo.hasClass(mutation.target, 'showNoResults'))
+                            {
+                                var nrText = query('.noResultsHeader')[0].innerHTML+': '+query('.noResultsText')[0].innerHTML;
+                                //console.log(nrText);
+                                //console.log(mutation.target);
+                                dojo.attr(box, 'aria-label', nrText);
+                                dojo.attr(box, 'tabindex', 0);
+                                box.focus();
+                            }
+                            else {
+                                dojo.removeAttr(box, 'tabindex');
+                                dojo.removeAttr(box, 'aria-label');
+                            }
+                        });    
+                    });
 
-                //     var observerCfg = { attributes: true, childList: true, characterData: true };
+                    var observerCfg = { attributes: true, childList: false, characterData: false };
 
-                //     noResultsMenuNodeObserver.observe(noResultsMenuNode[0], observerCfg);
-                // }
+                    containerNodeObserver.observe(containerNode[0], observerCfg);
+                }
 
             }));
 
