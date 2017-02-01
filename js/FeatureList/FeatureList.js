@@ -41,6 +41,13 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         constructor: function (options, srcRefNode) {
             var defaults = lang.mixin({}, this.options, options);
             this.domNode = srcRefNode;
+
+            var link = document.createElement("link");
+            link.href = "js/FeatureList/Templates/FeatureList.css";
+            link.type = "text/css";
+            link.rel = "stylesheet";
+            query('html')[0].appendChild(link);
+
             // properties
             this.set("map", defaults.map);
             var Layers = this._getLayers(defaults.layers);

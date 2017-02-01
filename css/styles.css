@@ -79,7 +79,15 @@ blockquote {
   margin-right: 4px; }
 
 .clear {
-  clear: both; }
+    clear: both; 
+    /*width: 22px;
+    height: 22px;
+    background-color: silver;
+    display: inline-block;
+    position: absolute;
+    right: 10px;
+    top: 8px;*/
+}
 
 .modal-scrollbar {
   margin-right: 17px; }
@@ -1233,22 +1241,6 @@ html, body {
     border-color: gray;
     border-style: solid;
     border-width: 0;
-}
-
-#featuresList {
-    list-style: none;
-    /*margin: 10px;*/
-    padding-left: 0;
-    -webkit-padding-start: 0;
-    background-color: white;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
-#featuresList li {
-    /* margin-bottom: 4px; */
-    /* margin-left: -10px; */
-    margin: 3px;
-    /* padding-left: 10px; */
 }
 
 .showAttr {
