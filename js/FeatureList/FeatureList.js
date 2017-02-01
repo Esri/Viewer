@@ -42,11 +42,11 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
             var defaults = lang.mixin({}, this.options, options);
             this.domNode = srcRefNode;
 
-            var link = document.createElement("link");
-            link.href = "js/FeatureList/Templates/FeatureList.css";
-            link.type = "text/css";
-            link.rel = "stylesheet";
-            query('html')[0].appendChild(link);
+            dojo.create("link", {
+                href : "js/FeatureList/Templates/FeatureList.css",
+                type : "text/css",
+                rel : "stylesheet",
+            }, document.head);
 
             // properties
             this.set("map", defaults.map);
