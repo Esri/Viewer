@@ -1252,15 +1252,6 @@ html, body {
     height: 0;
 }
 
-.borderLi {
-    border: solid 1px gray;
-}
-
-.featureItem h2 {
-    font-size: 16px;
-    text-align: left;
-}
-
 .splitterContent {
     overflow-y: hidden !important;
 }
@@ -1443,19 +1434,6 @@ html, body {
     background-blend-mode: darken;
     padding: 3px 10px 0px 10px;
     border-radius: 4px;
-}
-
-.featureItem tr .filterBtn {
-    width:18px;
-    height:18px;
-    /* padding-top:1px; */
-    opacity: 0.1;
-}
-
-.featureItem tr:focus .filterBtn,
-.featureItem tr:hover .filterBtn
-{
-    opacity: 1;
 }
 
 .dataInputBox {

@@ -8,9 +8,29 @@
     overflow-x: hidden;
 }
 #featuresList li {
-    /* margin-bottom: 4px; */
-    /* margin-left: -10px; */
     margin: 3px;
-    /* padding-left: 10px; */
 }
+
+.borderLi {
+    border: solid 1px gray;
+}
+
+.featureItem h2 {
+    font-size: 16px;
+    text-align: left;
+}
+
+/*.featureItem tr .filterBtn {
+    width:18px;
+    height:18px;
+    opacity: 0.1;
+}
+
+.featureItem tr:focus .filterBtn,
+.featureItem tr:hover .filterBtn
+{
+    opacity: 1;
+}*/
+
+
 
