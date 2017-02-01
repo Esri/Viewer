@@ -2,17 +2,16 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on", 
     "dojo/Deferred", "dojo/promise/all", "dojo/query", 
     "esri/tasks/query", "esri/tasks/QueryTask",
-    "dojo/text!application/dijit/templates/FeatureList.html", 
+    "dojo/text!application/FeatureList/templates/FeatureList.html", 
     "dojo/dom", "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
-    "dojo/text!application/dijit/templates/FeatureListTemplate.html",
+    "dojo/text!application/FeatureList/templates/FeatureListTemplate.html",
     "dojo/i18n!application/nls/FeatureList",
     "dojo/i18n!application/nls/resources",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", 
     "esri/symbols/CartographicLineSymbol", 
     "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol",
     "esri/graphic", "esri/Color", 
-    "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
     
     ], function (
@@ -27,8 +26,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         SimpleMarkerSymbol, PictureMarkerSymbol, 
         CartographicLineSymbol, 
         SimpleFillSymbol, SimpleLineSymbol,
-        Graphic, Color,
-        InfoWindow
+        Graphic, Color
     ) {
     var Widget = declare("esri.dijit.FeatureList", [_WidgetBase, _TemplatedMixin, Evented], {
         // defaults
@@ -179,9 +177,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                     }
 
                                     content+='<tr class="featureItem_${_layerId}_${_featureId} hideAttr" tabindex="0" aria-label="'+pField.label+', '+fieldValue+',"">\n';
-                                    content+='    <td valign="top">\n';
-                                    content+='      <!--<img src="..\\images\\Filter0.png" alt="filter" class="filterBtn"/>-->\n';
-                                    content+='    </td>\n';
+                                    content+='    <td valign="top"></td>\n';
                                     content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
                                     content+='    <td valign="top">:</td>\n';
                                     content+='    <td valign="top">'+fieldValue+'</td>\n';
