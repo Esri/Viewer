@@ -7,7 +7,6 @@ Evented, declare, win, fx, html, lang, has, dom,
 domClass, domStyle, domAttr, domConstruct, domGeometry, 
 on, mouse, query, Deferred) {
     return declare([Evented], {
-
         map: null,
         tools: [],
         toollist: [],
@@ -15,7 +14,6 @@ on, mouse, query, Deferred) {
         scrollTimer: null,
         config: {},
         pTools: null,
-        pMenu: null,
         pPages: null,
 
         constructor: function (config) {
@@ -44,8 +42,7 @@ on, mouse, query, Deferred) {
             on(window, "scroll", lang.hitch(this, this._windowScrolled));
             on(window, "resize", lang.hitch(this, this._windowScrolled));
             this.pTools = dom.byId("panelTools");
-            this.pMenu = dom.byId("panelMenu");
-            // on(this.pMenu, "click", lang.hitch(this, this._menuClick));
+
             this.pPages = dom.byId("panelPages");
             //Prevent body scroll when scrolling to the end of the panel content
             on(this.pPages, mouse.enter, lang.hitch(this, function () {
@@ -121,6 +118,7 @@ on, mouse, query, Deferred) {
                 type: "image",
                 src: "images/icons_" + this.config.icons + "/" + name + ".png",
                 title: tip,
+                alt: tip
             }, panelTool);
 
             if (!has("touch")) 
@@ -165,18 +163,22 @@ on, mouse, query, Deferred) {
             }, 
             pageContent);
 
-            domConstruct.create("h1", {
+            domConstruct.create("h2", {
                 className: "pageTitle fc",
                 innerHTML: this.config.i18n.tooltips[name] || name,
-                style: 'display:inline',
+                //style: 'display:inline',
                 id: "pagetitle_" + name
             }, pageHeader);
 
             if(loaderImg && loaderImg !=="") {
-                domConstruct.create("div", {
+                domConstruct.create('img',{
+                    src: 'images/reload1.gif',
+                    alt: 'Reloading',
+                    title: 'Reloading'
+                }, domConstruct.create("div", {
                     id: "loading_" + name,
                     class: 'hideLoading small-loading'
-                }, pageHeader);
+                }, pageHeader));
             }
 
             // domConstruct.create("div", {

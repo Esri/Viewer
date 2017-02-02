@@ -29,7 +29,7 @@ define(["dojo/ready",
     "dojo/i18n!application/nls/BaseMapLabels",
     "esri/dijit/Measurement", "esri/dijit/OverviewMap", "esri/geometry/Extent", 
     "esri/layers/FeatureLayer", "application/NavToolBar/NavToolBar", 
-    "application/FeatureList", "application/Filters/Filters", "application/TableOfContents", 
+    "application/FeatureList/FeatureList", "application/Filters/Filters", "application/TableOfContents", 
     "application/LanguageSelect/LanguageSelect",
     "application/ShareDialog", //"application/SearchSources",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", "esri/graphic",
@@ -128,9 +128,9 @@ define(["dojo/ready",
                 locale: document.documentElement.lang,
                 //location: window.location,
                 languages:languages,
-                textColor:this.activeColor
-            }, dom.byId('languageSelectNode')).startup();
-
+                textColor:this.activeColor,
+                showLabel:this.config.languageLabel
+            }, dojo.byId('languageSelectNode')).startup();
         },
 
         reportError: function (error) {
@@ -247,31 +247,44 @@ define(["dojo/ready",
         // Create UI
         _createUI: function () {
             var borderContainer = new BorderContainer({
-                design:'sidebar',
-                gutters:'true', 
+                //design:'sidebar',
+                gutters:'false', 
                 liveSplitters:'false',
                 id:"borderContainer"
             });
              
+            var contentPaneTop = new ContentPane({
+                region: "top",
+                splitter: 'false',
+                style: "padding:0;",
+                //gutters: 'false',
+                content: dojo.byId("layoutTopPanel"),
+                //class: "splitterContent",
+            });
+            borderContainer.addChild(contentPaneTop);
+              
             var contentPaneLeft = new ContentPane({
                 region: "leading",
                 splitter: 'true',
                 style: "width:425px; padding:0; overflow: none;",
-                content: dom.byId("leftPanel"),
+                content: dojo.byId("leftPanel"),
                 class: "splitterContent",
             });
             borderContainer.addChild(contentPaneLeft);
               
             var contentPaneRight = new ContentPane({
+                style: "padding:1px;",
                 region: "center",
                 splitter: "true",
                 class: "bg",
-                content: dom.byId("mapDiv"),
+                content: dojo.byId("mapDiv"),
             });
             borderContainer.addChild(contentPaneRight);
 
             borderContainer.placeAt(document.body);
             borderContainer.startup();
+
+            domConstruct.destroy('dijit_layout_ContentPane_0_splitter');
 
             aspect.after(contentPaneRight, "resize", lang.hitch(this, function() {
                 this.map.resize();
@@ -337,7 +350,8 @@ define(["dojo/ready",
                 }
     
                 all(toolList).then(lang.hitch(this, function (results) {
-                    
+
+
                     var tools = array.some(results, function (r) {
                         return r;
                     });
@@ -384,7 +398,7 @@ define(["dojo/ready",
             on(document.body, 'keydown', function(event) {
                 if(event.altKey) {
                     query('.goThereHint').forEach(function(h) {
-                        domStyle.set(h, 'display','block');
+                        domStyle.set(h, 'display','inline-table');
                     });
                 }
                 switch(event.key) {
@@ -404,7 +418,7 @@ define(["dojo/ready",
                             skipToMap();
                         }
                         break;
-                    case 'Digit0' :
+                    case '0' :
                         if (event.altKey) {
                             skipSkip();
                         }
@@ -426,38 +440,38 @@ define(["dojo/ready",
             if(this.config.alt_keys) {
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 1',
-                    style:'right:20px;'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;1</b> '+this.config.i18n.skip.tools,
+                    style:'left:20%; top:10px;'
                 }, dom.byId('panelTools'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 2',
-                    style:'left:160px; top:20%;'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;2</b> '+this.config.i18n.skip.search,
+                    style:'left:20%; top:50%;'
                 }, dom.byId('panelSearch'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 3',
-                    style:'left:20px; top:200px;'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;3</b> '+this.config.i18n.skip.content,
+                    style:'left:20%; top:50%;'
                 }, dom.byId('panelPages'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 4',
-                    style:'left:-8px; top:75%;'
-                }, dom.byId('dijit_layout_ContentPane_0_splitter'));
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;4</b> '+this.config.i18n.skip.splitter,
+                    style:'left:-30px; top:40%;'
+                }, dom.byId('dijit_layout_ContentPane_1_splitter'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 5',
-                    style:'left:20px; top:40px'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;5</b> '+this.config.i18n.skip.map,
+                    style:'left:10%; top:30%'
                 }, dom.byId('mapDiv'));
 
                 domConstruct.create("div", {
                     class:'goThereHint',
-                    innerHTML: 'Alt + 6',
-                    style:'left:60%; top:-75%;'
+                    innerHTML: '<b>Alt&nbsp;+&nbsp;6</b> '+this.config.i18n.skip.help,
+                    style:'left:20%; top:-75%;'
                 }, dom.byId('panelBottom'));
             }
             
@@ -469,13 +483,13 @@ define(["dojo/ready",
             var skipInstructions = query('.skip #skip-instructions')[0];
             var skipFeature = query('.skip #skip-feature')[0];
 
-            dojo.html.set(skipTools, this.config.i18n.skip.tools);
-            dojo.html.set(skipSearch, this.config.i18n.skip.search);
-            dojo.html.set(skipContent, this.config.i18n.skip.content);
-            dojo.html.set(skipSplitter, this.config.i18n.skip.splitter);
-            dojo.html.set(skipMap, this.config.i18n.skip.map);
-            dojo.html.set(skipInstructions, this.config.i18n.skip.help);
-            dojo.html.set(skipFeature, this.config.i18n.skip.featureDetaills);
+            dojo.html.set(skipTools, "1. "+this.config.i18n.skip.tools);
+            dojo.html.set(skipSearch, "2. "+this.config.i18n.skip.search);
+            dojo.html.set(skipContent, "3. "+this.config.i18n.skip.content);
+            dojo.html.set(skipSplitter, "4. "+this.config.i18n.skip.splitter);
+            dojo.html.set(skipMap, "5. "+this.config.i18n.skip.map);
+            dojo.html.set(skipInstructions, "6. "+this.config.i18n.skip.help);
+            dojo.html.set(skipFeature, "7. "+this.config.i18n.skip.featureDetaills);
 
             skipTools.addEventListener('click', function (e) { skipToTools(); });
             skipSearch.addEventListener('click', function (e) { skipToSearch(); });
@@ -492,6 +506,19 @@ define(["dojo/ready",
                         e.target.click();
                         e.preventDefault();
                     }
+                });
+            });
+
+            query('.skip a').forEach(function(a) {
+                a.onfocus = lang.hitch(a, function () {
+                    console.log(this);
+                    domAttr.set(this, "aria-hidden", "false");
+                    console.log(this);
+                });
+                a.onblur = lang.hitch(a, function () {
+                    console.log(this);
+                    domAttr.set(this, "aria-hidden", "true");
+                    console.log(this);
                 });
             });
 
@@ -517,7 +544,7 @@ define(["dojo/ready",
             };
 
             skipToSplitter = function() {
-                dom.byId('dijit_layout_ContentPane_0_splitter').focus();
+                dom.byId('dijit_layout_ContentPane_1_splitter').focus();
             };
 
             skipToMap = function() {
@@ -539,7 +566,6 @@ define(["dojo/ready",
                     featureList.FocusDetails();
                 }
             };
-
         },
 
         featureList : null,
@@ -642,12 +668,35 @@ define(["dojo/ready",
                     var list = this.domNode.querySelector("div");
                     domAttr.set(list, "role", "list");
 
+                    var galleryNodeObserver = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            //console.log(mutation);
+                            var node = mutation.target;
+                            var aSpan = node.querySelector("a span");
+                            var l = aSpan.innerText;
+                            if(dojo.hasClass(node, "esriBasemapGallerySelectedNode"))
+                            {
+                                l += ' '+this.config.i18n.tools.basemapGallery.selected;
+                            }       
+                            l += '.';                          
+                            //node.querySelector('a').focus();
+                            domAttr.set(aSpan, 'aria-label', l);
+                            //aSpan.focus();
+                        });    
+                    });
+
+                    var observerCfg = { attributes: true, childList: false, characterData: false };
+
                     var nodes = this.domNode.querySelectorAll(".esriBasemapGalleryNode");
                     array.forEach(nodes, function(node){
                         domAttr.set(node, "role", "listitem");
+                        //domAttr.set(node, "aria-hidden", "true");
+
+                        galleryNodeObserver.observe(node, observerCfg);
+
                         var img = node.querySelector("img");
                         img.alt='';
-                        domAttr.set(img, "tabindex", -1);
+                        domAttr.set(img, "aria-hidden", true);
                         domAttr.remove(img, "title");
                         domAttr.remove(img, "tabindex");
 
@@ -664,6 +713,14 @@ define(["dojo/ready",
                             var localizedLabel = i18n_BaseMapLabels.baseMapLabels[aSpanLabel];
                             if(localizedLabel && localizedLabel !== undefined)
                                 aSpan.innerText = localizedLabel;
+                            var l = aSpan.innerText;
+                            if(dojo.hasClass(node, "esriBasemapGallerySelectedNode"))
+                            {
+                                l += ' '+this.config.i18n.tools.basemapGallery.selected;
+                            }       
+                            l += '.';                          
+                            domAttr.set(aSpan, 'aria-label', l);
+                            //img.alt=aSpan.innerText;
                         } catch(e) {}
                         
                         domAttr.set(labelNode, "tabindex", 0);   
@@ -1594,7 +1651,7 @@ define(["dojo/ready",
                     domClass.remove(esriIconDownArrowNode, "esriIconDownArrow");
 
                     esriIconDownArrowNode.innerHTML = 
-                        '<img src="images\\downArrow.png" alt="Search in" width="20" height="20">';
+                        '<img src="images\\downArrow.png" alt="Search in">';
 
                     searchInput = dojo.query(".searchInput")[0];
                     dojo.setAttr(searchInput, 'role', 'search');
@@ -1602,12 +1659,12 @@ define(["dojo/ready",
                     esriIconZoomNode = dojo.query(".esriIconZoom")[0];
                     domClass.remove(esriIconZoomNode, "esriIconZoom");
                     esriIconZoomNode.innerHTML = 
-                        '<img src="images\\searchZoom.png" alt="Search" width="20" height="20">';
+                        '<img src="images\\searchZoom.png" alt="Search">';
 
                     esriIconCloseNode = dojo.query(".esriIconClose")[0]; 
                     domClass.remove(esriIconCloseNode, "esriIconClose");
                     esriIconCloseNode.innerHTML = 
-                        '<img src="images\\searchClear.png" alt="Clear search" width="16" height="16">';
+                        '<img src="images\\searchClear.png" alt="Clear search">';
                 }
 
                 var emptySearchItems = query('.searchInputGroup > input[type="text"] ');
@@ -1618,6 +1675,44 @@ define(["dojo/ready",
                         domAttr.set(s, "title", i18n.searchPlaceholder);
                     }
                 });
+
+
+                var containerNode = dojo.query('#search [data-dojo-attach-point=containerNode]');
+                if(containerNode && containerNode.length > 0) {
+                    var containerNodeObserver = new MutationObserver(function(mutations) {
+                        mutations.forEach(function(mutation) {
+                            //console.log(mutation.target);
+                            var box = dojo.query('#search .searchInputGroup')[0];
+                            if(dojo.hasClass(mutation.target, 'showNoResults'))
+                            {
+                                var nrText = '';
+                                var h = query('#search .noResultsText');
+                                if(h && h.length>0) {
+                                    nrText = query('#search .noResultsHeader')[0].innerHTML+': '+h[0].innerHTML;
+                                } else {
+                                    h = query('#search .noValueText');
+                                    if(h && h.length > 0) {
+                                        nrText = h[0].innerHTML;
+                                    }
+                                }
+                                //console.log(nrText);
+                                //console.log(mutation.target);
+                                dojo.attr(box, 'aria-label', nrText);
+                                dojo.attr(box, 'tabindex', 0);
+                                box.focus();
+                            }
+                            else {
+                                dojo.removeAttr(box, 'tabindex');
+                                dojo.removeAttr(box, 'aria-label');
+                            }
+                        });    
+                    });
+
+                    var observerCfg = { attributes: true, childList: false, characterData: false };
+
+                    containerNodeObserver.observe(containerNode[0], observerCfg);
+                }
+
             }));
 
             //create the tools
@@ -1664,9 +1759,9 @@ define(["dojo/ready",
                         if(rule.selectorText.indexOf(':hover') >= 0) {
                             rule.style.backgroundColor = this._rgbaColor(this.hoverColor);
                         }
-                        if(rule.selectorText.indexOf('.goThereHint') >= 0) {
-                            rule.style.backgroundColor = this._rgbaColor(this.hoverColor);
-                        }
+                        // if(rule.selectorText.indexOf('.goThereHint') >= 0) {
+                        //     rule.style.backgroundColor = this._rgbaColor(this.hoverColor);
+                        // }
                         //focus
                         if(rule.selectorText.indexOf(':focus') >= 0) {
                             // rule.style.outlineStyle = 'none';
@@ -1674,8 +1769,13 @@ define(["dojo/ready",
                             // rule.style.boxShadow = '0 0 0 2px '+this.focusColor+' inset';
                             rule.style.outlineColor = this._rgbaColor(this.focusColor);
                         }
+                        if(rule.selectorText.indexOf('.goThereHint') >= 0) {
+                            rule.style.borderColor = this._rgbaColor(this.focusColor);
+                            //rule.style.boxShadow = "3px 3px 10px "+this._rgbaColor(this.focusColor);
+                        }
                         //active
                         if(rule.selectorText.indexOf('.activeMarker') >= 0 || 
+                            //rule.selectorText.indexOf('.goThereHint') >= 0 ||
                             rule.selectorText.indexOf('dijitSplitterThumb') >= 0) {
                             rule.style.backgroundColor = this._rgbaColor(this.activeColor);
                             rule.style.outlineStyle = 'none';
@@ -1827,11 +1927,13 @@ define(["dojo/ready",
                     var altText = this.config.logoAltText;
                     if(!altText || altText === '')
                         altText = title;
-                    domConstruct.create("div", {
+                    var panelLogo = domConstruct.create("div", {
                         id: "panelLogo",
-                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt='" + altText + "' Title='" + altText + "' TabIndex=0 aria-label='" + altText + "'></>"
-                    }, dom.byId("panelTitle"), "first");
-                    domClass.add("panelTop", "largerTitle");
+                        TabIndex:0, 
+                        innerHTML: "<img id='logo' src=" + this.config.logo + " alt='" + altText + "' Title='" + altText + "' aria-label='" + altText + "'></>"
+                    }, dom.byId("panelTitle"));//, "first");
+                    //domClass.add("panelTop", "largerTitle");
+                    dojo.place(panelLogo, dojo.byId('panelText'), 'before');
                 }
 
                 //Set the application title
@@ -1879,6 +1981,16 @@ define(["dojo/ready",
                         if(homeButton) 
                             homeButton.click();
                     }));
+
+                    // legend heades missing
+                    var dojoxGridRowTables = query('.dojoxGridRowTable');
+                    if(dojoxGridRowTables)
+                    {
+                        dojoxGridRowTables.forEach(function(table) {
+                            dojo.removeAttr(table,"role");
+                        });
+                    }
+
                 }));
 
                 on(this.map, "extent-change", function() {

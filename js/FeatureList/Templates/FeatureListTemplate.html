@@ -1,5 +1,5 @@
 <div class="featureItem">
-	<table role="presentation">
+	<table>
 		<tr>
 			<th valign="top">
 				<input id="featureButton_${_layerId}_${_featureId}" class="checkbox" type="checkbox" name="featureItem" value="${_layerId},${_featureId}" onchange="featureExpand(this)" onkeypress="featureExpandAndZoom(event, this)"/>
@@ -19,7 +19,7 @@
 		</tr>
 		<tr class="featureItem_${_layerId}_${_featureId} hideAttr">
 			<td colspan="4" >
-				<div class='goThereHint' style='right:50%;'>Alt + 7</div>
+				<div class='goThereHint' style='left:20%; top:70%'><b>Alt&nbsp;+&nbsp;7</b> ${hint}</div>
 			</td>
 		</tr>
 		${_content}

@@ -322,6 +322,10 @@
       {
          "category":"Languages",
          "fields":[
+            {  "label":"Control with label",
+               "type":"boolean",
+               "fieldName":"languageLabel",
+               "tooltip": "Place a localized label in front of the Language control."},
             {  
                "type":"paragraph",
                "value":"<strong>Language 1</strong>"
@@ -464,10 +468,12 @@
       "locationSearch": true,
       "searchExtent":false,
 
+      "languageLabel":true,
+
       "lang1shortName": "EN",
       "lang1name": "English",
       "lang1code": "EN-US",
-      "lang1imageSrc": "images/flag.us.22.png",
+      "lang1imageSrc": "images/flag.uk.22.png",
 
       "lang2shortName": "FR",
       "lang2name": "French",

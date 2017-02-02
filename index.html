@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
 	<head>
-		<title>WCAG Viewer</title>	
+		<title>Accessible Viewer</title>	
 		<!-- Define the versions of IE that will be used to render the page. See Microsoft documentation for details. Optional. -->
     	
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -35,36 +35,39 @@
 		<!-- Loading Indicator -->
 		<div class="loading-indicator" role="presentation">
 			<div class="loading-message" id="loading_message"></div>
-			<div id='loadingTitle'><h1>WCAG Viewer</h1></div>
+			<div id='loadingTitle'><h1>Accessible Viewer</h1></div>
 		</div>
 
 		<!-- Map -->
 		<!-- The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
 
 		<div style="display:none;">
+			<div id="layoutTopPanel"/>
+				<div class="skip" role="banner">
+					<a accesskey="1" href="#" tabindex="0" aria-hidden=true id="skip-tools">1. Skip to Tools</a>
+					<a accesskey="2" href="#" tabindex="0" aria-hidden=true id="skip-search">2. Skip to Search</a>
+					<a accesskey="3" href="#" tabindex="0" aria-hidden=true id="skip-content">3. Skip to Content</a>
+					<a accesskey="4" href="#" tabindex="0" aria-hidden=true id="skip-splitter">4. Skip to Splitter</a>
+					<a accesskey="5" href="#" tabindex="0" aria-hidden=true id="skip-map">5. Skip to Map</a>
+					<a accesskey="6" href="#" tabindex="0" aria-hidden=true id="skip-instructions">6. Skip to Help</a>
+					<a accesskey="7" href="#" tabindex="0" aria-hidden=true id="skip-feature">7. Skip to Feature Details</a>
+			    </div>
+				<div id="panelTitle" class="fc bg borderBottom" style="display: flex; flex-direction: row;">
+					<h1 id="panelText" class="fc" style="flex:1"></h1>
+				    <div id="languageSelectNode">
+				    </div>
+				</div>
+			</div>
+
 			<div id="leftPanel" class="leftWrapper">
-				
 				<header id="panelTop" class="bg" style="color:transparent !important;">
 					<!-- Panel Title -->
-					<div id="panelTitle" class="fc bg borderBottom">
-						<h1 class="fc" id="panelText">WCAG Viewer</h1>
-						<div id="panelMenu" class="icon-menu icon-color"></div>
-						<div class="skip" role="banner">
-							<a accesskey="1" href="#" tabindex="0" id="skip-tools">1. Skip to Tools</a>
-							<a accesskey="2" href="#" tabindex="0" id="skip-search">2. Skip to Search</a>
-							<a accesskey="3" href="#" tabindex="0" id="skip-content">3. Skip to Content</a>
-							<a accesskey="4" href="#" tabindex="0" id="skip-splitter">4. Skip to Splitter</a>
-							<a accesskey="5" href="#" tabindex="0" id="skip-map">5. Skip to Map</a>
-							<a accesskey="6" href="#" tabindex="0" id="skip-instructions">6. Skip to Help</a>
-							<a accesskey="7" href="#" tabindex="0" id="skip-feature">7. Skip to Feature Details</a>
-					    </div>
-					</div>
 					<!-- Panel Tools -->
 					<div id="panelTools" class="fc bg borderBottom" role="toolbar">
 						<!--Tools are created programatically-->
 					</div>
 					<div id="panelSearch" class="fc bg borderBottom" >
-						<div class="searchLabel"><label id="searchLabel" for="panelGeocoder">Search: </label></div>
+						<div class="searchLabel"><label id="searchLabel" for="search_input">Search: </label></div>
 						<div id="panelGeocoder"></div>
 					</div>
 				</header>
@@ -74,12 +77,11 @@
 				</main>
 				<footer id="panelBottom" class="bg">
 					<span id="panelBottomSpan">Press <strong>ALT + 0 to 7</strong> keys for fast navigation</span>
-					<div id="languageSelectNode"></div>
+					<!-- <div id="languageSelectNode"></div> -->
 				</footer>
 			</div>
 
 			<div id="mapDiv" dir="ltr" tabindex=0></div>
-		</div>
 
 		<script type="text/javascript" src="js/utils.js">
 		</script>
@@ -92,7 +94,7 @@
          if(locale && locale.length===2) {
          	locale = locale[1];
          }
-         else locale = 'en-us';
+         else locale = navigator.language.toLowerCase();//'en-us';
          document.documentElement.lang = locale;
 
          var dojoConfig = {

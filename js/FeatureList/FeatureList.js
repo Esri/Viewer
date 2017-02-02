@@ -2,16 +2,16 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
     "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on", 
     "dojo/Deferred", "dojo/promise/all", "dojo/query", 
     "esri/tasks/query", "esri/tasks/QueryTask",
-    "dojo/text!application/dijit/templates/FeatureList.html", 
+    "dojo/text!application/FeatureList/templates/FeatureList.html", 
     "dojo/dom", "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
     "dojo/string", 
-    "dojo/text!application/dijit/templates/FeatureListTemplate.html",
+    "dojo/text!application/FeatureList/templates/FeatureListTemplate.html",
     "dojo/i18n!application/nls/FeatureList",
+    "dojo/i18n!application/nls/resources",
     "esri/symbols/SimpleMarkerSymbol", "esri/symbols/PictureMarkerSymbol", 
     "esri/symbols/CartographicLineSymbol", 
     "esri/symbols/SimpleFillSymbol", "esri/symbols/SimpleLineSymbol",
     "esri/graphic", "esri/Color", 
-    "esri/dijit/InfoWindow",
     "dojo/NodeList-dom", "dojo/NodeList-traverse"
     
     ], function (
@@ -22,12 +22,11 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         FeatureList, 
         dom, domClass, domAttr, domStyle, domConstruct, event, 
         string,
-        listTemplate, i18n,
+        listTemplate, i18n, Ri18n,
         SimpleMarkerSymbol, PictureMarkerSymbol, 
         CartographicLineSymbol, 
         SimpleFillSymbol, SimpleLineSymbol,
-        Graphic, Color,
-        InfoWindow
+        Graphic, Color
     ) {
     var Widget = declare("esri.dijit.FeatureList", [_WidgetBase, _TemplatedMixin, Evented], {
         // defaults
@@ -42,6 +41,13 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         constructor: function (options, srcRefNode) {
             var defaults = lang.mixin({}, this.options, options);
             this.domNode = srcRefNode;
+
+            dojo.create("link", {
+                href : "js/FeatureList/Templates/FeatureList.css",
+                type : "text/css",
+                rel : "stylesheet",
+            }, document.head);
+
             // properties
             this.set("map", defaults.map);
             var Layers = this._getLayers(defaults.layers);
@@ -166,8 +172,11 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                         if(pField.format.dateFormat) {
                                             fieldValue='FORMAT_DATE('+fieldName+',"'+pField.format.dateFormat+'")';
                                         }
+                                        else if(pField.format.time) {
+                                            fieldValue='FORMAT_TIME('+fieldName+',"'+pField.format.time+'")';
+                                        }
                                         else if(pField.format.digitSeparator) {
-                                            fieldValue='FORMAT_NUM('+fieldName+',"'+pField.format.places+'")';
+                                            fieldValue='FORMAT_NUM('+fieldName+',"'+pField.format.places+'|'+pField.format.digitSeparator+'")';
                                         }
                                         else {
                                             fieldValue=fieldName;
@@ -175,9 +184,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                     }
 
                                     content+='<tr class="featureItem_${_layerId}_${_featureId} hideAttr" tabindex="0" aria-label="'+pField.label+', '+fieldValue+',"">\n';
-                                    content+='    <td valign="top">\n';
-                                    content+='      <!--<img src="..\\images\\Filter0.png" alt="filter" class="filterBtn"/>-->\n';
-                                    content+='    </td>\n';
+                                    content+='    <td valign="top"></td>\n';
                                     content+='    <td valign="top" align="right">'+pField.label+'</td>\n';
                                     content+='    <td valign="top">:</td>\n';
                                     content+='    <td valign="top">'+fieldValue+'</td>\n';
@@ -218,12 +225,11 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
         _reloadList : function(ext) {
             if(!this._isVisible()) return;
             var loading_features = this.domNode.parentNode.parentNode.querySelector('#loading_features');
-            //domStyle.set(loading_features, 'display', '-webkit-inline-box');
+
             domClass.replace(loading_features, "showLoading", "hideLoading");
 
             this.__reloadList(ext).then(function(results) {
                 domClass.replace(loading_features, "hideLoading", "showLoading");
-                //domStyle.set(loading_features, 'display', 'none');
             });
         },
 
@@ -396,6 +402,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                         _content:content,
                         _panTo: i18n.widgets.featureList.panTo,
                         _zoomTo: i18n.widgets.featureList.zoomTo,
+                        hint:Ri18n.skip.featureDetaills,
                     };
                     lang.mixin(attributes, f.attributes);
                     var nulls = window.tasks[r].layer.fields.map(function(f){return f.name;});
@@ -409,7 +416,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     content = string.substitute(content, attributes);
                     listTemplate=string.substitute(listTemplate, attributes);
                     var result =  string.substitute(listTemplate, attributes);
-                    var re = /((>)((?:http:\/\/www\.|https:\/\/www\.|ftp:\/\/www.|www\.)[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(?:\/.*)?)(?:<))|(FORMAT_(DATE|NUM)\((-?\d*\.?\d*),\"(.+)\"\))/gm;
+                    var re = /((>)((?:http:\/\/www\.|https:\/\/www\.|ftp:\/\/www.|www\.)[a-z0-9]+(?:[\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(?:\/.*)?)(?:<))|(FORMAT_(DATE|TIME|NUM)\((-?\d*\.?\d*),\"(.+)\"\))/gm;
                     do {
                         var matches = re.exec(result);
                         if(!matches) break;
@@ -420,14 +427,49 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                             result = result.replace(matches[3], "<a href='"+matches[3]+"' target='_blank'>Follow Link</a>");
                         }
                         else if(matches[6]==="DATE") {
-                            var date = new Date(Number(matches[7]));
-                            result = result.replace(matches[5], date.toLocaleDateString("en-US", {
-                                year: "numeric", month: "long", day: "numeric"
-                            }));
+                            var dateNum = matches[7];
+                            if(!isNaN(parseFloat(dateNum)) && isFinite(dateNum)) {
+                                var date = new Date(Number(dateNum));
+                                result = result.replace(matches[5], date.toLocaleDateString(
+                                    document.documentElement.lang, 
+                                    {
+                                        year: "numeric", month: "long", day: "numeric"
+                                    }
+                                ));
+                            } else 
+                                result = result.replace(matches[5],'');
+                        }
+                        else if(matches[6]==="TIME") {
+                            var timeNum = matches[7];
+                            if(!isNaN(parseFloat(timeNum)) && isFinite(timeNum)) {
+                                var time = new Date(Number(timeNum));
+                                result = result.replace(matches[5], time.toLocaleDateString(
+                                    document.documentElement.lang, 
+                                    {
+                                        year: "numeric", month: "numeric", day: "numeric",
+                                        hour: "2-digit", minute: "2-digit"
+                                    }
+                                ));
+                            } else 
+                                result = result.replace(matches[5],'');
                         }
                         else if(matches[6]==="NUM") {
-                            var num = Number(matches[7]).toFixed(matches[8]);
-                            result = result.replace(matches[5], num);
+                            var num = matches[7];
+                            if(!isNaN(parseFloat(num)) && isFinite(num)) {
+                                num = Number(num);
+                                var d89=matches[8].split('|');
+                                var dec = Number(d89[0]);
+                                num = num.toLocaleString(document.documentElement.lang, 
+                                    {
+                                        minimumFractionDigits: dec,
+                                        maximumFractionDigits: dec,
+                                        useGrouping: d89[1]
+                                    }
+                                );
+                                
+                                result = result.replace(matches[5], num);
+                            } else 
+                                result = result.replace(matches[5],'');
                         }
 
                     } while (true);

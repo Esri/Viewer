@@ -42,16 +42,19 @@ define(
 				"link": "Lien de la carte",
 				"facebook": "Facebook",
 				"twitter": "Twitter"
-			}
+			},
+            "basemapGallery": {
+                selected: "Carte de base sélectionnée"
+            }
         },
         "tooltips":{
-        	"home": "Etendue par défaut",
-        	"locate": "Rechercher mon site",
+        	"home": "Etendue par Défaut",
+        	"locate": "Rechercher mon Site",
         	"legend": "Légende",
         	"bookmarks": "Géosignets",
         	"layers": "Couches",
-        	"basemap": "Galerie des cartes de base",
-        	"overview": "Vue générale",
+        	"basemap": "Galerie des Cartes de Base",
+        	"overview": "Vue Générale",
         	"measure": "Mesurer",
         	"edit": "Modifier",
         	"time": "Heure",
@@ -62,19 +65,19 @@ define(
             "features": "Liste des Caractéristiques"
         },
         "skip":{
-            "tools" : "1. Aller aux outils",
-            "search" : "2. Aller à la recherche",
-            "content" : "3. Aller au contenu",
-            "splitter" : "4. Aller au séparateur d’écran",
-            "map" : "5. Aller à la carte",
-            "help" : "6. Aller à l’aide",
-            "featureDetaills" : "7. Aller aux fonctionnalités détaillées"
+            "tools" : "Aller au outils",
+            "search" : "Aller à la recherche",
+            "content" : "Aller au contenu",
+            "splitter" : "Aller au séparateur d’écran",
+            "map" : "Aller à la carte",
+            "help" : "Aller à l’aide",
+            "featureDetaills" : "Aller aux fonctionnalités détaillées"
         },
-        search : "Recherche: ",
+        search : "Recherche : ",
         searchPlaceholder: "Trouver une adresse ou un lieu",
         searchEnterCriteria : "Terme recherché pour",
         pressAlt : "Appuyer sur ALT + 0 à 7 pour naviguer rapidement",
         instructions:"instructions.french",
-        wcagViewer : "Explorateur WCAG"
+        wcagViewer : "Visualiseur Accessible"
     })
 );
