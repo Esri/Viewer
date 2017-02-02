@@ -95,7 +95,7 @@ define([
                 dojo.attr(menuItem.domNode,'aria-label', esriLang.stripTags(langHint));
                 dojo.attr(menuItem.domNode,'title', esriLang.stripTags(langHint));
                 dojo.attr(menuItem.domNode,'data-code', lang.code);
-                dojo.attr(menuItem.domNode,'data-appId', lang.appId);
+                dojo.attr(menuItem.domNode,'data-appid', lang.appId);
                 menu.addChild(menuItem);
 
                 if(lang.code.substring(0,2).toLowerCase() === this.defaults.locale.substring(0,2).toLowerCase()) {
