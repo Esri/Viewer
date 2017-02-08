@@ -175,7 +175,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                         else if(pField.format.time) {
                                             fieldValue='FORMAT_TIME('+fieldName+',"'+pField.format.time+'")';
                                         }
-                                        else if(pField.format.digitSeparator) {
+                                        else if(pField.format.hasOwnProperty("digitSeparator")) {
                                             fieldValue='FORMAT_NUM('+fieldName+',"'+pField.format.places+'|'+pField.format.digitSeparator+'")';
                                         }
                                         else {
