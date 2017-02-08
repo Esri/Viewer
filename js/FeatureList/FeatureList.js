@@ -459,11 +459,12 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                                 num = Number(num);
                                 var d89=matches[8].split('|');
                                 var dec = Number(d89[0]);
+                                var useSeparator = d89[1] === "true";
                                 num = num.toLocaleString(document.documentElement.lang, 
                                     {
                                         minimumFractionDigits: dec,
                                         maximumFractionDigits: dec,
-                                        useGrouping: d89[1]
+                                        useGrouping: useSeparator
                                     }
                                 );
                                 
