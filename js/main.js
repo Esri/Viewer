@@ -558,7 +558,7 @@ define(["dojo/ready",
                     activeTool = activeTool[0].childNodes[0];
                     activeTool.click();
                 }
-                dom.byId('instructionsDiv').childNodes[0].focus();            
+                dom.byId('instructionsDiv').focus();            
             };
 
             skipToFeature = function() {
