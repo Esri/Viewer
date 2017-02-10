@@ -583,6 +583,12 @@ img {
     position: relative;
 }
 
+#pageBody_details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
 @media only screen and (min-width: 720px) {
     .pageBody {
         width: 100%;
@@ -1304,10 +1310,10 @@ html, body {
 }
 
 #instructionsDiv {
-    position: absolute;
-    bottom: 0;
+    /*position: absolute;*/
+    /*bottom: 0;*/
     padding: 0 5px;
-    max-height: 48%;
+    max-height: 38%;
     overflow-y: auto;
     width: calc(100% - 10px);
 }
@@ -1491,7 +1497,7 @@ html, body {
 #detailDiv {
   background: white;
     overflow-y: auto;
-    position: absolute;
+    /*position: absolute;*/
     color: black;
     width: calc(100% - 20px);
     padding: 10px 10px 0 10px;
@@ -1503,7 +1509,7 @@ html, body {
 
 .detailHalf {
     /*height: calc(100% - 274px);*/
-    max-height:50%;
+    max-height:60%;
 }
 
 .leftWrapper {
