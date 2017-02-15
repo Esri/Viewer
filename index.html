@@ -42,9 +42,9 @@
 		<!-- The ArcGIS API for JavaScript provides bidirectional support.  When viewing the application in an right to left (rtl) language like Hebrew and Arabic the map needs to remain in left-to-right (ltr) mode. Specify this by setting the dir attribute on the div to ltr. -->
 
 		<div style="display:none;">
-			<div id="layoutTopPanel"/>
+			<div id="layoutTopPanel">
 				<div id="panelTitle" class="fc bg borderBottom" style="display: flex; flex-direction: row;">
-					<h1 id="panelText" class="fc" style="flex:1"></h1>
+					<h1 id="panelText" class="fc" style="flex:1">&nbsp;</h1>
 					<div class="skip" role="banner">
 						<a accesskey="1" href="#" tabindex="0" aria-hidden=true id="skip-tools">1. Skip to Tools</a>
 						<a accesskey="2" href="#" tabindex="0" aria-hidden=true id="skip-search">2. Skip to Search</a>
@@ -58,30 +58,32 @@
 				    </div>
 				</div>
 			</div>
+		</div>
 
-			<div id="leftPanel" class="leftWrapper">
-				<header id="panelTop" class="bg" style="color:transparent !important;">
-					<!-- Panel Title -->
-					<!-- Panel Tools -->
-					<div id="panelTools" class="fc bg borderBottom" role="toolbar">
-						<!--Tools are created programatically-->
-					</div>
-					<div id="panelSearch" class="fc bg borderBottom" >
-						<div class="searchLabel"><label id="searchLabel" for="search_input">Search: </label></div>
-						<div id="panelGeocoder"></div>
-					</div>
-				</header>
-				<main id="panelPages" tabindex="0" class="bg leftContent">
-					<!-- <div id="fixContent" class="page showAttr">
-					</div> -->
-				</main>
-				<footer id="panelBottom" class="bg">
-					<span id="panelBottomSpan">Press <strong>ALT + 0 to 7</strong> keys for fast navigation</span>
-					<!-- <div id="languageSelectNode"></div> -->
-				</footer>
-			</div>
+		<div id="leftPanel" class="leftWrapper">
+			<header id="panelTop" class="bg" style="color:transparent !important;">
+				<!-- Panel Title -->
+				<!-- Panel Tools -->
+				<div id="panelTools" class="fc bg borderBottom" role="toolbar">
+					<!--Tools are created programatically-->
+				</div>
+				<div id="panelSearch" class="fc bg borderBottom" >
+					<div class="searchLabel"><label id="searchLabel" for="search_input">Search: </label></div>
+					<div id="panelGeocoder"></div>
+				</div>
+			</header>
+			<main id="panelPages" tabindex="0" class="bg leftContent">
+				<!-- <div id="fixContent" class="page showAttr">
+				</div> -->
+			</main>
+			<footer id="panelBottom" class="bg">
+				<span id="panelBottomSpan">Press <strong>ALT + 0 to 7</strong> keys for fast navigation</span>
+				<!-- <div id="languageSelectNode"></div> -->
+			</footer>
+		</div>
 
-			<div id="mapDiv" dir="ltr" tabindex=0></div>
+		<div id="mapDiv" dir="ltr" tabindex=0></div>
+
 
 		<script type="text/javascript" src="js/utils.js">
 		</script>
