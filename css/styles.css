@@ -1429,7 +1429,7 @@ html, body {
 }
 
 .skip {
-    position: absolute;
+    /*position: absolute;*/
     white-space: nowrap;
     font-size: 18px;
 }
