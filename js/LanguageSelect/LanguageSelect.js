@@ -66,7 +66,10 @@ define([
         startup: function () {
             if(this.button) return;
 
-            var menu = new DropDownMenu({ style: "display: none;"});
+            var menu = new DropDownMenu({ 
+                style: "display: none;",
+                //id: 'languageMenu',
+            });
             var currentLocale = this.defaults.locale.substring(0,2).toUpperCase();
             var currentIcon = null;
             var currentLanguage = null;
@@ -116,16 +119,16 @@ define([
 
             menu.startup();
 
+
+            
+
             this.button = new DropDownButton({
                 label: currentLocale,
                 dropDown: menu,
-                id:'langageButton'
+                id: 'languageButton',
+                role: 'application',
             });
             this.button.startup();
-
-            // var input= query('input[type="button"]',this.button.domNode)[0];
-            // domAttr.set(input,'id','langageButton');
-            // domAttr.set(input,'tabindex',0);
 
             if(currentIcon) {
                 dojo.removeClass(this.button.iconNode, "dijitNoIcon");
@@ -140,7 +143,7 @@ define([
 
             if(this.defaults.showLabel) {
                 domConstruct.create("label", {
-                    for: 'langageButton',
+                    for: 'languageButton',
                     innerHTML: i18n.widgets.languageSelect.language,
                     title: i18n.widgets.languageSelect.changeHere,
                     'aria-label': i18n.widgets.languageSelect.changeHere,
