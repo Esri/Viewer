@@ -856,6 +856,7 @@ define(["dojo/ready",
 
                         on(toolbar, 'updateTool_details', this._adjustDetails);
                         on(this.map, 'resize', this._adjustDetails);
+                        document.body.onresize = this._adjustDetails;
                     }));
                 }
                 deferred.resolve(true);
