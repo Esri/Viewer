@@ -844,7 +844,7 @@ define(["dojo/ready",
                     domClass.add(instructionsBtn, "panelToolDefault");
                 } 
                 else {
-                    deferedDetails.then(function(r) {
+                    deferedDetails.then(lang.hitch(this, function(r) {
                         require(["dojo/text!application/dijit/templates/"+this.config.i18n.instructions+".html"], 
                             function(instructionsText){
                             var instructionsDiv = domConstruct.create('div',{
@@ -853,11 +853,19 @@ define(["dojo/ready",
                                 tabindex: 0
                             }, dom.byId("pageBody_details"));
                         });
-                    });
+
+                        on(toolbar, 'updateTool_details', this._adjustDetails);
+                        on(this.map, 'resize', this._adjustDetails);
+                    }));
                 }
                 deferred.resolve(true);
             }
             return deferred.promise;
+        },
+
+        _adjustDetails :function() {
+            var pageBody = dojo.byId('pageBody_details');
+            var detailDiv = dojo.byId('detailDiv');
         },
 
         _addEditor: function (tool, toolbar) {

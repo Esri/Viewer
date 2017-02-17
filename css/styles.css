@@ -1313,7 +1313,7 @@ html, body {
     /*position: absolute;*/
     /*bottom: 0;*/
     padding: 0 5px;
-    max-height: 38%;
+    /*max-height: 38%;*/
     overflow-y: auto;
     width: calc(100% - 10px);
 }
@@ -1509,7 +1509,8 @@ html, body {
 
 .detailHalf {
     /*height: calc(100% - 274px);*/
-    max-height:60%;
+    /*max-height:60%;*/
+    height:auto;
 }
 
 .leftWrapper {
