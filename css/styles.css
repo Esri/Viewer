@@ -1751,10 +1751,16 @@ main {
     }
 
     .arcgisSearch .searchClose, .arcgisSearch .searchSpinner {
+        line-height: 28px;
         vertical-align: baseline;
-        margin-top: 7.5px;
         position: absolute;
-        right: 4px;
+        opacity:0.5;
+        height: 29px;
+    }
+
+    .searchClose:focus, .searchClose:hover {
+        background-color: rgba(0, 0, 0, 0.701961);
+        opacity:1;
     }
 
     .arcgisSearch .hasValue .searchClear {
