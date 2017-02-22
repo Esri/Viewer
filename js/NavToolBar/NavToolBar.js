@@ -55,7 +55,7 @@ define([
         },
         
         _init: function () {
-            if(!dom.byId("navZoomIn")) return;
+            //if(!dom.byId("navZoomIn")) return;
             this.nav.setZoomSymbol(new SimpleLineSymbol("SOLID", new Color(this.zoomColor), 4));
 
             dojo.empty(this.navToolBar);
