@@ -865,9 +865,13 @@ define(["dojo/ready",
         },
 
         _adjustDetails :function() {
-            var pageBody = dojo.byId('pageBody_details');
-            var detailDiv = dojo.byId('detailDiv');
-            detailDiv.style.maxHeight=(pageBody.clientHeight-instructionsDiv.clientHeight - 30) + 'px';
+            try {
+                var pageBody = dojo.byId('pageBody_details');
+                var detailDiv = dojo.byId('detailDiv');
+                detailDiv.style.maxHeight=(pageBody.clientHeight-instructionsDiv.clientHeight - 30) + 'px';
+            } catch (e) {
+                /* ignore instructionDiv not defined error: will come defined next time! */      
+            }
         },
 
         _addEditor: function (tool, toolbar) {
