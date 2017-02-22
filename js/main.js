@@ -1657,24 +1657,32 @@ define(["dojo/ready",
                 if (search && search.domNode) {
                     domConstruct.place(search.domNode, "panelGeocoder");
             
-                    esriIconDownArrowNode = dojo.query(".esriIconDownArrow")[0];
-                    domClass.remove(esriIconDownArrowNode, "esriIconDownArrow");
+                    var esriIconDownArrowNode = dojo.query(".searchIcon.esri-icon-down-arrow")[0];
+                    if(esriIconDownArrowNode)
+                    {
+                        domClass.remove(esriIconDownArrowNode, "searchIcon esri-icon-down-arrow");
 
-                    esriIconDownArrowNode.innerHTML = 
-                        '<img src="images\\downArrow.png" alt="Search in">';
+                        esriIconDownArrowNode.innerHTML = 
+                        '<img src="images\\downArrow.png" alt="Search in" width="20" height="20">';
+                    }
 
-                    searchInput = dojo.query(".searchInput")[0];
+                    var searchInput = dojo.query(".searchInput")[0];
                     dojo.setAttr(searchInput, 'role', 'search');
 
-                    esriIconZoomNode = dojo.query(".esriIconZoom")[0];
-                    domClass.remove(esriIconZoomNode, "esriIconZoom");
-                    esriIconZoomNode.innerHTML = 
-                        '<img src="images\\searchZoom.png" alt="Search">';
+                    var esriIconZoomNode = dojo.query(".searchIcon.esri-icon-search")[0];
+                    if(esriIconZoomNode)
+                    {
+                        domClass.remove(esriIconZoomNode, "searchIcon esri-icon-search");
+                        esriIconZoomNode.innerHTML = 
+                        '<img src="images\\searchZoom.png" alt="Search" width="20" height="20">';
+                    }
 
-                    esriIconCloseNode = dojo.query(".esriIconClose")[0]; 
-                    domClass.remove(esriIconCloseNode, "esriIconClose");
-                    esriIconCloseNode.innerHTML = 
-                        '<img src="images\\searchClear.png" alt="Clear search">';
+                    var esriIconCloseNode = dojo.query(".searchIcon.esri-icon-close.searchClose")[0]; 
+                    if(esriIconCloseNode) {
+                        domClass.remove(esriIconCloseNode, "searchIcon esri-icon-close");
+                        esriIconCloseNode.innerHTML = 
+                            '<img src="images\\searchClear.png" alt="Clear search" width="16" height="16">';
+                    }
                 }
 
                 var emptySearchItems = query('.searchInputGroup > input[type="text"] ');
