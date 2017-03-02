@@ -39,11 +39,13 @@ define(["dojo/_base/declare", "dojo/_base/lang", "dojo/has", "dojo/dom","esri/ke
             this.set("layers", VisibleLayers);
             window.filters = [];
             VisibleLayers.forEach(lang.hitch(this,function(layer){
-                window.filters.push({
-                    id: layer.id, 
-                    layer: layer, 
-                    fields:layer.popupInfo.fieldInfos.filter(function(l){return l.visible;})
-                });
+                if(layer.popupInfo) {
+                    window.filters.push({
+                        id: layer.id, 
+                        layer: layer, 
+                        fields:layer.popupInfo.fieldInfos.filter(function(l){return l.visible;})
+                    });
+                }
             }));
         },
 

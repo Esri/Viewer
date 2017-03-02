@@ -153,9 +153,9 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                     var preselected = null;
                     if(results) for(var i = 0; i<results.length; i++)
                     {
-                        if(window.tasks[i].layer.visible && window.tasks[i].layer.visibleAtMapScale) {
+                        var layer = window.tasks[i].layer;
+                        if(layer.visible && layer.visibleAtMapScale && layer.infoTemplate) {
                             r = results[i];
-                            var layer = window.tasks[i].layer;
                             var content = '';
                             if(!layer.infoTemplate) {
                                 var x = 1;
