@@ -34,10 +34,8 @@ define(
 			      "label3": 'Paisagem (imagem)',
 			      "label4": 'Retrato (imagem)'
 			    },
-			    "legend": "Adicionar legenda à saída",
-                "title": "ã_Title___Ç",
-                "titlePrompt": "ã_Add custom title______Ç"
-            },
+			    "legend": "Adicionar legenda à saída"
+			},
 			"share": {
 				"extent": "Utilizar extensão de mapa atual",
 				"label": "Partilhar este mapa",

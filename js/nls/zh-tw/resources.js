@@ -19,6 +19,11 @@ define(
         "map": {
             "error": "無法建立地圖"
         },
+        "nav":{
+            "next": "下一頁",
+            "previous": "上一頁",
+            "close": "關閉"
+        },
         "tools":{
             "search":{
                 "error": "無法找到位置",
@@ -35,12 +40,12 @@ define(
 			      "label4": '縱向'
 			    },
 			    "legend": "在輸出新增圖例",
-                "title": "試_Title___驗",
-                "titlePrompt": "試_Add custom title______驗"
+                "title": "標題",
+                "titlePrompt": "新增自訂標題"
             },
 			"share": {
 				"extent": "使用目前地圖範圍",
-				"label": "共用此地圖",
+				"label": "分享此地圖",
 				"link": "地圖連結",
 				"facebook": "Facebook",
 				"twitter": "Twitter"
@@ -59,7 +64,7 @@ define(
         	"time": "時間",
         	"print": "列印",
         	"details": "詳細資訊",
-        	"share": "共用"
+        	"share": "分享"
         }
     })
 );

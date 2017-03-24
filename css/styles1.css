@@ -1,0 +1,86 @@
+li[role='menuitem']:hover, 
+div[role='button']:not(.searchBtn):not(.searchClear):not(.home):not(.zoomLocateButton):hover,
+.no-touch .esriMeasurement .esriButton .dijitButtonNode:hover,
+#dijit_form_ComboButton_0_arrow:hover,
+button:hover, .navBtn:hover,
+.panelToolActive:hover,
+.esriMeasurement .esriToggleButton .dijitButtonNode:hover,
+.panelTool:hover, .esriBookmarkItem:hover,
+.esriSimpleSliderDecrementButton:hover, .esriSimpleSliderHomeButton:hover, .esriSimpleSliderIncrementButton:hover
+{
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+
+/*.HomeButton .home:hover,
+.LocateButton .zoomLocateButton:hover {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+}
+*/
+/*
+INTERNET EXPLORER and FIREFOX : not supported or buggy:
+http://reference.sitepoint.com/css/outline-color
+*/
+:focus {
+    /*--outline: -webkit-focus-ring-color auto 5px !important;*/
+    outline-width: 2px;
+    outline-offset: -1px;
+    outline-style: solid;
+    outline-color: invert;
+    /*box-shadow: 0 0 0 4px red inset;*/
+    }
+}
+
+.esriSimpleSliderIncrementButton:focus, 
+.esriSimpleSliderHomeButton:hover,
+.esriSimpleSliderDecrementButton:focus{
+    outline-offset: 2px;
+}
+
+.homeContainer input:focus, .locateContainer input:focus 
+{
+}
+
+.panelTool input[type="image" i]:focus
+{
+    /*--outline: -webkit-focus-ring-color auto 5px !important;*/
+    outline-width: 2px;
+}
+
+.ovwHighlight:focus{
+    /*--outline: -webkit-focus-ring-color auto 5px !important;*/
+    outline-offset: 2px !important;
+}
+
+#embedMapSizeDropDown:focus {
+    /*--outline: -webkit-focus-ring-color auto 5px !important;
+    outline-width: 2px;*/
+    outline-style: solid;
+    /*outline-color: rgba(0, 0, 0, 0.9);*/
+}
+
+.arcgisSearch .searchMenu li:hover, .arcgisSearch .searchMenu li:focus {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.activeMarker,
+.panelToolActive, 
+.esriBasemapGallerySelectedNode,
+.dijitSplitterThumb {
+  background-color: rgba(0, 0, 0, 0.7);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#4D000000,endColorstr=#4D000000) !important;
+}
+
+.esriBasemapGallerySelectedNode:hover span {
+  color: black;
+  text-align: center;
+}
+
+.goThereHint {
+}
+
+.searchBtn:focus, .searchClear:focus, .searchInput:focus {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+
+

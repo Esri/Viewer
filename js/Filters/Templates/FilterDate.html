@@ -1,0 +1,17 @@
+<div class="_filter _date">
+	<select autofocus tabindex=0 
+		data-dojo-attach-event="onchange: criteriaChanged"
+		data-dojo-attach-point="criteria"
+		>
+		<option value=" = ">${_i18n.widgets.FilterItem.equal}</option>			
+		<option value=" != ">${_i18n.widgets.FilterItem.notEqual}</option>			
+		<option value=" < ">${_i18n.widgets.FilterItem.lessThen}</option>			
+		<option value=" > ">${_i18n.widgets.FilterItem.moreThen}</option>			
+		<option value=" BETWEEN ">${_i18n.widgets.FilterItem.between}</option>			
+		<option value=" NOT BETWEEN ">${_i18n.widgets.FilterItem.notBetween}</option>			
+	</select>
+	<input type="text" data-dojo-attach-point="minValue" data-dojo-type="dijit/form/DateTextBox" aria-label="Enter date to match" required="true"/>
+	<div style="display:none;" data-dojo-attach-point="divMaxValue">
+		<input type="text" data-dojo-attach-point="maxValue" data-dojo-type="dijit/form/DateTextBox" aria-label="Enter last date" required="true"/>
+	</div>
+</div>

@@ -17,6 +17,14 @@ define(["dojo/has"], function (has) {
     };
 
     /*App capabilities*/
+    has.add("navigation", function (g) {
+        var navigation = getTool("navigation", g.config);
+        //overwrite the default with app settings
+        if (g.config.hasOwnProperty("navigation")) {
+            navigation = g.config.navigation;
+        }
+        return navigation;
+    });
     has.add("search", function (g) {
         var search = g.config.search || false;
         //overwrite the default with app settings
@@ -88,6 +96,22 @@ define(["dojo/has"], function (has) {
         }
         return home;
     });
+    has.add("features", function (g) {
+        var features = getTool("features", g.config);
+        //overwrite the default with app settings
+        if (g.config.hasOwnProperty("tool_features")) {
+            features = g.config.tool_features;
+        }
+        return features;
+    });
+    has.add("filter", function (g) {
+        var filter = getTool("filter", g.config);
+        //overwrite the default with app settings
+        if (g.config.hasOwnProperty("tool_filter")) {
+            filter = g.config.tool_filter;
+        }
+        return filter;
+    });
     has.add("layers", function (g) {
         var layers = getTool("layers", g.config);
         //overwrite the default with app settings
@@ -96,6 +120,15 @@ define(["dojo/has"], function (has) {
         }
         return layers;
     });
+    has.add("instructions", function (g) {
+        var instructions = getTool("instructions", g.config);
+        //overwrite the default with app settings
+        if (g.config.hasOwnProperty("tool_instructions")) {
+            instructions = g.config.tool_instructions;
+        }
+        return instructions;
+    });
+
     has.add("legend", function (g) {
         var legend = getTool("legend", g.config);
         //overwrite the default with app settings

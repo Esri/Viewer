@@ -1,0 +1,68 @@
+.tabs {
+  position: relative;
+  clear: both;
+  height: calc(100% -  50px);
+  display: -webkit-box;
+}
+.tab {
+}
+
+.tab label {
+  background: #81D6FF;
+  padding: 5px;
+  padding-bottom: 4px;
+  border: 1px solid black;
+  margin-left: 5px;
+  position: relative;
+  border-bottom-left-radius: 8px;
+  top: 10px;
+  z-index: 1;
+}
+.tab [type=radio] {display: none;position: relative;top: calc(100% - 10px);}
+
+.tab [type=radio] ~ label ~ .tabContent {
+    display: none;
+}
+
+.tabContent {
+  position: absolute;
+  background: transparent;
+  height: calc(100% - 20px);
+  width: calc(100% - 22px);
+}
+
+.contentInner {
+}
+
+.tab [type=radio]:checked ~ label {
+  background: white;
+  border-top: 1px solid white;
+}
+.tab [type=radio] ~ .tabContent  {
+  display: none;
+}
+
+.tab [type=radio]:checked ~ .tabContent{
+  z-index: 1; 
+  display: inherit; 
+  top: 0;
+}
+
+.tabHide {
+  display: none;
+}
+
+.tabShow {
+  display: inherit; 
+}
+
+.tab span {
+  padding:2px;
+}
+
+.Flipped, .Flipped .Content
+{
+    transform:rotateX(180deg); */
+    -ms-transform:rotateX(180deg); /* IE 9 */
+    -webkit-transform:rotateX(180deg); */ /* Safari and Chrome */
+}

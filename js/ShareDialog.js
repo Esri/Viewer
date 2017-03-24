@@ -1,7 +1,14 @@
-define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "esri/kernel", "dijit/_WidgetBase", "dijit/a11yclick", "dijit/_TemplatedMixin", "dojo/on",
+define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", 
+    "esri/kernel", "dijit/_WidgetBase", "dijit/a11yclick", "dijit/_TemplatedMixin", "dojo/on",
 // load template
-"dojo/text!application/dijit/templates/ShareDialog.html", "dojo/i18n!application/nls/ShareDialog", "dojo/dom-class", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-construct", "esri/request", "esri/urlUtils", "dijit/Dialog", "dojo/number", "dojo/_base/event"], function (
-Evented, declare, lang, has, esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on, dijitTemplate, i18n, domClass, domStyle, domAttr, domConstruct, esriRequest, urlUtils, Dialog, number, event) {
+"dojo/text!application/dijit/templates/ShareDialog.html", 
+"dojo/i18n!application/nls/ShareDialog", 
+"dojo/dom-class", "dojo/dom-style", "dojo/dom-attr", "dojo/dom-construct", "esri/request", "esri/urlUtils", "dijit/Dialog", "dojo/number", "dojo/_base/event"], function (
+Evented, declare, lang, has, 
+esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on, 
+dijitTemplate, 
+i18n, 
+domClass, domStyle, domAttr, domConstruct, esriRequest, urlUtils, Dialog, number, event) {
     var Widget = declare("esri.dijit.ShareDialog", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: dijitTemplate,
         options: {
@@ -19,8 +26,8 @@ Evented, declare, lang, has, esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on
             twitterURL: "https://twitter.com/intent/tweet?url={url}&text={title}&hashtags={hashtags}",
             googlePlusURL: "https://plus.google.com/share?url={url}",
             bitlyAPI: location.protocol === "https:" ? "https://api-ssl.bitly.com/v3/shorten" : "http://api.bit.ly/v3/shorten",
-            bitlyLogin: "arcgis",
-            bitlyKey: "R_b8a169f3a8b978b9697f64613bf1db6d",
+            bitlyLogin: "",
+            bitlyKey: "",
             embedSizes: [{
                 "width": "100%",
                 "height": "640px"
@@ -101,24 +108,28 @@ Evented, declare, lang, has, esriNS, _WidgetBase, a11yclick, _TemplatedMixin, on
                 shareDialogSubHeader: "share-dialog-subheader",
                 shareDialogTextarea: "share-dialog-textarea",
                 shareDialogExtent: "share-dialog-extent",
-                shareDialogExtentChk: "share-dialog-checkbox",
+                shareDialogExtentChk: "checkbox",
                 mapSizeContainer: "map-size-container",
                 embedMapSizeClear: "embed-map-size-clear",
                 iconClear: "icon-clear"
             };
         },
+        
         // bind listener for button to action
         postCreate: function () {
             this.inherited(arguments);
             this._setExtentChecked();
             this._shareLink();
             this.own(on(this._extentInput, a11yclick, lang.hitch(this, this._useExtentUpdate)));
+            
+            domAttr.remove(dojo.query(".share-dialog-textarea")[0], "style");
         },
+
         // start widget. called by user
         startup: function () {
             this._init();
-
         },
+
         // connections/subscriptions will be cleaned up during the destroy() lifecycle phase
         destroy: function () {
             this.inherited(arguments);

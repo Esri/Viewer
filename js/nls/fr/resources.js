@@ -34,32 +34,50 @@ define(
 			      "label3": 'Paysage',
 			      "label4": 'Portrait'
 			    },
-			    "legend": "Ajouter la légende à la sortie",
-                "title": "æ_Title___Â",
-                "titlePrompt": "æ_Add custom title______Â"
-            },
+			    "legend": "Ajouter la légende à la sortie"
+			},
 			"share": {
 				"extent": "Utiliser l’étendue courante de la carte",
 				"label": "Partager cette carte",
 				"link": "Lien de la carte",
 				"facebook": "Facebook",
 				"twitter": "Twitter"
-			}
+			},
+            "basemapGallery": {
+                selected: "Carte de base sélectionnée"
+            }
         },
         "tooltips":{
-        	"home": "Etendue par défaut",
-        	"locate": "Rechercher mon site",
+        	"home": "Etendue par Défaut",
+        	"locate": "Rechercher mon Site",
         	"legend": "Légende",
         	"bookmarks": "Géosignets",
         	"layers": "Couches",
-        	"basemap": "Galerie de fonds de carte",
-        	"overview": "Vue générale",
+        	"basemap": "Galerie des Cartes de Base",
+        	"overview": "Vue Générale",
         	"measure": "Mesurer",
         	"edit": "Modifier",
         	"time": "Heure",
         	"print": "Imprimer",
         	"details": "Détails",
-        	"share": "Partager"
-        }
+        	"share": "Partager",
+            "filter": "Filtres",
+            "features": "Liste des Caractéristiques"
+        },
+        "skip":{
+            "tools" : "Aller au outils",
+            "search" : "Aller à la recherche",
+            "content" : "Aller au contenu",
+            "splitter" : "Aller au séparateur d’écran",
+            "map" : "Aller à la carte",
+            "help" : "Aller à l’aide",
+            "featureDetaills" : "Aller aux fonctionnalités détaillées"
+        },
+        search : "Recherche : ",
+        searchPlaceholder: "Trouver une adresse ou un lieu",
+        searchEnterCriteria : "Terme recherché pour",
+        pressAlt : "Appuyer sur ALT + 0 à 7 pour naviguer rapidement",
+        instructions:"instructions.french",
+        wcagViewer : "Visualiseur Accessible"
     })
 );

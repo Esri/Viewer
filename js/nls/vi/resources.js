@@ -34,10 +34,8 @@ define(
 			      "label3": 'Hướng ngang',
 			      "label4": 'Hướng dọc'
 			    },
-			    "legend": "Thêm chú giải vào kết quả đầu ra",
-                "title": "Đ_Title___ớ",
-                "titlePrompt": "Đ_Add custom title______ớ"
-            },
+			    "legend": "Thêm chú giải vào kết quả đầu ra"
+			},
 			"share": {
 				"extent": "Sử dụng phạm vi bản đồ hiện tại",
 				"label": "Chia sẻ bản đồ này",

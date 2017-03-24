@@ -34,10 +34,8 @@ define(
 			      "label3": 'Na šířku',
 			      "label4": 'Na výšku'
 			    },
-			    "legend": "Přidat legendu do výstupu",
-                "title": "Ř_Title___ů",
-                "titlePrompt": "Ř_Add custom title______ů"
-            },
+			    "legend": "Přidat legendu do výstupu"
+			},
 			"share": {
 				"extent": "Použít aktuální rozsah mapy",
 				"label": "Sdílet tuto mapu",

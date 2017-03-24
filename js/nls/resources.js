@@ -34,25 +34,29 @@ define({
 			      "label3": 'Landscape',
 			      "label4": 'Portrait'
 			    },
-			    "legend": "Add legend to output",
-                "title": "Title",
-                "titlePrompt": "Add custom title"
-            },
+			    "legend": "Add legend to output"
+			},
 			"share": {
 				"extent": "Use current map extent",
 				"label": "Share this map",
 				"link": "Map Link",
 				"facebook": "Facebook",
 				"twitter": "Twitter"
-			}
+			},
+            "basemapGallery": {
+                selected: "Base map selected"
+            }
         },
         "tooltips":{
-        	"home": "Default extent",
-        	"locate": "Find my location",
-        	"legend": "Legend",
+        	"home": "Default Extent",
+        	"locate": "Find my Location",
+            "features" : "Feature List",
+            "filter" : "Filters",
+            "instructions": "Instructions",
+            "legend": "Legend",
         	"bookmarks": "Bookmarks",
         	"layers": "Layers",
-        	"basemap": "Basemap gallery",
+        	"basemap": "Basemap Gallery",
         	"overview": "Overview map",
         	"measure": "Measure",
         	"edit": "Edit",
@@ -60,7 +64,22 @@ define({
         	"print": "Print",
         	"details": "Details",
         	"share": "Share"
-        }
+        },
+        "skip":{
+            "tools" : "Skip to Tools",
+            "search" : "Skip to Search",
+            "content" : "Skip to Content",
+            "splitter" : "Skip to Splitter",
+            "map" : "Skip to Map",
+            "help" : "Skip to Help",
+            "featureDetaills" : "Skip to Feature Details"
+        },
+        search : "Search: ",
+        searchPlaceholder: "Find address or place",
+        searchEnterCriteria : "Enter search term for",
+        pressAlt : "Press ALT + 0 to 7 keys for fast navigation",
+        instructions:"instructions",
+        wcagViewer : "Accessible Viewer"
     }),
 "ar": 1,
 "cs": 1,
@@ -88,7 +107,5 @@ define({
 "tr": 1,
 "th": 1,
 "vi": 1,
-"zh-cn": 1,
-"zh-hk": 1,
-"zh-tw": 1
+"zh-cn": 1
 });

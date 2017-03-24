@@ -34,10 +34,8 @@ define(
 			      "label3": 'Poziomo',
 			      "label4": 'Pionowo'
 			    },
-			    "legend": "Dodaj legendę do danych wynikowych",
-                "title": "ł_Title___ą",
-                "titlePrompt": "ł_Add custom title______ą"
-            },
+			    "legend": "Dodaj legendę do danych wynikowych"
+			},
 			"share": {
 				"extent": "Użyj bieżącego zasięgu mapy",
 				"label": "Udostępnij tę mapę",

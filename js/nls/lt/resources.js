@@ -34,10 +34,8 @@ define(
 			      "label3": 'Gulsčias',
 			      "label4": 'Stačias'
 			    },
-			    "legend": "Į išvestį pridėti legendą",
-                "title": "Į_Title___š",
-                "titlePrompt": "Į_Add custom title______š"
-            },
+			    "legend": "Į išvestį pridėti legendą"
+			},
 			"share": {
 				"extent": "Naudoti esamą žemėlapio aprėptį",
 				"label": "Bendrinti šį žemėlapį",

@@ -1,0 +1,27 @@
+<div class="featureItem">
+	<table>
+		<tr>
+			<th valign="top">
+				<input id="featureButton_${_layerId}_${_featureId}" class="checkbox" type="checkbox" name="featureItem" value="${_layerId},${_featureId}" onchange="featureExpand(this)" onkeypress="featureExpandAndZoom(event, this)"/>
+			</th>
+			<th colspan="3" style="padding:0;" valign="top" align="left">
+				<label for="featureButton_${_layerId}_${_featureId}" class="checkbox">${_title}</label>
+			</th>
+		</tr>
+		<tr class="featureItem_${_layerId}_${_featureId} hideAttr">
+			<td>
+			</td>
+			<td colspan="3" >
+				<input id="panBtn_${_layerId}_${_featureId}" class="fg pageBtn" type="button" value="${_panTo}" onclick="featurePanZoom(this, true)" data-layerId="${_layerId}" data-featureId="${_featureId}"/>
+			
+				<input id="zoomBtn_${_layerId}_${_featureId}" class="fg pageBtn" type="button" value="${_zoomTo}" onclick="featurePanZoom(this, false)" data-layerId="${_layerId}" data-featureId="${_featureId}"/>
+			</td>
+		</tr>
+		<tr class="featureItem_${_layerId}_${_featureId} hideAttr">
+			<td colspan="4" >
+				<div class='goThereHint' style='left:20%; top:70%'><b>Alt&nbsp;+&nbsp;7</b> ${hint}</div>
+			</td>
+		</tr>
+		${_content}
+	</table>
+</div>

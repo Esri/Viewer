@@ -1,0 +1,8 @@
+<li tabindex=0>
+	<div>
+		<input id="Active_${field_label}_${id}" type="checkbox" class="checkbox" checked aria-label="Active" title="Active" data-dojo-attach-point="Active"/>
+		<label for="Active_${field_label}_${id}" class="checkbox">${field_label}</label>
+		<input type="button" value="${_i18n.widgets.FilterItem.remove}" class="pageBtn" style="float:right;" data-dojo-attach-event="onclick: filterRemove"/>
+	</div>
+	<div data-dojo-attach-point="content"/>
+</li>

@@ -34,10 +34,8 @@ define(
 			      "label3": 'Horisontaalpaigutus',
 			      "label4": 'Vertikaalpaigutus'
 			    },
-			    "legend": "Lisa väljundile legend",
-                "title": "Š_Title___ä",
-                "titlePrompt": "Š_Add custom title______ä"
-            },
+			    "legend": "Lisa väljundile legend"
+			},
 			"share": {
 				"extent": "Kasuta praeguse kaardi ulatust",
 				"label": "Jaga seda kaarti",
@@ -49,7 +47,8 @@ define(
         "tooltips":{
         	"home": "Vaikimisi kuvaulatus",
         	"locate": "Leia minu asukoht",
-        	"legend": "Legend",
+            "instructions": "Instructions",
+            "legend": "Legend",
         	"bookmarks": "Järjehoidjad",
         	"layers": "Kihid",
         	"basemap": "Aluskaartide galerii",

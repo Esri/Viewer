@@ -1,0 +1,18 @@
+<div class="_filter _string">
+	<select autofocus tabindex=0 
+		data-dojo-attach-event="onchange: criteriaChanged"
+		data-dojo-attach-point="criteria"
+		>
+		<option value=" = ">${_i18n.widgets.FilterItem.equal}</option>			
+		<option value=" != ">${_i18n.widgets.FilterItem.notEqual}</option>			
+		<option value=" LIKE ">${_i18n.widgets.FilterItem.like}</option>			
+		<option value=" NOT LIKE ">${_i18n.widgets.FilterItem.notLike}</option>			
+		<option value=" IN ">${_i18n.widgets.FilterItem.in}</option>			
+		<option value=" NOT IN ">${_i18n.widgets.FilterItem.notIn}</option>			
+	</select>
+	<input type="textbox" aria-label="Enter string to match" data-dojo-attach-point="textInput"/>
+	<div>
+		<fieldset class="_fieldExamples" style="display:none;" data-dojo-attach-point="listInput"></fieldset>
+		<!-- <input type="checkbox" value="Value" />Field Value <br /> -->
+    </div>
+</div>

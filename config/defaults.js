@@ -1,4 +1,4 @@
-﻿/*global define,location */
+/*global define,location */
 /*jslint sloppy:true */
 /*
  | Copyright 2014 Esri
@@ -18,9 +18,15 @@
 define({
     //Default configuration settings for the application. This is where you'll define things like a bing maps key,
     //default web map, default app color theme and more. These values can be overwritten by template configuration settings and url parameters.
-    "appid": "",//"73909e939be34d2b931f0765ba3bf4a6",
-    "webmap": "f5b13dbed07c46cdb783cf361833aa6b",
-    "oauthappid": null, //"AFTKRmv16wj14N3z",
+        "appid":  null, //
+             //"440b2da51b2b42878e8cb946c2de0326", //Farmers Markets
+             //"142adb5e5e1d4bddb578aefc6f6e6deb", // TH Demo
+    "webmap":  "116178b11f0f41bb9b1c7c96aa09fd5a", 
+    		 //"fe35efe129f845ef8de5296c15325118", // MAtt English 
+             //"326320c9eab3489d8d17bc389ce1e023",
+
+    "oauthappid": "", //"i0sXrSseaL5Ifovc", 
+    "portalUrl": "https://www.arcgis.com",
     //Group templates must support a group url parameter. This will contain the id of the group.
     //group: "",
     //Enter the url to the proxy if needed by the application. See the 'Using the proxy page' help topic for details
@@ -28,48 +34,59 @@ define({
     "proxyurl": "",
     "bingKey": "", //Enter the url to your organizations bing maps key if you want to use bing basemaps
     //Defaults to arcgis.com. Set this value to your portal or organization host name.
-    "sharinghost": location.protocol + "//" + "www.arcgis.com",
+    "sharinghost": "https://www.arcgis.com",
     //If you need localization set the localize value to true to get the localized strings
     //from the javascript/nls/resource files.
     //Note that we've included a placeholder nls folder and a resource file with one error string
     //to show how to setup the strings file.
-    "find": null,
-    "feature": null,
     "localize": true,
     "units": null,
     //Theme defines the background color of the title area and tool dialog
     //Color defines the text color for the title and details. Note that
     //both these values must be specified as hex colors.
-    "theme": "#80ab00",
-    "color": "#fff",
+    "theme": "#037EAF",
+    "color": "#ffffff",
+    "hoverColor": "#00A9E6",
+    "focusColor": "#00FFC5",
+    "activeColor": "#00C5FF",
+    "animated_marker":true,
+    "marker":"images/ripple-dot1.gif",
+    "marker_size":"35",
+    "alt_keys":true,
+
     //Specify the tool icon color for the tools on the toolbar and the menu icon.
     // Valid values are white and black.
     "icons": "white",
-    "logo": null,
+    "new_icons": true,
+    "logo": "images/logo.png",
     //Set of tools that will be added to the toolbar
     "tools": [
+        {"name": "instructions", "enabled": true},
+        {"name": "details", "enabled": false},
+        {"name": "overview", "enabled": true},
         {"name": "legend", "enabled": true},
-        {"name": "bookmarks", "enabled": true},
         {"name": "layers", "enabled": true},
         {"name": "basemap", "enabled": true},
-        {"name": "overview", "enabled": true},
+        {"name": "features", "enabled": true},
+        {"name": "filter", "enabled": true},
         {"name": "measure", "enabled": true},
-        {"name": "edit", "enabled": true, "toolbar": false}, 
-        {"name": "print", "enabled": true, "legend": false, "layouts":false, "format":"pdf"},
-        {"name": "details", "enabled": true},
-        {"name": "share", "enabled": true}
+        {"name": "edit", "enabled": true, "toolbar": true}, 
+        {"name": "share", "enabled": true},
+        {"name": "bookmarks", "enabled": true},
+        {"name": "navigation", "enabled": true},
+        {"name": "print", "enabled": true, "legend": false, "layouts":false, "format":"pdf"}
     ],
     //Set the active tool on the toolbar. Note home and locate can't be the active tool.
     //Set to "" to display no tools at startup
-    "activeTool": "legend",
+    "activeTool": "instructions",
     //Add the geocoding tool next to the title bar.
     "search": true,
     "locationSearch": true,
     //When searchExtent is true the locator will prioritize results within the current map extent.
-    "searchExtent": false,
+    "searchExtent": true,
     "searchLayers":[{
-        "id": "",
-        "fields": []
+        "id": "Incidents",
+        "fields": ["Incident Type", "Province", "Company", "Status", "Substance"]
     }],
     //Add the home extent button to the toolbar
     "home": true,
@@ -79,11 +96,9 @@ define({
     "scalebar": false,
     //Specify a title for the application. If not provided the web map title is used.
     "title": "",
-    //Optionally specify some sub title text. 
-    "subtitle":null,
     "level": null,
     "center": null,
     //Replace these with your own bitly key
-    "bitlyLogin": "esrimarketing",
-    "bitlyKey": "R_52f84981da0e75b23aea2b3b20cbafbc"
+    "bitlyLogin": "",
+    "bitlyKey": ""
 });

@@ -1,0 +1,44 @@
+<div class="aComboBox" 
+	data-dojo-attach-event="onclick: expandCombo"
+	data-dojo-attach-event="mouseover: btnPointer">
+	<div class="aComboBox_btn" data-dojo-attach-point="CaretDownButton">
+		<img src="images/caret-down.png" Alt="Expand" Title="Expand" tabindex="-1"
+		data-dojo-attach-point="imgExpand"/>
+	</div>
+	<input 
+		type="text" 
+		id="${id}_input" 
+		tabindex=0
+		role="combobox" 
+		aria-owns="${id}_listbox" 
+		aria-expanded="${expanded}" 
+		aria-haspopup="true" 
+		autocomplete="off" 
+		aria-activedescendant="${id}_listbox__option__0"
+		data-dojo-attach-point="inputControl"
+		data-dojo-attach-event="onkeydown: navigateCombo"
+
+		>
+	</input>
+	<div 
+		class="popup_container popup_animating" 
+		data-dojo-attach-point="popup_container"
+		style="display: none;">
+		<ul 
+			data-dojo-attach-point="ListItems"
+			id="${id}_listbox" 
+			tabindex="0" 
+			class="rw-list" 
+			role="listbox" 
+			aria-hidden="true" 
+			aria-labelledby="${id}_input" 
+			aria-live="false" 
+			aria-activedescendant="${id}_listbox__option__0">
+			<li 
+				role="option" 
+				tabindex="0" 
+				aria-selected="true" 
+				id="${id}_listbox__option__0">List Item 1</li>
+		</ul>
+	</div>
+</div>

@@ -1,7 +1,17 @@
-define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "esri/kernel", "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
-// load template    
-"dojo/text!application/dijit/templates/TableOfContents.html", "dojo/dom-class", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", "dojo/_base/array"], function (
-Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemplate, domClass, domStyle, domConstruct, event, array) {
+define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "esri/kernel", 
+    "dijit/_WidgetBase", "dijit/_TemplatedMixin", "dojo/on",
+    "dojo/text!application/dijit/templates/TableOfContents.html", 
+    "dojo/dom-class", "dojo/dom-attr", "dojo/dom-style", "dojo/dom-construct", "dojo/_base/event", 
+    "dojo/_base/array",
+    "esri/symbols/TextSymbol", "esri/renderers/SimpleRenderer", "esri/layers/LabelLayer"
+    ], function (
+        Evented, declare, lang, has, esriNS,
+        _WidgetBase, _TemplatedMixin, on, 
+        dijitTemplate, 
+        domClass, domAttr, domStyle, domConstruct, event, 
+        array,
+        TextSymbol, SimpleRenderer, LabelLayer
+    ) {
     var Widget = declare("esri.dijit.TableOfContents", [_WidgetBase, _TemplatedMixin, Evented], {
         templateString: dijitTemplate,
         // defaults
@@ -11,6 +21,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             layers: null,
             visible: true
         },
+
         // lifecycle: 1
         constructor: function (options, srcRefNode) {
             // mix in settings and defaults
@@ -35,9 +46,9 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 title: "toc-title",
                 titleContainer: "toc-title-container",
                 content: "toc-content",
-                titleCheckbox: "toc-checkbox",
+                titleCheckbox: "checkbox",
                 checkboxCheck: "icon-check-1",
-                titleText: "toc-text",
+                titleText: "checkbox",
                 accountText: "toc-account",
                 visible: "toc-visible",
                 settingsIcon: "icon-cog",
@@ -47,6 +58,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 clear: "clear"
             };
         },
+
         // start widget. called by user
         startup: function () {
             // map not defined
@@ -63,6 +75,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 }));
             }
         },
+
         // connections/subscriptions will be cleaned up during the destroy() lifecycle phase
         destroy: function () {
             this._removeEvents();
@@ -75,21 +88,27 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
         // toggle
         // expand
         // collapse
+
         /* ---------------- */
         /* Public Functions */
         /* ---------------- */
+
         show: function () {
             this.set("visible", true);
         },
+
         hide: function () {
             this.set("visible", false);
         },
+
         refresh: function () {
             this._createList();
         },
-        /* ---------------- */
+
+        /* ----------------- */
         /* Private Functions */
-        /* ---------------- */
+        /* ----------------- */
+
         _createList: function () {
             var layers = this.get("layers");
             this._nodes = [];
@@ -97,10 +116,13 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             this._removeEvents();
             // clear node
             this._layersNode.innerHTML = "";
+            domAttr.set(this._layersNode, "role", "list");
             // if we got layers
             if (layers && layers.length) {
+
                 for (var i = 0; i < layers.length; i++) {
                     var layer = layers[i];
+
                     // ceckbox class
                     var titleCheckBoxClass = this.css.titleCheckbox;
                     // layer class
@@ -116,61 +138,76 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                         titleCheckBoxClass += " ";
                         titleCheckBoxClass += this.css.checkboxCheck;
                     }
+
                     // layer node
                     var layerDiv = domConstruct.create("div", {
-                        className: layerClass
+                        className: layerClass,
+                        role: "listitem",
                     });
                     domConstruct.place(layerDiv, this._layersNode, "first");
+
                     // title of layer
                     var titleDiv = domConstruct.create("div", {
-                        className: this.css.title
-                    });
-                    domConstruct.place(titleDiv, layerDiv, "last");
+                        className: this.css.title,
+                    }, layerDiv);
+                    
                     // title container
                     var titleContainerDiv = domConstruct.create("div", {
-                        className: this.css.titleContainer
-                    });
-                    domConstruct.place(titleContainerDiv, titleDiv, "last");
-                    // Title checkbox
-                    var titleCheckbox = domConstruct.create("div", {
-                        className: titleCheckBoxClass
-                    });
-                    domConstruct.place(titleCheckbox, titleContainerDiv, "last");
-                    // Title text
-                    var titleText = domConstruct.create("div", {
-                        className: this.css.titleText,
-                        title: layer.title,
-                        innerHTML: layer.title
-                    });
-                    domConstruct.place(titleText, titleContainerDiv, "last");
-                    // Account text
-                    var accountText;
+                        className: this.css.titleContainer,
+                        tabindex: -1,
+                    }, titleDiv);
+                    
+                    titleCheckbox = domConstruct.create("input", 
+                    {
+                        id: "layer_ck_"+i,
+                        className: titleCheckBoxClass, //this.css.titleCheckbox,
+                        type: "checkbox",
+                        tabindex: 0,
+                        checked: layer.visibility,
+                    }, titleContainerDiv);
+
+                    var titleText = domConstruct.create("label", {
+                        "for": "layer_ck_"+i,
+                        "className": this.css.titleText,
+                        "innerHTML": layer.title,
+                        role: "presentation",
+                        //"title" : layer.title
+                    }, titleContainerDiv);
+
+                    this._atachSpaceKey(titleContainerDiv, titleCheckbox);
+
+                    var accountText = '';
                     if (layer.account) {
                         accountText = domConstruct.create("a", {
                             className: this.css.accountText,
                             id: layer.account
-                        });
-                        domConstruct.place(accountText, titleText, "last");
+                        }, titleText);
                     }
+
                     // settings
                     var settingsDiv, settingsIcon;
-                    if (layer.settings) {
+                    if (layer.layerObject &&
+                        dojo.exists("settings", layer) &&
+                        layer.layerObject.isEditable()) 
+                    { 
                         settingsDiv = domConstruct.create("div", {
                             className: this.css.settings,
                             id: layer.settings
-                        });
-                        domConstruct.place(settingsDiv, titleContainerDiv, "last");
-                        // settings icon
-                        settingsIcon = domConstruct.create("div", {
-                            className: this.css.settingsIcon
-                        });
-                        domConstruct.place(settingsIcon, settingsDiv, "last");
+                        }, titleContainerDiv);
+
+                        settingsIcon = domConstruct.create("img", {
+                            'src' : 'images/icon-cog.png',
+                            alt:'Configuration',
+                            role: "button,",
+                            tabindex:0,
+                        }, settingsDiv);
                     }
+
                     // clear css
                     var clearCSS = domConstruct.create("div", {
                         className: this.css.clear
-                    });
-                    domConstruct.place(clearCSS, titleContainerDiv, "last");
+                    }, titleContainerDiv);
+                    
                     // lets save all the nodes for events
                     var nodesObj = {
                         checkbox: titleCheckbox,
@@ -189,9 +226,18 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 this._setLayerEvents();
             }
         },
+
+        _atachSpaceKey: function(onButton, clickButton) {
+            on(onButton, 'keyup', lang.hitch(clickButton, function(event){
+                if(event.keyCode=='32')
+                    this.click();
+            }));
+        },
+
         _refreshLayers: function () {
             this.refresh();
         },
+
         _removeEvents: function () {
             var i;
             // checkbox click events
@@ -209,15 +255,25 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             this._checkEvents = [];
             this._layerEvents = [];
         },
+
         _toggleVisible: function (index, visible) {
             // update checkbox and layer visibility classes
             domClass.toggle(this._nodes[index].layer, this.css.visible, visible);
             domClass.toggle(this._nodes[index].checkbox, this.css.checkboxCheck, visible);
+            
             this.emit("toggle", {
                 index: index,
                 visible: visible
             });
+
+            if(visible) {
+                domAttr.set(this._nodes[index].checkbox, "checked", "checked");
+            }
+            else {
+                domAttr.set(this._nodes[index].checkbox, "checked", "");
+            }
         },
+
         _layerEvent: function (layer, index) {
             // layer visibility changes
             var visChange = on(layer, "visibility-change", lang.hitch(this, function (evt) {
@@ -226,6 +282,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             }));
             this._layerEvents.push(visChange);
         },
+
         _featureCollectionVisible: function (layer, index, visible) {
             // all layers either visible or not
             var equal;
@@ -253,6 +310,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 this._toggleVisible(index, visible);
             }
         },
+
         _createFeatureLayerEvent: function (layer, index, i) {
             var layers = layer.featureCollection.layers;
             // layer visibility changes
@@ -262,6 +320,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
             }));
             this._layerEvents.push(visChange);
         },
+
         _featureLayerEvent: function (layer, index) {
             // feature collection layers
             var layers = layer.featureCollection.layers;
@@ -272,6 +331,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 }
             }
         },
+
         _setLayerEvents: function () {
             // this function sets up all the events for layers
             var layers = this.get("layers");
@@ -291,6 +351,7 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 }
             }
         },
+
         _toggleLayer: function (layerIndex) {
             // all layers
             if (this.layers && this.layers.length) {
@@ -331,34 +392,32 @@ Evented, declare, lang, has, esriNS, _WidgetBase, _TemplatedMixin, on, dijitTemp
                 }
             }
         },
+
         _checkboxEvent: function (index) {
             // when checkbox is clicked
-            var checkEvent = on(this._nodes[index].checkbox, "click", lang.hitch(this, function (evt) {
+            var checkEvent = on(this._nodes[index].checkbox, "click", lang.hitch(this, 
+                function (evt) {
                 // toggle layer visibility
                 this._toggleLayer(index);
-                event.stop(evt);
+                //event.stop(evt);
             }));
             this._checkEvents.push(checkEvent);
-            // when title is clicked
-            var titleEvent = on(this._nodes[index].titleText, "click", lang.hitch(this, function (evt) {
-                // toggle layer visibility
-                this._toggleLayer(index);
-                event.stop(evt);
-            }));
-            this._checkEvents.push(titleEvent);
         },
+
         _init: function () {
             this._visible();
             this._createList();
             this.set("loaded", true);
             this.emit("load", {});
         },
+
         _updateThemeWatch: function () {
             var oldVal = arguments[1];
             var newVal = arguments[2];
             domClass.remove(this.domNode, oldVal);
             domClass.add(this.domNode, newVal);
         },
+
         _visible: function () {
             if (this.get("visible")) {
                 domStyle.set(this.domNode, "display", "block");

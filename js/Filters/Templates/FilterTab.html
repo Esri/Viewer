@@ -1,0 +1,43 @@
+<div>
+	<div class="tab">
+	    <input id="${id}_btn" type="radio" name="tabsGroup" ${checked} data-dojo-attach-event="onchange: filterChange" value="${id}_page" data-dojo-attach-point="btn">
+	    <label for="${id}_btn" aria-label="${filter_name}">
+	   		<span 
+	   			tabindex=0 
+	   			data-dojo-attach-event="onkeypress: filterKeyPress">${filter_name}
+	   		</span>
+			<img 
+				id="${id}_img"
+				src="images/someFilters.png" 
+				class="setIndicator" 
+				style="display:none; left:-4px;"
+			    data-dojo-attach-point="setIndicator" 
+			    Alt="${_i18n.widgets.FilterTab.someFilters}" title="${_i18n.widgets.FilterTab.someFilters}" 
+			    tabindex=0 />
+	   	</label>
+	</div>
+
+	<div class="tabContent tabHide" id="${id}_page">
+        <div class="filterAdd">
+       		<label for="${id}-fieldsCombo">${_i18n.widgets.FilterTab.attribute}:</label> 
+       		<!-- <label for="${id}-fieldsCombo">Attribute:</label>  -->
+       		<select id="${id}-fieldsCombo" autofocus tabindex=0 data-dojo-attach-point="fieldsCombo">
+       		</select>
+       		<input type="button" class="pageBtn" value="${_i18n.widgets.FilterTab.add}" data-dojo-attach-event="onclick: filterAdd" style="float: right;"/>
+
+       		<!-- <div style="display: -webkit-box; margin-top:10px;">
+	   			<Label data-dojo-attach-point="labelForComboAttributes">Attribute:&nbsp;</Label>
+	       		<div data-dojo-attach-point="AComboBoxHolder" style="width:calc(100% - 120px);">
+	       		</div>
+	       		<input type="button" class="pageBtn" value="Add" data-dojo-attach-event="onclick: filterAdd" style="margin-left: 4px;"/>
+	       	</div> -->
+        </div>
+
+       	<ul data-dojo-attach-point="filterList"></ul>
+
+        <div class="filterButtons">
+       		<input type="button" class="pageBtn" value="${_i18n.widgets.FilterTab.apply}" data-dojo-attach-event="onclick: filterApply"/>
+       		<input type="button" class="pageBtn" value="${_i18n.widgets.FilterTab.ignore}" data-dojo-attach-event="onclick: filterIgnore"/>
+        </div>
+    </div>
+</div>

@@ -34,10 +34,8 @@ define(
 			      "label3": 'Orizzontale',
 			      "label4": 'Verticale'
 			    },
-			    "legend": "Aggiungi legenda all\'output",
-                "title": "é_Title___È",
-                "titlePrompt": "é_Add custom title______È"
-            },
+			    "legend": "Aggiungi legenda all\'output"
+			},
 			"share": {
 				"extent": "Usa estensione mappa corrente",
 				"label": "Condividi la mappa",

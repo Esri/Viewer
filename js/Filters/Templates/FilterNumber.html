@@ -1,0 +1,21 @@
+<div class="_filter _number">
+	<select autofocus tabindex=0 
+		data-dojo-attach-event="onchange: criteriaChanged"
+		data-dojo-attach-point="criteria"
+		>
+		<option value=" = ">${_i18n.widgets.FilterItem.equal}</option>			
+		<option value=" != ">${_i18n.widgets.FilterItem.notEqual}</option>			
+		<option value=" < ">${_i18n.widgets.FilterItem.lessThen}</option>			
+		<option value=" > ">${_i18n.widgets.FilterItem.moreThen}</option>			
+		<option value=" BETWEEN ">${_i18n.widgets.FilterItem.between}</option>			
+		<option value=" NOT BETWEEN ">${_i18n.widgets.FilterItem.notBetween}</option>			
+	</select>
+	<input type="textbox" data-dojo-attach-point="minValue" aria-label="Enter value to match"
+	data-dojo-type="dijit/form/ValidationTextBox"
+    data-dojo-props="regExp:'${format}', invalidMessage:'Invalid Number'"/>
+	<div style="display:none;" data-dojo-attach-point="divMaxValue">
+		<input type="textbox" data-dojo-attach-point="maxValue" aria-label="Enter last value" 
+		data-dojo-type="dijit/form/ValidationTextBox"
+	    data-dojo-props="regExp:'${format}', invalidMessage:'Invalid Number.'"/>
+	</div>
+</div>

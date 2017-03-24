@@ -1,0 +1,36 @@
+#featuresList {
+    list-style: none;
+    margin: 0px;
+    padding-left: 0;
+    -webkit-padding-start: 0;
+    background-color: white;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+#featuresList li {
+    margin: 3px;
+}
+
+.borderLi {
+    border: solid 1px gray;
+}
+
+.featureItem h2 {
+    font-size: 16px;
+    text-align: left;
+}
+
+/*.featureItem tr .filterBtn {
+    width:18px;
+    height:18px;
+    opacity: 0.1;
+}
+
+.featureItem tr:focus .filterBtn,
+.featureItem tr:hover .filterBtn
+{
+    opacity: 1;
+}*/
+
+
+

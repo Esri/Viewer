@@ -1,0 +1,81 @@
+.aComboBox {
+	vertical-align: middle;
+	box-sizing: border-box;
+	background-color: #fff;
+	border: 1px solid rgb(169, 169, 169);
+	border-radius: 4px;
+	position: relative;
+	background-clip: border-box;
+	cursor: pointer;
+}
+
+.aComboBox_btn {
+	border: 1px solid transparent;
+	position: absolute;
+	right: 0;
+	cursor: pointer;
+	display: inline-block;
+	margin: 1px;
+	/**/
+	-webkit-appearance: button;
+	height: calc(100% - 4px);
+	pointer-events: none;
+}
+
+.aComboBox img {
+	width: 10px;
+	height: 10px;
+	padding: 3px;
+	/* pointer-events: none; */
+}
+
+.aComboBox input[type="text"] {
+	width: calc(100% - 8px);
+	border: none;
+	outline: 0;
+	padding: 1px 4px;
+	background-color: #fff;
+	font: inherit;
+	cursor: default;
+}
+
+.aComboBox .popup_container {
+	max-height: 202px;
+	min-height: 20px;
+	position: absolute;
+	top: 100%;
+	margin-top: 1px;
+	z-index: 1005;
+	left: 0;
+	right: 0;
+	box-sizing: border-box;
+	box-shadow: 0 5px 6px rgba(0,0,0,.2);
+	overflow: auto;
+	border: 1px solid rgb(169, 169, 169);
+	background-color: white;
+	border-bottom-left-radius: 5px;
+}
+
+.aComboBox ul {
+	padding: 0;
+	width: 100%;
+}
+
+.aComboBox ul li {
+	padding: 0;
+	margin: 0 2px;
+	width: calc(100% - 8px);
+	border-radius: 3px;
+	cursor: pointer;
+	border-color: transparent;
+	border-width: 2px;
+}
+
+.aComboBox ul li:hover {
+	border-color: #ccf;
+}
+
+.aComboBox .selected {
+	background-color: #ccf;
+}
+
