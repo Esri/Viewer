@@ -1252,7 +1252,7 @@ html, body {
 }
 
 .showAttr {
-    display: grid;
+    /*display: grid;*/
 }
 
 .hideAttr {
