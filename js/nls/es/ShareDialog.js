@@ -5,12 +5,14 @@ define({
       "heading": "Compartir este mapa",
       "url": "Enlace del mapa",
       "embed": "Integrar mapa",
-      "extent": "Compartir la extensión del mapa actual",
+      "extent": "Compartir vista de mapa actual",
       "size": "Tamaño (ancho/alto):",
       "facebookTooltip": "Facebook",
       "twitterTooltip": "Twitter",
       "gplusTooltip": "Google Plus",
-      "emailTooltip": "Correo electrónico"
+      "emailTooltip": "Correo Electrónico",
+      "copy": "Copiar dirección URL corta en el portapapeles",
+      "copied": "Copiada"
     }
   }
 });

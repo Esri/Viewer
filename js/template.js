@@ -240,7 +240,8 @@ define([
     },
     _initializeApplication: function() {
       // If this app is hosted on an Esri environment.
-      if (this.templateConfig.esriEnvironment) {
+      var overwrite = this.config.overwritesharing || false;
+      if (this.templateConfig.esriEnvironment && !overwrite) {
         var appLocation,
           instance;
         // Check to see if the app is hosted or a portal. If the app is hosted or a portal set the
@@ -257,7 +258,10 @@ define([
           this.config.sharinghost = location.protocol + "//" + location.host + instance;
           this.config.proxyurl = location.protocol + "//" + location.host + instance + "/sharing/proxy";
         }
+      }else{
+        this.config.sharinghost= location.protocol + "//" + this.config.sharinghost;
       }
+      console.log("Sharinghost", this.config.sharinghost);
       arcgisUtils.arcgisUrl = this.config.sharinghost + "/sharing/rest/content/items";
       // Define the proxy url for the app
       if (this.config.proxyurl) {
@@ -564,6 +568,7 @@ define([
           // are any custom roles defined in the organization?
           if (response.user && esriLang.isDefined(response.user.roleId)) {
             if (response.user.privileges) {
+              console.log(response.user.privileges);
               cfg.userPrivileges = response.user.privileges;
             }
           }

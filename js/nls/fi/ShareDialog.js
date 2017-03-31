@@ -5,12 +5,14 @@ define({
       "heading": "Jaa tämä kartta",
       "url": "Karttalinkki",
       "embed": "Upota kartta",
-      "extent": "Jaa nykyisen kartan laajuus",
+      "extent": "Jaa nykyinen karttanäkymä",
       "size": "Koko (leveys/korkeus):",
       "facebookTooltip": "Facebook",
       "twitterTooltip": "Twitter",
       "gplusTooltip": "Google Plus",
-      "emailTooltip": "Sähköposti"
+      "emailTooltip": "Sähköposti",
+      "copy": "Kopioi lyhyt URL leikepöydälle",
+      "copied": "Kopioitu"
     }
   }
 });

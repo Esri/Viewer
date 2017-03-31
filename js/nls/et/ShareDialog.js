@@ -5,12 +5,14 @@ define({
       "heading": "Jaga seda kaarti",
       "url": "Kaardi link",
       "embed": "Lisa kaart",
-      "extent": "Jaga praeguse kaardi kuvaulatust",
+      "extent": "Jaga praegust kaardivaadet",
       "size": "Suurus (laius/kõrgus):",
       "facebookTooltip": "Facebook",
       "twitterTooltip": "Twitter",
       "gplusTooltip": "Google Plus",
-      "emailTooltip": "e-mail"
+      "emailTooltip": "e-mail",
+      "copy": "Kopeeri lühike URL lõikelauale",
+      "copied": "Kopeeritud"
     }
   }
 });

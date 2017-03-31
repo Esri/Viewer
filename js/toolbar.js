@@ -53,19 +53,12 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
             }
             event.preventDefault();
           }
-        /*if (event.keyCode === keys.LEFT_ARROW || event.keyCode ===
-          keys.RIGHT_ARROW) {
-          this.map.disableKeyboardNavigation();
-          event.preventDefault();
-          (event.keyCode === keys.LEFT_ARROW) ? this._showPreviousPage(title) : this._showNextPage(title);
-        }*/
         }
       }));
       on(this.pTools, "keyup", lang.hitch(this, function() {
         if (!this.map.isKeyboardNavigation) {
           this.map.enableKeyboardNavigation();
         }
-
       }));
 
       this.pMenu = dom.byId("panelMenu");
@@ -91,7 +84,6 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
       }
       var pTool = domConstruct.create("button", {
         className: "panelTool",
-        //  tabindex: "-1",
         role: "button",
         name: name,
         title: this.config.i18n.tooltips[name] || name,
@@ -100,6 +92,8 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
       }, this.pTools);
       if (this.config.toolbarLabels) {
         domStyle.set(pTool, "width", "auto");
+        domClass.add(pTool, "labels");
+        domClass.add("panelTools", "labels");
       }
       query(".icon-color").style("color", this.config.iconColor);
       if (pressed) {

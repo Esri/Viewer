@@ -5,12 +5,14 @@ define({
       "heading": "Podeli ovu mapu",
       "url": "Link ka mapi",
       "embed": "Ugradi mapu",
-      "extent": "Podeli trenutni obuhvat mape",
+      "extent": "Podeli trenutni prikaz mape",
       "size": "Veličina (širina/visina):",
       "facebookTooltip": "Facebook",
       "twitterTooltip": "Twitter",
       "gplusTooltip": "Google Plus",
-      "emailTooltip": "E-pošta"
+      "emailTooltip": "E-Pošta",
+      "copy": "Kopiraj skraćenu URL adresu u ostavu",
+      "copied": "Kopirano"
     }
   }
 });

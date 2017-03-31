@@ -5,12 +5,14 @@ define({
       "heading": "שתף מפה זו",
       "url": "קישור למפה",
       "embed": "הטמע את המפה",
-      "extent": "שתף את תיחום המפה הנוכחי",
+      "extent": "שתף תצוגת מפה נוכחית",
       "size": "גודל (רוחב/גובה):",
       "facebookTooltip": "פייסבוק",
       "twitterTooltip": "טוויטר",
       "gplusTooltip": "Google Plus",
-      "emailTooltip": "שלח בדוא\"ל"
+      "emailTooltip": "דוא\"ל",
+      "copy": "העתק כתובת URL קצרה ללוח",
+      "copied": "הועתק"
     }
   }
 });

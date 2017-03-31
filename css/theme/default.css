@@ -1,0 +1,107 @@
+#panelTools {
+    position: relative;
+    left: 0px;
+    top: 0px;
+    min-height: 30px;
+    width: 100%;
+    display: block;
+    clear: both;
+}
+.panelTool{
+  margin:2px 0 2px 0;
+  width: 26px;
+  height:26px;
+  line-height: 26px;
+}
+#panelTop {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    color: #ffffff;
+    padding: 0px;
+    display: block;
+    overflow: visible;
+    height: 75px;
+}
+.esriSimpleSliderTL {
+    top: auto;
+    left: auto;
+    top: 80px;
+    left: 0;
+    border: none;
+}
+#locateDiv {
+    position: absolute;
+    z-index: 10;
+    top: 155px;
+    left: 0;
+}
+.noslider #locateDiv {
+    top: 80px;
+}
+#panelContent {
+    top: 10px;
+    right: 310px;
+}
+.panelTool {
+    height: 26px;
+}
+@media only screen and (min-width:320px) and (max-device-width:480px){
+    #panelContent{
+        top: auto !important;
+        right:0;
+        left:0;
+        bottom:0;
+        width:100%;
+        z-index: 99;
+    }
+    .pageContent{
+        width:100%;
+    }
+}
+@media only screen and (min-width: 720px) {
+    .esriSimpleSliderTL {
+        top: 10px !important;
+        left: 10px !important;
+    }
+    #locateDiv {
+        left: auto;
+        left: 10px;
+        top: 90px;
+    }
+    #panelTools {
+        display: block !important;
+    }
+    #panelContent {
+        top: 90px;
+    }
+    #panelTop {
+        width: auto;
+        left: 44px;
+        top: 10px;
+    }
+    .no-search #panelContent {
+        top: 10px;
+    }
+}
+.esriControlsBR {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+.logo-med {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+.logo-sm {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+}
+.esriAttribution {
+    position: absolute;
+    left: 65px;
+    bottom: 5px;
+}

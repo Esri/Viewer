@@ -5,12 +5,14 @@ define({
       "heading": "Condividi la mappa",
       "url": "Collegamento a mappa",
       "embed": "Incorpora mappa",
-      "extent": "Condividi estensione mappa corrente",
+      "extent": "Condividi vista mappa corrente",
       "size": "Dimensioni (larghezza/altezza):",
       "facebookTooltip": "Facebook",
       "twitterTooltip": "Twitter",
       "gplusTooltip": "Google Plus",
-      "emailTooltip": "E-mail"
+      "emailTooltip": "E-mail",
+      "copy": "Copia URL breve negli Appunti",
+      "copied": "Copiato"
     }
   }
 });

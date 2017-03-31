@@ -1,16 +1,18 @@
 define({
   "widgets": {
     "ShareDialog": {
-      "title": "Udostępnij",
+      "title": "Udostępnianie",
       "heading": "Udostępnij tę mapę",
-      "url": "Łącze mapy",
+      "url": "Łącze do mapy",
       "embed": "Osadź mapę",
-      "extent": "Udostępnij bieżący zasięg mapy",
+      "extent": "Udostępnij bieżący widok mapy",
       "size": "Rozmiar (szerokość/wysokość):",
       "facebookTooltip": "Facebook",
       "twitterTooltip": "Twitter",
       "gplusTooltip": "Google Plus",
-      "emailTooltip": "Email"
+      "emailTooltip": "Adres e-mail",
+      "copy": "Kopiuj skrócony adres URL do schowka",
+      "copied": "Skopiowane"
     }
   }
 });

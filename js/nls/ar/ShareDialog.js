@@ -5,12 +5,14 @@ define({
       "heading": "مشاركة هذه الخريطة",
       "url": "رابط الخريطة",
       "embed": "تضمين الخريطة",
-      "extent": "مشاركة نطاق الخريطة الحالي",
+      "extent": "مشاركة عرض الخريطة الحالي",
       "size": "الحجم (الاتساع/الارتفاع):",
-      "facebookTooltip": "Facebook",
-      "twitterTooltip": "Twitter",
+      "facebookTooltip": "فيس بوك",
+      "twitterTooltip": "تويتر",
       "gplusTooltip": "Google Plus",
-      "emailTooltip": "البريد الإلكتروني"
+      "emailTooltip": "البريد الإلكتروني",
+      "copy": "نسخ عنوان url قصير إلى الحافظة",
+      "copied": "تم النسخ"
     }
   }
 });

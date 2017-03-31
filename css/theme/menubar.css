@@ -1,0 +1,79 @@
+#panelTop {
+    position: fixed;
+    left: 30px;
+    top: 0;
+    width: 100%;
+    color: #ffffff;
+    padding: 0px;
+    display: block;
+    overflow: visible;
+    height: 75px;
+    z-index: 40;
+}
+#panelContent {
+    top:75px;
+}
+.noslider #panelTop{
+  left:0;
+}
+#panelTitle{
+  border-bottom: none;
+}
+#panelSearch{
+  margin: 7px 34px 10px 4px;
+}
+.esriSimpleSliderTL {
+    top:0;
+    left: 0;
+    border:none;
+}
+.arcgisSearch .searchBtn{
+  border:none;
+  border-radius: 0;
+  -webkit-border-radius:0;
+}
+.arcgisSearch .searchMenu{
+    border-radius: 0;
+    -webkit-border-radius:0;
+}
+
+.arcgisSearch .searchGroup .searchInput {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+    border:none;
+}
+.arcgisSearch .searchCollapsed .searchSubmit {
+    border-radius: 0;
+    -webkit-border-radius:0;
+    border:none;
+}
+#panelTools{
+  padding-left:10px;
+}
+.panelTool {
+    width: 26px;
+}
+.pageHeader{
+  display:none;
+}
+#locateDiv {
+    position: absolute;
+    bottom:0;
+    z-index: 30;
+    left:0;
+}
+@media only screen and (min-width: 720px) {
+
+    #panelTools {
+        display: block !important;
+    }
+    #panelSearch{
+      margin: 7px 4px 10px 6px;
+    }
+    #panelTop {
+        width: auto;
+    }
+    .no-search #panelContent {
+        bottom: 10px;
+    }
+}

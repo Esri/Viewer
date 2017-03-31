@@ -1,0 +1,91 @@
+#panelTools {
+    position: absolute;
+    display: block;
+    width: 30px;
+    top: 125px;
+    line-height: normal;
+}
+#panelTools.labels{
+  width: 120px;
+  top:135px;
+}
+.panelTool.labels{
+  display: block;
+  height: 45px;
+  white-space: nowrap;
+}
+.btnText {
+    display: inline-block;
+}
+.panelTool {
+  float:none;
+  width:30px;
+}
+.noslider #panelTools {
+    top: 50px;
+}
+.haslocate #panelTools {
+    top: 155px;
+}
+.noslider.haslocate #panelTools {
+    top: 80px;
+}
+#locateDiv {
+    position: absolute;
+    z-index: 10;
+    top: 125px;
+    left: 0;
+}
+#panelTitle {
+    border-bottom: none;
+}
+#panelContent {
+    z-index: 0;
+}
+#panelTop {
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    color: #ffffff;
+    padding: 0px;
+    display: block;
+    overflow: visible;
+    height: 50px;
+    z-index: 40;
+}
+#panelContent {
+    top: 51px;
+    right: 300px;
+}
+@media only screen and (min-width:320px) and (max-device-width:480px){
+    #panelContent{
+        top: auto !important;
+        right:0;
+        left:0;
+        bottom:0;
+        width:100%;
+        z-index: 99;
+    }
+    .pageContent{
+        width:100%;
+    }
+}
+.notools .esriSimpleSliderTL {
+    top: 75px;
+}
+.esriSimpleSliderTL {
+    top: auto;
+    left: auto;
+    top: 50px;
+    left: 0;
+    border: none;
+    z-index: 41 !important;
+}
+.arcgisSearch .searchGroup .searchInput {
+    border-radius: 0;
+    -webkit-border-radius: 0;
+}
+.arcgisSearch .searchCollapsed .searchSubmit {
+    border-radius: 0;
+}
