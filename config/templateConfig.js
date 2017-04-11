@@ -50,5 +50,6 @@ define({
     "color", "extent", "center", "level", "marker", "feature", "find", "sharedTheme", "sharedThemeItem", "sharinghost","overwritesharing", "tool_share_embed", "customLayout"
   ],
   // For esri hosted environments only. Will automatically create a sharingurl and proxyurl for the application.
-  esriEnvironment: true
+  "esriEnvironment": false,
+  "overwriteSharing": true
 });
