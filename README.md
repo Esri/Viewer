@@ -2,8 +2,6 @@ basic-viewer-template
 =====================
 *Basic Viewer*  is a configurable application template used to display a web map with a specified set of commonly used tools and options.
 
-![Screen Shot](https://dl.dropboxusercontent.com/u/24627279/screenshots/View.png)
-
 [View it live](http://www.arcgis.com/apps/Viewer/index.html?webmap=f5b13dbed07c46cdb783cf361833aa6b)
 
 # November 2015 Release Updates
@@ -93,5 +91,3 @@ http://www.apache.org/licenses/LICENSE-2.0
 Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for the specific language governing permissions and limitations under the License.
 
 A copy of the license is available in the repository's license.txt file.
-[](Esri Tags: ArcGIS Online Web Application Templates)
-[](Esri Language: JavaScript)
