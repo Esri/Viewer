@@ -2,7 +2,7 @@ basic-viewer-template
 =====================
 *Basic Viewer*  is a configurable application template used to display a web map with a specified set of commonly used tools and options.
 
-[View it live](http://www.arcgis.com/apps/Viewer/index.html?webmap=f5b13dbed07c46cdb783cf361833aa6b)
+[View it live](http://www.arcgis.com/apps/Viewer/index.html)
 
 # November 2015 Release Updates
 - **Splash Screen:**  Add a configurable splash screen and specify custom title and contents.
