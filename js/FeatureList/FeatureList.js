@@ -424,7 +424,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/lang", "dojo/has", "es
                             result = result.replace(matches[5], '');
                         }
                         if(matches[2]===">") {
-                            result = result.replace(matches[1], "><a href='"+matches[3]+"' target='_blank'>Follow Link</a><");
+                            result = result.replace(matches[1], "><a href='"+matches[3]+"' target='_blank'>"+i18n.widgets.featureList.followLink+"</a><");
                         }
                         else if(matches[6]==="DATE") {
                             var dateNum = matches[7];

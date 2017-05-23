@@ -3,7 +3,8 @@ define({
         featureList: ({
             panTo: "Centrer sur",
             zoomTo: "Magnifier sur",
-            featureSelected: "Caractéristique sélectionnée"
+            featureSelected: "Caractéristique sélectionnée",
+            followLink: "Suivez le lien"
         })
     })
 });

@@ -4,7 +4,8 @@ define({
             featureList: ({
                 panTo: "Pan To",
                 zoomTo: "Zoom To",
-                featureSelected: "Feature Selected"
+                featureSelected: "Feature Selected",
+                followLink: "Follow Link"
             })
         })
     }),
