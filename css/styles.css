@@ -1288,7 +1288,7 @@ html, body {
 #panelBottom {
     position:absolute;
     bottom: 0px;
-    color: white;
+    /*color: white;*/
     white-space: nowrap;
     width: calc(100% - 4px);
     padding: 2px;
