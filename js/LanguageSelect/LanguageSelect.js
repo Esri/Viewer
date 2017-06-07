@@ -94,6 +94,7 @@ define([
                         class: 'langMenuItemIcon',
                     }, iconCell);
                 }
+
                 var langHint = i18n.widgets.languageSelect.aria.changeLanguage+" "+lang.name;
                 dojo.attr(menuItem.domNode,'aria-label', esriLang.stripTags(langHint));
                 dojo.attr(menuItem.domNode,'title', esriLang.stripTags(langHint));
@@ -119,11 +120,18 @@ define([
 
             menu.startup();
 
-
-            
+            var currentHint = i18n.widgets.languageSelect.aria.currentLanguage+" "+(currentLanguage ? currentLanguage : document.documentElement.lang);
+            var btnLbl = this.defaults.showLabel ? i18n.widgets.languageSelect.language : "";
+            if(!currentIcon) {
+                btnLbl += ' <span style="font-weight:bold;">'+document.documentElement.lang.substring(0,2).toUpperCase()+'</span>';
+            }
+            if(this.defaults.textColor) {
+                btnLbl = '<span style="color:'+this.defaults.textColor+';">'+btnLbl+'</span>';
+            }
 
             this.button = new DropDownButton({
-                label: currentLocale,
+                label: btnLbl,
+                title: currentHint,
                 dropDown: menu,
                 id: 'languageButton',
                 role: 'application',
@@ -132,24 +140,20 @@ define([
 
             if(currentIcon) {
                 dojo.removeClass(this.button.iconNode, "dijitNoIcon");
-                dojo.place(currentIcon, this.button.iconNode);
-                var currentHint = i18n.widgets.languageSelect.aria.currentLanguage+" "+currentLanguage;
+                dojo.place(currentIcon, query(this.button._buttonNode).query(".dijitReset").query(".dijitArrowButtonChar")[0], "after");
                 dojo.attr(this.button.iconNode,'aria-label', currentHint);
                 dojo.attr(this.button.iconNode,'title', esriLang.stripTags(currentHint));
-            } else {
-                if(this.defaults.textColor)
-                    dojo.attr(this.button,'style', 'color:'+this.defaults.textColor+';');
             }
 
-            if(this.defaults.showLabel) {
-                domConstruct.create("label", {
-                    for: 'languageButton',
-                    innerHTML: i18n.widgets.languageSelect.language,
-                    title: i18n.widgets.languageSelect.changeHere,
-                    'aria-label': i18n.widgets.languageSelect.changeHere,
-                    tabindex: -1
-                }, this.domNode);
-            }
+            // if(this.defaults.showLabel) {
+            //     domConstruct.create("label", {
+            //         for: 'languageButton',
+            //         innerHTML: i18n.widgets.languageSelect.language,
+            //         title: i18n.widgets.languageSelect.changeHere,
+            //         'aria-label': i18n.widgets.languageSelect.changeHere,
+            //         tabindex: -1
+            //     }, this.domNode);
+            // }
 
             this.domNode.appendChild(this.button.domNode);
 
