@@ -38,20 +38,18 @@ define([
   "dojo/query",
 
   "dijit/registry",
-  "dijit/Menu",
   "dijit/focus",
   "dijit/a11y",
-  "dijit/CheckedMenuItem",
 
   "application/toolbar",
   "application/has-config",
-  "application/ShareDialog",
-  "application/SearchSources",
   "application/MapUrlParams",
 
   "esri/arcgis/utils",
   "esri/lang",
   "esri/urlUtils",
+
+  "esri/layers/FeatureLayer",
 
   "esri/dijit/HomeButton",
   "esri/dijit/LocateButton",
@@ -59,10 +57,8 @@ define([
   "esri/dijit/BasemapGallery",
   "esri/dijit/Measurement",
   "esri/dijit/OverviewMap",
-  "esri/dijit/LayerList",
+  "esri/dijit/LayerList"
 
-  "esri/geometry/Extent",
-  "esri/layers/FeatureLayer"
 ], function (
   ready, JSON,
 
@@ -75,21 +71,13 @@ define([
 
   on, Deferred, all, query,
 
-  registry, Menu, focusUtil, a11y,
-
-  CheckedMenuItem,
+  registry, focusUtil, a11y,
 
   Toolbar, has,
-  ShareDialog, SearchSources,
   MapUrlParams,
 
   arcgisUtils, esriLang, urlUtils,
-
-  HomeButton, LocateButton, Legend,
-  BasemapGallery, Measurement,
-  OverviewMap, LayerList,
-
-  Extent, FeatureLayer
+  FeatureLayer
 
 ) {
     return declare(null, {
@@ -128,6 +116,8 @@ define([
           this.color = this._setColor(this.config.color);
           this.theme = this._setColor(this.config.theme);
           this.iconColor = this._setColor(this.config.iconColor);
+          this.panelBackground = this._setColor(this.config.panelBackground);
+          this.panelColor = this._setColor(this.config.panelColor);
 
           // Apply custom theme css
           var customTheme = document.createElement("link");
@@ -135,7 +125,6 @@ define([
           customTheme.setAttribute("type", "text/css");
           customTheme.setAttribute("href", "css/theme/" + this.config.customLayout + ".css");
           document.head.appendChild(customTheme);
-          //domClass.add(document.body, this.config.customLayout);
 
           // Create and add custom style sheet
           if (this.config.customstyle) {
@@ -288,6 +277,7 @@ define([
 
           all(toolList).then(lang.hitch(this, function (results) {
             this._showSplashScreen(toolbar);
+
             //If all the results are false and locate and home are also false we can hide the toolbar
             var tools = array.some(results, function (r) {
               return r;
@@ -303,7 +293,6 @@ define([
               domStyle.set("panelTop", "height", "75px");
               domStyle.set("panelTitle", "margin-top",
                 "12px");
-              this._updateTheme();
               return;
             }
             // if no tools are active let's setup support for setting
@@ -315,11 +304,10 @@ define([
                 domStyle.set("panelTools", "height", h + "px");
               }
             }
-            //Now that all the tools have been added to the toolbar we can add page naviagation
-            //to the toolbar panel, update the color theme and set the active tool.
+            //Now that all the tools have been added to the toolbar we can add page naviagation to the toolbar panel
             this.updateAriaInfo();
             toolbar.updatePageNavigation();
-            this._updateTheme();
+
           }));
         }));
       },
@@ -349,8 +337,7 @@ define([
           // setup extent change event if the dialog is open and check box is checked. 
           if (this.shareDialog) {
             this.shareDialog.updateUrl();
-            //  if (this.shareDialog.useExtent) {
-            // setup extent handler 
+
             if (!this.extentHandle) {
               this.extentHandle = on.pausable(this.map, "extent-change", lang.hitch(this, function () {
                 if (this.shareDialog.useExtent) {
@@ -360,7 +347,6 @@ define([
             } else {
               this.extentHandle.resume();
             }
-            // }
           }
         } else {
           // destroy extent handler 
@@ -381,16 +367,17 @@ define([
               }
             }));
         }
-        if (this.config.customLayout === "default" && this.once) {
+        if ((this.config.customLayout === "default" || this.config.customLayout === "rounded") && this.once) {
           this.once = false;
+          var panel = dom.byId("panelContent");
           var titlebox = domGeometry.getContentBox(dom.byId("panelTop"));
           var mapbox = domGeometry.getContentBox(dom.byId("mapDiv"));
           if (mapbox.w && titlebox.w) {
             var spacer = mapbox.w - titlebox.w;
             if (spacer < 350) {
-              domStyle.set(dom.byId("panelContent"), "top", "90px");
+              domStyle.set(panel, "top", "90px");
             } else {
-              domStyle.set(dom.byId("panelContent"), "top", "10px");
+              domStyle.set(panel, "top", "10px");
             }
           }
         }
@@ -418,6 +405,7 @@ define([
           domAttr.set("modal", "aria-label", this.config.splashTitle || "Splash Screen");
           // set focus to the dialog
           var node = dom.byId("modal");
+          var closeOverlay = dom.byId("closeOverlay");
           focusUtil.focus(node);
 
           var title = this.config.splashTitle || "";
@@ -425,10 +413,10 @@ define([
           dom.byId("modalTitle").innerHTML = title;
           dom.byId("modalContent").innerHTML = content;
 
-          dom.byId("closeOverlay").value = this.config.splashButtonText || this.config.i18n.nav.close;
+          closeOverlay.value = this.config.splashButtonText || this.config.i18n.nav.close;
 
           // Close button handler for the overlay
-          on(dom.byId("closeOverlay"), "click", lang.hitch(
+          on(closeOverlay, "click", lang.hitch(
             this,
             function () {
               // set focus to active tool if we have one
@@ -436,7 +424,6 @@ define([
               domClass.remove(document.body, "noscroll");
               domClass.add("modal", "hide");
             }));
-          this._updateTheme();
         } else {
           this._setActiveTool(toolbar);
         }
@@ -445,17 +432,19 @@ define([
         //Add the basemap gallery to the toolbar.
         var deferred = new Deferred();
         if (has("basemap")) {
-          var basemapDiv = toolbar.createTool(tool, panelClass);
-          var basemap = new BasemapGallery({
-            id: "basemapGallery",
-            bingMapsKey: this.config.orgInfo.bingKey || "",
-            map: this.map,
-            showArcGISBasemaps: true,
-            portalUrl: this.config.sharinghost,
-            basemapsGroup: this._getBasemapGroup()
-          }, domConstruct.create("div", {}, basemapDiv));
-          basemap.startup();
-          deferred.resolve(true);
+          require(["esri/dijit/BasemapGallery"], lang.hitch(this, function (BasemapGallery) {
+            var basemapDiv = toolbar.createTool(tool, panelClass);
+            var basemap = new BasemapGallery({
+              id: "basemapGallery",
+              bingMapsKey: this.config.orgInfo.bingKey || "",
+              map: this.map,
+              showArcGISBasemaps: true,
+              portalUrl: this.config.sharinghost,
+              basemapsGroup: this._getBasemapGroup()
+            }, domConstruct.create("div", {}, basemapDiv));
+            basemap.startup();
+            deferred.resolve(true);
+          }));
         } else {
           deferred.resolve(false);
         }
@@ -531,7 +520,8 @@ define([
         if (has("edit") && this.editableLayers.length > 0) {
           if (this.editableLayers.length > 0) {
             this.editorDiv = toolbar.createTool(tool, panelClass);
-            return this._createEditor();
+            this._setupEditablePopup();
+            deferred.resolve(true);
           } else {
             console.log("No Editable Layers");
             deferred.resolve(false);
@@ -540,6 +530,51 @@ define([
           deferred.resolve(false);
         }
         return deferred.promise;
+      },
+      _setupEditablePopup: function () {
+
+        var link = domConstruct.create("a", {
+          "class": "action edit",
+          "id": "editLink",
+          "innerHTML": this.config.i18n.tooltips.edit,
+          "href": "javascript: void(0);"
+        }, query(".actionList", this.map.infoWindow.domNode)[0]);
+        on(link, "click", lang.hitch(this, function () {
+          var selectedFeature = this.map.infoWindow.getSelectedFeature();
+          this.map.infoWindow.hide();
+
+          this._createEditor().then(lang.hitch(this, function () {
+            var editTool = dom.byId("panelTool_edit");
+            editTool.click();
+            if (selectedFeature && selectedFeature._layer) {
+              domStyle.set(link, "visibility", "hidden");
+              this.editor.attributeInspector.showFeature(selectedFeature, selectedFeature._layer);
+              this.map.infoWindow.show();
+            }
+          }));
+        }));
+
+        on(this.map.infoWindow, "show", lang.hitch(this, function () {
+          //   this._updateLink(link);
+        }));
+        on(this.map.infoWindow, "selection-change", lang.hitch(this, function () {
+          this._updateLink(link);
+        }));
+      },
+      _updateLink: function (link) {
+
+        var selected = this.map.infoWindow.getSelectedFeature();
+        var isAttributeInspector = false;
+        query(".esriAttributeInspector").forEach(function (node) {
+          isAttributeInspector = true;
+        });
+
+        if (selected && selected._layer && typeof selected._layer.isEditable === "function" && selected._layer.isEditable() && !isAttributeInspector) {
+          // show editable link 
+          domStyle.set(link, "visibility", "visible");
+        } else { // hide editable link 
+          domStyle.set(link, "visibility", "hidden");
+        }
       },
       _createEditor: function () {
         var deferred = new Deferred();
@@ -551,13 +586,17 @@ define([
             deferred.resolve(false);
             return;
           }
+          this._destroyEditor();
           //add field infos if necessary. Field infos will contain hints if defined in the popup and hide fields where visible is set
           //to false. The popup logic takes care of this for the info window but not the edit window.
+          var editableLayers = [];
           array.forEach(this.editableLayers, lang.hitch(this,
             function (layer) {
+
               if (layer.featureLayer && layer.featureLayer.infoTemplate &&
                 layer.featureLayer.infoTemplate.info && layer
-                  .featureLayer.infoTemplate.info.fieldInfos) {
+                  .featureLayer.infoTemplate.info.fieldInfos && layer.featureLayer.visible) {
+                editableLayers.push(layer);
                 //only display visible fields
                 var fields = layer.featureLayer.infoTemplate.info
                   .fieldInfos;
@@ -583,31 +622,36 @@ define([
             }));
           var settings = {
             map: this.map,
-            layerInfos: this.editableLayers,
+            layerInfos: editableLayers, //this.editableLayers,
             toolbarVisible: has("edit-toolbar")
           };
+
           this.map.enableSnapping();
           //show the editor panel so layers render in the widget correctly.
+
           var editNode = dom.byId("page_edit");
           if (editNode) {
-            domClass.remove(dom.byId("page_edit"), "hide");
+            domClass.remove(editNode, "hide");
           }
-          this.editor = new Editor({
-            settings: settings
-          }, domConstruct.create("div", {}, this.editorDiv));
-          this.editor.on("load", lang.hitch(this, function () {
-            // hide the panel
-            if (editNode) {
-              domClass.add(editNode, "hide");
-            }
+          if (this.editor === null) {
+            this.editor = new Editor({
+              settings: settings
+            }, domConstruct.create("div", {}, this.editorDiv));
+            this.editor.on("load", lang.hitch(this, function () {
+              if (has("edit-toolbar")) {
+                query(".templatePicker").addClass("templatePicker-toolbar");
+              }
+            }), function (error) {
+              if (editNode) {
+                domClass.add(editNode, "hide");
+              }
+              deferred.resolve(true);
+            });
+            this.editor.startup();
             deferred.resolve(true);
-          }), function (error) {
-            if (editNode) {
-              domClass.add(editNode, "hide");
-            }
+          } else {
             deferred.resolve(true);
-          });
-          this.editor.startup();
+          }
         }));
         return deferred.promise;
       },
@@ -626,34 +670,37 @@ define([
           deferred.resolve(false);
         } else {
           if (has("layers")) {
-            //Use small panel class if layer layer is less than 5
-            if (layers.length < 5) {
-              panelClass = "small";
-            } else if (layers.length < 15) {
-              panelClass = "medium";
-            } else {
-              panelClass = "large";
-            }
-            var layersDiv = toolbar.createTool(tool, panelClass);
 
-            var toc = new LayerList({
-              map: this.map,
-              showSubLayers: has("layers-sublayers"),
-              subLayers: has("layers-sublayers"),
-              showLegend: has("layers-legend"),
-              showOpacitySlider: has("layers-opacity"),
-              layers: arcgisUtils.getLayerList(this.config.response)
-            }, domConstruct.create("div", {}, layersDiv));
-
-            toc.startup();
-
-            toc.on("toggle", lang.hitch(this, function () {
-              var legend = registry.byId("mapLegend");
-              if (legend) {
-                legend.refresh();
+            require(["esri/dijit/LayerList"], lang.hitch(this, function (LayerList) {
+              //Use small panel class if layer layer is less than 5
+              if (layers.length < 5) {
+                panelClass = "small";
+              } else if (layers.length < 15) {
+                panelClass = "medium";
+              } else {
+                panelClass = "large";
               }
+              var layersDiv = toolbar.createTool(tool, panelClass);
+
+              var toc = new LayerList({
+                map: this.map,
+                showSubLayers: has("layers-sublayers"),
+                subLayers: has("layers-sublayers"),
+                showLegend: has("layers-legend"),
+                showOpacitySlider: has("layers-opacity"),
+                layers: arcgisUtils.getLayerList(this.config.response)
+              }, domConstruct.create("div", {}, layersDiv));
+
+              toc.startup();
+
+              toc.on("toggle", lang.hitch(this, function () {
+                var legend = registry.byId("mapLegend");
+                if (legend) {
+                  legend.refresh();
+                }
+              }));
+              deferred.resolve(true);
             }));
-            deferred.resolve(true);
           } else {
             deferred.resolve(false);
           }
@@ -668,19 +715,20 @@ define([
           deferred.resolve(false);
         } else {
           if (has("legend")) {
-            var legendDiv = toolbar.createTool(tool, panelClass);
-            domAttr.set(legendDiv, "tabindex", 0);
-            var legend = new Legend({
-              map: this.map,
-              id: "mapLegend",
-              layerInfos: layers
-            }, domConstruct.create("div", {}, legendDiv));
+            require(["esri/dijit/Legend"], lang.hitch(this, function (Legend) {
+              var legendDiv = toolbar.createTool(tool, panelClass);
+              domAttr.set(legendDiv, "tabindex", 0);
+              var legend = new Legend({
+                map: this.map,
+                id: "mapLegend",
+                layerInfos: layers
+              }, domConstruct.create("div", {}, legendDiv));
 
-            domClass.add(legend.domNode, "legend");
-            legend.startup();
+              domClass.add(legend.domNode, "legend");
+              legend.startup();
 
-            deferred.resolve(true);
-
+              deferred.resolve(true);
+            }));
           } else {
             deferred.resolve(false);
           }
@@ -692,32 +740,35 @@ define([
         var deferred = new Deferred();
         if (has("measure")) {
 
-          var measureDiv = toolbar.createTool(tool, panelClass);
-          domAttr.set(measureDiv, "tabindex", "0");
-          var areaUnit = (this.config.units === "metric") ?
-            "esriSquareKilometers" : "esriSquareMiles";
-          var lengthUnit = (this.config.units === "metric") ?
-            "esriKilometers" : "esriMiles";
+          require(["esri/dijit/Measurement"], lang.hitch(this, function (Measurement) {
+            var measureDiv = toolbar.createTool(tool, panelClass);
+            domAttr.set(measureDiv, "tabindex", "0");
+            var areaUnit = (this.config.units === "metric") ?
+              "esriSquareKilometers" : "esriSquareMiles";
+            var lengthUnit = (this.config.units === "metric") ?
+              "esriKilometers" : "esriMiles";
 
-          var measure = new Measurement({
-            map: this.map,
-            defaultAreaUnit: areaUnit,
-            defaultLengthUnit: lengthUnit
-          }, domConstruct.create("div", {}, measureDiv));
+            var measure = new Measurement({
+              map: this.map,
+              defaultAreaUnit: areaUnit,
+              defaultLengthUnit: lengthUnit
+            }, domConstruct.create("div", {}, measureDiv));
 
-          measure.startup();
+            measure.startup();
 
-          query(".esriMeasurement .dijitButtonNode").forEach(
-            function (node) {
-              domAttr.set(node, "tabindex", "0");
-              domAttr.set(node, "role", "button");
-            });
-          query(
-            ".esriMeasurement .dijitButtonNode .dijitButtonContents")
-            .forEach(function (node) {
-              domAttr.set(node, "tabindex", "-1");
-            });
-          deferred.resolve(true);
+            query(".esriMeasurement .dijitButtonNode").forEach(
+              function (node) {
+                domAttr.set(node, "tabindex", "0");
+                domAttr.set(node, "role", "button");
+              });
+            query(
+              ".esriMeasurement .dijitButtonNode .dijitButtonContents")
+              .forEach(function (node) {
+                domAttr.set(node, "tabindex", "-1");
+              });
+            deferred.resolve(true);
+          }));
+
         } else {
           deferred.resolve(false);
         }
@@ -729,53 +780,54 @@ define([
         var deferred = new Deferred();
 
         if (has("overview")) {
-          var ovMapDiv = toolbar.createTool(tool, panelClass);
-          domStyle.set(ovMapDiv, {
-            "height": "100%",
-            "width": "100%"
-          });
-          domAttr.set("pageBody_overview", "tabindex", "-1");
+          require(["esri/dijit/OverviewMap"], lang.hitch(this, function (OverviewMap) {
+            var ovMapDiv = toolbar.createTool(tool, panelClass);
+            domStyle.set(ovMapDiv, {
+              "height": "100%",
+              "width": "100%"
+            });
+            domAttr.set("pageBody_overview", "tabindex", "-1");
 
-          on.once(dom.byId("panelTool_overview"), "focus", lang.hitch(
-            this,
-            function () {
-              var ovMap = new OverviewMap({
-                id: "overviewMap",
-                map: this.map,
-                height: "auto"
-              }, domConstruct.create("div", {}, ovMapDiv));
-              ovMap.startup();
+            on.once(dom.byId("panelTool_overview"), "focus", lang.hitch(
+              this,
+              function () {
+                var ovMap = new OverviewMap({
+                  id: "overviewMap",
+                  map: this.map,
+                  height: "auto"
+                }, domConstruct.create("div", {}, ovMapDiv));
+                ovMap.startup();
 
-              query(".ovwHighlight").forEach(function (node) {
-                domAttr.set(node, "tabindex", "0");
-                domAttr.set(node, "aria-label", this.config.i18n.map.overviewDetails);
-              });
-            }));
-          on(this.map, "layer-add", lang.hitch(this, function (args) {
-            //delete and re-create the overview map if the basemap gallery changes
-            if (args.layer.hasOwnProperty(
-              "_basemapGalleryLayerType") && args.layer._basemapGalleryLayerType ===
-              "basemap") {
-              var ov = registry.byId("overviewMap");
-              if (ov) {
-                ov.destroy();
+                query(".ovwHighlight").forEach(function (node) {
+                  domAttr.set(node, "tabindex", "0");
+                  domAttr.set(node, "aria-label", this.config.i18n.map.overviewDetails);
+                });
+              }));
+            on(this.map, "layer-add", lang.hitch(this, function (args) {
+              //delete and re-create the overview map if the basemap gallery changes
+              if (args.layer.hasOwnProperty(
+                "_basemapGalleryLayerType") && args.layer._basemapGalleryLayerType ===
+                "basemap") {
+                var ov = registry.byId("overviewMap");
+                if (ov) {
+                  ov.destroy();
+                }
+                on.once(dom.byId("panelTool_overview"), "focus",
+                  lang.hitch(this, function () {
+                    var ovMap = new OverviewMap({
+                      id: "overviewMap",
+                      map: this.map,
+                      //height: panelHeight,
+                      visible: false
+                    }, domConstruct.create("div", {},
+                      ovMapDiv));
+
+                    ovMap.startup();
+                  }));
               }
-              on.once(dom.byId("panelTool_overview"), "focus",
-                lang.hitch(this, function () {
-                  var ovMap = new OverviewMap({
-                    id: "overviewMap",
-                    map: this.map,
-                    //height: panelHeight,
-                    visible: false
-                  }, domConstruct.create("div", {},
-                    ovMapDiv));
-
-                  ovMap.startup();
-                }));
-
-            }
+            }));
+            deferred.resolve(true);
           }));
-          deferred.resolve(true);
         } else {
           deferred.resolve(false);
         }
@@ -922,30 +974,29 @@ define([
         var deferred = new Deferred();
 
         if (has("share")) {
-          var shareDiv = toolbar.createTool(tool, panelClass);
+          require(["application/ShareDialog"], lang.hitch(this, function (ShareDialog) {
+            var shareDiv = toolbar.createTool(tool, panelClass);
 
-          this.shareDialog = new ShareDialog({
-            bitlyLogin: this.config.bitlyLogin,
-            bitlyKey: this.config.bitlyKey,
-            map: this.map,
-            embedVisible: has("share-embed"),
-            image: this.config.sharinghost +
-            "/sharing/rest/content/items/" + this.config.response
-              .itemInfo.item.id + "/info/" + this.config.response.itemInfo
-              .thumbnail,
-            title: this.config.title,
-            summary: this.config.response.itemInfo.item.snippet ||
-            ""
-          }, shareDiv);
-          domClass.add(this.shareDialog.domNode, "pageBody");
-          this.shareDialog.startup();
-
-          deferred.resolve(true);
+            this.shareDialog = new ShareDialog({
+              bitlyLogin: this.config.bitlyLogin,
+              bitlyKey: this.config.bitlyKey,
+              map: this.map,
+              embedVisible: has("share-embed"),
+              image: this.config.sharinghost +
+              "/sharing/rest/content/items/" + this.config.response
+                .itemInfo.item.id + "/info/" + this.config.response.itemInfo
+                .thumbnail,
+              title: this.config.title,
+              summary: this.config.response.itemInfo.item.snippet ||
+              ""
+            }, shareDiv);
+            domClass.add(this.shareDialog.domNode, "pageBody");
+            this.shareDialog.startup();
+            deferred.resolve(true);
+          }));
         } else {
           deferred.resolve(false);
         }
-
-
         return deferred.promise;
 
       },
@@ -954,6 +1005,7 @@ define([
         array.forEach(layers, lang.hitch(this, function (layer) {
           if (layer && layer.layerObject) {
             var eLayer = layer.layerObject;
+
             if (eLayer instanceof FeatureLayer && eLayer.isEditable()) {
               layerInfos.push({
                 "featureLayer": eLayer
@@ -964,10 +1016,10 @@ define([
         return layerInfos;
       },
 
-
       _getBasemapGroup: function () {
         //Get the id or owner and title for an organizations custom basemap group.
         var basemapGroup = null;
+
         if (this.config.basemapgroup && this.config.basemapgroup.title &&
           this.config.basemapgroup.owner) {
           basemapGroup = {
@@ -987,23 +1039,24 @@ define([
         // Add map specific widgets like the Home  and locate buttons. Also add the geocoder.
         if (this.config.showSlider) {
           // Don't show home if slider isn't enabled
-          var home = new HomeButton({
-            map: this.map
-          }, domConstruct.create("div", {
-          }, query(
-            ".esriSimpleSliderIncrementButton")[0], "after"));
-          home.startup();
-          query(".home span").forEach(function (node) {
-            domAttr.set(node, {
-              "aria-hidden": "true",
-              "role": "presentation"
+          require(["esri/dijit/HomeButton"], lang.hitch(this, function (HomeButton) {
+            var home = new HomeButton({
+              map: this.map
+            }, domConstruct.create("div", {}, query(
+              ".esriSimpleSliderIncrementButton")[0], "after"));
+            home.startup();
+            query(".home span").forEach(function (node) {
+              domAttr.set(node, {
+                "aria-hidden": "true",
+                "role": "presentation"
+              });
+              domConstruct.create("span", {
+                className: "icon-home",
+                "aria-label": esriBundle.widgets.homeButton.home.title || "Default map view"
+              }, node, "after");
             });
-            domConstruct.create("span", {
-              className: "icon-home",
-              "aria-label": esriBundle.widgets.homeButton.home.title || "Default map view"
-            }, node, "after");
-          });
-          query(".esriSimpleSlider").addClass("homeEnabled");
+            query(".esriSimpleSlider").addClass("homeEnabled");
+          }));
         } else {
           domClass.add(document.body, "noslider");
         }
@@ -1020,31 +1073,33 @@ define([
 
           }));
         if (has("locate")) {
-          var geoLocate = new LocateButton({
-            map: this.map,
-            useTracking: this.config.locate_track
-          }, "locateDiv");
-          geoLocate.startup();
-          query(".LocateButton .zoomLocateButton").addClass("bg");
-          query(".zoomLocateButton span").forEach(function (node) {
-            domAttr.set(node, {
-              "aria-hidden": "true",
-              "role": "presentation"
+          require(["esri/dijit/LocateButton"], lang.hitch(this, function (LocateButton) {
+            var geoLocate = new LocateButton({
+              map: this.map,
+              useTracking: this.config.locate_track
+            }, "locateDiv");
+            geoLocate.startup();
+            query(".LocateButton .zoomLocateButton").addClass("bg");
+            query(".zoomLocateButton span").forEach(function (node) {
+              domAttr.set(node, {
+                "aria-hidden": "true",
+                "role": "presentation"
+              });
+              domConstruct.create("span", {
+                className: "icon-locate",
+                "aria-label": esriBundle.widgets.locateButton.locate.title || "Find my location"
+              }, node, "after");
             });
-            domConstruct.create("span", {
-              className: "icon-locate",
-              "aria-label": esriBundle.widgets.locateButton.locate.title || "Find my location"
-            }, node, "after");
-          });
 
+            domClass.add(document.body, "haslocate");
+          }));
 
-          domClass.add(document.body, "haslocate");
         }
 
         //Add the location search widget
         require(["application/has-config!search?esri/dijit/Search",
-          "application/has-config!search?esri/tasks/locator"
-        ], lang.hitch(this, function (Search, Locator) {
+          "application/has-config!search?esri/tasks/locator", "application/has-config!search?application/SearchSources"
+        ], lang.hitch(this, function (Search, Locator, SearchSources) {
           if (!Search && !Locator) {
             //add class so we know we don't have to hide title since search isn't visible
             domClass.add(document.body, "no-search");
@@ -1059,8 +1114,7 @@ define([
           };
 
           if (this.config.searchConfig) {
-            searchOptions.applicationConfiguredSources = this.config
-              .searchConfig.sources || [];
+            searchOptions.applicationConfiguredSources = this.config.searchConfig.sources || [];
           } else {
             var configuredSearchLayers = (this.config.searchLayers instanceof Array) ?
               this.config.searchLayers : JSON.parse(this.config.searchLayers);
@@ -1069,6 +1123,7 @@ define([
               this.config.helperServices.geocode : [];
           }
           var searchSources = new SearchSources(searchOptions);
+
           var createdOptions = searchSources.createOptions();
           if (this.config.searchConfig !== null && this.config.searchConfig !==
             undefined) {
@@ -1083,51 +1138,56 @@ define([
               createdOptions.enableSearchingAll = true;
             }
           }
-          var search = new Search(createdOptions, domConstruct.create(
-            "div", {
-              id: "search"
-            }, "mapDiv"));
+          if (searchSources && searchSources.sources && searchSources.sources.length && searchSources.sources.length > 0) {
 
-          if (this.map.width && this.map.width < 600) {
-            this._enableButtonMode(search);
-          }
+            var search = new Search(createdOptions, domConstruct.create(
+              "div", {
+                id: "search"
+              }, "mapDiv"));
 
-          on(this.map, "resize", lang.hitch(this, function (r) {
-            if (r && r.width) {
-              if (r.width < 600) {
-                this._enableButtonMode(search);
-              } else {
-                this._disableButtonMode(search);
-              }
+            if (this.map.width && this.map.width < 600) {
+              this._enableButtonMode(search);
             }
-          }));
 
-          search.on("select-result", lang.hitch(this, function () {
-
-            //if edit tool is enabled we'll have to delete/create
-            //so info window behaves correctly.
-            on.once(this.map.infoWindow, "hide", lang.hitch(
-              this,
-              function () {
-                search.clearGraphics();
-                if (this.editor) {
-                  this._destroyEditor();
-                  this._createEditor();
+            on(this.map, "resize", lang.hitch(this, function (r) {
+              if (r && r.width) {
+                if (r.width < 600) {
+                  this._enableButtonMode(search);
+                } else {
+                  this._disableButtonMode(search);
                 }
-              }));
+              }
+            }));
 
-          }));
-          search.startup();
+            search.on("select-result", lang.hitch(this, function () {
 
-          if (search && search.domNode) {
-            domConstruct.place(search.domNode, "panelGeocoder");
-          }
-          // update the search placeholder text color and dropdown
-          // to match the icon text
-          if (this.config.icons === "black") {
-            query(".arcgisSearch .searchIcon").style("color",
-              "#000");
-            domClass.add(dom.byId("search_input"), "dark");
+              //if edit tool is enabled we'll have to delete/create
+              //so info window behaves correctly.
+              on.once(this.map.infoWindow, "hide", lang.hitch(
+                this,
+                function () {
+                  search.clearGraphics();
+                  if (this.editor) {
+                    this._destroyEditor();
+                    this._createEditor();
+                  }
+                }));
+
+            }));
+            search.startup();
+
+            if (search && search.domNode) {
+              domConstruct.place(search.domNode, "panelGeocoder");
+            }
+            // update the search placeholder text color and dropdown
+            // to match the icon text
+            if (this.config.icons === "black") {
+              query(".arcgisSearch .searchIcon").style("color",
+                "#000");
+              domClass.add(dom.byId("search_input"), "dark");
+            }
+          } else {
+            console.log("No search sources are configured - Disable search");
           }
         }));
 
@@ -1147,9 +1207,8 @@ define([
             urlObject.query = esriLang.stripTags(urlObject.query);
             var customUrl = null;
             for (var prop in urlObject.query) {
-              if (urlObject.query.hasOwnProperty(prop)) {
-                if (prop.toUpperCase() === this.config.customUrlParam
-                  .toUpperCase()) {
+              if (urlObject.query.hasOwnProperty(prop) && this.config.customUrlParam) {
+                if (prop.toUpperCase() === this.config.customUrlParam.toUpperCase()) {
                   customUrl = prop;
                 }
               }
@@ -1206,16 +1265,17 @@ define([
       _enableButtonMode: function (search) {
         search.set("enableButtonMode", true);
         search.set("expanded", false);
+        var panelTextNode = dom.byId("panelText");
         if (!this.blurHandle) {
           this.blurHandle = on.pausable(search, "blur", function () {
-            domClass.remove(dom.byId("panelText"), "hide");
+            domClass.remove(panelTextNode, "hide");
           });
         } else {
           this.blurHandle.resume();
         }
         if (!this.focusHandle) {
           this.focusHandle = on.pausable(search, "focus", function () {
-            domClass.add(dom.byId("panelText"), "hide");
+            domClass.add(panelTextNode, "hide");
           });
         } else {
           this.focusHandle.resume();
@@ -1231,7 +1291,8 @@ define([
         }
       },
       _setColor: function (value) {
-        var colorValue = null, rgb;
+        var colorValue = null,
+          rgb;
         if (!value) {
           colorValue = new Color("transparent");
         } else {
@@ -1246,26 +1307,20 @@ define([
         return colorValue;
       },
       _updateTheme: function () {
-        //Update the app to use the configured color scheme
-        // Set the icons (slider +/-, search etc to match icon color )
-        query(".esriSimpleSlider").style("color", this.iconColor.toString());
-        query(".icon-color").style("color", this.iconColor.toString());
-        query(".LocateButton .zoomLocateButton").style("color", this.iconColor.toString());
-        query(".searchIcon").style("color", this.iconColor.toString());
-        query(".pageNav").style("color", this.iconColor.toString());
+        var colorObj = {
+          iconColor: this.iconColor.toString(),
+          backgroundColor: this.theme.toString(),
+          color: this.color.toString(),
+          panelColor: this.panelColor.toString(),
+          panelBackground: this.panelBackground.toString()
+        };
 
-        //Set the background color using the configured theme value
-        query(".bg").style("backgroundColor", this.theme.toString());
-        query(".esriPopup .pointer").style("backgroundColor", this.theme
-          .toString());
-        query(".esriPopup .titlePane").style("backgroundColor", this.theme
-          .toString());
+        var defaultCss = esriLang.substitute(colorObj, ".esriSimpleSlider{color:${iconColor};} .icon-color{color:${iconColor};}  .LocateButton .zoomLocateButton{color:${iconColor};} .searchIcon{color:${iconColor};} .pageNav{color:${iconColor};} .bg{background-color:${backgroundColor};} .esriPopup .pointer{background-color:${backgroundColor};} .esriPopup.light .titlePane, .esriPopup.dark .titlePane{ background-color:${backgroundColor}; color:${color};}  .esriPopup.light .titleButton, .esriPopup.dark .titleButton{color:${color};} .fc{color:${color};} .pageContent{background-color:${panelBackground};} .pageBody{ background: ${panelBackground}; color:${panelColor};}  .dijitTabPaneWrapper{background:${panelBackground};} .esriLayerList .esriTitle{background-color:${panelBackground};} .esriLayer{background-color:${panelBackground};}.esriLayerList .esriContainer{background-color:${panelBackground};} .esriLayerList .esriContainer{background-color:${panelBackground};} .esriLayerList .esriList{background-color:${panelBackground}; color:${panelColor};} #modal .copy{background-color:${panelBackground}; color:${panelColor};}   .templatePicker .grid .dojoxGridCell, .dojoxGridRow, .dojoxGridCelll, .templatePicker .grid .dojoxGridRowOdd, .templatePicker .grid .dojoxGridRowEven, .dojoxGridView, .templatePicker .dojoxGrid{ background-color:${panelBackground} !important; border:transparent;} ");
 
 
-        //Set the font color using the configured color value
-        query(".fc").style("color", this.color.toString());
-        query(".esriPopup .titlePane").style("color", this.color.toString());
-        query(".esriPopup .titleButton").style("color", this.color.toString());
+        var style = document.createElement("style");
+        style.appendChild(document.createTextNode(defaultCss));
+        document.head.appendChild(style);
 
       },
       _adjustPopupSize: function () {
@@ -1296,33 +1351,41 @@ define([
       _createWebMap: function (itemInfo, params) {
 
         window.config = this.config;
-        // create a map based on the input web map id
-        arcgisUtils.createMap(itemInfo, "mapDiv", {
+        var options = {
           mapOptions: params.mapOptions || {},
           editable: has("edit"),
           //is the app editable
           usePopupManager: true,
           layerMixins: this.config.layerMixins,
           bingMapsKey: this.config.orgInfo.bingKey || ""
-        }).then(lang.hitch(this, function (response) {
+        };
+        if (this.config.orgInfo && this.config.orgInfo.user && this.config.orgInfo.user.privileges) {
+          options.privileges = this.config.orgInfo.user.privileges;
+          console.log("Privileges set", options.privileges);
+        }
+
+        // create a map based on the input web map id
+        arcgisUtils.createMap(itemInfo, "mapDiv", options).then(lang.hitch(this, function (response) {
 
           this.map = response.map;
           domClass.add(this.map.infoWindow.domNode, "light");
-          if (this.config.customLayout === "default") {
+          if (this.config.customLayout === "default" || this.config.customLayout === "rounded") {
+            var panel = dom.byId("panelContent");
             on(window, "resize", lang.hitch(this, function () {
               var titlebox = domGeometry.getContentBox(dom.byId("panelTop"));
               var mapbox = domGeometry.getContentBox(dom.byId("mapDiv"));
               if (mapbox.w && titlebox.w) {
                 var spacer = mapbox.w - titlebox.w;
                 if (spacer < 350) {
-                  domStyle.set(dom.byId("panelContent"), "top", "90px");
+                  domStyle.set(panel, "top", "90px");
                 } else {
-                  domStyle.set(dom.byId("panelContent"), "top", "10px");
+                  domStyle.set(panel, "top", "10px");
                 }
               }
             }));
 
           }
+          this._updateTheme();
           if (params.markerGraphic) {
             // Add a marker graphic with an optional info window if
             // one was specified via the marker url parameter
@@ -1343,15 +1406,21 @@ define([
 
           }
 
-          this._updateTheme();
-
           //Add a logo if provided
           if (this.config.logo) {
+            var content;
+            if (this.config.logolink) {
+              content = "<a target='_blank' href='" + this.config.logolink + "'><img id='logo' role='presentation' src=" +
+                this.config.logo +
+                "></a>";
+            } else {
+              content = "<img id='logo' role='presentation' src=" +
+                this.config.logo +
+                ">";
+            }
             domConstruct.create("div", {
               id: "panelLogo",
-              innerHTML: "<img id='logo' role='presentation' src=" +
-              this.config.logo +
-              "></>"
+              innerHTML: content
             }, dom.byId("panelTitle"), "first");
             domClass.add("panelTop", "largerTitle");
           }
@@ -1374,16 +1443,17 @@ define([
             .altMapText || esriLang.stripTags(altText));
 
           domAttr.set(this.map.container, "tabindex", "0");
-
+          var titleNode = dom.byId("title");
           this.config.title = title;
           document.title = esriLang.stripTags(title);
-          dom.byId("title").innerHTML = title;
-          dom.byId("title")["aria-label"] = title;
+          titleNode.innerHTML = title;
+          titleNode["aria-label"] = title;
 
           //Set subtitle if provided
           if (this.config.subtitle) {
-            dom.byId("subtitle").innerHTML = this.config.subtitle;
-            dom.byId("subtitle")["aria-label"] = this.config.subtitle;
+            var subtitleNode = dom.byId("subtitle");
+            subtitleNode.innerHTML = this.config.subtitle;
+            subtitleNode["aria-label"] = this.config.subtitle;
           } else {
             domStyle.set("subtitle", "display", "none");
             domClass.add("title", "nosubtitle");

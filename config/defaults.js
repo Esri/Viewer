@@ -49,14 +49,17 @@ define({
   //Theme defines the background color of the title area and tool dialog
   //Color defines the text color for the title and details. Note that
   //both these values must be specified as hex colors.
-  "customLayout": "default", // default, sidetools, menubar
+  "customLayout": "default", // default, sidetools, menubar, rounded
   "theme": "#105e78",
   "color": "#fff",
   "iconColor": "#fff",
+  "panelBackground": "#fff",
+  "panelColor": "#000",
   "logo": null,
+  "logolink": null,
   //Set of tools that will be added to the toolbar
   "tools": [{
-    "name": "legend", // legend isn't accessible in that we don't read out contents.
+    "name": "legend",
     "enabled": false
   }, {
     "name": "bookmarks",

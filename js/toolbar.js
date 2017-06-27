@@ -3,7 +3,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
   "dojo/dom", "dojo/dom-class", "dojo/dom-style", "dojo/dom-attr",
   "dojo/dom-construct", "dojo/dom-geometry", "dojo/on", "dojo/mouse",
   "dojo/query", "dijit/focus", "dijit/a11y", "dojo/keys", "dojo/Deferred"
-], function(
+], function (
   Evented, declare, win, fx, html, lang, has, dom, domClass, domStyle,
   domAttr, domConstruct, domGeometry, on, mouse, query, focus, a11y, keys,
   Deferred) {
@@ -19,28 +19,28 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
     pMenu: null,
     pPages: null,
 
-    constructor: function(config) {
+    constructor: function (config) {
       this.config = config;
     },
-    startup: function() {
+    startup: function () {
       var deferred = this._init();
-      deferred.then(lang.hitch(this, function(config) {
+      deferred.then(lang.hitch(this, function (config) {
         // optional ready event to listen to
         this.emit("ready", config);
-      }), lang.hitch(this, function(error) {
+      }), lang.hitch(this, function (error) {
         // optional error event to listen to
         this.emit("error", error);
       }));
       return deferred;
     },
 
-    _init: function() {
+    _init: function () {
       var deferred;
 
       deferred = new Deferred();
       this.pTools = dom.byId("panelTools");
 
-      on(this.pTools, "keydown", lang.hitch(this, function(event) {
+      on(this.pTools, "keydown", lang.hitch(this, function (event) {
         var title = event.target.name;
         if (title) {
           title = title.toLowerCase();
@@ -55,7 +55,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
           }
         }
       }));
-      on(this.pTools, "keyup", lang.hitch(this, function() {
+      on(this.pTools, "keyup", lang.hitch(this, function () {
         if (!this.map.isKeyboardNavigation) {
           this.map.enableKeyboardNavigation();
         }
@@ -71,7 +71,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
       return deferred.promise;
     },
     //Create a tool and return the div where you can place content
-    createTool: function(tool, panelClass) {
+    createTool: function (tool, panelClass) {
       var name = tool.name;
       var pressed = (this.config.activeTool === name) ? true : false;
       // add tool  aria info (https://www.w3.org/WAI/PF/aria-practices/#toolbar)
@@ -107,7 +107,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
         className: "page hide",
         id: "page_" + name
       }, this.pPages);
-      on(page, "keydown", lang.hitch(this, function(e) {
+      on(page, "keydown", lang.hitch(this, function (e) {
         if (e.keyCode === keys.ESCAPE) {
           dom.byId("close_" + name).click();
         }
@@ -154,7 +154,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
       return pageBody;
     },
 
-    updatePageNavigation: function() {
+    updatePageNavigation: function () {
       //Adds the up/down and close tools to the page header.
       for (var i = 0; i < this.tools.length; i++) {
         var name = this.tools[i];
@@ -198,20 +198,20 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
         }
       }
     },
-    setContent: function(name, content) {
+    setContent: function (name, content) {
       domConstruct.place(content, "pageBody_" + name, "last");
     },
 
-    activateTool: function(name) {
+    activateTool: function (name) {
       var num = this._getPageNum(name);
       this._goToPage(num);
     },
 
-    _toolClick: function(name) {
+    _toolClick: function (name) {
       this.activateTool(name);
     },
 
-    _getPageNum: function(name) {
+    _getPageNum: function (name) {
       for (var i = 0; i < this.tools.length; i++) {
         if (this.tools[i] == name) {
           return i;
@@ -219,7 +219,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
       }
       return 0;
     },
-    _goToPage: function(num) {
+    _goToPage: function (num) {
       query(".page").addClass("hide");
       query("#page_" + this.tools[num]).removeClass("hide");
       this._updateMap();
@@ -228,17 +228,16 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
       this._updateTool(num);
 
     },
-    _showPreviousPage: function(name) {
+    _showPreviousPage: function (name) {
       var num = this._getPageNum(name) - 1;
       this._goToPage(num);
     },
 
-    _showNextPage: function(name) {
+    _showNextPage: function (name) {
       var num = this._getPageNum(name) + 1;
       this._goToPage(num);
     },
-
-    closePage: function(e) {
+    closePage: function (e) {
       var num = -1;
       this._goToPage(num);
 
@@ -246,18 +245,13 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
       if (e && e.target && e.target.name) {
         var tool = dom.byId("panelTool_" + e.target.name);
         if (tool) {
-          //domAttr.set(tool, "tabindex", "0");
           focus.focus(tool);
-        // don't reset the active tool
-        //if (this.config.activeTool && this.config.activeTool !== e.target.name) {
-        //  domAttr.set(tool, "tabindex", "-1");
-        //}
         }
       }
     },
     // highlight the active tool on the toolbar
-    _updateTool: function(num) {
-      query(".panelTool").forEach(function(node) {
+    _updateTool: function (num) {
+      query(".panelTool").forEach(function (node) {
         domClass.remove(node, "panelToolActive");
       });
 
@@ -269,7 +263,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
       }
       this.emit("updateTool", name);
     },
-    _updateMap: function() {
+    _updateMap: function () {
       if (this.map) {
         this.map.resize();
         this.map.reposition();

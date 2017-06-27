@@ -1,59 +1,30 @@
 {
 	"displayType": "tabs",
 	"configurationSettings": [{
-		"category": "App",
+		"category": "General",
 		"fields": [{
 			"type": "webmap"
 		}, {
 			"type": "appproxies"
 		}, {
 			"placeHolder": "Defaults to web map title",
-			"label": "Title:",
+			"label": "Application title",
 			"fieldName": "title",
 			"type": "string",
 			"tooltip": "Defaults to web map title"
 		}, {
 			"placeHolder": "Optional subtitle text",
-			"label": "Subtitle:",
+			"label": "Application subtitle",
 			"fieldName": "subtitle",
 			"type": "string",
 			"tooltip": "Optional subtitle text"
 		}, {
-			"label": "Title logo:",
-			"fieldName": "logo",
-			"type": "string",
-			"sharedThemeProperty": "logo.small",
-			"tooltip": "Defaults to sample logo"
-		}, {
-			"type": "subcategory",
-			"label": "Accessibility Options"
-		}, {
-			"type": "paragraph",
-			"value": "The primary purpose of alternative map text is to be read by screen readers to allow the content and function of the map to be accessible to users with visual or certain cognitive disabilities.  For more information see this article on <a href='http://webaim.org/techniques/alttext/' target='_blank'>Alt Text</a>. "
-		}, {
-			"type": "string",
-			"stringFieldOption": "richtext",
-			"label": "Alternate Map Text",
-			"tooltip": "Define text that will be read by screen reader",
-			"fieldName": "altMapText"
-		}, {
-			"type": "boolean",
-			"fieldName": "toolbarLabels",
-			"label": "Add toolbar labels",
-			"tooltip": "Add text next to toolbar icon"
-		}]
-	}, {
-		"category": "General",
-		"fields": [{
 			"type": "string",
 			"fieldName": "description",
 			"label": "Details",
 			"placeHolder": "Defaults to web map description.",
 			"tooltip": "Enter content for the details panel",
 			"stringFieldOption": "richtext"
-		}, {
-			"type": "subcategory",
-			"label": "Additional options"
 		}, {
 			"type": "conditional",
 			"fieldName": "splashModal",
@@ -78,6 +49,98 @@
 				"tooltip": "Define button text"
 			}]
 		}, {
+			"type": "subcategory",
+			"label": "Accessibility Options"
+		}, {
+			"type": "paragraph",
+			"value": "The primary purpose of alternative map text is to be read by screen readers to allow the content and function of the map to be accessible to users with visual or certain cognitive disabilities.  For more information see this article on <a href='http://webaim.org/techniques/alttext/' target='_blank'>Alt Text</a>. "
+		}, {
+			"type": "string",
+			"stringFieldOption": "richtext",
+			"label": "Alternate Map Text",
+			"tooltip": "Define text that will be read by screen reader",
+			"fieldName": "altMapText"
+		}]
+	}, {
+		"category": "Theme",
+		"fields": [{
+			"type": "subcategory",
+			"label": "Colors"
+		}, {
+			"type": "color",
+			"fieldName": "theme",
+			"tooltip": "Header background color",
+			"label": "Header color",
+			"sharedThemeProperty": "header.background"
+		}, {
+			"type": "color",
+			"fieldName": "color",
+			"tooltip": "Title bar text color",
+			"label": "Header text color",
+			"sharedThemeProperty": "header.text"
+		}, {
+			"type": "color",
+			"fieldName": "iconColor",
+			"tooltip": "Icon color",
+			"label": "Button icon color",
+			"sharedThemeProperty": "button.background"
+		}, {
+			"type": "color",
+			"fieldName": "panelBackground",
+			"tooltip": "Panel body background color",
+			"label": "Panel background",
+			"sharedThemeProperty": "body.background"
+		}, {
+			"type": "color",
+			"fieldName": "panelColor",
+			"tooltip": "Panel body text color",
+			"label": "Panel text color",
+			"sharedThemeProperty": "body.text"
+		}, {
+			"label": "Title logo",
+			"fieldName": "logo",
+			"type": "string",
+			"sharedThemeProperty": "logo.small",
+			"tooltip": "Defaults to shared theme logo if defined in org settings."
+		}, {
+			"label": "Logo link",
+			"fieldName": "logolink",
+			"type": "string",
+			"sharedThemeProperty": "logo.link",
+			"tooltip": "Click through url for logo"
+		},{
+			"type": "subcategory",
+			"label": "Custom Layout Options"
+		}, {
+			"type": "radio",
+			"fieldName": "customLayout",
+			"label": "Choose a layout",
+			"items": [{
+				"label": "Default",
+				"value": "default",
+				"checked": true
+			}, {
+				"label": "Tool sidebar",
+				"value": "sidetools"
+			}, {
+				"label": "Menu bar",
+				"value": "menubar"
+			}, {
+				"label": "Default with Rounded corners",
+				"value": "rounded"
+			}]
+		}, {
+			"type": "paragraph",
+			"value": "Use the Custom css option to paste css that overwrites rules in the app."
+		}, {
+			"type": "string",
+			"fieldName": "customstyle",
+			"tooltip": "Custom css",
+			"label": "Custom css"
+		}]
+	}, {
+		"category": "Options",
+		"fields": [{
 			"type": "boolean",
 			"fieldName": "popupPanel",
 			"label": "Show popup content panel instead of popup window"
@@ -87,7 +150,7 @@
 			"label": "Display scalebar on map"
 		}, {
 			"type": "paragraph",
-			"value": "Optionally add a Locate button to the map. Note that the Locate button is only available if site is using https"
+			"value": "Add a Locate button to the map. Note that the Locate button is only available if site is using https"
 		}, {
 			"type": "conditional",
 			"fieldName": "locate",
@@ -99,58 +162,111 @@
 				"fieldName": "locate_track",
 				"label": "Enable tracking of users location"
 			}]
-		}]
-	}, {
-		"category": "Theme",
-		"fields": [{
-			"type": "radio",
-			"fieldName": "customLayout",
-			"label": "Custom Layout",
-			"items": [{
-				"label": "<img style='vertical-align:middle' src='https://devext.arcgis.com/apps/View/images/config-themes/default.png'><span>Default</span>",
-				"value": "default",
-				"checked": true
-			}, {
-				"label": "<img style='vertical-align:middle'  src='http://devext.arcgis.com/apps/View/images/config-themes/sidetools.png'><span>Tool sidebar</span>",
-				"value": "sidetools"
-			}, {
-				"label": "<img style='vertical-align:middle'  src='https://devext.arcgis.com/apps/View/images/config-themes/menubar.png'><span>Menu bar</span>",
-				"value": "menubar"
-			}]
 		}, {
-			"type": "color",
-			"fieldName": "theme",
-			"tooltip": "Color theme to use",
-			"label": "Color Theme:",
-			"sharedThemeProperty": "header.background"
-		}, {
-			"type": "color",
-			"fieldName": "color",
-			"tooltip": "Title bar text color",
-			"label": "Title Color:",
-			"sharedThemeProperty": "header.text"
-		}, {
-			"type": "color",
-			"fieldName": "iconColor",
-			"tooltip": "Icon color",
-			"label": "Icon color:",
-			"sharedThemeProperty": "button.text"
+			"type": "subcategory",
+			"label": "Toolbar Options"
 		}, {
 			"type": "paragraph",
-			"value": "Use the Custom css option to paste css that overwrites rules in the app."
+			"value": "Select tools for the app toolbar. <br> <br> Note: if the web map doesn't support the enabled capability the tool will not appear. For example if the map doesn't have bookmarks then the bookmark tool won't appear on the toolbar even if it is checked."
 		}, {
-			"type": "string",
-			"fieldName": "customstyle",
-			"tooltip": "Custom css",
-			"label": "Custom css"
-		}]
-	}, {
-		"category": "Tools",
-		"fields": [{
+			"type": "boolean",
+			"fieldName": "tool_basemap",
+			"label": "Basemap Gallery"
+		}, {
+			"type": "boolean",
+			"fieldName": "tool_bookmarks",
+			"label": "Bookmarks"
+		}, {
+			"type": "boolean",
+			"fieldName": "tool_legend",
+			"label": "Legend"
+		}, {
+			"type": "boolean",
+			"fieldName": "tool_details",
+			"label": "Map Details"
+		}, {
+			"type": "boolean",
+			"fieldName": "tool_measure",
+			"label": "Measure Tool"
+		}, {
+			"type": "boolean",
+			"fieldName": "tool_overview",
+			"label": "Overview Map"
+		}, {
+			"type": "conditional",
+			"condition": false,
+			"fieldName": "tool_share",
+			"label": "Share Tools",
+			"items": [{
+				"type": "boolean",
+				"fieldName": "tool_share_embed",
+				"label": "Add embed option to share dialog"
+			}]}, {
+				"type": "paragraph",
+				"value": "The Layer List widget displays a list of layers in the map. The layers visibility can be toggled on and off. Optionally you can include sub layers a legend and opacity slider as part of the Layer List widget."
+			}, {
+				"type": "conditional",
+				"condition": false,
+				"fieldName": "tool_layers",
+				"label": "Display layer list",
+				"items": [{
+					"type": "boolean",
+					"fieldName": "tool_sublayers",
+					"label": "Include sublayers in Layer List"
+				}, {
+					"type": "boolean",
+					"fieldName": "tool_layerlegend",
+					"label": "Include legend in Layer List"
+				}, {
+					"type": "boolean",
+					"fieldName": "tool_opacity",
+					"label": "Include opacity slider in Layer List"
+				}]
+			}, {
+				"type": "paragraph",
+				"value": "Display the Editor tool and optionally add a toolbar that provides additional editing capabilities including cut, merge and reshape."
+			}, {
+				"type": "conditional",
+				"condition": false,
+				"fieldName": "tool_edit",
+				"label": "Display Editor",
+				"items": [{
+					"type": "boolean",
+					"fieldName": "tool_edit_toolbar",
+					"label": "Add Toolbar to Editor"
+				}]
+			}, {
+				"type": "paragraph",
+				"value": "Display the print tool and optionally display a legend on the print page and all the print layouts associated with the print service used by the template."
+			}, {
+				"type": "conditional",
+				"condition": false,
+				"fieldName": "tool_print",
+				"label": "Print Tool",
+				"items": [{
+					"type": "boolean",
+					"fieldName": "tool_print_layouts",
+					"label": "Display all Layout Options"
+				}, {
+					"type": "paragraph",
+					"value": "Specify the print format. Check your print service to see a list of valid values. The following values are valid for the default print service: PDF, PNG32, PNG8, JPG, GIF, EPS, SVG, SVGZ"
+				}, {
+					"placeHolder": "Default value is PDF",
+					"label": "Format",
+					"fieldName": "tool_print_format",
+					"type": "string",
+					"tooltip": "Defaults to PDF"
+				}, {
+					"type": "boolean",
+					"fieldName": "tool_print_legend",
+					"label": "Add Legend to Output"
+				}]
+			},
+		 {
 			"type": "string",
 			"fieldName": "activeTool",
 			"tooltip": "Active Tool",
-			"label": "Specify active tool at app startup:",
+			"label": "Specify active tool at app startup",
 			"options": [{
 				"label": "None",
 				"value": ""
@@ -186,106 +302,17 @@
 				"value": "share"
 			}]
 		}, {
-			"type": "paragraph",
-			"value": "Enable tools for the app toolbar. <br> <br> Note: if the web map doesn't support the enabled capability the tool will not appear. For example if the map doesn't have bookmarks then the bookmark tool won't appear on the toolbar even if it is checked."
-		}, {
 			"type": "boolean",
-			"fieldName": "tool_basemap",
-			"label": "Basemap Gallery"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_bookmarks",
-			"label": "Bookmarks"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_legend",
-			"label": "Legend"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_details",
-			"label": "Map Details"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_measure",
-			"label": "Measure Tool"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_overview",
-			"label": "Overview Map"
-		}, {
-			"type": "conditional",
-			"condition": false,
-			"fieldName": "tool_share",
-			"label": "Share Tools",
-			"items": [{
-				"type": "boolean",
-				"fieldName": "tool_share_embed",
-				"label": "Add embed option to share dialog"
-			}]
-		}, {
-			"type": "paragraph",
-			"value": "The Layer List widget displays a list of layers in the map. The layers visibility can be toggled on and off. Optionally you can include sub layers a legend and opacity slider as part of the Layer List widget."
-		}, {
-			"type": "conditional",
-			"condition": false,
-			"fieldName": "tool_layers",
-			"label": "Display layer list",
-			"items": [{
-				"type": "boolean",
-				"fieldName": "tool_sublayers",
-				"label": "Include sublayers in Layer List"
-			}, {
-				"type": "boolean",
-				"fieldName": "tool_layerlegend",
-				"label": "Include legend in Layer List"
-			}, {
-				"type": "boolean",
-				"fieldName": "tool_opacity",
-				"label": "Include opacity slider in Layer List"
-			}]
-		}, {
-			"type": "paragraph",
-			"value": "Display the Editor tool and optionally add a toolbar that provides additional editing capabilities including cut, merge and reshape."
-		}, {
-			"type": "conditional",
-			"condition": false,
-			"fieldName": "tool_edit",
-			"label": "Display Editor",
-			"items": [{
-				"type": "boolean",
-				"fieldName": "tool_edit_toolbar",
-				"label": "Add Toolbar to Editor"
-			}]
-		}, {
-			"type": "paragraph",
-			"value": "Display the print tool and optionally display a legend on the print page and all the print layouts associated with the print service used by the template."
-		}, {
-			"type": "conditional",
-			"condition": false,
-			"fieldName": "tool_print",
-			"label": "Print Tool",
-			"items": [{
-				"type": "boolean",
-				"fieldName": "tool_print_layouts",
-				"label": "Display all Layout Options"
-			}, {
-				"type": "paragraph",
-				"value": "Specify the print format. Check your print service to see a list of valid values. The following values are valid for the default print service: PDF, PNG32, PNG8, JPG, GIF, EPS, SVG, SVGZ"
-			}, {
-				"placeHolder": "Default value is PDF",
-				"label": "Format:",
-				"fieldName": "tool_print_format",
-				"type": "string",
-				"tooltip": "Defaults to PDF"
-			}, {
-				"type": "boolean",
-				"fieldName": "tool_print_legend",
-				"label": "Add Legend to Output"
-			}]
+			"fieldName": "toolbarLabels",
+			"label": "Add toolbar labels",
+			"tooltip": "Add text next to toolbar icon"
 		}]
 	}, {
 		"category": "Search",
 		"fields": [{
+			"type": "subcategory",
+			"label": "Search Settings"
+		}, {
 			"type": "paragraph",
 			"value": "Enable search to allow users to find a location or data in the map. Configure the search settings to refine the experience in your app by setting the default search resource, placeholder text, etc."
 		}, {
@@ -298,15 +325,15 @@
 				"fieldName": "searchConfig",
 				"label": "Configure Search"
 			}]
-		}]
-	}, {
-		"category": "Custom URL Parameter",
-		"fields": [{
+		}, {
+			"type": "subcategory",
+			"label": "Custom URL Parameter"
+		}, {
 			"type": "paragraph",
 			"value": "Setup the app to support a custom url parameter. For example if your map contains a feature layer with parcel information and you'd like to be able to find parcels using a url parameter you can use this section to do so. Select a layer and search field then define the name of a custom param. Once you've defined these values you can append the custom search to your application url using the custom parameter name you define. For example, if I set the custom param value to parcels a custom url would look like this index.html?parcel=3045"
 		}, {
 			"placeHolder": "i.e. parcels",
-			"label": "URL param name:",
+			"label": "URL param name",
 			"fieldName": "customUrlParam",
 			"type": "string",
 			"tooltip": "Custom URL param name"

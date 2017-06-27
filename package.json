@@ -1,0 +1,24 @@
+{
+  "name": "viewer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.0.4",
+    "gulp-concat-css": "^2.3.0",
+    "gulp-html-replace": "^1.6.2",
+    "gulp-imagemin": "^3.2.0",
+    "gulp-minify": "0.0.15",
+    "gulp-more-css": "^1.0.0"
+  },
+  "dependencies": {
+    "gulp-shorthand": "^1.1.0"
+  }
+}

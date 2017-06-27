@@ -1,80 +1,78 @@
 var gulp = require("gulp");
-var jshint = require("gulp-jshint");
-var beautify = require("gulp-beautify");
-var sass = require("gulp-sass");
-var compass = require("gulp-compass");
-var cssbeautify = require("gulp-cssbeautify");
-var uncss = require("gulp-uncss"); 
-var minifycss = require("gulp-minify-css");
-var stylus = require("gulp-stylus");
-var nib = require("nib");
+var htmlreplace = require("gulp-html-replace");
+var cssminify = require("gulp-more-css");
+var jsminify = require("gulp-minify");
+var imagemin = require("gulp-imagemin");
 
-
-//Define a task. Takes two arguments the name of the task and a function
-//which will be run when you call the task
-//In this example we specify that we want to run jshint on each .js file 
-//in the javascript folder and report the results using the jshint reporter. 
-gulp.task("lint", function(){
-	gulp.src("./js/*.js")
-	.pipe(jshint())
-	.pipe(jshint.reporter("default"));
+/**
+ * Copy files in nls folder 
+ */
+gulp.task("copynls", function () {
+    gulp.src(["js/nls/**/*"])
+        .pipe(gulp.dest("build/js/nls"));
 });
-
-//Run the beautify task and specify options in this example 
-//I added a base to overwrite existing files. You could 
-//specify that results are written to another location by specifying
-//a different destination instead. 
-gulp.task("beautify", function(){
-	gulp.src("./js/*.js",{base:"./"})
-	.pipe(beautify({indentSize:4}))
-	.pipe(gulp.dest("./"));
+gulp.task("copyhtml", function () {
+    gulp.src(["oauth-callback.html"])
+        .pipe(gulp.dest("build/"));
 });
-
-//Process sass
-gulp.task('sass', function () {
-    gulp.src("./css/*.scss")
-        .pipe(sass())
-        .pipe(sass({errLogToConsole: true}))
-        .pipe(gulp.dest("./css"));
+gulp.task("copyfonts", function () {
+    gulp.src(["fonts/*"])
+        .pipe(gulp.dest("build/fonts/"));
 });
-
-
-//use nib
-
-gulp.task('nib', function(){
-    gulp.src('./css/*.styl')
-        .pipe(stylus({ use: nib(), compress: false }))
-        .pipe(gulp.dest('./css'));
+gulp.task("copydijit", function () {
+    gulp.src(["js/dijit/**/*"])
+        .pipe(gulp.dest("build/js/dijit/"));
 });
-
-//Task to remove unused css. I write these updates out to a new folder
-//called public so I don't lose any css I  may need. 
-gulp.task("uncss", function(){
-	gulp.src("./css/*.css")
-   .pipe(uncss({
-      html: ["index.html"]
-    }))
-   .pipe(gulp.dest("./public"));
+/**
+ * Optimize images 
+ */
+gulp.task("imagemin", function () {
+    gulp.src("images/**/*").pipe(imagemin()).pipe(gulp.dest("build/images"));
 });
-
-//Beautify css 
-gulp.task("css",function(){
-	gulp.src("./css/*.css", {base:"./"})
-	.pipe(cssbeautify())
-	.pipe(gulp.dest("./public"))
+/** 
+ * minify javascript 
+ */
+gulp.task("compress", function () {
+    gulp.src("js/*.js").pipe(jsminify({
+        ext: {
+            src: "js/*.js",
+            min: ".js"
+        },
+        noSource: true
+    })).pipe(gulp.dest("build/js/"));
+});
+/**
+ * Minify json config files 
+ */
+gulp.task("compressjson", function () {
+    gulp.src("config/*.js").pipe(jsminify({
+        ext: {
+            src: "config/*.js",
+            min: ".js"
+        },
+        noSource: true
+    })).pipe(gulp.dest("build/config/"));
 });
 
 
-//Minify css
-gulp.task("minify-css", function(){
-	gulp.src("./css/*.css",{base:"./"})
-	.pipe(minifycss())
-	.pipe(gulp.dest("./"))
+/**
+ * minify css (Using concatenate + minify above instead )
+ */
+gulp.task("minifycss", function () {
+    return gulp.src("css/**/*.css").pipe(cssminify()).pipe(gulp.dest("build/css"));
 });
 
 
+/**
+ * Replace css stylesheets in index.html with 
+ * concatenated css file. Looks for comments
+ * in index.html with build:css and endbuild
+ */
+gulp.task("replace", function () {
+    gulp.src("index.html").pipe(htmlreplace({
+        "css": "css/styles.css"
+    })).pipe(gulp.dest("build/"));
+});
 
-//define a default task that will run if you type gulp at the command line
-
-gulp.task('default', ["lint","beautify","css"]);
-
+//"optimize", 
+gulp.task("default", ["compress", "copyhtml", "copyfonts", "copydijit", "compressjson", "imagemin", "copynls", "minifycss", "replace"]);

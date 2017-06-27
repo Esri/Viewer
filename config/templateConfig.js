@@ -47,9 +47,9 @@ define({
   //if you want users to be able to specify lat/lon coordinates that define the map's center or
   //specify an alternate basemap via a url parameter.
   "urlItems": [
-    "color", "extent", "center", "level", "marker", "feature", "find", "sharedTheme", "sharedThemeItem", "sharinghost","overwritesharing", "tool_share_embed", "customLayout"
+    "color", "extent", "center", "level", "marker", "feature", "find", "sharedTheme", "sharedThemeItem", "sharinghost", "overwritesharing", "tool_share_embed", "customLayout"
   ],
   // For esri hosted environments only. Will automatically create a sharingurl and proxyurl for the application.
   "esriEnvironment": false,
-  "overwriteSharing": true
+  "overwriteSharing": false
 });
