@@ -55,7 +55,7 @@ define({
     "home": "Numatytoji aprėptis",
     "locate": "Rasti mano vietą",
     "legend": "Legenda",
-    "bookmarks": "Žymės",
+    "bookmarks": "Žymos",
     "layers": "Sluoksniai",
     "basemap": "Pagrindo žemėlapių galerija",
     "overview": "Apžvalga",

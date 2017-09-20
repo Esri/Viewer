@@ -84,6 +84,7 @@
     }
     #panelTop {
         width: auto;
+        min-width: 270px;
     }
     .no-search #panelContent {
         bottom: 10px;

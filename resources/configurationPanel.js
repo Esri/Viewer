@@ -108,7 +108,7 @@
 			"type": "string",
 			"sharedThemeProperty": "logo.link",
 			"tooltip": "Click through url for logo"
-		},{
+		}, {
 			"type": "subcategory",
 			"label": "Custom Layout Options"
 		}, {
@@ -141,67 +141,69 @@
 	}, {
 		"category": "Options",
 		"fields": [{
-			"type": "boolean",
-			"fieldName": "popupPanel",
-			"label": "Show popup content panel instead of popup window"
-		}, {
-			"type": "boolean",
-			"fieldName": "scalebar",
-			"label": "Display scalebar on map"
-		}, {
-			"type": "paragraph",
-			"value": "Add a Locate button to the map. Note that the Locate button is only available if site is using https"
-		}, {
-			"type": "conditional",
-			"fieldName": "locate",
-			"label": "Display locate button on map",
-			"tooltip": "Display locate button",
-			"condition": false,
-			"items": [{
 				"type": "boolean",
-				"fieldName": "locate_track",
-				"label": "Enable tracking of users location"
-			}]
-		}, {
-			"type": "subcategory",
-			"label": "Toolbar Options"
-		}, {
-			"type": "paragraph",
-			"value": "Select tools for the app toolbar. <br> <br> Note: if the web map doesn't support the enabled capability the tool will not appear. For example if the map doesn't have bookmarks then the bookmark tool won't appear on the toolbar even if it is checked."
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_basemap",
-			"label": "Basemap Gallery"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_bookmarks",
-			"label": "Bookmarks"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_legend",
-			"label": "Legend"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_details",
-			"label": "Map Details"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_measure",
-			"label": "Measure Tool"
-		}, {
-			"type": "boolean",
-			"fieldName": "tool_overview",
-			"label": "Overview Map"
-		}, {
-			"type": "conditional",
-			"condition": false,
-			"fieldName": "tool_share",
-			"label": "Share Tools",
-			"items": [{
+				"fieldName": "popupPanel",
+				"label": "Show pop-up content panel instead of pop-up window"
+			}, {
 				"type": "boolean",
-				"fieldName": "tool_share_embed",
-				"label": "Add embed option to share dialog"
-			}]}, {
+				"fieldName": "scalebar",
+				"label": "Display scalebar on map"
+			}, {
+				"type": "paragraph",
+				"value": "Add a Locate button to the map. Note that the Locate button is only available if site is using https"
+			}, {
+				"type": "conditional",
+				"fieldName": "locate",
+				"label": "Display locate button on map",
+				"tooltip": "Display locate button",
+				"condition": false,
+				"items": [{
+					"type": "boolean",
+					"fieldName": "locate_track",
+					"label": "Enable tracking of users location"
+				}]
+			}, {
+				"type": "subcategory",
+				"label": "Toolbar Options"
+			}, {
+				"type": "paragraph",
+				"value": "Select tools for the app toolbar. <br> <br> Note: if the web map doesn't support the enabled capability the tool will not appear."
+			}, {
+				"type": "boolean",
+				"fieldName": "tool_basemap",
+				"label": "Basemap Gallery"
+			}, {
+				"type": "boolean",
+				"fieldName": "tool_bookmarks",
+				"condition": "bookmark",
+				"label": "Bookmarks"
+			}, {
+				"type": "boolean",
+				"fieldName": "tool_legend",
+				"label": "Legend"
+			}, {
+				"type": "boolean",
+				"fieldName": "tool_details",
+				"label": "Map Details"
+			}, {
+				"type": "boolean",
+				"fieldName": "tool_measure",
+				"label": "Measure Tool"
+			}, {
+				"type": "boolean",
+				"fieldName": "tool_overview",
+				"label": "Overview Map"
+			}, {
+				"type": "conditional",
+				"condition": false,
+				"fieldName": "tool_share",
+				"label": "Share Tools",
+				"items": [{
+					"type": "boolean",
+					"fieldName": "tool_share_embed",
+					"label": "Add embed option to share dialog"
+				}]
+			}, {
 				"type": "paragraph",
 				"value": "The Layer List widget displays a list of layers in the map. The layers visibility can be toggled on and off. Optionally you can include sub layers a legend and opacity slider as part of the Layer List widget."
 			}, {
@@ -262,51 +264,52 @@
 					"label": "Add Legend to Output"
 				}]
 			},
-		 {
-			"type": "string",
-			"fieldName": "activeTool",
-			"tooltip": "Active Tool",
-			"label": "Specify active tool at app startup",
-			"options": [{
-				"label": "None",
-				"value": ""
+			{
+				"type": "string",
+				"fieldName": "activeTool",
+				"tooltip": "Active Tool",
+				"label": "Specify active tool at app startup",
+				"options": [{
+					"label": "None",
+					"value": ""
+				}, {
+					"label": "Bookmarks",
+					"value": "bookmarks"
+				}, {
+					"label": "Basemap",
+					"value": "basemap"
+				}, {
+					"label": "Details",
+					"value": "details"
+				}, {
+					"label": "Edit",
+					"value": "edit"
+				}, {
+					"label": "Layers",
+					"value": "layers"
+				}, {
+					"label": "Legend",
+					"value": "legend"
+				}, {
+					"label": "Measure",
+					"value": "measure"
+				}, {
+					"label": "Overview",
+					"value": "overview"
+				}, {
+					"label": "Print",
+					"value": "print"
+				}, {
+					"label": "Share",
+					"value": "share"
+				}]
 			}, {
-				"label": "Bookmarks",
-				"value": "bookmarks"
-			}, {
-				"label": "Basemap",
-				"value": "basemap"
-			}, {
-				"label": "Details",
-				"value": "details"
-			}, {
-				"label": "Edit",
-				"value": "edit"
-			}, {
-				"label": "Layers",
-				"value": "layers"
-			}, {
-				"label": "Legend",
-				"value": "legend"
-			}, {
-				"label": "Measure",
-				"value": "measure"
-			}, {
-				"label": "Overview",
-				"value": "overview"
-			}, {
-				"label": "Print",
-				"value": "print"
-			}, {
-				"label": "Share",
-				"value": "share"
-			}]
-		}, {
-			"type": "boolean",
-			"fieldName": "toolbarLabels",
-			"label": "Add toolbar labels",
-			"tooltip": "Add text next to toolbar icon"
-		}]
+				"type": "boolean",
+				"fieldName": "toolbarLabels",
+				"label": "Add toolbar labels",
+				"tooltip": "Add text next to toolbar icon"
+			}
+		]
 	}, {
 		"category": "Search",
 		"fields": [{
