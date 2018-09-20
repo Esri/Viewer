@@ -139,7 +139,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
 
       domConstruct.create("div", {
         className: "pageHeaderImg",
-        title: name,
+        title: this.config.i18n.tooltips[name] || name,
         role: "presentation",
         innerHTML: "<span aria-hidden=true class='pageIcon icon-color " + "icon-" + name + "'></span>"
       }, pageHeader);
@@ -147,7 +147,7 @@ define(["dojo/Evented", "dojo/_base/declare", "dojo/_base/window",
       var pageBody = domConstruct.create("div", {
         className: "pageBody",
         tabindex: "0",
-        title: name,
+        title: this.config.i18n.tooltips[name] || name,
         id: "pageBody_" + name
       }, pageContent);
 

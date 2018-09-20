@@ -1201,19 +1201,17 @@ define([
           }));
 
           search.on("select-result", lang.hitch(this, function () {
-
             //if edit tool is enabled we'll have to delete/create
             //so info window behaves correctly.
             on.once(this.map.infoWindow, "hide", lang.hitch(
               this,
               function () {
-                search.clearGraphics();
+                search.clear();
                 if (this.editor) {
                   this._destroyEditor();
                   this._createEditor();
                 }
               }));
-
           }));
           search.startup();
 

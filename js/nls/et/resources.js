@@ -27,7 +27,7 @@ define({
   "tools": {
     "search": {
       "error": "Asukohta ei leitud",
-      "notWhatYouWanted": "Ei ole see, mida soovisid?",
+      "notWhatYouWanted": "Ei ole see, mida soovisite?",
       "selectAnother": "Vali muu asukoht",
       "currentLocation": "Praegune asukoht",
       "title": "Asukoht"

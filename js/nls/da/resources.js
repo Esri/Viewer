@@ -63,7 +63,7 @@ define({
     "edit": "Redigér",
     "time": "Tid",
     "print": "Udskriv",
-    "details": "%1 - Vælg app-mappe",
+    "details": "Oplysninger",
     "share": "Opdatér"
   }
 });

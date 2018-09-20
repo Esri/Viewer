@@ -4,16 +4,15 @@
 <head>
   <title></title>
   <meta charset="utf-8">
-  <meta name="fragment" content="!">
   <!-- Responsive -->
   <meta name="viewport" content="width=device-width" , initial-scale=1>
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <!-- End Responsive -->
-  <link rel="stylesheet" href="https://js.arcgis.com/3.23/esri/themes/calcite/dijit/calcite.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.26/esri/themes/calcite/dijit/calcite.css">
 
-  <link rel="stylesheet" href="https://js.arcgis.com/3.23/esri/css/esri.css">
+  <link rel="stylesheet" href="https://js.arcgis.com/3.26/esri/css/esri.css">
   <!-- build:css -->
   <link rel="stylesheet" href="css/styles.css">
   <!-- endbuild -->
@@ -69,7 +68,8 @@
       </div>
     </div>
     <!--Modal Splash Screen-->
-    <div id="modal" class="hide dialog-modal" aria-labelledby="modalTitle" aria-describedby="modalContent" role="dialog" tabindex="-1">
+    <div id="modal" class="hide dialog-modal" aria-labelledby="modalTitle" aria-describedby="modalContent" role="dialog"
+      tabindex="-1">
       <div class="modal-content">
         <header class="modal-header bg fc">
           <h2 id="modalTitle" class="dialog-modal"></h2>
@@ -82,11 +82,13 @@
     </div>
   </div>
   <script type="text/javascript">
+    var webgl = location.search.match(/webgl=([\w-]+)/) ? (RegExp.$1).toLowerCase() === "false" ? 0 : 1 : 1;
     var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
     var dojoConfig = {
+      has: {
+        "esri-featurelayer-webgl": webgl
+      },
       async: true,
-      // The locationPath logic below may look confusing but all its doing is
-      // enabling us to load the api from a CDN and load local modules from the correct location.
       packages: [{
         name: "application",
         location: package_path + '/js'
@@ -116,7 +118,7 @@
       return (false);
     }
   </script>
-  <script type="text/javascript" src="https://js.arcgis.com/3.23/"></script>
+  <script type="text/javascript" src="https://js.arcgis.com/3.26/"></script>
   <script type="text/javascript">
     require([
       "config/templateConfig",
