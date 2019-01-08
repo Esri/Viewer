@@ -18,6 +18,10 @@ define({
   root: ({
     "map": {
       "error": "Unable to create map",
+      licenseError: {
+        message: "Your account is not licensed to use Configurable Apps that are not public. Please ask your organization administrator to assign you a user type that includes Essential Apps or an add-on Essential Apps license.",
+        title: "Not Licensed"
+      },
       "overviewDetails": "Overview map shows current extent of map within the context of larger area."
     },
     "nav": {

@@ -17,6 +17,10 @@
 define({
   "map": {
     "error": "Kaart kan niet gemaakt worden",
+    "licenseError": {
+      "message": "Uw account heeft geen licentie om configureerbare apps te gebruiken die niet openbaar zijn. Vraag uw organisatiebeheerder om u een gebruikerstype toe te wijzen dat Essential Apps of een add-on Essential Apps-licentie bevat.",
+      "title": "Geen licentie"
+    },
     "overviewDetails": "De Overview map toont de huidige extent van de kaart binnen de context van een groter gebied."
   },
   "nav": {
