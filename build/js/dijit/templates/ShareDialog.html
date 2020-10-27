@@ -1,0 +1,37 @@
+<div class="${theme}">
+  <div data-dojo-attach-point="_dialogNode">
+    <div class="${css.shareDialogContent}">
+      <div class="${css.shareDialogSubHeader}">${_i18n.widgets.ShareDialog.heading}</div>
+      <div class="${css.iconContainer}">
+        <button role="button" class="${css.facebookIcon}" data-dojo-attach-point="_facebookButton" title="${_i18n.widgets.ShareDialog.facebookTooltip}"></button>
+        <button role="button" class="${css.twitterIcon}" data-dojo-attach-point="_twitterButton" title="${_i18n.widgets.ShareDialog.twitterTooltip}"></button>
+        <button role="button" class="${css.emailIcon}" data-dojo-attach-point="_emailButton" title="${_i18n.widgets.ShareDialog.emailTooltip}"></button>
+        <div class="${css.iconClear}"></div>
+      </div>
+      <div class="${css.shareDialogExtent}">
+        <input role="checkbox" checked id="${id}_extent_checkbox" data-dojo-attach-point="_extentInput" type="checkbox"
+          class="${css.shareDialogExtentChk}" /> <label for="${id}_extent_checkbox" tabindex="0" class="${css.shareDialogExtentChk}">
+          ${_i18n.widgets.ShareDialog.extent} </label>
+      </div>
+      <div class="${css.shareDialogSubHeader}">${_i18n.widgets.ShareDialog.url}</div>
+      <input id="shareField" class="${css.shareMapURL}" label="${_i18n.widgets.ShareDialog.url}" aria-label="${_i18n.widgets.ShareDialog.url}"
+        type="text" data-dojo-attach-point="_shareMapUrlText" readonly />
+      <!--Trigger -->
+      <button class="share-btn" data-clipboard-target="#shareField" data-dojo-attach-point="_shareButton">
+        <img class="clippy" src="images/clippy.svg" alt="${_i18n.widgets.ShareDialog.copy}" title="${_i18n.widgets.ShareDialog.copy}">
+      </button>
+      <div class="${css.embed}">
+        <div class="${css.shareDialogSubHeader}">${_i18n.widgets.ShareDialog.embed}</div>
+        <textarea data-dojo-attach-point="_embedNode" aria-label="${_i18n.widgets.ShareDialog.embed}" rows="5" cols="33"
+          readonly class="${css.shareDialogTextarea}"></textarea>
+        <div class="${css.mapSizeContainer}">
+          <div class="${css.mapSizeLabel}">${_i18n.widgets.ShareDialog.size}</div>
+          <div class="${css.embedMapSizeDropDown}">
+            <select tabindex="0" data-dojo-attach-point="_comboBoxNode"></select>
+          </div>
+          <div class="${css.embedMapSizeClear}"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

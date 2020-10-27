@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <!-- Responsive -->
+  <meta name="viewport" content="width=device-width" , initial-scale=1>
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <!-- End Responsive -->
+  <link rel="stylesheet" href="https://js.arcgis.com/3.34/esri/themes/calcite/dijit/calcite.css">
+
+  <link rel="stylesheet" href="https://js.arcgis.com/3.34/esri/css/esri.css">
+  <link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body class="calcite app-loading no-touch">
+  <div>
+    <!-- Loading Indicator -->
+    <div class="loading-indicator" role="presentation">
+      <div class="loading-message" id="loading_message"></div>
+    </div>
+    <!-- Map -->
+    <div id="mapDiv" dir="ltr">
+      <div id="locateDiv"></div>
+    </div>
+    <!-- Panel Top -->
+    <div id="panelTop" class="bg shadow">
+      <!-- Panel Title -->
+      <div id="panelTitle">
+        <header class="fc" id="panelText" role="banner">
+          <hgroup>
+            <h1 id="title"></h1>
+            <h2 id="subtitle"></h2>
+          </hgroup>
+        </header>
+        <div role="search" id="panelSearch">
+          <div id="panelGeocoder"></div>
+        </div>
+        <div id="panelMenu" class="icon-menu icon-color"></div>
+      </div>
+      <!-- Panel Tools -->
+      <div role="toolbar" id="panelTools" class="bg fc">
+        <!--Tools are created programatically-->
+      </div>
+    </div>
+    <!-- Panel Content -->
+    <div id="panelContent">
+      <div id="panelPages"></div>
+      <div class="pageContent shadow medium panelPopup" tabindex="0" role="button" id="pageContent_popup">
+        <div id="pageHeader_popup" class="popupHeader bg">
+          <div class="popupTitle fc">
+            <div id="popupTitle"></div>
+            <button id="popupButtonPrev" role="button" class="popupButton prev icon-color"></button>
+            <button id="popupButtonNext" role="button" class="popupButton next icon-color"></button>
+            <button id="popupButtonClose" role="button" class="popupButton close icon-color"></button>
+          </div>
+        </div>
+        <div class="pageBody bg" id="pageBody_popup">
+          <div id="popupContainer" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'center'"
+            class="popupContent"></div>
+          <div id="popupFooter"></div>
+        </div>
+      </div>
+    </div>
+    <!--Modal Splash Screen-->
+    <div id="modal" class="hide dialog-modal" aria-labelledby="modalTitle" aria-describedby="modalContent" role="dialog"
+      tabindex="-1">
+      <div class="modal-content">
+        <header class="modal-header bg fc">
+          <h2 id="modalTitle" class="dialog-modal"></h2>
+        </header>
+        <div class="copy">
+          <div id="modalContent" class="dialog-modal"></div>
+          <input id="closeOverlay" class="dialog-modal bg fc" type="button" />
+        </div>
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+    var webgl = location.search.match(/webgl=([\w-]+)/) ? (RegExp.$1).toLowerCase() === "false" ? 0 : 1 : 1;
+    var package_path = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/'));
+    var dojoConfig = {
+      has: {
+        "esri-featurelayer-webgl": webgl
+      },
+      async: true,
+      packages: [{
+        name: "application",
+        location: package_path + '/js'
+      }, {
+        name: "config",
+        location: package_path + '/config'
+      }, {
+        name: "arcgis_templates",
+        location: package_path + '/..'
+      }]
+    };
+    // Have to handle a locale parameter before dojo is loaded
+    var locale = getQueryVariable("locale");
+    if (locale) {
+      dojoConfig.locale = locale;
+    }
+
+    function getQueryVariable(param) {
+      var query = window.location.search.substring(1);
+      var vars = query.split("&");
+      for (var i = 0; i < vars.length; i++) {
+        var pair = vars[i].split("=");
+        if (pair[0] == param) {
+          return pair[1];
+        }
+      }
+      return (false);
+    }
+
+  </script>
+  <script type="text/javascript" src="https://js.arcgis.com/3.34/"></script>
+  <script type="text/javascript">
+    require([
+      "config/templateConfig",
+      "dojo/parser",
+      "application/template",
+      "application/main",
+      "dijit/layout/ContentPane",
+      "dijit/layout/BorderContainer"
+    ], function (
+      templateConfig,
+      parser,
+      Template,
+      Main
+    ) {
+      parser.parse();
+      // create the template. This will take care of all the logic required for template applications
+      var myTemplate = new Template(templateConfig);
+      // create my main application. Start placing your logic in the main.js file.
+      var myApp = new Main();
+      // start template
+      myTemplate.startup().then(function (config) {
+        // The config object contains the following properties: helper services, (optionally)
+        // i18n, appid, webmap and any custom values defined by the application.
+        // In this example we have one called theme.
+        myApp.startup(config);
+      }, function (error) {
+        // something went wrong. Let's report it.
+        myApp.reportError(error);
+      });
+    });
+
+  </script>
+</body>
+
+</html>

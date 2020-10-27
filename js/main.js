@@ -110,7 +110,8 @@ define([
         this.config = config;
         if (this.config.sharedThemeConfig && this.config.sharedThemeConfig.attributes && this.config.sharedThemeConfig.attributes.theme) {
           var sharedTheme = this.config.sharedThemeConfig.attributes;
-          this.config.logo = sharedTheme.layout.header.component.settings.logoUrl || sharedTheme.theme.logo.small || null;
+          var logo = (sharedTheme && sharedTheme.theme && sharedTheme.theme.logo && sharedTheme.theme.logo.small) ? sharedTheme.theme.logo.small : null
+          this.config.logo = sharedTheme.layout.header.component.settings.logoUrl || logo;
           this.config.color = sharedTheme.theme.text.color;
           this.config.theme = sharedTheme.theme.body.bg;
         }
@@ -161,8 +162,8 @@ define([
               }
               this._createWebMap(itemInfo, urlParams);
             }), lang.hitch(this, function (error) {
-            this.reportError(error);
-          }));
+              this.reportError(error);
+            }));
 
 
         }));
@@ -331,12 +332,12 @@ define([
         this.map.setInfoWindowOnClick(true);
       }
 
-      // Shorten the url for copied links. Do 
+      // Shorten the url for copied links. Do
       // this once if current view isn't checked
       // Do each time extent changes if extent is checked
       if (name === "share") {
         // clicked on share so setup extent handler
-        // setup extent change event if the dialog is open and check box is checked. 
+        // setup extent change event if the dialog is open and check box is checked.
         if (this.shareDialog) {
           this.shareDialog.updateUrl();
 
@@ -351,7 +352,7 @@ define([
           }
         }
       } else {
-        // destroy extent handler 
+        // destroy extent handler
         if (this.extentHandle) {
           this.extentHandle.pause();
         }
@@ -489,7 +490,7 @@ define([
       if (has("details")) {
         var description = this.config.description || this.config.response
           .itemInfo.item.description || this.config.response.itemInfo
-          .item.snippet;
+            .item.snippet;
         if (description) {
           var descLength = description.length;
           //Change the panel class based on the string length
@@ -602,9 +603,9 @@ define([
       });
 
       if (selected && selected._layer && typeof selected._layer.isEditable === "function" && selected._layer.isEditable() && !isAttributeInspector) {
-        // show editable link 
+        // show editable link
         domStyle.set(link, "visibility", "visible");
-      } else { // hide editable link 
+      } else { // hide editable link
         domStyle.set(link, "visibility", "hidden");
       }
     },
@@ -627,7 +628,7 @@ define([
 
             if (layer.featureLayer && layer.featureLayer.infoTemplate &&
               layer.featureLayer.infoTemplate.info && layer
-              .featureLayer.infoTemplate.info.fieldInfos && layer.featureLayer.visible) {
+                .featureLayer.infoTemplate.info.fieldInfos && layer.featureLayer.visible) {
               editableLayers.push(layer);
               //only display visible fields
               var fields = layer.featureLayer.infoTemplate.info
@@ -794,7 +795,7 @@ define([
               domAttr.set(node, "role", "button");
             });
           query(
-              ".esriMeasurement .dijitButtonNode .dijitButtonContents")
+            ".esriMeasurement .dijitButtonNode .dijitButtonContents")
             .forEach(function (node) {
               domAttr.set(node, "tabindex", "-1");
             });
@@ -838,7 +839,7 @@ define([
           on(this.map, "layer-add", lang.hitch(this, function (args) {
             //delete and re-create the overview map if the basemap gallery changes
             if (args.layer.hasOwnProperty(
-                "_basemapGalleryLayerType") && args.layer._basemapGalleryLayerType ===
+              "_basemapGalleryLayerType") && args.layer._basemapGalleryLayerType ===
               "basemap") {
               var ov = registry.byId("overviewMap");
               if (ov) {
@@ -1016,8 +1017,8 @@ define([
             embedVisible: has("share-embed"),
             image: this.config.sharinghost +
               "/sharing/rest/content/items/" + this.config.response
-              .itemInfo.item.id + "/info/" + this.config.response.itemInfo
-              .thumbnail,
+                .itemInfo.item.id + "/info/" + this.config.response.itemInfo
+                .thumbnail,
             title: this.config.title,
             summary: this.config.response.itemInfo.item.snippet ||
               ""
@@ -1110,8 +1111,12 @@ define([
             map: this.map,
             useTracking: this.config.locate_track
           }, "locateDiv");
+          if (this.config.locate_scale) {
+            geoLocate.scale = this.config.locate_scale;
+          }
           geoLocate.startup();
           query(".LocateButton .zoomLocateButton").addClass("bg");
+          query(".LocateButton .zoomLocateButton").addClass("fc");
           query(".zoomLocateButton span").forEach(function (node) {
             domAttr.set(node, {
               "aria-hidden": "true",
@@ -1174,12 +1179,12 @@ define([
 
           var search = new Search(createdOptions, domConstruct.create(
             "div", {
-              id: "search"
-            }, "mapDiv"));
+            id: "search"
+          }, "mapDiv"));
           on(query(".arcgisSearch .searchBtn"), "click", function () {
-            // Set focus to search if input is empty. This is to resolve issue on 
+            // Set focus to search if input is empty. This is to resolve issue on
             // android where input wasn't getting focused when button was pressed
-            // to expand the search. 
+            // to expand the search.
             if (!search.value) {
               search.focus();
             }
@@ -1232,8 +1237,8 @@ define([
 
       //Feature Search or find (if no search widget)
       if ((this.config.find || (this.config.customUrlLayer.id !==
-          null && this.config.customUrlLayer.fields.length > 0 &&
-          this.config.customUrlParam !== null))) {
+        null && this.config.customUrlLayer.fields.length > 0 &&
+        this.config.customUrlParam !== null))) {
         require(["esri/dijit/Search"], lang.hitch(this, function (
           Search) {
           var source = null,
@@ -1354,7 +1359,7 @@ define([
         panelBackground: this.panelBackground.toString()
       };
 
-      var defaultCss = esriLang.substitute(colorObj, ".esriSimpleSlider{color:${iconColor};} .icon-color{color:${iconColor};}  .LocateButton .zoomLocateButton{color:${iconColor};} .searchIcon{color:${iconColor};} .pageNav{color:${iconColor};} .bg{background-color:${backgroundColor};} .esriPopup .pointer{background-color:${backgroundColor};} .esriPopup.light .titlePane, .esriPopup.dark .titlePane{ background-color:${backgroundColor}; color:${color};}  .esriPopup.light .titleButton, .esriPopup.dark .titleButton{color:${color};} .fc{color:${color};} .pageContent{background-color:${panelBackground};} .pageBody{ background: ${panelBackground}; color:${panelColor};}  .dijitTabPaneWrapper{background:${panelBackground};} .esriLayerList .esriTitle{background-color:${panelBackground};} .esriLayer{background-color:${panelBackground};}.esriLayerList .esriContainer{background-color:${panelBackground};} .esriLayerList .esriContainer{background-color:${panelBackground};} .esriLayerList .esriList{background-color:${panelBackground}; color:${panelColor};} #modal .copy{background-color:${panelBackground}; color:${panelColor};}   .templatePicker .grid .dojoxGridCell, .dojoxGridRow, .dojoxGridCelll, .templatePicker .grid .dojoxGridRowOdd, .templatePicker .grid .dojoxGridRowEven, .dojoxGridView, .templatePicker .dojoxGrid{ background-color:${panelBackground} !important; border:transparent;} ");
+      var defaultCss = esriLang.substitute(colorObj, ".esriSimpleSlider{color:${iconColor};} .icon-color{color:${iconColor};}  .LocateButton .zoomLocateButton{color:${iconColor};background-color:${backgroundColor};} .searchIcon{color:${iconColor};} .pageNav{color:${iconColor};} .bg{background-color:${backgroundColor};} .esriPopup .pointer{background-color:${backgroundColor};} .esriPopup.light .titlePane, .esriPopup.dark .titlePane{ background-color:${backgroundColor}; color:${color};}  .esriPopup.light .titleButton, .esriPopup.dark .titleButton{color:${color};} .fc{color:${color};} .pageContent{background-color:${panelBackground};} .pageBody{ background: ${panelBackground}; color:${panelColor};}  .dijitTabPaneWrapper{background:${panelBackground};} .esriLayerList .esriTitle{background-color:${panelBackground};} .esriLayer{background-color:${panelBackground};}.esriLayerList .esriContainer{background-color:${panelBackground};} .esriLayerList .esriContainer{background-color:${panelBackground};} .esriLayerList .esriList{background-color:${panelBackground}; color:${panelColor};} #modal .copy{background-color:${panelBackground}; color:${panelColor};}   .templatePicker .grid .dojoxGridCell, .dojoxGridRow, .dojoxGridCelll, .templatePicker .grid .dojoxGridRowOdd, .templatePicker .grid .dojoxGridRowEven, .dojoxGridView, .templatePicker .dojoxGrid{ background-color:${panelBackground} !important; border:transparent;} ");
 
 
       var style = document.createElement("style");
@@ -1400,7 +1405,6 @@ define([
       };
       if (this.config.orgInfo && this.config.orgInfo.user && this.config.orgInfo.user.privileges) {
         options.privileges = this.config.orgInfo.user.privileges;
-        console.log("Privileges set", options.privileges);
       }
 
       // create a map based on the input web map id
@@ -1444,16 +1448,18 @@ define([
             }));
 
         }
-
         //Add a logo if provided
         if (this.config.logo) {
           var content;
+          const altText = this.config.logoAltText ? "alt = " + this.config.logoAltText : "role =presentation";
+
           if (this.config.logolink) {
-            content = "<a target='_blank' href='" + this.config.logolink + "'><img id='logo' role='presentation' src=" +
+
+            content = "<a target='_blank' href='" + this.config.logolink + "'><img id='logo'" + altText + " src=" +
               this.config.logo +
               "></a>";
           } else {
-            content = "<img id='logo' role='presentation' src=" +
+            content = "<img id='logo' " + altText + " src=" +
               this.config.logo +
               ">";
           }

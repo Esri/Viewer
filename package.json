@@ -10,11 +10,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "gulp": "^4.0.0",
+    "gulp": "^3.9.1",
     "gulp-clean-css": "^3.0.4",
     "gulp-concat-css": "^2.3.0",
     "gulp-html-replace": "^1.6.2",
-    "gulp-imagemin": "^5.0.3",
+    "gulp-imagemin": "^3.2.0",
     "gulp-minify": "0.0.15",
     "gulp-more-css": "^1.0.0"
   },

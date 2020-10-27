@@ -20,7 +20,7 @@ define({
   //default web map, default app color theme and more. These values can be overwritten by template configuration settings and url parameters.
   "appid": "", //"73909e939be34d2b931f0765ba3bf4a6",
   "webmap": "14ab61d83557477daac4e36fae8c992e",
-  "oauthappid": null, //"AFTKRmv16wj14N3z",
+  "oauthappid": "arcgisWebApps", //"AFTKRmv16wj14N3z",
   //Group templates must support a group url parameter. This will contain the id of the group.
   //group: "",
   //Enter the url to the proxy if needed by the application. See the 'Using the proxy page' help topic for details
@@ -57,6 +57,7 @@ define({
   "panelColor": "#000",
   "logo": null,
   "logolink": null,
+  "logoAltText": null,
   //Set of tools that will be added to the toolbar
   "tools": [{
     "name": "legend",
@@ -125,6 +126,8 @@ define({
   //Add the geolocation button on the toolbar. Only displayed if browser supports geolocation
   "locate": false,
   "locate_track": false,
+  "locate_scale": null,
+
   //When true display a scalebar on the map
   "scalebar": false,
   //Specify a title for the application. If not provided the web map title is used.

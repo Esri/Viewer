@@ -70,11 +70,11 @@ define([
       map: null,
       url: window.location.href,
       image: "",
-      title: window.document.title,
+      // title: window.document.title,
       summary: "",
       hashtags: "",
       mailURL: "mailto:%20?subject={title}&body={summary}%20{url}",
-      facebookURL: "https://www.facebook.com/sharer/sharer.php?u={url}",
+      facebookURL: "https://www.facebook.com/sharer/sharer.php?s=100&u={url}",
       twitterURL: "https://twitter.com/intent/tweet?url={url}&text={title}&hashtags={hashtags}",
       bitlyAPI: "https://arcg.is/prod/shorten",
       embedSizes: [{
@@ -105,7 +105,6 @@ define([
     },
     // lifecycle: 1
     constructor: function (options, srcRefNode) {
-
       // mix in settings and defaults
       var defaults = lang.mixin({}, this.options, options);
       // widget node
